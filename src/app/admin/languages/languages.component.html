@@ -1,0 +1,49 @@
+﻿<div [@routerTransition]>
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>{{l("Languages")}}</span> <small>{{l("LanguagesHeaderInfo")}}</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button *ngIf="isGranted(adminPermissions.configuration_LanguagesCreate)" (click)="createOrEditLanguageModal.show()" class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewLanguage")}}</button>
+        </div>
+    </div>
+
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <kendo-grid [data]="languagesData | async" [scrollable]="'none'" (dataStateChange)="dataStateChange($event)" (edit)="editHandler($event)" (remove)="removeHandler($event)">
+                <kendo-grid-command-column title="{{l('Actions')}}" [width]="200">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <button kendoGridEditCommand *ngIf="isGranted(adminPermissions.configuration_LanguagesEdit) && dataItem.tenantId === appSession.tenantId" title="{{l('Edit')}}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></button>
+                        <button *ngIf="isGranted(adminPermissions.configuration_LanguagesChangeTexts)" (click)="changeTexts(dataItem)" title="{{l('ChangeTexts')}}" class="btn btn-xs btn-primary"><i class="fa fa-bars"></i></button>
+                        <button *ngIf="isGranted(adminPermissions.configuration_LanguagesEdit)" (click)="setAsDefaultLanguage(dataItem)" title="{{l('SetAsDefaultLanguage')}}" class="btn btn-xs  btn-success"><i class="fa fa-check"></i></button>
+                        <button kendoGridRemoveCommand *ngIf="isGranted(adminPermissions.configuration_LanguagesDelete) && dataItem.tenantId === appSession.tenantId" title="{{l('Delete')}}" class="btn btn-xs red"><i class="fa fa-trash-o"></i></button>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column field="displayName" title="{{l('Name')}}" [width]="100"></kendo-grid-column>
+                <kendo-grid-column field="name" title="{{l('Code')}}" [width]="100"></kendo-grid-column>
+                <kendo-grid-command-column *ngIf="appSession.tenantId" title="{{l('Default')}}*" [width]="100">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <span *ngIf="dataItem.tenantId !== appSession.tenantId" class="label label-default">{{l('Yes')}}</span>
+                        <span *ngIf="dataItem.tenantId == appSession.tenantId" class="label label-success">{{l('No')}}</span>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-command-column title="{{l('CreationTime')}}" [width]="300">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        {{t(dataItem.creationTime)}}
+                    </ng-template>
+                </kendo-grid-command-column>
+            </kendo-grid>
+            <p class="margin-top-20" *ngIf="appSession.tenantId">
+                * {{l("CanNotEditOrDeleteDefaultLanguages")}}
+            </p>
+        </div>
+    </div>
+
+    <createOrEditLanguageModal #createOrEditLanguageModal (modalSave)="getLanguages()"></createOrEditLanguageModal>
+</div>

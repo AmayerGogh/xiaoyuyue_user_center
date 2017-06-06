@@ -1,0 +1,185 @@
+<div [@routerTransition]>
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>{{l("Users")}}</span> <small>{{l("UsersHeaderInfo")}}</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button (click)="exportToExcel()" class="btn btn-default"><i class="fa fa-file-excel-o"></i> {{l("ExportToExcel")}}</button>
+            <button (click)="createUser()" *ngIf="isGranted(adminPermissions.userManage_UsersCreate)" class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateNewUser")}}</button>
+        </div>
+    </div>
+
+    <div class="portlet light margin-bottom-15">
+        <div class="portlet-body">
+            <div class="form">
+                <form class="horizontal-form form-horizontal">
+                    <div class="row margin-bottom-10">
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("UserName")}}</label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="userName" name="UserName" autoFocus class="form-control" [placeholder]="l('UserName')" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div [ngClass]="{'col-md-6': isGranted(adminPermissions.userManage_Roles), 'col-md-12':!isGranted(adminPermissions.userManage_Roles)}">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("FilterByPermission")}}</label>
+                                <div class="col-md-9">
+                                    <permission-combo [(selectedPermission)]="selectedPermission"></permission-combo>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("Surname")}}</label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="surname" name="Surname" class="form-control" [placeholder]="l('Surname')" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("EmailAddress")}}</label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="email" name="Email" type="email" class="form-control" [placeholder]="l('EmailAddress')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("EmailConfirm")}}</label>
+                                <div class="col-md-9">
+                                    <select name="IsEmailConfirmed" class="form-control" [(ngModel)]="isEmailConfirmed" title="{{l('EmailConfirm')}}" jq-plugin="selectpicker">
+                                        <option *ngFor="let flag of flags" [value]="flag.value">{{l(flag.displayText)}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("PhoneNumber")}}</label>
+                                <div class="col-md-9">
+                                    <input [(ngModel)]="phoneNumber" name="PhoneNumber" type="tel" class="form-control" [placeholder]="l('PhoneNumber')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("PhoneConfirm")}}</label>
+                                <div class="col-md-9">
+                                    <select name="IsPhoneConfirmed" class="form-control" [(ngModel)]="isPhoneConfirmed" title="{{l('PhoneConfirm')}}" jq-plugin="selectpicker">
+                                        <option *ngFor="let flag of flags" [value]="flag.value">{{l(flag.displayText)}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("Active")}}</label>
+                                <div class="col-md-9">
+                                    <select name="IsActive" class="form-control" [(ngModel)]="isActive" title="{{l('Active')}}" jq-plugin="selectpicker">
+                                        <option *ngFor="let flag of flags" [value]="flag.value">{{l(flag.displayText)}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row margin-bottom-10" [hidden]="!advancedFiltersAreShown">
+                        <div class="col-md-6" *ngIf="isGranted(adminPermissions.userManage_Roles)">
+                            <div class="form-group common-max-width">
+                                <label class="col-md-3 control-label">{{l("FilterByRole")}}</label>
+                                <div class="col-md-9">
+                                    <role-combo [(selectedRole)]="roles" emptyText="{{l('FilterByRole')}}"></role-combo>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row margin-bottom-10">
+                        <div class="col-xs-6 col-md-2 col-md-offset-4 col-sm-3 col-sm-offset-3 common-min-width">
+                            <div class="text-center filter-action">
+                                <span class="btn green btn-block" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                <span class="btn green btn-block" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-2 col-sm-3 common-min-width">
+                            <div class="text-center filter-action">
+                                <button class="btn blue btn-block" (click)="getUsers()"><i class="fa fa-search"></i> {{l("Search")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-body">
+            <kendo-grid [data]="usersData | async" [pageSize]="pageSize" [skip]="skip" [pageable]="{ buttonCount: buttonCount,info: info,type: type,pageSizes: pageSizes, previousNext: previousNext}" [sortable]="true" [sort]="sort" (dataStateChange)="dataStateChange($event)">
+                <kendo-grid-command-column title="{{l('Actions')}}" class="vapps-to-toggle" [width]="60">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <a class="btn btn-xs btn-default green show-btns"><i class="fa fa-bars"></i></a>
+                        <div class="vapps-fixed">
+                            <button *ngIf="isGranted(adminPermissions.userManage_UsersImpersonation) && dataItem.id !== appSession.userId" class="btn btn-xs btn-default green" title="{{l('LoginAsThisUser')}}" (click)="loginAsThisUser(dataItem)"><i class="fa fa-user"></i></button>
+                            <button *ngIf="isGranted(adminPermissions.userManage_UsersEdit)" class="btn btn-xs btn-primary" title="{{l('Edit')}}" (click)="editHandler(dataItem)"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-xs btn-default yellow" title="{{l('Unlock')}}" (click)="unlockedUser(dataItem)"><i class="fa fa-unlock"></i></button>
+                            <button *ngIf="isGranted(adminPermissions.userManage_UsersDelete)" class="btn btn-xs btn-default red" title="{{l('Delete')}}" (click)="removeHandler(dataItem)"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column field="userName" title="{{l('UserName')}}" [width]="120"></kendo-grid-column>
+                <!--<kendo-grid-column field="surname" title="{{l('Surname')}}" [width]="160"></kendo-grid-column>-->
+                <kendo-grid-column field="name" title="{{l('Name')}}" [width]="120"></kendo-grid-column>
+                <kendo-grid-command-column title="{{l('Roles')}}" [width]="100">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <ng-template ngFor [ngForOf]="dataItem.roles" let-role>
+                            <span [ngClass]="{'label-primary': role.roleName=='Admin', 'label-success': role.roleName!='Admin'}" class="label">{{role.roleName}}</span>
+                        </ng-template>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column field="emailAddress" title="{{l('EmailAddress')}}" [width]="160"></kendo-grid-column>
+                <kendo-grid-command-column title="{{l('EmailConfirm')}}" [width]="120">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <span *ngIf="dataItem.isEmailConfirmed" class="label label-success">{{l('Yes')}}</span>
+                        <span *ngIf="!dataItem.isEmailConfirmed" class="label label-default">{{l('No')}}</span>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column field="phoneNumber" title="{{l('PhoneNumber')}}" [width]="120"></kendo-grid-column>
+                <kendo-grid-command-column title="{{l('Active')}}" [width]="60">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <span *ngIf="dataItem.isActive" class="label label-success">{{l('Yes')}}</span>
+                        <span *ngIf="!dataItem.isActive" class="label label-default">{{l('No')}}</span>
+                    </ng-template>
+                </kendo-grid-command-column>
+                <!--<kendo-grid-command-column title="{{l('LastLoginTime')}}" [width]="160">
+                    <ng-template let-dataItem>
+                        {{t(dataItem.lastLoginTime)}}
+                    </ng-template>
+                </kendo-grid-command-column>-->
+                <kendo-grid-command-column title="{{l('CreationTime')}}" [width]="160">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        {{t(dataItem.creationTime)}}
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-messages noRecords="{{l('NoDataAvailable')}}" pagerItemsPerPage="{{l('ItemsPerPage')}}" pagerOf="{{l('PagerOf')}}" pagerItems="{{l('Items')}}" pagerNextPage="{{l('NextPage')}}" pagerPreviousPage="{{l('PreviousPage')}}" pagerFirstPage="{{l('FirstPage')}}"
+                    pagerLastPage="{{l('LastPage')}}"></kendo-grid-messages>
+            </kendo-grid>
+        </div>
+    </div>
+</div>

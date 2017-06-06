@@ -1,0 +1,40 @@
+﻿<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <span class="caption-subject bold uppercase">
+                <span *ngIf="organizationUnit">{{organizationUnit.displayName}}</span>
+            <span *ngIf="!organizationUnit">{{l("Members")}}</span>
+            </span>
+        </div>
+        <div class="actions" *ngIf="organizationUnit">
+            <a *ngIf="isGranted(adminPermissions.userManage_OrganizationUnits_ManageMembers)" (click)="openAddModal()" class="btn btn-circle btn-default">
+                <i class="fa fa-plus"></i> {{l("AddMember")}}
+            </a>
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <kendo-grid *ngIf="organizationUnit" [data]="membersData | async" [pageSize]="pageSize" [skip]="skip" [pageable]="{ buttonCount: buttonCount,info: info,type: type,pageSizes: pageSizes, previousNext: previousNext}" [sortable]="true" [sort]="sort" (dataStateChange)="dataStateChange($event)"
+            (remove)="removeHandler($event)">
+            <kendo-grid-column field="userName" title="{{l('UserName')}}" [width]="120"></kendo-grid-column>
+            <kendo-grid-column field="name" title="{{l('Name')}}" [width]="120"></kendo-grid-column>
+            <kendo-grid-column field="surname" title="{{l('Surname')}}" [width]="120"></kendo-grid-column>
+            <kendo-grid-column field="emailAddress" title="{{l('EmailAddress')}}" [width]="240"></kendo-grid-column>
+            <kendo-grid-column field="profilePictureId" title="{{l('ProfilePictureId')}}" [width]="180"></kendo-grid-column>
+            <kendo-grid-column field="addedTime" title="{{l('AddedTime')}}" [width]="180"></kendo-grid-column>
+            <kendo-grid-command-column title="{{l('Actions')}}" [width]="150">
+                <ng-template let-dataItem kendoGridCellTemplate>
+                    <button *ngIf="isGranted(adminPermissions.userManage_OrganizationUnits_ManageMembers)" kendoGridRemoveCommand class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i></button>
+                </ng-template>
+            </kendo-grid-command-column>
+            <kendo-grid-messages noRecords="{{l('NoDataAvailable')}}" pagerItemsPerPage="{{l('ItemsPerPage')}}" pagerOf="{{l('PagerOf')}}" pagerItems="{{l('Items')}}" pagerNextPage="{{l('NextPage')}}" pagerPreviousPage="{{l('PreviousPage')}}" pagerFirstPage="{{l('FirstPage')}}"
+                pagerLastPage="{{l('LastPage')}}"></kendo-grid-messages>
+        </kendo-grid>
+
+        <div *ngIf="!organizationUnit" class="text-muted">
+            {{l("SelectAnOrganizationUnitToSeeMembers")}}
+        </div>
+    </div>
+</div>
+
+<commonLookupModal #memberLookupModal (itemSelected)="addModalMemberSelected($event)"></commonLookupModal>

@@ -1,0 +1,99 @@
+<div [@routerTransition]>
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>{{l("Admin.ContentManage.MessageTemplate")}}</span> <small>{{l("MessageTemplate")}}</small>
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button (click)="exportToExcel()" class="btn btn-default"><i class="fa fa-file-excel-o"></i> {{l("ExportToExcel")}}</button>
+            <button (click)="createSmsTemplate()" class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateSmsTemplate")}}</button>
+        </div>
+    </div>
+
+    <div class="portlet light margin-bottom-15">
+        <div class="portlet-body">
+            <div class="inputs inputs-full-width">
+                <div class="portlet-input">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group common-max-width">
+                                    <label class="col-md-4 control-label">{{l("SmsTemplateName")}}</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control common-max-width" type="text" name="SmsTemplateName" placeholder="{{l('SmsTemplateName')}}" [(ngModel)]="templateName">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group common-max-width">
+                                    <label class="col-md-4 control-label">{{l("SmsTemplateCode")}}</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control common-max-width" type="text" name="SmsTemplateCode" placeholder="{{l('SmsTemplateCode')}}" [(ngModel)]="templateCode">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6" [hidden]="!advancedFiltersAreShown">
+                                <div class="form-group common-max-width">
+                                    <label class="col-md-4 control-label">{{l("SmsTemplateProvider")}}</label>
+                                    <div class="col-md-8">
+                                        <select *ngIf="allSmsProvider" name="SmsTemplateProvider" class="form-control" title="{{l('SmsTemplateProvider')}}" jq-plugin="selectpicker">
+                                            <option *ngFor="let smsProvider of allSmsProvider" >{{smsProvider.displayName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-10">
+                            <div class="col-xs-6 col-md-2 col-md-offset-4 col-sm-3 col-sm-offset-3 common-min-width">
+                                <div class="text-center filter-action">
+                                    <span class="btn green btn-block" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
+                                    <span class="btn green btn-block" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-2 col-sm-3 common-min-width">
+                                <div class="text-center filter-action">
+                                    <button class="btn blue btn-block" (click)='loadData()'><i class="fa fa-search"></i> {{l("Search")}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="portlet light margin-bottom-15">
+        <div>
+            <div id="TenantsTable"></div>
+            <kendo-grid [data]="loadMessageManageData | async" [pageSize]="pageSize" [skip]="skip" [pageable]="{ buttonCount: buttonCount,info: info,type: type,pageSizes: pageSizes, previousNext: previousNext}" [sortable]="true" [sort]="sort" [scrollable]="'none'">
+                <kendo-grid-column title="{{l('SmsTemplateName')}}" field="name">
+                </kendo-grid-column>
+                <kendo-grid-column title="{{l('SmsTemplateCode')}}" field="templateCode">
+                </kendo-grid-column>
+                <kendo-grid-column title="{{l('SmsTemplateProvider')}}" field="smsProvider">
+                </kendo-grid-column>
+                <kendo-grid-command-column title="{{l('CreationTime')}}">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        {{t(dataItem.creationTime)}}
+                    </ng-template>
+                </kendo-grid-command-column>
+                <kendo-grid-column title="{{l('Actions')}}">
+                    <ng-template let-dataItem kendoGridCellTemplate>
+                        <button kendoGridEditCommand class="btn btn-xs btn-primary blue" title="{{l('Edit')}}" (click)="editHandler(dataItem)"><i class="fa fa-edit"></i></button>
+                        <button kendoGridRemoveCommand class="btn btn-xs btn-primary red" title="{{l('Delete')}}" (click)="deleteHandler(dataItem)"><i class="fa fa-trash-o"></i></button>
+                        <!--<button *ngIf="isGranted(adminPermissions.content_SMSTemplatesEdit)" class="btn btn-xs btn-primary" title="{{l('Edit')}}" (click)="editHandler(dataItem)"><i class="fa fa-edit"></i></button>-->
+                    </ng-template>
+                </kendo-grid-column>
+                <kendo-grid-messages noRecords="{{l('NoDataAvailable')}}" pagerItemsPerPage="{{l('ItemsPerPage')}}" pagerOf="{{l('PagerOf')}}" pagerItems="{{l('Items')}}" pagerNextPage="{{l('NextPage')}}" pagerPreviousPage="{{l('PreviousPage')}}" pagerFirstPage="{{l('FirstPage')}}"
+                    pagerLastPage="{{l('LastPage')}}"></kendo-grid-messages>
+            </kendo-grid>
+        </div>
+    </div>
+</div>
