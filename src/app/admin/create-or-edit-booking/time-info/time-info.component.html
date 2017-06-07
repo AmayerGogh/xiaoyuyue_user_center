@@ -104,9 +104,9 @@
                 </div>
                 <!-- 编辑状态的展示时间段 -->
                 <ng-template #hasTimeInfo>
-                    <div *ngFor="let timeInfoItem of timeInfo" class="col-md-6 time-info-wrap view-time-info box-shadow border-radius-14 pull-left paddingTop-32 no-lr-padding">
+                    <div *ngFor="let timeInfoItem of timeInfo; let index = index;" class="col-md-6 time-info-wrap view-time-info box-shadow border-radius-14 pull-left paddingTop-32 no-lr-padding">
                         <div class="xiaoyuyue-title-box">
-                            {{bookingItem.hourOfDay}}
+                            {{timeInfoItem.hourOfDay}}
                             <div class="btn-action-wrap">
                                 <span class="icon vapps-icon-app-copy-2" (click)="copyBookingItem(index)"></span>
                                 <span class="icon vapps-icon-app-edit" (click)="editBookingItem(index)"></span>

@@ -25,16 +25,17 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
   bookingDataForEdit: GetBookingForEditOutput;
   baseInfo: BookingEditDto = new BookingEditDto();
   timeInfo: BookingItemEditDto[];
-  selectOutletId: number;
-  selectContactorId: number;
 
   href: string = document.location.href;
   bookingId: any = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
 
   input: CreateOrUpdateBookingInput = new CreateOrUpdateBookingInput();
 
-  public outletSelectDefaultItem: { text: string, value: number } = { text: "请选择", value: null };
-  public contactorSelectDefaultItem: { text: string, value: number } = { text: "请选择", value: null };
+  selectOutletId: number;
+  selectContactorId: number;
+
+  public outletSelectDefaultItem: string;
+  public contactorSelectDefaultItem: string;
   constructor(
     injector: Injector,
     private _locaition: Location,
@@ -56,24 +57,22 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
 
   loadData() {
 
-    // 获取门店下拉框数据源
-    this._outletServiceServiceProxy
-      .getOutletSelectList()
-      .subscribe(result => {
-        this.outletSelectListData = result;
-        // this.outletSelectDefaultItem.text = this.outletSelectListData[0].text;
-        // this.outletSelectDefaultItem.value = parseInt(this.outletSelectListData[0].value);
-      })
-
-    /*    // 获取联系人下拉框数据源
-        this._outletServiceServiceProxy
-          .getContactorSelectList()
-          .subscribe(result => {
-            this.contactorSelectListData = result;
-          })*/
-
-
     if (!this.bookingId) {
+      // 获取门店下拉框数据源
+      this._outletServiceServiceProxy
+        .getOutletSelectList()
+        .subscribe(result => {
+          this.outletSelectDefaultItem = result[0].value;
+          this.outletSelectListData = result;
+
+          // 获取联系人下拉框数据源
+          this._outletServiceServiceProxy
+            .getContactorSelectList(parseInt(this.outletSelectListData[0].value))
+            .subscribe(result => {
+              this.contactorSelectListData = result;
+              this.contactorSelectDefaultItem = result[0].value;
+            })
+        })
       return;
     }
 
@@ -83,12 +82,29 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
         this.bookingDataForEdit = result;
         this.baseInfo = result.booking;
         this.timeInfo = result.items;
-      })
 
+        // 获取门店下拉框数据源
+        this._outletServiceServiceProxy
+          .getOutletSelectList()
+          .subscribe(result => {
+            this.outletSelectDefaultItem = this.bookingDataForEdit.booking.outletId.toString();
+            this.outletSelectListData = result;
+
+            // 获取联系人下拉框数据源
+            this._outletServiceServiceProxy
+              .getContactorSelectList(this.bookingDataForEdit.booking.outletId)
+              .subscribe(result => {
+                this.contactorSelectListData = result;
+                this.contactorSelectDefaultItem = result[0].value;
+              })
+          })
+      })
   }
 
   save() {
     this.input.booking = this.baseInfo;
+    this.input.booking.outletId = this.selectOutletId;
+    this.input.booking.contactorId = this.selectContactorId;
     this.input.items = this.allBookingTime;
     this._organizationBookingServiceProxy
       .createOrUpdateBooking(this.input)
@@ -126,18 +142,18 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
   }
 
   public outletChange(outlet: any): void {
-    this.selectOutletId = outlet.value;
-
+    this.selectOutletId = parseInt(outlet);
     this._outletServiceServiceProxy
       .getContactorSelectList(this.selectOutletId)
       .subscribe(result => {
         this.contactorSelectListData = result;
+        this.contactorSelectDefaultItem = result[0].value;
         // this.contactorSelectDefaultItem.text = this.contactorSelectListData[0].text;
         // this.contactorSelectDefaultItem.value = parseInt(this.contactorSelectListData[0].value);
       })
   }
 
   public contactorChange(contactor: any): void {
-    this.selectContactorId = contactor.value;
+    this.selectContactorId = parseInt(contactor);
   }
 }

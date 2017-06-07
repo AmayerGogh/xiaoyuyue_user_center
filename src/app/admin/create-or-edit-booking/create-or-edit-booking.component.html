@@ -38,8 +38,7 @@
                                         <input class="form-control col-md-6" type="text" name="projectName" [(ngModel)]="baseInfo.name" placeholder="项目名称" required autofocus>
                                     </div>
                                     <div class="col-md-6">
-
-                                        <kendo-dropdownlist [data]="outletSelectListData" (valueChange)="outletChange($event)" [defaultItem]="outletSelectDefaultItem" textField="text" valueField="value" [value]="selectOutlet"></kendo-dropdownlist>
+                                        <kendo-dropdownlist [data]="outletSelectListData" (valueChange)="outletChange($event)" [textField]="'text'" [valueField]="'value'" [valuePrimitive]="true" [value]="outletSelectDefaultItem"></kendo-dropdownlist>
                                         <!--<select *ngIf="outletSelectListData" [(ngModel)]="outletId" name="BookingState" class="form-control" title="门店选择" jq-plugin="selectpicker" onchange="gradeChange()" id="selectpicker">-->
                                         <!--<option >{{l("Please_Choose")}}</option>-->
                                         <!--<option *ngFor="let item of outletSelectListData" [value]="item.value">{{item.text}}</option>-->
@@ -59,7 +58,7 @@
                                 <div class="choose-contact name col-md-3 text-right"><span>选择联系人</span></div>
                                 <div class="col-md-9 input-box">
                                     <div class="common-max-width">
-                                        <kendo-dropdownlist [data]="contactorSelectListData" (valueChange)="contactorChange($event)" [textField]="'text'" [valueField]="'value'"></kendo-dropdownlist>
+                                        <kendo-dropdownlist [data]="contactorSelectListData" (valueChange)="contactorChange($event)" [textField]="'text'" [valueField]="'value'" [valuePrimitive]="true" [value]="contactorSelectDefaultItem"> </kendo-dropdownlist>
 
                                         <!--<select class="form-control" title="联系人选择" jq-plugin="selectpicker">
                                         <option >{{l("Please_Choose")}}</option>-->

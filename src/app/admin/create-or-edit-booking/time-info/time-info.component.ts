@@ -74,6 +74,32 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
     this.timeInfoFormVaild = true;
     this.timeInfoFormDisabled.emit(this.timeInfoFormVaild);
 
+    // 判断是创建或者编辑的状态
+    if (!this.bookingId) {
+      // 如果有多个预约时间段，将拆开单个保存数组
+      if (allBookingTimeItem.length > 1) {
+        let maxBookingNum = this.localSingleBookingItem.maxBookingNum;
+        let maxQueueNum = this.localSingleBookingItem.maxQueueNum;
+        for (let i = 0; i < allBookingTimeItem.length; i++) {
+          this.localSingleBookingItem = new BookingItemEditDto();
+          this.localSingleBookingItem.maxBookingNum = maxBookingNum;
+          this.localSingleBookingItem.maxQueueNum = maxQueueNum;
+          this.getLocalBookingItem();
+          this.localSingleBookingItem.hourOfDay = allBookingTimeItem[i];
+          this.localAllBookingItem.push(this.localSingleBookingItem);
+        }
+        return;
+      }
+      this.getLocalBookingItem();
+      this.localSingleBookingItem.hourOfDay = allBookingTimeItem[0];
+      this.localAllBookingItem.push(this.localSingleBookingItem);
+      this.localSingleBookingItem = new BookingItemEditDto();
+
+      this.changeInput.emit(this.localAllBookingItem);
+      return;
+    }
+
+    // 编辑状态
     if (allBookingTimeItem.length > 1) {
       let maxBookingNum = this.localSingleBookingItem.maxBookingNum;
       let maxQueueNum = this.localSingleBookingItem.maxQueueNum;
@@ -83,16 +109,17 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
         this.localSingleBookingItem.maxQueueNum = maxQueueNum;
         this.getLocalBookingItem();
         this.localSingleBookingItem.hourOfDay = allBookingTimeItem[i];
-        this.localAllBookingItem.push(this.localSingleBookingItem);
+        this.timeInfo.push(this.localSingleBookingItem);
       }
       return;
     }
     this.getLocalBookingItem();
     this.localSingleBookingItem.hourOfDay = allBookingTimeItem[0];
-    this.localAllBookingItem.push(this.localSingleBookingItem);
+    this.timeInfo.push(this.localSingleBookingItem);
     this.localSingleBookingItem = new BookingItemEditDto();
 
-    this.changeInput.emit(this.localAllBookingItem);
+    this.changeInput.emit(this.timeInfo);
+
   }
 
   // 点击创建按钮，显示创建时段面板
@@ -135,8 +162,13 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
 
   // 复制整个时段(单个)
   copyBookingItem(index) {
-    let temp = this.localAllBookingItem[index];
-    this.localAllBookingItem.push(temp);
+    if (!this.bookingId) {
+      let temp = this.localAllBookingItem[index];
+      this.localAllBookingItem.push(temp);
+    }
+
+    let temp = this.timeInfo[index];
+    this.timeInfo.push(temp);
   }
 
   // 编辑整个时段(单个)
@@ -144,22 +176,34 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
     this.localSingleBookingItem = new BookingItemEditDto();
     this.allBookingTime = [];
     this.isCreateTimeField = true;
-    
-    let temp = this.localAllBookingItem[index];
+    if (!this.bookingId) {
+
+      let temp = this.localAllBookingItem[index];
+      this.localSingleBookingItem.maxBookingNum = temp.maxBookingNum;
+      this.localSingleBookingItem.maxQueueNum = temp.maxQueueNum;
+
+      this.bookingDate = this.stringToDate(temp.availableDates);
+      this.allBookingTime.push(this.stringToBookingTime(this.bookingDate, temp.hourOfDay));
+      this.removeBookingItem(index);
+      return;
+    }
+
+    let temp = this.timeInfo[index];
     this.localSingleBookingItem.maxBookingNum = temp.maxBookingNum;
     this.localSingleBookingItem.maxQueueNum = temp.maxQueueNum;
-
     this.bookingDate = this.stringToDate(temp.availableDates);
     this.allBookingTime.push(this.stringToBookingTime(this.bookingDate, temp.hourOfDay));
-
-    console.log(this.allBookingTime);
-
     this.removeBookingItem(index);
+
   }
 
   // 移除整个时段(单个)
   removeBookingItem(index) {
-    this.localAllBookingItem.splice(index, 1);
+    if (!this.bookingId) {
+      this.localAllBookingItem.splice(index, 1);
+      return;
+    }
+    this.timeInfo.splice(index, 1);
   }
 
   getBookingTimeItemHeight(): string {
