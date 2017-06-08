@@ -111,6 +111,9 @@ interface JQuery {
 interface JQuery {
     flatpickr(...any): any;
 }
+interface JQuery {
+    inputmask(...any): any;
+}
 interface Window {
     FileReader: any;
     webkitURL: any;

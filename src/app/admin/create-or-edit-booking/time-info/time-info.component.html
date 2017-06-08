@@ -36,17 +36,13 @@
                             <div class="col-md-9 row input-box">
                                 <div class="col-md-9">
                                     <!--<kendo-datepicker [(value)]="bookingDate" [format]="'yyyy/MM/dd'"></kendo-datepicker>-->
-                                    <!--<div id="timeInfoFlatpickr" class="flatpickr">
-                                        <input type="text" placeholder="Select Date.." data-input>
+                                    <div id="timeInfoFlatpickr" class="flatpickr-wrap">
+                                        <input class="form-control" type="text" name="bookingDate" placeholder="请选择日期" [(ngModel)]="localSingleBookingItem.availableDates" data-input required>
 
-                                        <a class="input-button" title="toggle" data-toggle>
+                                        <a class="input-button flatpickr-toggle" title="切换" data-toggle>
                                             <i class="icon-calendar"></i>
                                         </a>
-
-                                        <a class="input-button" title="clear" data-clear>
-                                            <i class="icon-close"></i>
-                                        </a>
-                                    </div>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>

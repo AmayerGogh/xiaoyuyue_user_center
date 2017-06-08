@@ -54,7 +54,7 @@
             "../src/app/shared/layout/layout.scss",
 
             "assets/common/styles/xiaoyuyue-icon.css",
-            "assets/common/styles/flatpickr.base16_flat.min.css",
+            "../node_modules/flatpickr/dist/flatpickr.css",
             "styles.css"
         ],
         "scripts": [
@@ -106,7 +106,7 @@
             "../src/assets/metronic/global/scripts/app.js",
             "../src/assets/metronic/admin/layout4/scripts/layout.js",
             "../src/assets/metronic/layouts/global/scripts/quick-sidebar.js",
-            "assets/common/js/flatpickr.js"
+            "../node_modules/flatpickr/dist/flatpickr.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

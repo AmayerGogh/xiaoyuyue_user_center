@@ -41,6 +41,15 @@
             .time-item+.time-item {
                 border-top: 1px solid #eee;
             }
+            .flatpickr-wrap {
+                position: relative;
+                .flatpickr-toggle {
+                    position: absolute;
+                    top: 50%;
+                    right: 10px;
+                    transform: translateY(-50%);
+                }
+            }
             .time-item {
                 // width: 510px;
                 height: 64px;
