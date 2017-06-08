@@ -46,9 +46,10 @@ deploy_test:
   only:
     - develop
   script:
-    - Stop-WebAppPool 'xiaoyuyue_user_center' #停止iis进程
-    - copy dist D:\wwwroot\xiaoyuyue_user_center
-    - Start-WebAppPool 'xiaoyuyue_user_center' #启动iis进程
+    - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
+    - copy web.config dist\ #复制iis 配置文件
+    - copy dist D:\wwwroot\xiaoyuyue_user_center # 复制文件到iis目录
+    - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
 # 部署生产服务器
 # deploy_production:
