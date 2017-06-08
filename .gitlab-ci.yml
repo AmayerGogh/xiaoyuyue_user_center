@@ -37,7 +37,7 @@ build:
     - develop
     - master
   script:
-    - ng build --prod --aot
+    - ng build --prod --aot 
 
 
 # 部署测试服务器
