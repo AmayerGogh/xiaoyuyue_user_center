@@ -29,7 +29,7 @@
     "@progress/kendo-angular-excel-export": "^1.0.1",
     "@progress/kendo-angular-grid": "^1.0.4",
     "@progress/kendo-angular-inputs": "^1.0.0",
-    "@progress/kendo-angular-intl": "^1.0.0",
+    "@progress/kendo-angular-intl": "1.0.0",
     "@progress/kendo-angular-l10n": "^1.0.0",
     "@progress/kendo-data-query": "^1.0.0",
     "@progress/kendo-drawing": "^1.0.0",
