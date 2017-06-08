@@ -49,7 +49,12 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
     bookingTime[0] = this.bookingStart;
     bookingTime[1] = this.bookingEnd;
     this.allBookingTime.push(bookingTime);
-    console.log(this.allBookingTime);
+  }
+
+  ngAfterViewInit() {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+
   }
   cancel() {
     this.isCreateTimeField = false;
@@ -127,6 +132,9 @@ export class TimeInfoComponent extends AppComponentBase implements OnInit {
     // 点击创建按钮时，创建面板的内容应置空
     this.localSingleBookingItem.maxBookingNum = null;
     this.localSingleBookingItem.maxQueueNum = null;
+
+    $(".flatpickr").flatpickr();
+    console.log($(".flatpickr"));
 
     // 表示时间信息表单有新增，需要再次验证，传递给父组件为false
     this.timeInfoFormVaild = false;
