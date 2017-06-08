@@ -19,6 +19,7 @@ install_deps:
     - develop
     - master
   script:
+    - npm install @progress/kendo-angular-intl@1.0.0
     - snpm install
 
 # 运行测试用例
