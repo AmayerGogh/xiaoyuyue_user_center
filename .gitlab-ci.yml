@@ -18,7 +18,7 @@ install_deps:
     - develop
     - master
   script:
-    - npm install
+    - snpm install
 
 # 运行测试用例
 # test:
@@ -37,8 +37,7 @@ build:
     - develop
     - master
   script:
-    - npm run clean
-    - npm run build
+    - ng build --prod --aot
 
 
 # 部署测试服务器
@@ -47,8 +46,9 @@ deploy_test:
   only:
     - develop
   script:
+    - Stop-WebAppPool 'xiaoyuyue_user_center' #停止iis进程
     - copy dist D:\wwwroot\xiaoyuyue_user_center
-
+    - Start-WebAppPool 'xiaoyuyue_user_center' #启动iis进程
 
 # 部署生产服务器
 # deploy_production:
