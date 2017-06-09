@@ -19,7 +19,7 @@ install_deps:
     - develop
     - master
   script:
-    - snpm install
+    - npm install
 
 # 运行测试用例
 # test:
@@ -48,8 +48,9 @@ deploy_test:
     - develop
   script:
     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
-    - copy web.config dist\ #复制iis 配置文件
-    - copy dist D:\wwwroot\xiaoyuyue_user_center # 复制文件到iis目录
+    - copy web.config dist\ -force #复制iis 配置文件
+    - copy dist\* D:\wwwroot\xiaoyuyue_user_center -force # 复制文件到iis目录
+    - Start-Sleep -Seconds 3
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
 # 部署生产服务器
