@@ -49,7 +49,7 @@ deploy_test:
   script:
     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
     - copy web.config dist\ -force #复制iis 配置文件
-    - copy dist\* D:\wwwroot\xiaoyuyue_user_center -force # 复制文件到iis目录
+    - copy dist\* D:\wwwroot\xiaoyuyue_user_center -force –recurse # 复制文件到iis目录
     - Start-Sleep -Seconds 3
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
