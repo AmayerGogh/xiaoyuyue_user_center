@@ -29,13 +29,15 @@ import { ConfirmEmailComponent } from './email-activation/confirm-email.componen
 import { SendTwoFactorCodeComponent } from './login/send-two-factor-code.component';
 import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code.component';
 import { LanguageSwitchComponent } from './language-switch.component';
-import { BackgroundImageSliderComponent } from './login/background-image-slider.component'
 import { LoginService } from "shared/services/login.service";
 import { TooltipModule } from "ngx-bootstrap";
 import { SupplementaryExternalRegisterComponent } from "account/supplementary-external-register/supplementary-external-register.component";
 import { LuosimaoCaptcha } from "account/shared/luosimao-captcha/luosimao-captcha.component";
 import { PhoneValidateComponent } from "account/shared/phone-validate/phone-validate.component";
 import { SMSServiceProxy } from "shared/service-proxies/service-proxies";
+import { BackgroundImgComponent } from "account/background-img/background-img.component";
+import { HeaderComponent } from "account/header/header.component";
+import { FooterComponent } from "account/footer/footer.component";
 
 @NgModule({
     imports: [
@@ -70,10 +72,13 @@ import { SMSServiceProxy } from "shared/service-proxies/service-proxies";
         SendTwoFactorCodeComponent,
         ValidateTwoFactorCodeComponent,
         LanguageSwitchComponent,
-        BackgroundImageSliderComponent,
         SupplementaryExternalRegisterComponent,
         PhoneValidateComponent,
-        LuosimaoCaptcha
+        LuosimaoCaptcha,
+        
+        HeaderComponent,
+        FooterComponent,
+        BackgroundImgComponent
     ],
     providers: [
         LoginService,

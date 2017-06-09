@@ -3,7 +3,17 @@ Login page
 ***/
 
 .user-login {
-    min-height: 100vh;
+    .bg-wrap {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -99999;
+    }
+    min-height: calc(100vh - 60px);
+    background-size: cover;
+    overflow: hidden;
     .bs-reset {
         margin: 0;
         padding: 0;
@@ -25,8 +35,7 @@ Login page
             top: 80px;
             left: 80px;
         }
-    }
-    // .login-container {
+    } // .login-container {
     //     position: relative;
     //     min-height: 100vh;
     // }
@@ -60,13 +69,11 @@ Login page
             margin-top: 20px;
             color: #a4aab2;
             font-size: 13px;
-            .login-label{
+            .login-label {
                 text-align: left !important;
             }
-
             .form-control {
-                width: 100%;
-                // border: none;
+                width: 100%; // border: none;
                 // border-bottom: 1px solid;
                 // border-color: #a0a9b4;
                 color: #868e97;
@@ -106,8 +113,8 @@ Login page
                     }
                 }
             }
-            .has-success .form-control{
-             border-bottom:1px solid #27a4b0;
+            .has-success .form-control {
+                border-bottom: 1px solid #27a4b0;
             }
         }
         .login-options {
@@ -173,7 +180,8 @@ Login page
 }
 
 @media (max-width: 1023px) {
-    html, body {
+    html,
+    body {
         overflow: auto;
     }
     .user-login {

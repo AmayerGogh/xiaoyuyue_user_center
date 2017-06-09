@@ -14,13 +14,15 @@ import { NgxAni } from "ngxani";
 @Component({
     templateUrl: './login.component.html',
     animations: [accountModuleAnimation()],
-    styleUrls: ['./login.component.less'],
+    styleUrls: ['./login.component.scss'],
     providers: [{ provide: TooltipConfig, useFactory: getAlertConfig }]
 })
 export class LoginComponent extends AppComponentBase implements AfterViewInit {
 
     submitting: boolean = false;
     flag: boolean = true;
+    // 普通登录或者手机验证登录，默认普通登录
+    ordinaryLogin: boolean = true;
 
     constructor(
         injector: Injector,
@@ -96,7 +98,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         this._ngxAni.to(externalAni, .6, {
             transform: "scale(1)",
             opacity: .8,
-            "ease": this._ngxAni['easeOutBack'], 
+            "ease": this._ngxAni['easeOutBack'],
             onComplete: () => {
                 // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
                 setTimeout(() => {
@@ -120,6 +122,16 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         })
     }
 
+    // add after
+    //是否账号登录
+    isOrdinaryLogin() {
+        this.ordinaryLogin = true;
+    }
+    //是否手机验证登录
+    isPhoneLogin() {
+        this.ordinaryLogin = false;
+    }
+
 }
 
 
@@ -128,4 +140,5 @@ export function getAlertConfig(): TooltipConfig {
         placement: 'top',
         container: 'body'
     });
+
 }

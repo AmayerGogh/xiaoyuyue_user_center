@@ -8,7 +8,7 @@ import { LoginService } from "shared/services/login.service";
 @Component({
     templateUrl: './account.component.html',
     styleUrls: [
-        './account.component.less',
+        './account.component.scss',
     ],
     encapsulation: ViewEncapsulation.None
 })

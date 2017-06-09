@@ -426,7 +426,7 @@ body {
     visibility: visible;
     left: 0;
     width: 100%;
-    background: #36c6d3;
+    background: #ff9742;
 }
 
 .form-group.form-md-line-input .form-control.edited:not([readonly])~label,

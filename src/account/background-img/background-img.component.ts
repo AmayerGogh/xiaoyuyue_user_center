@@ -5,20 +5,19 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { AbpSessionService } from '@abp/session/abp-session.service';
 
 @Component({
-    selector: "background-image-slider",
-    templateUrl: './background-image-slider.component.html',
+    selector: "xiaoyuyue-background-img",
+    templateUrl: './background-img.component.html',
+    styleUrls: ['background-img.component.scss'],
     animations: [accountModuleAnimation()]
 })
 
-export class BackgroundImageSliderComponent extends AppComponentBase {
+export class BackgroundImgComponent extends AppComponentBase {
 
     @ViewChild('loginBg') _loginBg: ElementRef;
     private $loginBg: JQuery;
 
     private imageData: string[] = [
-        "/assets/common/images/login/bg1.jpg",
-        "/assets/common/images/login/bg2.jpg",
-        "/assets/common/images/login/bg3.jpg",
+        "/assets/common/images/login/bg.jpg",
     ]
     private imgUrl: string;
 
