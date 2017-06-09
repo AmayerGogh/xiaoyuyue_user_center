@@ -39,6 +39,9 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         // this._activatedRoute.queryParams.subscribe((params: Params) => {
         //     this.loginService.externalLoginCallback(params);
         // });
+
+        // 临时设置租户ID
+        abp.multiTenancy.setTenantIdCookie(1);;
     }
 
     ngAfterViewInit(): void {

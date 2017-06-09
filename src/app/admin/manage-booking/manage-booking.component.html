@@ -42,10 +42,12 @@
                                             <label class="col-md-3 control-label">{{l("CreationTime")}}</label>
                                             <div class="col-md-9" style="padding-right: 0; padding-left: 0;">
                                                 <div class="col-md-6">
-                                                    <kendo-datepicker [(value)]="startCreationTime"></kendo-datepicker>
+                                                    <input class="form-control startCreationTime" type="text" name="startCreationTime" placeholder="请选择起始日期" [(ngModel)]="startCreationTime" data-input>
+                                                    <!--<kendo-datepicker [(value)]="startCreationTime"></kendo-datepicker>-->
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <kendo-datepicker [(value)]="endCreationTime"></kendo-datepicker>
+                                                    <input class="form-control endCreationTime" type="text" name="endCreationTime" placeholder="请选择结束日期" [(ngModel)]="endCreationTime" data-input>
+                                                    <!--<kendo-datepicker [(value)]="endCreationTime"></kendo-datepicker>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +117,7 @@
                     </div>
                     <!-- 蒙版遮罩 -->
                     <div class="booking-item-cover clearfix" *ngIf="!disabledBooking[index]">
-                        <div class="qr-code-wrap"><img src="/src/assets/common/images/qr-code.png" alt="qr-code" width="100%"></div>
+                        <div class="qr-code-wrap"><img src="/assets/common/images/qr-code.png" alt="qr-code" width="100%"></div>
                         <div class="handle-wrap">
                             <div class="handle-item-1 row">
                                 <span class="item col-md-6 col-sm-6 col-xs-6" (click)="disabledBookingClass(disabledAni, index)"><i class="vapps-icon-app-disable"></i>禁用</span>

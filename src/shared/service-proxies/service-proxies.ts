@@ -2995,6 +2995,175 @@ export class OrganizationBookingServiceProxy {
         return null;
     }
 
+    /**
+     * 获取时间
+     * @return Success
+     */
+    getItemDatetime(tenantId: number, name: string, description: string, templateId: number, contactorId: number, contactor_Name: string, contactor_Telephone: string, contactor_WechatQrcodeUrl: string, contactor_TenantId: number, contactor_OutletId: number, contactor_IsDefault: boolean, contactor_CreationTime: moment.Moment, contactor_CreatorUserId: number, contactor_Id: number, outletId: number, outlet_TenantId: number, outlet_Name: string, outlet_Longitude: string, outlet_BusinessHours: string, outlet_Province: string, outlet_ProvinceId: number, outlet_City: string, outlet_CityId: number, outlet_District: string, outlet_DistrictId: number, outlet_DetailAddress: string, outlet_PictureId: number, outlet_IsActive: boolean, outlet_Contactors: any[], outlet_IsDeleted: boolean, outlet_DeleterUserId: number, outlet_DeletionTime: moment.Moment, outlet_LastModificationTime: moment.Moment, outlet_LastModifierUserId: number, outlet_CreationTime: moment.Moment, outlet_CreatorUserId: number, outlet_Id: number, needGender: boolean, needAge: boolean, needEmail: boolean, sticked: boolean, isActive: boolean, pV: number, uV: number, items: any[], pictures: any[], isDeleted: boolean, deleterUserId: number, deletionTime: moment.Moment, lastModificationTime: moment.Moment, lastModifierUserId: number, creationTime: moment.Moment, creatorUserId: number, id: number): Observable<string[]> {
+        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetItemDatetime?";
+        if (tenantId !== undefined)
+            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
+        if (name !== undefined)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+        if (description !== undefined)
+            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
+        if (templateId !== undefined)
+            url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&"; 
+        if (contactorId !== undefined)
+            url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&"; 
+        if (contactor_Name !== undefined)
+            url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&"; 
+        if (contactor_Telephone !== undefined)
+            url_ += "Contactor.Telephone=" + encodeURIComponent("" + contactor_Telephone) + "&"; 
+        if (contactor_WechatQrcodeUrl !== undefined)
+            url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&"; 
+        if (contactor_TenantId !== undefined)
+            url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&"; 
+        if (contactor_OutletId !== undefined)
+            url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&"; 
+        if (contactor_IsDefault !== undefined)
+            url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&"; 
+        if (contactor_CreationTime !== undefined)
+            url_ += "Contactor.CreationTime=" + encodeURIComponent("" + contactor_CreationTime.toJSON()) + "&"; 
+        if (contactor_CreatorUserId !== undefined)
+            url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&"; 
+        if (contactor_Id !== undefined)
+            url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&"; 
+        if (outletId !== undefined)
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+        if (outlet_TenantId !== undefined)
+            url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&"; 
+        if (outlet_Name !== undefined)
+            url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&"; 
+        if (outlet_Longitude !== undefined)
+            url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&"; 
+        if (outlet_BusinessHours !== undefined)
+            url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&"; 
+        if (outlet_Province !== undefined)
+            url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&"; 
+        if (outlet_ProvinceId !== undefined)
+            url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&"; 
+        if (outlet_City !== undefined)
+            url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&"; 
+        if (outlet_CityId !== undefined)
+            url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&"; 
+        if (outlet_District !== undefined)
+            url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&"; 
+        if (outlet_DistrictId !== undefined)
+            url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&"; 
+        if (outlet_DetailAddress !== undefined)
+            url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&"; 
+        if (outlet_PictureId !== undefined)
+            url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&"; 
+        if (outlet_IsActive !== undefined)
+            url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&"; 
+        if (outlet_Contactors !== undefined)
+            outlet_Contactors.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Outlet.Contactors[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (outlet_IsDeleted !== undefined)
+            url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&"; 
+        if (outlet_DeleterUserId !== undefined)
+            url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&"; 
+        if (outlet_DeletionTime !== undefined)
+            url_ += "Outlet.DeletionTime=" + encodeURIComponent("" + outlet_DeletionTime.toJSON()) + "&"; 
+        if (outlet_LastModificationTime !== undefined)
+            url_ += "Outlet.LastModificationTime=" + encodeURIComponent("" + outlet_LastModificationTime.toJSON()) + "&"; 
+        if (outlet_LastModifierUserId !== undefined)
+            url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&"; 
+        if (outlet_CreationTime !== undefined)
+            url_ += "Outlet.CreationTime=" + encodeURIComponent("" + outlet_CreationTime.toJSON()) + "&"; 
+        if (outlet_CreatorUserId !== undefined)
+            url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&"; 
+        if (outlet_Id !== undefined)
+            url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&"; 
+        if (needGender !== undefined)
+            url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&"; 
+        if (needAge !== undefined)
+            url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&"; 
+        if (needEmail !== undefined)
+            url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&"; 
+        if (sticked !== undefined)
+            url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&"; 
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        if (pV !== undefined)
+            url_ += "PV=" + encodeURIComponent("" + pV) + "&"; 
+        if (uV !== undefined)
+            url_ += "UV=" + encodeURIComponent("" + uV) + "&"; 
+        if (items !== undefined)
+            items.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Items[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (pictures !== undefined)
+            pictures.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Pictures[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (isDeleted !== undefined)
+            url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&"; 
+        if (deleterUserId !== undefined)
+            url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&"; 
+        if (deletionTime !== undefined)
+            url_ += "DeletionTime=" + encodeURIComponent("" + deletionTime.toJSON()) + "&"; 
+        if (lastModificationTime !== undefined)
+            url_ += "LastModificationTime=" + encodeURIComponent("" + lastModificationTime.toJSON()) + "&"; 
+        if (lastModifierUserId !== undefined)
+            url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&"; 
+        if (creationTime !== undefined)
+            url_ += "CreationTime=" + encodeURIComponent("" + creationTime.toJSON()) + "&"; 
+        if (creatorUserId !== undefined)
+            url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&"; 
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetItemDatetime(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetItemDatetime(response));
+                } catch (e) {
+                    return <Observable<string[]>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<string[]>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetItemDatetime(response: Response): string[] {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: string[] = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(item);
+            }
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
     protected throwException(message: string, status: number, response: string, result?: any): any {
         if(result !== null && result !== undefined)
             throw result;
@@ -11758,6 +11927,8 @@ export class BookingListDto {
     subBookedNum: number;
     /** 待确认人数 */
     wait4ConfirmNum: number;
+    /** 可用预约时间 */
+    availableBookingTime: string[];
     id: number;
 
     constructor(data?: any) {
@@ -11775,6 +11946,11 @@ export class BookingListDto {
             this.subQueueNum = data["subQueueNum"] !== undefined ? data["subQueueNum"] : undefined;
             this.subBookedNum = data["subBookedNum"] !== undefined ? data["subBookedNum"] : undefined;
             this.wait4ConfirmNum = data["wait4ConfirmNum"] !== undefined ? data["wait4ConfirmNum"] : undefined;
+            if (data["availableBookingTime"] && data["availableBookingTime"].constructor === Array) {
+                this.availableBookingTime = [];
+                for (let item of data["availableBookingTime"])
+                    this.availableBookingTime.push(item);
+            }
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
@@ -11798,6 +11974,11 @@ export class BookingListDto {
         data["subQueueNum"] = this.subQueueNum !== undefined ? this.subQueueNum : undefined;
         data["subBookedNum"] = this.subBookedNum !== undefined ? this.subBookedNum : undefined;
         data["wait4ConfirmNum"] = this.wait4ConfirmNum !== undefined ? this.wait4ConfirmNum : undefined;
+        if (this.availableBookingTime && this.availableBookingTime.constructor === Array) {
+            data["availableBookingTime"] = [];
+            for (let item of this.availableBookingTime)
+                data["availableBookingTime"].push(item);
+        }
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -11817,9 +11998,8 @@ export class GetBookingForEditOutput {
     booking: BookingEditDto;
     /** 时间段 */
     items: BookingItemEditDto[];
-    /** 预约图片
-Todo:添加预约图片 */
-    bookingPicture: string;
+    /** 预约图片 */
+    bookingPicture: BookingPictureEditDto[];
     /** 可用门店列表 */
     availableOutlets: SelectListItemDto[];
     /** 可用联系人列表（默认门店下的可用联系人） */
@@ -11833,7 +12013,11 @@ Todo:添加预约图片 */
                 for (let item of data["items"])
                     this.items.push(BookingItemEditDto.fromJS(item));
             }
-            this.bookingPicture = data["bookingPicture"] !== undefined ? data["bookingPicture"] : undefined;
+            if (data["bookingPicture"] && data["bookingPicture"].constructor === Array) {
+                this.bookingPicture = [];
+                for (let item of data["bookingPicture"])
+                    this.bookingPicture.push(BookingPictureEditDto.fromJS(item));
+            }
             if (data["availableOutlets"] && data["availableOutlets"].constructor === Array) {
                 this.availableOutlets = [];
                 for (let item of data["availableOutlets"])
@@ -11859,7 +12043,11 @@ Todo:添加预约图片 */
             for (let item of this.items)
                 data["items"].push(item.toJS());
         }
-        data["bookingPicture"] = this.bookingPicture !== undefined ? this.bookingPicture : undefined;
+        if (this.bookingPicture && this.bookingPicture.constructor === Array) {
+            data["bookingPicture"] = [];
+            for (let item of this.bookingPicture)
+                data["bookingPicture"].push(item.toJS());
+        }
         if (this.availableOutlets && this.availableOutlets.constructor === Array) {
             data["availableOutlets"] = [];
             for (let item of this.availableOutlets)
@@ -12006,6 +12194,47 @@ export class BookingItemEditDto {
     }
 }
 
+export class BookingPictureEditDto {
+    /** 图片Id */
+    pictureId: number;
+    /** 图片 Url */
+    pictureUrl: string;
+    /** 排序 */
+    displayOrder: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+            this.pictureUrl = data["pictureUrl"] !== undefined ? data["pictureUrl"] : undefined;
+            this.displayOrder = data["displayOrder"] !== undefined ? data["displayOrder"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): BookingPictureEditDto {
+        return new BookingPictureEditDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        data["pictureUrl"] = this.pictureUrl !== undefined ? this.pictureUrl : undefined;
+        data["displayOrder"] = this.displayOrder !== undefined ? this.displayOrder : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BookingPictureEditDto(JSON.parse(json));
+    }
+}
+
 export class CreateOrUpdateBookingInput {
     /** 预约基本信息 */
     booking: BookingEditDto = new BookingEditDto();
@@ -12013,7 +12242,7 @@ export class CreateOrUpdateBookingInput {
     items: BookingItemEditDto[] = [];
     /** 预约图片
 Todo:添加预约图片 */
-    bookingPicture: string;
+    bookingPictures: BookingPictureEditDto[];
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -12023,7 +12252,11 @@ Todo:添加预约图片 */
                 for (let item of data["items"])
                     this.items.push(BookingItemEditDto.fromJS(item));
             }
-            this.bookingPicture = data["bookingPicture"] !== undefined ? data["bookingPicture"] : undefined;
+            if (data["bookingPictures"] && data["bookingPictures"].constructor === Array) {
+                this.bookingPictures = [];
+                for (let item of data["bookingPictures"])
+                    this.bookingPictures.push(BookingPictureEditDto.fromJS(item));
+            }
         }
     }
 
@@ -12039,7 +12272,11 @@ Todo:添加预约图片 */
             for (let item of this.items)
                 data["items"].push(item.toJS());
         }
-        data["bookingPicture"] = this.bookingPicture !== undefined ? this.bookingPicture : undefined;
+        if (this.bookingPictures && this.bookingPictures.constructor === Array) {
+            data["bookingPictures"] = [];
+            for (let item of this.bookingPictures)
+                data["bookingPictures"].push(item.toJS());
+        }
         return data; 
     }
 
@@ -12079,6 +12316,385 @@ export class EntityDtoOfInt64 {
     clone() {
         const json = this.toJSON();
         return new EntityDtoOfInt64(JSON.parse(json));
+    }
+}
+
+export class Contactor {
+    name: string;
+    telephone: string;
+    wechatQrcodeUrl: string;
+    tenantId: number;
+    outletId: number;
+    isDefault: boolean;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.telephone = data["telephone"] !== undefined ? data["telephone"] : undefined;
+            this.wechatQrcodeUrl = data["wechatQrcodeUrl"] !== undefined ? data["wechatQrcodeUrl"] : undefined;
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.outletId = data["outletId"] !== undefined ? data["outletId"] : undefined;
+            this.isDefault = data["isDefault"] !== undefined ? data["isDefault"] : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): Contactor {
+        return new Contactor(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["telephone"] = this.telephone !== undefined ? this.telephone : undefined;
+        data["wechatQrcodeUrl"] = this.wechatQrcodeUrl !== undefined ? this.wechatQrcodeUrl : undefined;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["outletId"] = this.outletId !== undefined ? this.outletId : undefined;
+        data["isDefault"] = this.isDefault !== undefined ? this.isDefault : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new Contactor(JSON.parse(json));
+    }
+}
+
+export class BookingItem {
+    tenantId: number;
+    bookingId: number;
+    availableDates: string;
+    hourOfDay: string;
+    maxBookingNum: number;
+    maxQueueNum: number;
+    bookedNum: number;
+    queueNum: number;
+    isActive: boolean;
+    isDeleted: boolean;
+    deleterUserId: number;
+    deletionTime: moment.Moment;
+    booking: Booking;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.bookingId = data["bookingId"] !== undefined ? data["bookingId"] : undefined;
+            this.availableDates = data["availableDates"] !== undefined ? data["availableDates"] : undefined;
+            this.hourOfDay = data["hourOfDay"] !== undefined ? data["hourOfDay"] : undefined;
+            this.maxBookingNum = data["maxBookingNum"] !== undefined ? data["maxBookingNum"] : undefined;
+            this.maxQueueNum = data["maxQueueNum"] !== undefined ? data["maxQueueNum"] : undefined;
+            this.bookedNum = data["bookedNum"] !== undefined ? data["bookedNum"] : undefined;
+            this.queueNum = data["queueNum"] !== undefined ? data["queueNum"] : undefined;
+            this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
+            this.isDeleted = data["isDeleted"] !== undefined ? data["isDeleted"] : undefined;
+            this.deleterUserId = data["deleterUserId"] !== undefined ? data["deleterUserId"] : undefined;
+            this.deletionTime = data["deletionTime"] ? moment(data["deletionTime"].toString()) : undefined;
+            this.booking = data["booking"] ? Booking.fromJS(data["booking"]) : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): BookingItem {
+        return new BookingItem(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["bookingId"] = this.bookingId !== undefined ? this.bookingId : undefined;
+        data["availableDates"] = this.availableDates !== undefined ? this.availableDates : undefined;
+        data["hourOfDay"] = this.hourOfDay !== undefined ? this.hourOfDay : undefined;
+        data["maxBookingNum"] = this.maxBookingNum !== undefined ? this.maxBookingNum : undefined;
+        data["maxQueueNum"] = this.maxQueueNum !== undefined ? this.maxQueueNum : undefined;
+        data["bookedNum"] = this.bookedNum !== undefined ? this.bookedNum : undefined;
+        data["queueNum"] = this.queueNum !== undefined ? this.queueNum : undefined;
+        data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
+        data["isDeleted"] = this.isDeleted !== undefined ? this.isDeleted : undefined;
+        data["deleterUserId"] = this.deleterUserId !== undefined ? this.deleterUserId : undefined;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : undefined;
+        data["booking"] = this.booking ? this.booking.toJS() : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BookingItem(JSON.parse(json));
+    }
+}
+
+export class Booking {
+    tenantId: number;
+    name: string;
+    description: string;
+    templateId: number;
+    contactorId: number;
+    contactor: Contactor;
+    outletId: number;
+    outlet: Outlet;
+    needGender: boolean;
+    needAge: boolean;
+    needEmail: boolean;
+    sticked: boolean;
+    isActive: boolean;
+    pv: number;
+    uv: number;
+    items: BookingItem[];
+    pictures: BookingPicture[];
+    isDeleted: boolean;
+    deleterUserId: number;
+    deletionTime: moment.Moment;
+    lastModificationTime: moment.Moment;
+    lastModifierUserId: number;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.description = data["description"] !== undefined ? data["description"] : undefined;
+            this.templateId = data["templateId"] !== undefined ? data["templateId"] : undefined;
+            this.contactorId = data["contactorId"] !== undefined ? data["contactorId"] : undefined;
+            this.contactor = data["contactor"] ? Contactor.fromJS(data["contactor"]) : undefined;
+            this.outletId = data["outletId"] !== undefined ? data["outletId"] : undefined;
+            this.outlet = data["outlet"] ? Outlet.fromJS(data["outlet"]) : undefined;
+            this.needGender = data["needGender"] !== undefined ? data["needGender"] : undefined;
+            this.needAge = data["needAge"] !== undefined ? data["needAge"] : undefined;
+            this.needEmail = data["needEmail"] !== undefined ? data["needEmail"] : undefined;
+            this.sticked = data["sticked"] !== undefined ? data["sticked"] : undefined;
+            this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
+            this.pv = data["pv"] !== undefined ? data["pv"] : undefined;
+            this.uv = data["uv"] !== undefined ? data["uv"] : undefined;
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(BookingItem.fromJS(item));
+            }
+            if (data["pictures"] && data["pictures"].constructor === Array) {
+                this.pictures = [];
+                for (let item of data["pictures"])
+                    this.pictures.push(BookingPicture.fromJS(item));
+            }
+            this.isDeleted = data["isDeleted"] !== undefined ? data["isDeleted"] : undefined;
+            this.deleterUserId = data["deleterUserId"] !== undefined ? data["deleterUserId"] : undefined;
+            this.deletionTime = data["deletionTime"] ? moment(data["deletionTime"].toString()) : undefined;
+            this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : undefined;
+            this.lastModifierUserId = data["lastModifierUserId"] !== undefined ? data["lastModifierUserId"] : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): Booking {
+        return new Booking(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["description"] = this.description !== undefined ? this.description : undefined;
+        data["templateId"] = this.templateId !== undefined ? this.templateId : undefined;
+        data["contactorId"] = this.contactorId !== undefined ? this.contactorId : undefined;
+        data["contactor"] = this.contactor ? this.contactor.toJS() : undefined;
+        data["outletId"] = this.outletId !== undefined ? this.outletId : undefined;
+        data["outlet"] = this.outlet ? this.outlet.toJS() : undefined;
+        data["needGender"] = this.needGender !== undefined ? this.needGender : undefined;
+        data["needAge"] = this.needAge !== undefined ? this.needAge : undefined;
+        data["needEmail"] = this.needEmail !== undefined ? this.needEmail : undefined;
+        data["sticked"] = this.sticked !== undefined ? this.sticked : undefined;
+        data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
+        data["pv"] = this.pv !== undefined ? this.pv : undefined;
+        data["uv"] = this.uv !== undefined ? this.uv : undefined;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJS());
+        }
+        if (this.pictures && this.pictures.constructor === Array) {
+            data["pictures"] = [];
+            for (let item of this.pictures)
+                data["pictures"].push(item.toJS());
+        }
+        data["isDeleted"] = this.isDeleted !== undefined ? this.isDeleted : undefined;
+        data["deleterUserId"] = this.deleterUserId !== undefined ? this.deleterUserId : undefined;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId !== undefined ? this.lastModifierUserId : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new Booking(JSON.parse(json));
+    }
+}
+
+export class Outlet {
+    tenantId: number;
+    name: string;
+    longitude: string;
+    businessHours: string;
+    province: string;
+    provinceId: number;
+    city: string;
+    cityId: number;
+    district: string;
+    districtId: number;
+    detailAddress: string;
+    pictureId: number;
+    isActive: boolean;
+    contactors: Contactor[];
+    isDeleted: boolean;
+    deleterUserId: number;
+    deletionTime: moment.Moment;
+    lastModificationTime: moment.Moment;
+    lastModifierUserId: number;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.longitude = data["longitude"] !== undefined ? data["longitude"] : undefined;
+            this.businessHours = data["businessHours"] !== undefined ? data["businessHours"] : undefined;
+            this.province = data["province"] !== undefined ? data["province"] : undefined;
+            this.provinceId = data["provinceId"] !== undefined ? data["provinceId"] : undefined;
+            this.city = data["city"] !== undefined ? data["city"] : undefined;
+            this.cityId = data["cityId"] !== undefined ? data["cityId"] : undefined;
+            this.district = data["district"] !== undefined ? data["district"] : undefined;
+            this.districtId = data["districtId"] !== undefined ? data["districtId"] : undefined;
+            this.detailAddress = data["detailAddress"] !== undefined ? data["detailAddress"] : undefined;
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+            this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
+            if (data["contactors"] && data["contactors"].constructor === Array) {
+                this.contactors = [];
+                for (let item of data["contactors"])
+                    this.contactors.push(Contactor.fromJS(item));
+            }
+            this.isDeleted = data["isDeleted"] !== undefined ? data["isDeleted"] : undefined;
+            this.deleterUserId = data["deleterUserId"] !== undefined ? data["deleterUserId"] : undefined;
+            this.deletionTime = data["deletionTime"] ? moment(data["deletionTime"].toString()) : undefined;
+            this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : undefined;
+            this.lastModifierUserId = data["lastModifierUserId"] !== undefined ? data["lastModifierUserId"] : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): Outlet {
+        return new Outlet(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["longitude"] = this.longitude !== undefined ? this.longitude : undefined;
+        data["businessHours"] = this.businessHours !== undefined ? this.businessHours : undefined;
+        data["province"] = this.province !== undefined ? this.province : undefined;
+        data["provinceId"] = this.provinceId !== undefined ? this.provinceId : undefined;
+        data["city"] = this.city !== undefined ? this.city : undefined;
+        data["cityId"] = this.cityId !== undefined ? this.cityId : undefined;
+        data["district"] = this.district !== undefined ? this.district : undefined;
+        data["districtId"] = this.districtId !== undefined ? this.districtId : undefined;
+        data["detailAddress"] = this.detailAddress !== undefined ? this.detailAddress : undefined;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
+        if (this.contactors && this.contactors.constructor === Array) {
+            data["contactors"] = [];
+            for (let item of this.contactors)
+                data["contactors"].push(item.toJS());
+        }
+        data["isDeleted"] = this.isDeleted !== undefined ? this.isDeleted : undefined;
+        data["deleterUserId"] = this.deleterUserId !== undefined ? this.deleterUserId : undefined;
+        data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId !== undefined ? this.lastModifierUserId : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new Outlet(JSON.parse(json));
+    }
+}
+
+export class BookingPicture {
+    tenantId: number;
+    bookingId: number;
+    pictureId: number;
+    displayOrder: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.bookingId = data["bookingId"] !== undefined ? data["bookingId"] : undefined;
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+            this.displayOrder = data["displayOrder"] !== undefined ? data["displayOrder"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): BookingPicture {
+        return new BookingPicture(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["bookingId"] = this.bookingId !== undefined ? this.bookingId : undefined;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        data["displayOrder"] = this.displayOrder !== undefined ? this.displayOrder : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BookingPicture(JSON.parse(json));
     }
 }
 

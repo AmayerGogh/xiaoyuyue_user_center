@@ -15,12 +15,16 @@ import { Router } from "@angular/router";
   styleUrls: ['./manage-booking.component.scss'],
   animations: [appModuleAnimation()]
 })
+
 export class ManageBookingComponent extends AppComponentBase implements OnInit {
 
   organizationBookingResultData: BookingListDto[];
 
   endCreationTime: moment.Moment;
   startCreationTime: moment.Moment;
+
+  // endCreationTime: string;
+  // startCreationTime: string;
   isActive: boolean;
   outletId: number;
   bookingName: string;
@@ -42,6 +46,12 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
 
   ngOnInit() {
     this.loadData();
+    var Greeting = (function () { function Greeting() { } Greeting.prototype.greet = function () { console.log("Hello World!!!"); }; }());
+  }
+
+  ngAfterViewInit() {
+    $(".startCreationTime").flatpickr();
+    $(".endCreationTime").flatpickr();
   }
 
 
@@ -56,11 +66,18 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
         sorting = state.sort[0].field + " " + state.sort[0].dir;
       }
     }
+    this.startCreationTime ? moment(this.startCreationTime) : undefined;
+    this.endCreationTime ? moment(this.endCreationTime) : undefined;
+
     this._organizationBookingServiceProxy
       .getBookingsAsync(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
       .subscribe(result => {
         this.organizationBookingResultData = result.items;
       })
+  }
+  getMoment(arg: string) {
+    if (arg === undefined) return undefined;
+    return moment(arg);
   }
 
   editHandler(bookingId: number) {
@@ -109,7 +126,7 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       .subscribe(result => {
 
         input.booking = result.booking;
-        input.bookingPicture = result.bookingPicture;
+        input.bookingPictures = result.bookingPicture;
         input.items = result.items;
 
         // 创建预约

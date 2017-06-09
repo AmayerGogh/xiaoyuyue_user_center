@@ -32,7 +32,7 @@ body.page-md {
 
 .page-header.navbar {
     background: #3B3F51;
-    border-bottom: 1px solid #e9ecf3;
+    /*border-bottom: 1px solid #e9ecf3;*/
     /* Top notification menu/bar */
     /* Header seaech box */
     /* Menu Toggler */
@@ -373,7 +373,7 @@ body.page-md {
     .page-header.navbar {
         padding: 0;
         /* Top menu */
-    }
+
     .page-header.navbar .top-menu .navbar-nav>li.dropdown>.dropdown-toggle:hover {
         background-color: #f6f7fa;
     }
@@ -383,7 +383,7 @@ body.page-md {
     /* 767px */
     .page-header.navbar {
         background: #FFFFFF;
-        border-bottom: 1px solid white;
+        /*border-bottom: 1px solid white;*/
         /* Top menu */
     }
     .page-header.navbar .page-top {

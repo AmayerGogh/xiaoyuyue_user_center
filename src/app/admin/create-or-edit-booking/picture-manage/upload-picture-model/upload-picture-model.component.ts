@@ -5,7 +5,7 @@ import { FileUploader, FileUploaderOptions } from "ng2-file-upload";
 import { AppConsts } from "shared/AppConsts";
 import { TokenService } from "abp-ng2-module/src/auth/token.service";
 import { IAjaxResponse } from "abp-ng2-module/src/abpHttp";
-import { UpdateProfilePictureInput, PictureServiceProxy, UploadTokenOutput } from "shared/service-proxies/service-proxies";
+import { UpdateProfilePictureInput, PictureServiceProxy, UploadTokenOutput, BookingPictureEditDto } from "shared/service-proxies/service-proxies";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 
 @Component({
@@ -18,6 +18,7 @@ export class UploadPictureModelComponent extends AppComponentBase implements OnI
 
   @Output() getAllPictureUrl: EventEmitter<SafeUrl[]> = new EventEmitter();
   public allPictureUrl: SafeUrl[] = [];
+  public allPictureId: BookingPictureEditDto[] = [];
 
   @ViewChild('uploadPictureModel') modal: ModalDirective;
 
@@ -128,11 +129,14 @@ export class UploadPictureModelComponent extends AppComponentBase implements OnI
               //  }
               // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-              // var domain = up.getOption('domain');
+              var domain = up.getOption('domain');
               // var res = parseJSON(info);
               // this._$profilePicture = domain + res.key; //获取上传成功后的文件的Url
-              // console.log(domain);
-              console.log('上传成功');
+              var result = info.result;
+              console.log(result);
+              self.allPictureId.push(result.pictureId);
+              console.log(domain);
+              console.log(self.allPictureId);
             },
             'Error': function (up, err, errTip) {
               //上传出错时,处理相关的事情

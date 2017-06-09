@@ -98,11 +98,11 @@ declare var WxLogin: any;
 
 declare var Push: any;
 
-declare var $:any;
-declare var Qiniu:any;
-declare var QiniuJsSDK:any;
-declare var plupload:any;
-declare var FileProgress:jQuery;
+declare var $: any;
+declare var Qiniu: any;
+declare var QiniuJsSDK: any;
+declare var plupload: any;
+declare var FileProgress: jQuery;
 
 interface JQuery {
     LUOCAPTCHA(...any): any;
@@ -123,3 +123,10 @@ interface Window {
 interface HTMLInputEvent extends Event {
     target: HTMLInputElement & EventTarget;
 }
+interface String {
+    getMoment(...args): any;
+}
+// String.prototype.getMoment = function(): any {
+//      if (arg === undefined) return undefined;
+//         return moment(arg);
+// }

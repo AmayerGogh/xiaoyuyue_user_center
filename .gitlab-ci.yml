@@ -6,7 +6,8 @@ stages:
   # - deploy_production
 
 cache:
-  key: ${CI_BUILD_REF_NAME}
+  key: "$CI_JOB_NAME/$CI_COMMIT_REF_NAME"
+  untracked: true
   paths:
     - node_modules/
     - dist/
@@ -37,8 +38,7 @@ build:
     - develop
     - master
   script:
-    - npm run clean
-    - npm run build
+    - ng build --prod --aot 
 
 
 # 部署测试服务器
@@ -47,8 +47,11 @@ deploy_test:
   only:
     - develop
   script:
-    - copy dist D:\wwwroot\xiaoyuyue_user_center
-
+    - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
+    - copy web.config dist\ -force #复制iis 配置文件
+    - copy dist\* D:\wwwroot\xiaoyuyue_user_center -force # 复制文件到iis目录
+    - Start-Sleep -Seconds 3
+    - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
 # 部署生产服务器
 # deploy_production:
