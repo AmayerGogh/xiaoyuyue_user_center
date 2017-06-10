@@ -1,6 +1,7 @@
-import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { AppComponentBase } from "shared/common/app-component-base";
 import { UploadPictureModelComponent } from "app/admin/create-or-edit-booking/picture-manage/upload-picture-model/upload-picture-model.component";
+import { BookingPictureEditDto } from "shared/service-proxies/service-proxies";
 
 @Component({
   selector: 'app-picture-manage',
@@ -8,7 +9,9 @@ import { UploadPictureModelComponent } from "app/admin/create-or-edit-booking/pi
   styleUrls: ['./picture-manage.component.scss']
 })
 export class PictureManageComponent extends AppComponentBase implements OnInit {
+  @Output() sendPictureForEdit: EventEmitter<BookingPictureEditDto> = new EventEmitter();
   allPictureUrl: string[];
+  @Input() pictureInfo: BookingPictureEditDto;
 
   @ViewChild('uploadPictureModel') uploadPictureModel: UploadPictureModelComponent;
 
@@ -20,6 +23,7 @@ export class PictureManageComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.pictureInfo);
   }
 
   createUser(): void {
@@ -28,6 +32,9 @@ export class PictureManageComponent extends AppComponentBase implements OnInit {
 
   getAllPictureUrl(allPictureUrl: string[]) {
     this.allPictureUrl = allPictureUrl;
+  }
+  getPictureForEdit(pictureForEdit: BookingPictureEditDto) {
+    this.sendPictureForEdit.emit(pictureForEdit);
   }
 
 }

@@ -132,8 +132,22 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
         // 创建预约
         this._organizationBookingServiceProxy
           .createOrUpdateBooking(input)
-          .subscribe()
+          .subscribe(() => {
+            this.loadData();
+            this.notify.success("复制成功！");
+          })
       });
 
+  }
+
+  // 删除预约
+  removeBooking(index) {
+    let bookingId = this.organizationBookingResultData[index].id;
+    this._organizationBookingServiceProxy
+      .deleteBooking(bookingId)
+      .subscribe(() => {
+        this.loadData();
+        this.notify.success("删除成功！");
+      });
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Input } from '@angular/core';
 import { Location } from '@angular/common';
 import { AppComponentBase } from "shared/common/app-component-base";
 import { appModuleAnimation } from "shared/animations/routerTransition";
-import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, CreateOrUpdateBookingInput, BookingEditDto, BookingItemEditDto, GetBookingForEditOutput, OutletServiceServiceProxy, SelectListItemDto } from "shared/service-proxies/service-proxies";
+import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, CreateOrUpdateBookingInput, BookingEditDto, BookingItemEditDto, GetBookingForEditOutput, OutletServiceServiceProxy, SelectListItemDto, BookingPictureEditDto } from "shared/service-proxies/service-proxies";
 
 import * as moment from 'moment';
 import { AppConsts } from "shared/AppConsts";
@@ -16,6 +16,11 @@ import { SortDescriptor } from "@progress/kendo-data-query/dist/es/sort-descript
   animations: [appModuleAnimation()]
 })
 export class CreateOrEditBookingComponent extends AppComponentBase implements OnInit {
+  // 传给图片管理组件
+  pictureInfo: BookingPictureEditDto[];
+
+  pictureForEdit: BookingPictureEditDto;
+  allPictureForEdit: BookingPictureEditDto[] = [];
   outletSelectListData: SelectListItemDto[];
   contactorSelectListData: SelectListItemDto[];
 
@@ -82,6 +87,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
         this.bookingDataForEdit = result;
         this.baseInfo = result.booking;
         this.timeInfo = result.items;
+        this.pictureInfo = result.bookingPicture;
 
         // 获取门店下拉框数据源
         this._outletServiceServiceProxy
@@ -106,6 +112,8 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
     this.input.booking.outletId = this.selectOutletId;
     this.input.booking.contactorId = this.selectContactorId;
     this.input.items = this.allBookingTime;
+    this.allPictureForEdit.push(this.pictureForEdit);
+    this.input.bookingPictures = this.allPictureForEdit;
     this._organizationBookingServiceProxy
       .createOrUpdateBooking(this.input)
       .subscribe(() => {
@@ -155,5 +163,9 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
 
   public contactorChange(contactor: any): void {
     this.selectContactorId = parseInt(contactor);
+  }
+
+  getPictureForEdit(pictureForEdit: BookingPictureEditDto) {
+    this.pictureForEdit = pictureForEdit;
   }
 }

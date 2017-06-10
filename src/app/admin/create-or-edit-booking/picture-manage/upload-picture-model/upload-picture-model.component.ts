@@ -17,8 +17,11 @@ export class UploadPictureModelComponent extends AppComponentBase implements OnI
 
 
   @Output() getAllPictureUrl: EventEmitter<SafeUrl[]> = new EventEmitter();
+  @Output() sendPictureForEdit: EventEmitter<BookingPictureEditDto> = new EventEmitter();
   public allPictureUrl: SafeUrl[] = [];
-  public allPictureId: BookingPictureEditDto[] = [];
+  public allPictureId: number[] = [];
+  displayOrder: number = 0;
+  public pictureForEdit: BookingPictureEditDto = new BookingPictureEditDto();
 
   @ViewChild('uploadPictureModel') modal: ModalDirective;
 
@@ -129,14 +132,17 @@ export class UploadPictureModelComponent extends AppComponentBase implements OnI
               //  }
               // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-              var domain = up.getOption('domain');
+              
               // var res = parseJSON(info);
               // this._$profilePicture = domain + res.key; //获取上传成功后的文件的Url
-              var result = info.result;
-              console.log(result);
-              self.allPictureId.push(result.pictureId);
-              console.log(domain);
-              console.log(self.allPictureId);
+              var result = JSON.parse(info).result;
+              self.displayOrder++;
+              self.pictureForEdit.pictureId = result.pictureId;
+              self.pictureForEdit.displayOrder = self.displayOrder;
+              // self.allPictureId.push(result.pictureId);
+              // console.log(domain);
+              // console.log(self.allPictureId);
+              self.sendPictureForEdit.emit(self.pictureForEdit);
             },
             'Error': function (up, err, errTip) {
               //上传出错时,处理相关的事情
@@ -155,6 +161,9 @@ export class UploadPictureModelComponent extends AppComponentBase implements OnI
               let timeStamp = date.getTime().valueOf();
               let key = `${id}/${outletId}/${timeStamp}`;
               // do something with key here
+
+              var domain = up.getOption('domain');
+              self.pictureForEdit.pictureUrl = domain + key;
               return key
             }
           }
