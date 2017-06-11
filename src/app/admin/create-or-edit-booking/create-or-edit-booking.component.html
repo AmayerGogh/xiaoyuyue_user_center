@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-xs-6 text-right">
-                <button type="submit" (click)="save()" class="btn btn-submit" [disabled]="!infoFormValid || !createBookingForm.form.valid"><span class="vapps-icon vapps-icon-app-submit"></span>{{l("Save")}}</button>
+                <button type="submit" (click)="save()" class="btn btn-submit" [disabled]="bookingId?false:(!infoFormValid || !createBookingForm.form.valid)"><span class="vapps-icon vapps-icon-app-submit"></span>{{l("Save")}}</button>
                 <button type="botton" (click)="saveAndEdit()" class="btn btn-submit">{{l("UserCenter.SavingAndEditing")}}</button>
                 <button class="btn btn-view"><span class="vapps-icon vapps-icon-app-preview"></span>{{l("View")}}</button>
             </div>
