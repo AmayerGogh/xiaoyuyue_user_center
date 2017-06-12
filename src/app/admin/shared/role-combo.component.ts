@@ -27,11 +27,13 @@ export class RoleComboComponent extends AppComponentBase implements OnInit, Afte
     @Output() selectedRoleChange: EventEmitter<string> = new EventEmitter<string>();
 
     @Input() emptyText: string = '';
+    _dataLocalStorage: DataLocalStorage;
 
     constructor(
-        private _dataLocalStorage: DataLocalStorage,
+        private dataLocalStorage: DataLocalStorage,
         injector: Injector) {
         super(injector);
+        this._dataLocalStorage = dataLocalStorage;
     }
 
     ngOnInit(): void {

@@ -5,8 +5,8 @@
                 <div class="page-head">
                     <div class="page-title">
                         <h1>
-                            <span *ngIf="getUserForEdit.user.id">{{l("EditUser")}}: {{getUserForEdit.user.userName}}</span>
-                            <span *ngIf="!getUserForEdit.user.id">{{l("CreateNewUser")}}</span>
+                            <span *ngIf="_getUserForEdit.user.id">{{l("EditUser")}}: {{_getUserForEdit.user.userName}}</span>
+                            <span *ngIf="!_getUserForEdit.user.id">{{l("CreateNewUser")}}</span>
                             <small>{{l("UsersHeaderInfo")}}</small>
                         </h1>
                     </div>
@@ -24,33 +24,33 @@
 
                         <div class="row common-input-line-width">
                             <div class="col-sm-4 text-center">
-                                <img src="{{getUserForEdit.profilePicture}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
+                                <img src="{{_getUserForEdit.profilePicture}}" width="128" height="128" class="img-thumbnail img-rounded user-edit-dialog-profile-image" />
                             </div>
                             <div class="col-sm-8">
                                 <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                                    <input #nameInput class="form-control" type="text" name="Name" [ngClass]="{'edited':getUserForEdit.user.name}" [(ngModel)]="getUserForEdit.user.name" required maxlength="32">
+                                    <input #nameInput class="form-control" type="text" name="Name" [ngClass]="{'edited':_getUserForEdit.user.name}" [(ngModel)]="_getUserForEdit.user.name" required maxlength="32">
                                     <label>{{l("Name")}}</label>
                                 </div>
 
                                 <div class="form-group form-md-line-input form-md-floating-label no-hint">
-                                    <input type="text" name="Surname" class="form-control" [ngClass]="{'edited':getUserForEdit.user.surname}" [(ngModel)]="getUserForEdit.user.surname" required maxlength="32">
+                                    <input type="text" name="Surname" class="form-control" [ngClass]="{'edited':_getUserForEdit.user.surname}" [(ngModel)]="_getUserForEdit.user.surname" required maxlength="32">
                                     <label>{{l("Surname")}}</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group form-md-line-input form-md-floating-label no-hint common-input-line-width">
-                            <input type="email" name="EmailAddress" class="form-control" [ngClass]="{'edited':getUserForEdit.user.emailAddress}" [(ngModel)]="getUserForEdit.user.emailAddress" required maxlength="256" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
+                            <input type="email" name="EmailAddress" class="form-control" [ngClass]="{'edited':_getUserForEdit.user.emailAddress}" [(ngModel)]="_getUserForEdit.user.emailAddress" required maxlength="256" pattern="^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$">
                             <label>{{l("EmailAddress")}}</label>
                         </div>
 
                         <div class="form-group form-md-line-input form-md-floating-label no-hint common-input-line-width">
-                            <input type="text" name="PhoneNumber" class="form-control" [ngClass]="{'edited':getUserForEdit.user.phoneNumber}" [(ngModel)]="getUserForEdit.user.phoneNumber" maxlength="24">
+                            <input type="text" name="PhoneNumber" class="form-control" [ngClass]="{'edited':_getUserForEdit.user.phoneNumber}" [(ngModel)]="_getUserForEdit.user.phoneNumber" maxlength="24">
                             <label>{{l("PhoneNumber")}}</label>
                         </div>
 
                         <div class="form-group form-md-line-input form-md-floating-label common-input-line-width">
-                            <input type="text" [disabled]="!canChangeUserName" [ngClass]="{'edited':getUserForEdit.user.userName}" name="UserName" class="form-control input-ltr" [(ngModel)]="getUserForEdit.user.userName" required maxlength="32">
+                            <input type="text" [disabled]="!canChangeUserName" [ngClass]="{'edited':_getUserForEdit.user.userName}" name="UserName" class="form-control input-ltr" [(ngModel)]="_getUserForEdit.user.userName" required maxlength="32">
                             <label>{{l("UserName")}}</label>
                             <span class="help-block" *ngIf="!canChangeUserName">{{l("CanNotChangeAdminUserName")}}</span>
                         </div>
@@ -93,7 +93,7 @@
 
                         <div class="md-checkbox-list common-input-line-width">
                             <div class="md-checkbox">
-                                <input id="EditUser_ShouldChangePasswordOnNextLogin" class="md-check" type="checkbox" name="ShouldChangePasswordOnNextLogin" [(ngModel)]="getUserForEdit.user.shouldChangePasswordOnNextLogin">
+                                <input id="EditUser_ShouldChangePasswordOnNextLogin" class="md-check" type="checkbox" name="ShouldChangePasswordOnNextLogin" [(ngModel)]="_getUserForEdit.user.shouldChangePasswordOnNextLogin">
                                 <label for="EditUser_ShouldChangePasswordOnNextLogin">
                             <span class="inc"></span>
                             <span class="check"></span>
@@ -120,7 +120,7 @@
                         </label>
                             </div>
                             <div class="md-checkbox" *ngIf="isTwoFactorEnabled">
-                                <input id="EditUser_IsTwoFactorEnabled" class="md-check" type="checkbox" name="IsTwoFactorEnabled" [(ngModel)]="getUserForEdit.user.isTwoFactorEnabled">
+                                <input id="EditUser_IsTwoFactorEnabled" class="md-check" type="checkbox" name="IsTwoFactorEnabled" [(ngModel)]="_getUserForEdit.user.isTwoFactorEnabled">
                                 <label for="EditUser_IsTwoFactorEnabled">
                             <span class="inc"></span>
                             <span class="check"></span>
@@ -129,7 +129,7 @@
                         </label>
                             </div>
                             <div class="md-checkbox" *ngIf="isLockoutEnabled">
-                                <input id="EditUser_IsLockoutEnabled" class="md-check" type="checkbox" name="IsLockoutEnabled" [(ngModel)]="getUserForEdit.user.isLockoutEnabled">
+                                <input id="EditUser_IsLockoutEnabled" class="md-check" type="checkbox" name="IsLockoutEnabled" [(ngModel)]="_getUserForEdit.user.isLockoutEnabled">
                                 <label for="EditUser_IsLockoutEnabled" tooltip="{{l('IsLockoutEnabled_Hint')}}">
                             <span class="inc"></span>
                             <span class="check"></span>
@@ -146,7 +146,7 @@
                         </ng-template>
 
                         <div class="md-checkbox-list">
-                            <div class="md-checkbox" *ngFor="let role of getUserForEdit.roles">
+                            <div class="md-checkbox" *ngFor="let role of _getUserForEdit.roles">
                                 <input id="EditUser_{{role.roleName}}" class="md-check" type="checkbox" name="{{role.roleName}}" [(ngModel)]="role.isAssigned">
                                 <label attr.for="EditUser_{{role.roleName}}">
                                     <span class="inc"></span>
@@ -172,7 +172,7 @@
                         <div *ngIf="!isShowPermission">
                             <div>
                                 <form novalidate #myForm="ngForm">
-                                    <kendo-grid [data]="getUserForEdit.externalLoginData | async" [pageSize]=" pageSize " [skip]="skip " [sort]="sort " [pageable]="true " [sortable]="false" (dataStateChange)="onStateChange($event)">
+                                    <kendo-grid [data]="_getUserForEdit.externalLoginData | async" [pageSize]=" pageSize " [skip]="skip " [sort]="sort " [pageable]="true " [sortable]="false" (dataStateChange)="onStateChange($event)">
                                         <kendo-grid-column field="loginProvider " title="{{l( 'ExternalLoginMode')}} ">
                                             <ng-template let-dataItem="dataItem "></ng-template>
                                         </kendo-grid-column>
