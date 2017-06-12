@@ -7,11 +7,11 @@ import { BookingPictureEditDto } from "shared/service-proxies/service-proxies";
   selector: 'app-picture-manage',
   templateUrl: './picture-manage.component.html',
   styleUrls: ['./picture-manage.component.scss']
-})
+}) 
 export class PictureManageComponent extends AppComponentBase implements OnInit {
   @Output() sendPictureForEdit: EventEmitter<BookingPictureEditDto> = new EventEmitter();
   allPictureUrl: string[];
-  @Input() pictureInfo: BookingPictureEditDto;
+  @Input() pictureInfo: BookingPictureEditDto[];
 
   @ViewChild('uploadPictureModel') uploadPictureModel: UploadPictureModelComponent;
 
@@ -23,6 +23,12 @@ export class PictureManageComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.pictureInfo);
+  }
+
+  ngAfterViewInit() {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
     console.log(this.pictureInfo);
   }
 

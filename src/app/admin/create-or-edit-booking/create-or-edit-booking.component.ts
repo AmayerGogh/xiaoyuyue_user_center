@@ -91,7 +91,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
         this.bookingDataForEdit = result;
         this.baseInfo = result.booking;
         this.timeInfo = result.items;
-        this.pictureInfo = result.bookingPicture;
+        this.pictureInfo = result.bookingPictures;
 
         // 获取门店下拉框数据源
         this._outletServiceServiceProxy

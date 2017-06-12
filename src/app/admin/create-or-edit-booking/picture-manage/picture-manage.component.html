@@ -10,8 +10,8 @@
             <div class="row">
                 <div *ngIf="pictureInfo; else hasPictureInfo">
                     <div class="gallery-wrap col-md-6">
-                        <div class="picture-item" *ngFor="let pictureUrlItem of pictureInfo.pictureUrl">
-                            <div class="content"><img *ngIf="allPictureUrl" [src]="pictureUrlItem" alt="" width=100% height=100%></div>
+                        <div class="picture-item" *ngFor="let pictureUrlItem of pictureInfo">
+                            <div class="content"><img [src]="'http://'+pictureUrlItem.pictureUrl" alt="" width=100% height=100%></div>
                         </div>
                     </div>
                 </div>

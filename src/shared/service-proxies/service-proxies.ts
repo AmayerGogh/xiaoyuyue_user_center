@@ -3758,6 +3758,56 @@ export class OutletServiceServiceProxy {
     }
 
     /**
+     * 获取门店详情
+     * @return Success
+     */
+    getBookingForEdit(id: number): Observable<GetOutletForEditDto> {
+        let url_ = this.baseUrl + "/api/services/app/OutletService/GetBookingForEdit?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBookingForEdit(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBookingForEdit(response));
+                } catch (e) {
+                    return <Observable<GetOutletForEditDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetOutletForEditDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBookingForEdit(response: Response): GetOutletForEditDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetOutletForEditDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetOutletForEditDto.fromJS(resultData200) : new GetOutletForEditDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
      * 创建或更新门店
      * @return Success
      */
@@ -5912,19 +5962,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
-     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -11999,7 +12049,7 @@ export class GetBookingForEditOutput {
     /** 时间段 */
     items: BookingItemEditDto[];
     /** 预约图片 */
-    bookingPicture: BookingPictureEditDto[];
+    bookingPictures: BookingPictureEditDto[];
     /** 可用门店列表 */
     availableOutlets: SelectListItemDto[];
     /** 可用联系人列表（默认门店下的可用联系人） */
@@ -12013,10 +12063,10 @@ export class GetBookingForEditOutput {
                 for (let item of data["items"])
                     this.items.push(BookingItemEditDto.fromJS(item));
             }
-            if (data["bookingPicture"] && data["bookingPicture"].constructor === Array) {
-                this.bookingPicture = [];
-                for (let item of data["bookingPicture"])
-                    this.bookingPicture.push(BookingPictureEditDto.fromJS(item));
+            if (data["bookingPictures"] && data["bookingPictures"].constructor === Array) {
+                this.bookingPictures = [];
+                for (let item of data["bookingPictures"])
+                    this.bookingPictures.push(BookingPictureEditDto.fromJS(item));
             }
             if (data["availableOutlets"] && data["availableOutlets"].constructor === Array) {
                 this.availableOutlets = [];
@@ -12043,10 +12093,10 @@ export class GetBookingForEditOutput {
             for (let item of this.items)
                 data["items"].push(item.toJS());
         }
-        if (this.bookingPicture && this.bookingPicture.constructor === Array) {
-            data["bookingPicture"] = [];
-            for (let item of this.bookingPicture)
-                data["bookingPicture"].push(item.toJS());
+        if (this.bookingPictures && this.bookingPictures.constructor === Array) {
+            data["bookingPictures"] = [];
+            for (let item of this.bookingPictures)
+                data["bookingPictures"].push(item.toJS());
         }
         if (this.availableOutlets && this.availableOutlets.constructor === Array) {
             data["availableOutlets"] = [];
@@ -12080,9 +12130,9 @@ export class BookingEditDto {
     description: string;
     /** 模板Id */
     templateId: number;
-    /** 联系人Id */
+    /** 联系人Id(必填) */
     contactorId: number;
-    /** 门店Id */
+    /** 门店Id(必填) */
     outletId: number;
     /** 需要填写性别 */
     needGender: boolean;
@@ -12240,9 +12290,8 @@ export class CreateOrUpdateBookingInput {
     booking: BookingEditDto = new BookingEditDto();
     /** 时间段 */
     items: BookingItemEditDto[] = [];
-    /** 预约图片
-Todo:添加预约图片 */
-    bookingPictures: BookingPictureEditDto[];
+    /** 预约图片 */
+    bookingPictures: BookingPictureEditDto[] = [];
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -13170,11 +13219,17 @@ export class ContactorEditDto {
     }
 }
 
-export class CreateOrUpdateOutletInput {
+export class GetOutletForEditDto {
     /** 门店信息 */
     outlet: OutletEditDto;
     /** 联系人集合 */
     contactors: ContactorEditDto[];
+    /** 可用省份 */
+    availableProvinces: SelectListItemDto[];
+    /** 可用城市 */
+    availableCitys: SelectListItemDto[];
+    /** 可用区域 */
+    availableDistricts: SelectListItemDto[];
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -13184,11 +13239,26 @@ export class CreateOrUpdateOutletInput {
                 for (let item of data["contactors"])
                     this.contactors.push(ContactorEditDto.fromJS(item));
             }
+            if (data["availableProvinces"] && data["availableProvinces"].constructor === Array) {
+                this.availableProvinces = [];
+                for (let item of data["availableProvinces"])
+                    this.availableProvinces.push(SelectListItemDto.fromJS(item));
+            }
+            if (data["availableCitys"] && data["availableCitys"].constructor === Array) {
+                this.availableCitys = [];
+                for (let item of data["availableCitys"])
+                    this.availableCitys.push(SelectListItemDto.fromJS(item));
+            }
+            if (data["availableDistricts"] && data["availableDistricts"].constructor === Array) {
+                this.availableDistricts = [];
+                for (let item of data["availableDistricts"])
+                    this.availableDistricts.push(SelectListItemDto.fromJS(item));
+            }
         }
     }
 
-    static fromJS(data: any): CreateOrUpdateOutletInput {
-        return new CreateOrUpdateOutletInput(data);
+    static fromJS(data: any): GetOutletForEditDto {
+        return new GetOutletForEditDto(data);
     }
 
     toJS(data?: any) {
@@ -13199,6 +13269,21 @@ export class CreateOrUpdateOutletInput {
             for (let item of this.contactors)
                 data["contactors"].push(item.toJS());
         }
+        if (this.availableProvinces && this.availableProvinces.constructor === Array) {
+            data["availableProvinces"] = [];
+            for (let item of this.availableProvinces)
+                data["availableProvinces"].push(item.toJS());
+        }
+        if (this.availableCitys && this.availableCitys.constructor === Array) {
+            data["availableCitys"] = [];
+            for (let item of this.availableCitys)
+                data["availableCitys"].push(item.toJS());
+        }
+        if (this.availableDistricts && this.availableDistricts.constructor === Array) {
+            data["availableDistricts"] = [];
+            for (let item of this.availableDistricts)
+                data["availableDistricts"].push(item.toJS());
+        }
         return data; 
     }
 
@@ -13208,7 +13293,7 @@ export class CreateOrUpdateOutletInput {
 
     clone() {
         const json = this.toJSON();
-        return new CreateOrUpdateOutletInput(JSON.parse(json));
+        return new GetOutletForEditDto(JSON.parse(json));
     }
 }
 
@@ -13279,6 +13364,48 @@ export class OutletEditDto {
     clone() {
         const json = this.toJSON();
         return new OutletEditDto(JSON.parse(json));
+    }
+}
+
+export class CreateOrUpdateOutletInput {
+    /** 门店信息 */
+    outlet: OutletEditDto;
+    /** 联系人集合 */
+    contactors: ContactorEditDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.outlet = data["outlet"] ? OutletEditDto.fromJS(data["outlet"]) : undefined;
+            if (data["contactors"] && data["contactors"].constructor === Array) {
+                this.contactors = [];
+                for (let item of data["contactors"])
+                    this.contactors.push(ContactorEditDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateOrUpdateOutletInput {
+        return new CreateOrUpdateOutletInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["outlet"] = this.outlet ? this.outlet.toJS() : undefined;
+        if (this.contactors && this.contactors.constructor === Array) {
+            data["contactors"] = [];
+            for (let item of this.contactors)
+                data["contactors"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new CreateOrUpdateOutletInput(JSON.parse(json));
     }
 }
 
