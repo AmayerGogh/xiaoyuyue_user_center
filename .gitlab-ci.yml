@@ -6,16 +6,9 @@ stages:
   # - deploy_production
 
 cache:
+  key: "$CI_JOB_NAME/$CI_COMMIT_REF_NAME"
+  untracked: true
   paths:
-    - node_modules/
-    - dist/
-
-rspec:
-  stage: install_deps,build,deploy_test
-  script: test
-  cache:
-    key: rspec
-    paths:
     - node_modules/
     - dist/
 
@@ -46,7 +39,11 @@ build:
     - master
   script:
     - ng build --prod --aot 
-
+  cache:
+    untracked: true
+    key: build
+    paths:
+    - node_modules/
 
 # 部署测试服务器
 deploy_test:
@@ -59,6 +56,12 @@ deploy_test:
     - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recursee # 复制文件到iis目录
     - Start-Sleep -Seconds 3
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
+  cache:
+    untracked: true
+    key: deploy_test
+    paths:
+    - node_modules/
+    - dist/
 
 # 部署生产服务器
 # deploy_production:
