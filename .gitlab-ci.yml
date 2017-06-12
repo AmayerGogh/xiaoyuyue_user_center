@@ -1,8 +1,9 @@
 stages:
-  - install_deps
+  # - install_deps
   # - test
-  - build
-  - deploy_test
+  # - build
+  # - deploy_test
+  - build_and_deploy_test
   # - deploy_production
 
 cache:
@@ -58,3 +59,17 @@ deploy_test:
 #     - master
 #   script:
 #     - bash scripts/deploy/deploy.sh
+
+# 编译和部署(缓存node_modules IO很慢，写在一起提高速度)
+build_and_deploy_test:
+  stage: deploy_test
+  only:
+    - develop
+  script:
+    - npm install
+    - ng build
+    - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
+    - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
+    - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recursee # 复制文件到iis目录
+    - Start-Sleep -Seconds 3
+    - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
