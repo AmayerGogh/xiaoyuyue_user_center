@@ -111,14 +111,11 @@ export class PermissionComboComponent extends AppComponentBase implements OnInit
 
     @Input() selectedPermission: string = undefined;
     @Output() selectedPermissionChange: EventEmitter<string> = new EventEmitter<string>();
-    
-    _dataLocalStorage: DataLocalStorage;
-    
+
     constructor(
-        private dataLocalStorage: DataLocalStorage,
+        private _dataLocalStorage: DataLocalStorage,
         injector: Injector) {
-        super(injector);
-        this._dataLocalStorage = dataLocalStorage;
+        super(injector)
     }
 
     ngOnInit(): void {

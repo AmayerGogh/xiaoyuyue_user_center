@@ -31,7 +31,7 @@
     <div class="row">
         <div class="col-xs-6">
             <div class="form-group form-md-line-input form-md-floating-label">
-                <input id="registerPassword" type="password" name="Password" class="form-control" [(ngModel)]="model.password" #Password="ngModel" reverse="true" [requireDigit]="passwordComplexitySetting.requireDigit" [requireLowercase]="passwordComplexitySetting.requireLowercase"
+                <input id="registerPassword" type="password" name="Password" class="form-control" [(ngModel)]="model.password" #Password="ngModel" validateEqual="PasswordRepeat" reverse="true" [requireDigit]="passwordComplexitySetting.requireDigit" [requireLowercase]="passwordComplexitySetting.requireLowercase"
                     [requireUppercase]="passwordComplexitySetting.requireUppercase" [requireNonAlphanumeric]="passwordComplexitySetting.requireNonAlphanumeric" [requiredLength]="passwordComplexitySetting.requiredLength" required [class.edited]="model.password && model.password.length > 0">
                 <label for="registerPassword">{{l("Password")}}</label>
             </div>
@@ -46,10 +46,31 @@
             </div>
         </div>
 
-       
+        <div class="col-xs-6">
+            <div class="form-group form-md-line-input form-md-floating-label">
+                <input id="registerPasswordRepeat" class="form-control" type="password" [(ngModel)]="model.passwordRepeat" #PasswordRepeat="ngModel" name="PasswordRepeat" validateEqual="Password" reverse="false" [requireDigit]="passwordComplexitySetting.requireDigit"
+                    [requireLowercase]="passwordComplexitySetting.requireLowercase" [requireUppercase]="passwordComplexitySetting.requireUppercase" [requireNonAlphanumeric]="passwordComplexitySetting.requireNonAlphanumeric" [requiredLength]="passwordComplexitySetting.requiredLength"
+                    required [class.edited]="model.passwordRepeat && model.passwordRepeat.length > 0" />
+                <label for="registerPasswordRepeat">{{l("PasswordRepeat")}}</label>
+            </div>
+            <div [hidden]="registerForm.form.valid || registerForm.form.pristine" class="form-group">
+                <ul class="help-block text-danger" *ngIf="PasswordRepeat.errors">
+                    <li [hidden]="!PasswordRepeat.errors.requireDigit">{{l("PasswordComplexity_RequireDigit_Hint")}}</li>
+                    <li [hidden]="!PasswordRepeat.errors.requireLowercase">{{l("PasswordComplexity_RequireLowercase_Hint")}}</li>
+                    <li [hidden]="!PasswordRepeat.errors.requireUppercase">{{l("PasswordComplexity_RequireUppercase_Hint")}}</li>
+                    <li [hidden]="!PasswordRepeat.errors.requireNonAlphanumeric">{{l("PasswordComplexity_RequireNonAlphanumeric_Hint")}}</li>
+                    <li [hidden]="!PasswordRepeat.errors.requiredLength">{{l("PasswordComplexity_RequiredLength_Hint", passwordComplexitySetting.requiredLength)}}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <p *ngIf="useCaptcha" class="hint"></p>
+
+    <div *ngIf="useCpaptcha" class="form-group margin-bottom-20">
+        <!--<recaptcha (resolved)="captchaResolved($event)" siteKey="6LfD-wUTAAAAACULAVXvL61K0w02RIsjhI8EyiS-"></recaptcha>-->
+        <LuosimaoCaptcha></LuosimaoCaptcha>
+    </div>
 
     <div class="form-actions">
         <button [disabled]="saving" routerLink="/account/login" type="button" class="btn btn-default"><i class="fa fa-arrow-left"></i> {{l("Back")}}</button>
