@@ -13,7 +13,7 @@ cache:
 rspec:
   script: test
   cache:
-    untracked: true
+    key: rspec
     paths:
     - node_modules/
     - dist/
