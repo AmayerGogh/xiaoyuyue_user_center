@@ -1,16 +1,13 @@
 export class SelectHelper {
     static defaultList(): Object[] {
-        return [{
-            value: "",
-            displayText: "Please_Choose"
-        },
+        return [
         {
             value: true,
-            displayText: "Yes",
+            displayText: "是",
         },
         {
             value: false,
-            displayText: "No",
+            displayText: "否",
         }];
     }
 }

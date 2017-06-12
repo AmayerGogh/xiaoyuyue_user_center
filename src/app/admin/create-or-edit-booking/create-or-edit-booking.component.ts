@@ -7,6 +7,7 @@ import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, Create
 import * as moment from 'moment';
 import { AppConsts } from "shared/AppConsts";
 import { SortDescriptor } from "@progress/kendo-data-query/dist/es/sort-descriptor";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -44,6 +45,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
   constructor(
     injector: Injector,
     private _locaition: Location,
+    private _router: Router,
     private _outletServiceServiceProxy: OutletServiceServiceProxy,
     private _organizationBookingServiceProxy: OrganizationBookingServiceProxy
   ) {
@@ -154,7 +156,8 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
   }
 
   back() {
-    this._locaition.back();
+    // this._locaition.back();
+    this._router.navigate(['/app/admin/booking'])
   }
 
   public outletChange(outlet: any): void {

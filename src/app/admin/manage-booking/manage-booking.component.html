@@ -57,9 +57,7 @@
                                         <div class="form-group common-max-width">
                                             <label class="col-md-3 control-label">{{l("UserCenter.Booking.TenantField")}}</label>
                                             <div class="col-md-9">
-                                                <select name="TenantField" class="form-control" title="{{l('UserCenter.Booking.TenantField')}}" jq-plugin="selectpicker">
-                                                <option >{{l("Please_Choose")}}</option>
-                                        </select>
+                                                <kendo-dropdownlist [data]="outletSelectListData" (valueChange)="outletChangeHandler($event)" [textField]="'text'" [valueField]="'value'" [valuePrimitive]="true" [value]="outletSelectDefaultItem"></kendo-dropdownlist>
                                             </div>
                                         </div>
                                     </div>
@@ -68,9 +66,7 @@
                                         <div class="form-group common-max-width">
                                             <label class="col-md-3 control-label">{{l("UserCenter.Booking.BookingState")}}</label>
                                             <div class="col-md-9">
-                                                <select name="BookingState" class="form-control" title="{{l('UserCenter.Booking.BookingState')}}" jq-plugin="selectpicker">
-                                                    <option >{{l("Please_Choose")}}</option>
-                                                </select>
+                                                <kendo-dropdownlist [data]="bookingActiveSelectListData" (valueChange)="bookingActiveChangeHandler($event)" [textField]="'displayText'" [valueField]="'value'" [valuePrimitive]="true" [defaultItem]="bookingActiveSelectDefaultItem"></kendo-dropdownlist>
                                             </div>
                                         </div>
                                     </div>

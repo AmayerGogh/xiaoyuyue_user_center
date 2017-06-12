@@ -2,12 +2,13 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { appModuleAnimation } from "shared/animations/routerTransition";
 import { AppComponentBase } from "shared/common/app-component-base";
 import { NgxAni } from "ngxani";
-import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, BookingListDto, CreateOrUpdateBookingInput } from "shared/service-proxies/service-proxies";
+import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, BookingListDto, CreateOrUpdateBookingInput, OutletServiceServiceProxy, SelectListItemDto } from "shared/service-proxies/service-proxies";
 import { AppConsts } from "shared/AppConsts";
 import { SortDescriptor } from "@progress/kendo-data-query/dist/es/sort-descriptor";
 
 import * as moment from 'moment';
 import { Router } from "@angular/router";
+import { SelectHelper } from "shared/helpers/SelectHelper";
 
 @Component({
   selector: 'app-manage-booking',
@@ -17,11 +18,15 @@ import { Router } from "@angular/router";
 })
 
 export class ManageBookingComponent extends AppComponentBase implements OnInit {
+  outletSelectDefaultItem: string;
+  outletSelectListData: SelectListItemDto[];
+  bookingActiveSelectListData: Object[] = SelectHelper.defaultList();
+  bookingActiveSelectDefaultItem: object;
 
   organizationBookingResultData: BookingListDto[];
 
-  endCreationTime: moment.Moment;
-  startCreationTime: moment.Moment;
+  endCreationTime: any;
+  startCreationTime: any;
 
   // endCreationTime: string;
   // startCreationTime: string;
@@ -39,6 +44,7 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     injector: Injector,
     private _ngxAni: NgxAni,
     private _router: Router,
+    private _outletServiceServiceProxy: OutletServiceServiceProxy,
     private _organizationBookingServiceProxy: OrganizationBookingServiceProxy
   ) {
     super(injector);
@@ -46,7 +52,12 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
 
   ngOnInit() {
     this.loadData();
-    var Greeting = (function () { function Greeting() { } Greeting.prototype.greet = function () { console.log("Hello World!!!"); }; }());
+    // this.bookingActiveSelectDefaultItem = this.bookingActiveSelectListData[0];
+    // console.log(this.bookingActiveSelectDefaultItem.displayText)
+    this.bookingActiveSelectDefaultItem = {
+            value: "",
+            displayText: "是否激活"
+        };
   }
 
   ngAfterViewInit() {
@@ -66,12 +77,29 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
         sorting = state.sort[0].field + " " + state.sort[0].dir;
       }
     }
-    this.startCreationTime ? moment(this.startCreationTime) : undefined;
-    this.endCreationTime ? moment(this.endCreationTime) : undefined;
+    this.startCreationTime = this.startCreationTime ? moment(this.startCreationTime) : undefined;
+    this.endCreationTime = this.endCreationTime ? moment(this.endCreationTime) : undefined;
+
+    // 获取可用下拉框数据源
+    this._outletServiceServiceProxy
+      .getOutletSelectList()
+      .subscribe(result => {
+        // 添加请选择数据源
+        let input = new SelectListItemDto();
+        input.text = "请选择门店";
+        input.value = "0";
+        this.outletSelectListData = result;
+        this.outletSelectListData.unshift(input);
+        this.outletSelectDefaultItem = result[0].value;
+      })
 
     this._organizationBookingServiceProxy
       .getBookingsAsync(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
       .subscribe(result => {
+        if (typeof this.startCreationTime === "object") {
+          this.startCreationTime = this.startCreationTime.format('YYYY-MM-DD');
+          this.endCreationTime = this.endCreationTime.format('YYYY-MM-DD');
+        }
         this.organizationBookingResultData = result.items;
       })
   }
@@ -149,5 +177,14 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
         this.loadData();
         this.notify.success("删除成功！");
       });
+  }
+
+  // 门店搜索下拉框值改变时
+  public outletChangeHandler(outlet: any): void {
+    this.outletId = outlet;
+  }
+  // 预约状态搜索下拉框值改变时
+  public bookingActiveChangeHandler(bookingActive: any): void {
+    this.isActive = bookingActive;
   }
 }
