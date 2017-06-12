@@ -11,6 +11,7 @@ cache:
     - dist/
 
 rspec:
+  stage: install_deps,build,deploy_test
   script: test
   cache:
     key: rspec
