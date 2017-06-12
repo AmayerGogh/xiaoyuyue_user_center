@@ -111,7 +111,7 @@
                 </div>
                 <!-- 编辑状态的展示时间段 -->
                 <ng-template #hasTimeInfo>
-                    <div *ngFor="let timeInfoItem of timeInfo; let index = index;" class="col-md-6 time-info-wrap view-time-info box-shadow border-radius-14 pull-left paddingTop-32 no-lr-padding">
+                    <div *ngFor="let timeInfoItem of timeInfo; let index = index;" class="col-lg-4 time-info-wrap view-time-info box-shadow border-radius-14 pull-left paddingTop-32 no-lr-padding">
                         <div class="xiaoyuyue-title-box">
                             {{timeInfoItem.hourOfDay}}
                             <div class="btn-action-wrap">
@@ -121,26 +121,26 @@
                             </div>
                         </div>
                         <div class="time-item clearfix">
-                            <div class="bookingPeopleOfNumber-name name col-md-3 text-right"><span>{{l("UserCenter.Booking.BookingPeopleOfNumber")}}</span></div>
-                            <div class="col-md-9 view-box">
+                            <div class="bookingPeopleOfNumber-name name col-md-4 text-right"><span>{{l("UserCenter.Booking.BookingPeopleOfNumber")}}</span></div>
+                            <div class="col-md-8 view-box">
                                 {{timeInfoItem.maxBookingNum}}
                             </div>
                         </div>
                         <div class="time-item">
-                            <div class="queuePeopleOfNumber-name name col-md-3 text-right"><span>{{l("UserCenter.Booking.QueuePeopleOfNumber")}}</span></div>
-                            <div class="col-md-9 view-box">
+                            <div class="queuePeopleOfNumber-name name col-md-4 text-right"><span>{{l("UserCenter.Booking.QueuePeopleOfNumber")}}</span></div>
+                            <div class="col-md-8 view-box">
                                 {{timeInfoItem.maxQueueNum}}
                             </div>
                         </div>
                         <div class="time-item">
-                            <div class="bookingDate-name name col-md-3 text-right"><span>{{l("UserCenter.Booking.BookingDate")}}</span></div>
-                            <div class="col-md-9 view-box">
+                            <div class="bookingDate-name name col-md-4 text-right"><span>{{l("UserCenter.Booking.BookingDate")}}</span></div>
+                            <div class="col-md-8 view-box">
                                 {{timeInfoItem.availableDates}}
                             </div>
                         </div>
                         <div class="time-item">
-                            <div class="bookingTime-name name col-md-3 text-right"><span>{{l("UserCenter.Booking.BookingTime")}}</span></div>
-                            <div class="col-md-9 view-box">
+                            <div class="bookingTime-name name col-md-4 text-right"><span>{{l("UserCenter.Booking.BookingTime")}}</span></div>
+                            <div class="col-md-8 view-box">
                                 {{timeInfoItem.hourOfDay}}
                             </div>
                         </div>
