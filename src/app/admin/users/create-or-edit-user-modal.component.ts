@@ -53,7 +53,7 @@ export class CreateOrEditUserModalComponent extends AppComponentBase {
     pageSize: number = AppConsts.grid.defaultPageSize;
     skip: number = 0;
     sort: Array<SortDescriptor> = [];
-
+    _getUserForEdit: GetUserForEdit;
     constructor(
         injector: Injector,
         private _userService: UserServiceProxy,
@@ -62,6 +62,7 @@ export class CreateOrEditUserModalComponent extends AppComponentBase {
         private getUserForEdit: GetUserForEdit, 
     ) {
         super(injector);
+        this._getUserForEdit = getUserForEdit;
     }
 
     ngOnInit(): void {
@@ -79,14 +80,14 @@ export class CreateOrEditUserModalComponent extends AppComponentBase {
     getForEdit(userId?: number): void {
         let that = this;
         if (userId) {
-            this.getUserForEdit.getUserInfo(userId);
+            this._getUserForEdit.getUserInfo(userId);
             this.setRandomPassword = false;
             this.sendActivationEmail = false;
             this.isShowPermission = false;
         } else {
             this.isShowPermission = true;
-            this.getUserForEdit.user = this.user;
-            this.getUserForEdit.roles = this.roles;
+            this._getUserForEdit.user = this.user;
+            this._getUserForEdit.roles = this.roles;
         }
     }
 
@@ -102,7 +103,7 @@ export class CreateOrEditUserModalComponent extends AppComponentBase {
             input.grantedPermissionNames = this.editUserPermissionsModal.permissionTree.getGrantedPermissionNames();
         }
 
-        input.user = this.getUserForEdit.user;
+        input.user = this._getUserForEdit.user;
         input.setRandomPassword = this.setRandomPassword;
         input.sendActivationEmail = this.sendActivationEmail;
         input.assignedRoleNames =
@@ -124,7 +125,7 @@ export class CreateOrEditUserModalComponent extends AppComponentBase {
     }
 
     getAssignedRoleCount(): number {
-        return _.filter(this.getUserForEdit.roles, { isAssigned: true }).length;
+        return _.filter(this._getUserForEdit.roles, { isAssigned: true }).length;
     }
 
 }

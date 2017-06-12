@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-xs-6 text-right">
-            <button (click)="exportToExcel()" class="btn btn-default"><i class="fa fa-file-excel-o"></i> {{l("ExportToExcel")}}</button>
+            <button (click)="" class="btn btn-default"><i class="fa fa-file-excel-o"></i> {{l("ExportToExcel")}}</button>
             <button (click)="createSmsTemplate()" class="btn btn-primary blue"><i class="fa fa-plus"></i> {{l("CreateSmsTemplate")}}</button>
         </div>
     </div>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-6" [hidden]="!advancedFiltersAreShown">
+                            <div class="col-xs-6">
                                 <div class="form-group common-max-width">
                                     <label class="col-md-4 control-label">{{l("SmsTemplateProvider")}}</label>
                                     <div class="col-md-8">
@@ -53,8 +53,6 @@
                         <div class="row margin-bottom-10">
                             <div class="col-xs-6 col-md-2 col-md-offset-4 col-sm-3 col-sm-offset-3 common-min-width">
                                 <div class="text-center filter-action">
-                                    <span class="btn green btn-block" *ngIf="!advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-down"></i> {{l("ShowAdvancedFilters")}}</span>
-                                    <span class="btn green btn-block" *ngIf="advancedFiltersAreShown" (click)="advancedFiltersAreShown=!advancedFiltersAreShown"><i class="fa fa-angle-up"></i> {{l("HideAdvancedFilters")}}</span>
                                 </div>
                             </div>
                             <div class="col-xs-6 col-md-2 col-sm-3 common-min-width">

@@ -48,7 +48,7 @@ export class TenantsComponent extends AppComponentBase implements OnInit, AfterV
     pageSize: number = AppConsts.grid.defaultPageSize;
     skip: number = 0;
     sort: Array<SortDescriptor> = [];
-
+    _dataLocalStorage: DataLocalStorage;
     @ViewChild(GridComponent) private grid: GridComponent;
 
     constructor(
@@ -58,10 +58,11 @@ export class TenantsComponent extends AppComponentBase implements OnInit, AfterV
         private _commonLookupService: CommonLookupServiceProxy,
         private _impersonationService: ImpersonationService,
         private _tenantsGridDataResult: AppGridData,
-        private _dataLocalStorage: DataLocalStorage,
+        private dataLocalStorage: DataLocalStorage,
         private _router: Router
     ) {
         super(injector);
+        this._dataLocalStorage = dataLocalStorage;
     }
 
     ngOnInit(): void {

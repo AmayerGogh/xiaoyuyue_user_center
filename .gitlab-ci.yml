@@ -12,6 +12,14 @@ cache:
     - node_modules/
     - dist/
 
+rspec:
+  script: echo "cache modules..."  
+  cache:
+    untracked: true
+    paths:
+    - node_modules/
+    - dist/
+
 # 安装依赖
 install_deps:
   stage: install_deps
@@ -48,8 +56,8 @@ deploy_test:
     - develop
   script:
     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
-    - copy web.config dist\ -force #复制iis 配置文件
-    - copy dist\* D:\wwwroot\xiaoyuyue_user_center -force –recurse # 复制文件到iis目录
+    - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
+    - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recursee # 复制文件到iis目录
     - Start-Sleep -Seconds 3
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
