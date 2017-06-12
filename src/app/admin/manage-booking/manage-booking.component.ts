@@ -1,3 +1,4 @@
+import { ActiveOrDisableInput } from './../../../shared/service-proxies/service-proxies';
 import { Component, OnInit, Injector } from '@angular/core';
 import { appModuleAnimation } from "shared/animations/routerTransition";
 import { AppComponentBase } from "shared/common/app-component-base";
@@ -94,7 +95,7 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       })
 
     this._organizationBookingServiceProxy
-      .getBookingsAsync(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
+      .getBookings(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
       .subscribe(result => {
         if (typeof this.startCreationTime === "object") {
           this.startCreationTime = this.startCreationTime.format('YYYY-MM-DD');
@@ -132,10 +133,12 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       "filter": "grayscale(100%)"
     })
     this.disabledBooking[index] = !this.disabledBooking[index];
-    let disabledId: EntityDtoOfInt64 = new EntityDtoOfInt64();
-    disabledId.id = this.organizationBookingResultData[index].id;
+    
+    var input = new ActiveOrDisableInput();
+    input.id = this.organizationBookingResultData[index].id;
+    input.isActive = false;
     this._organizationBookingServiceProxy
-      .disableBooking(disabledId)
+      .activedOrDisableBooking(input)
       .subscribe(result => {
         this.notify.success("已关闭预约!");
       });
