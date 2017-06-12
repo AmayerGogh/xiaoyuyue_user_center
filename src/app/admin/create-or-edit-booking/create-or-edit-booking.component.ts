@@ -112,8 +112,10 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
     this.input.booking.outletId = this.selectOutletId;
     this.input.booking.contactorId = this.selectContactorId;
     this.input.items = this.allBookingTime;
-    this.allPictureForEdit.push(this.pictureForEdit);
-    this.input.bookingPictures = this.allPictureForEdit;
+    if (this.pictureForEdit) {
+      this.allPictureForEdit.push(this.pictureForEdit);
+      this.input.bookingPictures = this.allPictureForEdit;
+    }
     this._organizationBookingServiceProxy
       .createOrUpdateBooking(this.input)
       .subscribe(() => {
