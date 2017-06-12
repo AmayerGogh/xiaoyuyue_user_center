@@ -68,14 +68,16 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
         .getOutletSelectList()
         .subscribe(result => {
           this.outletSelectDefaultItem = result[0].value;
+          this.selectOutletId = parseInt(result[0].value);
           this.outletSelectListData = result;
 
           // 获取联系人下拉框数据源
           this._outletServiceServiceProxy
             .getContactorSelectList(parseInt(this.outletSelectListData[0].value))
             .subscribe(result => {
-              this.contactorSelectListData = result;
               this.contactorSelectDefaultItem = result[0].value;
+              this.selectContactorId = parseInt(result[0].value);
+              this.contactorSelectListData = result;
             })
         })
       return;
@@ -95,6 +97,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
           .subscribe(result => {
             this.outletSelectDefaultItem = this.bookingDataForEdit.booking.outletId.toString();
             this.outletSelectListData = result;
+            this.selectOutletId = parseInt(result[0].value);
 
             // 获取联系人下拉框数据源
             this._outletServiceServiceProxy
@@ -102,6 +105,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
               .subscribe(result => {
                 this.contactorSelectListData = result;
                 this.contactorSelectDefaultItem = result[0].value;
+                this.selectContactorId = parseInt(result[0].value);
               })
           })
       })
@@ -111,7 +115,9 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
     this.input.booking = this.baseInfo;
     this.input.booking.outletId = this.selectOutletId;
     this.input.booking.contactorId = this.selectContactorId;
-    this.input.items = this.allBookingTime;
+    // 判断是否有添加新的时间信息
+    this.input.items = !this.allBookingTime ? this.timeInfo : this.allBookingTime;
+    // 判断是否上传过图片
     if (this.pictureForEdit) {
       this.allPictureForEdit.push(this.pictureForEdit);
       this.input.bookingPictures = this.allPictureForEdit;
@@ -119,7 +125,7 @@ export class CreateOrEditBookingComponent extends AppComponentBase implements On
     this._organizationBookingServiceProxy
       .createOrUpdateBooking(this.input)
       .subscribe(() => {
-        this.notify.success("创建成功!");
+        this.notify.success("保存成功!");
         this.back();
       });
   }
