@@ -14,13 +14,13 @@ cache:
     - dist/
 
 # 安装依赖
-install_deps:
-  stage: install_deps
-  only:
-    - develop
-    - master
-  script:
-    - npm install
+# install_deps:
+#   stage: install_deps
+#   only:
+#     - develop
+#     - master
+#   script:
+#     - npm install
 
 # 运行测试用例
 # test:
@@ -32,25 +32,25 @@ install_deps:
 #     - npm run test
 
 # 编译
-build:
-  stage: build
-  only:
-    - develop
-    - master
-  script:
-    - ng build
+# build:
+#   stage: build
+#   only:
+#     - develop
+#     - master
+#   script:
+#     - ng build
 
-# 部署测试服务器
-deploy_test:
-  stage: deploy_test
-  only:
-    - develop
-  script:
-    - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
-    - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
-    - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recursee # 复制文件到iis目录
-    - Start-Sleep -Seconds 3
-    - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
+# # 部署测试服务器
+# deploy_test:
+#   stage: deploy_test
+#   only:
+#     - develop
+#   script:
+#     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
+#     - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
+#     - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recurse # 复制文件到iis目录
+#     - Start-Sleep -Seconds 3
+#     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
 
 # 部署生产服务器
 # deploy_production:
@@ -70,6 +70,6 @@ build_and_deploy_test:
     - ng build
     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
     - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
-    - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recursee # 复制文件到iis目录
+    - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recurse # 复制文件到iis目录
     - Start-Sleep -Seconds 3
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
