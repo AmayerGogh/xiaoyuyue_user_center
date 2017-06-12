@@ -6,14 +6,12 @@ stages:
   # - deploy_production
 
 cache:
-  key: "$CI_JOB_NAME/$CI_COMMIT_REF_NAME"
-  untracked: true
   paths:
     - node_modules/
     - dist/
 
 rspec:
-  script: echo "cache modules..."  
+  script: test
   cache:
     untracked: true
     paths:
