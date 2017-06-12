@@ -72,6 +72,42 @@ a:hover {
 .k-multiselect-wrap,
 .k-numeric-wrap,
 .k-picker-wrap {
+    cursor: pointer;
+}
+
+.k-animation-container-shown,
+.k-animation-container-shown .k-list-container {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .2);
+}
+
+.k-dropdown-wrap .k-input {
+    height: auto;
+}
+
+.k-list .k-item.k-state-focused,
+.k-list .k-item:focus {
+    box-shadow: none;
+}
+
+.k-list .k-item.k-state-selected {
+    background-color: #ff9742;
+}
+
+.k-list .k-item:hover.k-state-selected {
+    background-color: #fbaa69;
+}
+
+.k-dropdown-wrap {
+    border: 1px solid #c2cad8 !important;
+    background-image: none !important;
+    background-color: #FFF !important;
+}
+
+.k-dateinput-wrap,
+.k-dropdown-wrap,
+.k-multiselect-wrap,
+.k-numeric-wrap,
+.k-picker-wrap {
     border: 0;
 }
 
@@ -121,10 +157,6 @@ a:hover {
 
 
 /*重写覆盖kendo-date-picker样式*/
-
-.k-datepicker .k-animation-container {
-    overflow: visible;
-}
 
 .x-multiple-date-wrap {
     width: 100%;
