@@ -2748,8 +2748,8 @@ export class OrganizationBookingServiceProxy {
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
      * @return Success
      */
-    getBookingsAsync(name: string, outletId: number, isActive: boolean, startCreationTime: moment.Moment, endCreationTime: moment.Moment, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingListDto> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetBookingsAsync?";
+    getBookings(name: string, outletId: number, isActive: boolean, startCreationTime: moment.Moment, endCreationTime: moment.Moment, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingListDto> {
+        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetBookings?";
         if (name !== undefined)
             url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
         if (outletId !== undefined)
@@ -2780,11 +2780,11 @@ export class OrganizationBookingServiceProxy {
         };
 
         return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookingsAsync(response);
+            return this.processGetBookings(response);
         }).catch((response: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processGetBookingsAsync(response));
+                    return Observable.of(this.processGetBookings(response));
                 } catch (e) {
                     return <Observable<PagedResultDtoOfBookingListDto>><any>Observable.throw(e);
                 }
@@ -2793,7 +2793,7 @@ export class OrganizationBookingServiceProxy {
         });
     }
 
-    protected processGetBookingsAsync(response: Response): PagedResultDtoOfBookingListDto {
+    protected processGetBookings(response: Response): PagedResultDtoOfBookingListDto {
         const responseText = response.text();
         const status = response.status; 
 
@@ -2904,11 +2904,11 @@ export class OrganizationBookingServiceProxy {
     }
 
     /**
-     * 禁用/关闭 预约
+     * 激活/禁用 预约
      * @return Success
      */
-    disableBooking(input: EntityDtoOfInt64): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/DisableBooking";
+    activedOrDisableBooking(input: ActiveOrDisableInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/ActivedOrDisableBooking";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input ? input.toJS() : null);
@@ -2923,11 +2923,11 @@ export class OrganizationBookingServiceProxy {
         };
 
         return this.http.request(url_, options_).map((response) => {
-            return this.processDisableBooking(response);
+            return this.processActivedOrDisableBooking(response);
         }).catch((response: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processDisableBooking(response));
+                    return Observable.of(this.processActivedOrDisableBooking(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -2936,7 +2936,7 @@ export class OrganizationBookingServiceProxy {
         });
     }
 
-    protected processDisableBooking(response: Response): void {
+    protected processActivedOrDisableBooking(response: Response): void {
         const responseText = response.text();
         const status = response.status; 
 
@@ -12339,21 +12339,24 @@ export class CreateOrUpdateBookingInput {
     }
 }
 
-export class EntityDtoOfInt64 {
+export class ActiveOrDisableInput {
+    isActive: boolean;
     id: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
 
-    static fromJS(data: any): EntityDtoOfInt64 {
-        return new EntityDtoOfInt64(data);
+    static fromJS(data: any): ActiveOrDisableInput {
+        return new ActiveOrDisableInput(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -12364,7 +12367,7 @@ export class EntityDtoOfInt64 {
 
     clone() {
         const json = this.toJSON();
-        return new EntityDtoOfInt64(JSON.parse(json));
+        return new ActiveOrDisableInput(JSON.parse(json));
     }
 }
 
@@ -16821,6 +16824,35 @@ export class ExternalUserLoginDto {
     clone() {
         const json = this.toJSON();
         return new ExternalUserLoginDto(JSON.parse(json));
+    }
+}
+
+export class EntityDtoOfInt64 {
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): EntityDtoOfInt64 {
+        return new EntityDtoOfInt64(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new EntityDtoOfInt64(JSON.parse(json));
     }
 }
 

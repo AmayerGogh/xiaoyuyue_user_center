@@ -93,6 +93,10 @@ a:hover {
     background-color: #ff9742;
 }
 
+.k-state-selected {
+    background-color: #ff9742;
+}
+
 .k-list .k-item:hover.k-state-selected {
     background-color: #fbaa69;
 }

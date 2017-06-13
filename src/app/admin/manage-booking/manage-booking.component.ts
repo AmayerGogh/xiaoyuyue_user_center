@@ -2,7 +2,7 @@ import { Component, OnInit, Injector } from '@angular/core';
 import { appModuleAnimation } from "shared/animations/routerTransition";
 import { AppComponentBase } from "shared/common/app-component-base";
 import { NgxAni } from "ngxani";
-import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, BookingListDto, CreateOrUpdateBookingInput, OutletServiceServiceProxy, SelectListItemDto, EntityDtoOfInt64 } from "shared/service-proxies/service-proxies";
+import { OrganizationBookingServiceProxy, PagedResultDtoOfBookingListDto, BookingListDto, CreateOrUpdateBookingInput, OutletServiceServiceProxy, SelectListItemDto, ActiveOrDisableInput } from "shared/service-proxies/service-proxies";
 import { AppConsts } from "shared/AppConsts";
 import { SortDescriptor } from "@progress/kendo-data-query/dist/es/sort-descriptor";
 
@@ -18,6 +18,7 @@ import { SelectHelper } from "shared/helpers/SelectHelper";
 })
 
 export class ManageBookingComponent extends AppComponentBase implements OnInit {
+  activeOrDisable: ActiveOrDisableInput = new ActiveOrDisableInput();
   outletSelectDefaultItem: string;
   outletSelectListData: SelectListItemDto[];
   bookingActiveSelectListData: Object[] = SelectHelper.defaultList();
@@ -33,8 +34,6 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
   isActive: boolean;
   outletId: number;
   bookingName: string;
-
-  disabledBooking: Array<boolean> = new Array();
 
   pageSize: number = AppConsts.grid.defaultPageSize;
   skip: number = 0;
@@ -55,9 +54,9 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     // this.bookingActiveSelectDefaultItem = this.bookingActiveSelectListData[0];
     // console.log(this.bookingActiveSelectDefaultItem.displayText)
     this.bookingActiveSelectDefaultItem = {
-            value: "",
-            displayText: "是否激活"
-        };
+      value: "",
+      displayText: "是否激活"
+    };
   }
 
   ngAfterViewInit() {
@@ -94,7 +93,7 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       })
 
     this._organizationBookingServiceProxy
-      .getBookingsAsync(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
+      .getBookings(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
       .subscribe(result => {
         if (typeof this.startCreationTime === "object") {
           this.startCreationTime = this.startCreationTime.format('YYYY-MM-DD');
@@ -131,13 +130,13 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     this._ngxAni.to(disabledAni, .6, {
       "filter": "grayscale(100%)"
     })
-    this.disabledBooking[index] = !this.disabledBooking[index];
-    let disabledId: EntityDtoOfInt64 = new EntityDtoOfInt64();
-    disabledId.id = this.organizationBookingResultData[index].id;
+    this.activeOrDisable.id = this.organizationBookingResultData[index].id;
+    this.activeOrDisable.isActive = false;
     this._organizationBookingServiceProxy
-      .disableBooking(disabledId)
+      .activedOrDisableBooking(this.activeOrDisable)
       .subscribe(result => {
         this.notify.success("已关闭预约!");
+        this.loadData();
       });
   }
 
@@ -146,7 +145,14 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     this._ngxAni.to(disabledAni, .6, {
       "filter": "grayscale(0)"
     })
-    this.disabledBooking[index] = !this.disabledBooking[index];
+    this.activeOrDisable.id = this.organizationBookingResultData[index].id;
+    this.activeOrDisable.isActive = true;
+    this._organizationBookingServiceProxy
+      .activedOrDisableBooking(this.activeOrDisable)
+      .subscribe(result => {
+        this.notify.success("已开启预约!");
+        this.loadData();
+      });
   }
 
   // 复制预约
