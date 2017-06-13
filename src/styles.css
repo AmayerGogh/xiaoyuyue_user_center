@@ -210,3 +210,10 @@ a:hover {
 .common-input-line-width {
     width: 60%;
 }
+
+
+/* 覆盖metronicUI样式*/
+
+.form-group.form-md-line-input {
+    margin-bottom: 15px;
+}

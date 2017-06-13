@@ -55,7 +55,7 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     // console.log(this.bookingActiveSelectDefaultItem.displayText)
     this.bookingActiveSelectDefaultItem = {
       value: "",
-      displayText: "是否激活"
+      displayText: "请选择"
     };
   }
 
@@ -85,8 +85,8 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       .subscribe(result => {
         // 添加请选择数据源
         let input = new SelectListItemDto();
-        input.text = "请选择门店";
-        input.value = "0";
+        input.text = "请选择";
+        input.value = "";
         this.outletSelectListData = result;
         this.outletSelectListData.unshift(input);
         this.outletSelectDefaultItem = result[0].value;

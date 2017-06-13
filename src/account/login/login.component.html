@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="password" class="form-control" type="password" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
+                                <input id="password" class="form-control" type="password" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
                                 <label for="password">{{l("Password")}}</label>
                             </div>
                         </div>

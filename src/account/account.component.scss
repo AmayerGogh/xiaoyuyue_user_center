@@ -2,6 +2,12 @@
 Login page
 ***/
 
+html,
+body {
+    min-height: 100%;
+    overflow: hidden;
+}
+
 .user-login {
     .bg-wrap {
         width: 100%;

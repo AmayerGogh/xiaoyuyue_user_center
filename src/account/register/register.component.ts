@@ -8,16 +8,7 @@ import { LoginService } from "shared/services/login.service";
 
 @Component({
     templateUrl: './register.component.html',
-    styles: [`
-        .registe-form .form-group{
-            position: relative;
-            margin: 0 0 10px 0;
-            padding-top: 20px;
-        }
-        .registe-form .form-control{
-            margin-bottom: 10px !important;
-        }
-    `],
+    styleUrls: ['./resister.components.scss'],
     animations: [accountModuleAnimation()]
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
