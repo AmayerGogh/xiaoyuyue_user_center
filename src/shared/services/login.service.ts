@@ -310,7 +310,7 @@ export class LoginService {
             console.log(result);
             if (result.waitingForActivation) {
                 this._messageService.info("您已成功注册,请完善基本信息!");
-                this._router.navigate(['/account/supplementary-external-register', result.userId]);
+                // this._router.navigate(['/account/supplementary-external-register', result.userId]);
                 return;
             }
 

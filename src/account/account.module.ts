@@ -31,7 +31,6 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
 import { LanguageSwitchComponent } from './language-switch.component';
 import { LoginService } from "shared/services/login.service";
 import { TooltipModule } from "ngx-bootstrap";
-import { SupplementaryExternalRegisterComponent } from "account/supplementary-external-register/supplementary-external-register.component";
 import { LuosimaoCaptcha } from "account/shared/luosimao-captcha/luosimao-captcha.component";
 import { PhoneValidateComponent } from "account/shared/phone-validate/phone-validate.component";
 import { SMSServiceProxy } from "shared/service-proxies/service-proxies";
@@ -72,7 +71,6 @@ import { FooterComponent } from "account/footer/footer.component";
         SendTwoFactorCodeComponent,
         ValidateTwoFactorCodeComponent,
         LanguageSwitchComponent,
-        SupplementaryExternalRegisterComponent,
         PhoneValidateComponent,
         LuosimaoCaptcha,
         

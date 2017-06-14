@@ -14,6 +14,8 @@ import { VerificationCodeType } from "shared/AppEnums";
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
     phoneNumber: string;
+    isSendSMS: boolean = false;
+    confirmPasswd: string;
 
     model: RegisterModel = new RegisterModel();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
@@ -33,7 +35,6 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        //Prevent to register new users in the host context
         if (this.appSession.tenant == null) {
             this._router.navigate(['account/login']);
             return;
@@ -43,20 +44,16 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
             this.passwordComplexitySetting = result.setting;
         });
 
-        jQuery.getScript('//captcha.luosimao.com/static/js/api.js', () => {
-        });
+        // 注释螺丝帽
+        /*jQuery.getScript('//captcha.luosimao.com/static/js/api.js', () => {
+        });*/
     }
 
-    get useCaptcha(): boolean {
-        return this.setting.getBoolean('App.UserManagement.UseCaptchaOnRegistration');
-    }
+    // get useCaptcha(): boolean {
+    //     return this.setting.getBoolean('App.UserManagement.UseCaptchaOnRegistration');
+    // }
 
-    save(): void {
-        this.captchaResolved();
-        if (this.useCaptcha && !this.model.captchaResponse) {
-            this.message.warn(this.l('CaptchaCanNotBeEmpty'));
-            return;
-        }
+    register(): void {
 
         this.saving = true;
         this._accountService.register(this.model)
@@ -70,22 +67,24 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
                 //Autheticate
                 this.saving = true;
-                this._loginService.authenticateModel.loginCertificate = this.model.userName;
+                this._loginService.authenticateModel.loginCertificate = this.model.name;
                 this._loginService.authenticateModel.password = this.model.password;
                 this._loginService.authenticate(() => { this.saving = false; });
             });
     }
 
-    captchaResolved(): void {
-        let captchaResponse = $('#lc-captcha-response').val();
-        this.model.captchaResponse = captchaResponse;
-    }
+    // 注释掉螺丝帽验证码
+    // captchaResolved(): void {
+    //     let captchaResponse = $('#lc-captcha-response').val();
+    //     this.model.captchaResponse = captchaResponse;
+    // }
 
     // 发送验证码
     send() {
         let input: CodeSendInput = new CodeSendInput();
-        input.targetNumber = this.phoneNumber;
+        input.targetNumber = this.model.phoneNumber;
         input.codeType = VerificationCodeType.Register;
+        input.captchaResponse = "";
         // input.captchaResponse = this.captchaResolved();
 
         this._SMSServiceProxy
@@ -98,6 +97,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     anginSend() {
         let self = this;
         let time = 60;
+        this.isSendSMS = true;
         let set = setInterval(() => {
             time--;
             self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
@@ -105,6 +105,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
         setTimeout(() => {
             clearInterval(set);
+            self.isSendSMS = false;
             self._smsBtn.nativeElement.innerHTML = this.l("AgainSendValidateCode");
         }, 60000);
     }

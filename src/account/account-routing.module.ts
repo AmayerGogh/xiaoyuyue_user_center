@@ -13,7 +13,6 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
 import { AccountComponent } from './account.component';
 import { AppRouteGuard } from "app/shared/common/auth/auth-route-guard";
 import { ExternalLoginGuard } from "app/shared/common/auth/external-login-guard";
-import { SupplementaryExternalRegisterComponent } from "account/supplementary-external-register/supplementary-external-register.component";
 
 @NgModule({
     imports: [
@@ -24,7 +23,6 @@ import { SupplementaryExternalRegisterComponent } from "account/supplementary-ex
                 children: [
                     { path: 'login', component: LoginComponent, canActivate: [ExternalLoginGuard]},
                     { path: 'register', component: RegisterComponent },
-                    { path: 'supplementary-external-register/:id', component: SupplementaryExternalRegisterComponent }, 
                     { path: 'register-tenant', component: RegisterTenantComponent },
                     { path: 'register-tenant-result', component: RegisterTenantResultComponent },
                     { path: 'forgot-password', component: ForgotPasswordComponent },

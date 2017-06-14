@@ -9,11 +9,6 @@ import { AdminRoutingModule } from './admin-routing.module'
 import { UtilsModule } from '@shared/utils/utils.module'
 import { AppCommonModule } from '@app/shared/common/app-common.module'
 
-import { PermissionComboComponent } from './shared/permission-combo.component';
-import { RoleComboComponent } from './shared/role-combo.component';
-import { PermissionTreeComponent } from './shared/permission-tree.component';
-import { FeatureTreeComponent } from './shared/feature-tree.component';
-
 import { HostSettingsComponent } from './settings/host-settings.component'
 import { GridModule, SharedModule } from '@progress/kendo-angular-grid';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
@@ -28,14 +23,10 @@ import { AppStorageService } from "shared/services/storage.service";
 import { HostSettingService } from "shared/services/get-host-settings.service";
 import { GetUserForEdit } from "shared/services/get-user-info.service";
 import { TenantService } from "shared/services/tenant.service";
-import { DataLocalStorage } from "shared/services/data-local-storage.service";
 import { SmsSettingComponent } from './settings/host-settings/sms-setting/sms-setting.component';
-import { MessageManageComponent } from './message-manage/message-manage.component';
 
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
-import { EditModalComponent } from "app/admin/message-manage/create-or-edit-message-template/edit-modal/edit-modal.component";
-import { CreateOrEditMessageTemplateComponent } from "app/admin/message-manage/create-or-edit-message-template/create-or-edit-message-template.component";
 import { DatePickerModule, DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { CreateOrEditBookingComponent } from "app/admin/create-or-edit-booking/create-or-edit-booking.component";
@@ -71,10 +62,6 @@ import { TenantSettingsComponent } from "app/admin/settings/tenant-settings.comp
         DateInputsModule,
     ],
     declarations: [
-        PermissionComboComponent,
-        RoleComboComponent,
-        PermissionTreeComponent,
-        FeatureTreeComponent,
         HostSettingsComponent,
         
         UserManagementComponent,
@@ -84,9 +71,6 @@ import { TenantSettingsComponent } from "app/admin/settings/tenant-settings.comp
         LoginSettingComponent,
         GeneralInfoComponent,
         SmsSettingComponent,
-        MessageManageComponent,
-        CreateOrEditMessageTemplateComponent,
-        EditModalComponent,
         CreateOrEditBookingComponent,
         BaseInfoComponent,
         PictureManageComponent,
@@ -101,7 +85,6 @@ import { TenantSettingsComponent } from "app/admin/settings/tenant-settings.comp
         GetUserForEdit,
         TenantService,
         SMSTemplateServiceProxy,
-        DataLocalStorage,
         OrganizationBookingServiceProxy,
         PictureServiceProxy,
         OutletServiceServiceProxy
