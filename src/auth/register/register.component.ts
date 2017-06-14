@@ -56,7 +56,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     register(): void {
 
         this.saving = true;
-        this.model.phoneNumber = "12334";
+        this.model.phoneNumber = "18599926714";
         this.model.registerCode = "123";
         this._accountService.register(this.model)
             .finally(() => { this.saving = false; })
