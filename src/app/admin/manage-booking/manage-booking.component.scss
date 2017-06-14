@@ -17,6 +17,7 @@
     .booking-list-wrap {
         padding: 0;
         transform-style: preserve-3d;
+        min-height: 470px;
         .booking-item.flip {
             transform-style: preserve-3d;
         } // 禁用预约的样式

@@ -11,7 +11,6 @@ import { ChangePasswordModalComponent } from './profile/change-password-modal.co
 import { ChangeProfilePictureModalComponent } from './profile/change-profile-picture-modal.component';
 import { MySettingsModalComponent } from './profile/my-settings-modal.component'
 import { AppAuthService } from '@app/shared/common/auth/app-auth.service';
-import { ImpersonationService } from '@app/admin/users/impersonation.service';
 import { LinkedAccountService } from '@app/shared/layout/linked-account.service';
 import { NotificationSettingsModalCompoent } from '@app/shared/layout/notifications/notification-settings-modal.component';
 import { UserNotificationHelper } from '@app/shared/layout/notifications/UserNotificationHelper';
@@ -56,7 +55,6 @@ export class HeaderComponent extends AppComponentBase implements OnInit {
         private _userLinkServiceProxy: UserLinkServiceProxy,
         private _userServiceProxy: UserServiceProxy,
         private _authService: AppAuthService,
-        private _impersonationService: ImpersonationService,
         private _linkedAccountService: LinkedAccountService,
         private _userNotificationHelper: UserNotificationHelper
     ) {
@@ -160,10 +158,6 @@ export class HeaderComponent extends AppComponentBase implements OnInit {
 
     onMySettingsModalSaved(): void {
         this.shownLoginName = this.appSession.getShownLoginName();
-    }
-
-    backToMyAccount(): void {
-        this._impersonationService.backToImpersonator();
     }
 
     switchToLinkedUser(linkedUser: LinkedUserDto): void {

@@ -18,6 +18,11 @@ import { SelectHelper } from "shared/helpers/SelectHelper";
 })
 
 export class ManageBookingComponent extends AppComponentBase implements OnInit {
+  totalCount: number;
+  pagesTotal: number[] = [];
+  pagesNum: number = 1;
+  currentPage: number = 0;
+
   activeOrDisable: ActiveOrDisableInput = new ActiveOrDisableInput();
   outletSelectDefaultItem: string;
   outletSelectListData: SelectListItemDto[];
@@ -95,6 +100,9 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
     this._organizationBookingServiceProxy
       .getBookings(this.bookingName, this.outletId, this.isActive, this.startCreationTime, this.endCreationTime, sorting, maxResultCount, skipCount)
       .subscribe(result => {
+        this.pagesTotal = [];
+        this.totalCount = result.totalCount;
+        this.pagesCount(result.totalCount, maxResultCount);
         if (typeof this.startCreationTime === "object") {
           this.startCreationTime = this.startCreationTime.format('YYYY-MM-DD');
           this.endCreationTime = this.endCreationTime.format('YYYY-MM-DD');
@@ -164,8 +172,15 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
       .subscribe(result => {
 
         input.booking = result.booking;
+        input.booking.id = 0;
         input.bookingPictures = result.bookingPictures;
         input.items = result.items;
+        if (input.items) {
+          for (let i = 0; i < input.items.length; i++) {
+            input.items[i].id = 0;
+            input.items[i].bookingId = 0;
+          }
+        }
 
         // 创建预约
         this._organizationBookingServiceProxy
@@ -196,5 +211,66 @@ export class ManageBookingComponent extends AppComponentBase implements OnInit {
   // 预约状态搜索下拉框值改变时
   public bookingActiveChangeHandler(bookingActive: any): void {
     this.isActive = bookingActive;
+  }
+
+  // 计算分页数量
+  pagesCount(totalCount: number, skipCount: number) {
+    let temp = totalCount - skipCount;
+
+    this.pagesTotal.push(this.pagesNum++);
+
+    if (temp < skipCount) {
+      this.pagesNum = 1;
+      return;
+    } else {
+      return this.pagesCount(temp, skipCount);
+    }
+  }
+
+  // 改变页码事件
+  changePage(index: number) {
+    this.pagesTotal = [];
+    this.skip = index;
+    this.currentPage = index;
+    // this.pagesNum = index+1;
+    this.loadData();
+  }
+
+  // 上一页
+  prevPage(index: number) {
+    this.pagesTotal = [];
+    this.skip = --index;
+    this.currentPage = index--;
+    if (this.currentPage < 0) {
+      this.currentPage = 0;
+      this.skip = 0;
+    }
+    this.loadData();
+  }
+  // 下一页
+  nextPage(index: number) {
+    this.pagesTotal = [];
+    this.skip = ++index;
+    this.currentPage = index++;
+    if (this.currentPage > this.totalCount - 1) {
+      this.currentPage = this.totalCount - 1;
+      this.skip = this.totalCount - 1
+    }
+    this.loadData();
+  }
+
+  // 第一页
+  firstPage() {
+    this.pagesTotal = [];
+    this.skip = 0;
+    this.currentPage = 0;
+    this.loadData();
+  }
+  // 最后一页
+  lastPage() {
+    this.pagesTotal = [];
+    this.skip = this.totalCount - 1;
+    this.currentPage = this.totalCount - 1;
+    this.loadData();
   }
 }

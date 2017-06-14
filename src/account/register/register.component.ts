@@ -1,10 +1,11 @@
-import { Component, Injector, OnInit, NgModule } from '@angular/core';
+import { Component, Injector, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy } from '@shared/service-proxies/service-proxies'
+import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy, CodeSendInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies'
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { RegisterModel } from './register.model';
 import { LoginService } from "shared/services/login.service";
+import { VerificationCodeType } from "shared/AppEnums";
 
 @Component({
     templateUrl: './register.component.html',
@@ -12,18 +13,21 @@ import { LoginService } from "shared/services/login.service";
     animations: [accountModuleAnimation()]
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
+    phoneNumber: string;
 
     model: RegisterModel = new RegisterModel();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
 
     saving: boolean = false;
 
+    @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
         private _accountService: AccountServiceProxy,
         private _router: Router,
         private readonly _loginService: LoginService,
-        private _profileService: ProfileServiceProxy
+        private _profileService: ProfileServiceProxy,
+        private _SMSServiceProxy: SMSServiceProxy
     ) {
         super(injector);
     }
@@ -75,5 +79,33 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     captchaResolved(): void {
         let captchaResponse = $('#lc-captcha-response').val();
         this.model.captchaResponse = captchaResponse;
+    }
+
+    // 发送验证码
+    send() {
+        let input: CodeSendInput = new CodeSendInput();
+        input.targetNumber = this.phoneNumber;
+        input.codeType = VerificationCodeType.Register;
+        // input.captchaResponse = this.captchaResolved();
+
+        this._SMSServiceProxy
+            .sendCodeAsync(input)
+            .subscribe(result => {
+                this.anginSend();
+            });
+    }
+
+    anginSend() {
+        let self = this;
+        let time = 60;
+        let set = setInterval(() => {
+            time--;
+            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
+        }, 1000)
+
+        setTimeout(() => {
+            clearInterval(set);
+            self._smsBtn.nativeElement.innerHTML = this.l("AgainSendValidateCode");
+        }, 60000);
     }
 }

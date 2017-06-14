@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input id="userName" class="form-control" type="text" autocomplete="off" name="UserName" required maxlength="256" maxlength="32">
+                            <input id="userName" class="form-control" type="text" autocomplete="off" name="UserName" required maxlength="256" maxlength="32" [(ngModel)]="phoneNumber">
                             <label for="userName">手机号</label>
                         </div>
                     </div>
@@ -25,9 +25,12 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="form-group form-md-line-input form-md-floating-label">
+                        <div class="validate-code-wrap form-group form-md-line-input form-md-floating-label">
                             <input id="userName" class="form-control" type="text" autocomplete="off" name="UserName" required maxlength="256" maxlength="32">
                             <label for="userName">验证码</label>
+                            <div class="get-sms-btn form-group form-md-line-input">
+                                <button type="button" class="btn" (click)="send()" #smsBtn [disabled]="!phoneNumber">获取验证码</button>
+                            </div>
                         </div>
                     </div>
                 </div>
