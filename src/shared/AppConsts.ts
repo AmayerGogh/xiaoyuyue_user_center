@@ -6,7 +6,7 @@
     static remoteServiceBaseUrlFormat: string;
     static appBaseUrl: string;
     static appBaseUrlFormat: string;
-    static readonly externalLoginUrl = '/account/login';
+    static readonly externalLoginUrl = '/auth/login';
     
     static readonly userManagement = {
         defaultAdminUserName: 'admin'

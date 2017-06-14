@@ -27,7 +27,7 @@ import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
                     },
                     {
                         path: 'admin',
-                        loadChildren: 'app/admin/admin.module#AdminModule', //Lazy load admin module
+                        loadChildren: 'app/desktop/account/admin.module#AdminModule', //Lazy load admin module
                         data: { preload: true }
                     }
                 ]

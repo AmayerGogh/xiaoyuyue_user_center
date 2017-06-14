@@ -23,7 +23,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {
             UrlHelper.redirectUrl = location.href;
-            this._router.navigate(['/account/login']);
+            this._router.navigate(['/auth/login']);
             return false;
         }
 
@@ -45,7 +45,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     selectBestRoute(): string {
         if (!this._sessionService.user) {
-            return '/account/login';
+            return '/auth/login';
         }
 
         if (this._permissionChecker.isGranted(AdminPermissions.tenantDashboard)) {

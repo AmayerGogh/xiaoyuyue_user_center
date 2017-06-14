@@ -4,8 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     { path: '', redirectTo: '/app/main/dashboard', pathMatch: 'full' },
     {
-        path: 'account',
-        loadChildren: 'account/account.module#AccountModule', //Lazy load account module
+        path: 'auth',
+        loadChildren: 'auth/auth.module#AuthModule', //Lazy load account module
         data: { preload: true }
     }
 ];

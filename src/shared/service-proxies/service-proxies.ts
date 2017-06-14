@@ -1564,6 +1564,54 @@ export class FileServiceProxy {
         return null;
     }
 
+    /**
+     * 云存储回调
+     * @return Success
+     */
+    uploadPictureCallBack(input: UploadPictureInput): Observable<UploadPictureOutput> {
+        let url_ = this.baseUrl + "/api/services/app/File/UploadPictureCallBack";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processUploadPictureCallBack(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processUploadPictureCallBack(response));
+                } catch (e) {
+                    return <Observable<UploadPictureOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<UploadPictureOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processUploadPictureCallBack(response: Response): UploadPictureOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: UploadPictureOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? UploadPictureOutput.fromJS(resultData200) : new UploadPictureOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
     protected throwException(message: string, status: number, response: string, result?: any): any {
         if(result !== null && result !== undefined)
             throw result;
@@ -4508,54 +4556,6 @@ export class PictureServiceProxy {
 
         if (status === 200) {
             return null;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 云存储回调
-     * @return Success
-     */
-    uploadloadCallBack(input: CreateOrUpdatePictureInput): Observable<UploadCallBackOutput> {
-        let url_ = this.baseUrl + "/api/services/app/Picture/UploadloadCallBack";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processUploadloadCallBack(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processUploadloadCallBack(response));
-                } catch (e) {
-                    return <Observable<UploadCallBackOutput>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<UploadCallBackOutput>><any>Observable.throw(response);
-        });
-    }
-
-    protected processUploadloadCallBack(response: Response): UploadCallBackOutput {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: UploadCallBackOutput = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? UploadCallBackOutput.fromJS(resultData200) : new UploadCallBackOutput();
-            return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -10399,6 +10399,82 @@ export class CreateOrUpdateEditionDto {
     }
 }
 
+/** 上传图片回调参数 */
+export class UploadPictureInput {
+    /** 名称 */
+    name: string;
+    /** 图片 Key */
+    key: string;
+    /** 创建者id (回调用,必须大于0) */
+    creatorUserId: number;
+    /** 租户Id */
+    tenantId: number;
+    /** 分组Id */
+    groupId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.key = data["key"] !== undefined ? data["key"] : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.groupId = data["groupId"] !== undefined ? data["groupId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UploadPictureInput {
+        return new UploadPictureInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["key"] = this.key !== undefined ? this.key : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["groupId"] = this.groupId !== undefined ? this.groupId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UploadPictureInput(JSON.parse(json));
+    }
+}
+
+export class UploadPictureOutput {
+    pictureId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UploadPictureOutput {
+        return new UploadPictureOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UploadPictureOutput(JSON.parse(json));
+    }
+}
+
 export class CreateFriendshipRequestInput {
     userId: number;
     tenantId: number;
@@ -13706,35 +13782,6 @@ export class CreateOrUpdatePictureInput {
     clone() {
         const json = this.toJSON();
         return new CreateOrUpdatePictureInput(JSON.parse(json));
-    }
-}
-
-export class UploadCallBackOutput {
-    pictureId: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): UploadCallBackOutput {
-        return new UploadCallBackOutput(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new UploadCallBackOutput(JSON.parse(json));
     }
 }
 
