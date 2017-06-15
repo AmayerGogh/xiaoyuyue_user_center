@@ -106,7 +106,8 @@
             "../src/assets/metronic/global/scripts/app.js",
             "../src/assets/metronic/admin/layout4/scripts/layout.js",
             "../src/assets/metronic/layouts/global/scripts/quick-sidebar.js",
-            "../node_modules/flatpickr/dist/flatpickr.js"
+            "../node_modules/flatpickr/dist/flatpickr.js",
+            "../node_modules/flatpickr/dist/l10n/zh.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

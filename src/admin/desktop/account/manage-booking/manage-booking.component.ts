@@ -1,4 +1,3 @@
-import { ActiveOrDisableInput } from './../../../shared/service-proxies/service-proxies';
 import { Component, OnInit, Injector } from '@angular/core';
 import { appModuleAnimation } from "shared/animations/routerTransition";
 import { AppComponentBase } from "shared/common/app-component-base";
