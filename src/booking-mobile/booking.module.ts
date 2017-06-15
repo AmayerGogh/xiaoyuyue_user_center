@@ -7,7 +7,7 @@ import { BookingComponent } from "booking-mobile/booking.component";
 import { BookingAboutComponent } from "booking-mobile/about/booking-about.component";
 import { BookingHeaderComponent } from "booking-mobile/layout/header/header.component";
 import { BookingRatingComponent } from "booking-mobile/rating/booking-rating.component";
-import { BookingTimeComponent } from "booking-mobile/time/booking-timecomponent";
+import { BookingTimeComponent } from "booking-mobile/time/booking-time.component";
 import { BookingSideBarComponent } from "booking-mobile/layout/side-bar/side-bar.component";
 
 @NgModule({

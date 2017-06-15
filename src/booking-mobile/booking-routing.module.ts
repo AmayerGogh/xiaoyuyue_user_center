@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BookingComponent } from "booking-mobile/booking.component";
 import { BookingAboutComponent } from "booking-mobile/about/booking-about.component";
-import { BookingTimeComponent } from "booking-mobile/time/booking-timecomponent";
+import { BookingTimeComponent } from "booking-mobile/time/booking-time.component";
 import { BookingRatingComponent } from "booking-mobile/rating/booking-rating.component";
 
 @NgModule({
