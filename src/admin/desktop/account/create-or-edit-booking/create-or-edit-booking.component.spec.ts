@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CreateOrEditBookingComponent } from "app/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
+import { CreateOrEditBookingComponent } from "admin/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
 
 
 describe('CreateYuyueComponent', () => {

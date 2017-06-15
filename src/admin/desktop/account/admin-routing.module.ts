@@ -1,10 +1,10 @@
 import { AdminPermissions } from '@shared/AdminPermissions';
 import { NgModule } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { ManageBookingComponent } from "app/desktop/account/manage-booking/manage-booking.component";
-import { CreateOrEditBookingComponent } from "app/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
-import { HostSettingsComponent } from "app/desktop/account/settings/host-settings.component";
-import { TenantSettingsComponent } from "app/desktop/account/settings/tenant-settings.component";
+import { ManageBookingComponent } from "admin/desktop/account/manage-booking/manage-booking.component";
+import { CreateOrEditBookingComponent } from "admin/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
+import { HostSettingsComponent } from "admin/desktop/account/settings/host-settings.component";
+import { TenantSettingsComponent } from "admin/desktop/account/settings/tenant-settings.component";
 
 @NgModule({
     imports: [

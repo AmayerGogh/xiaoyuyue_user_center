@@ -7,7 +7,7 @@ import { FileUploadModule } from '@node_modules/ng2-file-upload';
 
 import { AdminRoutingModule } from './admin-routing.module'
 import { UtilsModule } from '@shared/utils/utils.module'
-import { AppCommonModule } from '@app/shared/common/app-common.module'
+import { AppCommonModule } from '@admin/shared/common/app-common.module'
 
 import { HostSettingsComponent } from './settings/host-settings.component'
 import { GridModule, SharedModule } from '@progress/kendo-angular-grid';
@@ -25,17 +25,17 @@ import { DatePickerModule, DateInputsModule } from '@progress/kendo-angular-date
 import { ManageBookingComponent } from './manage-booking/manage-booking.component';
 import { UploadPictureModelComponent } from './create-or-edit-booking/picture-manage/upload-picture-model/upload-picture-model.component';
 
-import { UserManagementComponent } from "app/desktop/account/settings/host-settings/user-management/user-management.component";
-import { TenantManagementComponent } from "app/desktop/account/settings/host-settings/tenant-management/tenant-management.component";
-import { SecurityComponent } from "app/desktop/account/settings/host-settings/security/security.component";
-import { EmailSmtpComponent } from "app/desktop/account/settings/host-settings/email-smtp/email-smtp.component";
-import { LoginSettingComponent } from "app/desktop/account/settings/host-settings/login-setting/login-setting.component";
-import { GeneralInfoComponent } from "app/desktop/account/settings/host-settings/general-info/general-info.component";
-import { CreateOrEditBookingComponent } from "app/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
-import { BaseInfoComponent } from "app/desktop/account/create-or-edit-booking/base-info/base-info.component";
-import { PictureManageComponent } from "app/desktop/account/create-or-edit-booking/picture-manage/picture-manage.component";
-import { TimeInfoComponent } from "app/desktop/account/create-or-edit-booking/time-info/time-info.component";
-import { TenantSettingsComponent } from "app/desktop/account/settings/tenant-settings.component";
+import { UserManagementComponent } from "admin/desktop/account/settings/host-settings/user-management/user-management.component";
+import { TenantManagementComponent } from "admin/desktop/account/settings/host-settings/tenant-management/tenant-management.component";
+import { SecurityComponent } from "admin/desktop/account/settings/host-settings/security/security.component";
+import { EmailSmtpComponent } from "admin/desktop/account/settings/host-settings/email-smtp/email-smtp.component";
+import { LoginSettingComponent } from "admin/desktop/account/settings/host-settings/login-setting/login-setting.component";
+import { GeneralInfoComponent } from "admin/desktop/account/settings/host-settings/general-info/general-info.component";
+import { CreateOrEditBookingComponent } from "admin/desktop/account/create-or-edit-booking/create-or-edit-booking.component";
+import { BaseInfoComponent } from "admin/desktop/account/create-or-edit-booking/base-info/base-info.component";
+import { PictureManageComponent } from "admin/desktop/account/create-or-edit-booking/picture-manage/picture-manage.component";
+import { TimeInfoComponent } from "admin/desktop/account/create-or-edit-booking/time-info/time-info.component";
+import { TenantSettingsComponent } from "admin/desktop/account/settings/tenant-settings.component";
 
 
 @NgModule({

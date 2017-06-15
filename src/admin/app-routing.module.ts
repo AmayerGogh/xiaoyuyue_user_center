@@ -22,12 +22,12 @@ import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
                     },
                     {
                         path: 'main',
-                        loadChildren: 'app/main/main.module#MainModule', //Lazy load main module
+                        loadChildren: 'admin/main/main.module#MainModule', //Lazy load main module
                         data: { preload: true }
                     },
                     {
                         path: 'admin',
-                        loadChildren: 'app/desktop/account/admin.module#AdminModule', //Lazy load admin module
+                        loadChildren: 'admin/desktop/account/admin.module#AdminModule', //Lazy load admin module
                         data: { preload: true }
                     }
                 ]

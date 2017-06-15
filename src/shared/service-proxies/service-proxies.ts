@@ -15461,6 +15461,8 @@ export class CreateTenantInput {
     name: string;
     /** 管理员邮箱地址 */
     adminEmailAddress: string;
+    /** 管理员手机号码 */
+    phoneNumber: string;
     /** 管理员密码 */
     adminPassword: string;
     /** 数据库连接字符串 */
@@ -15479,6 +15481,7 @@ export class CreateTenantInput {
             this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.adminEmailAddress = data["adminEmailAddress"] !== undefined ? data["adminEmailAddress"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
             this.adminPassword = data["adminPassword"] !== undefined ? data["adminPassword"] : undefined;
             this.connectionString = data["connectionString"] !== undefined ? data["connectionString"] : undefined;
             this.shouldChangePasswordOnNextLogin = data["shouldChangePasswordOnNextLogin"] !== undefined ? data["shouldChangePasswordOnNextLogin"] : undefined;
@@ -15497,6 +15500,7 @@ export class CreateTenantInput {
         data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["adminEmailAddress"] = this.adminEmailAddress !== undefined ? this.adminEmailAddress : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
         data["adminPassword"] = this.adminPassword !== undefined ? this.adminPassword : undefined;
         data["connectionString"] = this.connectionString !== undefined ? this.connectionString : undefined;
         data["shouldChangePasswordOnNextLogin"] = this.shouldChangePasswordOnNextLogin !== undefined ? this.shouldChangePasswordOnNextLogin : undefined;
@@ -15786,21 +15790,21 @@ export class GetMemberActivityOutput {
 export class RegisterTenantInput {
     /** 租户名称 */
     tenancyName: string;
-    /** 名称 */
-    name: string;
-    /** 管理员邮箱 */
-    adminEmailAddress: string;
+    /** 手机号码 */
+    phoneNumber: string;
+    /** 注册验证码 */
+    registerCode: string;
     /** 管理员密码 */
-    adminPassword: string;
+    password: string;
     /** 验证码结果 */
     captchaResponse: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
-            this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.adminEmailAddress = data["adminEmailAddress"] !== undefined ? data["adminEmailAddress"] : undefined;
-            this.adminPassword = data["adminPassword"] !== undefined ? data["adminPassword"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
+            this.registerCode = data["registerCode"] !== undefined ? data["registerCode"] : undefined;
+            this.password = data["password"] !== undefined ? data["password"] : undefined;
             this.captchaResponse = data["captchaResponse"] !== undefined ? data["captchaResponse"] : undefined;
         }
     }
@@ -15812,9 +15816,9 @@ export class RegisterTenantInput {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
-        data["name"] = this.name !== undefined ? this.name : undefined;
-        data["adminEmailAddress"] = this.adminEmailAddress !== undefined ? this.adminEmailAddress : undefined;
-        data["adminPassword"] = this.adminPassword !== undefined ? this.adminPassword : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
+        data["registerCode"] = this.registerCode !== undefined ? this.registerCode : undefined;
+        data["password"] = this.password !== undefined ? this.password : undefined;
         data["captchaResponse"] = this.captchaResponse !== undefined ? this.captchaResponse : undefined;
         return data; 
     }

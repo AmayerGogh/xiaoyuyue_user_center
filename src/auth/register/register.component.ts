@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy, CodeSendInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies'
+import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy, CodeSendInput, SMSServiceProxy, TenantRegistrationServiceProxy, RegisterTenantInput } from '@shared/service-proxies/service-proxies'
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { RegisterModel } from './register.model';
@@ -17,7 +17,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     isSendSMS: boolean = false;
     confirmPasswd: string;
 
-    model: RegisterModel = new RegisterModel();
+    model: RegisterTenantInput = new RegisterTenantInput();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
 
     saving: boolean = false;
@@ -26,6 +26,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _accountService: AccountServiceProxy,
+        private _tenantRegistrationServiceProxy: TenantRegistrationServiceProxy,
         private _router: Router,
         private readonly _loginService: LoginService,
         private _profileService: ProfileServiceProxy,
@@ -58,10 +59,11 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
         this.saving = true;
         this.model.phoneNumber = "18599926714";
         this.model.registerCode = "123";
-        this._accountService.register(this.model)
+        this._tenantRegistrationServiceProxy.registerTenant(this.model)
             .finally(() => { this.saving = false; })
             .subscribe((result) => {
-                if (!result.canLogin) {
+                console.log(result);
+                if (!result.isActive) {
                     this.notify.success(this.l('SuccessfullyRegistered'));
                     this._router.navigate(['auth/login']);
                     return;
@@ -69,7 +71,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
                 //Autheticate
                 this.saving = true;
-                this._loginService.authenticateModel.loginCertificate = this.model.name;
+                this._loginService.authenticateModel.loginCertificate = this.model.tenancyName;
                 this._loginService.authenticateModel.password = this.model.password;
                 this._loginService.authenticate(() => { this.saving = false; });
             });

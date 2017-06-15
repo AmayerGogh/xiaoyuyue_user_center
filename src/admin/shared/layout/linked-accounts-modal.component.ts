@@ -6,7 +6,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { UserLinkServiceProxy, LinkedUserDto, UnlinkUserInput } from '@shared/service-proxies/service-proxies';
 import { LinkAccountModalComponent } from './link-account-modal.component';
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
-import { LinkedAccountService } from '@app/shared/layout/linked-account.service';
+import { LinkedAccountService } from '@admin/shared/layout/linked-account.service';
 
 import * as moment from "moment";
 

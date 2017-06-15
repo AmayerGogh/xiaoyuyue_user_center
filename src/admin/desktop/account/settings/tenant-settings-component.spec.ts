@@ -3,7 +3,7 @@ import { Component, OnInit, Injector, ViewEncapsulation, ViewChild, Injectable }
 import { TestBed, async } from '@angular/core/testing';
 import { TenantSettingsComponent } from './tenant-settings.component';
 import { ModalModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
-import { TimeZoneComboComponent } from "app/shared/common/timing/timezone-combo.component";
+import { TimeZoneComboComponent } from "admin/shared/common/timing/timezone-combo.component";
 import { FileSelectDirective } from '@node_modules/ng2-file-upload';
 import { FormsModule }    from '@angular/forms';
 import { GridModule } from '@progress/kendo-angular-grid';

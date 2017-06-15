@@ -14,10 +14,10 @@ import { HeaderNotificationsComponent } from './shared/layout/notifications/head
 import { SideBarComponent } from './shared/layout/side-bar.component';
 import { FooterComponent } from './shared/layout/footer.component';
 
-import { LoginAttemptsModalComponent } from '@app/shared/layout/login-attempts-modal.component';
-import { ChangePasswordModalComponent } from '@app/shared/layout/profile/change-password-modal.component';
-import { ChangeProfilePictureModalComponent } from '@app/shared/layout/profile/change-profile-picture-modal.component';
-import { MySettingsModalComponent } from '@app/shared/layout/profile/my-settings-modal.component';
+import { LoginAttemptsModalComponent } from '@admin/shared/layout/login-attempts-modal.component';
+import { ChangePasswordModalComponent } from '@admin/shared/layout/profile/change-password-modal.component';
+import { ChangeProfilePictureModalComponent } from '@admin/shared/layout/profile/change-profile-picture-modal.component';
+import { MySettingsModalComponent } from '@admin/shared/layout/profile/my-settings-modal.component';
 
 import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
 
@@ -30,8 +30,8 @@ import { AppConsts } from '@shared/AppConsts';
 
 import { AppSessionService } from '@shared/common/session/app-session.service';
 import { LinkedAccountService } from './shared/layout/linked-account.service';
-import { LinkedAccountsModalComponent } from '@app/shared/layout/linked-accounts-modal.component';
-import { LinkAccountModalComponent } from '@app/shared/layout/link-account-modal.component';
+import { LinkedAccountsModalComponent } from '@admin/shared/layout/linked-accounts-modal.component';
+import { LinkAccountModalComponent } from '@admin/shared/layout/link-account-modal.component';
 import { NotificationsComponent } from './shared/layout/notifications/notifications.component';
 import { NotificationSettingsModalCompoent } from './shared/layout/notifications/notification-settings-modal.component';
 import { UserNotificationHelper } from './shared/layout/notifications/UserNotificationHelper';

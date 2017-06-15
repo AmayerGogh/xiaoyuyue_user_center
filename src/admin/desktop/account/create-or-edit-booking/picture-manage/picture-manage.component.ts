@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { AppComponentBase } from "shared/common/app-component-base";
 import { BookingPictureEditDto } from "shared/service-proxies/service-proxies";
-import { UploadPictureModelComponent } from "app/desktop/account/create-or-edit-booking/picture-manage/upload-picture-model/upload-picture-model.component";
+import { UploadPictureModelComponent } from "admin/desktop/account/create-or-edit-booking/picture-manage/upload-picture-model/upload-picture-model.component";
 
 @Component({
   selector: 'app-picture-manage',
