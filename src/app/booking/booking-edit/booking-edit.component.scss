@@ -1,0 +1,17 @@
+ .booking-edit {
+     .card-item {
+         padding: 0 15px 0;
+         background-color: #AAA;
+         border-radius: 4px;
+         .top-wrap {
+             height: 50px;
+             line-height: 50px;
+             border-bottom: 1px solid #CCC;
+         }
+         .content {
+             border-bottom: 1px solid #CCC;
+             padding: 20px 0;
+             .content-item {}
+         }
+     }
+ }
