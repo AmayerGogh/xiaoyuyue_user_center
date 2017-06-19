@@ -1,9 +1,12 @@
-import { Component, ViewContainerRef, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewContainerRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
 
 @Component({
     templateUrl: './center.component.html'
 })
 export class CenterComponent implements OnInit, AfterViewInit {
+    toggleSideBarFlag: boolean;
+    @ViewChild('sideBarModel') sideBarModel: SideBarComponent;
 
     public constructor(
     ) {
@@ -14,6 +17,11 @@ export class CenterComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+    }
+
+    showSideBarHandler(flag) {
+        this.toggleSideBarFlag = flag;
+        this.toggleSideBarFlag && this.sideBarModel.showSideBar();
     }
 }
 

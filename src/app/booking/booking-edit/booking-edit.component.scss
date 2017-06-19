@@ -1,7 +1,39 @@
  .booking-edit {
+     width: 100%;
+     padding: 10px;
+     background-color: #f9f9f9;
+     .tenant-wrap {
+         border-radius: 4px;
+         background-color: #FFF;
+         overflow: hidden;
+         .tenant-bg-wrap {
+             margin-bottom: 15px;
+         }
+         .tenant-info {
+             padding: 15px;
+             .name {
+                 color: #FF9641;
+                 font-size: 15px;
+                 margin-bottom: 15px;
+             }
+             .contact {
+                 color: #333;
+             }
+         }
+     }
+     .address-wrap {
+         padding: 15px;
+         border-radius: 4px;
+         background-color: #FFF;
+     }
+     .address-wrap,
+     .personal-info-wrap,
+     .booking-info-wrap {
+         margin-bottom: 10px;
+     }
      .card-item {
          padding: 0 15px 0;
-         background-color: #AAA;
+         background-color: #FFF;
          border-radius: 4px;
          .top-wrap {
              height: 50px;
@@ -9,7 +41,6 @@
              border-bottom: 1px solid #CCC;
          }
          .content {
-             border-bottom: 1px solid #CCC;
              padding: 20px 0;
              .content-item {}
          }

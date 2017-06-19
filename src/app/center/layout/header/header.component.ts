@@ -6,14 +6,13 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  toggleSideBarFlag: boolean;
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
-  toggleSideBarFlag: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
-
   showSideBar() {
     this.toggleSideBarFlag = true;
     this.toggleFlag.emit(this.toggleSideBarFlag);

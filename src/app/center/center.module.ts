@@ -22,6 +22,7 @@ import { AppCommonModule } from "app/shared/common/app-common.module";
 import { AdminRoutingModule } from "app/center/center-routing.module";
 import { CenterComponent } from "app/center/center.component";
 import { MainUserComponent } from "app/center/main-user/main-user.component";
+import { HeaderComponent } from './layout/header/header.component';
 
 
 
@@ -51,7 +52,9 @@ import { MainUserComponent } from "app/center/main-user/main-user.component";
     ],
     declarations: [
         CenterComponent,
-        MainUserComponent
+        MainUserComponent,
+        HeaderComponent,
+        
     ],
     providers: [
         AppStorageService,
