@@ -1,11 +1,31 @@
 <div class="header">
-    <span class="glyphicon glyphicon-menu-left back-icon pull-left"></span>
-    <span class="glyphicon glyphicon-menu-hamburger menu-icon pull-right" (click)="showSideBar()"></span>
+    <span class="vapps-icon-app-back-left back-icon pull-left"></span>
+    <span class="vapps-icon-app-menu menu-icon pull-right" (click)="showSideBar()"></span>
 
-    <div class="header-bg"><img class="avatar" src="/assets/common/images/default-profile-picture.png" width="60px" alt="avatar"></div>
+    <div class="header-bg">
+        <div class="content">
+            <img class="avatar" src="/assets/common/images/default-profile-picture.png" width="60px" alt="avatar">
+            <div class="username">张旭</div>
+        </div>
+    </div>
     <div class="menu-wrap">
-        <div class="menu-item"><a class="item" routerLink="/app/booking/manage">应约管理</a></div>
-        <div class="menu-item"><a class="item" href="#">个人信息</a></div>
-        <div class="menu-item"><a class="item" href="#">设置管理</a></div>
+        <div class="menu-item">
+            <a class="item" routerLink="/app/booking">
+                <span class="vapps-icon vapps-icon-app-user-manage"></span>
+                <span class="name">应约管理</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a class="item" href="#">
+                <span class="vapps-icon vapps-icon-app-user-info"></span>
+                <span class="name">个人信息</span>
+            </a>
+        </div>
+        <div class="menu-item">
+            <a class="item" href="#">
+                <span class="vapps-icon vapps-icon-app-user-setting"></span>
+                <span class="name">设置管理</span>
+            </a>
+        </div>
     </div>
 </div>

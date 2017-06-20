@@ -12,6 +12,7 @@ import { BookingEditComponent } from "app/booking/booking-edit/booking-edit.comp
                 path: '',
                 component: BookingComponent,
                 children: [
+                    { path: '', redirectTo: 'manage' },
                     {
                         path: 'manage', component: BookingManageComponent
                     },

@@ -25,8 +25,7 @@ import { AdminRoutingModule } from "app/booking/booking-routing.module";
 import { BookingComponent } from "app/booking/booking.component";
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
-
+import { SideBarComponent } from "app/booking/layout/side-bar/side-bar.component";
 
 @NgModule({
     imports: [

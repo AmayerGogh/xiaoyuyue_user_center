@@ -13,17 +13,25 @@
         .top-wrap {
             height: 50px;
             line-height: 50px;
-            border-bottom: 1px solid #CCC;
+            border-bottom: 1px solid #E5E5E5;
+            .title {
+                color: #FF9641;
+            }
         }
         .content {
-            border-bottom: 1px solid #CCC;
             padding: 20px 0;
-            .content-item {}
+            .content-item {
+                padding: 4px 0;
+                .desc {
+                    color: #FF9641;
+                }
+            }
         }
         .bottom-action {
             height: 40px;
             line-height: 40px;
             display: flex;
+            border-top: 1px solid #E5E5E5;
             .action-item+.action-item {
                 // border-left: 1px solid #ccc;
             }

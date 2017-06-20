@@ -22,12 +22,12 @@ import { AppSessionService } from '@shared/common/session/app-session.service';
 
 import { GridModule } from '@progress/kendo-angular-grid';
 import { GridDataResultsModule } from '@shared/grid-data-results/grid-result.modules';
-import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
+// import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
 
 @NgModule({
     declarations: [
         AppComponent,
-        SideBarComponent
+        // SideBarComponent
     ],
     imports: [
         ngCommon.CommonModule,
@@ -48,7 +48,8 @@ import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
         ServiceProxyModule,
 
         GridModule,
-        GridDataResultsModule
+        GridDataResultsModule,
+
     ],
     providers: [
     ]
