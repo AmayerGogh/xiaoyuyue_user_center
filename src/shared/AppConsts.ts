@@ -6,7 +6,7 @@
     static remoteServiceBaseUrlFormat: string;
     static appBaseUrl: string;
     static appBaseUrlFormat: string;
-    static readonly externalLoginUrl = '/account/login';
+    static readonly externalLoginUrl = '/auth/login';
     
     static readonly userManagement = {
         defaultAdminUserName: 'admin'
@@ -21,7 +21,7 @@
     };
 
     static readonly grid = {
-        defaultPageSize: 10,
+        defaultPageSize: 1,
         pageSizes: [5, 10, 20, 50, 100],
         maxPageSize:1000,
     }

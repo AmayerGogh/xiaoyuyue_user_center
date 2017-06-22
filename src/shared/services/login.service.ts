@@ -139,18 +139,18 @@ export class LoginService {
         } else if (authenticateResult.accessToken) {
             //Successfully logged in
 
-            this.login(authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, redirectUrl);
+            this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, redirectUrl);
 
         } else {
             //Unexpected result!
 
             this._logService.warn('Unexpected authenticateResult!');
-            this._router.navigate(['account/login']);
+            this._router.navigate(['auth/login']);
 
         }
     }
 
-    private login(accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
+    private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
 
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
@@ -158,6 +158,8 @@ export class LoginService {
             accessToken,
             tokenExpireDate
         );
+
+        abp.multiTenancy.setTenantIdCookie(tenantId);
 
         this._utilsService.setCookieValue(
             AppConsts.authorization.encrptedAuthTokenName,
@@ -278,7 +280,7 @@ export class LoginService {
                         return;
                     }
 
-                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+                    // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
                 });
         }
     }
@@ -296,7 +298,7 @@ export class LoginService {
                         return;
                     }
 
-                    this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+                    // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
                 });
         }
     }
@@ -310,11 +312,11 @@ export class LoginService {
             console.log(result);
             if (result.waitingForActivation) {
                 this._messageService.info("您已成功注册,请完善基本信息!");
-                this._router.navigate(['/account/supplementary-external-register', result.userId]);
+                // this._router.navigate(['/account/supplementary-external-register', result.userId]);
                 return;
             }
 
-            this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+            // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
         });
     }
 
@@ -334,7 +336,7 @@ export class LoginService {
                     return;
                 }
 
-                this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+                // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
             });
     }
 

@@ -1,0 +1,44 @@
+.booking-manage {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    .booking-item+.booking-item {
+        margin-top: 10px;
+    }
+    .booking-item {
+        padding: 0 15px 0;
+        background-color: #FFF;
+        border-radius: 4px;
+        .top-wrap {
+            height: 50px;
+            line-height: 50px;
+            border-bottom: 1px solid #E5E5E5;
+            .title {
+                color: #FF9641;
+            }
+        }
+        .content {
+            padding: 20px 0;
+            .content-item {
+                padding: 4px 0;
+                .desc {
+                    color: #FF9641;
+                }
+            }
+        }
+        .bottom-action {
+            height: 40px;
+            line-height: 40px;
+            display: flex;
+            border-top: 1px solid #E5E5E5;
+            .action-item+.action-item {
+                // border-left: 1px solid #ccc;
+            }
+            .action-item {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    }
+}

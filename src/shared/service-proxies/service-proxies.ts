@@ -74,6 +74,54 @@ export class AccountServiceProxy {
     }
 
     /**
+     * 租户是否存在
+     * @return Success
+     */
+    isTenantNameExist(input: IsTenantAvailableInput): Observable<boolean> {
+        let url_ = this.baseUrl + "/api/services/app/Account/IsTenantNameExist";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processIsTenantNameExist(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processIsTenantNameExist(response));
+                } catch (e) {
+                    return <Observable<boolean>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<boolean>><any>Observable.throw(response);
+        });
+    }
+
+    protected processIsTenantNameExist(response: Response): boolean {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: boolean = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : null;
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
      * 注册
      * @return Success
      */
@@ -1510,6 +1558,54 @@ export class FileServiceProxy {
 
         if (status === 200) {
             return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 云存储回调
+     * @return Success
+     */
+    uploadPictureCallBack(input: UploadPictureInput): Observable<UploadPictureOutput> {
+        let url_ = this.baseUrl + "/api/services/app/File/UploadPictureCallBack";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processUploadPictureCallBack(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processUploadPictureCallBack(response));
+                } catch (e) {
+                    return <Observable<UploadPictureOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<UploadPictureOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processUploadPictureCallBack(response: Response): UploadPictureOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: UploadPictureOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? UploadPictureOutput.fromJS(resultData200) : new UploadPictureOutput();
+            return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -4467,54 +4563,6 @@ export class PictureServiceProxy {
     }
 
     /**
-     * 云存储回调
-     * @return Success
-     */
-    uploadloadCallBack(input: CreateOrUpdatePictureInput): Observable<UploadCallBackOutput> {
-        let url_ = this.baseUrl + "/api/services/app/Picture/UploadloadCallBack";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processUploadloadCallBack(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processUploadloadCallBack(response));
-                } catch (e) {
-                    return <Observable<UploadCallBackOutput>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<UploadCallBackOutput>><any>Observable.throw(response);
-        });
-    }
-
-    protected processUploadloadCallBack(response: Response): UploadCallBackOutput {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: UploadCallBackOutput = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? UploadCallBackOutput.fromJS(resultData200) : new UploadCallBackOutput();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
      * 创建或更新图片
      * @return Success
      */
@@ -5962,19 +6010,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
+     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -8901,25 +8949,19 @@ export class IsTenantAvailableOutput {
 export class RegisterInput {
     /** 名称 */
     name: string;
-    /** 姓氏 */
-    surname: string;
-    /** 用户名 */
-    userName: string;
-    /** 邮箱 */
-    emailAddress: string;
+    /** 手机号码 */
+    phoneNumber: string;
+    /** 注册验证码 */
+    registerCode: string;
     /** 密码 */
     password: string;
-    /** 验证码结果 */
-    captchaResponse: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.surname = data["surname"] !== undefined ? data["surname"] : undefined;
-            this.userName = data["userName"] !== undefined ? data["userName"] : undefined;
-            this.emailAddress = data["emailAddress"] !== undefined ? data["emailAddress"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
+            this.registerCode = data["registerCode"] !== undefined ? data["registerCode"] : undefined;
             this.password = data["password"] !== undefined ? data["password"] : undefined;
-            this.captchaResponse = data["captchaResponse"] !== undefined ? data["captchaResponse"] : undefined;
         }
     }
 
@@ -8930,11 +8972,9 @@ export class RegisterInput {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["name"] = this.name !== undefined ? this.name : undefined;
-        data["surname"] = this.surname !== undefined ? this.surname : undefined;
-        data["userName"] = this.userName !== undefined ? this.userName : undefined;
-        data["emailAddress"] = this.emailAddress !== undefined ? this.emailAddress : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
+        data["registerCode"] = this.registerCode !== undefined ? this.registerCode : undefined;
         data["password"] = this.password !== undefined ? this.password : undefined;
-        data["captchaResponse"] = this.captchaResponse !== undefined ? this.captchaResponse : undefined;
         return data; 
     }
 
@@ -10356,6 +10396,82 @@ export class CreateOrUpdateEditionDto {
     clone() {
         const json = this.toJSON();
         return new CreateOrUpdateEditionDto(JSON.parse(json));
+    }
+}
+
+/** 上传图片回调参数 */
+export class UploadPictureInput {
+    /** 名称 */
+    name: string;
+    /** 图片 Key */
+    key: string;
+    /** 创建者id (回调用,必须大于0) */
+    creatorUserId: number;
+    /** 租户Id */
+    tenantId: number;
+    /** 分组Id */
+    groupId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.key = data["key"] !== undefined ? data["key"] : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
+            this.groupId = data["groupId"] !== undefined ? data["groupId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UploadPictureInput {
+        return new UploadPictureInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["key"] = this.key !== undefined ? this.key : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
+        data["groupId"] = this.groupId !== undefined ? this.groupId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UploadPictureInput(JSON.parse(json));
+    }
+}
+
+export class UploadPictureOutput {
+    pictureId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UploadPictureOutput {
+        return new UploadPictureOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UploadPictureOutput(JSON.parse(json));
     }
 }
 
@@ -13669,35 +13785,6 @@ export class CreateOrUpdatePictureInput {
     }
 }
 
-export class UploadCallBackOutput {
-    pictureId: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): UploadCallBackOutput {
-        return new UploadCallBackOutput(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new UploadCallBackOutput(JSON.parse(json));
-    }
-}
-
 export class PictureGroupListDto {
     /** 分组名称 */
     name: string;
@@ -15374,6 +15461,8 @@ export class CreateTenantInput {
     name: string;
     /** 管理员邮箱地址 */
     adminEmailAddress: string;
+    /** 管理员手机号码 */
+    phoneNumber: string;
     /** 管理员密码 */
     adminPassword: string;
     /** 数据库连接字符串 */
@@ -15392,6 +15481,7 @@ export class CreateTenantInput {
             this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.adminEmailAddress = data["adminEmailAddress"] !== undefined ? data["adminEmailAddress"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
             this.adminPassword = data["adminPassword"] !== undefined ? data["adminPassword"] : undefined;
             this.connectionString = data["connectionString"] !== undefined ? data["connectionString"] : undefined;
             this.shouldChangePasswordOnNextLogin = data["shouldChangePasswordOnNextLogin"] !== undefined ? data["shouldChangePasswordOnNextLogin"] : undefined;
@@ -15410,6 +15500,7 @@ export class CreateTenantInput {
         data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["adminEmailAddress"] = this.adminEmailAddress !== undefined ? this.adminEmailAddress : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
         data["adminPassword"] = this.adminPassword !== undefined ? this.adminPassword : undefined;
         data["connectionString"] = this.connectionString !== undefined ? this.connectionString : undefined;
         data["shouldChangePasswordOnNextLogin"] = this.shouldChangePasswordOnNextLogin !== undefined ? this.shouldChangePasswordOnNextLogin : undefined;
@@ -15699,21 +15790,21 @@ export class GetMemberActivityOutput {
 export class RegisterTenantInput {
     /** 租户名称 */
     tenancyName: string;
-    /** 名称 */
-    name: string;
-    /** 管理员邮箱 */
-    adminEmailAddress: string;
+    /** 手机号码 */
+    phoneNumber: string;
+    /** 注册验证码 */
+    registerCode: string;
     /** 管理员密码 */
-    adminPassword: string;
+    password: string;
     /** 验证码结果 */
     captchaResponse: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
-            this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.adminEmailAddress = data["adminEmailAddress"] !== undefined ? data["adminEmailAddress"] : undefined;
-            this.adminPassword = data["adminPassword"] !== undefined ? data["adminPassword"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
+            this.registerCode = data["registerCode"] !== undefined ? data["registerCode"] : undefined;
+            this.password = data["password"] !== undefined ? data["password"] : undefined;
             this.captchaResponse = data["captchaResponse"] !== undefined ? data["captchaResponse"] : undefined;
         }
     }
@@ -15725,9 +15816,9 @@ export class RegisterTenantInput {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
-        data["name"] = this.name !== undefined ? this.name : undefined;
-        data["adminEmailAddress"] = this.adminEmailAddress !== undefined ? this.adminEmailAddress : undefined;
-        data["adminPassword"] = this.adminPassword !== undefined ? this.adminPassword : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
+        data["registerCode"] = this.registerCode !== undefined ? this.registerCode : undefined;
+        data["password"] = this.password !== undefined ? this.password : undefined;
         data["captchaResponse"] = this.captchaResponse !== undefined ? this.captchaResponse : undefined;
         return data; 
     }
@@ -16019,6 +16110,8 @@ export class AuthenticateResultModel {
     passwordResetCode: string;
     /** 用户Id */
     userId: number;
+    /** 租户Id */
+    tenantId: number;
     /** 需要双重验证 */
     requiresTwoFactorVerification: boolean;
     /** 双重认证供应商 */
@@ -16034,6 +16127,7 @@ export class AuthenticateResultModel {
             this.shouldResetPassword = data["shouldResetPassword"] !== undefined ? data["shouldResetPassword"] : undefined;
             this.passwordResetCode = data["passwordResetCode"] !== undefined ? data["passwordResetCode"] : undefined;
             this.userId = data["userId"] !== undefined ? data["userId"] : undefined;
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
             this.requiresTwoFactorVerification = data["requiresTwoFactorVerification"] !== undefined ? data["requiresTwoFactorVerification"] : undefined;
             if (data["twoFactorAuthProviders"] && data["twoFactorAuthProviders"].constructor === Array) {
                 this.twoFactorAuthProviders = [];
@@ -16056,6 +16150,7 @@ export class AuthenticateResultModel {
         data["shouldResetPassword"] = this.shouldResetPassword !== undefined ? this.shouldResetPassword : undefined;
         data["passwordResetCode"] = this.passwordResetCode !== undefined ? this.passwordResetCode : undefined;
         data["userId"] = this.userId !== undefined ? this.userId : undefined;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
         data["requiresTwoFactorVerification"] = this.requiresTwoFactorVerification !== undefined ? this.requiresTwoFactorVerification : undefined;
         if (this.twoFactorAuthProviders && this.twoFactorAuthProviders.constructor === Array) {
             data["twoFactorAuthProviders"] = [];

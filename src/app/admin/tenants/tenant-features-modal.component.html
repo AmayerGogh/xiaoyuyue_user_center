@@ -1,5 +1,0 @@
-﻿<form #editTenantFeaturesForm="ngForm" name="editTenantFeaturesForm" role="form" novalidate class="form-validation" (submit)="save()" *ngIf="active">
-    <feature-tree #featureTree></feature-tree>
-
-    <button type="button" [disabled]="saving" [buttonBusy]="resettingFeatures" [busyText]="l('SavingWithThreeDot')" class="btn btn-default red" (click)="resetFeatures()" [tooltipHtml]="l('ResetFeaturesTooltip')" placement="top" container="body"><i class="fa fa-refresh"></i><span>{{l("ResetSpecialFeatures")}}</span></button>
-</form>
