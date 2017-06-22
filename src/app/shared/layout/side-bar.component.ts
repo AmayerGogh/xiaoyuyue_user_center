@@ -23,7 +23,7 @@ export class SideBarComponent extends AppComponentBase {
 
     menu: SideBarMenu = new SideBarMenu("MainMenu", "MainMenu", [
         new SideBarMenuItem("UserCenter.Menu.UserData", this.adminPermissions.tenantDashboard, "vapps-icon-dc-menu", "/app/main/dashboard"),
-        new SideBarMenuItem("UserCenter.Menu.ManageBooking", this.adminPermissions.userManage, "vapps-icon-bm-menu", "", [
+        new SideBarMenuItem("UserCenter.Menu.ManageBooking", "", "vapps-icon-bm-menu", "", [
             new SideBarMenuItem("UserCenter.Menu.ManageBooking.List", "", "", "/app/admin/booking"),
             // new SideBarMenuItem("UserCenter.Menu.ManageYuyue.ResponderList", this.adminPermissions.userManage_Tenants, "", "/app/admin/tenants"),
             // new SideBarMenuItem("Roles", this.adminPermissions.userManage_Roles, "icon-briefcase", "/app/admin/roles"),
