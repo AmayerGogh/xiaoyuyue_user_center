@@ -1,8 +1,30 @@
 <div [@routerTransition]>
-<form #loginForm="ngForm" method="post">
-    <div class="login-wrap">
-    </div>
-</form>
+    <form #loginForm="ngForm" method="post">
+        <div class="login-wrap box-shadow">
+            <div class="logo-wrap">
+                <img src="../../assets/common/images/login/logo-x2.png" width="40px" alt="logo">
+            </div>
+
+            <div class="login-body">
+                <div class="form-item">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input id="userName" class="form-control" type="text" autocomplete="off" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required maxlength="256" maxlength="32" [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
+                        <label for="userName">{{l("UserName")}}/手机号/邮箱</label>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input id="password" class="form-control" type="password" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
+                        <label for="password">{{l("Password")}}</label>
+                    </div>
+                </div>
+                <div class="btn btn-block login-btn-wrap" (click)="login()">
+                    {{l("LogIn")}}
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 
 <!--<div [@routerTransition]>

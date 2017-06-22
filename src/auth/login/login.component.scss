@@ -1,0 +1,29 @@
+.login-wrap {
+    width: calc(100% - 60px);
+    position: relative;
+    margin: 100px auto 0;
+    padding: 60px 30px 30px;
+    background-color: #FFF;
+    .logo-wrap {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #E5E5E5;
+        border-radius: 50%;
+        text-align: center;
+    }
+    .login-body {
+        .form-item {
+            width: 100%;
+        }
+        .login-btn-wrap {
+            line-height: 40px;
+            background-color: #FF9641;
+            border-radius: 40px;
+        }
+    }
+}
