@@ -1,0 +1,26 @@
+<div class="optimal-booking-time">
+    <div bsModal #optimalBookingTimeModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel" aria-hidden="true" [config]="{backdrop: 'static'}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title row">
+                        最佳预约时间
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>根据目前预约的情况,给您推荐最佳预约时间</p>
+                    <p>10:00-11:00</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-submit btn-block" (click)="confirmBookingTime()">选择</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <xiaoyuyue-reply-booking-model #replyBookingModel></xiaoyuyue-reply-booking-model>
+</div>

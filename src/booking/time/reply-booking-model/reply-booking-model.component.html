@@ -1,0 +1,54 @@
+<div class="reply-booking">
+    <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel" aria-hidden="true" [config]="{backdrop: 'static'}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form #relpyBookingFrom="ngForm">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group form-md-line-input form-md-floating-label">
+                                    <input id="name" class="form-control" type="text" autocomplete="off">
+                                    <label for="name">姓名</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group form-md-line-input form-md-floating-label">
+                                    <input id="bookingTime" class="form-control" type="text" autocomplete="off">
+                                    <label for="bookingTime">预约时间</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group form-md-line-input form-md-floating-label">
+                                    <input id="phoneNum" class="form-control" type="text" autocomplete="off">
+                                    <label for="phoneNum">手机号</label>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="form-group form-md-line-input form-md-floating-label">
+                                    <input id="subscriberNum" class="form-control" type="number" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-submit btn-block" (click)="save()">应约</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

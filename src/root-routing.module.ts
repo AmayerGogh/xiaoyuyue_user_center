@@ -9,8 +9,8 @@ const routes: Routes = [
     //     data: { preload: true }
     // },
     {
-    path: 'mobile',
-    loadChildren: 'booking-mobile/booking.module#BookingModule', //Lazy load account module
+    path: 'booking',
+    loadChildren: 'booking/booking.module#BookingModule', //Lazy load account module
     data: { preload: true }
     }    
 ];

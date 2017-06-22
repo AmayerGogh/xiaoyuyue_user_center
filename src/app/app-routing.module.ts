@@ -13,8 +13,8 @@ import { AppComponent } from './app.component';
                 // canActivateChild: [AppRouteGuard],
                 children: [
                     {
-                        path: 'booking',
-                        loadChildren: 'app/booking/booking.module#AdminModule', //Lazy load admin module
+                        path: 'admin',
+                        loadChildren: 'app/admin/admin.module#AdminModule', //Lazy load admin module
                         data: { preload: true }
                     },
                     {

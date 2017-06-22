@@ -1,0 +1,11 @@
+<div class="booking-time" [@routerTransition]>
+    <input class="flatpickr" [(ngModel)]="selectDate">
+    <div *ngIf="availableDateItemData">
+        <div *ngFor="let availableDateItem of availableDateItemData;">
+            <div class="valid-time-wrap clearfix" *ngIf="t(availableDateItem.date) == selectDate">
+                <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxQueueNum<=0}" *ngFor="let time of availableDateItem.times; let index=index" (click)="getBookingItemId(time.id)">{{time.hourOfDay}}</div>
+            </div>
+        </div>
+    </div>
+    <xiaoyuyue-optimal-booking-time-model #optimalBookingTimeModel></xiaoyuyue-optimal-booking-time-model>
+</div>

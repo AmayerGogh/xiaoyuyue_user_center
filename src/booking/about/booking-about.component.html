@@ -1,0 +1,33 @@
+<div class="booking-about" [@routerTransition] *ngIf="businessAboutData">
+    <div class="about-header about-item">
+        <div class="intro-wrap">{{businessAboutData.description}}</div>
+    </div>
+    <div class="about-body about-item">
+        <div class="banner-wrap item">banner区域</div>
+        <div class="video-wrap item">视频区域</div>
+    </div>
+    <div class="about-footer about-item">
+        <div class="address item clearfix">
+            <div class="pull-left">
+                <span class="name">地  址:</span>
+                <span class="desc">{{businessAboutData.outletAddress}}</span>
+            </div>
+            <div class="pull-right"><span class="btn btn-view vapps-icon-app-address"></span></div>
+        </div>
+        <div class="contact item clearfix">
+            <div class="pull-left">
+                <span class="name">联系人:</span>
+                <span class="desc">{{businessAboutData.contactorName}}</span>
+            </div>
+            <div class="pull-right"><span class="btn btn-view vapps-icon-app-qr-code"></span></div>
+        </div>
+        <div class="phone item clearfix">
+            <div class="pull-left">
+                <span class="name">手  机:</span>
+                <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
+            </div>
+            <div class="pull-right"><span class="btn btn-view vapps-icon-app-phone"></span></div>
+        </div>
+        <div class="ad-wrap">广告招租</div>
+    </div>
+</div>
