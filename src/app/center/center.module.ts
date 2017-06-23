@@ -17,7 +17,6 @@ import { TenantService } from "shared/services/tenant.service";
 
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
-import { DatePickerModule, DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { AdminRoutingModule } from "app/center/center-routing.module";
 import { CenterComponent } from "app/center/center.component";
@@ -46,9 +45,6 @@ import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
         ButtonsModule,
         SharedModule,
         DialogModule,
-
-        DatePickerModule,
-        DateInputsModule,
     ],
     declarations: [
         CenterComponent,

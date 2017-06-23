@@ -27,7 +27,7 @@ export class ReplyBookingModelComponent implements OnInit {
 
   save(input: JoinBookingInput) {
 
-    this._bookingServiceProxy
+    // this._bookingServiceProxy
       // .joinBooking(this.input)
       //   .subscribe();
 
