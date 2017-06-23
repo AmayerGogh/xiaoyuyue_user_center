@@ -16,16 +16,17 @@ import { GetUserForEdit } from "shared/services/get-user-info.service";
 import { TenantService } from "shared/services/tenant.service";
 
 import { DialogModule } from '@progress/kendo-angular-dialog';
-import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
+import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy, PersonBookingServiceProxy } from 'shared/service-proxies/service-proxies';
 import { DatePickerModule, DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { BookingManageComponent } from './booking-manage/booking-manage.component';
-import { BookingEditComponent } from './booking-edit/booking-edit.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AdminRoutingModule } from "app/admin/admin-routing.module";
 import { SideBarComponent } from "app/admin/layout/side-bar/side-bar.component";
 import { AdminComponent } from "app/admin/admin.component";
+import { BookingDetailComponent } from './booking-detail/booking-detial.component';
+import { CancelBookingModalComponent } from './cancel-booking-modal/cancel-booking-modal.component';
 
 @NgModule({
     imports: [
@@ -54,10 +55,11 @@ import { AdminComponent } from "app/admin/admin.component";
     declarations: [
         AdminComponent,
         BookingManageComponent,
-        BookingEditComponent,
+        BookingDetailComponent,
         HeaderComponent,
         FooterComponent,
-        SideBarComponent
+        SideBarComponent,
+        CancelBookingModalComponent
     ],
     providers: [
         AppStorageService,
@@ -67,7 +69,8 @@ import { AdminComponent } from "app/admin/admin.component";
         SMSTemplateServiceProxy,
         OrganizationBookingServiceProxy,
         PictureServiceProxy,
-        OutletServiceServiceProxy
+        OutletServiceServiceProxy,
+        PersonBookingServiceProxy
     ]
 })
 export class AdminModule { }

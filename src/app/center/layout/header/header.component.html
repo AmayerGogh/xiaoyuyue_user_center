@@ -1,16 +1,16 @@
 <div class="header">
-    <span class="vapps-icon-app-back-left back-icon pull-left"></span>
+    <span class="vapps-icon-app-back-left back-icon pull-left" (click)="back()"></span>
     <span class="vapps-icon-app-menu menu-icon pull-right" (click)="showSideBar()"></span>
 
     <div class="header-bg">
         <div class="content">
-            <img class="avatar" src="/assets/common/images/default-profile-picture.png" width="60px" alt="avatar">
-            <div class="username">张旭</div>
+            <img class="avatar" [src]="profilePicture" width="60px" alt="avatar">
+            <div class="username">{{shownLoginName}}</div>
         </div>
     </div>
     <div class="menu-wrap">
         <div class="menu-item">
-            <a class="item" routerLink="/app/booking">
+            <a class="item" routerLink="/app/admin/manage">
                 <span class="vapps-icon vapps-icon-app-user-manage"></span>
                 <span class="name">应约管理</span>
             </a>

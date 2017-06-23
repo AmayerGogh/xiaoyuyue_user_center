@@ -1,10 +1,10 @@
-<div class="booking-edit">
+<div class="booking-edit" *ngIf="bookingOrderForEdidData">
     <div class="tenant-wrap box-shadow">
         <div class="tenant-bg-wrap"><img src="/assets/common/images/booking/tenant-bg.png" width="100%" alt="tenant-bg"></div>
         <div class="tenant-info">
-            <div class="name">机构名称及门店</div>
+            <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}}{{bookingOrderForEdidData.bookingInfo.outletName}}</div>
             <div class="contact clearfix">
-                <span class="pull-left"><span class="vapps-icon-app-contact"></span>李先生 15800158000</span>
+                <span class="pull-left"><span class="vapps-icon-app-contact"></span>{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
                 <span class="pull-right"><span class="vapps-icon vapps-icon-app-qr-code"></span></span>
             </div>
         </div>
@@ -12,7 +12,7 @@
 
     <div class="address-wrap box-shadow">
         <div class="left">
-            <span class="vapps-icon-app-location"></span> 广东省广州市番禺区番禺大道北节能科技园产业大厦
+            <span class="vapps-icon-app-location"></span> {{bookingOrderForEdidData.bookingInfo.outletAddress}}
         </div>
         <div class="right">
             <span class="vapps-icon vapps-icon-app-phone"></span>
@@ -27,19 +27,19 @@
             <div class="content">
                 <div class="content-item">
                     <span class="name">项目名称:</span>
-                    <span class="desc">项目名称</span>
+                    <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
                 </div>
                 <div class="content-item">
                     <span class="name">预约时间</span>
-                    <span class="desc">2017-06-12 09:00-12:00</span>
+                    <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingData}}</span>
                 </div>
                 <div class="content-item">
                     <span class="name">应约人数</span>
-                    <span class="desc">2</span>
+                    <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
                 </div>
                 <div class="content-item">
                     <span class="name">温馨提示</span>
-                    <span class="desc">提示提示提示提示提示提示提示提示提示提示</span>
+                    <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
                 </div>
             </div>
         </div>
@@ -53,11 +53,11 @@
             <div class="content">
                 <div class="content-item">
                     <span class="name">姓名:</span>
-                    <span class="desc">刘先生</span>
+                    <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
                 </div>
                 <div class="content-item">
                     <span class="name">联系方式</span>
-                    <span class="desc">15800158000</span>
+                    <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
                 </div>
             </div>
         </div>

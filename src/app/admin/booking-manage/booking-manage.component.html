@@ -1,89 +1,32 @@
-<div class="booking-manage">
-    <div class="booking-item box-shadow">
+<div class="booking-manage" *ngIf="personBookingDatas">
+    <div class="booking-item box-shadow" *ngFor="let dataItem of personBookingDatas">
         <div class="top-wrap clearfix">
-            <div class="title pull-left">项目名称</div>
+            <div class="title pull-left">{{dataItem.bookingName}}</div>
             <div class="icon pull-right"><span class="vapps-icon-app-to-top"></span></div>
         </div>
         <div class="content">
             <div class="content-item">
                 <span class="name">预约机构: </span>
-                <span class="desc">机构名称及门店</span>
+                <span class="desc">{{dataItem.bookingName}}{{dataItem.outletName}}</span>
             </div>
             <div class="content-item">
                 <span class="name">预约时间: </span>
-                <span class="desc">2017-06-12 09:00-12:00</span>
+                <span class="desc">{{t(dataItem.bookingDate)}}</span>
             </div>
             <div class="content-item">
                 <span class="name">预约电话: </span>
-                <span class="desc">15800158000</span>
+                <span class="desc">{{dataItem.phoneNum}}</span>
             </div>
             <div class="content-item">
                 <span class="name">应约人数: </span>
-                <span class="desc">50</span>
+                <span class="desc">{{dataItem.bookingNum}}</span>
             </div>
         </div>
         <div class="bottom-action">
-            <span class="action-item"><a routerLink="/app/booking/detail">查看详情</a></span>|
-            <span class="action-item">取消预约</span>|
-            <span class="action-item">置顶预约</span>
+            <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a>查看详情</a></span>|
+            <span class="action-item" (click)="cancelBooking(dataItem.id)">取消预约</span>|
+            <span class="action-item" (click)="skickBooking()">置顶预约</span>
         </div>
     </div>
-    <div class="booking-item box-shadow">
-        <div class="top-wrap clearfix">
-            <div class="title pull-left">项目名称</div>
-            <div class="icon pull-right"><span class="vapps-icon-app-to-top"></span></div>
-        </div>
-        <div class="content">
-            <div class="content-item">
-                <span class="name">预约机构: </span>
-                <span class="desc">机构名称及门店</span>
-            </div>
-            <div class="content-item">
-                <span class="name">预约时间: </span>
-                <span class="desc">2017-06-12 09:00-12:00</span>
-            </div>
-            <div class="content-item">
-                <span class="name">预约电话: </span>
-                <span class="desc">15800158000</span>
-            </div>
-            <div class="content-item">
-                <span class="name">应约人数: </span>
-                <span class="desc">50</span>
-            </div>
-        </div>
-        <div class="bottom-action">
-            <span class="action-item"><a routerLink="/app/booking/detail">查看详情</a></span>|
-            <span class="action-item">取消预约</span>|
-            <span class="action-item">置顶预约</span>
-        </div>
-    </div>
-    <div class="booking-item box-shadow">
-        <div class="top-wrap clearfix">
-            <div class="title pull-left">项目名称</div>
-            <div class="icon pull-right"><span class="vapps-icon-app-to-top"></span></div>
-        </div>
-        <div class="content">
-            <div class="content-item">
-                <span class="name">预约机构: </span>
-                <span class="desc">机构名称及门店</span>
-            </div>
-            <div class="content-item">
-                <span class="name">预约时间: </span>
-                <span class="desc">2017-06-12 09:00-12:00</span>
-            </div>
-            <div class="content-item">
-                <span class="name">预约电话: </span>
-                <span class="desc">15800158000</span>
-            </div>
-            <div class="content-item">
-                <span class="name">应约人数: </span>
-                <span class="desc">50</span>
-            </div>
-        </div>
-        <div class="bottom-action">
-            <span class="action-item"><a routerLink="/app/booking/detail">查看详情</a></span>|
-            <span class="action-item">取消预约</span>|
-            <span class="action-item">置顶预约</span>
-        </div>
-    </div>
+    <xiaoyuyue-cancel-booking-modal #cancelBookingModal></xiaoyuyue-cancel-booking-modal>
 </div>

@@ -24,6 +24,7 @@ import { CenterComponent } from "app/center/center.component";
 import { MainUserComponent } from "app/center/main-user/main-user.component";
 import { HeaderComponent } from './layout/header/header.component';
 import { SideBarComponent } from "app/center/layout/side-bar/side-bar.component";
+import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @NgModule({
     imports: [
@@ -57,6 +58,7 @@ import { SideBarComponent } from "app/center/layout/side-bar/side-bar.component"
     ],
     providers: [
         AppStorageService,
+        ProfileServiceProxy,
         HostSettingService,
         GetUserForEdit,
         TenantService,

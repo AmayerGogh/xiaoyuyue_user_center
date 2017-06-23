@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'xiaoyuyue-header',
@@ -9,7 +10,9 @@ export class HeaderComponent implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
   toggleSideBarFlag: boolean = false;
 
-  constructor() { }
+  constructor(
+    private _location: Location
+  ) { }
 
   ngOnInit() {
   }
@@ -17,6 +20,10 @@ export class HeaderComponent implements OnInit {
   showSideBar() {
     this.toggleSideBarFlag = true;
     this.toggleFlag.emit(this.toggleSideBarFlag);
+  }
+
+  back() {
+    this._location.back();
   }
 
 }

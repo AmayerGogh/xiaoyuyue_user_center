@@ -1,0 +1,39 @@
+<div class="cancel-booking">
+    <div bsModal #cancelBookingModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cancelBookingModel" aria-hidden="true" [config]="{backdrop: 'static'}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" (click)="close()" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title row">
+                        请选择取消预约的理由
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="refuse-reason-wrap">
+                        <div class="refuse-reason-item">
+                            <label for="choose_1">我不想参加了</label>
+                            <input type="radio" id="choose_1" name="refuseReason" value="我不想参加了" [(ngModel)]="input.refuseReason">
+                        </div>
+                        <div class="refuse-reason-item">
+                            <label for="choose_2">信息填写错误,重新预约</label>
+                            <input type="radio" id="choose_2" name="refuseReason" value="信息填写错误,重新预约" [(ngModel)]="input.refuseReason">
+                        </div>
+                        <div class="refuse-reason-item">
+                            <label for="choose_3">时间与其他项目冲突</label>
+                            <input type="radio" id="choose_3" name="refuseReason" value="时间与其他项目冲突" [(ngModel)]="input.refuseReason">
+                        </div>
+                        <div class="refuse-reason-item">
+                            <textarea rows="" cols=""></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-block btn-submit" (click)="submit()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,10 @@ export class SideBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    let self = this;
+    $(".menu-item").click(() => {
+      self.hideSideBar();
+    })
   }
   showSideBar() {
     this.sideBarEle.nativeElement.style.display = "block";
