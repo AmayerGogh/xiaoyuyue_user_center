@@ -12,6 +12,7 @@ import { CommonModule } from '@shared/common/common.module';
 import { TenantChangeComponent } from './shared/tenant-change.component';
 import { TenantChangeModalComponent } from './shared/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
+import { LoadingComponent } from './loading/loading.component';
 import { RegisterComponent } from './register/register.component';
 import { RegisterTenantComponent } from './register/register-tenant.component';
 import { RegisterTenantResultComponent } from './register/register-tenant-result.component';
@@ -57,6 +58,7 @@ import { BackgroundImgComponent } from "auth/layout/background-img/background-im
         TenantChangeComponent,
         TenantChangeModalComponent,
         LoginComponent,
+        LoadingComponent,
         RegisterComponent,
         RegisterTenantComponent,
         RegisterTenantResultComponent,

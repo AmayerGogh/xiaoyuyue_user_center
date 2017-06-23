@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Component({
   selector: 'xiaoyuyue-side-bar',
@@ -7,7 +8,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
-  constructor() { }
+  constructor(
+        private _authService: AppAuthService
+  ) { }
 
   ngOnInit() {
   }
@@ -17,6 +20,9 @@ export class SideBarComponent implements OnInit {
 
   hideSideBar() {
     this.sideBarEle.nativeElement.style.display = "none";
+  }
+  layout() {
+    this._authService.logout();
   }
 
 }

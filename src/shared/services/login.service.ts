@@ -22,6 +22,7 @@ export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
     static readonly GOOGLE: string = 'Google';
     static readonly MICROSOFT: string = 'Microsoft';
     static readonly WECHAT: string = 'WeChat';
+    static readonly WECHATMP: string = 'WeChatMP';
 
     icon: string;
     initialized = false;
@@ -305,7 +306,7 @@ export class LoginService {
 
     private wechatLogin(params: Params) {
         var model = new ExternalAuthenticateModel();
-        model.authProvider = ExternalLoginProvider.WECHAT;
+        model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
         this.externalAuthenticateAsync(model).then((result: ExternalAuthenticateResultModel) => {

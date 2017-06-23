@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-// import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
+import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
                 path: 'app',
-                // component: AppComponent,
-                // canActivate: [AppRouteGuard],
-                // canActivateChild: [AppRouteGuard],
+                canActivate: [AppRouteGuard],
+                canActivateChild: [AppRouteGuard],
                 children: [
                     {
                         path: 'admin',

@@ -1,8 +1,11 @@
 .loading {
+    height: 100%;
     text-align: center;
     position: relative;
     .wrap {
         position: absolute;
-        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
