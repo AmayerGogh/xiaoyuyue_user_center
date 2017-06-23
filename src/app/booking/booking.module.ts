@@ -17,7 +17,6 @@ import { TenantService } from "shared/services/tenant.service";
 
 import { DialogModule } from '@progress/kendo-angular-dialog';
 import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
-import { DatePickerModule, DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { BookingManageComponent } from './booking-manage/booking-manage.component';
 import { BookingEditComponent } from './booking-edit/booking-edit.component';
@@ -47,9 +46,6 @@ import { SideBarComponent } from "app/booking/layout/side-bar/side-bar.component
         ButtonsModule,
         SharedModule,
         DialogModule,
-
-        DatePickerModule,
-        DateInputsModule,
     ],
     declarations: [
         BookingComponent,
