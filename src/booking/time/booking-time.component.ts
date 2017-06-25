@@ -53,7 +53,8 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
           "locale": "zh",
           enable: self.enableBookingDate,
           onChange: function (selectedDates, dateStr, instance) {
-            self.input.date = selectedDates;
+            self.input.date = moment(new Date(selectedDates));
+            self.optimalBookingTimeModel.show();
             self.optimalBookingTimeModel.save(self.input);
           },
           // enable: ["2017-06-22", "2017-06-23"]

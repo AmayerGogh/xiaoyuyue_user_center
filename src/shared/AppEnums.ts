@@ -1,4 +1,4 @@
-﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, FriendDtoState, DefaultTimezoneScope, UserNotificationState, IsTenantAvailableOutputState, CodeSendInputCodeType } from '@shared/service-proxies/service-proxies';
+﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, FriendDtoState, DefaultTimezoneScope, UserNotificationState, IsTenantAvailableOutputState, CodeSendInputCodeType, Status } from '@shared/service-proxies/service-proxies';
 
 export class AppChatMessageReadState {
     static Unread: number = ChatMessageDtoReadState._1;
@@ -46,4 +46,12 @@ export class VerificationCodeType {
     static ChangeEmail: number =  CodeSendInputCodeType._40;
     static PhoneBinding: number =  CodeSendInputCodeType._50;
     static PhoneVerify: number =  CodeSendInputCodeType._60;
+}
+
+export class AppStatus {
+    static State1: number = Status._1;
+    static State2: number = Status._2;
+    static State3: number = Status._3;
+    static State4: number = Status._4;
+    static State5: number = Status._5;
 }

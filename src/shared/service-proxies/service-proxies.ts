@@ -3979,8 +3979,8 @@ export class OutletServiceServiceProxy {
      * 获取门店详情
      * @return Success
      */
-    getBookingForEdit(id: number): Observable<GetOutletForEditDto> {
-        let url_ = this.baseUrl + "/api/services/app/OutletService/GetBookingForEdit?";
+    getOutletForEdit(id: number): Observable<GetOutletForEditDto> {
+        let url_ = this.baseUrl + "/api/services/app/OutletService/GetOutletForEdit?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
@@ -3997,11 +3997,11 @@ export class OutletServiceServiceProxy {
         };
 
         return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookingForEdit(response);
+            return this.processGetOutletForEdit(response);
         }).catch((response: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processGetBookingForEdit(response));
+                    return Observable.of(this.processGetOutletForEdit(response));
                 } catch (e) {
                     return <Observable<GetOutletForEditDto>><any>Observable.throw(e);
                 }
@@ -4010,7 +4010,7 @@ export class OutletServiceServiceProxy {
         });
     }
 
-    protected processGetBookingForEdit(response: Response): GetOutletForEditDto {
+    protected processGetOutletForEdit(response: Response): GetOutletForEditDto {
         const responseText = response.text();
         const status = response.status; 
 
@@ -4530,16 +4530,20 @@ export class PersonBookingServiceProxy {
     }
 
     /**
-     * 获取所有预约
+     * 获取所有预约订单
+     * @bookingName 预约名称
+     * @status 预约状态
      * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
      * @return Success
      */
-    getBookingOrders(bookingName: string, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfPersonBookingOrderListDto> {
+    getBookingOrders(bookingName: string, status: Status[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfPersonBookingOrderListDto> {
         let url_ = this.baseUrl + "/api/services/app/PersonBooking/GetBookingOrders?";
         if (bookingName !== undefined)
             url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
+        if (status !== undefined)
+            status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
@@ -4589,7 +4593,7 @@ export class PersonBookingServiceProxy {
     }
 
     /**
-     * 获取预约订单
+     * 获取预约订单详情
      * @return Success
      */
     getBookingOrderForEdit(id: number): Observable<GetPersonBookingOrderOutput> {
@@ -4672,6 +4676,51 @@ export class PersonBookingServiceProxy {
     }
 
     protected processCancelBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 置顶预约订单
+     * @return Success
+     */
+    stickedBookingOrder(input: StickedInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/PersonBooking/StickedBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processStickedBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processStickedBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processStickedBookingOrder(response: Response): void {
         const responseText = response.text();
         const status = response.status; 
 
@@ -5398,7 +5447,7 @@ export class ProfileServiceProxy {
      * @tenantId 租户Id
      * @return Success
      */
-    getFriendProfilePictureById(profilePictureId: string, userId: number, tenantId: number): Observable<GetProfilePictureOutput> {
+    getFriendProfilePictureById(profilePictureId: number, userId: number, tenantId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetFriendProfilePictureById?";
         if (profilePictureId !== undefined)
             url_ += "ProfilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
@@ -5453,7 +5502,7 @@ export class ProfileServiceProxy {
      * @profilePictureId 头像文件Id
      * @return Success
      */
-    getProfilePictureById(profilePictureId: string): Observable<GetProfilePictureOutput> {
+    getProfilePictureById(profilePictureId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetProfilePictureById?";
         if (profilePictureId !== undefined)
             url_ += "profilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
@@ -6305,19 +6354,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
+     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -9985,9 +10034,9 @@ export class JoinBookingTimeInfo {
     /** 时间 */
     hourOfDay: string;
     /** 最大可预约人数 */
-    maxBookingNum: string;
+    maxBookingNum: number;
     /** 最大可排队人数 */
-    maxQueueNum: string;
+    maxQueueNum: number;
     id: number;
 
     constructor(data?: any) {
@@ -10265,7 +10314,7 @@ export class FriendDto {
     friendTenantId: number;
     friendUserName: string;
     friendTenancyName: string;
-    friendProfilePictureId: string;
+    friendProfilePictureId: number;
     unreadMessageCount: number;
     isOnline: boolean;
     state: FriendDtoState;
@@ -11822,6 +11871,8 @@ export class ExternalAuthenticationProviderEditDto {
     appId: string;
     /** App secret */
     appSecret: string;
+    /** 在登录页面显示 */
+    showOnLoginPage: boolean;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -11829,6 +11880,7 @@ export class ExternalAuthenticationProviderEditDto {
             this.isEnabled = data["isEnabled"] !== undefined ? data["isEnabled"] : undefined;
             this.appId = data["appId"] !== undefined ? data["appId"] : undefined;
             this.appSecret = data["appSecret"] !== undefined ? data["appSecret"] : undefined;
+            this.showOnLoginPage = data["showOnLoginPage"] !== undefined ? data["showOnLoginPage"] : undefined;
         }
     }
 
@@ -11842,6 +11894,7 @@ export class ExternalAuthenticationProviderEditDto {
         data["isEnabled"] = this.isEnabled !== undefined ? this.isEnabled : undefined;
         data["appId"] = this.appId !== undefined ? this.appId : undefined;
         data["appSecret"] = this.appSecret !== undefined ? this.appSecret : undefined;
+        data["showOnLoginPage"] = this.showOnLoginPage !== undefined ? this.showOnLoginPage : undefined;
         return data; 
     }
 
@@ -13643,7 +13696,7 @@ export class OrganizationUnitUserListDto {
     surname: string;
     userName: string;
     emailAddress: string;
-    profilePictureId: string;
+    profilePictureId: number;
     addedTime: moment.Moment;
     id: number;
 
@@ -14311,6 +14364,8 @@ export class PersonBookingOrderListDto {
     status: PersonBookingOrderListDtoStatus;
     /** 手机号码 */
     phoneNum: string;
+    /** 置顶 */
+    sticked: boolean;
     id: number;
 
     constructor(data?: any) {
@@ -14321,6 +14376,7 @@ export class PersonBookingOrderListDto {
             this.bookingNum = data["bookingNum"] !== undefined ? data["bookingNum"] : undefined;
             this.status = data["status"] !== undefined ? data["status"] : undefined;
             this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
+            this.sticked = data["sticked"] !== undefined ? data["sticked"] : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
@@ -14337,6 +14393,7 @@ export class PersonBookingOrderListDto {
         data["bookingNum"] = this.bookingNum !== undefined ? this.bookingNum : undefined;
         data["status"] = this.status !== undefined ? this.status : undefined;
         data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
+        data["sticked"] = this.sticked !== undefined ? this.sticked : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -14543,6 +14600,39 @@ export class CancelBookingOrderInput {
     clone() {
         const json = this.toJSON();
         return new CancelBookingOrderInput(JSON.parse(json));
+    }
+}
+
+export class StickedInput {
+    /** 置顶/取消 */
+    sticked: boolean;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.sticked = data["sticked"] !== undefined ? data["sticked"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): StickedInput {
+        return new StickedInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["sticked"] = this.sticked !== undefined ? this.sticked : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new StickedInput(JSON.parse(json));
     }
 }
 
@@ -14882,24 +14972,12 @@ export class ChangePasswordInput {
 }
 
 export class UpdateProfilePictureInput {
-    /** 文件名 */
-    fileName: string;
-    /** X 轴 */
-    x: number;
-    /** Y轴 */
-    y: number;
-    /** 宽度 */
-    width: number;
-    /** 高度 */
-    height: number;
+    /** ͼƬId */
+    pictureId: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
-            this.fileName = data["fileName"] !== undefined ? data["fileName"] : undefined;
-            this.x = data["x"] !== undefined ? data["x"] : undefined;
-            this.y = data["y"] !== undefined ? data["y"] : undefined;
-            this.width = data["width"] !== undefined ? data["width"] : undefined;
-            this.height = data["height"] !== undefined ? data["height"] : undefined;
+            this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
         }
     }
 
@@ -14909,11 +14987,7 @@ export class UpdateProfilePictureInput {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        data["fileName"] = this.fileName !== undefined ? this.fileName : undefined;
-        data["x"] = this.x !== undefined ? this.x : undefined;
-        data["y"] = this.y !== undefined ? this.y : undefined;
-        data["width"] = this.width !== undefined ? this.width : undefined;
-        data["height"] = this.height !== undefined ? this.height : undefined;
+        data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
         return data; 
     }
 
@@ -17218,11 +17292,14 @@ export class ExternalLoginProviderInfoModel {
     name: string;
     /** 客户端Id */
     clientId: string;
+    /** 是否在登录界面显示 */
+    showOnLoginPage: boolean;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.clientId = data["clientId"] !== undefined ? data["clientId"] : undefined;
+            this.showOnLoginPage = data["showOnLoginPage"] !== undefined ? data["showOnLoginPage"] : undefined;
         }
     }
 
@@ -17234,6 +17311,7 @@ export class ExternalLoginProviderInfoModel {
         data = data === undefined ? {} : data;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["clientId"] = this.clientId !== undefined ? this.clientId : undefined;
+        data["showOnLoginPage"] = this.showOnLoginPage !== undefined ? this.showOnLoginPage : undefined;
         return data; 
     }
 
@@ -17286,6 +17364,8 @@ export class ExternalAuthenticateModel {
 }
 
 export class ExternalAuthenticateResultModel {
+    /** 租户Id */
+    tenantId: number;
     /** 用户Id */
     userId: number;
     /** 访问令牌 */
@@ -17301,6 +17381,7 @@ export class ExternalAuthenticateResultModel {
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
             this.userId = data["userId"] !== undefined ? data["userId"] : undefined;
             this.accessToken = data["accessToken"] !== undefined ? data["accessToken"] : undefined;
             this.encryptedAccessToken = data["encryptedAccessToken"] !== undefined ? data["encryptedAccessToken"] : undefined;
@@ -17316,6 +17397,7 @@ export class ExternalAuthenticateResultModel {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
         data["userId"] = this.userId !== undefined ? this.userId : undefined;
         data["accessToken"] = this.accessToken !== undefined ? this.accessToken : undefined;
         data["encryptedAccessToken"] = this.encryptedAccessToken !== undefined ? this.encryptedAccessToken : undefined;
@@ -17464,7 +17546,7 @@ export class UserListDto {
     /** 电话号码 */
     phoneNumber: string;
     /** 头像图片Id */
-    profilePictureId: string;
+    profilePictureId: number;
     /** 是否确认邮箱 */
     isEmailConfirmed: boolean;
     /** 角色 */
@@ -17569,7 +17651,7 @@ export class UserListRoleDto {
 
 export class GetUserForEditOutput {
     /** 头像图片Id */
-    profilePictureId: string;
+    profilePictureId: number;
     /** 用户资料 */
     user: UserEditDto;
     /** 角色 */
@@ -18312,11 +18394,20 @@ export enum State {
     _1 = 1, 
 }
 
+export enum Status {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+}
+
 /** 默认时区有效范围 */
 export enum DefaultTimezoneScope {
     _1 = 1, 
     _2 = 2, 
     _4 = 4, 
+    _7 = 7, 
 }
 
 export enum IsTenantAvailableOutputState {
@@ -18362,6 +18453,7 @@ export enum TenantNotificationSeverity {
 export enum PersonBookingOrderListDtoStatus {
     _1 = 1, 
     _2 = 2, 
+    _3 = 3, 
     _4 = 4, 
     _5 = 5, 
 }

@@ -5,6 +5,8 @@ import { AppConsts } from '@shared/AppConsts';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { CancelBookingModalComponent } from '../cancel-booking-modal/cancel-booking-modal.component';
+import { Status } from '@shared/service-proxies/service-proxies';
+import { AppStatus } from "shared/AppEnums";
 
 @Component({
   selector: 'xiaoyuyue-booking-manage',
@@ -12,6 +14,7 @@ import { CancelBookingModalComponent } from '../cancel-booking-modal/cancel-book
   styleUrls: ['./booking-manage.component.scss']
 })
 export class BookingManageComponent extends AppComponentBase implements OnInit {
+  status: Status[] = [AppStatus.State1, AppStatus.State2, AppStatus.State5];
   personBookingDatas: PersonBookingOrderListDto[];
   bookingName: string = "";
   pageSize: number = AppConsts.grid.defaultPageSize;
@@ -46,7 +49,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
     }
 
     this._personBookingServiceProxy
-      .getBookingOrders(this.bookingName, sorting, maxResultCount, skipCount)
+      .getBookingOrders(this.bookingName, this.status , sorting, maxResultCount, skipCount)
       .subscribe(result => {
         this.personBookingDatas = result.items;
       });
