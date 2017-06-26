@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookingSideBarComponent implements OnInit {
 
+  href: string = document.location.href;
+  bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+
   constructor() { }
 
   ngOnInit() {

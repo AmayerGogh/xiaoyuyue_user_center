@@ -179,7 +179,7 @@ export class LoginService {
         }
 
         var initialUrl = UrlHelper.initialUrl;
-        
+
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
             // initialUrl = "http://www.vapps.com.cn";
@@ -318,7 +318,7 @@ export class LoginService {
                 return;
             }
 
-            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds, null, null, redirectUrl);
+            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
         });
     }
 

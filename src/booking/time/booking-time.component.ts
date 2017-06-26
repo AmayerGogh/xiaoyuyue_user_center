@@ -19,7 +19,8 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   selectDate: Date = undefined;
   input: JoinBookingInput = new JoinBookingInput();
 
-  bookingId: number = 41;
+  href: string = document.location.href;
+  bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
   source: string = "";
   availableDateItemData: JoinBookingDataInfo[] = [];
 
