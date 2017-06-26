@@ -85,7 +85,7 @@ ngAfterViewInit(): void {
     // 解决Chrome浏览器自动填充的BUG
     setTimeout(() => {
     $("input:-webkit-autofill").addClass("edited")
-}, 300);
+}, 400);
 
 $(document).click(() => {
     self.flag = true;

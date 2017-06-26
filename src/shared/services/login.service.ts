@@ -159,7 +159,7 @@ export class LoginService {
             accessToken,
             tokenExpireDate
         );
-
+        console.log(tenantId);
         abp.multiTenancy.setTenantIdCookie(tenantId);
 
         this._utilsService.setCookieValue(
@@ -179,7 +179,7 @@ export class LoginService {
         }
 
         var initialUrl = UrlHelper.initialUrl;
-
+        
         if (initialUrl.indexOf('/login') > 0) {
             initialUrl = AppConsts.appBaseUrl;
             // initialUrl = "http://www.vapps.com.cn";
@@ -306,6 +306,7 @@ export class LoginService {
 
     private wechatLogin(params: Params) {
         var model = new ExternalAuthenticateModel();
+        let redirectUrl = AppConsts.appBaseUrl + "/app/center";
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
@@ -317,7 +318,7 @@ export class LoginService {
                 return;
             }
 
-            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds, null, null, redirectUrl);
         });
     }
 
