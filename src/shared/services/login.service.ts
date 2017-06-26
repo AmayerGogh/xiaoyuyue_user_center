@@ -152,7 +152,7 @@ export class LoginService {
     }
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
-
+        // expireInSeconds = 0;
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
@@ -317,7 +317,7 @@ export class LoginService {
                 return;
             }
 
-            // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
         });
     }
 

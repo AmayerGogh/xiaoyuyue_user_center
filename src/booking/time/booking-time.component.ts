@@ -66,5 +66,6 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
 
   getBookingItemId(index) {
     this.selectIndex = index;
+    this.replyBookingModel.show();
   }
 }
