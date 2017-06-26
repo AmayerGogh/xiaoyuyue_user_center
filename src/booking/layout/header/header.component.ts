@@ -7,7 +7,7 @@ import { OrganizationInfoDto, BookingServiceProxy } from 'shared/service-proxies
   styleUrls: ['./header.component.scss']
 })
 export class BookingHeaderComponent implements OnInit {
-  bookingId: number = 40;
+  bookingId: number = 41;
   source: string = "";
   organizationInfoData: OrganizationInfoDto;
   businessData: OrganizationInfoDto;

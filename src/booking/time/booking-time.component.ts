@@ -14,13 +14,14 @@ import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-
   encapsulation: ViewEncapsulation.None
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit {
+  selectIndex: number;
   enableBookingDate: Date[] = [];
   selectDate: Date = undefined;
   input: JoinBookingInput = new JoinBookingInput();
 
-  bookingId: number = 40;
+  bookingId: number = 41;
   source: string = "";
-  availableDateItemData: JoinBookingDataInfo[];
+  availableDateItemData: JoinBookingDataInfo[] = [];
 
   @ViewChild('optimalBookingTimeModel') optimalBookingTimeModel: OptimalBookingTimeModelComponent;
   @ViewChild('replyBookingModel') replyBookingModel: ReplyBookingModelComponent;
@@ -44,12 +45,13 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
       .subscribe(result => {
         this.availableDateItemData = result.availableDateItem;
         // 测试, 如果没有选择时间段,那么就赋值默认的一个id
-        this.input.bookingItemId = this.availableDateItemData[0].times[0].id;
+        this.input.bookingItemId = this.availableDateItemData[0].hasOwnProperty("times") ? this.availableDateItemData[0].times[0].id : 0;
         for (let i = 0; i < result.availableDateItem.length; i++) {
-          this.enableBookingDate.push(result.availableDateItem[i].date.toDate());
+          this.enableBookingDate.push(new Date(result.availableDateItem[i].date.toDate()));
         }
         $(".flatpickr").flatpickr({
           inline: true,
+          minDate: "today",
           "locale": "zh",
           enable: self.enableBookingDate,
           onChange: function (selectedDates, dateStr, instance) {
@@ -62,7 +64,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
       })
   }
 
-  getBookingItemId(id) {
-    this.input.bookingItemId = id;
+  getBookingItemId(index) {
+    this.selectIndex = index;
   }
 }

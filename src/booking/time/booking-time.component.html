@@ -3,7 +3,7 @@
     <div *ngIf="availableDateItemData">
         <div *ngFor="let availableDateItem of availableDateItemData;">
             <div class="valid-time-wrap clearfix" *ngIf="t(availableDateItem.date) == selectDate">
-                <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxQueueNum<=0}" *ngFor="let time of availableDateItem.times; let index=index" (click)="getBookingItemId(time.id)">{{time.hourOfDay}}</div>
+                <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxQueueNum<=0, 'active': selectIndex == index}" *ngFor="let time of availableDateItem.times; let index=index" (click)="getBookingItemId(index)">{{time.hourOfDay}}</div>
             </div>
         </div>
     </div>

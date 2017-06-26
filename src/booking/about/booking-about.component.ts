@@ -11,7 +11,7 @@ import { JoinBookingInfoDto, BookingServiceProxy } from "shared/service-proxies/
 })
 
 export class BookingAboutComponent extends AppComponentBase implements OnInit {
-  bookingId: number = 40;
+  bookingId: number = 41;
   source: string = "";
   businessAboutData: JoinBookingInfoDto;
     public constructor(

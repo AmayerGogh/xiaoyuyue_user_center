@@ -35,9 +35,17 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
   }
 
   submit() {
+    // 临时测试
+    this.input.age = 0;
+    this.input.emailAddress = "";
+    this.input.gender = 0;
+
     this._bookingServiceProxy
       .joinBooking(this.input)
-      .subscribe();
+      .subscribe( result => {
+        this.notify.success("应约成功!");
+        this.close();
+      });
   }
 
   getNameHandler(event: any) {
