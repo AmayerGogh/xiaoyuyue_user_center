@@ -4,9 +4,9 @@ import { PersonBookingServiceProxy, PersonBookingOrderListDto } from "shared/ser
 import { AppConsts } from '@shared/AppConsts';
 import { SortDescriptor } from '@progress/kendo-data-query';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { CancelBookingModalComponent } from '../cancel-booking-modal/cancel-booking-modal.component';
 import { Status } from '@shared/service-proxies/service-proxies';
 import { AppStatus } from "shared/AppEnums";
+import { CancelBookingModalComponent } from "app/admin/cancel-booking-modal/cancel-booking-modal.component";
 
 @Component({
   selector: 'xiaoyuyue-booking-manage',

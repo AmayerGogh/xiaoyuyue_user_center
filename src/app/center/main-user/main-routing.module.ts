@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Route } from '@angular/router';
-import { BookingManageComponent } from "app/admin/booking-manage/booking-manage.component";
+import { MainUserComponent } from "app/center/main-user/main-user.component";
 
 @NgModule({
     imports: [
@@ -9,7 +9,7 @@ import { BookingManageComponent } from "app/admin/booking-manage/booking-manage.
             {
                 path: '',
                 children: [
-                    { path: 'manage', component: BookingManageComponent },
+                    { path: 'manage', component: MainUserComponent },
                 ]
             }
         ])

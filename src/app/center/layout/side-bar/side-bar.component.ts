@@ -7,7 +7,7 @@ import * as _ from 'lodash';
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit {
+export class CenterSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
   constructor(
     private _authService: AppAuthService
