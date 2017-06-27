@@ -19,13 +19,13 @@ import { DialogModule } from '@progress/kendo-angular-dialog';
 import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy, PersonBookingServiceProxy } from 'shared/service-proxies/service-proxies';
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { BookingManageComponent } from './booking-manage/booking-manage.component';
-import { HeaderComponent } from './layout/header/header.component';
+import { AdminHeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { AdminRoutingModule } from "app/admin/admin-routing.module";
-import { SideBarComponent } from "app/admin/layout/side-bar/side-bar.component";
 import { AdminComponent } from "app/admin/admin.component";
 import { BookingDetailComponent } from './booking-detail/booking-detial.component';
 import { CancelBookingModalComponent } from './cancel-booking-modal/cancel-booking-modal.component';
+import { AdminSideBarComponent } from "app/admin/layout/side-bar/side-bar.component";
 
 @NgModule({
     imports: [
@@ -52,10 +52,10 @@ import { CancelBookingModalComponent } from './cancel-booking-modal/cancel-booki
         AdminComponent,
         BookingManageComponent,
         BookingDetailComponent,
-        HeaderComponent,
+        AdminHeaderComponent,
         FooterComponent,
-        SideBarComponent,
-        CancelBookingModalComponent
+        AdminSideBarComponent,
+        CancelBookingModalComponent,
     ],
     providers: [
         AppStorageService,

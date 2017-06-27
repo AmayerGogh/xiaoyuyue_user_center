@@ -5,13 +5,14 @@ import { BookingTimeComponent } from "booking/time/booking-time.component";
 import { BookingAboutComponent } from "booking/about/booking-about.component";
 import { BookingRatingComponent } from "booking/rating/booking-rating.component";
 import { AppRouteGuard } from "app/shared/common/auth/auth-route-guard";
+import { BookedComponent } from './booked/booked.component';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
                 path: '',
-                                canActivate: [AppRouteGuard],
+                canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 component: BookingComponent,
                 children: [
@@ -20,6 +21,9 @@ import { AppRouteGuard } from "app/shared/common/auth/auth-route-guard";
                     { path: 'time/:id', component: BookingTimeComponent},
                     { path: 'rating/:id', component: BookingRatingComponent}
                 ]
+            },
+            {
+                path: 'booked/:id', component: BookedComponent
             }
         ])
     ],

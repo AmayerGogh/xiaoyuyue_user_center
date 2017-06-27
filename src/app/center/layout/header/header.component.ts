@@ -4,11 +4,11 @@ import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'xiaoyuyue-header',
+  selector: 'xiaoyuyue-center-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent extends AppComponentBase implements OnInit {
+export class CenterHeaderComponent extends AppComponentBase implements OnInit {
   shownLoginName: string = "";
   profilePicture: string = "/assets/common/images/default-profile-picture.png";
   toggleSideBarFlag: boolean;

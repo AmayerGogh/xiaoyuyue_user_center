@@ -21,9 +21,9 @@ import { AppCommonModule } from "app/shared/common/app-common.module";
 import { AdminRoutingModule } from "app/center/center-routing.module";
 import { CenterComponent } from "app/center/center.component";
 import { MainUserComponent } from "app/center/main-user/main-user.component";
-import { HeaderComponent } from './layout/header/header.component';
 import { SideBarComponent } from "app/center/layout/side-bar/side-bar.component";
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
+import { CenterHeaderComponent } from "app/center/layout/header/header.component";
 
 @NgModule({
     imports: [
@@ -49,7 +49,7 @@ import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
     declarations: [
         CenterComponent,
         MainUserComponent,
-        HeaderComponent,
+        CenterHeaderComponent,
         SideBarComponent
     ],
     providers: [

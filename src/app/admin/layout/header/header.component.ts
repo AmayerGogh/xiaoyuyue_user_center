@@ -2,11 +2,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'xiaoyuyue-header',
+  selector: 'xiaoyuyue-admin-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class AdminHeaderComponent implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
   toggleSideBarFlag: boolean = false;
 

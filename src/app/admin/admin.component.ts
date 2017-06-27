@@ -1,12 +1,12 @@
 import { Component, ViewContainerRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
+import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
 
 @Component({
     templateUrl: './admin.component.html'
 })
 export class AdminComponent implements OnInit, AfterViewInit {
     toggleSideBarFlag: boolean = false;
-    @ViewChild('sideBarModel') sideBarModel: SideBarComponent;
+    @ViewChild('sideBarModel') sideBarModel: AdminSideBarComponent;
     public constructor(
     ) {
     }

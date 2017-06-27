@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { OrganizationInfoDto, BookingServiceProxy } from 'shared/service-proxies/service-proxies';
 
 @Component({
-  selector: 'xiaoyuyue-header',
+  selector: 'xiaoyuyue-booking-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })

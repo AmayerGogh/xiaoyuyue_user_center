@@ -178,12 +178,14 @@ export class LoginService {
             );
         }
 
-        var initialUrl = UrlHelper.initialUrl;
+        let initialUrl = AppConsts.appBaseUrl;
 
-        if (initialUrl.indexOf('/login') > 0) {
-            initialUrl = AppConsts.appBaseUrl;
-            // initialUrl = "http://www.vapps.com.cn";
-        }
+        // var initialUrl = UrlHelper.initialUrl;
+
+        // if (initialUrl.indexOf('/login') > 0) {
+        //     initialUrl = AppConsts.appBaseUrl;
+        //     // initialUrl = "http://www.vapps.com.cn";
+        // }
 
         if (redirectUrl) {
             location.href = redirectUrl;

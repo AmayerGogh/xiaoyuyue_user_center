@@ -1,4 +1,5 @@
-﻿export class UrlHelper {
+﻿import { Http } from '@angular/http';
+export class UrlHelper {
     /**
      * The URL requested, before initial routing.
      */
@@ -8,6 +9,11 @@
     static getQueryParameters(): any {
         return document.location.search.replace(/(^\?)/, '').split("&").map(function (n) { return n = n.split("="), this[n[0]] = n[1], this }.bind({}))[0];
     }
+
+    // private getSourceUrl(): string {
+    //     Http.head()
+    //     return;
+    // }
 }
 
 export class FormatArgumentHelper {

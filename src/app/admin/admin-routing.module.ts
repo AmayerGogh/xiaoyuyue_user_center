@@ -18,7 +18,7 @@ import { BookingDetailComponent } from './booking-detail/booking-detial.componen
                     },
                     {
                         path: 'detail/:id', component: BookingDetailComponent
-                    },
+                    }
                 ]
             }
         ])

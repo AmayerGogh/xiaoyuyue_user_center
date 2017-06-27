@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Component({
-  selector: 'xiaoyuyue-side-bar',
+  selector: 'xiaoyuyue-admin-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class SideBarComponent implements OnInit {
+export class AdminSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
   constructor(
         private _authService: AppAuthService

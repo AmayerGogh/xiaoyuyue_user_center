@@ -20,7 +20,7 @@ import { ServiceProxyModule } from "shared/service-proxies/service-proxy.module"
 import { BookingService } from "shared/services/booking.service";
 import { OptimalBookingTimeModelComponent } from './time/optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './time/reply-booking-model/reply-booking-model.component';
-
+import { BookedComponent } from './booked/booked.component';
 
 @NgModule({
     imports: [
@@ -54,7 +54,8 @@ import { ReplyBookingModelComponent } from './time/reply-booking-model/reply-boo
         BookingTimeComponent,
         BookingRatingComponent,
         OptimalBookingTimeModelComponent,
-        ReplyBookingModelComponent
+        ReplyBookingModelComponent,
+        BookedComponent
     ],
     providers: [
         BookingServiceProxy,
