@@ -153,13 +153,13 @@ export class LoginService {
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
         // expireInSeconds = 0;
+        // debugger;
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
             accessToken,
             tokenExpireDate
         );
-        console.log(tenantId);
         abp.multiTenancy.setTenantIdCookie(tenantId);
 
         this._utilsService.setCookieValue(
@@ -177,16 +177,8 @@ export class LoginService {
                 abp.appPath
             );
         }
-
-        let initialUrl = AppConsts.appBaseUrl;
-
-        // var initialUrl = UrlHelper.initialUrl;
-
-        // if (initialUrl.indexOf('/login') > 0) {
-        //     initialUrl = AppConsts.appBaseUrl;
-        //     // initialUrl = "http://www.vapps.com.cn";
-        // }
-
+        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : AppConsts.appBaseUrl;
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {

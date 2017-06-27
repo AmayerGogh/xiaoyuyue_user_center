@@ -1,5 +1,4 @@
-﻿import { Http } from '@angular/http';
-export class UrlHelper {
+﻿export class UrlHelper {
     /**
      * The URL requested, before initial routing.
      */
