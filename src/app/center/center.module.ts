@@ -23,6 +23,7 @@ import { CenterComponent } from "app/center/center.component";
 import { CenterSideBarComponent } from "app/center/layout/side-bar/side-bar.component";
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 import { CenterHeaderComponent } from "app/center/layout/header/header.component";
+import { MainUserComponent } from 'app/center/main-user/main-user.component';
 
 @NgModule({
     imports: [
@@ -46,6 +47,7 @@ import { CenterHeaderComponent } from "app/center/layout/header/header.component
         DialogModule,
     ],
     declarations: [
+        MainUserComponent,
         CenterComponent,
         CenterHeaderComponent,
         CenterSideBarComponent

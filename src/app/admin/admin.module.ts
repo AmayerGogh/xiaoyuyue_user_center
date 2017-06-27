@@ -24,6 +24,8 @@ import { AdminRoutingModule } from "app/admin/admin-routing.module";
 import { AdminComponent } from "app/admin/admin.component";
 import { BookingDetailComponent } from './booking-detail/booking-detial.component';
 import { AdminSideBarComponent } from "app/admin/layout/side-bar/side-bar.component";
+import { BookingManageComponent } from 'app/admin/booking-manage/booking-manage.component';
+import { CancelBookingModalComponent } from 'app/admin/cancel-booking-modal/cancel-booking-modal.component';
 
 @NgModule({
     imports: [
@@ -52,6 +54,8 @@ import { AdminSideBarComponent } from "app/admin/layout/side-bar/side-bar.compon
         AdminHeaderComponent,
         FooterComponent,
         AdminSideBarComponent,
+        BookingManageComponent,
+        CancelBookingModalComponent
     ],
     providers: [
         AppStorageService,
