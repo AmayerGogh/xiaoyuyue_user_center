@@ -29,7 +29,8 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
             UrlHelper.redirectUrl = location.href;
             this._utilsService.deleteCookie("UrlHelper.redirectUrl", '/');
             // 测试域名
-            if (location.href !== "http://vapps.oicp.io/") {
+            let domainArr = ["http://vapps.oicp.io/", "http://localhost:5201/"]
+            if (domainArr.indexOf(location.href) < 0) {
                 this._utilsService.setCookieValue("UrlHelper.redirectUrl", location.href, exdate, '/');
             }
             this._router.navigate(['/auth/login']);

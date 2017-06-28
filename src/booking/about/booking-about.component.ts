@@ -12,7 +12,7 @@ import { JoinBookingInfoDto, BookingServiceProxy } from "shared/service-proxies/
 
 export class BookingAboutComponent extends AppComponentBase implements OnInit {
     href: string = document.location.href;
-    bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+    bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
     source: string = "";
     businessAboutData: JoinBookingInfoDto;
     public constructor(
@@ -26,8 +26,11 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit {
         this.loadBookingData();
     }
     loadBookingData() {
+        if (this.href.indexOf("?") >= 0) {
+            this.bookingId = this.bookingId.split("?")[0];
+        }
         this._bookingServiceProxy
-            .getJoinBookingInfo(this.source, this.bookingId)
+            .getJoinBookingInfo(this.source, parseInt(this.bookingId))
             .subscribe(result => {
                 this.businessAboutData = result.bookingInfo;
             })

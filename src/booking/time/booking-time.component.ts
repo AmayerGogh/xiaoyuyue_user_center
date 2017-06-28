@@ -5,6 +5,9 @@ import { JoinBookingDataInfo, BookingServiceProxy, JoinBookingInput } from 'shar
 import * as moment from 'moment';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UtilsService } from '@abp/utils/utils.service';
 
 @Component({
   selector: 'xiaoyuyue-booking-time',
@@ -20,7 +23,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   input: JoinBookingInput = new JoinBookingInput();
 
   href: string = document.location.href;
-  bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+  bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
   source: string = "";
   availableDateItemData: JoinBookingDataInfo[] = [];
 
@@ -28,7 +31,11 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   @ViewChild('replyBookingModel') replyBookingModel: ReplyBookingModelComponent;
   public constructor(
     injector: Injector,
-    private _bookingServiceProxy: BookingServiceProxy
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _bookingServiceProxy: BookingServiceProxy,
+    private _appAuthService: AppAuthService,
+    private _utilsService: UtilsService,
   ) {
     super(injector);
   }
@@ -37,12 +44,29 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
     this.loadBookingData();
   }
   ngAfterViewInit() {
+    if (this._appAuthService.isLogin()) {
+      
+      this._route
+        .queryParams
+        .subscribe(params => {
+          console.log(params);
+          this.input.date = moment(new Date(params["date"]));
+          this.selectIndex = params["index"];
+        });
+
+      // this.input
+      this.replyBookingModel.show();
+      this.replyBookingModel.save(this.input);
+    }
   }
-  
+
   loadBookingData() {
     let self = this;
+    if (this.href.indexOf("?") >= 0) {
+      this.bookingId = this.bookingId.split("?")[0];
+    }
     this._bookingServiceProxy
-      .getJoinBookingInfo(this.source, this.bookingId)
+      .getJoinBookingInfo(this.source, parseInt(this.bookingId))
       .subscribe(result => {
         this.availableDateItemData = result.availableDateItem;
         // 测试, 如果没有选择时间段,那么就赋值默认的一个id
@@ -66,8 +90,19 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
       })
   }
 
-  getBookingItemId(index) {
+  selectOptimalTime(index) {
     this.selectIndex = index;
+    if (!this._appAuthService.isLogin()) {
+      let exdate = new Date();
+      let href = location.href;
+      exdate.setDate(exdate.getDate() + 1);
+      href += `?date=${this.selectDate}&index=${index}`;
+
+      this._router.navigate(['/auth/login']);
+      this._utilsService.setCookieValue("UrlHelper.redirectUrl", href, exdate, "/");
+      return;
+    }
     this.replyBookingModel.show();
+    this.replyBookingModel.save(this.input);
   }
 }

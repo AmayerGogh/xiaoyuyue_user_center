@@ -12,8 +12,6 @@ import { BookedComponent } from './booked/booked.component';
         RouterModule.forChild([
             {
                 path: '',
-                canActivate: [AppRouteGuard],
-                canActivateChild: [AppRouteGuard],
                 component: BookingComponent,
                 children: [
                     { path: '', redirectTo: 'about' },

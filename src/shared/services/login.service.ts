@@ -152,8 +152,6 @@ export class LoginService {
     }
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
-        // expireInSeconds = 0;
-        // debugger;
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(

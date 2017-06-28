@@ -8,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class BookingSideBarComponent implements OnInit {
 
   href: string = document.location.href;
-  bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+  bookingId: any = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
 
   constructor() { }
 
   ngOnInit() {
+    this.bookingId = parseInt(this.bookingId);
+    if (this.href.indexOf("?") >= 0) {
+      this.bookingId += '';
+      this.bookingId = this.bookingId.split("?")[0];
+    }
   }
 
 }

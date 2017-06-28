@@ -8,7 +8,8 @@ import { OrganizationInfoDto, BookingServiceProxy } from 'shared/service-proxies
 })
 export class BookingHeaderComponent implements OnInit {
   href: string = document.location.href;
-  bookingId: number = +this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+  bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+
   source: string = "";
   organizationInfoData: OrganizationInfoDto;
   businessData: OrganizationInfoDto;
@@ -20,11 +21,14 @@ export class BookingHeaderComponent implements OnInit {
   ngOnInit() {
     this.loadBookingData();
   }
-    loadBookingData() {
-        this._bookingServiceProxy
-            .getJoinBookingInfo(this.source, this.bookingId)
-            .subscribe(result => {
-                this.organizationInfoData = result.organizationInfo;
-            })
+  loadBookingData() {
+    if (this.href.indexOf("?") >= 0) {
+      this.bookingId = this.bookingId.split("?")[0];
     }
+    this._bookingServiceProxy
+      .getJoinBookingInfo(this.source, parseInt(this.bookingId))
+      .subscribe(result => {
+        this.organizationInfoData = result.organizationInfo;
+      })
+  }
 }

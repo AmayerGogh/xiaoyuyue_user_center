@@ -10,4 +10,11 @@ export class AppAuthService {
             location.href = AppConsts.appBaseUrl;
         }
     }
+
+    isLogin(): boolean{
+        if (abp.auth.getToken()) {
+            return true;
+        }
+        return false;
+    }
 }
