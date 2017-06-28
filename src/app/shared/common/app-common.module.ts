@@ -11,6 +11,7 @@ import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { AppAuthService } from './auth/app-auth.service';
 import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { AppRouteGuard } from './auth/auth-route-guard';
+import { DateRangePickerComponent } from "app/shared/common/timing/date-range-picker.component";
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { AppRouteGuard } from './auth/auth-route-guard';
         CommonModule,
     ],
     declarations: [
+        DateRangePickerComponent,
         TimeZoneComboComponent,
         JqPluginDirective,
     ],
