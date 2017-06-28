@@ -10,12 +10,7 @@ import { CommonModule } from '@shared/common/common.module';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { AppAuthService } from './auth/app-auth.service';
 import { JqPluginDirective } from './libs/jq-plugin.directive';
-import { CommonLookupModalComponent } from './lookup/common-lookup-modal.component';
-import { DateRangePickerComponent } from './timing/date-range-picker.component';
 import { AppRouteGuard } from './auth/auth-route-guard';
-
-import { GridModule } from '@progress/kendo-angular-grid';
-import { GridDataResultsModule } from '@shared/grid-data-results/grid-result.modules';
 
 @NgModule({
     imports: [
@@ -25,20 +20,14 @@ import { GridDataResultsModule } from '@shared/grid-data-results/grid-result.mod
         UtilsModule,
         AbpModule,
         CommonModule,
-        GridModule,
-        GridDataResultsModule
     ],
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective,
-        CommonLookupModalComponent,
-        DateRangePickerComponent
     ],
     exports: [
         TimeZoneComboComponent,
         JqPluginDirective,
-        CommonLookupModalComponent,
-        DateRangePickerComponent
     ]
 })
 export class AppCommonModule {
