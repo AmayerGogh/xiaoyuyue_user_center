@@ -14,14 +14,13 @@ import { BookedComponent } from './booked/booked.component';
                 path: '',
                 component: BookingComponent,
                 children: [
-                    { path: '', redirectTo: 'about' },
-                    { path: 'about/:id', component: BookingAboutComponent},
-                    { path: 'time/:id', component: BookingTimeComponent},
-                    { path: 'rating/:id', component: BookingRatingComponent}
+                    { path: 'about/:id', component: BookingAboutComponent },
+                    { path: 'time/:id', component: BookingTimeComponent },
+                    { path: 'rating/:id', component: BookingRatingComponent }
                 ]
             },
             {
-                path: 'booked/:id', component: BookedComponent
+                path: 'booked', component: BookedComponent
             }
         ])
     ],

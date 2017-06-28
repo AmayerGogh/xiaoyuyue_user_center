@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Injector } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { BookingServiceProxy, JoinBookingInput } from 'shared/service-proxies/service-proxies';
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'xiaoyuyue-reply-booking-model',
@@ -13,6 +14,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
   @ViewChild('replyBookingModel') modal: ModalDirective;
   constructor(
     injector: Injector,
+    private _router: Router,
     private _bookingServiceProxy: BookingServiceProxy
   ) {
     super(injector);
@@ -42,9 +44,10 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     this._bookingServiceProxy
       .joinBooking(this.input)
-      .subscribe( result => {
-        this.notify.success("应约成功!");
+      .subscribe(result => {
         this.close();
+        // let bookedDetail = "?bookingname=" + result.bookingName + "&bookingcustomer=" + result.bookingCustomer + "&bookingdate=" + result.bookingDate + "&hourofday=" + result.hourOfDay;
+        this._router.navigate(['/booking/booked/'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
       });
   }
 

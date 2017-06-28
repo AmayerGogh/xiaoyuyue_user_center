@@ -8,6 +8,21 @@
         background-color: #FFF;
         border-radius: 10px;
         box-shadow: 0px 1px 6px rgba(0, 0, 0, 0.1);
+        .booking-customer-info {
+            text-align: left;
+            width: 300px;
+            margin: 0 auto;
+            .booking-item {
+                display: flex;
+                .item-left {
+                    width: 42px;
+                    flex: 0 0 42px;
+                }
+                .item-right {
+                    flex: 1;
+                }
+            }
+        }
         .success-tip {
             font-size: 24px;
             color: #FF9641;

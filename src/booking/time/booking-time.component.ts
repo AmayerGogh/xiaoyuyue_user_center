@@ -45,11 +45,10 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   }
   ngAfterViewInit() {
     if (this._appAuthService.isLogin() && this.href.indexOf("?") >= 0) {
-      
+
       this._route
         .queryParams
         .subscribe(params => {
-          console.log(params);
           this.input.date = moment(new Date(params["date"]));
           this.selectIndex = params["index"];
         });
@@ -74,6 +73,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
         for (let i = 0; i < result.availableDateItem.length; i++) {
           this.enableBookingDate.push(new Date(result.availableDateItem[i].date.toDate()));
         }
+        this.input.date = moment(this.enableBookingDate[0]);
         $(".flatpickr").flatpickr({
           inline: true,
           minDate: "today",

@@ -4,9 +4,12 @@
     <div class="content-wrap">
         <div class="finshed-icon"><img src="../../assets/common/images/svg/app-booked.svg" width="48px" alt="已完成"></div>
         <p class="success-tip">应约成功</p>
-        <p><span>项目</span><span>项目名称</span></p>
-        <p><span>应约人</span><span>李某某</span></p>
-        <p><span>时间</span><span>2017.06.08 </span> <span>10:00-11:00</span></p>
+
+        <div class="booking-customer-info">
+            <p class="booking-item"><span class="item-left">项目</span><span class="item-right">{{bookingName}}</span></p>
+            <p class="booking-item"><span class="item-left">应约人</span><span class="item-right">{{bookingCustomer}}</span></p>
+            <p class="booking-item"><span class="item-left">时间</span><span class="item-right">{{bookingDate}}</span> <span>{{hourOfDay}}</span></p>
+        </div>
 
         <div class="btn btn-submit">
             <a routerLink="/app/admin">完成</a>
