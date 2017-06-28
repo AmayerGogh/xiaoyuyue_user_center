@@ -37,14 +37,40 @@
         width: 100%;
         position: relative;
         padding-bottom: 85px;
-        .btn {
-            font-size: 26px;
-        }
         .item+.item {
             margin-top: 10px;
         }
         .item {
+            display: flex;
             line-height: 26px;
+            .item-left {
+                flex: 1;
+                .info-wrap {
+                    display: flex;
+                    .name {
+                        width: 46px;
+                        flex: 0 0 46px;
+                    }
+                    .colon {
+                        width: 20px;
+                        flex: 0 0 20px;
+                        padding-right: 15px;
+                    }
+                    .desc {
+                        flex: 1;
+                    }
+                }
+            }
+            .item-right {
+                width: 26px;
+                flex: 0 0 26px;
+                .btn {
+                    display: inline-block;
+                    width: 26px;
+                    line-height: 26px;
+                    font-size: 16px;
+                }
+            }
         }
         .ad-wrap {
             width: 100%;

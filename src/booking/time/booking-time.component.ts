@@ -17,7 +17,7 @@ import { UtilsService } from '@abp/utils/utils.service';
   encapsulation: ViewEncapsulation.None
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit {
-  selectIndex: number;
+  selectIndex: number = 0;
   enableBookingDate: Date[] = [];
   selectDate: Date = undefined;
   input: JoinBookingInput = new JoinBookingInput();
@@ -44,7 +44,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
     this.loadBookingData();
   }
   ngAfterViewInit() {
-    if (this._appAuthService.isLogin()) {
+    if (this._appAuthService.isLogin() && this.href.indexOf("?") >= 0) {
       
       this._route
         .queryParams

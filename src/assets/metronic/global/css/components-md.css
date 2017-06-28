@@ -467,7 +467,8 @@ fieldset[disabled] .form-group.form-md-line-input .form-control {
 }
 
 .form-group.form-md-line-input.form-md-floating-label .form-control~label {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 400;
     top: 25px;
     transition: 0.2s ease all;
     color: #999;
@@ -7846,11 +7847,11 @@ fieldset[disabled] .btn.purple-soft:not(.btn-outline).focus {
     font-weight: 600;
     text-transform: uppercase;
     transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    border-radius: 6px;
     overflow: hidden;
     position: relative;
     user-select: none;

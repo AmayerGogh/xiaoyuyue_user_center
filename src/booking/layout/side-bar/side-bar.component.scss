@@ -16,6 +16,7 @@
         border-top-right-radius: 10px;
         .menu-item.active {
             .item {
+                color: #FF9641;
                 border-bottom: 2px solid #FF9641;
             }
         }
@@ -25,6 +26,7 @@
             text-align: center;
             .item {
                 display: inline-block;
+                color: #333;
             }
         }
     }
