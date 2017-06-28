@@ -6,7 +6,7 @@ import { hmrBootstrap } from './hmr';
 
 import * as moment from 'moment';
 
-import 'moment/min/locales.min';
+// import 'moment/min/locales.min';
 import 'moment-timezone';
 
 if (environment.production) {
