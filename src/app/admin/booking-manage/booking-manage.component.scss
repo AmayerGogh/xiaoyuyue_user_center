@@ -3,6 +3,7 @@
     height: 100%;
     padding: 10px;
     background-color: #F1F1F1;
+    font-size: 16px;
     .booking-item+.booking-item {
         margin-top: 10px;
     }
@@ -17,11 +18,18 @@
             .title {
                 color: #FF9641;
             }
+            .icon {
+                color: #FF9641;
+                font-size: 22px;
+            }
         }
         .content {
             padding: 20px 0;
             .content-item {
                 padding: 4px 0;
+                .name {
+                    margin-right: 10px;
+                }
                 .desc {
                     color: #FF9641;
                 }
@@ -32,12 +40,22 @@
             line-height: 40px;
             display: flex;
             border-top: 1px solid #E5E5E5;
-            .action-item+.action-item {
-                // border-left: 1px solid #ccc;
+            .line {
+                transform: scaleX(.2) translateY(-1px);
             }
             .action-item {
                 flex: 1;
                 text-align: center;
+                color: #333;
+                .icon {
+                    display: inline-block;
+                    margin-right: 6px;
+                    color: #FF9641;
+                    vertical-align: text-bottom;
+                }
+                a {
+                    color: #333;
+                }
             }
         }
     }

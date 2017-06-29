@@ -20,6 +20,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   pageSize: number = AppConsts.grid.defaultPageSize;
   skip: number = 0;
   sort: Array<SortDescriptor> = [];
+  actionFlag: boolean = false;
 
   @ViewChild('cancelBookingModal') cancelBookingModal: CancelBookingModalComponent;
 
@@ -56,7 +57,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   }
 
   showBookingDetail(bookingId: number) {
-    this._router.navigate(['/app/admin/detail', bookingId]);
+    this._router.navigate(['/manage/bookingorder/detail', bookingId]);
   }
 
   cancelBooking(bookingId: number) {
@@ -65,5 +66,9 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
 
   skickBooking() {
 
+  }
+
+  setActionFlag() {
+    this.actionFlag = !this.actionFlag;
   }
 }

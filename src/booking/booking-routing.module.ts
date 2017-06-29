@@ -14,6 +14,7 @@ import { BookedComponent } from './booked/booked.component';
                 path: '',
                 component: BookingComponent,
                 children: [
+                    { path: '', redirectTo: "about" },
                     { path: 'about/:id', component: BookingAboutComponent },
                     { path: 'time/:id', component: BookingTimeComponent },
                     { path: 'rating/:id', component: BookingRatingComponent }

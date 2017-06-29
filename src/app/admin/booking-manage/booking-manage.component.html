@@ -2,30 +2,31 @@
     <div class="booking-item box-shadow" *ngFor="let dataItem of personBookingDatas">
         <div class="top-wrap clearfix">
             <div class="title pull-left">{{dataItem.bookingName}}</div>
-            <div class="icon pull-right"><span class="vapps-icon-app-to-top"></span></div>
+            <div class="icon pull-right" (click)="setActionFlag()" [ngClass]="{'rotate-180': actionFlag, 'rotate-360': !actionFlag}"><span class="vapps-icon-app-drop-down"></span></div>
         </div>
         <div class="content">
             <div class="content-item">
-                <span class="name">预约机构: </span>
+                <span class="name">预约机构 : </span>
                 <span class="desc">{{dataItem.bookingName}}{{dataItem.outletName}}</span>
             </div>
             <div class="content-item">
-                <span class="name">预约时间: </span>
+                <span class="name">预约时间 : </span>
                 <span class="desc">{{t(dataItem.bookingDate)}}</span>
             </div>
             <div class="content-item">
-                <span class="name">预约电话: </span>
+                <span class="name">预约电话 : </span>
                 <span class="desc">{{dataItem.phoneNum}}</span>
             </div>
             <div class="content-item">
-                <span class="name">应约人数: </span>
+                <span class="name">应约人数 : </span>
                 <span class="desc">{{dataItem.bookingNum}}</span>
             </div>
         </div>
-        <div class="bottom-action">
-            <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a>查看详情</a></span>|
-            <span class="action-item" (click)="cancelBooking(dataItem.id)">取消预约</span>|
-            <span class="action-item" (click)="skickBooking()">置顶预约</span>
+        <div class="bottom-action" *ngIf="actionFlag">
+            <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a><span class="icon vapps-icon-app-detail"></span>查看详情</a>
+            </span><span class="line">|</span>
+            <span class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>
+            <span class="action-item" (click)="skickBooking()"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
         </div>
     </div>
     <xiaoyuyue-cancel-booking-modal #cancelBookingModal></xiaoyuyue-cancel-booking-modal>

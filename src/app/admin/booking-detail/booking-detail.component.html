@@ -1,67 +1,77 @@
 <div class="booking-edit" *ngIf="bookingOrderForEdidData">
-    <div class="tenant-wrap box-shadow">
+    <div class="tenant-wrap card-shadow">
         <div class="tenant-bg-wrap"><img src="/assets/common/images/booking/tenant-bg.png" width="100%" alt="tenant-bg"></div>
         <div class="tenant-info">
             <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}}{{bookingOrderForEdidData.bookingInfo.outletName}}</div>
-            <div class="contact clearfix">
-                <span class="pull-left"><span class="vapps-icon-app-contact"></span>{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
-                <span class="pull-right"><span class="vapps-icon vapps-icon-app-qr-code"></span></span>
+            <div class="contact">
+                <span class="item-left">
+                    <div class="content-wrap">
+                        <span class="item-left gray-icon vapps-icon-app-contact"></span>
+                <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
+            </div>
+            </span>
+            <span class="item-right text-center">
+                <span class="orange-icon vapps-icon-app-qr-code"></span>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="address-wrap card-shadow">
+    <div class="item-left">
+        <div class="content-wrap">
+            <span class="item-left gray-icon vapps-icon-app-location"></span>
+            <span class="item-right">{{bookingOrderForEdidData.bookingInfo.outletAddress}}</span>
+        </div>
+    </div>
+    <div class="item-right text-center">
+        <span class="orange-icon vapps-icon-app-phone"></span>
+    </div>
+</div>
+
+<div class="booking-info-wrap card-shadow">
+    <div class="card-item booking-info">
+        <div class="top-wrap">
+            <div class="title">预约信息</div>
+        </div>
+        <div class="content">
+            <div class="content-item">
+                <span class="name">项目名称 : </span>
+                <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
+            </div>
+            <div class="content-item">
+                <span class="name">预约时间 : </span>
+                <span class="desc">{{t(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
+            </div>
+            <div class="content-item">
+                <span class="name">应约人数 : </span>
+                <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
+            </div>
+            <div class="content-item">
+                <span class="name">温馨提示 : </span>
+                <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="address-wrap box-shadow">
-        <div class="left">
-            <span class="vapps-icon-app-location"></span> {{bookingOrderForEdidData.bookingInfo.outletAddress}}
+<div class="personal-info-wrap box-shadow">
+    <div class="card-item personal-info">
+        <div class="top-wrap">
+            <div class="title">个人信息</div>
         </div>
-        <div class="right">
-            <span class="vapps-icon vapps-icon-app-phone"></span>
-        </div>
-    </div>
-
-    <div class="booking-info-wrap box-shadow">
-        <div class="card-item booking-info">
-            <div class="top-wrap">
-                <div class="title">预约信息</div>
+        <div class="content">
+            <div class="content-item">
+                <span class="name">姓名 : </span>
+                <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
             </div>
-            <div class="content">
-                <div class="content-item">
-                    <span class="name">项目名称:</span>
-                    <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">预约时间</span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingData}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">应约人数</span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">温馨提示</span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
-                </div>
+            <div class="content-item">
+                <span class="name">联系方式 : </span>
+                <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="personal-info-wrap box-shadow">
-        <div class="card-item personal-info">
-            <div class="top-wrap">
-                <div class="title">个人信息</div>
-            </div>
-            <div class="content">
-                <div class="content-item">
-                    <span class="name">姓名:</span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">联系方式</span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <button class="btn btn-view btn-block" type="button">取消预约</button>
+<button class="btn btn-submit btn-block cancel-btn" type="button">取消预约</button>
 </div>

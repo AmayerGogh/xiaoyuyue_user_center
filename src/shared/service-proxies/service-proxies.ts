@@ -6354,19 +6354,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
-     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -14504,6 +14504,8 @@ export class BookingInfoDto {
 export class BookingOrderInfo {
     /** 预约日期 */
     bookingData: moment.Moment;
+    /** 预约时间 */
+    hourOfDay: string;
     /** 预约人数 */
     bookingNum: number;
     /** 温馨提示 */
@@ -14527,6 +14529,7 @@ export class BookingOrderInfo {
     constructor(data?: any) {
         if (data !== undefined) {
             this.bookingData = data["bookingData"] ? moment(data["bookingData"].toString()) : undefined;
+            this.hourOfDay = data["hourOfDay"] !== undefined ? data["hourOfDay"] : undefined;
             this.bookingNum = data["bookingNum"] !== undefined ? data["bookingNum"] : undefined;
             this.hit = data["hit"] !== undefined ? data["hit"] : undefined;
             this.customerName = data["customerName"] !== undefined ? data["customerName"] : undefined;
@@ -14547,6 +14550,7 @@ export class BookingOrderInfo {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["bookingData"] = this.bookingData ? this.bookingData.toISOString() : undefined;
+        data["hourOfDay"] = this.hourOfDay !== undefined ? this.hourOfDay : undefined;
         data["bookingNum"] = this.bookingNum !== undefined ? this.bookingNum : undefined;
         data["hit"] = this.hit !== undefined ? this.hit : undefined;
         data["customerName"] = this.customerName !== undefined ? this.customerName : undefined;

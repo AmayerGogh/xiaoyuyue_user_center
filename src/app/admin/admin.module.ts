@@ -56,4 +56,4 @@ import { CancelBookingModalComponent } from 'app/admin/cancel-booking-modal/canc
         PersonBookingServiceProxy
     ]
 })
-export class AdminModule { }
+export class BookingOrderModule { }

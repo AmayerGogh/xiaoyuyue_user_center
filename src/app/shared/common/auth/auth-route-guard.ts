@@ -59,7 +59,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
         }
 
         if (this._permissionChecker.isGranted(AdminPermissions.tenantDashboard)) {
-            return '/app/center';
+            return '/manage/center';
         }
 
         if (this._permissionChecker.isGranted(AdminPermissions.userManage_Tenants)) {

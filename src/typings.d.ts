@@ -112,6 +112,11 @@ interface JQuery {
     flatpickr(...any): any;
 }
 interface JQuery {
+    FastClick(...any): any;
+}
+FastClick.attach(document.body);
+
+interface JQuery {
     inputmask(...any): any;
 }
 interface Window {

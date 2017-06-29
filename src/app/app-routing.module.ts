@@ -7,13 +7,13 @@ import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
     imports: [
         RouterModule.forChild([
             {
-                path: 'app',
+                path: 'manage',
                 canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 children: [
                     {
-                        path: 'admin',
-                        loadChildren: 'app/admin/admin.module#AdminModule', //Lazy load admin module
+                        path: 'bookingorder',
+                        loadChildren: 'app/admin/admin.module#BookingOrderModule', //Lazy load admin module
                         data: { preload: true }
                     },
                     {
