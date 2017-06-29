@@ -78,6 +78,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
           inline: true,
           minDate: "today",
           "locale": "zh",
+          disableMobile: "true",
           enable: self.enableBookingDate,
           defaultDate: self.enableBookingDate[0],
           onChange: function (selectedDates, dateStr, instance) {
