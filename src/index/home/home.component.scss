@@ -1,0 +1,125 @@
+    html,
+    body {
+        background-color: #FFF;
+    }
+    
+    .home {
+        .border-radius-6 {
+            border-radius: 6px;
+        }
+        .top-content {
+            position: relative;
+            .top-text {
+                width: 100%;
+                position: absolute;
+                top: 100px;
+                padding: 0 50px;
+                p {
+                    font-size: 48px;
+                    color: #FFF;
+                }
+                p:nth-child(2) {
+                    padding-left: 96px;
+                }
+            }
+            .top-action {
+                width: 100%;
+                position: absolute;
+                bottom: 40px;
+                text-align: center;
+                color: #FFF;
+                .intro {
+                    width: 269px;
+                    margin: 0 auto 10px;
+                    font-size: 30px;
+                    background-color: rgba(0, 0, 0, .8);
+                    padding: 8px 0;
+                    cursor: pointer;
+                }
+                .login-register {
+                    width: 269px;
+                    margin: 0 auto;
+                    .action-btn {
+                        width: calc(50% - 20px);
+                        display: block;
+                        background-color: rgba(254, 125, 21, 0.78);
+                        font-size: 20px;
+                        padding: 6px 0;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+        .page-wrap {
+            .page {
+                .interlayer {
+                    height: 54px;
+                    background-color: #c6d3d4;
+                    margin-bottom: 30px;
+                }
+                .content {
+                    padding: 0 26px;
+                    .title {
+                        font-size: 30px;
+                        text-align: center;
+                        color: #FF9641;
+                        margin-bottom: 42px;
+                    }
+                    .desc {
+                        font-size: 20px;
+                        text-align: left;
+                        line-height: 2;
+                        margin-bottom: 42px;
+                    }
+                    .material-wrap {
+                        text-align: center;
+                    }
+                }
+            }
+            .page-3 {
+                .page3-content {
+                    padding: 0 26px;
+                    .title {
+                        font-size: 30px;
+                        color: #FF9641;
+                    }
+                    .logo-wrap {
+                        margin-bottom: 8px;
+                        .logo {
+                            vertical-align: bottom;
+                        }
+                    }
+                    .slogan {
+                        margin-bottom: 50px;
+                        font-size: 18px;
+                        color: #000;
+                    }
+                    .about-wrap {
+                        .about-title {
+                            font-size: 18px;
+                            color: #000;
+                        }
+                        .about-item+.about-item {
+                            margin-top: 10px;
+                        }
+                        .about-item {
+                            display: flex;
+                            line-height: 1;
+                            .name {
+                                width: 60px;
+                                flex: 0 0 60px;
+                                font-size: 16px;
+                                color: #000;
+                            }
+                            .desc {
+                                flex: 1;
+                                font-size: 16px;
+                                margin: 0;
+                                color: #000;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }

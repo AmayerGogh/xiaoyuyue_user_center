@@ -1,0 +1,14 @@
+<div class="header">
+    <div class="top-fixed clearfix">
+        <span class="icon pull-left vapps-icon-app-logo"></span>
+        <span class="icon pull-right" (click)="isShowSubMenu()" [ngClass]="{'vapps-icon-app-menu': !isShowSubMenuFlag, 'vapps-icon-app-close': isShowSubMenuFlag}"></span>
+    </div>
+
+    <div class="sub-menu" *ngIf="isShowSubMenuFlag">
+        <div class="sub-menu-item"><a href="#">首页</a></div>
+        <div class="sub-menu-item"><a href="#">了解</a></div>
+        <div class="sub-menu-item"><a href="#">公众号</a></div>
+        <div class="sub-menu-item"><a href="#">应用场景</a></div>
+        <div class="sub-menu-item"><a href="#">关于我们</a></div>
+    </div>
+</div>

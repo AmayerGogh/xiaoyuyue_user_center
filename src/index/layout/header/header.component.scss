@@ -1,0 +1,36 @@
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    .top-fixed {
+        height: 66px;
+        padding: 0 24px;
+        color: #FFF;
+        background-color: #fe7d15;
+        .icon {
+            font-size: 26px;
+            line-height: 66px;
+        }
+        .vapps-icon-app-close,
+        .vapps-icon-app-menu {
+            font-size: 22px;
+        }
+    }
+    .sub-menu {
+        position: absolute;
+        width: 100%;
+        font-size: 0;
+        .sub-menu-item {
+            height: 66px;
+            line-height: 66px;
+            padding: 0 24px;
+            background-color: rgba(254, 125, 21, 0.78);
+            ;
+            font-size: 18px;
+            a {
+                color: #FFF;
+            }
+        }
+    }
+}
