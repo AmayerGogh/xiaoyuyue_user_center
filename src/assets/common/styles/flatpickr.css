@@ -469,8 +469,8 @@ span.flatpickr-weekday {
 }
 
 .dayContainer {
-    padding: 0;
-    outline: 0;
+    padding: 8px 0;
+    .time-content outline: 0;
     text-align: left;
     width: 315px;
     min-width: 315px;

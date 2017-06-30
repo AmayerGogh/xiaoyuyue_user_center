@@ -14,9 +14,11 @@
             margin: 0 auto;
             .booking-item {
                 display: flex;
+                padding: 0 86px;
                 .item-left {
-                    width: 42px;
-                    flex: 0 0 42px;
+                    width: 50px;
+                    flex: 0 0 50px;
+                    color: #999;
                 }
                 .item-right {
                     flex: 1;
@@ -31,6 +33,7 @@
             width: 143px;
             a {
                 display: block;
+                color: #FFF;
             }
         }
         .finshed-icon {
@@ -47,6 +50,14 @@
     }
     .booked-footer {
         position: relative;
+        .xiaoyuyue-tip+.xiaoyuyue-tip {
+            padding-top: 0;
+        }
+        .xiaoyuyue-tip {
+            padding: 10px 0;
+            margin: 0;
+            color: #999;
+        }
         .qr-code-wrap {
             text-align: center;
         }

@@ -41,7 +41,12 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit(): void {
+    let self = this;
     this.loadBookingData();
+    document.addEventListener('click', function() {
+      self.replyBookingModel.close();
+      self.optimalBookingTimeModel.close();
+    });
   }
   ngAfterViewInit() {
     if (this._appAuthService.isLogin() && this.href.indexOf("?") >= 0) {

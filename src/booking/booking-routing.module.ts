@@ -21,7 +21,7 @@ import { BookedComponent } from './booked/booked.component';
                 ]
             },
             {
-                path: 'booked', component: BookedComponent
+                path: 'booked/:id', component: BookedComponent
             }
         ])
     ],

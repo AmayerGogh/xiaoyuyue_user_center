@@ -1,8 +1,8 @@
 <div class="booking-manage" *ngIf="personBookingDatas">
-    <div class="booking-item box-shadow" *ngFor="let dataItem of personBookingDatas">
+    <div class="booking-item box-shadow" (click)="setActionFlag()" *ngFor="let dataItem of personBookingDatas">
         <div class="top-wrap clearfix">
             <div class="title pull-left">{{dataItem.bookingName}}</div>
-            <div class="icon pull-right" (click)="setActionFlag()" [ngClass]="{'rotate-180': actionFlag, 'rotate-360': !actionFlag}"><span class="vapps-icon-app-drop-down"></span></div>
+            <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag, 'rotate-360': !actionFlag}"><span class="vapps-icon-app-drop-down"></span></div>
         </div>
         <div class="content">
             <div class="content-item">

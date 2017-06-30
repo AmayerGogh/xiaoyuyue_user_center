@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
   input: JoinBookingInput = new JoinBookingInput();
+      href: string = document.location.href;
+    bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
   @ViewChild('replyBookingModel') modal: ModalDirective;
   constructor(
     injector: Injector,
@@ -42,12 +44,15 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     this.input.emailAddress = "";
     this.input.gender = 0;
 
+        if (this.href.indexOf("?") >= 0) {
+            this.bookingId = this.bookingId.split("?")[0];
+        }
     this._bookingServiceProxy
       .joinBooking(this.input)
       .subscribe(result => {
         this.close();
         // let bookedDetail = "?bookingname=" + result.bookingName + "&bookingcustomer=" + result.bookingCustomer + "&bookingdate=" + result.bookingDate + "&hourofday=" + result.hourOfDay;
-        this._router.navigate(['/booking/booked/'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
+        this._router.navigate(['/booking/booked/', this.bookingId], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
       });
   }
 

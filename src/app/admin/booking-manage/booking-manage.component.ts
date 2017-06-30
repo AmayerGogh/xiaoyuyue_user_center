@@ -2,7 +2,6 @@ import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { PersonBookingServiceProxy, PersonBookingOrderListDto } from "shared/service-proxies/service-proxies";
 import { AppConsts } from '@shared/AppConsts';
-import { SortDescriptor } from '@progress/kendo-data-query';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Status } from '@shared/service-proxies/service-proxies';
 import { AppStatus } from "shared/AppEnums";
@@ -19,7 +18,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   bookingName: string = "";
   pageSize: number = AppConsts.grid.defaultPageSize;
   skip: number = 0;
-  sort: Array<SortDescriptor> = [];
+  sort: any;
   actionFlag: boolean = false;
 
   @ViewChild('cancelBookingModal') cancelBookingModal: CancelBookingModalComponent;
@@ -44,9 +43,9 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
     if (state) {
       maxResultCount = state.take;
       skipCount = state.skip
-      if (state.sort.length > 0 && state.sort[0].dir) {
-        sorting = state.sort[0].field + " " + state.sort[0].dir;
-      }
+      // if (state.sort.length > 0 && state.sort[0].dir) {
+      //   sorting = state.sort[0].field + " " + state.sort[0].dir;
+      // }
     }
 
     this._personBookingServiceProxy
