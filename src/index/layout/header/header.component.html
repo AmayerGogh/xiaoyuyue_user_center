@@ -5,10 +5,10 @@
     </div>
 
     <div class="sub-menu" *ngIf="isShowSubMenuFlag">
-        <div class="sub-menu-item"><a href="#">首页</a></div>
-        <div class="sub-menu-item"><a href="#">了解</a></div>
-        <div class="sub-menu-item"><a href="#">公众号</a></div>
-        <div class="sub-menu-item"><a href="#">应用场景</a></div>
-        <div class="sub-menu-item"><a href="#">关于我们</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu()"><a href="#">首页</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu()"><a href="#">了解</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu()"><a href="#page1">公众号</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu()"><a href="#page2">应用场景</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu()"><a href="#page3">关于我们</a></div>
     </div>
 </div>
