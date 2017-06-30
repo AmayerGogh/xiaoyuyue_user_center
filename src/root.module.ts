@@ -18,6 +18,7 @@ import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
 
 import { NgxAniModule } from 'ngxani';
 import { AppModule } from "app";
+import { IndexModule } from './index/main.module';
 
 export function appInitializerFactory(injector: Injector) {
     return () => {
@@ -62,6 +63,7 @@ export function getRemoteServiceBaseUrl(): string {
         BrowserModule,
         BrowserAnimationsModule,
         AppModule,
+        IndexModule,
         CommonModule.forRoot(),
         AbpModule,
         ServiceProxyModule,
