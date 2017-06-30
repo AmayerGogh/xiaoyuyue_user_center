@@ -17,10 +17,23 @@
             font-size: 22px;
         }
     }
+    .sub-menu.ani {
+        transition: all 0.6s cubic-bezier(.4, 0.01, 0, 0.96)
+    }
+    .sub-menu.ani.fade-in {
+        transform: translateY(0);
+    }
+    .sub-menu.ani.fade-out {
+        transform: translateY(-490px);
+    }
     .sub-menu {
-        position: absolute;
         width: 100%;
+        position: absolute;
+        z-index: -1;
         font-size: 0;
+        .sub-menu-item.active {
+            background-color: rgba(221, 182, 130, 0.75);
+        }
         .sub-menu-item {
             height: 66px;
             line-height: 66px;
