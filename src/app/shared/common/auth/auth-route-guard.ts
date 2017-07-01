@@ -11,6 +11,7 @@ import {
     CanActivateChild
 } from '@angular/router';
 import { UtilsService } from '@abp/utils/utils.service';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild {
@@ -19,20 +20,13 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
         private _permissionChecker: PermissionCheckerService,
         private _router: Router,
         private _utilsService: UtilsService,
+        private _appAuthService: AppAuthService,
         private _sessionService: AppSessionService,
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {
-            let exdate = new Date()
-            exdate.setDate(exdate.getDate() + 1)
-            UrlHelper.redirectUrl = location.href;
-            this._utilsService.deleteCookie("UrlHelper.redirectUrl", '/');
-            // 测试域名
-            let domainArr = ["http://vapps.oicp.io/", "http://localhost:5201/"]
-            if (domainArr.indexOf(location.href) < 0) {
-                this._utilsService.setCookieValue("UrlHelper.redirectUrl", location.href, exdate, '/');
-            }
+            this._appAuthService.recordRedirectUrl();
             this._router.navigate(['/auth/login']);
             return false;
         }

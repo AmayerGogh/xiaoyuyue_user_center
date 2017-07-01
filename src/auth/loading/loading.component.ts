@@ -31,7 +31,7 @@ export class LoadingComponent implements OnInit {
                     if (this.externalLoginProviders[i].name == "WeChatMP") {
                         let authBaseUrl = "https://open.weixin.qq.com/connect/oauth2/authorize";
                         let appid = this.externalLoginProviders[i].clientId;
-                        let redirect_url = AppConsts.appBaseUrl + '/auth/login' + '?providerName=' + ExternalLoginProvider.WECHATMP;
+                        let redirect_url = AppConsts.appBaseUrl + '/auth/loading' + '?providerName=' + ExternalLoginProvider.WECHATMP;
                         let response_type = "code";
                         let scope = "snsapi_userinfo";
 
