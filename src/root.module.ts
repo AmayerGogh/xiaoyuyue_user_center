@@ -18,6 +18,7 @@ import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
 
 import { NgxAniModule } from 'ngxani';
 import { AppModule } from "app";
+import { IndexModule } from './index/main.module';
 
 export function appInitializerFactory(injector: Injector) {
     return () => {
@@ -33,11 +34,6 @@ export function appInitializerFactory(injector: Injector) {
                             $('body').attr('class', 'page-md page-header-fixed page-sidebar-closed-hide-logo page-footer-fixed theme-2');
                         } else {
                             $('body').attr('class', 'page-md login');
-                        }
-
-                        //tenant specific custom css
-                        if (appSessionService.tenant && appSessionService.tenant.customCssId) {
-                            $('head').append('<link id="TenantCustomCss" href="' + AppConsts.remoteServiceBaseUrl + '/TenantCustomization/GetCustomCss?id=' + appSessionService.tenant.customCssId + '" rel="stylesheet"/>');
                         }
 
                         abp.ui.clearBusy();
@@ -62,6 +58,7 @@ export function getRemoteServiceBaseUrl(): string {
         BrowserModule,
         BrowserAnimationsModule,
         AppModule,
+        IndexModule,
         CommonModule.forRoot(),
         AbpModule,
         ServiceProxyModule,

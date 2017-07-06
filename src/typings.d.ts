@@ -15,42 +15,9 @@
 
 declare var System: any;
 
-declare var App: any; //Related to Metronic
-declare var Layout: any; //Related to Metronic
-
-interface JQuery {
-    Jcrop(...any): any;
-}
-
-interface JQuery {
-    daterangepicker(...any): any;
-}
-
 interface JQuery {
     slimScroll(...any): any;
 }
-
-interface JQuery {
-    timeago(...any): any;
-}
-
-
-/**
- * jQuery selectpicker
- */
-
-interface JQuery {
-    selectpicker(...any): any;
-}
-
-/**
- * bootstrap multiselect
- */
-
-interface JQuery {
-    multiselect(...any): any;
-}
-
 
 // interface JQuery {
 //     backstretch(...any): any;
@@ -58,32 +25,16 @@ interface JQuery {
 
 
 /**
- * jQuery sparkline
- */
-
-interface JQuery {
-    sparkline(...any): any;
-}
-
-/**
- * jQuery Bootstrap Switch
- */
-
-interface JQuery {
-    bootstrapSwitch(...any): any;
-}
-
-/**
  * Morris
  */
 
-declare namespace morris {
+/*declare namespace morris {
     interface IAreaOptions {
         gridEnabled?: boolean;
         //gridLineColor?: string;
         padding?: number;
     }
-}
+}*/
 
 /**
  * rtl-detect

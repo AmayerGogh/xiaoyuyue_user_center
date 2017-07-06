@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { PersonBookingServiceProxy, GetPersonBookingOrderOutput } from 'shared/service-proxies/service-proxies';
+import { PerBookingOrderServiceProxy, GetPersonBookingOrderOutput } from 'shared/service-proxies/service-proxies';
 import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
@@ -15,7 +15,7 @@ export class BookingDetailComponent extends AppComponentBase implements OnInit {
 
   constructor(
     injector: Injector,
-    private _personBookingServiceProxy: PersonBookingServiceProxy
+    private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
   ) {
     super(injector);
   }
@@ -25,7 +25,7 @@ export class BookingDetailComponent extends AppComponentBase implements OnInit {
   }
 
   loadBookingOrderForEditData(bookingId: number) {
-    this._personBookingServiceProxy
+    this._perBookingOrderServiceProxy
     .getBookingOrderForEdit(bookingId)
     .subscribe( result => {
       this.bookingOrderForEdidData = result;

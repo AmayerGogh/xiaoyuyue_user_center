@@ -28,69 +28,38 @@
         "mobile": false,
         "styles": [
             "assets/metronic/global/plugins/jquery-file-upload/css/jquery.fileupload.css",
-            "assets/metronic/global/css/plugins-md.css",
             "assets/metronic/global/css/components-md.css",
             "assets/metronic/libs/bootstrap/css/bootstrap.css",
 
-            "../node_modules/simple-line-icons/css/simple-line-icons.css",
-            "../node_modules/font-awesome/css/font-awesome.css",
-            "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-
-            "../node_modules/jquery.uniform/dist/css/default.css",
             "../node_modules/toastr/build/toastr.css",
             "../node_modules/sweetalert/dist/sweetalert.css",
-            "../node_modules/jstree/dist/themes/default/style.min.css",
-            "../node_modules/morris.js/morris.css",
 
-            "../external_libs/Jcrop/css/Jcrop.css",
-            "../node_modules/bootstrap-daterangepicker/daterangepicker.css",
-            "../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
-            "../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css",
-            "../node_modules/bootstrap-select/dist/css/bootstrap-select.css",
+            "assets/common/styles/xiaoyuyue-icon.css",
+            "assets/common/styles/flatpickr.css",
 
             "../src/app/shared/layout.scss",
             "../src/app/shared/core.less",
             "../src/app/shared/skin.less",
-
-            "assets/common/styles/xiaoyuyue-icon.css",
-            "assets/common/styles/flatpickr.css",
             "styles.css"
         ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js",
-            "../node_modules/jquery-migrate/dist/jquery-migrate.min.js",
             "../node_modules/jqueryui/jquery-ui.min.js",
             "../node_modules/js-cookie/src/js.cookie.js",
-            "../node_modules/jstree/dist/jstree.min.js",
 
             "../node_modules/fastclick/lib/fastclick.js",
-
-            "../node_modules/bootstrap/dist/js/bootstrap.js",
-            "../node_modules/bootstrap-select/dist/js/bootstrap-select.js",
-            "../node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect.js",
-            "../node_modules/tether/dist/js/tether.min.js",
-
             "../node_modules/lodash/lodash.min.js",
-            "../node_modules/moment/min/moment.min.js",
-
-            "../external_libs/Jcrop/js/Jcrop.js",
-            "../node_modules/morris.js/morris.min.js",
-            "../node_modules/raphael/raphael.min.js",
-            "../node_modules/jquery-sparkline/jquery.sparkline.min.js",
+            "../node_modules/bootstrap/dist/js/bootstrap.js",
+            "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
             "../node_modules/jquery-backstretch/jquery.backstretch.min.js",
 
             "../node_modules/toastr/toastr.js",
-            "../node_modules/sweetalert/dist/sweetalert-dev.js",
             "../node_modules/block-ui/jquery.blockUI.js",
             "../node_modules/spin.js/spin.min.js",
             "../node_modules/spin.js/jquery.spin.js",
+            "../node_modules/sweetalert/dist/sweetalert-dev.js",
+            "../node_modules/moment/min/moment.min.js",
 
-            "../node_modules/bootstrap-daterangepicker/daterangepicker.js",
-            "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
-            "../node_modules/timeago/jquery.timeago.js",
-            "../node_modules/localforage/dist/localforage.min.js",
-            "../node_modules/bootstrap-switch/dist/js/bootstrap-switch.min.js",
-            "../node_modules/push.js/push.min.js",
 
             "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
@@ -104,12 +73,11 @@
             "../src/assets/common/js/plupload-2.1.9.dev.js",
             "../node_modules/qiniu-js/dist/qiniu.js",
 
-            "../src/assets/metronic/global/scripts/app.js",
-            "../src/assets/metronic/admin/layout4/scripts/layout.js",
-            "../src/assets/metronic/layouts/global/scripts/quick-sidebar.js",
-
             "../src/assets/common/js/flatpickr.js",
-            "../src/assets/common/js/flatpickr-zh.js"
+            "../src/assets/common/js/flatpickr-zh.js",
+
+            "../node_modules/timeago/jquery.timeago.js",
+            "../node_modules/bootstrap-select/dist/js/bootstrap-select.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

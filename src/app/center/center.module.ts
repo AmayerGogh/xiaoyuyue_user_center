@@ -10,7 +10,7 @@ import { UtilsModule } from '@shared/utils/utils.module'
 import { AppStorageService } from "shared/services/storage.service";
 import { TenantService } from "shared/services/tenant.service";
 
-import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
+import { SMSTemplateServiceProxy, OrgBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy } from "shared/service-proxies/service-proxies";
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { AdminRoutingModule } from "app/center/center-routing.module";
 import { CenterComponent } from "app/center/center.component";
@@ -46,7 +46,7 @@ import { MainUserComponent } from 'app/center/main-user/main-user.component';
         ProfileServiceProxy,
         TenantService,
         SMSTemplateServiceProxy,
-        OrganizationBookingServiceProxy,
+        OrgBookingServiceProxy,
         PictureServiceProxy,
         OutletServiceServiceProxy
     ]

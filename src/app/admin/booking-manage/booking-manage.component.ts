@@ -1,9 +1,9 @@
 import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { PersonBookingServiceProxy, PersonBookingOrderListDto } from "shared/service-proxies/service-proxies";
+import { PerBookingOrderServiceProxy } from "shared/service-proxies/service-proxies";
 import { AppConsts } from '@shared/AppConsts';
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { Status } from '@shared/service-proxies/service-proxies';
+import { Status3, BookingOrderListDto } from '@shared/service-proxies/service-proxies';
 import { AppStatus } from "shared/AppEnums";
 import { CancelBookingModalComponent } from "app/admin/cancel-booking-modal/cancel-booking-modal.component";
 
@@ -13,8 +13,8 @@ import { CancelBookingModalComponent } from "app/admin/cancel-booking-modal/canc
   styleUrls: ['./booking-manage.component.scss']
 })
 export class BookingManageComponent extends AppComponentBase implements OnInit {
-  status: Status[] = [AppStatus.State1, AppStatus.State2, AppStatus.State5];
-  personBookingDatas: PersonBookingOrderListDto[];
+  personBookingDatas: BookingOrderListDto[];
+  status: Status3[] = [AppStatus.State1, AppStatus.State2, AppStatus.State5];
   bookingName: string = "";
   pageSize: number = AppConsts.grid.defaultPageSize;
   skip: number = 0;
@@ -26,7 +26,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   constructor(
     injector: Injector,
     private _router: Router,
-    private _personBookingServiceProxy: PersonBookingServiceProxy
+    private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
   ) {
     super(
       injector
@@ -48,7 +48,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
       // }
     }
 
-    this._personBookingServiceProxy
+    this._perBookingOrderServiceProxy
       .getBookingOrders(this.bookingName, this.status , sorting, maxResultCount, skipCount)
       .subscribe(result => {
         this.personBookingDatas = result.items;
