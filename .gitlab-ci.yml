@@ -11,7 +11,6 @@ cache:
   untracked: true
   paths:
     - node_modules/
-    - dist/
 
 # 安装依赖
 # install_deps:
