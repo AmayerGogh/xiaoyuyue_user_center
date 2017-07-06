@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Injector } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { PersonBookingServiceProxy, CancelBookingOrderInput } from 'shared/service-proxies/service-proxies';
+import { PerBookingOrderServiceProxy, CancelBookingOrderInput } from 'shared/service-proxies/service-proxies';
 import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
@@ -14,7 +14,7 @@ export class CancelBookingModalComponent extends AppComponentBase implements OnI
 
   constructor(
     injector: Injector,
-    private _personBookingServiceProxy: PersonBookingServiceProxy
+    private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
   ) {
     super(injector);
   }
@@ -32,7 +32,7 @@ export class CancelBookingModalComponent extends AppComponentBase implements OnI
   }
 
   submit() {
-    this._personBookingServiceProxy
+    this._perBookingOrderServiceProxy
       .cancelBookingOrder(this.input)
       .subscribe( result => {
         this.notify.success("取消成功!");

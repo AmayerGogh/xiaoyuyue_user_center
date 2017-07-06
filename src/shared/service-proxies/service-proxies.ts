@@ -1732,6 +1732,56 @@ export class FileServiceProxy {
         return null;
     }
 
+    /**
+     * 获取存储空间域名
+     * @return Success
+     */
+    getBucketDomain(bucket: string): Observable<string> {
+        let url_ = this.baseUrl + "/api/services/app/File/GetBucketDomain?";
+        if (bucket !== undefined)
+            url_ += "bucket=" + encodeURIComponent("" + bucket) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBucketDomain(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBucketDomain(response));
+                } catch (e) {
+                    return <Observable<string>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<string>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBucketDomain(response: Response): string {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: string = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 !== undefined ? resultData200 : null;
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
     protected throwException(message: string, status: number, response: string, result?: any): any {
         if(result !== null && result !== undefined)
             throw result;
@@ -2942,455 +2992,6 @@ export class NotificationServiceProxy {
 }
 
 @Injectable()
-export class OrganizationBookingServiceProxy {
-    private http: Http = null; 
-    private baseUrl: string = undefined; 
-    protected jsonParseReviver: (key: string, value: any) => any = undefined;
-
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http; 
-        this.baseUrl = baseUrl ? baseUrl : ""; 
-    }
-
-    /**
-     * 获取所有预约
-     * @name 预约名称
-     * @outletId 门店Id
-     * @isActive 是否激活
-     * @startCreationTime 开始创建时间
-     * @endCreationTime 结束创建时间
-     * @sorting 排序字段 (eg:Id DESC)
-     * @maxResultCount 最大结果数量(等同:PageSize)
-     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @return Success
-     */
-    getBookings(name: string, outletId: number, isActive: boolean, startCreationTime: moment.Moment, endCreationTime: moment.Moment, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingListDto> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetBookings?";
-        if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
-        if (outletId !== undefined)
-            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
-        if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
-        if (startCreationTime !== undefined)
-            url_ += "StartCreationTime=" + encodeURIComponent("" + startCreationTime.toJSON()) + "&"; 
-        if (endCreationTime !== undefined)
-            url_ += "EndCreationTime=" + encodeURIComponent("" + endCreationTime.toJSON()) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookings(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetBookings(response));
-                } catch (e) {
-                    return <Observable<PagedResultDtoOfBookingListDto>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<PagedResultDtoOfBookingListDto>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetBookings(response: Response): PagedResultDtoOfBookingListDto {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: PagedResultDtoOfBookingListDto = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? PagedResultDtoOfBookingListDto.fromJS(resultData200) : new PagedResultDtoOfBookingListDto();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 获取预约详情
-     * @return Success
-     */
-    getBookingForEdit(id: number): Observable<GetBookingForEditOutput> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetBookingForEdit?";
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookingForEdit(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetBookingForEdit(response));
-                } catch (e) {
-                    return <Observable<GetBookingForEditOutput>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<GetBookingForEditOutput>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetBookingForEdit(response: Response): GetBookingForEditOutput {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: GetBookingForEditOutput = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? GetBookingForEditOutput.fromJS(resultData200) : new GetBookingForEditOutput();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 创建或更新预约
-     * @return Success
-     */
-    createOrUpdateBooking(input: CreateOrUpdateBookingInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/CreateOrUpdateBooking";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processCreateOrUpdateBooking(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processCreateOrUpdateBooking(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    protected processCreateOrUpdateBooking(response: Response): void {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            return null;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 激活/禁用 预约
-     * @return Success
-     */
-    activedOrDisableBooking(input: ActiveOrDisableInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/ActivedOrDisableBooking";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processActivedOrDisableBooking(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processActivedOrDisableBooking(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    protected processActivedOrDisableBooking(response: Response): void {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            return null;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 删除预约
-     * @return Success
-     */
-    deleteBooking(id: number): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/DeleteBooking?";
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "delete",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processDeleteBooking(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processDeleteBooking(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    protected processDeleteBooking(response: Response): void {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            return null;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 获取时间
-     * @return Success
-     */
-    getItemDatetime(tenantId: number, name: string, description: string, hint: string, templateId: number, contactorId: number, contactor_Name: string, contactor_PhoneNumber: string, contactor_WechatQrcodeUrl: string, contactor_TenantId: number, contactor_OutletId: number, contactor_IsDefault: boolean, contactor_CreationTime: moment.Moment, contactor_CreatorUserId: number, contactor_Id: number, outletId: number, outlet_TenantId: number, outlet_Name: string, outlet_Longitude: string, outlet_BusinessHours: string, outlet_Province: string, outlet_ProvinceId: number, outlet_City: string, outlet_CityId: number, outlet_District: string, outlet_DistrictId: number, outlet_DetailAddress: string, outlet_PictureId: number, outlet_IsActive: boolean, outlet_Contactors: any[], outlet_IsDeleted: boolean, outlet_DeleterUserId: number, outlet_DeletionTime: moment.Moment, outlet_LastModificationTime: moment.Moment, outlet_LastModifierUserId: number, outlet_CreationTime: moment.Moment, outlet_CreatorUserId: number, outlet_Id: number, needGender: boolean, needAge: boolean, needEmail: boolean, sticked: boolean, isActive: boolean, pV: number, uV: number, items: any[], pictures: any[], isDeleted: boolean, deleterUserId: number, deletionTime: moment.Moment, lastModificationTime: moment.Moment, lastModifierUserId: number, creationTime: moment.Moment, creatorUserId: number, id: number): Observable<string[]> {
-        let url_ = this.baseUrl + "/api/services/app/OrganizationBooking/GetItemDatetime?";
-        if (tenantId !== undefined)
-            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
-        if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
-        if (description !== undefined)
-            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
-        if (hint !== undefined)
-            url_ += "Hint=" + encodeURIComponent("" + hint) + "&"; 
-        if (templateId !== undefined)
-            url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&"; 
-        if (contactorId !== undefined)
-            url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&"; 
-        if (contactor_Name !== undefined)
-            url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&"; 
-        if (contactor_PhoneNumber !== undefined)
-            url_ += "Contactor.PhoneNumber=" + encodeURIComponent("" + contactor_PhoneNumber) + "&"; 
-        if (contactor_WechatQrcodeUrl !== undefined)
-            url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&"; 
-        if (contactor_TenantId !== undefined)
-            url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&"; 
-        if (contactor_OutletId !== undefined)
-            url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&"; 
-        if (contactor_IsDefault !== undefined)
-            url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&"; 
-        if (contactor_CreationTime !== undefined)
-            url_ += "Contactor.CreationTime=" + encodeURIComponent("" + contactor_CreationTime.toJSON()) + "&"; 
-        if (contactor_CreatorUserId !== undefined)
-            url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&"; 
-        if (contactor_Id !== undefined)
-            url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&"; 
-        if (outletId !== undefined)
-            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
-        if (outlet_TenantId !== undefined)
-            url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&"; 
-        if (outlet_Name !== undefined)
-            url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&"; 
-        if (outlet_Longitude !== undefined)
-            url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&"; 
-        if (outlet_BusinessHours !== undefined)
-            url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&"; 
-        if (outlet_Province !== undefined)
-            url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&"; 
-        if (outlet_ProvinceId !== undefined)
-            url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&"; 
-        if (outlet_City !== undefined)
-            url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&"; 
-        if (outlet_CityId !== undefined)
-            url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&"; 
-        if (outlet_District !== undefined)
-            url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&"; 
-        if (outlet_DistrictId !== undefined)
-            url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&"; 
-        if (outlet_DetailAddress !== undefined)
-            url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&"; 
-        if (outlet_PictureId !== undefined)
-            url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&"; 
-        if (outlet_IsActive !== undefined)
-            url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&"; 
-        if (outlet_Contactors !== undefined)
-            outlet_Contactors.forEach((item, index) => { 
-                for (let attr in item)
-                    url_ += "Outlet.Contactors[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
-            });
-        if (outlet_IsDeleted !== undefined)
-            url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&"; 
-        if (outlet_DeleterUserId !== undefined)
-            url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&"; 
-        if (outlet_DeletionTime !== undefined)
-            url_ += "Outlet.DeletionTime=" + encodeURIComponent("" + outlet_DeletionTime.toJSON()) + "&"; 
-        if (outlet_LastModificationTime !== undefined)
-            url_ += "Outlet.LastModificationTime=" + encodeURIComponent("" + outlet_LastModificationTime.toJSON()) + "&"; 
-        if (outlet_LastModifierUserId !== undefined)
-            url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&"; 
-        if (outlet_CreationTime !== undefined)
-            url_ += "Outlet.CreationTime=" + encodeURIComponent("" + outlet_CreationTime.toJSON()) + "&"; 
-        if (outlet_CreatorUserId !== undefined)
-            url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&"; 
-        if (outlet_Id !== undefined)
-            url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&"; 
-        if (needGender !== undefined)
-            url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&"; 
-        if (needAge !== undefined)
-            url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&"; 
-        if (needEmail !== undefined)
-            url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&"; 
-        if (sticked !== undefined)
-            url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&"; 
-        if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
-        if (pV !== undefined)
-            url_ += "PV=" + encodeURIComponent("" + pV) + "&"; 
-        if (uV !== undefined)
-            url_ += "UV=" + encodeURIComponent("" + uV) + "&"; 
-        if (items !== undefined)
-            items.forEach((item, index) => { 
-                for (let attr in item)
-                    url_ += "Items[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
-            });
-        if (pictures !== undefined)
-            pictures.forEach((item, index) => { 
-                for (let attr in item)
-                    url_ += "Pictures[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
-            });
-        if (isDeleted !== undefined)
-            url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&"; 
-        if (deleterUserId !== undefined)
-            url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&"; 
-        if (deletionTime !== undefined)
-            url_ += "DeletionTime=" + encodeURIComponent("" + deletionTime.toJSON()) + "&"; 
-        if (lastModificationTime !== undefined)
-            url_ += "LastModificationTime=" + encodeURIComponent("" + lastModificationTime.toJSON()) + "&"; 
-        if (lastModifierUserId !== undefined)
-            url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&"; 
-        if (creationTime !== undefined)
-            url_ += "CreationTime=" + encodeURIComponent("" + creationTime.toJSON()) + "&"; 
-        if (creatorUserId !== undefined)
-            url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&"; 
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetItemDatetime(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetItemDatetime(response));
-                } catch (e) {
-                    return <Observable<string[]>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<string[]>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetItemDatetime(response: Response): string[] {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: string[] = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            if (resultData200 && resultData200.constructor === Array) {
-                result200 = [];
-                for (let item of resultData200)
-                    result200.push(item);
-            }
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    protected throwException(message: string, status: number, response: string, result?: any): any {
-        if(result !== null && result !== undefined)
-            throw result;
-        else
-            throw new SwaggerException(message, status, response, null);
-    }
-}
-
-@Injectable()
 export class OrganizationUnitServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -3838,6 +3439,779 @@ export class OrganizationUnitServiceProxy {
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 !== undefined ? resultData200 : null;
             return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
+export class OrgBookingServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * 获取所有预约
+     * @name 预约名称
+     * @outletId 门店Id
+     * @isActive 是否激活
+     * @startCreationTime 开始创建时间
+     * @endCreationTime 结束创建时间
+     * @sorting 排序字段 (eg:Id DESC)
+     * @maxResultCount 最大结果数量(等同:PageSize)
+     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @return Success
+     */
+    getBookings(name: string, outletId: number, isActive: boolean, startCreationTime: moment.Moment, endCreationTime: moment.Moment, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingListDto> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookings?";
+        if (name !== undefined)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+        if (outletId !== undefined)
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        if (startCreationTime !== undefined)
+            url_ += "StartCreationTime=" + encodeURIComponent("" + startCreationTime.toJSON()) + "&"; 
+        if (endCreationTime !== undefined)
+            url_ += "EndCreationTime=" + encodeURIComponent("" + endCreationTime.toJSON()) + "&"; 
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBookings(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBookings(response));
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfBookingListDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfBookingListDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBookings(response: Response): PagedResultDtoOfBookingListDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: PagedResultDtoOfBookingListDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfBookingListDto.fromJS(resultData200) : new PagedResultDtoOfBookingListDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 获取预约详情
+     * @return Success
+     */
+    getBookingForEdit(id: number): Observable<GetBookingForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookingForEdit?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBookingForEdit(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBookingForEdit(response));
+                } catch (e) {
+                    return <Observable<GetBookingForEditOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetBookingForEditOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBookingForEdit(response: Response): GetBookingForEditOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetBookingForEditOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetBookingForEditOutput.fromJS(resultData200) : new GetBookingForEditOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 创建或更新预约
+     * @return Success
+     */
+    createOrUpdateBooking(input: CreateOrUpdateBookingInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/CreateOrUpdateBooking";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processCreateOrUpdateBooking(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processCreateOrUpdateBooking(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processCreateOrUpdateBooking(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 激活/禁用 预约
+     * @return Success
+     */
+    activedOrDisableBooking(input: ActiveOrDisableInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/ActivedOrDisableBooking";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processActivedOrDisableBooking(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processActivedOrDisableBooking(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processActivedOrDisableBooking(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 删除预约
+     * @return Success
+     */
+    deleteBooking(id: number): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/DeleteBooking?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processDeleteBooking(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processDeleteBooking(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processDeleteBooking(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 获取时间
+     * @return Success
+     */
+    getItemDatetime(tenantId: number, name: string, description: string, hint: string, templateId: number, contactorId: number, contactor_Name: string, contactor_PhoneNumber: string, contactor_WechatQrcodeUrl: string, contactor_TenantId: number, contactor_OutletId: number, contactor_IsDefault: boolean, contactor_CreationTime: moment.Moment, contactor_CreatorUserId: number, contactor_Id: number, outletId: number, outlet_TenantId: number, outlet_Name: string, outlet_Longitude: string, outlet_PhoneNum: string, outlet_BusinessHours: string, outlet_Province: string, outlet_ProvinceId: number, outlet_City: string, outlet_CityId: number, outlet_District: string, outlet_DistrictId: number, outlet_DetailAddress: string, outlet_PictureId: number, outlet_IsActive: boolean, outlet_Contactors: any[], outlet_IsDeleted: boolean, outlet_DeleterUserId: number, outlet_DeletionTime: moment.Moment, outlet_LastModificationTime: moment.Moment, outlet_LastModifierUserId: number, outlet_CreationTime: moment.Moment, outlet_CreatorUserId: number, outlet_Id: number, needGender: boolean, needAge: boolean, needEmail: boolean, sticked: boolean, isActive: boolean, pV: number, uV: number, items: any[], pictures: any[], isDeleted: boolean, deleterUserId: number, deletionTime: moment.Moment, lastModificationTime: moment.Moment, lastModifierUserId: number, creationTime: moment.Moment, creatorUserId: number, id: number): Observable<string[]> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetItemDatetime?";
+        if (tenantId !== undefined)
+            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
+        if (name !== undefined)
+            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+        if (description !== undefined)
+            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
+        if (hint !== undefined)
+            url_ += "Hint=" + encodeURIComponent("" + hint) + "&"; 
+        if (templateId !== undefined)
+            url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&"; 
+        if (contactorId !== undefined)
+            url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&"; 
+        if (contactor_Name !== undefined)
+            url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&"; 
+        if (contactor_PhoneNumber !== undefined)
+            url_ += "Contactor.PhoneNumber=" + encodeURIComponent("" + contactor_PhoneNumber) + "&"; 
+        if (contactor_WechatQrcodeUrl !== undefined)
+            url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&"; 
+        if (contactor_TenantId !== undefined)
+            url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&"; 
+        if (contactor_OutletId !== undefined)
+            url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&"; 
+        if (contactor_IsDefault !== undefined)
+            url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&"; 
+        if (contactor_CreationTime !== undefined)
+            url_ += "Contactor.CreationTime=" + encodeURIComponent("" + contactor_CreationTime.toJSON()) + "&"; 
+        if (contactor_CreatorUserId !== undefined)
+            url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&"; 
+        if (contactor_Id !== undefined)
+            url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&"; 
+        if (outletId !== undefined)
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+        if (outlet_TenantId !== undefined)
+            url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&"; 
+        if (outlet_Name !== undefined)
+            url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&"; 
+        if (outlet_Longitude !== undefined)
+            url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&"; 
+        if (outlet_PhoneNum !== undefined)
+            url_ += "Outlet.PhoneNum=" + encodeURIComponent("" + outlet_PhoneNum) + "&"; 
+        if (outlet_BusinessHours !== undefined)
+            url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&"; 
+        if (outlet_Province !== undefined)
+            url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&"; 
+        if (outlet_ProvinceId !== undefined)
+            url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&"; 
+        if (outlet_City !== undefined)
+            url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&"; 
+        if (outlet_CityId !== undefined)
+            url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&"; 
+        if (outlet_District !== undefined)
+            url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&"; 
+        if (outlet_DistrictId !== undefined)
+            url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&"; 
+        if (outlet_DetailAddress !== undefined)
+            url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&"; 
+        if (outlet_PictureId !== undefined)
+            url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&"; 
+        if (outlet_IsActive !== undefined)
+            url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&"; 
+        if (outlet_Contactors !== undefined)
+            outlet_Contactors.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Outlet.Contactors[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (outlet_IsDeleted !== undefined)
+            url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&"; 
+        if (outlet_DeleterUserId !== undefined)
+            url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&"; 
+        if (outlet_DeletionTime !== undefined)
+            url_ += "Outlet.DeletionTime=" + encodeURIComponent("" + outlet_DeletionTime.toJSON()) + "&"; 
+        if (outlet_LastModificationTime !== undefined)
+            url_ += "Outlet.LastModificationTime=" + encodeURIComponent("" + outlet_LastModificationTime.toJSON()) + "&"; 
+        if (outlet_LastModifierUserId !== undefined)
+            url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&"; 
+        if (outlet_CreationTime !== undefined)
+            url_ += "Outlet.CreationTime=" + encodeURIComponent("" + outlet_CreationTime.toJSON()) + "&"; 
+        if (outlet_CreatorUserId !== undefined)
+            url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&"; 
+        if (outlet_Id !== undefined)
+            url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&"; 
+        if (needGender !== undefined)
+            url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&"; 
+        if (needAge !== undefined)
+            url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&"; 
+        if (needEmail !== undefined)
+            url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&"; 
+        if (sticked !== undefined)
+            url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&"; 
+        if (isActive !== undefined)
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+        if (pV !== undefined)
+            url_ += "PV=" + encodeURIComponent("" + pV) + "&"; 
+        if (uV !== undefined)
+            url_ += "UV=" + encodeURIComponent("" + uV) + "&"; 
+        if (items !== undefined)
+            items.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Items[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (pictures !== undefined)
+            pictures.forEach((item, index) => { 
+                for (let attr in item)
+                    url_ += "Pictures[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
+            });
+        if (isDeleted !== undefined)
+            url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&"; 
+        if (deleterUserId !== undefined)
+            url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&"; 
+        if (deletionTime !== undefined)
+            url_ += "DeletionTime=" + encodeURIComponent("" + deletionTime.toJSON()) + "&"; 
+        if (lastModificationTime !== undefined)
+            url_ += "LastModificationTime=" + encodeURIComponent("" + lastModificationTime.toJSON()) + "&"; 
+        if (lastModifierUserId !== undefined)
+            url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&"; 
+        if (creationTime !== undefined)
+            url_ += "CreationTime=" + encodeURIComponent("" + creationTime.toJSON()) + "&"; 
+        if (creatorUserId !== undefined)
+            url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&"; 
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetItemDatetime(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetItemDatetime(response));
+                } catch (e) {
+                    return <Observable<string[]>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<string[]>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetItemDatetime(response: Response): string[] {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: string[] = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(item);
+            }
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
+export class OrgBookingOrderServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * 获取所有预约订单
+     * @bookingName 预约名称
+     * @customerName 客户名称
+     * @bookingDate 预约开始时间
+     * @startMinute 预约开始时间
+     * @endMinute 预约结束时间
+     * @phoneNumber 电话号码
+     * @gender 性别
+     * @creationDate 创建日期
+     * @status 预约状态
+     * @sorting 排序字段 (eg:Id DESC)
+     * @maxResultCount 最大结果数量(等同:PageSize)
+     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @return Success
+     */
+    getOrders(bookingName: string, customerName: string, bookingDate: moment.Moment, startMinute: number, endMinute: number, phoneNumber: string, gender: Gender, creationDate: moment.Moment, status: Status[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingOrderListDto> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrders?";
+        if (bookingName !== undefined)
+            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
+        if (customerName !== undefined)
+            url_ += "CustomerName=" + encodeURIComponent("" + customerName) + "&"; 
+        if (bookingDate !== undefined)
+            url_ += "BookingDate=" + encodeURIComponent("" + bookingDate.toJSON()) + "&"; 
+        if (startMinute !== undefined)
+            url_ += "StartMinute=" + encodeURIComponent("" + startMinute) + "&"; 
+        if (endMinute !== undefined)
+            url_ += "EndMinute=" + encodeURIComponent("" + endMinute) + "&"; 
+        if (phoneNumber !== undefined)
+            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&"; 
+        if (gender !== undefined)
+            url_ += "Gender=" + encodeURIComponent("" + gender) + "&"; 
+        if (creationDate !== undefined)
+            url_ += "CreationDate=" + encodeURIComponent("" + creationDate.toJSON()) + "&"; 
+        if (status !== undefined)
+            status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetOrders(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetOrders(response));
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfBookingOrderListDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfBookingOrderListDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetOrders(response: Response): PagedResultDtoOfBookingOrderListDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: PagedResultDtoOfBookingOrderListDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfBookingOrderListDto.fromJS(resultData200) : new PagedResultDtoOfBookingOrderListDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 获取某个预约所有订单
+     * @bookingId 预约Id
+     * @customerName 客户名称
+     * @bookingDate 预约开始时间
+     * @startMinute 预约开始时间
+     * @endMinute 预约结束时间
+     * @phoneNumber 电话号码
+     * @gender 性别
+     * @creationDate 创建日期
+     * @status 预约状态
+     * @sorting 排序字段 (eg:Id DESC)
+     * @maxResultCount 最大结果数量(等同:PageSize)
+     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @return Success
+     */
+    getOrders2Booking(bookingId: number, customerName: string, bookingDate: moment.Moment, startMinute: number, endMinute: number, phoneNumber: string, gender: Gender2, creationDate: moment.Moment, status: Status2[], sorting: string, maxResultCount: number, skipCount: number): Observable<BookingsOrderListDto> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrders2Booking?";
+        if (bookingId !== undefined)
+            url_ += "BookingId=" + encodeURIComponent("" + bookingId) + "&"; 
+        if (customerName !== undefined)
+            url_ += "CustomerName=" + encodeURIComponent("" + customerName) + "&"; 
+        if (bookingDate !== undefined)
+            url_ += "BookingDate=" + encodeURIComponent("" + bookingDate.toJSON()) + "&"; 
+        if (startMinute !== undefined)
+            url_ += "StartMinute=" + encodeURIComponent("" + startMinute) + "&"; 
+        if (endMinute !== undefined)
+            url_ += "EndMinute=" + encodeURIComponent("" + endMinute) + "&"; 
+        if (phoneNumber !== undefined)
+            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&"; 
+        if (gender !== undefined)
+            url_ += "Gender=" + encodeURIComponent("" + gender) + "&"; 
+        if (creationDate !== undefined)
+            url_ += "CreationDate=" + encodeURIComponent("" + creationDate.toJSON()) + "&"; 
+        if (status !== undefined)
+            status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetOrders2Booking(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetOrders2Booking(response));
+                } catch (e) {
+                    return <Observable<BookingsOrderListDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<BookingsOrderListDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetOrders2Booking(response: Response): BookingsOrderListDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: BookingsOrderListDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? BookingsOrderListDto.fromJS(resultData200) : new BookingsOrderListDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 批量确认预约订单
+     * @return Success
+     */
+    batchComfirmBookingOrder(input: BatchComfirmInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/BatchComfirmBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processBatchComfirmBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processBatchComfirmBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processBatchComfirmBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 确认预约订单
+     * @return Success
+     */
+    comfirmBookingOrder(input: EntityDtoOfInt64): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/ComfirmBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processComfirmBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processComfirmBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processComfirmBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 备注订单
+     * @return Success
+     */
+    remarkBookingOrder(input: RemarkBookingOrderInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/RemarkBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processRemarkBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processRemarkBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processRemarkBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -4452,6 +4826,228 @@ export class OutletServiceServiceProxy {
 }
 
 @Injectable()
+export class PerBookingOrderServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * 获取所有预约订单
+     * @bookingName 预约名称
+     * @status 预约状态
+     * @sorting 排序字段 (eg:Id DESC)
+     * @maxResultCount 最大结果数量(等同:PageSize)
+     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
+     * @return Success
+     */
+    getBookingOrders(bookingName: string, status: Status3[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingOrderListDto> {
+        let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrders?";
+        if (bookingName !== undefined)
+            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
+        if (status !== undefined)
+            status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+        if (maxResultCount !== undefined)
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+        if (skipCount !== undefined)
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBookingOrders(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBookingOrders(response));
+                } catch (e) {
+                    return <Observable<PagedResultDtoOfBookingOrderListDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<PagedResultDtoOfBookingOrderListDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBookingOrders(response: Response): PagedResultDtoOfBookingOrderListDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: PagedResultDtoOfBookingOrderListDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PagedResultDtoOfBookingOrderListDto.fromJS(resultData200) : new PagedResultDtoOfBookingOrderListDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 获取预约订单详情
+     * @return Success
+     */
+    getBookingOrderForEdit(id: number): Observable<GetPersonBookingOrderOutput> {
+        let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrderForEdit?";
+        if (id !== undefined)
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetBookingOrderForEdit(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetBookingOrderForEdit(response));
+                } catch (e) {
+                    return <Observable<GetPersonBookingOrderOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetPersonBookingOrderOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetBookingOrderForEdit(response: Response): GetPersonBookingOrderOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetPersonBookingOrderOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetPersonBookingOrderOutput.fromJS(resultData200) : new GetPersonBookingOrderOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 取消订单
+     * @return Success
+     */
+    cancelBookingOrder(input: CancelBookingOrderInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/CancelBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processCancelBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processCancelBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processCancelBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 置顶预约订单
+     * @return Success
+     */
+    stickedBookingOrder(input: StickedInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/StickedBookingOrder";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processStickedBookingOrder(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processStickedBookingOrder(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processStickedBookingOrder(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
 export class PermissionServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -4504,228 +5100,6 @@ export class PermissionServiceProxy {
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? ListResultDtoOfFlatPermissionWithLevelDto.fromJS(resultData200) : new ListResultDtoOfFlatPermissionWithLevelDto();
             return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    protected throwException(message: string, status: number, response: string, result?: any): any {
-        if(result !== null && result !== undefined)
-            throw result;
-        else
-            throw new SwaggerException(message, status, response, null);
-    }
-}
-
-@Injectable()
-export class PersonBookingServiceProxy {
-    private http: Http = null; 
-    private baseUrl: string = undefined; 
-    protected jsonParseReviver: (key: string, value: any) => any = undefined;
-
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
-        this.http = http; 
-        this.baseUrl = baseUrl ? baseUrl : ""; 
-    }
-
-    /**
-     * 获取所有预约订单
-     * @bookingName 预约名称
-     * @status 预约状态
-     * @sorting 排序字段 (eg:Id DESC)
-     * @maxResultCount 最大结果数量(等同:PageSize)
-     * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @return Success
-     */
-    getBookingOrders(bookingName: string, status: Status[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfPersonBookingOrderListDto> {
-        let url_ = this.baseUrl + "/api/services/app/PersonBooking/GetBookingOrders?";
-        if (bookingName !== undefined)
-            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
-        if (status !== undefined)
-            status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookingOrders(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetBookingOrders(response));
-                } catch (e) {
-                    return <Observable<PagedResultDtoOfPersonBookingOrderListDto>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<PagedResultDtoOfPersonBookingOrderListDto>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetBookingOrders(response: Response): PagedResultDtoOfPersonBookingOrderListDto {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: PagedResultDtoOfPersonBookingOrderListDto = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? PagedResultDtoOfPersonBookingOrderListDto.fromJS(resultData200) : new PagedResultDtoOfPersonBookingOrderListDto();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 获取预约订单详情
-     * @return Success
-     */
-    getBookingOrderForEdit(id: number): Observable<GetPersonBookingOrderOutput> {
-        let url_ = this.baseUrl + "/api/services/app/PersonBooking/GetBookingOrderForEdit?";
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetBookingOrderForEdit(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetBookingOrderForEdit(response));
-                } catch (e) {
-                    return <Observable<GetPersonBookingOrderOutput>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<GetPersonBookingOrderOutput>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetBookingOrderForEdit(response: Response): GetPersonBookingOrderOutput {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: GetPersonBookingOrderOutput = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? GetPersonBookingOrderOutput.fromJS(resultData200) : new GetPersonBookingOrderOutput();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 取消订单
-     * @return Success
-     */
-    cancelBookingOrder(input: CancelBookingOrderInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/PersonBooking/CancelBookingOrder";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processCancelBookingOrder(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processCancelBookingOrder(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    protected processCancelBookingOrder(response: Response): void {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            return null;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 置顶预约订单
-     * @return Success
-     */
-    stickedBookingOrder(input: StickedInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/PersonBooking/StickedBookingOrder";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(input ? input.toJS() : null);
-        
-        let options_ = {
-            body: content_,
-            method: "post",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processStickedBookingOrder(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processStickedBookingOrder(response));
-                } catch (e) {
-                    return <Observable<void>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<void>><any>Observable.throw(response);
-        });
-    }
-
-    protected processStickedBookingOrder(response: Response): void {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            return null;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -6354,19 +6728,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
+     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -7503,6 +7877,118 @@ export class TenantDashboardServiceProxy {
 }
 
 @Injectable()
+export class TenantInfoServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * 获取租户基本信息
+     * @return Success
+     */
+    getTenantInfoForEdit(): Observable<TenantInfoEditDto> {
+        let url_ = this.baseUrl + "/api/services/app/TenantInfo/GetTenantInfoForEdit";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetTenantInfoForEdit(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetTenantInfoForEdit(response));
+                } catch (e) {
+                    return <Observable<TenantInfoEditDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<TenantInfoEditDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetTenantInfoForEdit(response: Response): TenantInfoEditDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: TenantInfoEditDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? TenantInfoEditDto.fromJS(resultData200) : new TenantInfoEditDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 更新租户资料
+     * @return Success
+     */
+    updateTenantInfo(input: TenantInfoEditDto): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/TenantInfo/UpdateTenantInfo";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "put",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processUpdateTenantInfo(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processUpdateTenantInfo(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processUpdateTenantInfo(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
 export class TenantRegistrationServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -7719,11 +8205,11 @@ export class TenantSettingsServiceProxy {
     }
 
     /**
-     * 清除自定义Css
+     * 清除 Backgroud
      * @return Success
      */
-    clearCustomCss(): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/TenantSettings/ClearCustomCss";
+    clearBackgroundPicture(): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/TenantSettings/ClearBackgroundPicture";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -7738,11 +8224,11 @@ export class TenantSettingsServiceProxy {
         };
 
         return this.http.request(url_, options_).map((response) => {
-            return this.processClearCustomCss(response);
+            return this.processClearBackgroundPicture(response);
         }).catch((response: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processClearCustomCss(response));
+                    return Observable.of(this.processClearBackgroundPicture(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -7751,7 +8237,7 @@ export class TenantSettingsServiceProxy {
         });
     }
 
-    protected processClearCustomCss(response: Response): void {
+    protected processClearBackgroundPicture(response: Response): void {
         const responseText = response.text();
         const status = response.status; 
 
@@ -9879,8 +10365,12 @@ export class OrganizationInfoDto {
     name: string;
     /** 描述/机构宣传语 */
     description: string;
+    /** 宣传语 */
+    tagline: string;
     /** logo */
     logoUrl: string;
+    /** 背景图片 Id */
+    backgroundPictureUrl: string;
     /** 门店图片地址 */
     outletPictureUrl: string;
 
@@ -9888,7 +10378,9 @@ export class OrganizationInfoDto {
         if (data !== undefined) {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.description = data["description"] !== undefined ? data["description"] : undefined;
+            this.tagline = data["tagline"] !== undefined ? data["tagline"] : undefined;
             this.logoUrl = data["logoUrl"] !== undefined ? data["logoUrl"] : undefined;
+            this.backgroundPictureUrl = data["backgroundPictureUrl"] !== undefined ? data["backgroundPictureUrl"] : undefined;
             this.outletPictureUrl = data["outletPictureUrl"] !== undefined ? data["outletPictureUrl"] : undefined;
         }
     }
@@ -9901,7 +10393,9 @@ export class OrganizationInfoDto {
         data = data === undefined ? {} : data;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["description"] = this.description !== undefined ? this.description : undefined;
+        data["tagline"] = this.tagline !== undefined ? this.tagline : undefined;
         data["logoUrl"] = this.logoUrl !== undefined ? this.logoUrl : undefined;
+        data["backgroundPictureUrl"] = this.backgroundPictureUrl !== undefined ? this.backgroundPictureUrl : undefined;
         data["outletPictureUrl"] = this.outletPictureUrl !== undefined ? this.outletPictureUrl : undefined;
         return data; 
     }
@@ -9917,6 +10411,7 @@ export class OrganizationInfoDto {
 }
 
 export class JoinBookingInfoDto {
+    orgName: string;
     /** 项目名称 */
     name: string;
     /** 项目描述 */
@@ -9931,6 +10426,8 @@ export class JoinBookingInfoDto {
     contactorPhoneNum: string;
     /** 联系人微信 */
     contactorWechatUrl: string;
+    /** 门店名称 */
+    outletName: string;
     /** 门店地址 */
     outletAddress: string;
     /** 门店经纬度 */
@@ -9938,6 +10435,7 @@ export class JoinBookingInfoDto {
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.orgName = data["orgName"] !== undefined ? data["orgName"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.description = data["description"] !== undefined ? data["description"] : undefined;
             if (data["pictures"] && data["pictures"].constructor === Array) {
@@ -9949,6 +10447,7 @@ export class JoinBookingInfoDto {
             this.contactorName = data["contactorName"] !== undefined ? data["contactorName"] : undefined;
             this.contactorPhoneNum = data["contactorPhoneNum"] !== undefined ? data["contactorPhoneNum"] : undefined;
             this.contactorWechatUrl = data["contactorWechatUrl"] !== undefined ? data["contactorWechatUrl"] : undefined;
+            this.outletName = data["outletName"] !== undefined ? data["outletName"] : undefined;
             this.outletAddress = data["outletAddress"] !== undefined ? data["outletAddress"] : undefined;
             this.outletLongitude = data["outletLongitude"] !== undefined ? data["outletLongitude"] : undefined;
         }
@@ -9960,6 +10459,7 @@ export class JoinBookingInfoDto {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["orgName"] = this.orgName !== undefined ? this.orgName : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["description"] = this.description !== undefined ? this.description : undefined;
         if (this.pictures && this.pictures.constructor === Array) {
@@ -9971,6 +10471,7 @@ export class JoinBookingInfoDto {
         data["contactorName"] = this.contactorName !== undefined ? this.contactorName : undefined;
         data["contactorPhoneNum"] = this.contactorPhoneNum !== undefined ? this.contactorPhoneNum : undefined;
         data["contactorWechatUrl"] = this.contactorWechatUrl !== undefined ? this.contactorWechatUrl : undefined;
+        data["outletName"] = this.outletName !== undefined ? this.outletName : undefined;
         data["outletAddress"] = this.outletAddress !== undefined ? this.outletAddress : undefined;
         data["outletLongitude"] = this.outletLongitude !== undefined ? this.outletLongitude : undefined;
         return data; 
@@ -11089,6 +11590,8 @@ export class CreateOrUpdateEditionDto {
 
 /** 上传图片回调参数 */
 export class UploadPictureInput {
+    /** 空间名 */
+    bucket: string;
     /** 名称 */
     name: string;
     /** 图片 Key */
@@ -11102,6 +11605,7 @@ export class UploadPictureInput {
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.bucket = data["bucket"] !== undefined ? data["bucket"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.key = data["key"] !== undefined ? data["key"] : undefined;
             this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
@@ -11116,6 +11620,7 @@ export class UploadPictureInput {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["bucket"] = this.bucket !== undefined ? this.bucket : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["key"] = this.key !== undefined ? this.key : undefined;
         data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
@@ -11136,10 +11641,12 @@ export class UploadPictureInput {
 
 export class UploadPictureOutput {
     pictureId: number;
+    originalUrl: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.pictureId = data["pictureId"] !== undefined ? data["pictureId"] : undefined;
+            this.originalUrl = data["originalUrl"] !== undefined ? data["originalUrl"] : undefined;
         }
     }
 
@@ -11150,6 +11657,7 @@ export class UploadPictureOutput {
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["pictureId"] = this.pictureId !== undefined ? this.pictureId : undefined;
+        data["originalUrl"] = this.originalUrl !== undefined ? this.originalUrl : undefined;
         return data; 
     }
 
@@ -12717,6 +13225,319 @@ export class NotificationSubscriptionDto {
     }
 }
 
+export class ListResultDtoOfOrganizationUnitDto {
+    items: OrganizationUnitDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(OrganizationUnitDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultDtoOfOrganizationUnitDto {
+        return new ListResultDtoOfOrganizationUnitDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ListResultDtoOfOrganizationUnitDto(JSON.parse(json));
+    }
+}
+
+export class OrganizationUnitDto {
+    parentId: number;
+    code: string;
+    displayName: string;
+    memberCount: number;
+    lastModificationTime: moment.Moment;
+    lastModifierUserId: number;
+    creationTime: moment.Moment;
+    creatorUserId: number;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.parentId = data["parentId"] !== undefined ? data["parentId"] : undefined;
+            this.code = data["code"] !== undefined ? data["code"] : undefined;
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.memberCount = data["memberCount"] !== undefined ? data["memberCount"] : undefined;
+            this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : undefined;
+            this.lastModifierUserId = data["lastModifierUserId"] !== undefined ? data["lastModifierUserId"] : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): OrganizationUnitDto {
+        return new OrganizationUnitDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["parentId"] = this.parentId !== undefined ? this.parentId : undefined;
+        data["code"] = this.code !== undefined ? this.code : undefined;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["memberCount"] = this.memberCount !== undefined ? this.memberCount : undefined;
+        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined;
+        data["lastModifierUserId"] = this.lastModifierUserId !== undefined ? this.lastModifierUserId : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new OrganizationUnitDto(JSON.parse(json));
+    }
+}
+
+export class PagedResultDtoOfOrganizationUnitUserListDto {
+    totalCount: number;
+    items: OrganizationUnitUserListDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.totalCount = data["totalCount"] !== undefined ? data["totalCount"] : undefined;
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(OrganizationUnitUserListDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): PagedResultDtoOfOrganizationUnitUserListDto {
+        return new PagedResultDtoOfOrganizationUnitUserListDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["totalCount"] = this.totalCount !== undefined ? this.totalCount : undefined;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new PagedResultDtoOfOrganizationUnitUserListDto(JSON.parse(json));
+    }
+}
+
+export class OrganizationUnitUserListDto {
+    name: string;
+    surname: string;
+    userName: string;
+    emailAddress: string;
+    profilePictureId: number;
+    addedTime: moment.Moment;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.surname = data["surname"] !== undefined ? data["surname"] : undefined;
+            this.userName = data["userName"] !== undefined ? data["userName"] : undefined;
+            this.emailAddress = data["emailAddress"] !== undefined ? data["emailAddress"] : undefined;
+            this.profilePictureId = data["profilePictureId"] !== undefined ? data["profilePictureId"] : undefined;
+            this.addedTime = data["addedTime"] ? moment(data["addedTime"].toString()) : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): OrganizationUnitUserListDto {
+        return new OrganizationUnitUserListDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["surname"] = this.surname !== undefined ? this.surname : undefined;
+        data["userName"] = this.userName !== undefined ? this.userName : undefined;
+        data["emailAddress"] = this.emailAddress !== undefined ? this.emailAddress : undefined;
+        data["profilePictureId"] = this.profilePictureId !== undefined ? this.profilePictureId : undefined;
+        data["addedTime"] = this.addedTime ? this.addedTime.toISOString() : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new OrganizationUnitUserListDto(JSON.parse(json));
+    }
+}
+
+export class CreateOrganizationUnitInput {
+    /** 父节点Id(可空) */
+    parentId: number;
+    /** 显示名称 */
+    displayName: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.parentId = data["parentId"] !== undefined ? data["parentId"] : undefined;
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): CreateOrganizationUnitInput {
+        return new CreateOrganizationUnitInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["parentId"] = this.parentId !== undefined ? this.parentId : undefined;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new CreateOrganizationUnitInput(JSON.parse(json));
+    }
+}
+
+export class UpdateOrganizationUnitInput {
+    /** 组织单位Id(大于0) */
+    id: number;
+    /** 显示名称 */
+    displayName: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UpdateOrganizationUnitInput {
+        return new UpdateOrganizationUnitInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UpdateOrganizationUnitInput(JSON.parse(json));
+    }
+}
+
+export class MoveOrganizationUnitInput {
+    /** 组织单位Id(大于0) */
+    id: number;
+    /** 目标父节点Id(可空) */
+    newParentId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+            this.newParentId = data["newParentId"] !== undefined ? data["newParentId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): MoveOrganizationUnitInput {
+        return new MoveOrganizationUnitInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        data["newParentId"] = this.newParentId !== undefined ? this.newParentId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new MoveOrganizationUnitInput(JSON.parse(json));
+    }
+}
+
+export class UserToOrganizationUnitInput {
+    /** 用户 Id(大于0) */
+    userId: number;
+    /** 组织单位 Id(大于0) */
+    organizationUnitId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.userId = data["userId"] !== undefined ? data["userId"] : undefined;
+            this.organizationUnitId = data["organizationUnitId"] !== undefined ? data["organizationUnitId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): UserToOrganizationUnitInput {
+        return new UserToOrganizationUnitInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["userId"] = this.userId !== undefined ? this.userId : undefined;
+        data["organizationUnitId"] = this.organizationUnitId !== undefined ? this.organizationUnitId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new UserToOrganizationUnitInput(JSON.parse(json));
+    }
+}
+
 export class PagedResultDtoOfBookingListDto {
     totalCount: number;
     items: BookingListDto[];
@@ -13424,6 +14245,7 @@ export class Outlet {
     tenantId: number;
     name: string;
     longitude: string;
+    phoneNum: string;
     businessHours: string;
     province: string;
     provinceId: number;
@@ -13449,6 +14271,7 @@ export class Outlet {
             this.tenantId = data["tenantId"] !== undefined ? data["tenantId"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.longitude = data["longitude"] !== undefined ? data["longitude"] : undefined;
+            this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
             this.businessHours = data["businessHours"] !== undefined ? data["businessHours"] : undefined;
             this.province = data["province"] !== undefined ? data["province"] : undefined;
             this.provinceId = data["provinceId"] !== undefined ? data["provinceId"] : undefined;
@@ -13484,6 +14307,7 @@ export class Outlet {
         data["tenantId"] = this.tenantId !== undefined ? this.tenantId : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["longitude"] = this.longitude !== undefined ? this.longitude : undefined;
+        data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
         data["businessHours"] = this.businessHours !== undefined ? this.businessHours : undefined;
         data["province"] = this.province !== undefined ? this.province : undefined;
         data["provinceId"] = this.provinceId !== undefined ? this.provinceId : undefined;
@@ -13561,99 +14385,9 @@ export class BookingPicture {
     }
 }
 
-export class ListResultDtoOfOrganizationUnitDto {
-    items: OrganizationUnitDto[];
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            if (data["items"] && data["items"].constructor === Array) {
-                this.items = [];
-                for (let item of data["items"])
-                    this.items.push(OrganizationUnitDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ListResultDtoOfOrganizationUnitDto {
-        return new ListResultDtoOfOrganizationUnitDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        if (this.items && this.items.constructor === Array) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJS());
-        }
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new ListResultDtoOfOrganizationUnitDto(JSON.parse(json));
-    }
-}
-
-export class OrganizationUnitDto {
-    parentId: number;
-    code: string;
-    displayName: string;
-    memberCount: number;
-    lastModificationTime: moment.Moment;
-    lastModifierUserId: number;
-    creationTime: moment.Moment;
-    creatorUserId: number;
-    id: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.parentId = data["parentId"] !== undefined ? data["parentId"] : undefined;
-            this.code = data["code"] !== undefined ? data["code"] : undefined;
-            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
-            this.memberCount = data["memberCount"] !== undefined ? data["memberCount"] : undefined;
-            this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : undefined;
-            this.lastModifierUserId = data["lastModifierUserId"] !== undefined ? data["lastModifierUserId"] : undefined;
-            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
-            this.creatorUserId = data["creatorUserId"] !== undefined ? data["creatorUserId"] : undefined;
-            this.id = data["id"] !== undefined ? data["id"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): OrganizationUnitDto {
-        return new OrganizationUnitDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["parentId"] = this.parentId !== undefined ? this.parentId : undefined;
-        data["code"] = this.code !== undefined ? this.code : undefined;
-        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
-        data["memberCount"] = this.memberCount !== undefined ? this.memberCount : undefined;
-        data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : undefined;
-        data["lastModifierUserId"] = this.lastModifierUserId !== undefined ? this.lastModifierUserId : undefined;
-        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
-        data["creatorUserId"] = this.creatorUserId !== undefined ? this.creatorUserId : undefined;
-        data["id"] = this.id !== undefined ? this.id : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new OrganizationUnitDto(JSON.parse(json));
-    }
-}
-
-export class PagedResultDtoOfOrganizationUnitUserListDto {
+export class PagedResultDtoOfBookingOrderListDto {
     totalCount: number;
-    items: OrganizationUnitUserListDto[];
+    items: BookingOrderListDto[];
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -13661,13 +14395,13 @@ export class PagedResultDtoOfOrganizationUnitUserListDto {
             if (data["items"] && data["items"].constructor === Array) {
                 this.items = [];
                 for (let item of data["items"])
-                    this.items.push(OrganizationUnitUserListDto.fromJS(item));
+                    this.items.push(BookingOrderListDto.fromJS(item));
             }
         }
     }
 
-    static fromJS(data: any): PagedResultDtoOfOrganizationUnitUserListDto {
-        return new PagedResultDtoOfOrganizationUnitUserListDto(data);
+    static fromJS(data: any): PagedResultDtoOfBookingOrderListDto {
+        return new PagedResultDtoOfBookingOrderListDto(data);
     }
 
     toJS(data?: any) {
@@ -13687,43 +14421,74 @@ export class PagedResultDtoOfOrganizationUnitUserListDto {
 
     clone() {
         const json = this.toJSON();
-        return new PagedResultDtoOfOrganizationUnitUserListDto(JSON.parse(json));
+        return new PagedResultDtoOfBookingOrderListDto(JSON.parse(json));
     }
 }
 
-export class OrganizationUnitUserListDto {
-    name: string;
-    surname: string;
-    userName: string;
+/** 预约列表 */
+export class BookingOrderListDto {
+    /** 应约人名称 */
+    customerName: string;
+    /** 预约名称 */
+    bookingName: string;
+    /** 门店名称 */
+    outletName: string;
+    /** 预约日期 */
+    bookingDate: moment.Moment;
+    /** 预约时间 */
+    hourOfDay: string;
+    /** 预约人数 */
+    subscriberNum: number;
+    /** 订单状态 */
+    status: BookingOrderListDtoStatus;
+    /** 手机号码 */
+    phoneNum: string;
+    /** 备注 */
+    remark: string;
+    /** 置顶 */
+    sticked: boolean;
+    /** 邮箱 */
     emailAddress: string;
-    profilePictureId: number;
-    addedTime: moment.Moment;
+    /** 创建时间 */
+    creationTime: moment.Moment;
     id: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
-            this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.surname = data["surname"] !== undefined ? data["surname"] : undefined;
-            this.userName = data["userName"] !== undefined ? data["userName"] : undefined;
+            this.customerName = data["customerName"] !== undefined ? data["customerName"] : undefined;
+            this.bookingName = data["bookingName"] !== undefined ? data["bookingName"] : undefined;
+            this.outletName = data["outletName"] !== undefined ? data["outletName"] : undefined;
+            this.bookingDate = data["bookingDate"] ? moment(data["bookingDate"].toString()) : undefined;
+            this.hourOfDay = data["hourOfDay"] !== undefined ? data["hourOfDay"] : undefined;
+            this.subscriberNum = data["subscriberNum"] !== undefined ? data["subscriberNum"] : undefined;
+            this.status = data["status"] !== undefined ? data["status"] : undefined;
+            this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
+            this.remark = data["remark"] !== undefined ? data["remark"] : undefined;
+            this.sticked = data["sticked"] !== undefined ? data["sticked"] : undefined;
             this.emailAddress = data["emailAddress"] !== undefined ? data["emailAddress"] : undefined;
-            this.profilePictureId = data["profilePictureId"] !== undefined ? data["profilePictureId"] : undefined;
-            this.addedTime = data["addedTime"] ? moment(data["addedTime"].toString()) : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
 
-    static fromJS(data: any): OrganizationUnitUserListDto {
-        return new OrganizationUnitUserListDto(data);
+    static fromJS(data: any): BookingOrderListDto {
+        return new BookingOrderListDto(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        data["name"] = this.name !== undefined ? this.name : undefined;
-        data["surname"] = this.surname !== undefined ? this.surname : undefined;
-        data["userName"] = this.userName !== undefined ? this.userName : undefined;
+        data["customerName"] = this.customerName !== undefined ? this.customerName : undefined;
+        data["bookingName"] = this.bookingName !== undefined ? this.bookingName : undefined;
+        data["outletName"] = this.outletName !== undefined ? this.outletName : undefined;
+        data["bookingDate"] = this.bookingDate ? this.bookingDate.toISOString() : undefined;
+        data["hourOfDay"] = this.hourOfDay !== undefined ? this.hourOfDay : undefined;
+        data["subscriberNum"] = this.subscriberNum !== undefined ? this.subscriberNum : undefined;
+        data["status"] = this.status !== undefined ? this.status : undefined;
+        data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
+        data["remark"] = this.remark !== undefined ? this.remark : undefined;
+        data["sticked"] = this.sticked !== undefined ? this.sticked : undefined;
         data["emailAddress"] = this.emailAddress !== undefined ? this.emailAddress : undefined;
-        data["profilePictureId"] = this.profilePictureId !== undefined ? this.profilePictureId : undefined;
-        data["addedTime"] = this.addedTime ? this.addedTime.toISOString() : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -13734,31 +14499,29 @@ export class OrganizationUnitUserListDto {
 
     clone() {
         const json = this.toJSON();
-        return new OrganizationUnitUserListDto(JSON.parse(json));
+        return new BookingOrderListDto(JSON.parse(json));
     }
 }
 
-export class CreateOrganizationUnitInput {
-    /** 父节点Id(可空) */
-    parentId: number;
-    /** 显示名称 */
-    displayName: string;
+export class BookingsOrderListDto {
+    totalBookingNum: number;
+    bookingOrders: PagedResultDtoOfBookingOrderListDto;
 
     constructor(data?: any) {
         if (data !== undefined) {
-            this.parentId = data["parentId"] !== undefined ? data["parentId"] : undefined;
-            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.totalBookingNum = data["totalBookingNum"] !== undefined ? data["totalBookingNum"] : undefined;
+            this.bookingOrders = data["bookingOrders"] ? PagedResultDtoOfBookingOrderListDto.fromJS(data["bookingOrders"]) : undefined;
         }
     }
 
-    static fromJS(data: any): CreateOrganizationUnitInput {
-        return new CreateOrganizationUnitInput(data);
+    static fromJS(data: any): BookingsOrderListDto {
+        return new BookingsOrderListDto(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        data["parentId"] = this.parentId !== undefined ? this.parentId : undefined;
-        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["totalBookingNum"] = this.totalBookingNum !== undefined ? this.totalBookingNum : undefined;
+        data["bookingOrders"] = this.bookingOrders ? this.bookingOrders.toJS() : undefined;
         return data; 
     }
 
@@ -13768,31 +14531,64 @@ export class CreateOrganizationUnitInput {
 
     clone() {
         const json = this.toJSON();
-        return new CreateOrganizationUnitInput(JSON.parse(json));
+        return new BookingsOrderListDto(JSON.parse(json));
     }
 }
 
-export class UpdateOrganizationUnitInput {
-    /** 组织单位Id(大于0) */
+export class BatchComfirmInput {
+    /** 预约订单id数组 */
+    ids: number[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["ids"] && data["ids"].constructor === Array) {
+                this.ids = [];
+                for (let item of data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): BatchComfirmInput {
+        return new BatchComfirmInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.ids && this.ids.constructor === Array) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BatchComfirmInput(JSON.parse(json));
+    }
+}
+
+export class EntityDtoOfInt64 {
     id: number;
-    /** 显示名称 */
-    displayName: string;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.id = data["id"] !== undefined ? data["id"] : undefined;
-            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
         }
     }
 
-    static fromJS(data: any): UpdateOrganizationUnitInput {
-        return new UpdateOrganizationUnitInput(data);
+    static fromJS(data: any): EntityDtoOfInt64 {
+        return new EntityDtoOfInt64(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
         data["id"] = this.id !== undefined ? this.id : undefined;
-        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
         return data; 
     }
 
@@ -13802,31 +14598,30 @@ export class UpdateOrganizationUnitInput {
 
     clone() {
         const json = this.toJSON();
-        return new UpdateOrganizationUnitInput(JSON.parse(json));
+        return new EntityDtoOfInt64(JSON.parse(json));
     }
 }
 
-export class MoveOrganizationUnitInput {
-    /** 组织单位Id(大于0) */
+export class RemarkBookingOrderInput {
+    /** 备注 */
+    remark: string;
     id: number;
-    /** 目标父节点Id(可空) */
-    newParentId: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.remark = data["remark"] !== undefined ? data["remark"] : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
-            this.newParentId = data["newParentId"] !== undefined ? data["newParentId"] : undefined;
         }
     }
 
-    static fromJS(data: any): MoveOrganizationUnitInput {
-        return new MoveOrganizationUnitInput(data);
+    static fromJS(data: any): RemarkBookingOrderInput {
+        return new RemarkBookingOrderInput(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["remark"] = this.remark !== undefined ? this.remark : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
-        data["newParentId"] = this.newParentId !== undefined ? this.newParentId : undefined;
         return data; 
     }
 
@@ -13836,41 +14631,7 @@ export class MoveOrganizationUnitInput {
 
     clone() {
         const json = this.toJSON();
-        return new MoveOrganizationUnitInput(JSON.parse(json));
-    }
-}
-
-export class UserToOrganizationUnitInput {
-    /** 用户 Id(大于0) */
-    userId: number;
-    /** 组织单位 Id(大于0) */
-    organizationUnitId: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.userId = data["userId"] !== undefined ? data["userId"] : undefined;
-            this.organizationUnitId = data["organizationUnitId"] !== undefined ? data["organizationUnitId"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): UserToOrganizationUnitInput {
-        return new UserToOrganizationUnitInput(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["userId"] = this.userId !== undefined ? this.userId : undefined;
-        data["organizationUnitId"] = this.organizationUnitId !== undefined ? this.organizationUnitId : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new UserToOrganizationUnitInput(JSON.parse(json));
+        return new RemarkBookingOrderInput(JSON.parse(json));
     }
 }
 
@@ -13922,11 +14683,11 @@ export class OutletListDto {
     /** 营业时间 */
     businessHours: string;
     /** 省份 */
-    provinceId: string;
+    province: string;
     /** 城市 */
-    cityId: string;
+    city: string;
     /** 区域 */
-    districtId: string;
+    district: string;
     /** 详细地址 */
     detailAddress: string;
     /** 图片url */
@@ -13942,9 +14703,9 @@ export class OutletListDto {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.longitude = data["longitude"] !== undefined ? data["longitude"] : undefined;
             this.businessHours = data["businessHours"] !== undefined ? data["businessHours"] : undefined;
-            this.provinceId = data["provinceId"] !== undefined ? data["provinceId"] : undefined;
-            this.cityId = data["cityId"] !== undefined ? data["cityId"] : undefined;
-            this.districtId = data["districtId"] !== undefined ? data["districtId"] : undefined;
+            this.province = data["province"] !== undefined ? data["province"] : undefined;
+            this.city = data["city"] !== undefined ? data["city"] : undefined;
+            this.district = data["district"] !== undefined ? data["district"] : undefined;
             this.detailAddress = data["detailAddress"] !== undefined ? data["detailAddress"] : undefined;
             this.pictureUrl = data["pictureUrl"] !== undefined ? data["pictureUrl"] : undefined;
             this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
@@ -13962,9 +14723,9 @@ export class OutletListDto {
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["longitude"] = this.longitude !== undefined ? this.longitude : undefined;
         data["businessHours"] = this.businessHours !== undefined ? this.businessHours : undefined;
-        data["provinceId"] = this.provinceId !== undefined ? this.provinceId : undefined;
-        data["cityId"] = this.cityId !== undefined ? this.cityId : undefined;
-        data["districtId"] = this.districtId !== undefined ? this.districtId : undefined;
+        data["province"] = this.province !== undefined ? this.province : undefined;
+        data["city"] = this.city !== undefined ? this.city : undefined;
+        data["district"] = this.district !== undefined ? this.district : undefined;
         data["detailAddress"] = this.detailAddress !== undefined ? this.detailAddress : undefined;
         data["pictureUrl"] = this.pictureUrl !== undefined ? this.pictureUrl : undefined;
         data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
@@ -14120,6 +14881,8 @@ export class OutletEditDto {
     longitude: string;
     /** 营业时间 */
     businessHours: string;
+    /** 电话号码 */
+    phoneNum: string;
     /** 省份(必填) */
     provinceId: number;
     /** 城市(必填) */
@@ -14141,6 +14904,7 @@ export class OutletEditDto {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.longitude = data["longitude"] !== undefined ? data["longitude"] : undefined;
             this.businessHours = data["businessHours"] !== undefined ? data["businessHours"] : undefined;
+            this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
             this.provinceId = data["provinceId"] !== undefined ? data["provinceId"] : undefined;
             this.cityId = data["cityId"] !== undefined ? data["cityId"] : undefined;
             this.districtId = data["districtId"] !== undefined ? data["districtId"] : undefined;
@@ -14161,6 +14925,7 @@ export class OutletEditDto {
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["longitude"] = this.longitude !== undefined ? this.longitude : undefined;
         data["businessHours"] = this.businessHours !== undefined ? this.businessHours : undefined;
+        data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
         data["provinceId"] = this.provinceId !== undefined ? this.provinceId : undefined;
         data["cityId"] = this.cityId !== undefined ? this.cityId : undefined;
         data["districtId"] = this.districtId !== undefined ? this.districtId : undefined;
@@ -14220,191 +14985,6 @@ export class CreateOrUpdateOutletInput {
     clone() {
         const json = this.toJSON();
         return new CreateOrUpdateOutletInput(JSON.parse(json));
-    }
-}
-
-export class ListResultDtoOfFlatPermissionWithLevelDto {
-    items: FlatPermissionWithLevelDto[];
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            if (data["items"] && data["items"].constructor === Array) {
-                this.items = [];
-                for (let item of data["items"])
-                    this.items.push(FlatPermissionWithLevelDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): ListResultDtoOfFlatPermissionWithLevelDto {
-        return new ListResultDtoOfFlatPermissionWithLevelDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        if (this.items && this.items.constructor === Array) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJS());
-        }
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new ListResultDtoOfFlatPermissionWithLevelDto(JSON.parse(json));
-    }
-}
-
-export class FlatPermissionWithLevelDto {
-    /** 权限等级 */
-    level: number;
-    /** 父权限名称 */
-    parentName: string;
-    /** (系统)名称 */
-    name: string;
-    /** 显示名称 */
-    displayName: string;
-    /** 描述 */
-    description: string;
-    /** 默认授予 */
-    isGrantedByDefault: boolean;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.level = data["level"] !== undefined ? data["level"] : undefined;
-            this.parentName = data["parentName"] !== undefined ? data["parentName"] : undefined;
-            this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
-            this.description = data["description"] !== undefined ? data["description"] : undefined;
-            this.isGrantedByDefault = data["isGrantedByDefault"] !== undefined ? data["isGrantedByDefault"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): FlatPermissionWithLevelDto {
-        return new FlatPermissionWithLevelDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["level"] = this.level !== undefined ? this.level : undefined;
-        data["parentName"] = this.parentName !== undefined ? this.parentName : undefined;
-        data["name"] = this.name !== undefined ? this.name : undefined;
-        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
-        data["description"] = this.description !== undefined ? this.description : undefined;
-        data["isGrantedByDefault"] = this.isGrantedByDefault !== undefined ? this.isGrantedByDefault : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new FlatPermissionWithLevelDto(JSON.parse(json));
-    }
-}
-
-export class PagedResultDtoOfPersonBookingOrderListDto {
-    totalCount: number;
-    items: PersonBookingOrderListDto[];
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.totalCount = data["totalCount"] !== undefined ? data["totalCount"] : undefined;
-            if (data["items"] && data["items"].constructor === Array) {
-                this.items = [];
-                for (let item of data["items"])
-                    this.items.push(PersonBookingOrderListDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): PagedResultDtoOfPersonBookingOrderListDto {
-        return new PagedResultDtoOfPersonBookingOrderListDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["totalCount"] = this.totalCount !== undefined ? this.totalCount : undefined;
-        if (this.items && this.items.constructor === Array) {
-            data["items"] = [];
-            for (let item of this.items)
-                data["items"].push(item.toJS());
-        }
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new PagedResultDtoOfPersonBookingOrderListDto(JSON.parse(json));
-    }
-}
-
-/** 预约列表 */
-export class PersonBookingOrderListDto {
-    /** 预约名称 */
-    bookingName: string;
-    /** 门店名称 */
-    outletName: string;
-    /** 预约时间 */
-    bookingDate: moment.Moment;
-    /** 预约人数 */
-    bookingNum: number;
-    /** 订单状态 */
-    status: PersonBookingOrderListDtoStatus;
-    /** 手机号码 */
-    phoneNum: string;
-    /** 置顶 */
-    sticked: boolean;
-    id: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.bookingName = data["bookingName"] !== undefined ? data["bookingName"] : undefined;
-            this.outletName = data["outletName"] !== undefined ? data["outletName"] : undefined;
-            this.bookingDate = data["bookingDate"] ? moment(data["bookingDate"].toString()) : undefined;
-            this.bookingNum = data["bookingNum"] !== undefined ? data["bookingNum"] : undefined;
-            this.status = data["status"] !== undefined ? data["status"] : undefined;
-            this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
-            this.sticked = data["sticked"] !== undefined ? data["sticked"] : undefined;
-            this.id = data["id"] !== undefined ? data["id"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): PersonBookingOrderListDto {
-        return new PersonBookingOrderListDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["bookingName"] = this.bookingName !== undefined ? this.bookingName : undefined;
-        data["outletName"] = this.outletName !== undefined ? this.outletName : undefined;
-        data["bookingDate"] = this.bookingDate ? this.bookingDate.toISOString() : undefined;
-        data["bookingNum"] = this.bookingNum !== undefined ? this.bookingNum : undefined;
-        data["status"] = this.status !== undefined ? this.status : undefined;
-        data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
-        data["sticked"] = this.sticked !== undefined ? this.sticked : undefined;
-        data["id"] = this.id !== undefined ? this.id : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new PersonBookingOrderListDto(JSON.parse(json));
     }
 }
 
@@ -14509,7 +15089,7 @@ export class BookingOrderInfo {
     /** 预约人数 */
     bookingNum: number;
     /** 温馨提示 */
-    hit: string;
+    hint: string;
     /** 客户名称 */
     customerName: string;
     /** 电话号码 */
@@ -14531,7 +15111,7 @@ export class BookingOrderInfo {
             this.bookingData = data["bookingData"] ? moment(data["bookingData"].toString()) : undefined;
             this.hourOfDay = data["hourOfDay"] !== undefined ? data["hourOfDay"] : undefined;
             this.bookingNum = data["bookingNum"] !== undefined ? data["bookingNum"] : undefined;
-            this.hit = data["hit"] !== undefined ? data["hit"] : undefined;
+            this.hint = data["hint"] !== undefined ? data["hint"] : undefined;
             this.customerName = data["customerName"] !== undefined ? data["customerName"] : undefined;
             this.phoneNum = data["phoneNum"] !== undefined ? data["phoneNum"] : undefined;
             this.emailAddress = data["emailAddress"] !== undefined ? data["emailAddress"] : undefined;
@@ -14552,7 +15132,7 @@ export class BookingOrderInfo {
         data["bookingData"] = this.bookingData ? this.bookingData.toISOString() : undefined;
         data["hourOfDay"] = this.hourOfDay !== undefined ? this.hourOfDay : undefined;
         data["bookingNum"] = this.bookingNum !== undefined ? this.bookingNum : undefined;
-        data["hit"] = this.hit !== undefined ? this.hit : undefined;
+        data["hint"] = this.hint !== undefined ? this.hint : undefined;
         data["customerName"] = this.customerName !== undefined ? this.customerName : undefined;
         data["phoneNum"] = this.phoneNum !== undefined ? this.phoneNum : undefined;
         data["emailAddress"] = this.emailAddress !== undefined ? this.emailAddress : undefined;
@@ -14637,6 +15217,93 @@ export class StickedInput {
     clone() {
         const json = this.toJSON();
         return new StickedInput(JSON.parse(json));
+    }
+}
+
+export class ListResultDtoOfFlatPermissionWithLevelDto {
+    items: FlatPermissionWithLevelDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(FlatPermissionWithLevelDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): ListResultDtoOfFlatPermissionWithLevelDto {
+        return new ListResultDtoOfFlatPermissionWithLevelDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ListResultDtoOfFlatPermissionWithLevelDto(JSON.parse(json));
+    }
+}
+
+export class FlatPermissionWithLevelDto {
+    /** 权限等级 */
+    level: number;
+    /** 父权限名称 */
+    parentName: string;
+    /** (系统)名称 */
+    name: string;
+    /** 显示名称 */
+    displayName: string;
+    /** 描述 */
+    description: string;
+    /** 默认授予 */
+    isGrantedByDefault: boolean;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.level = data["level"] !== undefined ? data["level"] : undefined;
+            this.parentName = data["parentName"] !== undefined ? data["parentName"] : undefined;
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.description = data["description"] !== undefined ? data["description"] : undefined;
+            this.isGrantedByDefault = data["isGrantedByDefault"] !== undefined ? data["isGrantedByDefault"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): FlatPermissionWithLevelDto {
+        return new FlatPermissionWithLevelDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["level"] = this.level !== undefined ? this.level : undefined;
+        data["parentName"] = this.parentName !== undefined ? this.parentName : undefined;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["description"] = this.description !== undefined ? this.description : undefined;
+        data["isGrantedByDefault"] = this.isGrantedByDefault !== undefined ? this.isGrantedByDefault : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new FlatPermissionWithLevelDto(JSON.parse(json));
     }
 }
 
@@ -15445,9 +16112,7 @@ export class TenantLoginInfoDto {
     tenancyName: string;
     name: string;
     editionDisplayName: string;
-    logoId: string;
-    logoFileType: string;
-    customCssId: string;
+    logoId: number;
     id: number;
 
     constructor(data?: any) {
@@ -15456,8 +16121,6 @@ export class TenantLoginInfoDto {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.editionDisplayName = data["editionDisplayName"] !== undefined ? data["editionDisplayName"] : undefined;
             this.logoId = data["logoId"] !== undefined ? data["logoId"] : undefined;
-            this.logoFileType = data["logoFileType"] !== undefined ? data["logoFileType"] : undefined;
-            this.customCssId = data["customCssId"] !== undefined ? data["customCssId"] : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
@@ -15472,8 +16135,6 @@ export class TenantLoginInfoDto {
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["editionDisplayName"] = this.editionDisplayName !== undefined ? this.editionDisplayName : undefined;
         data["logoId"] = this.logoId !== undefined ? this.logoId : undefined;
-        data["logoFileType"] = this.logoFileType !== undefined ? this.logoFileType : undefined;
-        data["customCssId"] = this.customCssId !== undefined ? this.customCssId : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -16796,6 +17457,60 @@ export class GetMemberActivityOutput {
     }
 }
 
+export class TenantInfoEditDto {
+    /** 机构名称/租户名 */
+    tenancyName: string;
+    /** 宣传语 */
+    tagline: string;
+    /** 描述 */
+    description: string;
+    /** Logo 图片 Id */
+    logoId: number;
+    /** Logo 图片 Url */
+    logoUrl: string;
+    /** 背景图片 Id */
+    backgroundPictureId: number;
+    /** 背景图片 Url */
+    backgroundPictureUrl: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
+            this.tagline = data["tagline"] !== undefined ? data["tagline"] : undefined;
+            this.description = data["description"] !== undefined ? data["description"] : undefined;
+            this.logoId = data["logoId"] !== undefined ? data["logoId"] : undefined;
+            this.logoUrl = data["logoUrl"] !== undefined ? data["logoUrl"] : undefined;
+            this.backgroundPictureId = data["backgroundPictureId"] !== undefined ? data["backgroundPictureId"] : undefined;
+            this.backgroundPictureUrl = data["backgroundPictureUrl"] !== undefined ? data["backgroundPictureUrl"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): TenantInfoEditDto {
+        return new TenantInfoEditDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
+        data["tagline"] = this.tagline !== undefined ? this.tagline : undefined;
+        data["description"] = this.description !== undefined ? this.description : undefined;
+        data["logoId"] = this.logoId !== undefined ? this.logoId : undefined;
+        data["logoUrl"] = this.logoUrl !== undefined ? this.logoUrl : undefined;
+        data["backgroundPictureId"] = this.backgroundPictureId !== undefined ? this.backgroundPictureId : undefined;
+        data["backgroundPictureUrl"] = this.backgroundPictureUrl !== undefined ? this.backgroundPictureUrl : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new TenantInfoEditDto(JSON.parse(json));
+    }
+}
+
 export class RegisterTenantInput {
     /** 租户名称 */
     tenancyName: string;
@@ -17939,35 +18654,6 @@ export class ExternalUserLoginDto {
     }
 }
 
-export class EntityDtoOfInt64 {
-    id: number;
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.id = data["id"] !== undefined ? data["id"] : undefined;
-        }
-    }
-
-    static fromJS(data: any): EntityDtoOfInt64 {
-        return new EntityDtoOfInt64(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["id"] = this.id !== undefined ? this.id : undefined;
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new EntityDtoOfInt64(JSON.parse(json));
-    }
-}
-
 export class UpdateUserPermissionsInput {
     /** 用户Id */
     id: number;
@@ -18398,7 +19084,37 @@ export enum State {
     _1 = 1, 
 }
 
+/** 性别 */
+export enum Gender {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+}
+
 export enum Status {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+}
+
+/** 性别 */
+export enum Gender2 {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum Status2 {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+    _4 = 4, 
+    _5 = 5, 
+}
+
+export enum Status3 {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 
@@ -18454,7 +19170,7 @@ export enum TenantNotificationSeverity {
     _4 = 4, 
 }
 
-export enum PersonBookingOrderListDtoStatus {
+export enum BookingOrderListDtoStatus {
     _1 = 1, 
     _2 = 2, 
     _3 = 3, 

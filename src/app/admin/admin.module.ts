@@ -10,7 +10,7 @@ import { UtilsModule } from '@shared/utils/utils.module'
 import { AppStorageService } from "shared/services/storage.service";
 import { TenantService } from "shared/services/tenant.service";
 
-import { SMSTemplateServiceProxy, OrganizationBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy, PersonBookingServiceProxy } from 'shared/service-proxies/service-proxies';
+import { SMSTemplateServiceProxy,OrgBookingServiceProxy, PictureServiceProxy, OutletServiceServiceProxy, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 import { AppCommonModule } from "app/shared/common/app-common.module";
 import { AdminHeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -50,10 +50,10 @@ import { CancelBookingModalComponent } from 'app/admin/cancel-booking-modal/canc
         AppStorageService,
         TenantService,
         SMSTemplateServiceProxy,
-        OrganizationBookingServiceProxy,
         PictureServiceProxy,
         OutletServiceServiceProxy,
-        PersonBookingServiceProxy
+        PerBookingOrderServiceProxy,
+        OrgBookingServiceProxy
     ]
 })
 export class BookingOrderModule { }
