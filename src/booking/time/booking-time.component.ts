@@ -17,6 +17,7 @@ import { UtilsService } from '@abp/utils/utils.service';
   encapsulation: ViewEncapsulation.None
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit {
+  defaultEnableBookingDate: string[] = ["1970-01-01"];
   selectIndex: number = 0;
   enableBookingDate: Date[] = [];
   selectDate: Date = undefined;
@@ -69,7 +70,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
       .subscribe(result => {
         this.availableDateItemData = result.availableDateItem;
         // 测试, 如果没有选择时间段,那么就赋值默认的一个id
-        this.input.bookingItemId = this.availableDateItemData[0].hasOwnProperty("times") ? this.availableDateItemData[0].times[0].id : 0;
+        this.input.bookingItemId = this.availableDateItemData[0] ? this.availableDateItemData[0].times[0].id : 0;
         for (let i = 0; i < result.availableDateItem.length; i++) {
           this.enableBookingDate.push(new Date(result.availableDateItem[i].date.toDate()));
         }
@@ -79,7 +80,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
           minDate: "today",
           "locale": "zh",
           disableMobile: "true",
-          enable: self.enableBookingDate,
+          enable: self.enableBookingDate.length == 0 ? self.defaultEnableBookingDate : self.enableBookingDate,
           defaultDate: self.enableBookingDate[0],
           onChange: function (selectedDates, dateStr, instance) {
             self.input.date = moment(new Date(selectedDates));

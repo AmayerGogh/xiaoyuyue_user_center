@@ -16,7 +16,8 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   personBookingDatas: BookingOrderListDto[];
   status: Status3[] = [AppStatus.State1, AppStatus.State2, AppStatus.State5];
   bookingName: string = "";
-  pageSize: number = AppConsts.grid.defaultPageSize;
+  // pageSize: number = AppConsts.grid.defaultPageSize;
+  pageSize: number;
   skip: number = 0;
   sort: any;
   actionFlag: boolean = false;
