@@ -21,6 +21,7 @@ import { BookingService } from "shared/services/booking.service";
 import { OptimalBookingTimeModelComponent } from './time/optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './time/reply-booking-model/reply-booking-model.component';
 import { BookedComponent } from './booked/booked.component';
+import { FooterAdComponent } from "booking/layout/footer-ad/footer-ad.component";
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { BookedComponent } from './booked/booked.component';
         BookingRatingComponent,
         OptimalBookingTimeModelComponent,
         ReplyBookingModelComponent,
-        BookedComponent
+        BookedComponent,
+        FooterAdComponent
     ],
     providers: [
         BookingServiceProxy,

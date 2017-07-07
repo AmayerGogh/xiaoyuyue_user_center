@@ -25,7 +25,7 @@ import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
 @NgModule({
     declarations: [
         AppComponent,
-        SideBarComponent
+        SideBarComponent,
     ],
     imports: [
         ngCommon.CommonModule,

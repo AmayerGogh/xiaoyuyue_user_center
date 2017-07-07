@@ -1,12 +1,12 @@
 <div class="header" *ngIf="organizationInfoData">
     <div class="bg-wrap">
-        <img class="bg-tenant" src="/assets/common/images/booking/booking-bg.png" alt="机构背景">
+        <img class="bg-tenant" [src]="organizationInfoData.outletPictureUrl" alt="机构背景">
         <span class="bg-cover"></span>
     </div>
 
     <div class="content-wrap box-shadow">
-        <div class="tenant-avatar"><img src="/assets/common/images/booking/booking-logo.jpg" width="100%" height="100%" alt="logo"></div>
+        <div class="tenant-avatar"><img [src]="organizationInfoData.logoUrl" width="100%" height="100%" alt="logo"></div>
         <div class="tenant-name">{{organizationInfoData.name}}</div>
-        <div class="tenant-banner">机构宣传语</div>
+        <div class="tenant-banner">{{organizationInfoData.tagline}}</div>
     </div>
 </div>

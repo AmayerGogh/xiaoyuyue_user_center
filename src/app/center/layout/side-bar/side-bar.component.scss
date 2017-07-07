@@ -23,6 +23,12 @@
             height: 52px;
             line-height: 52px;
             text-align: center;
+            color: #808080;
+            .icon {
+                font-size: 22px;
+                margin-right: 10px;
+                vertical-align: sub;
+            }
         }
         .menu-item.active>.item {
             color: #FF9641;

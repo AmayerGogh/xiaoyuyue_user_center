@@ -34,7 +34,7 @@ export class AdminSideBarComponent implements OnInit {
     })
   }
 
-  layout() {
+  logout() {
     this._authService.logout();
   }
 

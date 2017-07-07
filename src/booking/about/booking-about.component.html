@@ -3,8 +3,8 @@
         <div class="intro-wrap">{{businessAboutData.description}}</div>
     </div>
     <div class="about-body about-item">
-        <div class="banner-wrap item"><img src="/assets/common/images/booking/booking-bg.png" width="100%" alt=""></div>
-        <div class="video-wrap item"><img src="/assets/common/images/booking/booking-bg.png" width="100%" alt=""></div>
+        <div class="banner-wrap item" *ngIf="businessAboutData.pictures[0]"><img [src]="businessAboutData.pictures[0]" width="100%" alt=""></div>
+        <div class="video-wrap item" *ngIf="businessAboutData.videoUrl"></div>
     </div>
     <div class="about-footer about-item">
         <div class="address item">
@@ -37,6 +37,6 @@
             </div>
             <div class="item-right"><span class="btn btn-view vapps-icon-app-phone"></span></div>
         </div>
-        <div class="ad-wrap"><img src="/assets/common/images/ad/ad2.jpg" width="100%" alt=""></div>
     </div>
+    <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad>
 </div>
