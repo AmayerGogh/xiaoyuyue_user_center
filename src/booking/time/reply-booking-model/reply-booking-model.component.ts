@@ -3,6 +3,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { BookingServiceProxy, JoinBookingInput } from 'shared/service-proxies/service-proxies';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { Router } from '@angular/router';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Component({
   selector: 'xiaoyuyue-reply-booking-model',
@@ -11,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
   input: JoinBookingInput = new JoinBookingInput();
-      href: string = document.location.href;
-    bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+  href: string = document.location.href;
+  bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
   @ViewChild('replyBookingModel') modal: ModalDirective;
   constructor(
     injector: Injector,
@@ -44,9 +45,10 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     this.input.emailAddress = "";
     this.input.gender = 0;
 
-        if (this.href.indexOf("?") >= 0) {
-            this.bookingId = this.bookingId.split("?")[0];
-        }
+    if (this.href.indexOf("?") >= 0) {
+      this.bookingId = this.bookingId.split("?")[0];
+    }
+
     this._bookingServiceProxy
       .joinBooking(this.input)
       .subscribe(result => {

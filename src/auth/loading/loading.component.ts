@@ -15,7 +15,7 @@ export class LoadingComponent implements OnInit {
 
     constructor(
         private _router: Router,
-        private _tokenAuthService: TokenAuthServiceProxy,
+        private _tokenAuthService: TokenAuthServiceProxy
     ) { }
 
     ngOnInit() {
