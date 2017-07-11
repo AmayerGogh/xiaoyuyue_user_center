@@ -36,7 +36,6 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
   save(input: JoinBookingInput) {
     this.input = input;
-    console.log(this.t(this.input.date));
   }
 
   submit() {

@@ -3,8 +3,7 @@
     height: 100%;
     font-size: 16px;
     .video {
-        height: 212px;
-        overflow: hidden;
+        min-height: 212px;
     }
     .content {
         padding: 0 25px;
