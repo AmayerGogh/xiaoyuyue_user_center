@@ -20,7 +20,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
   defaultEnableBookingDate: string[] = ["1970-01-01"];
   selectIndex: number = 0;
   enableBookingDate: Date[] = [];
-  selectDate: Date = undefined;
+  selectDate: string = "";
   input: JoinBookingInput = new JoinBookingInput();
 
   href: string = document.location.href;
@@ -98,6 +98,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
       let exdate = new Date();
       let href = location.href;
       exdate.setDate(exdate.getDate() + 1);
+      this.selectDate = this.input.date.utcOffset("+08:00").format("YYYY-MM-DD");
       href += `?date=${this.selectDate}&index=${index}`;
 
       this._router.navigate(['/auth/login']);
