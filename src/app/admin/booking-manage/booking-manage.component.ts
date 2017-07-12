@@ -20,7 +20,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   pageSize: number;
   skip: number = 0;
   sort: any;
-  actionFlag: boolean = false;
+  actionFlag: boolean[] = [];
 
   @ViewChild('cancelBookingModal') cancelBookingModal: CancelBookingModalComponent;
 
@@ -68,7 +68,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
 
   }
 
-  setActionFlag() {
-    this.actionFlag = !this.actionFlag;
+  setActionFlag(index: number) {
+    this.actionFlag[index] = !this.actionFlag[index];
   }
 }

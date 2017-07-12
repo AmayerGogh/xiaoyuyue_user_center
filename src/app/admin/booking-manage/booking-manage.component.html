@@ -1,8 +1,8 @@
 <div class="booking-manage" *ngIf="personBookingDatas">
-    <div class="booking-item box-shadow" (click)="setActionFlag()" *ngFor="let dataItem of personBookingDatas">
+    <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
         <div class="top-wrap clearfix">
             <div class="title pull-left">{{dataItem.bookingName}}</div>
-            <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag, 'rotate-360': !actionFlag}"><span class="vapps-icon-app-drop-down"></span></div>
+            <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[index], 'rotate-360': !actionFlag[index]}"><span class="vapps-icon-app-drop-down"></span></div>
         </div>
         <div class="content">
             <div class="content-item">
@@ -22,7 +22,7 @@
                 <span class="desc">{{dataItem.subscriberNum}}</span>
             </div>
         </div>
-        <div class="bottom-action" *ngIf="actionFlag">
+        <div class="bottom-action" *ngIf="actionFlag[index]">
             <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a><span class="icon vapps-icon-app-detail"></span>查看详情</a>
             </span><span class="line">|</span>
             <span class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>

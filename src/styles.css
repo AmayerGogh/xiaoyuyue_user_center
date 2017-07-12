@@ -6,7 +6,17 @@ body {
     background-color: #F1F1F1;
 }
 
-a:hover {
+html,
+body,
+.header {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+a,
+a:hover,
+a:focus {
     text-decoration: none;
 }
 

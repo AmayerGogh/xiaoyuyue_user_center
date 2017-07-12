@@ -1,105 +1,41 @@
 <div [@routerTransition]>
     <form #loginForm="ngForm" method="post">
-        <div class="login-wrap box-shadow">
+        <div class="login-wrap card-shadow">
             <div class="logo-wrap">
-                <img src="/assets/common/images/login/logo-x2.png" width="40px" alt="logo">
+                <img src="/assets/common/images/login/logo-colorized.png" width="40px" alt="logo">
             </div>
 
             <div class="login-body">
                 <div class="form-item">
                     <div class="form-group form-md-line-input form-md-floating-label">
-                        <input id="userName" class="form-control" type="text" autocomplete="off" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required maxlength="256" maxlength="32" [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
-                        <label for="userName">{{l("UserName")}}/手机号/邮箱</label>
+                        <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required maxlength="256" maxlength="32" [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
                     </div>
                 </div>
 
                 <div class="form-item">
                     <div class="form-group form-md-line-input form-md-floating-label">
-                        <input id="password" class="form-control" type="password" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
-                        <label for="password">{{l("Password")}}</label>
+                        <input id="password" class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
                     </div>
                 </div>
+
                 <div class="btn btn-block login-btn-wrap" (click)="login()">
                     {{l("LogIn")}}
+                </div>
+
+                <div class="form-item clearfix account-action">
+                    <span class="pull-left">快速注册</span>
+                    <span class="pull-right">忘记密码?</span>
+                </div>
+
+                <div class="extra-login">
+                    <div class="title-text"><span class="text">第三方平台登录</span></div>
+                    <div class="login-icon">
+                        <span class="item"><img src="/assets/common/images/login/weChat-x2.png" width="38px" alt="weChat"></span>
+                        <span class="item"><img src="/assets/common/images/login/qq-x2.png" width="38px" alt="weChat"></span>
+                        <span class="item"><img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weChat"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </form>
 </div>
-
-<!--<div [@routerTransition]>
-    <form #loginForm="ngForm" method="post">
-        <div class="login-wrap portlet">
-            <div class="login-title">
-                <div class="title">{{l("LogIn")}}</div>
-                <div class="toggle-wrap clearfix">
-                    <span class="ordinary-login col-md-6" (click)="isOrdinaryLogin()">
-                        账号登录
-                        <span class="line" *ngIf="ordinaryLogin"></span>
-                    </span>
-                    <span class="phone-login col-md-6" (click)="isPhoneLogin()">
-                        手机验证登录
-                        <span class="line" *ngIf="!ordinaryLogin"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="login-body">
-                <div [@routerTransition] class="ordinary-login-wrap" *ngIf="ordinaryLogin">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="userName" class="form-control" type="text" autocomplete="off" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required maxlength="256" maxlength="32" [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
-                                <label for="userName">{{l("UserName")}}/手机号/邮箱</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="password" class="form-control" type="password" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
-                                <label for="password">{{l("Password")}}</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div [@routerTransition] class="phone-login-wrap" *ngIf="!ordinaryLogin">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="phoneNumber" class="form-control" type="phone" autocomplete="off" name="phoneNumber" required [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
-                                <label for="phoneNumber">手机号</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="identifyCode" class="form-control" type="text" name="identifyCode" required maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
-                                <label for="identifyCode">验证码</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group">
-                        <div class="col-md-5 col-xs-6">
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                <input class="form-control" [(ngModel)]="loginService.rememberMe" type="checkbox" name="rememberMe" value="true" />{{l("RememberMe")}}
-                                <span></span>
-                            </label>
-                        </div>
-                        <div class="col-md-5 col-xs-6">
-                            <span class="forgot-password pull-right">
-                                <a routerLink="/account/forgot-password" id="forget-password" class="forget-password">{{l("ForgotPassword")}}</a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="btn login-btn-wrap" (click)="login()">
-                    {{l("LogIn")}}
-                </div>
-            </div>
-            <div class="login-footer"></div>
-        </div>
-    </form>
-</div>-->

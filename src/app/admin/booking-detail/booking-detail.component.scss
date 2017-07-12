@@ -106,6 +106,9 @@
                      color: #FF9641;
                  }
              }
+             .content-item+.content-item {
+                 margin-top: 10px;
+             }
          }
      }
      .personal-info-wrap {
