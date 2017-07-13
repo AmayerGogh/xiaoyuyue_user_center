@@ -5,7 +5,6 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AbpModule } from '@abp/abp.module';
-import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
 import { AppConsts } from '@shared/AppConsts';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { CommonModule } from '@shared/common/common.module';
@@ -24,7 +23,6 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
 import { LanguageSwitchComponent } from './language-switch.component';
 import { LoginService } from "shared/services/login.service";
 import { TooltipModule } from "ngx-bootstrap";
-import { SMSServiceProxy, BookingServiceProxy } from "shared/service-proxies/service-proxies";
 import { AuthComponent } from "auth/auth.component";
 import { AuthRoutingModule } from "auth/auth-routing.module";
 import { PhoneValidateComponent } from "auth/shared/phone-validate/phone-validate.component";
@@ -48,7 +46,6 @@ import { BackgroundImgComponent } from "auth/layout/background-img/background-im
         CommonModule,
 
         UtilsModule,
-        ServiceProxyModule,
         AuthRoutingModule
     ],
     declarations: [
@@ -75,9 +72,7 @@ import { BackgroundImgComponent } from "auth/layout/background-img/background-im
     providers: [
         LoginService,
         TenantRegistrationHelperService,
-        SMSServiceProxy,
-        TooltipModule,
-        BookingServiceProxy
+        TooltipModule
     ]
 })
 export class AuthModule {
