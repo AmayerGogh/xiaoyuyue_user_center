@@ -69,6 +69,9 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   }
 
   setActionFlag(index: number) {
+    for (let i = 0; i < this.actionFlag.length;  i++) {
+      this.actionFlag[i] = false;
+    }
     this.actionFlag[index] = !this.actionFlag[index];
   }
 }

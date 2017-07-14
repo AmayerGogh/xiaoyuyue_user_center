@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { AppAuthService } from "app/shared/common/auth/app-auth.service";
 import * as _ from 'lodash';
 
 @Component({
   selector: 'xiaoyuyue-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  styleUrls: ['./side-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CenterSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;

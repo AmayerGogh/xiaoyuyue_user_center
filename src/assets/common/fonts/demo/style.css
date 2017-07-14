@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'xiaoyuyue';
-  src:  url('fonts/xiaoyuyue.eot?blgrbe');
-  src:  url('fonts/xiaoyuyue.eot?blgrbe#iefix') format('embedded-opentype'),
-    url('fonts/xiaoyuyue.ttf?blgrbe') format('truetype'),
-    url('fonts/xiaoyuyue.woff?blgrbe') format('woff'),
-    url('fonts/xiaoyuyue.svg?blgrbe#xiaoyuyue') format('svg');
+  src:  url('fonts/xiaoyuyue.eot?qzajds');
+  src:  url('fonts/xiaoyuyue.eot?qzajds#iefix') format('embedded-opentype'),
+    url('fonts/xiaoyuyue.ttf?qzajds') format('truetype'),
+    url('fonts/xiaoyuyue.woff?qzajds') format('woff'),
+    url('fonts/xiaoyuyue.svg?qzajds#xiaoyuyue') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -84,187 +84,179 @@
   content: "\e90e";
   color: #b2b2b2;
 }
-.vapps-icon-app-copy-1:before {
-  content: "\e90f";
-  color: #808080;
-}
 .vapps-icon-app-copy-2:before {
-  content: "\e910";
+  content: "\e90f";
   color: #fff;
 }
-.vapps-icon-app-delete:before {
-  content: "\e911";
-  color: #808080;
-}
 .vapps-icon-app-delete-time-field:before {
-  content: "\e912";
+  content: "\e910";
   color: #ff9641;
 }
 .vapps-icon-app-detail:before {
-  content: "\e913";
+  content: "\e911";
   color: #ff9641;
 }
-.vapps-icon-app-disable:before {
-  content: "\e914";
-  color: #fff;
-}
 .vapps-icon-app-drop-down:before {
-  content: "\e915";
+  content: "\e912";
   color: #808080;
 }
 .vapps-icon-app-edit:before {
-  content: "\e916";
+  content: "\e913";
   color: #ff9641;
 }
 .vapps-icon-app-finished:before {
-  content: "\e917";
+  content: "\e914";
   color: #d30000;
 }
 .vapps-icon-app-first-page:before {
-  content: "\e918";
+  content: "\e915";
   color: #808080;
 }
 .vapps-icon-app-last-page:before {
-  content: "\e919";
+  content: "\e916";
   color: #808080;
 }
-.vapps-icon-app-location:before {
-  content: "\e91a";
-  color: #b2b2b2;
-}
 .vapps-icon-app-logo:before {
-  content: "\e91b";
+  content: "\e917";
   color: #fff;
 }
 .vapps-icon-app-logo-text:before {
-  content: "\e91c";
+  content: "\e918";
   color: #fff;
 }
 .vapps-icon-app-menu:before {
-  content: "\e91d";
+  content: "\e919";
   color: #fff;
 }
 .vapps-icon-app-menu-booked:before {
-  content: "\e91e";
+  content: "\e91a";
   color: #808080;
 }
 .vapps-icon-app-menu-home:before {
-  content: "\e91f";
+  content: "\e91b";
   color: #ff9641;
 }
 .vapps-icon-app-menu-logout:before {
-  content: "\e920";
+  content: "\e91c";
   color: #808080;
 }
 .vapps-icon-app-menu-personal:before {
-  content: "\e921";
+  content: "\e91d";
   color: #808080;
 }
 .vapps-icon-app-menu-setting:before {
-  content: "\e922";
+  content: "\e91e";
   color: #808080;
 }
 .vapps-icon-app-message:before {
-  content: "\e923";
+  content: "\e91f";
   color: #fff;
 }
 .vapps-icon-app-mode-toggle-1:before {
-  content: "\e924";
+  content: "\e920";
   color: #fff;
 }
 .vapps-icon-app-mode-toggle-2:before {
-  content: "\e925";
+  content: "\e921";
   color: #808080;
 }
 .vapps-icon-app-multitask:before {
-  content: "\e926";
+  content: "\e922";
   color: #ff9641;
 }
 .vapps-icon-app-next-page:before {
-  content: "\e927";
+  content: "\e923";
   color: #ccc;
 }
 .vapps-icon-app-phone:before {
-  content: "\e928";
+  content: "\e924";
   color: #ff9641;
 }
 .vapps-icon-app-preview:before {
-  content: "\e929";
+  content: "\e925";
   color: #fff;
 }
 .vapps-icon-app-prev-page:before {
-  content: "\e92a";
+  content: "\e926";
   color: #ccc;
 }
 .vapps-icon-app-qr-code:before {
-  content: "\e92b";
+  content: "\e927";
   color: #ff9641;
 }
 .vapps-icon-app-refurbish:before {
-  content: "\e92c";
+  content: "\e928";
   color: #808080;
 }
 .vapps-icon-app-remove:before {
-  content: "\e92d";
+  content: "\e929";
   color: #ff9641;
 }
 .vapps-icon-app-search:before {
-  content: "\e92e";
-  color: #fff;
-}
-.vapps-icon-app-share:before {
-  content: "\e92f";
+  content: "\e92a";
   color: #fff;
 }
 .vapps-icon-app-submit:before {
-  content: "\e930";
+  content: "\e92b";
   color: #fff;
 }
+.vapps-icon-app-time-line-item-name:before {
+  content: "\e92c";
+  color: #b2b2b2;
+}
+.vapps-icon-app-time-line-outlet:before {
+  content: "\e92d";
+  color: #b2b2b2;
+}
+.vapps-icon-app-time-line-shophours:before {
+  content: "\e92e";
+  color: #b2b2b2;
+}
 .vapps-icon-app-to-bottom:before {
-  content: "\e931";
+  content: "\e92f";
   color: #ff9641;
 }
 .vapps-icon-app-to-top:before {
-  content: "\e932";
+  content: "\e930";
   color: #ff9641;
 }
 .vapps-icon-app-upload:before {
-  content: "\e933";
+  content: "\e931";
   color: #ff9641;
 }
 .vapps-icon-app-user-auth:before {
-  content: "\e934";
+  content: "\e932";
   color: #ff9641;
 }
 .vapps-icon-app-user-center:before {
-  content: "\e935";
+  content: "\e933";
   color: #ff9641;
 }
 .vapps-icon-app-user-feedback:before {
-  content: "\e936";
+  content: "\e934";
   color: #ff9641;
 }
 .vapps-icon-app-user-info:before {
-  content: "\e937";
+  content: "\e935";
   color: #808080;
 }
 .vapps-icon-app-user-logout:before {
-  content: "\e938";
+  content: "\e936";
   color: #808080;
 }
 .vapps-icon-app-user-manage:before {
-  content: "\e939";
+  content: "\e937";
   color: #808080;
 }
 .vapps-icon-app-user-profile:before {
-  content: "\e93a";
+  content: "\e938";
   color: #ff9641;
 }
 .vapps-icon-app-user-security:before {
-  content: "\e93b";
+  content: "\e939";
   color: #ff9641;
 }
 .vapps-icon-app-user-setting:before {
-  content: "\e93c";
+  content: "\e93a";
   color: #808080;
 }
