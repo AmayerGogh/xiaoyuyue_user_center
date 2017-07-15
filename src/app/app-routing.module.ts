@@ -7,7 +7,7 @@ import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
     imports: [
         RouterModule.forChild([
             {
-                path: 'manage',
+                path: '',
                 canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 children: [

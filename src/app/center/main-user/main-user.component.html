@@ -1,6 +1,6 @@
 <div class="time-line-wrap">
     <div class="time-line-content">
-        <div class="time-item clearfix" *ngFor="let item of perBookingOrderData">
+        <div class="time-item clearfix" *ngFor="let item of perBookingOrderData" (click)="showBookingDetail(item.id)">
             <div class="item-logo card-shadow"><img [src]="item.orgLogoUrl" width="100%" height="100%" alt="图片加载失败..."></div>
             <div class="item-content card-shadow">
                 <div class="flex-item">

@@ -1,0 +1,112 @@
+.rotating-card-container {
+    @include perspective(800px);
+    .card-image {
+        overflow: visible;
+    }
+    .card-image,
+    .card {
+        @include transition-transform(1s, $transition-bezier-rotating-card);
+        @include transform-style(preserve-3d);
+        position: relative;
+        .back,
+        .front {
+            @include backface-visibility(hidden);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .front {
+            position: relative;
+            z-index: 2;
+        }
+        .back {
+            @include rotateY-180();
+            z-index: 3;
+            background-color: $white-color;
+            border-radius: $border-radius-large;
+            @include shadow-big();
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            &.back-background {
+                &:after {
+                    position: absolute;
+                    z-index: 1;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    left: 0;
+                    top: 0;
+                    content: "";
+                    background-color: rgba(0, 0, 0, .56);
+                    border-radius: $border-radius-large;
+                }
+                .card-content {
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+            .footer {
+                .btn {
+                    margin: 0;
+                }
+            }
+            .card-content {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
+    .card {
+        .back {
+            box-shadow: none;
+        }
+    }
+    &:not(.manual-flip):hover {
+        .card-image,
+        .card {
+            @include rotateY-180();
+        }
+        .card-image {
+            box-shadow: none;
+        }
+    }
+    &.hover.manual-flip {
+        .card-image,
+        .card {
+            @include rotateY-180();
+        }
+        .card-image {
+            box-shadow: none;
+        }
+    }
+    .card-image {
+        .front {
+            .btn-container {
+                position: absolute;
+                bottom: 0px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+        .back {
+            .card-title {
+                position: relative;
+                bottom: 0;
+                left: 0;
+            }
+            hr {
+                border-color: rgba($white-color, .2);
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .card-profile & {
+        .front {
+            text-align: left;
+        }
+    }
+}

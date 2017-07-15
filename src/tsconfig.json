@@ -19,7 +19,9 @@
             "@abp/*": ["../node_modules/abp-ng2-module/src/*"],
             "@admin/*": ["./admin/*"],
             "@shared/*": ["./shared/*"],
-            "@node_modules/*": ["../node_modules/*"]
+            "@node_modules/*": ["../node_modules/*"],
+            "@sass/*": ["./sass/*"]
+
         }
     },
     "exclude": ["node_modules"]

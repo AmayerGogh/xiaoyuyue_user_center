@@ -5,7 +5,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Status3, BookingOrderListDto } from '@shared/service-proxies/service-proxies';
 import { AppStatus } from "shared/AppEnums";
-import { CancelBookingModalComponent } from "app/admin/cancel-booking-modal/cancel-booking-modal.component";
+import { CancelBookingModalComponent } from "app/admin/booking-order/cancel-booking-modal/cancel-booking-modal.component";
 
 @Component({
   selector: 'xiaoyuyue-booking-manage',
@@ -57,7 +57,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   }
 
   showBookingDetail(bookingId: number) {
-    this._router.navigate(['/manage/bookingorder/detail', bookingId]);
+    this._router.navigate(['/bookingorder/detail', bookingId]);
   }
 
   cancelBooking(bookingId: number) {

@@ -1,9 +1,9 @@
 import { AdminPermissions } from '@shared/AdminPermissions';
 import { NgModule } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { BookingManageComponent } from "app/admin/booking-manage/booking-manage.component";
 import { AdminComponent } from "app/admin/admin.component";
-import { BookingDetailComponent } from './booking-detail/booking-detial.component';
+import { BookingManageComponent } from 'app/admin/booking-order/booking-manage/booking-manage.component';
+import { BookingDetailComponent } from "app/admin/booking-order/booking-detail/booking-detial.component";
 
 @NgModule({
     imports: [
@@ -12,9 +12,9 @@ import { BookingDetailComponent } from './booking-detail/booking-detial.componen
                 path: '',
                 component: AdminComponent,
                 children: [
-                    { path: '', redirectTo: 'manage' },
+                    { path: '', redirectTo: 'list' },
                     {
-                        path: 'manage', component: BookingManageComponent
+                        path: 'list', component: BookingManageComponent
                     },
                     {
                         path: 'detail/:id', component: BookingDetailComponent

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PerBookingOrderServiceProxy, BookingTimelineDto } from 'shared/service-proxies/service-proxies';
 import * as moment from 'moment';
 
@@ -15,6 +16,7 @@ export class MainUserComponent implements OnInit {
 
   constructor
   (
+    private _router: Router,
     private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
   ) { }
 
@@ -28,5 +30,9 @@ export class MainUserComponent implements OnInit {
     .subscribe( result => {
       this.perBookingOrderData = result.items;
     })
+  }
+
+    showBookingDetail(bookingId: number) {
+    this._router.navigate(['/manage/bookingorder/detail', bookingId]);
   }
 }

@@ -11,9 +11,8 @@ import { MainUserComponent } from "app/center/main-user/main-user.component";
                 path: '',
                 component: CenterComponent,
                 children: [
-                    { path: '', redirectTo: 'index'},
                     {
-                        path: 'index', component: MainUserComponent
+                        path: '', component: MainUserComponent
                     },
                 ]
             }

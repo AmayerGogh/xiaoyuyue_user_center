@@ -29,7 +29,6 @@ export class BookingDetailComponent extends AppComponentBase implements OnInit {
     .getBookingOrderForEdit(bookingId)
     .subscribe( result => {
       this.bookingOrderForEdidData = result;
-      console.log(result)
     })
   }
 }
