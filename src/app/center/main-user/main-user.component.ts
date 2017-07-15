@@ -33,6 +33,6 @@ export class MainUserComponent implements OnInit {
   }
 
     showBookingDetail(bookingId: number) {
-    this._router.navigate(['/manage/bookingorder/detail', bookingId]);
+    this._router.navigate(['/bookingorder/detail', bookingId]);
   }
 }
