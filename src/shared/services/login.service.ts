@@ -176,7 +176,7 @@ export class LoginService {
             );
         }
         UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
-        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl+"/manage/center";
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl+"/admin/center";
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {
@@ -298,7 +298,7 @@ export class LoginService {
 
     private wechatLogin(params: Params) {
         var model = new ExternalAuthenticateModel();
-        let redirectUrl = AppConsts.appBaseUrl + "/manage/center";
+        let redirectUrl = AppConsts.appBaseUrl + "/admin/center";
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];

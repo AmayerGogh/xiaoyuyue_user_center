@@ -8,11 +8,10 @@ import { HomeComponent } from "index/home/home.component";
     imports: [
         RouterModule.forChild([
             {
-                path: '',
+                path: 'admin',
                 canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 children: [
-                    { path: '', component: HomeComponent },
                     {
                         path: 'bookingorder',
                         loadChildren: 'app/admin/admin.module#BookingOrderModule', //Lazy load admin module
