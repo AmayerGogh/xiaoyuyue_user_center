@@ -1150,11 +1150,12 @@ export class CommonLookupServiceProxy {
     }
 
     /**
-     * 获取版本信息(下拉框)
      * @return Success
      */
-    getEditionsForCombobox(): Observable<ListResultDtoOfComboboxItemDto> {
-        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetEditionsForCombobox";
+    getEditionsForCombobox(onlyFreeItems: boolean): Observable<ListResultDtoOfSubscribableEditionComboboxItemDto> {
+        let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetEditionsForCombobox?";
+        if (onlyFreeItems !== undefined)
+            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -1175,21 +1176,21 @@ export class CommonLookupServiceProxy {
                 try {
                     return Observable.of(this.processGetEditionsForCombobox(response));
                 } catch (e) {
-                    return <Observable<ListResultDtoOfComboboxItemDto>><any>Observable.throw(e);
+                    return <Observable<ListResultDtoOfSubscribableEditionComboboxItemDto>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<ListResultDtoOfComboboxItemDto>><any>Observable.throw(response);
+                return <Observable<ListResultDtoOfSubscribableEditionComboboxItemDto>><any>Observable.throw(response);
         });
     }
 
-    protected processGetEditionsForCombobox(response: Response): ListResultDtoOfComboboxItemDto {
+    protected processGetEditionsForCombobox(response: Response): ListResultDtoOfSubscribableEditionComboboxItemDto {
         const responseText = response.text();
         const status = response.status; 
 
         if (status === 200) {
-            let result200: ListResultDtoOfComboboxItemDto = null;
+            let result200: ListResultDtoOfSubscribableEditionComboboxItemDto = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? ListResultDtoOfComboboxItemDto.fromJS(resultData200) : new ListResultDtoOfComboboxItemDto();
+            result200 = resultData200 ? ListResultDtoOfSubscribableEditionComboboxItemDto.fromJS(resultData200) : new ListResultDtoOfSubscribableEditionComboboxItemDto();
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -1419,7 +1420,7 @@ export class EditionServiceProxy {
      * 获取版本信息
      * @return Success
      */
-    getEditionForEdit(id: number): Observable<GetEditionForEditOutput> {
+    getEditionForEdit(id: number): Observable<GetEditionEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionForEdit?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
@@ -1443,21 +1444,21 @@ export class EditionServiceProxy {
                 try {
                     return Observable.of(this.processGetEditionForEdit(response));
                 } catch (e) {
-                    return <Observable<GetEditionForEditOutput>><any>Observable.throw(e);
+                    return <Observable<GetEditionEditOutput>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<GetEditionForEditOutput>><any>Observable.throw(response);
+                return <Observable<GetEditionEditOutput>><any>Observable.throw(response);
         });
     }
 
-    protected processGetEditionForEdit(response: Response): GetEditionForEditOutput {
+    protected processGetEditionForEdit(response: Response): GetEditionEditOutput {
         const responseText = response.text();
         const status = response.status; 
 
         if (status === 200) {
-            let result200: GetEditionForEditOutput = null;
+            let result200: GetEditionEditOutput = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? GetEditionForEditOutput.fromJS(resultData200) : new GetEditionForEditOutput();
+            result200 = resultData200 ? GetEditionEditOutput.fromJS(resultData200) : new GetEditionEditOutput();
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -1559,12 +1560,19 @@ export class EditionServiceProxy {
 
     /**
      * 获取版本信息(下拉框选项)
+     * @selectedEditionId 选择版本Id
+     * @addAllItem 添加所有
+     * @onlyFreeItems 只获取免费版
      * @return Success
      */
-    getEditionComboboxItems(id: number): Observable<ComboboxItemDto[]> {
+    getEditionComboboxItems(selectedEditionId: number, addAllItem: boolean, onlyFreeItems: boolean): Observable<SubscribableEditionComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionComboboxItems?";
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        if (selectedEditionId !== undefined)
+            url_ += "selectedEditionId=" + encodeURIComponent("" + selectedEditionId) + "&"; 
+        if (addAllItem !== undefined)
+            url_ += "addAllItem=" + encodeURIComponent("" + addAllItem) + "&"; 
+        if (onlyFreeItems !== undefined)
+            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -1585,25 +1593,142 @@ export class EditionServiceProxy {
                 try {
                     return Observable.of(this.processGetEditionComboboxItems(response));
                 } catch (e) {
-                    return <Observable<ComboboxItemDto[]>><any>Observable.throw(e);
+                    return <Observable<SubscribableEditionComboboxItemDto[]>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<ComboboxItemDto[]>><any>Observable.throw(response);
+                return <Observable<SubscribableEditionComboboxItemDto[]>><any>Observable.throw(response);
         });
     }
 
-    protected processGetEditionComboboxItems(response: Response): ComboboxItemDto[] {
+    protected processGetEditionComboboxItems(response: Response): SubscribableEditionComboboxItemDto[] {
         const responseText = response.text();
         const status = response.status; 
 
         if (status === 200) {
-            let result200: ComboboxItemDto[] = null;
+            let result200: SubscribableEditionComboboxItemDto[] = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             if (resultData200 && resultData200.constructor === Array) {
                 result200 = [];
                 for (let item of resultData200)
-                    result200.push(ComboboxItemDto.fromJS(item));
+                    result200.push(SubscribableEditionComboboxItemDto.fromJS(item));
             }
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
+export class EditionViewServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * 获取所有版本
+     * @return Success
+     */
+    getEditionsForSelect(): Observable<EditionsSelectOutput> {
+        let url_ = this.baseUrl + "/api/services/app/EditionView/GetEditionsForSelect";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetEditionsForSelect(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetEditionsForSelect(response));
+                } catch (e) {
+                    return <Observable<EditionsSelectOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<EditionsSelectOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetEditionsForSelect(response: Response): EditionsSelectOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: EditionsSelectOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? EditionsSelectOutput.fromJS(resultData200) : new EditionsSelectOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 获取版本
+     * @return Success
+     */
+    getEdition(editionId: number): Observable<EditionSelectDto> {
+        let url_ = this.baseUrl + "/api/services/app/EditionView/GetEdition?";
+        if (editionId !== undefined)
+            url_ += "editionId=" + encodeURIComponent("" + editionId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetEdition(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetEdition(response));
+                } catch (e) {
+                    return <Observable<EditionSelectDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<EditionSelectDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetEdition(response: Response): EditionSelectDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: EditionSelectDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? EditionSelectDto.fromJS(resultData200) : new EditionSelectDto();
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -2041,6 +2166,182 @@ export class FriendshipServiceProxy {
 }
 
 @Injectable()
+export class HostDashboardServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * @return Success
+     */
+    getDashboardStatisticsData(incomeStatisticsDateInterval: IncomeStatisticsDateInterval, startDate: moment.Moment, endDate: moment.Moment): Observable<HostDashboardData> {
+        let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetDashboardStatisticsData?";
+        if (incomeStatisticsDateInterval !== undefined)
+            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetDashboardStatisticsData(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetDashboardStatisticsData(response));
+                } catch (e) {
+                    return <Observable<HostDashboardData>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<HostDashboardData>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetDashboardStatisticsData(response: Response): HostDashboardData {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: HostDashboardData = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? HostDashboardData.fromJS(resultData200) : new HostDashboardData();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getIncomeStatistics(incomeStatisticsDateInterval: IncomeStatisticsDateInterval2, startDate: moment.Moment, endDate: moment.Moment): Observable<GetIncomeStatisticsDataOutput> {
+        let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetIncomeStatistics?";
+        if (incomeStatisticsDateInterval !== undefined)
+            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetIncomeStatistics(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetIncomeStatistics(response));
+                } catch (e) {
+                    return <Observable<GetIncomeStatisticsDataOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetIncomeStatisticsDataOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetIncomeStatistics(response: Response): GetIncomeStatisticsDataOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetIncomeStatisticsDataOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetIncomeStatisticsDataOutput.fromJS(resultData200) : new GetIncomeStatisticsDataOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getEditionTenantStatistics(startDate: moment.Moment, endDate: moment.Moment): Observable<GetEditionTenantStatisticsOutput> {
+        let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetEditionTenantStatistics?";
+        if (startDate !== undefined)
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+        if (endDate !== undefined)
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetEditionTenantStatistics(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetEditionTenantStatistics(response));
+                } catch (e) {
+                    return <Observable<GetEditionTenantStatisticsOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetEditionTenantStatisticsOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetEditionTenantStatistics(response: Response): GetEditionTenantStatisticsOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetEditionTenantStatisticsOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetEditionTenantStatisticsOutput.fromJS(resultData200) : new GetEditionTenantStatisticsOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
 export class HostSettingsServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -2276,6 +2577,82 @@ export class HostSettingsServiceProxy {
 
         if (status === 200) {
             return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
+export class IncomeStatisticsServiceServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * @return Success
+     */
+    getIncomeStatisticsData(startDate: moment.Moment, endDate: moment.Moment, dateInterval: DateInterval): Observable<IncomeStastistic[]> {
+        let url_ = this.baseUrl + "/api/services/app/IncomeStatisticsService/GetIncomeStatisticsData?";
+        if (startDate !== undefined)
+            url_ += "startDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+        if (endDate !== undefined)
+            url_ += "endDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+        if (dateInterval !== undefined)
+            url_ += "dateInterval=" + encodeURIComponent("" + dateInterval) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetIncomeStatisticsData(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetIncomeStatisticsData(response));
+                } catch (e) {
+                    return <Observable<IncomeStastistic[]>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<IncomeStastistic[]>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetIncomeStatisticsData(response: Response): IncomeStastistic[] {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: IncomeStastistic[] = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(IncomeStastistic.fromJS(item));
+            }
+            return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -4814,6 +5191,180 @@ export class OutletServiceServiceProxy {
 
         if (status === 200) {
             return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
+export class PaymentServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * @return Success
+     */
+    getPaymentInfo(upgradeEditionId: number): Observable<PaymentInfoDto> {
+        let url_ = this.baseUrl + "/api/services/app/Payment/GetPaymentInfo?";
+        if (upgradeEditionId !== undefined)
+            url_ += "UpgradeEditionId=" + encodeURIComponent("" + upgradeEditionId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetPaymentInfo(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetPaymentInfo(response));
+                } catch (e) {
+                    return <Observable<PaymentInfoDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<PaymentInfoDto>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetPaymentInfo(response: Response): PaymentInfoDto {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: PaymentInfoDto = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? PaymentInfoDto.fromJS(resultData200) : new PaymentInfoDto();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    createPayment(input: CreatePaymentDto): Observable<any> {
+        let url_ = this.baseUrl + "/api/services/app/Payment/CreatePayment";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processCreatePayment(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processCreatePayment(response));
+                } catch (e) {
+                    return <Observable<any>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<any>><any>Observable.throw(response);
+        });
+    }
+
+    protected processCreatePayment(response: Response): any {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: any = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key] !== undefined ? resultData200[key] : {};
+                }
+            }
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    executePayment(input: ExecutePaymentDto): Observable<any> {
+        let url_ = this.baseUrl + "/api/services/app/Payment/ExecutePayment";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processExecutePayment(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processExecutePayment(response));
+                } catch (e) {
+                    return <Observable<any>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<any>><any>Observable.throw(response);
+        });
+    }
+
+    protected processExecutePayment(response: Response): any {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: any = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            if (resultData200) {
+                result200 = {};
+                for (let key in resultData200) {
+                    if (resultData200.hasOwnProperty(key))
+                        result200[key] = resultData200[key] !== undefined ? resultData200[key] : {};
+                }
+            }
+            return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -7563,21 +8114,36 @@ export class TenantServiceProxy {
      * 获取所有租户
      * @tenancyName 租户系统名称
      * @name 租户名称
+     * @subscriptionEndDateStart 订阅(购买)时间-开始
+     * @subscriptionEndDateEnd 订阅(购买)时间-结束
+     * @creationDateStart 创建时间-开始
+     * @creationDateEnd 创建时间-结束
      * @editionId 版本
+     * @editionIdSpecified 指定版本
      * @isActive 是否启用(空代表全部)
      * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
      * @return Success
      */
-    getTenants(tenancyName: string, name: string, editionId: number, isActive: boolean, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfTenantListDto> {
+    getTenants(tenancyName: string, name: string, subscriptionEndDateStart: moment.Moment, subscriptionEndDateEnd: moment.Moment, creationDateStart: moment.Moment, creationDateEnd: moment.Moment, editionId: number, editionIdSpecified: boolean, isActive: boolean, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfTenantListDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenants?";
         if (tenancyName !== undefined)
             url_ += "TenancyName=" + encodeURIComponent("" + tenancyName) + "&"; 
         if (name !== undefined)
             url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+        if (subscriptionEndDateStart !== undefined)
+            url_ += "SubscriptionEndDateStart=" + encodeURIComponent("" + subscriptionEndDateStart.toJSON()) + "&"; 
+        if (subscriptionEndDateEnd !== undefined)
+            url_ += "SubscriptionEndDateEnd=" + encodeURIComponent("" + subscriptionEndDateEnd.toJSON()) + "&"; 
+        if (creationDateStart !== undefined)
+            url_ += "CreationDateStart=" + encodeURIComponent("" + creationDateStart.toJSON()) + "&"; 
+        if (creationDateEnd !== undefined)
+            url_ += "CreationDateEnd=" + encodeURIComponent("" + creationDateEnd.toJSON()) + "&"; 
         if (editionId !== undefined)
             url_ += "EditionId=" + encodeURIComponent("" + editionId) + "&"; 
+        if (editionIdSpecified !== undefined)
+            url_ += "EditionIdSpecified=" + encodeURIComponent("" + editionIdSpecified) + "&"; 
         if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
         if (sorting !== undefined)
@@ -7819,7 +8385,7 @@ export class TenantServiceProxy {
      * 获取租户特性详情
      * @return Success
      */
-    getTenantFeaturesForEdit(id: number): Observable<GetTenantFeaturesForEditOutput> {
+    getTenantFeaturesForEdit(id: number): Observable<GetTenantFeaturesEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantFeaturesForEdit?";
         if (id !== undefined)
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
@@ -7843,21 +8409,21 @@ export class TenantServiceProxy {
                 try {
                     return Observable.of(this.processGetTenantFeaturesForEdit(response));
                 } catch (e) {
-                    return <Observable<GetTenantFeaturesForEditOutput>><any>Observable.throw(e);
+                    return <Observable<GetTenantFeaturesEditOutput>><any>Observable.throw(e);
                 }
             } else
-                return <Observable<GetTenantFeaturesForEditOutput>><any>Observable.throw(response);
+                return <Observable<GetTenantFeaturesEditOutput>><any>Observable.throw(response);
         });
     }
 
-    protected processGetTenantFeaturesForEdit(response: Response): GetTenantFeaturesForEditOutput {
+    protected processGetTenantFeaturesForEdit(response: Response): GetTenantFeaturesEditOutput {
         const responseText = response.text();
         const status = response.status; 
 
         if (status === 200) {
-            let result200: GetTenantFeaturesForEditOutput = null;
+            let result200: GetTenantFeaturesEditOutput = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 ? GetTenantFeaturesForEditOutput.fromJS(resultData200) : new GetTenantFeaturesForEditOutput();
+            result200 = resultData200 ? GetTenantFeaturesEditOutput.fromJS(resultData200) : new GetTenantFeaturesEditOutput();
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -8020,7 +8586,6 @@ export class TenantDashboardServiceProxy {
     }
 
     /**
-     * 获取活跃成员数量
      * @return Success
      */
     getMemberActivity(): Observable<GetMemberActivityOutput> {
@@ -8060,6 +8625,251 @@ export class TenantDashboardServiceProxy {
             let result200: GetMemberActivityOutput = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? GetMemberActivityOutput.fromJS(resultData200) : new GetMemberActivityOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getDashboardData(salesSummaryDatePeriod: SalesSummaryDatePeriod): Observable<GetDashboardDataOutput> {
+        let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetDashboardData?";
+        if (salesSummaryDatePeriod !== undefined)
+            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetDashboardData(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetDashboardData(response));
+                } catch (e) {
+                    return <Observable<GetDashboardDataOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetDashboardDataOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetDashboardData(response: Response): GetDashboardDataOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetDashboardDataOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetDashboardDataOutput.fromJS(resultData200) : new GetDashboardDataOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getSalesSummary(salesSummaryDatePeriod: SalesSummaryDatePeriod2): Observable<GetSalesSummaryOutput> {
+        let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetSalesSummary?";
+        if (salesSummaryDatePeriod !== undefined)
+            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetSalesSummary(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetSalesSummary(response));
+                } catch (e) {
+                    return <Observable<GetSalesSummaryOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetSalesSummaryOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetSalesSummary(response: Response): GetSalesSummaryOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetSalesSummaryOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetSalesSummaryOutput.fromJS(resultData200) : new GetSalesSummaryOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getWorldMap(input: any): Observable<GetWorldMapOutput> {
+        let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetWorldMap?";
+        if (input !== undefined)
+            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetWorldMap(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetWorldMap(response));
+                } catch (e) {
+                    return <Observable<GetWorldMapOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetWorldMapOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetWorldMap(response: Response): GetWorldMapOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetWorldMapOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetWorldMapOutput.fromJS(resultData200) : new GetWorldMapOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getServerStats(input: any): Observable<GetServerStatsOutput> {
+        let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetServerStats?";
+        if (input !== undefined)
+            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetServerStats(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetServerStats(response));
+                } catch (e) {
+                    return <Observable<GetServerStatsOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetServerStatsOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetServerStats(response: Response): GetServerStatsOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetServerStatsOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetServerStatsOutput.fromJS(resultData200) : new GetServerStatsOutput();
+            return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * @return Success
+     */
+    getGeneralStats(input: any): Observable<GetGeneralStatsOutput> {
+        let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetGeneralStats?";
+        if (input !== undefined)
+            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = "";
+        
+        let options_ = {
+            body: content_,
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processGetGeneralStats(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processGetGeneralStats(response));
+                } catch (e) {
+                    return <Observable<GetGeneralStatsOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetGeneralStatsOutput>><any>Observable.throw(response);
+        });
+    }
+
+    protected processGetGeneralStats(response: Response): GetGeneralStatsOutput {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            let result200: GetGeneralStatsOutput = null;
+            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetGeneralStatsOutput.fromJS(resultData200) : new GetGeneralStatsOutput();
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -11240,21 +12050,21 @@ export class MarkAllUnreadMessagesOfUserAsReadInput {
     }
 }
 
-export class ListResultDtoOfComboboxItemDto {
-    items: ComboboxItemDto[];
+export class ListResultDtoOfSubscribableEditionComboboxItemDto {
+    items: SubscribableEditionComboboxItemDto[];
 
     constructor(data?: any) {
         if (data !== undefined) {
             if (data["items"] && data["items"].constructor === Array) {
                 this.items = [];
                 for (let item of data["items"])
-                    this.items.push(ComboboxItemDto.fromJS(item));
+                    this.items.push(SubscribableEditionComboboxItemDto.fromJS(item));
             }
         }
     }
 
-    static fromJS(data: any): ListResultDtoOfComboboxItemDto {
-        return new ListResultDtoOfComboboxItemDto(data);
+    static fromJS(data: any): ListResultDtoOfSubscribableEditionComboboxItemDto {
+        return new ListResultDtoOfSubscribableEditionComboboxItemDto(data);
     }
 
     toJS(data?: any) {
@@ -11273,29 +12083,32 @@ export class ListResultDtoOfComboboxItemDto {
 
     clone() {
         const json = this.toJSON();
-        return new ListResultDtoOfComboboxItemDto(JSON.parse(json));
+        return new ListResultDtoOfSubscribableEditionComboboxItemDto(JSON.parse(json));
     }
 }
 
-export class ComboboxItemDto {
+export class SubscribableEditionComboboxItemDto {
+    isFree: boolean;
     value: string;
     displayText: string;
     isSelected: boolean;
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.isFree = data["isFree"] !== undefined ? data["isFree"] : undefined;
             this.value = data["value"] !== undefined ? data["value"] : undefined;
             this.displayText = data["displayText"] !== undefined ? data["displayText"] : undefined;
             this.isSelected = data["isSelected"] !== undefined ? data["isSelected"] : undefined;
         }
     }
 
-    static fromJS(data: any): ComboboxItemDto {
-        return new ComboboxItemDto(data);
+    static fromJS(data: any): SubscribableEditionComboboxItemDto {
+        return new SubscribableEditionComboboxItemDto(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["isFree"] = this.isFree !== undefined ? this.isFree : undefined;
         data["value"] = this.value !== undefined ? this.value : undefined;
         data["displayText"] = this.displayText !== undefined ? this.displayText : undefined;
         data["isSelected"] = this.isSelected !== undefined ? this.isSelected : undefined;
@@ -11308,7 +12121,7 @@ export class ComboboxItemDto {
 
     clone() {
         const json = this.toJSON();
-        return new ComboboxItemDto(JSON.parse(json));
+        return new SubscribableEditionComboboxItemDto(JSON.parse(json));
     }
 }
 
@@ -11522,11 +12335,8 @@ export class ListResultDtoOfEditionListDto {
 }
 
 export class EditionListDto {
-    /** 版本(系统)名称 */
     name: string;
-    /** 显示名称 */
     displayName: string;
-    /** 创建时间 */
     creationTime: moment.Moment;
     id: number;
 
@@ -11562,12 +12372,9 @@ export class EditionListDto {
     }
 }
 
-export class GetEditionForEditOutput {
-    /** 版本详情 */
+export class GetEditionEditOutput {
     edition: EditionEditDto;
-    /** 赋予的特性 */
     featureValues: NameValueDto[];
-    /** 所有特性列表 */
     features: FlatFeatureDto[];
 
     constructor(data?: any) {
@@ -11586,8 +12393,8 @@ export class GetEditionForEditOutput {
         }
     }
 
-    static fromJS(data: any): GetEditionForEditOutput {
-        return new GetEditionForEditOutput(data);
+    static fromJS(data: any): GetEditionEditOutput {
+        return new GetEditionEditOutput(data);
     }
 
     toJS(data?: any) {
@@ -11612,7 +12419,7 @@ export class GetEditionForEditOutput {
 
     clone() {
         const json = this.toJSON();
-        return new GetEditionForEditOutput(JSON.parse(json));
+        return new GetEditionEditOutput(JSON.parse(json));
     }
 }
 
@@ -11622,11 +12429,25 @@ export class EditionEditDto {
     id: number;
     /** 显示名称 */
     displayName: string;
+    /** 月价格 */
+    monthlyPrice: number;
+    /** 年价格 */
+    annualPrice: number;
+    /** 试用天数 */
+    trialDayCount: number;
+    waitingDayAfterExpire: number;
+    /** 过期后 */
+    expiringEditionId: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.id = data["id"] !== undefined ? data["id"] : undefined;
             this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.monthlyPrice = data["monthlyPrice"] !== undefined ? data["monthlyPrice"] : undefined;
+            this.annualPrice = data["annualPrice"] !== undefined ? data["annualPrice"] : undefined;
+            this.trialDayCount = data["trialDayCount"] !== undefined ? data["trialDayCount"] : undefined;
+            this.waitingDayAfterExpire = data["waitingDayAfterExpire"] !== undefined ? data["waitingDayAfterExpire"] : undefined;
+            this.expiringEditionId = data["expiringEditionId"] !== undefined ? data["expiringEditionId"] : undefined;
         }
     }
 
@@ -11638,6 +12459,11 @@ export class EditionEditDto {
         data = data === undefined ? {} : data;
         data["id"] = this.id !== undefined ? this.id : undefined;
         data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["monthlyPrice"] = this.monthlyPrice !== undefined ? this.monthlyPrice : undefined;
+        data["annualPrice"] = this.annualPrice !== undefined ? this.annualPrice : undefined;
+        data["trialDayCount"] = this.trialDayCount !== undefined ? this.trialDayCount : undefined;
+        data["waitingDayAfterExpire"] = this.waitingDayAfterExpire !== undefined ? this.waitingDayAfterExpire : undefined;
+        data["expiringEditionId"] = this.expiringEditionId !== undefined ? this.expiringEditionId : undefined;
         return data; 
     }
 
@@ -11652,18 +12478,12 @@ export class EditionEditDto {
 }
 
 export class FlatFeatureDto {
-    /** 父(特性)名称 */
     parentName: string;
-    /** (系统)名称 */
     name: string;
-    /** 显示名称 */
     displayName: string;
-    /** 描述 */
     description: string;
-    /** 默认值 */
     defaultValue: string;
-    /** 输出框类型 */
-    inputType: IInputType;
+    inputType: FeatureInputTypeDto;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -11672,7 +12492,7 @@ export class FlatFeatureDto {
             this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
             this.description = data["description"] !== undefined ? data["description"] : undefined;
             this.defaultValue = data["defaultValue"] !== undefined ? data["defaultValue"] : undefined;
-            this.inputType = data["inputType"] ? IInputType.fromJS(data["inputType"]) : undefined;
+            this.inputType = data["inputType"] ? FeatureInputTypeDto.fromJS(data["inputType"]) : undefined;
         }
     }
 
@@ -11698,6 +12518,347 @@ export class FlatFeatureDto {
     clone() {
         const json = this.toJSON();
         return new FlatFeatureDto(JSON.parse(json));
+    }
+}
+
+export class FeatureInputTypeDto {
+    name: string;
+    attributes: { [key: string] : any; };
+    validator: IValueValidator;
+    itemSource: LocalizableComboboxItemSourceDto;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            if (data["attributes"]) {
+                this.attributes = {};
+                for (let key in data["attributes"]) {
+                    if (data["attributes"].hasOwnProperty(key))
+                        this.attributes[key] = data["attributes"][key] !== undefined ? data["attributes"][key] : undefined;
+                }
+            }
+            this.validator = data["validator"] ? IValueValidator.fromJS(data["validator"]) : undefined;
+            this.itemSource = data["itemSource"] ? LocalizableComboboxItemSourceDto.fromJS(data["itemSource"]) : undefined;
+        }
+    }
+
+    static fromJS(data: any): FeatureInputTypeDto {
+        return new FeatureInputTypeDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        if (this.attributes) {
+            data["attributes"] = {};
+            for (let key in this.attributes) {
+                if (this.attributes.hasOwnProperty(key))
+                    data["attributes"][key] = this.attributes[key] !== undefined ? this.attributes[key] : undefined;
+            }
+        }
+        data["validator"] = this.validator ? this.validator.toJS() : undefined;
+        data["itemSource"] = this.itemSource ? this.itemSource.toJS() : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new FeatureInputTypeDto(JSON.parse(json));
+    }
+}
+
+export class IValueValidator {
+    name: string;
+    attributes: { [key: string] : any; };
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            if (data["attributes"]) {
+                this.attributes = {};
+                for (let key in data["attributes"]) {
+                    if (data["attributes"].hasOwnProperty(key))
+                        this.attributes[key] = data["attributes"][key] !== undefined ? data["attributes"][key] : undefined;
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): IValueValidator {
+        return new IValueValidator(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        if (this.attributes) {
+            data["attributes"] = {};
+            for (let key in this.attributes) {
+                if (this.attributes.hasOwnProperty(key))
+                    data["attributes"][key] = this.attributes[key] !== undefined ? this.attributes[key] : undefined;
+            }
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new IValueValidator(JSON.parse(json));
+    }
+}
+
+export class LocalizableComboboxItemSourceDto {
+    items: LocalizableComboboxItemDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["items"] && data["items"].constructor === Array) {
+                this.items = [];
+                for (let item of data["items"])
+                    this.items.push(LocalizableComboboxItemDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): LocalizableComboboxItemSourceDto {
+        return new LocalizableComboboxItemSourceDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.items && this.items.constructor === Array) {
+            data["items"] = [];
+            for (let item of this.items)
+                data["items"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new LocalizableComboboxItemSourceDto(JSON.parse(json));
+    }
+}
+
+export class LocalizableComboboxItemDto {
+    value: string;
+    displayText: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.value = data["value"] !== undefined ? data["value"] : undefined;
+            this.displayText = data["displayText"] !== undefined ? data["displayText"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): LocalizableComboboxItemDto {
+        return new LocalizableComboboxItemDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["value"] = this.value !== undefined ? this.value : undefined;
+        data["displayText"] = this.displayText !== undefined ? this.displayText : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new LocalizableComboboxItemDto(JSON.parse(json));
+    }
+}
+
+export class CreateOrUpdateEditionDto {
+    edition: EditionEditDto = new EditionEditDto();
+    featureValues: NameValueDto[] = [];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.edition = data["edition"] ? EditionEditDto.fromJS(data["edition"]) : new EditionEditDto();
+            if (data["featureValues"] && data["featureValues"].constructor === Array) {
+                this.featureValues = [];
+                for (let item of data["featureValues"])
+                    this.featureValues.push(NameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): CreateOrUpdateEditionDto {
+        return new CreateOrUpdateEditionDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["edition"] = this.edition ? this.edition.toJS() : undefined;
+        if (this.featureValues && this.featureValues.constructor === Array) {
+            data["featureValues"] = [];
+            for (let item of this.featureValues)
+                data["featureValues"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new CreateOrUpdateEditionDto(JSON.parse(json));
+    }
+}
+
+export class EditionsSelectOutput {
+    allFeatures: FlatFeatureSelectDto[];
+    editionsWithFeatures: EditionWithFeaturesDto[];
+    tenantEditionId: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["allFeatures"] && data["allFeatures"].constructor === Array) {
+                this.allFeatures = [];
+                for (let item of data["allFeatures"])
+                    this.allFeatures.push(FlatFeatureSelectDto.fromJS(item));
+            }
+            if (data["editionsWithFeatures"] && data["editionsWithFeatures"].constructor === Array) {
+                this.editionsWithFeatures = [];
+                for (let item of data["editionsWithFeatures"])
+                    this.editionsWithFeatures.push(EditionWithFeaturesDto.fromJS(item));
+            }
+            this.tenantEditionId = data["tenantEditionId"] !== undefined ? data["tenantEditionId"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): EditionsSelectOutput {
+        return new EditionsSelectOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.allFeatures && this.allFeatures.constructor === Array) {
+            data["allFeatures"] = [];
+            for (let item of this.allFeatures)
+                data["allFeatures"].push(item.toJS());
+        }
+        if (this.editionsWithFeatures && this.editionsWithFeatures.constructor === Array) {
+            data["editionsWithFeatures"] = [];
+            for (let item of this.editionsWithFeatures)
+                data["editionsWithFeatures"].push(item.toJS());
+        }
+        data["tenantEditionId"] = this.tenantEditionId !== undefined ? this.tenantEditionId : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new EditionsSelectOutput(JSON.parse(json));
+    }
+}
+
+export class FlatFeatureSelectDto {
+    parentName: string;
+    name: string;
+    displayName: string;
+    description: string;
+    defaultValue: string;
+    inputType: IInputType;
+    textHtmlColor: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.parentName = data["parentName"] !== undefined ? data["parentName"] : undefined;
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.description = data["description"] !== undefined ? data["description"] : undefined;
+            this.defaultValue = data["defaultValue"] !== undefined ? data["defaultValue"] : undefined;
+            this.inputType = data["inputType"] ? IInputType.fromJS(data["inputType"]) : undefined;
+            this.textHtmlColor = data["textHtmlColor"] !== undefined ? data["textHtmlColor"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): FlatFeatureSelectDto {
+        return new FlatFeatureSelectDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["parentName"] = this.parentName !== undefined ? this.parentName : undefined;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["description"] = this.description !== undefined ? this.description : undefined;
+        data["defaultValue"] = this.defaultValue !== undefined ? this.defaultValue : undefined;
+        data["inputType"] = this.inputType ? this.inputType.toJS() : undefined;
+        data["textHtmlColor"] = this.textHtmlColor !== undefined ? this.textHtmlColor : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new FlatFeatureSelectDto(JSON.parse(json));
+    }
+}
+
+export class EditionWithFeaturesDto {
+    edition: EditionSelectDto;
+    featureValues: NameValueDto[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.edition = data["edition"] ? EditionSelectDto.fromJS(data["edition"]) : undefined;
+            if (data["featureValues"] && data["featureValues"].constructor === Array) {
+                this.featureValues = [];
+                for (let item of data["featureValues"])
+                    this.featureValues.push(NameValueDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): EditionWithFeaturesDto {
+        return new EditionWithFeaturesDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["edition"] = this.edition ? this.edition.toJS() : undefined;
+        if (this.featureValues && this.featureValues.constructor === Array) {
+            data["featureValues"] = [];
+            for (let item of this.featureValues)
+                data["featureValues"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new EditionWithFeaturesDto(JSON.parse(json));
     }
 }
 
@@ -11748,37 +12909,57 @@ export class IInputType {
     }
 }
 
-export class IValueValidator {
+export class EditionSelectDto {
+    id: number;
+    /** 版本名称 */
     name: string;
-    attributes: { [key: string] : any; };
+    /** 显示名称 */
+    displayName: string;
+    /** 过期版本 */
+    expiringEditionId: number;
+    /** 月价格 */
+    monthlyPrice: number;
+    /** 年价格 */
+    annualPrice: number;
+    /** 试用天数 */
+    trialDayCount: number;
+    /** 过期后等待天数 */
+    waitingDayAfterExpire: number;
+    /** 是否免费 */
+    isFree: boolean;
+    additionalData: AdditionalData;
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
-            if (data["attributes"]) {
-                this.attributes = {};
-                for (let key in data["attributes"]) {
-                    if (data["attributes"].hasOwnProperty(key))
-                        this.attributes[key] = data["attributes"][key] !== undefined ? data["attributes"][key] : undefined;
-                }
-            }
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.expiringEditionId = data["expiringEditionId"] !== undefined ? data["expiringEditionId"] : undefined;
+            this.monthlyPrice = data["monthlyPrice"] !== undefined ? data["monthlyPrice"] : undefined;
+            this.annualPrice = data["annualPrice"] !== undefined ? data["annualPrice"] : undefined;
+            this.trialDayCount = data["trialDayCount"] !== undefined ? data["trialDayCount"] : undefined;
+            this.waitingDayAfterExpire = data["waitingDayAfterExpire"] !== undefined ? data["waitingDayAfterExpire"] : undefined;
+            this.isFree = data["isFree"] !== undefined ? data["isFree"] : undefined;
+            this.additionalData = data["additionalData"] ? AdditionalData.fromJS(data["additionalData"]) : undefined;
         }
     }
 
-    static fromJS(data: any): IValueValidator {
-        return new IValueValidator(data);
+    static fromJS(data: any): EditionSelectDto {
+        return new EditionSelectDto(data);
     }
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
-        if (this.attributes) {
-            data["attributes"] = {};
-            for (let key in this.attributes) {
-                if (this.attributes.hasOwnProperty(key))
-                    data["attributes"][key] = this.attributes[key] !== undefined ? this.attributes[key] : undefined;
-            }
-        }
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["expiringEditionId"] = this.expiringEditionId !== undefined ? this.expiringEditionId : undefined;
+        data["monthlyPrice"] = this.monthlyPrice !== undefined ? this.monthlyPrice : undefined;
+        data["annualPrice"] = this.annualPrice !== undefined ? this.annualPrice : undefined;
+        data["trialDayCount"] = this.trialDayCount !== undefined ? this.trialDayCount : undefined;
+        data["waitingDayAfterExpire"] = this.waitingDayAfterExpire !== undefined ? this.waitingDayAfterExpire : undefined;
+        data["isFree"] = this.isFree !== undefined ? this.isFree : undefined;
+        data["additionalData"] = this.additionalData ? this.additionalData.toJS() : undefined;
         return data; 
     }
 
@@ -11788,50 +12969,7 @@ export class IValueValidator {
 
     clone() {
         const json = this.toJSON();
-        return new IValueValidator(JSON.parse(json));
-    }
-}
-
-/** 创建或更新版本 DTO */
-export class CreateOrUpdateEditionDto {
-    /** 版本信息 */
-    edition: EditionEditDto = new EditionEditDto();
-    /** 功能信息 */
-    featureValues: NameValueDto[] = [];
-
-    constructor(data?: any) {
-        if (data !== undefined) {
-            this.edition = data["edition"] ? EditionEditDto.fromJS(data["edition"]) : new EditionEditDto();
-            if (data["featureValues"] && data["featureValues"].constructor === Array) {
-                this.featureValues = [];
-                for (let item of data["featureValues"])
-                    this.featureValues.push(NameValueDto.fromJS(item));
-            }
-        }
-    }
-
-    static fromJS(data: any): CreateOrUpdateEditionDto {
-        return new CreateOrUpdateEditionDto(data);
-    }
-
-    toJS(data?: any) {
-        data = data === undefined ? {} : data;
-        data["edition"] = this.edition ? this.edition.toJS() : undefined;
-        if (this.featureValues && this.featureValues.constructor === Array) {
-            data["featureValues"] = [];
-            for (let item of this.featureValues)
-                data["featureValues"].push(item.toJS());
-        }
-        return data; 
-    }
-
-    toJSON() {
-        return JSON.stringify(this.toJS());
-    }
-
-    clone() {
-        const json = this.toJSON();
-        return new CreateOrUpdateEditionDto(JSON.parse(json));
+        return new EditionSelectDto(JSON.parse(json));
     }
 }
 
@@ -12075,6 +13213,317 @@ export class AcceptFriendshipRequestInput {
     clone() {
         const json = this.toJSON();
         return new AcceptFriendshipRequestInput(JSON.parse(json));
+    }
+}
+
+export class HostDashboardData {
+    newTenantsCount: number;
+    newSubscriptionAmount: number;
+    dashboardPlaceholder1: number;
+    dashboardPlaceholder2: number;
+    incomeStatistics: IncomeStastistic[];
+    editionStatistics: TenantEdition[];
+    expiringTenants: ExpiringTenant[];
+    recentTenants: RecentTenant[];
+    maxExpiringTenantsShownCount: number;
+    maxRecentTenantsShownCount: number;
+    subscriptionEndAlertDayCount: number;
+    recentTenantsDayCount: number;
+    subscriptionEndDateStart: moment.Moment;
+    subscriptionEndDateEnd: moment.Moment;
+    tenantCreationStartDate: moment.Moment;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.newTenantsCount = data["newTenantsCount"] !== undefined ? data["newTenantsCount"] : undefined;
+            this.newSubscriptionAmount = data["newSubscriptionAmount"] !== undefined ? data["newSubscriptionAmount"] : undefined;
+            this.dashboardPlaceholder1 = data["dashboardPlaceholder1"] !== undefined ? data["dashboardPlaceholder1"] : undefined;
+            this.dashboardPlaceholder2 = data["dashboardPlaceholder2"] !== undefined ? data["dashboardPlaceholder2"] : undefined;
+            if (data["incomeStatistics"] && data["incomeStatistics"].constructor === Array) {
+                this.incomeStatistics = [];
+                for (let item of data["incomeStatistics"])
+                    this.incomeStatistics.push(IncomeStastistic.fromJS(item));
+            }
+            if (data["editionStatistics"] && data["editionStatistics"].constructor === Array) {
+                this.editionStatistics = [];
+                for (let item of data["editionStatistics"])
+                    this.editionStatistics.push(TenantEdition.fromJS(item));
+            }
+            if (data["expiringTenants"] && data["expiringTenants"].constructor === Array) {
+                this.expiringTenants = [];
+                for (let item of data["expiringTenants"])
+                    this.expiringTenants.push(ExpiringTenant.fromJS(item));
+            }
+            if (data["recentTenants"] && data["recentTenants"].constructor === Array) {
+                this.recentTenants = [];
+                for (let item of data["recentTenants"])
+                    this.recentTenants.push(RecentTenant.fromJS(item));
+            }
+            this.maxExpiringTenantsShownCount = data["maxExpiringTenantsShownCount"] !== undefined ? data["maxExpiringTenantsShownCount"] : undefined;
+            this.maxRecentTenantsShownCount = data["maxRecentTenantsShownCount"] !== undefined ? data["maxRecentTenantsShownCount"] : undefined;
+            this.subscriptionEndAlertDayCount = data["subscriptionEndAlertDayCount"] !== undefined ? data["subscriptionEndAlertDayCount"] : undefined;
+            this.recentTenantsDayCount = data["recentTenantsDayCount"] !== undefined ? data["recentTenantsDayCount"] : undefined;
+            this.subscriptionEndDateStart = data["subscriptionEndDateStart"] ? moment(data["subscriptionEndDateStart"].toString()) : undefined;
+            this.subscriptionEndDateEnd = data["subscriptionEndDateEnd"] ? moment(data["subscriptionEndDateEnd"].toString()) : undefined;
+            this.tenantCreationStartDate = data["tenantCreationStartDate"] ? moment(data["tenantCreationStartDate"].toString()) : undefined;
+        }
+    }
+
+    static fromJS(data: any): HostDashboardData {
+        return new HostDashboardData(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["newTenantsCount"] = this.newTenantsCount !== undefined ? this.newTenantsCount : undefined;
+        data["newSubscriptionAmount"] = this.newSubscriptionAmount !== undefined ? this.newSubscriptionAmount : undefined;
+        data["dashboardPlaceholder1"] = this.dashboardPlaceholder1 !== undefined ? this.dashboardPlaceholder1 : undefined;
+        data["dashboardPlaceholder2"] = this.dashboardPlaceholder2 !== undefined ? this.dashboardPlaceholder2 : undefined;
+        if (this.incomeStatistics && this.incomeStatistics.constructor === Array) {
+            data["incomeStatistics"] = [];
+            for (let item of this.incomeStatistics)
+                data["incomeStatistics"].push(item.toJS());
+        }
+        if (this.editionStatistics && this.editionStatistics.constructor === Array) {
+            data["editionStatistics"] = [];
+            for (let item of this.editionStatistics)
+                data["editionStatistics"].push(item.toJS());
+        }
+        if (this.expiringTenants && this.expiringTenants.constructor === Array) {
+            data["expiringTenants"] = [];
+            for (let item of this.expiringTenants)
+                data["expiringTenants"].push(item.toJS());
+        }
+        if (this.recentTenants && this.recentTenants.constructor === Array) {
+            data["recentTenants"] = [];
+            for (let item of this.recentTenants)
+                data["recentTenants"].push(item.toJS());
+        }
+        data["maxExpiringTenantsShownCount"] = this.maxExpiringTenantsShownCount !== undefined ? this.maxExpiringTenantsShownCount : undefined;
+        data["maxRecentTenantsShownCount"] = this.maxRecentTenantsShownCount !== undefined ? this.maxRecentTenantsShownCount : undefined;
+        data["subscriptionEndAlertDayCount"] = this.subscriptionEndAlertDayCount !== undefined ? this.subscriptionEndAlertDayCount : undefined;
+        data["recentTenantsDayCount"] = this.recentTenantsDayCount !== undefined ? this.recentTenantsDayCount : undefined;
+        data["subscriptionEndDateStart"] = this.subscriptionEndDateStart ? this.subscriptionEndDateStart.toISOString() : undefined;
+        data["subscriptionEndDateEnd"] = this.subscriptionEndDateEnd ? this.subscriptionEndDateEnd.toISOString() : undefined;
+        data["tenantCreationStartDate"] = this.tenantCreationStartDate ? this.tenantCreationStartDate.toISOString() : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new HostDashboardData(JSON.parse(json));
+    }
+}
+
+export class IncomeStastistic {
+    label: string;
+    date: moment.Moment;
+    amount: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.label = data["label"] !== undefined ? data["label"] : undefined;
+            this.date = data["date"] ? moment(data["date"].toString()) : undefined;
+            this.amount = data["amount"] !== undefined ? data["amount"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): IncomeStastistic {
+        return new IncomeStastistic(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["label"] = this.label !== undefined ? this.label : undefined;
+        data["date"] = this.date ? this.date.toISOString() : undefined;
+        data["amount"] = this.amount !== undefined ? this.amount : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new IncomeStastistic(JSON.parse(json));
+    }
+}
+
+export class TenantEdition {
+    label: string;
+    value: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.label = data["label"] !== undefined ? data["label"] : undefined;
+            this.value = data["value"] !== undefined ? data["value"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): TenantEdition {
+        return new TenantEdition(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["label"] = this.label !== undefined ? this.label : undefined;
+        data["value"] = this.value !== undefined ? this.value : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new TenantEdition(JSON.parse(json));
+    }
+}
+
+export class ExpiringTenant {
+    tenantName: string;
+    remainingDayCount: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.tenantName = data["tenantName"] !== undefined ? data["tenantName"] : undefined;
+            this.remainingDayCount = data["remainingDayCount"] !== undefined ? data["remainingDayCount"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): ExpiringTenant {
+        return new ExpiringTenant(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["tenantName"] = this.tenantName !== undefined ? this.tenantName : undefined;
+        data["remainingDayCount"] = this.remainingDayCount !== undefined ? this.remainingDayCount : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ExpiringTenant(JSON.parse(json));
+    }
+}
+
+export class RecentTenant {
+    id: number;
+    name: string;
+    creationTime: moment.Moment;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+        }
+    }
+
+    static fromJS(data: any): RecentTenant {
+        return new RecentTenant(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new RecentTenant(JSON.parse(json));
+    }
+}
+
+export class GetIncomeStatisticsDataOutput {
+    incomeStatistics: IncomeStastistic[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["incomeStatistics"] && data["incomeStatistics"].constructor === Array) {
+                this.incomeStatistics = [];
+                for (let item of data["incomeStatistics"])
+                    this.incomeStatistics.push(IncomeStastistic.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetIncomeStatisticsDataOutput {
+        return new GetIncomeStatisticsDataOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.incomeStatistics && this.incomeStatistics.constructor === Array) {
+            data["incomeStatistics"] = [];
+            for (let item of this.incomeStatistics)
+                data["incomeStatistics"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetIncomeStatisticsDataOutput(JSON.parse(json));
+    }
+}
+
+export class GetEditionTenantStatisticsOutput {
+    editionStatistics: TenantEdition[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["editionStatistics"] && data["editionStatistics"].constructor === Array) {
+                this.editionStatistics = [];
+                for (let item of data["editionStatistics"])
+                    this.editionStatistics.push(TenantEdition.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetEditionTenantStatisticsOutput {
+        return new GetEditionTenantStatisticsOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.editionStatistics && this.editionStatistics.constructor === Array) {
+            data["editionStatistics"] = [];
+            for (let item of this.editionStatistics)
+                data["editionStatistics"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetEditionTenantStatisticsOutput(JSON.parse(json));
     }
 }
 
@@ -12409,22 +13858,28 @@ export class ExternalAuthenticationEditDto {
 }
 
 export class SMSSettingsEditDto {
-    /** 注册验证码模板 */
+    /** 是否启用图形验证码 */
+    useCaptchaToVerification: boolean;
+    /** 注册模板 */
     registerVerificationTempId: number;
-    /** 修改密码验证码模板 */
+    /** 修改密码模板 */
     changePasswordVerificationTempId: number;
-    /** 修改手机验证码模板 */
-    changeTelephoneVerificationTempId: number;
-    /** 修改手机验证码模板 */
+    /** 绑定手机模板 */
+    unBindingPhoneVerificationTempId: number;
+    /** 绑定手机模板 */
+    bindingPhoneVerificationTempId: number;
+    /** 登陆模板 */
     loginVerificationTempId: number;
     /** 可用短信模板 */
     availableSmsTemplates: SelectListItemDto[];
 
     constructor(data?: any) {
         if (data !== undefined) {
+            this.useCaptchaToVerification = data["useCaptchaToVerification"] !== undefined ? data["useCaptchaToVerification"] : undefined;
             this.registerVerificationTempId = data["registerVerificationTempId"] !== undefined ? data["registerVerificationTempId"] : undefined;
             this.changePasswordVerificationTempId = data["changePasswordVerificationTempId"] !== undefined ? data["changePasswordVerificationTempId"] : undefined;
-            this.changeTelephoneVerificationTempId = data["changeTelephoneVerificationTempId"] !== undefined ? data["changeTelephoneVerificationTempId"] : undefined;
+            this.unBindingPhoneVerificationTempId = data["unBindingPhoneVerificationTempId"] !== undefined ? data["unBindingPhoneVerificationTempId"] : undefined;
+            this.bindingPhoneVerificationTempId = data["bindingPhoneVerificationTempId"] !== undefined ? data["bindingPhoneVerificationTempId"] : undefined;
             this.loginVerificationTempId = data["loginVerificationTempId"] !== undefined ? data["loginVerificationTempId"] : undefined;
             if (data["availableSmsTemplates"] && data["availableSmsTemplates"].constructor === Array) {
                 this.availableSmsTemplates = [];
@@ -12440,9 +13895,11 @@ export class SMSSettingsEditDto {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
+        data["useCaptchaToVerification"] = this.useCaptchaToVerification !== undefined ? this.useCaptchaToVerification : undefined;
         data["registerVerificationTempId"] = this.registerVerificationTempId !== undefined ? this.registerVerificationTempId : undefined;
         data["changePasswordVerificationTempId"] = this.changePasswordVerificationTempId !== undefined ? this.changePasswordVerificationTempId : undefined;
-        data["changeTelephoneVerificationTempId"] = this.changeTelephoneVerificationTempId !== undefined ? this.changeTelephoneVerificationTempId : undefined;
+        data["unBindingPhoneVerificationTempId"] = this.unBindingPhoneVerificationTempId !== undefined ? this.unBindingPhoneVerificationTempId : undefined;
+        data["bindingPhoneVerificationTempId"] = this.bindingPhoneVerificationTempId !== undefined ? this.bindingPhoneVerificationTempId : undefined;
         data["loginVerificationTempId"] = this.loginVerificationTempId !== undefined ? this.loginVerificationTempId : undefined;
         if (this.availableSmsTemplates && this.availableSmsTemplates.constructor === Array) {
             data["availableSmsTemplates"] = [];
@@ -12738,6 +14195,7 @@ export class ApplicationLanguageListDto {
     name: string;
     displayName: string;
     icon: string;
+    isDisabled: boolean;
     isDeleted: boolean;
     deleterUserId: number;
     deletionTime: moment.Moment;
@@ -12753,6 +14211,7 @@ export class ApplicationLanguageListDto {
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
             this.icon = data["icon"] !== undefined ? data["icon"] : undefined;
+            this.isDisabled = data["isDisabled"] !== undefined ? data["isDisabled"] : undefined;
             this.isDeleted = data["isDeleted"] !== undefined ? data["isDeleted"] : undefined;
             this.deleterUserId = data["deleterUserId"] !== undefined ? data["deleterUserId"] : undefined;
             this.deletionTime = data["deletionTime"] ? moment(data["deletionTime"].toString()) : undefined;
@@ -12774,6 +14233,7 @@ export class ApplicationLanguageListDto {
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
         data["icon"] = this.icon !== undefined ? this.icon : undefined;
+        data["isDisabled"] = this.isDisabled !== undefined ? this.isDisabled : undefined;
         data["isDeleted"] = this.isDeleted !== undefined ? this.isDeleted : undefined;
         data["deleterUserId"] = this.deleterUserId !== undefined ? this.deleterUserId : undefined;
         data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : undefined;
@@ -12850,12 +14310,14 @@ export class ApplicationLanguageEditDto {
     id: number;
     name: string;
     icon: string;
+    isDisabled: boolean;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.id = data["id"] !== undefined ? data["id"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
             this.icon = data["icon"] !== undefined ? data["icon"] : undefined;
+            this.isDisabled = data["isDisabled"] !== undefined ? data["isDisabled"] : undefined;
         }
     }
 
@@ -12868,6 +14330,7 @@ export class ApplicationLanguageEditDto {
         data["id"] = this.id !== undefined ? this.id : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
         data["icon"] = this.icon !== undefined ? this.icon : undefined;
+        data["isDisabled"] = this.isDisabled !== undefined ? this.isDisabled : undefined;
         return data; 
     }
 
@@ -12878,6 +14341,41 @@ export class ApplicationLanguageEditDto {
     clone() {
         const json = this.toJSON();
         return new ApplicationLanguageEditDto(JSON.parse(json));
+    }
+}
+
+export class ComboboxItemDto {
+    value: string;
+    displayText: string;
+    isSelected: boolean;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.value = data["value"] !== undefined ? data["value"] : undefined;
+            this.displayText = data["displayText"] !== undefined ? data["displayText"] : undefined;
+            this.isSelected = data["isSelected"] !== undefined ? data["isSelected"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): ComboboxItemDto {
+        return new ComboboxItemDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["value"] = this.value !== undefined ? this.value : undefined;
+        data["displayText"] = this.displayText !== undefined ? this.displayText : undefined;
+        data["isSelected"] = this.isSelected !== undefined ? this.isSelected : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ComboboxItemDto(JSON.parse(json));
     }
 }
 
@@ -15242,6 +16740,129 @@ export class CreateOrUpdateOutletInput {
     }
 }
 
+export class PaymentInfoDto {
+    edition: EditionSelectDto;
+    additionalPrice: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.edition = data["edition"] ? EditionSelectDto.fromJS(data["edition"]) : undefined;
+            this.additionalPrice = data["additionalPrice"] !== undefined ? data["additionalPrice"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): PaymentInfoDto {
+        return new PaymentInfoDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["edition"] = this.edition ? this.edition.toJS() : undefined;
+        data["additionalPrice"] = this.additionalPrice !== undefined ? this.additionalPrice : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new PaymentInfoDto(JSON.parse(json));
+    }
+}
+
+export class CreatePaymentDto {
+    editionId: number;
+    editionPaymentType: CreatePaymentDtoEditionPaymentType;
+    paymentPeriodType: CreatePaymentDtoPaymentPeriodType;
+    subscriptionPaymentGatewayType: CreatePaymentDtoSubscriptionPaymentGatewayType;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.editionId = data["editionId"] !== undefined ? data["editionId"] : undefined;
+            this.editionPaymentType = data["editionPaymentType"] !== undefined ? data["editionPaymentType"] : undefined;
+            this.paymentPeriodType = data["paymentPeriodType"] !== undefined ? data["paymentPeriodType"] : undefined;
+            this.subscriptionPaymentGatewayType = data["subscriptionPaymentGatewayType"] !== undefined ? data["subscriptionPaymentGatewayType"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): CreatePaymentDto {
+        return new CreatePaymentDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["editionId"] = this.editionId !== undefined ? this.editionId : undefined;
+        data["editionPaymentType"] = this.editionPaymentType !== undefined ? this.editionPaymentType : undefined;
+        data["paymentPeriodType"] = this.paymentPeriodType !== undefined ? this.paymentPeriodType : undefined;
+        data["subscriptionPaymentGatewayType"] = this.subscriptionPaymentGatewayType !== undefined ? this.subscriptionPaymentGatewayType : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new CreatePaymentDto(JSON.parse(json));
+    }
+}
+
+export class ExecutePaymentDto {
+    gateway: ExecutePaymentDtoGateway;
+    editionPaymentType: ExecutePaymentDtoEditionPaymentType;
+    editionId: number;
+    paymentPeriodType: ExecutePaymentDtoPaymentPeriodType;
+    additionalData: { [key: string] : string; };
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.gateway = data["gateway"] !== undefined ? data["gateway"] : undefined;
+            this.editionPaymentType = data["editionPaymentType"] !== undefined ? data["editionPaymentType"] : undefined;
+            this.editionId = data["editionId"] !== undefined ? data["editionId"] : undefined;
+            this.paymentPeriodType = data["paymentPeriodType"] !== undefined ? data["paymentPeriodType"] : undefined;
+            if (data["additionalData"]) {
+                this.additionalData = {};
+                for (let key in data["additionalData"]) {
+                    if (data["additionalData"].hasOwnProperty(key))
+                        this.additionalData[key] = data["additionalData"][key] !== undefined ? data["additionalData"][key] : undefined;
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): ExecutePaymentDto {
+        return new ExecutePaymentDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["gateway"] = this.gateway !== undefined ? this.gateway : undefined;
+        data["editionPaymentType"] = this.editionPaymentType !== undefined ? this.editionPaymentType : undefined;
+        data["editionId"] = this.editionId !== undefined ? this.editionId : undefined;
+        data["paymentPeriodType"] = this.paymentPeriodType !== undefined ? this.paymentPeriodType : undefined;
+        if (this.additionalData) {
+            data["additionalData"] = {};
+            for (let key in this.additionalData) {
+                if (this.additionalData.hasOwnProperty(key))
+                    data["additionalData"][key] = this.additionalData[key] !== undefined ? this.additionalData[key] : undefined;
+            }
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ExecutePaymentDto(JSON.parse(json));
+    }
+}
+
 export class PagedResultDtoOfBookingTimelineDto {
     totalCount: number;
     items: BookingTimelineDto[];
@@ -16492,16 +18113,30 @@ export class UserLoginInfoDto {
 export class TenantLoginInfoDto {
     tenancyName: string;
     name: string;
-    editionDisplayName: string;
     logoId: number;
+    logoFileType: string;
+    subscriptionEndDateUtc: moment.Moment;
+    isInTrialPeriod: boolean;
+    edition: EditionInfoDto;
+    creationTime: moment.Moment;
+    paymentPeriodType: TenantLoginInfoDtoPaymentPeriodType;
+    subscriptionDateString: string;
+    creationTimeString: string;
     id: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.tenancyName = data["tenancyName"] !== undefined ? data["tenancyName"] : undefined;
             this.name = data["name"] !== undefined ? data["name"] : undefined;
-            this.editionDisplayName = data["editionDisplayName"] !== undefined ? data["editionDisplayName"] : undefined;
             this.logoId = data["logoId"] !== undefined ? data["logoId"] : undefined;
+            this.logoFileType = data["logoFileType"] !== undefined ? data["logoFileType"] : undefined;
+            this.subscriptionEndDateUtc = data["subscriptionEndDateUtc"] ? moment(data["subscriptionEndDateUtc"].toString()) : undefined;
+            this.isInTrialPeriod = data["isInTrialPeriod"] !== undefined ? data["isInTrialPeriod"] : undefined;
+            this.edition = data["edition"] ? EditionInfoDto.fromJS(data["edition"]) : undefined;
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : undefined;
+            this.paymentPeriodType = data["paymentPeriodType"] !== undefined ? data["paymentPeriodType"] : undefined;
+            this.subscriptionDateString = data["subscriptionDateString"] !== undefined ? data["subscriptionDateString"] : undefined;
+            this.creationTimeString = data["creationTimeString"] !== undefined ? data["creationTimeString"] : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
@@ -16514,8 +18149,15 @@ export class TenantLoginInfoDto {
         data = data === undefined ? {} : data;
         data["tenancyName"] = this.tenancyName !== undefined ? this.tenancyName : undefined;
         data["name"] = this.name !== undefined ? this.name : undefined;
-        data["editionDisplayName"] = this.editionDisplayName !== undefined ? this.editionDisplayName : undefined;
         data["logoId"] = this.logoId !== undefined ? this.logoId : undefined;
+        data["logoFileType"] = this.logoFileType !== undefined ? this.logoFileType : undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : undefined;
+        data["isInTrialPeriod"] = this.isInTrialPeriod !== undefined ? this.isInTrialPeriod : undefined;
+        data["edition"] = this.edition ? this.edition.toJS() : undefined;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : undefined;
+        data["paymentPeriodType"] = this.paymentPeriodType !== undefined ? this.paymentPeriodType : undefined;
+        data["subscriptionDateString"] = this.subscriptionDateString !== undefined ? this.subscriptionDateString : undefined;
+        data["creationTimeString"] = this.creationTimeString !== undefined ? this.creationTimeString : undefined;
         data["id"] = this.id !== undefined ? this.id : undefined;
         return data; 
     }
@@ -16574,6 +18216,53 @@ export class ApplicationInfoDto {
     clone() {
         const json = this.toJSON();
         return new ApplicationInfoDto(JSON.parse(json));
+    }
+}
+
+export class EditionInfoDto {
+    displayName: string;
+    trialDayCount: number;
+    monthlyPrice: number;
+    annualPrice: number;
+    isHighestEdition: boolean;
+    isFree: boolean;
+    id: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.displayName = data["displayName"] !== undefined ? data["displayName"] : undefined;
+            this.trialDayCount = data["trialDayCount"] !== undefined ? data["trialDayCount"] : undefined;
+            this.monthlyPrice = data["monthlyPrice"] !== undefined ? data["monthlyPrice"] : undefined;
+            this.annualPrice = data["annualPrice"] !== undefined ? data["annualPrice"] : undefined;
+            this.isHighestEdition = data["isHighestEdition"] !== undefined ? data["isHighestEdition"] : undefined;
+            this.isFree = data["isFree"] !== undefined ? data["isFree"] : undefined;
+            this.id = data["id"] !== undefined ? data["id"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): EditionInfoDto {
+        return new EditionInfoDto(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["displayName"] = this.displayName !== undefined ? this.displayName : undefined;
+        data["trialDayCount"] = this.trialDayCount !== undefined ? this.trialDayCount : undefined;
+        data["monthlyPrice"] = this.monthlyPrice !== undefined ? this.monthlyPrice : undefined;
+        data["annualPrice"] = this.annualPrice !== undefined ? this.annualPrice : undefined;
+        data["isHighestEdition"] = this.isHighestEdition !== undefined ? this.isHighestEdition : undefined;
+        data["isFree"] = this.isFree !== undefined ? this.isFree : undefined;
+        data["id"] = this.id !== undefined ? this.id : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new EditionInfoDto(JSON.parse(json));
     }
 }
 
@@ -17560,6 +19249,8 @@ export class CreateTenantInput {
     editionId: number;
     /** 激活 */
     isActive: boolean;
+    subscriptionEndDateUtc: moment.Moment;
+    isInTrialPeriod: boolean;
 
     constructor(data?: any) {
         if (data !== undefined) {
@@ -17573,6 +19264,8 @@ export class CreateTenantInput {
             this.sendActivationEmail = data["sendActivationEmail"] !== undefined ? data["sendActivationEmail"] : undefined;
             this.editionId = data["editionId"] !== undefined ? data["editionId"] : undefined;
             this.isActive = data["isActive"] !== undefined ? data["isActive"] : undefined;
+            this.subscriptionEndDateUtc = data["subscriptionEndDateUtc"] ? moment(data["subscriptionEndDateUtc"].toString()) : undefined;
+            this.isInTrialPeriod = data["isInTrialPeriod"] !== undefined ? data["isInTrialPeriod"] : undefined;
         }
     }
 
@@ -17592,6 +19285,8 @@ export class CreateTenantInput {
         data["sendActivationEmail"] = this.sendActivationEmail !== undefined ? this.sendActivationEmail : undefined;
         data["editionId"] = this.editionId !== undefined ? this.editionId : undefined;
         data["isActive"] = this.isActive !== undefined ? this.isActive : undefined;
+        data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : undefined;
+        data["isInTrialPeriod"] = this.isInTrialPeriod !== undefined ? this.isInTrialPeriod : undefined;
         return data; 
     }
 
@@ -17609,13 +19304,13 @@ export class GetTenantForEditOutput {
     /** 租户详情 */
     tenant: TenantEditDto;
     /** 特性(限制) */
-    features: GetTenantFeaturesForEditOutput;
+    features: GetTenantFeaturesEditOutput;
     id: number;
 
     constructor(data?: any) {
         if (data !== undefined) {
             this.tenant = data["tenant"] ? TenantEditDto.fromJS(data["tenant"]) : undefined;
-            this.features = data["features"] ? GetTenantFeaturesForEditOutput.fromJS(data["features"]) : undefined;
+            this.features = data["features"] ? GetTenantFeaturesEditOutput.fromJS(data["features"]) : undefined;
             this.id = data["id"] !== undefined ? data["id"] : undefined;
         }
     }
@@ -17703,10 +19398,8 @@ export class TenantEditDto {
     }
 }
 
-export class GetTenantFeaturesForEditOutput {
-    /** 已有(设置的)特性值,更新时要赋值 */
+export class GetTenantFeaturesEditOutput {
     featureValues: NameValueDto[];
-    /** 所有特性值 */
     features: FlatFeatureDto[];
 
     constructor(data?: any) {
@@ -17724,8 +19417,8 @@ export class GetTenantFeaturesForEditOutput {
         }
     }
 
-    static fromJS(data: any): GetTenantFeaturesForEditOutput {
-        return new GetTenantFeaturesForEditOutput(data);
+    static fromJS(data: any): GetTenantFeaturesEditOutput {
+        return new GetTenantFeaturesEditOutput(data);
     }
 
     toJS(data?: any) {
@@ -17749,7 +19442,7 @@ export class GetTenantFeaturesForEditOutput {
 
     clone() {
         const json = this.toJSON();
-        return new GetTenantFeaturesForEditOutput(JSON.parse(json));
+        return new GetTenantFeaturesEditOutput(JSON.parse(json));
     }
 }
 
@@ -17825,20 +19518,14 @@ export class EntityDto {
 }
 
 export class GetMemberActivityOutput {
-    totalMembers: number[];
-    newMembers: number[];
+    memberActivities: MemberActivity[];
 
     constructor(data?: any) {
         if (data !== undefined) {
-            if (data["totalMembers"] && data["totalMembers"].constructor === Array) {
-                this.totalMembers = [];
-                for (let item of data["totalMembers"])
-                    this.totalMembers.push(item);
-            }
-            if (data["newMembers"] && data["newMembers"].constructor === Array) {
-                this.newMembers = [];
-                for (let item of data["newMembers"])
-                    this.newMembers.push(item);
+            if (data["memberActivities"] && data["memberActivities"].constructor === Array) {
+                this.memberActivities = [];
+                for (let item of data["memberActivities"])
+                    this.memberActivities.push(MemberActivity.fromJS(item));
             }
         }
     }
@@ -17849,15 +19536,10 @@ export class GetMemberActivityOutput {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        if (this.totalMembers && this.totalMembers.constructor === Array) {
-            data["totalMembers"] = [];
-            for (let item of this.totalMembers)
-                data["totalMembers"].push(item);
-        }
-        if (this.newMembers && this.newMembers.constructor === Array) {
-            data["newMembers"] = [];
-            for (let item of this.newMembers)
-                data["newMembers"].push(item);
+        if (this.memberActivities && this.memberActivities.constructor === Array) {
+            data["memberActivities"] = [];
+            for (let item of this.memberActivities)
+                data["memberActivities"].push(item.toJS());
         }
         return data; 
     }
@@ -17869,6 +19551,443 @@ export class GetMemberActivityOutput {
     clone() {
         const json = this.toJSON();
         return new GetMemberActivityOutput(JSON.parse(json));
+    }
+}
+
+export class MemberActivity {
+    name: string;
+    earnings: string;
+    cases: number;
+    closed: number;
+    rate: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.name = data["name"] !== undefined ? data["name"] : undefined;
+            this.earnings = data["earnings"] !== undefined ? data["earnings"] : undefined;
+            this.cases = data["cases"] !== undefined ? data["cases"] : undefined;
+            this.closed = data["closed"] !== undefined ? data["closed"] : undefined;
+            this.rate = data["rate"] !== undefined ? data["rate"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): MemberActivity {
+        return new MemberActivity(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["name"] = this.name !== undefined ? this.name : undefined;
+        data["earnings"] = this.earnings !== undefined ? this.earnings : undefined;
+        data["cases"] = this.cases !== undefined ? this.cases : undefined;
+        data["closed"] = this.closed !== undefined ? this.closed : undefined;
+        data["rate"] = this.rate !== undefined ? this.rate : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new MemberActivity(JSON.parse(json));
+    }
+}
+
+export class GetDashboardDataOutput {
+    totalProfit: number;
+    newFeedbacks: number;
+    newOrders: number;
+    newUsers: number;
+    salesSummary: SalesSummaryData[];
+    totalSales: number;
+    revenue: number;
+    expenses: number;
+    growth: number;
+    transactionPercent: number;
+    newVisitPercent: number;
+    bouncePercent: number;
+    networkLoad: number[];
+    cpuLoad: number[];
+    loadRate: number[];
+    timeLineItems: TimeLineItem[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.totalProfit = data["totalProfit"] !== undefined ? data["totalProfit"] : undefined;
+            this.newFeedbacks = data["newFeedbacks"] !== undefined ? data["newFeedbacks"] : undefined;
+            this.newOrders = data["newOrders"] !== undefined ? data["newOrders"] : undefined;
+            this.newUsers = data["newUsers"] !== undefined ? data["newUsers"] : undefined;
+            if (data["salesSummary"] && data["salesSummary"].constructor === Array) {
+                this.salesSummary = [];
+                for (let item of data["salesSummary"])
+                    this.salesSummary.push(SalesSummaryData.fromJS(item));
+            }
+            this.totalSales = data["totalSales"] !== undefined ? data["totalSales"] : undefined;
+            this.revenue = data["revenue"] !== undefined ? data["revenue"] : undefined;
+            this.expenses = data["expenses"] !== undefined ? data["expenses"] : undefined;
+            this.growth = data["growth"] !== undefined ? data["growth"] : undefined;
+            this.transactionPercent = data["transactionPercent"] !== undefined ? data["transactionPercent"] : undefined;
+            this.newVisitPercent = data["newVisitPercent"] !== undefined ? data["newVisitPercent"] : undefined;
+            this.bouncePercent = data["bouncePercent"] !== undefined ? data["bouncePercent"] : undefined;
+            if (data["networkLoad"] && data["networkLoad"].constructor === Array) {
+                this.networkLoad = [];
+                for (let item of data["networkLoad"])
+                    this.networkLoad.push(item);
+            }
+            if (data["cpuLoad"] && data["cpuLoad"].constructor === Array) {
+                this.cpuLoad = [];
+                for (let item of data["cpuLoad"])
+                    this.cpuLoad.push(item);
+            }
+            if (data["loadRate"] && data["loadRate"].constructor === Array) {
+                this.loadRate = [];
+                for (let item of data["loadRate"])
+                    this.loadRate.push(item);
+            }
+            if (data["timeLineItems"] && data["timeLineItems"].constructor === Array) {
+                this.timeLineItems = [];
+                for (let item of data["timeLineItems"])
+                    this.timeLineItems.push(TimeLineItem.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetDashboardDataOutput {
+        return new GetDashboardDataOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["totalProfit"] = this.totalProfit !== undefined ? this.totalProfit : undefined;
+        data["newFeedbacks"] = this.newFeedbacks !== undefined ? this.newFeedbacks : undefined;
+        data["newOrders"] = this.newOrders !== undefined ? this.newOrders : undefined;
+        data["newUsers"] = this.newUsers !== undefined ? this.newUsers : undefined;
+        if (this.salesSummary && this.salesSummary.constructor === Array) {
+            data["salesSummary"] = [];
+            for (let item of this.salesSummary)
+                data["salesSummary"].push(item.toJS());
+        }
+        data["totalSales"] = this.totalSales !== undefined ? this.totalSales : undefined;
+        data["revenue"] = this.revenue !== undefined ? this.revenue : undefined;
+        data["expenses"] = this.expenses !== undefined ? this.expenses : undefined;
+        data["growth"] = this.growth !== undefined ? this.growth : undefined;
+        data["transactionPercent"] = this.transactionPercent !== undefined ? this.transactionPercent : undefined;
+        data["newVisitPercent"] = this.newVisitPercent !== undefined ? this.newVisitPercent : undefined;
+        data["bouncePercent"] = this.bouncePercent !== undefined ? this.bouncePercent : undefined;
+        if (this.networkLoad && this.networkLoad.constructor === Array) {
+            data["networkLoad"] = [];
+            for (let item of this.networkLoad)
+                data["networkLoad"].push(item);
+        }
+        if (this.cpuLoad && this.cpuLoad.constructor === Array) {
+            data["cpuLoad"] = [];
+            for (let item of this.cpuLoad)
+                data["cpuLoad"].push(item);
+        }
+        if (this.loadRate && this.loadRate.constructor === Array) {
+            data["loadRate"] = [];
+            for (let item of this.loadRate)
+                data["loadRate"].push(item);
+        }
+        if (this.timeLineItems && this.timeLineItems.constructor === Array) {
+            data["timeLineItems"] = [];
+            for (let item of this.timeLineItems)
+                data["timeLineItems"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetDashboardDataOutput(JSON.parse(json));
+    }
+}
+
+export class SalesSummaryData {
+    period: string;
+    sales: number;
+    profit: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.period = data["period"] !== undefined ? data["period"] : undefined;
+            this.sales = data["sales"] !== undefined ? data["sales"] : undefined;
+            this.profit = data["profit"] !== undefined ? data["profit"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): SalesSummaryData {
+        return new SalesSummaryData(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["period"] = this.period !== undefined ? this.period : undefined;
+        data["sales"] = this.sales !== undefined ? this.sales : undefined;
+        data["profit"] = this.profit !== undefined ? this.profit : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new SalesSummaryData(JSON.parse(json));
+    }
+}
+
+export class TimeLineItem {
+    title: string;
+    image: string;
+    autherName: string;
+    longDate: string;
+    shortDate: string;
+    titleDate: string;
+    text: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.title = data["title"] !== undefined ? data["title"] : undefined;
+            this.image = data["image"] !== undefined ? data["image"] : undefined;
+            this.autherName = data["autherName"] !== undefined ? data["autherName"] : undefined;
+            this.longDate = data["longDate"] !== undefined ? data["longDate"] : undefined;
+            this.shortDate = data["shortDate"] !== undefined ? data["shortDate"] : undefined;
+            this.titleDate = data["titleDate"] !== undefined ? data["titleDate"] : undefined;
+            this.text = data["text"] !== undefined ? data["text"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): TimeLineItem {
+        return new TimeLineItem(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["title"] = this.title !== undefined ? this.title : undefined;
+        data["image"] = this.image !== undefined ? this.image : undefined;
+        data["autherName"] = this.autherName !== undefined ? this.autherName : undefined;
+        data["longDate"] = this.longDate !== undefined ? this.longDate : undefined;
+        data["shortDate"] = this.shortDate !== undefined ? this.shortDate : undefined;
+        data["titleDate"] = this.titleDate !== undefined ? this.titleDate : undefined;
+        data["text"] = this.text !== undefined ? this.text : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new TimeLineItem(JSON.parse(json));
+    }
+}
+
+export class GetSalesSummaryOutput {
+    salesSummary: SalesSummaryData[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["salesSummary"] && data["salesSummary"].constructor === Array) {
+                this.salesSummary = [];
+                for (let item of data["salesSummary"])
+                    this.salesSummary.push(SalesSummaryData.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetSalesSummaryOutput {
+        return new GetSalesSummaryOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.salesSummary && this.salesSummary.constructor === Array) {
+            data["salesSummary"] = [];
+            for (let item of this.salesSummary)
+                data["salesSummary"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetSalesSummaryOutput(JSON.parse(json));
+    }
+}
+
+export class GetWorldMapOutput {
+    countries: WorldMapCountry[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["countries"] && data["countries"].constructor === Array) {
+                this.countries = [];
+                for (let item of data["countries"])
+                    this.countries.push(WorldMapCountry.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): GetWorldMapOutput {
+        return new GetWorldMapOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.countries && this.countries.constructor === Array) {
+            data["countries"] = [];
+            for (let item of this.countries)
+                data["countries"].push(item.toJS());
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetWorldMapOutput(JSON.parse(json));
+    }
+}
+
+export class WorldMapCountry {
+    countryName: string;
+    color: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.countryName = data["countryName"] !== undefined ? data["countryName"] : undefined;
+            this.color = data["color"] !== undefined ? data["color"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): WorldMapCountry {
+        return new WorldMapCountry(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["countryName"] = this.countryName !== undefined ? this.countryName : undefined;
+        data["color"] = this.color !== undefined ? this.color : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new WorldMapCountry(JSON.parse(json));
+    }
+}
+
+export class GetServerStatsOutput {
+    networkLoad: number[];
+    cpuLoad: number[];
+    loadRate: number[];
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["networkLoad"] && data["networkLoad"].constructor === Array) {
+                this.networkLoad = [];
+                for (let item of data["networkLoad"])
+                    this.networkLoad.push(item);
+            }
+            if (data["cpuLoad"] && data["cpuLoad"].constructor === Array) {
+                this.cpuLoad = [];
+                for (let item of data["cpuLoad"])
+                    this.cpuLoad.push(item);
+            }
+            if (data["loadRate"] && data["loadRate"].constructor === Array) {
+                this.loadRate = [];
+                for (let item of data["loadRate"])
+                    this.loadRate.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): GetServerStatsOutput {
+        return new GetServerStatsOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.networkLoad && this.networkLoad.constructor === Array) {
+            data["networkLoad"] = [];
+            for (let item of this.networkLoad)
+                data["networkLoad"].push(item);
+        }
+        if (this.cpuLoad && this.cpuLoad.constructor === Array) {
+            data["cpuLoad"] = [];
+            for (let item of this.cpuLoad)
+                data["cpuLoad"].push(item);
+        }
+        if (this.loadRate && this.loadRate.constructor === Array) {
+            data["loadRate"] = [];
+            for (let item of this.loadRate)
+                data["loadRate"].push(item);
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetServerStatsOutput(JSON.parse(json));
+    }
+}
+
+export class GetGeneralStatsOutput {
+    transactionPercent: number;
+    newVisitPercent: number;
+    bouncePercent: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.transactionPercent = data["transactionPercent"] !== undefined ? data["transactionPercent"] : undefined;
+            this.newVisitPercent = data["newVisitPercent"] !== undefined ? data["newVisitPercent"] : undefined;
+            this.bouncePercent = data["bouncePercent"] !== undefined ? data["bouncePercent"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): GetGeneralStatsOutput {
+        return new GetGeneralStatsOutput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["transactionPercent"] = this.transactionPercent !== undefined ? this.transactionPercent : undefined;
+        data["newVisitPercent"] = this.newVisitPercent !== undefined ? this.newVisitPercent : undefined;
+        data["bouncePercent"] = this.bouncePercent !== undefined ? this.bouncePercent : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new GetGeneralStatsOutput(JSON.parse(json));
     }
 }
 
@@ -19495,14 +21614,14 @@ export class UserLoginAttemptDto {
 }
 
 export class GetLatestWebLogsOutput {
-    latesWebLogLines: string[];
+    latestWebLogLines: string[];
 
     constructor(data?: any) {
         if (data !== undefined) {
-            if (data["latesWebLogLines"] && data["latesWebLogLines"].constructor === Array) {
-                this.latesWebLogLines = [];
-                for (let item of data["latesWebLogLines"])
-                    this.latesWebLogLines.push(item);
+            if (data["latestWebLogLines"] && data["latestWebLogLines"].constructor === Array) {
+                this.latestWebLogLines = [];
+                for (let item of data["latestWebLogLines"])
+                    this.latestWebLogLines.push(item);
             }
         }
     }
@@ -19513,10 +21632,10 @@ export class GetLatestWebLogsOutput {
 
     toJS(data?: any) {
         data = data === undefined ? {} : data;
-        if (this.latesWebLogLines && this.latesWebLogLines.constructor === Array) {
-            data["latesWebLogLines"] = [];
-            for (let item of this.latesWebLogLines)
-                data["latesWebLogLines"].push(item);
+        if (this.latestWebLogLines && this.latestWebLogLines.constructor === Array) {
+            data["latestWebLogLines"] = [];
+            for (let item of this.latestWebLogLines)
+                data["latestWebLogLines"].push(item);
         }
         return data; 
     }
@@ -19529,6 +21648,24 @@ export class GetLatestWebLogsOutput {
         const json = this.toJSON();
         return new GetLatestWebLogsOutput(JSON.parse(json));
     }
+}
+
+export enum IncomeStatisticsDateInterval {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum IncomeStatisticsDateInterval2 {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum DateInterval {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
 }
 
 /** 通知状态（可空） */
@@ -19575,6 +21712,18 @@ export enum Status3 {
     _5 = 5, 
 }
 
+export enum SalesSummaryDatePeriod {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum SalesSummaryDatePeriod2 {
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
 /** 默认时区有效范围 */
 export enum DefaultTimezoneScope {
     _1 = 1, 
@@ -19610,6 +21759,47 @@ export enum ChatMessageDtoReadState {
     _2 = 2, 
 }
 
+export class AdditionalData {
+    paypal: { [key: string] : string; };
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            if (data["Paypal"]) {
+                this.paypal = {};
+                for (let key in data["Paypal"]) {
+                    if (data["Paypal"].hasOwnProperty(key))
+                        this.paypal[key] = data["Paypal"][key] !== undefined ? data["Paypal"][key] : undefined;
+                }
+            }
+        }
+    }
+
+    static fromJS(data: any): AdditionalData {
+        return new AdditionalData(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        if (this.paypal) {
+            data["Paypal"] = {};
+            for (let key in this.paypal) {
+                if (this.paypal.hasOwnProperty(key))
+                    data["Paypal"][key] = this.paypal[key] !== undefined ? this.paypal[key] : undefined;
+            }
+        }
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new AdditionalData(JSON.parse(json));
+    }
+}
+
 export enum UserNotificationState {
     _0 = 0, 
     _1 = 1, 
@@ -19631,6 +21821,38 @@ export enum BookingOrderListDtoStatus {
     _5 = 5, 
 }
 
+export enum CreatePaymentDtoEditionPaymentType {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum CreatePaymentDtoPaymentPeriodType {
+    _30 = 30, 
+    _365 = 365, 
+}
+
+export enum CreatePaymentDtoSubscriptionPaymentGatewayType {
+    _1 = 1, 
+}
+
+export enum ExecutePaymentDtoGateway {
+    _1 = 1, 
+}
+
+export enum ExecutePaymentDtoEditionPaymentType {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
+    _3 = 3, 
+}
+
+export enum ExecutePaymentDtoPaymentPeriodType {
+    _30 = 30, 
+    _365 = 365, 
+}
+
 export enum BookingOrderInfoGender {
     _0 = 0, 
     _1 = 1, 
@@ -19641,6 +21863,11 @@ export enum CurrentUserProfileEditDtoGender {
     _0 = 0, 
     _1 = 1, 
     _2 = 2, 
+}
+
+export enum TenantLoginInfoDtoPaymentPeriodType {
+    _30 = 30, 
+    _365 = 365, 
 }
 
 export enum UserCodeSendInputCodeType {

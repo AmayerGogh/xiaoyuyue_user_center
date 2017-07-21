@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { AdminComponent } from "app/admin/admin.component";
 import { BookingManageComponent } from 'app/admin/booking-order/booking-manage/booking-manage.component';
 import { BookingDetailComponent } from "app/admin/booking-order/booking-detail/booking-detial.component";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
     imports: [
@@ -12,12 +13,25 @@ import { BookingDetailComponent } from "app/admin/booking-order/booking-detail/b
                 path: '',
                 component: AdminComponent,
                 children: [
-                    { path: '', redirectTo: 'list' },
                     {
-                        path: 'list', component: BookingManageComponent
+                        path: 'order',
+                        children: [
+                            { path: '', redirectTo: 'list' },
+                            {
+                                path: 'list', component: BookingManageComponent
+                            },
+                            {
+                                path: 'detail/:id', component: BookingDetailComponent
+                            }
+                        ]
                     },
                     {
-                        path: 'detail/:id', component: BookingDetailComponent
+                        path: 'user',
+                        children: [
+                            {
+                                path: '', component: UserProfileComponent
+                            }
+                        ]
                     }
                 ]
             }

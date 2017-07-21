@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 })
 export class AdminHeaderComponent implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
+  @Input() title: string;
   toggleSideBarFlag: boolean = false;
 
   constructor(

@@ -6,6 +6,7 @@ import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.compon
 })
 export class AdminComponent implements OnInit, AfterViewInit {
     toggleSideBarFlag: boolean = false;
+    title: string = "维普氏科技";
     @ViewChild('sideBarModel') sideBarModel: AdminSideBarComponent;
     public constructor(
     ) {
@@ -17,6 +18,8 @@ export class AdminComponent implements OnInit, AfterViewInit {
 
     ngAfterViewInit(): void {
     }
+
+
 
     showSideBarHandler(flag) {
         this.toggleSideBarFlag = flag;

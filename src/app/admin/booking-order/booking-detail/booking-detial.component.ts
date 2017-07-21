@@ -24,6 +24,11 @@ export class BookingDetailComponent extends AppComponentBase implements OnInit {
     this.loadBookingOrderForEditData(this.bookingId);
   }
 
+      ngAfterViewInit() {
+        // TODO: 暂时处理
+        $("#headerTitle").text("应约详情");
+    }
+
   loadBookingOrderForEditData(bookingId: number) {
     this._perBookingOrderServiceProxy
     .getBookingOrderForEdit(bookingId)

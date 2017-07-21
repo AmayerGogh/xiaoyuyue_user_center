@@ -37,6 +37,10 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   ngOnInit() {
     this.loadPersonBookingData();
   }
+    ngAfterViewInit() {
+        // TODO: 暂时处理
+        $("#headerTitle").text("应约管理");
+    }
   loadPersonBookingData() {
     let state = { skip: this.skip, take: this.pageSize, sort: this.sort };
 
@@ -57,7 +61,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   }
 
   showBookingDetail(bookingId: number) {
-    this._router.navigate(['/admin/bookingorder/detail', bookingId]);
+    this._router.navigate(['/app/admin/order/detail', bookingId]);
   }
 
   cancelBooking(bookingId: number) {

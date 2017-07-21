@@ -1,3 +1,89 @@
-<p>
-  user-profile works!
-</p>
+<div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
+    <form #userProfile="ngForm">
+        <div class="card">
+            <div class="user-profile front">
+                <div class="wrap card-shadow">
+                    <div class="avatar-wrap" id="uploadAreaWrap">
+                        <div class="img-area" id="uploadArea">
+                            <img width="100%" id="profilePicture">
+                        </div>
+                    </div>
+
+                    <div class="profile-body">
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名" name="UserName" [(ngModel)]="input.userName" required autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="nickName" class="form-control" type="text" autocomplete="off" placeholder="昵称" name="nickName" [(ngModel)]="input.nickName" required>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="name" class="form-control" type="text" autocomplete="off" placeholder="姓名" name="name" [(ngModel)]="input.name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="sex" class="form-control" type="text" autocomplete="off" placeholder="性别" name="sex" [(ngModel)]="input.gender">
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="email" class="form-control" type="email" placeholder="电子邮箱" name="EmailAddress" [(ngModel)]="input.emailAddress">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-submit btn-block save-btn" type="submit" (click)="save()" [disabled]="!userProfile.form.valid">保存</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-profile back" (click)="showEdit()">
+                <div class="wrap card-shadow">
+                    <div class="avatar-wrap">
+                        <img [src]="getUserPicture()" width="100%" alt="defaultAvatar">
+                    </div>
+
+                    <div class="profile-body">
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名为空" name="UserName" [(ngModel)]="userProfileData.userName" readonly autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="nickName" class="form-control" type="text" autocomplete="off" placeholder="昵称为空" name="nickName" [(ngModel)]="userProfileData.nickName" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="name" class="form-control" type="text" autocomplete="off" placeholder="姓名为空" name="name" [(ngModel)]="userProfileData.name" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="sex" class="form-control" type="text" autocomplete="off" placeholder="性别为空" name="sex" value="男" readonly>
+                            </div>
+                        </div>
+
+                        <div class="form-item">
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                                <input id="email" class="form-control" type="email" placeholder="电子邮箱为空" name="EmailAddress" [(ngModel)]="userProfileData.emailAddress" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

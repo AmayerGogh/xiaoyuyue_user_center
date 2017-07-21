@@ -1,4 +1,4 @@
-﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, FriendDtoState, DefaultTimezoneScope, UserNotificationState, IsTenantAvailableOutputState, CodeSendInputCodeType, Status } from '@shared/service-proxies/service-proxies';
+﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, FriendDtoState, DefaultTimezoneScope, UserNotificationState, IsTenantAvailableOutputState, CodeSendInputCodeType, Status, CurrentUserProfileEditDtoGender } from '@shared/service-proxies/service-proxies';
 
 export class AppChatMessageReadState {
     static Unread: number = ChatMessageDtoReadState._1;
@@ -54,4 +54,10 @@ export class AppStatus {
     static State3: number = Status._3;
     static State4: number = Status._4;
     static State5: number = Status._5;
+}
+
+export class AppGender {
+    static None: number = CurrentUserProfileEditDtoGender._0;
+    static Male: number = CurrentUserProfileEditDtoGender._1;
+    static Female: number = CurrentUserProfileEditDtoGender._2;
 }
