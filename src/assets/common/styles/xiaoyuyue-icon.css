@@ -28,7 +28,7 @@
 
 .vapps-icon-app-add:before {
     content: "\e901";
-    color: #ff9641;
+    /* color: #ff9641; */
 }
 
 .vapps-icon-app-add-booking-item:before {

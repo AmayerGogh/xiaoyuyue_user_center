@@ -2,7 +2,7 @@
 @import '_mixin';
 .rotating-container {
     @include perspective(800px);
-    .card {
+    .rotating {
         @include transition-transform(.6s, $transition-bezier-rotating-card);
         @include transform-style(preserve-3d);
         position: relative;
@@ -11,7 +11,7 @@
             @include backface-visibility(hidden);
             width: 100%;
             position: absolute;
-            top: 50px;
+            top: 0;
             left: 0;
         }
         .front {
@@ -27,7 +27,7 @@
         }
     }
     &.filp-active {
-        .card {
+        .rotating {
             @include rotateY-180();
         }
     }

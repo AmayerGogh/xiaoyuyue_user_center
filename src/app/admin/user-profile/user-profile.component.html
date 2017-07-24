@@ -1,95 +1,150 @@
-<div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
-    <form #userProfile="ngForm">
-        <div class="card">
-            <div class="user-profile front">
-                <div class="wrap card-shadow">
-                    <div class="avatar-wrap" id="uploadAreaWrap">
-                        <div class="img-area" id="uploadArea">
-                            <img width="100%" id="profilePicture" [src]="userProfileData.profilePictureUrl">
-
+<div class="user-profile">
+    <div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
+        <!-- <div class="rotating-container"> -->
+        <form #userProfile="ngForm">
+            <div class="rotating">
+                <div class="col-md-12 front">
+                    <div class="card">
+                        <div class="avatar-wrap" id="uploadArea">
+                            <img [src]="input.profilePictureUrl" id="profilePicture">
+                            <span *ngIf="!input.profilePictureUrl" class="vapps-icon-app-add"></span>
                         </div>
-                    </div>
-
-                    <div class="profile-body">
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="userName" class="form-control" type="text" autocomplete="off" name="UserName" [(ngModel)]="input.userName" [class.edited]="input.userName" required autofocus>
-                                <label for="userName">用户名</label>
+                        <div class="card-content">
+                            <div class="row" *ngIf="input.userName">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.is-focused]="input.userName">
+                                        <label class="control-label">用户名</label>
+                                        <input type="text" class="form-control" name="username" [(ngModel)]="input.userName">
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="nickName" class="form-control" type="text" autocomplete="off" name="nickName" [(ngModel)]="input.nickName" [class.edited]="input.nickName" required>
-                                <label for="nickName">昵称</label>
+                            <div class="row" *ngIf="input.nickName">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.is-focused]="input.nickName">
+                                        <label class="control-label">昵称</label>
+                                        <input type="text" class="form-control" name="nickname" [(ngModel)]="input.nickName">
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="name" class="form-control" type="text" autocomplete="off" name="name" [(ngModel)]="input.name" [class.edited]="input.name" required>
-                                <label for="name">姓名</label>
+                            <div class="row" *ngIf="input.name">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.is-focused]="input.name">
+                                        <label class="control-label">姓名</label>
+                                        <input type="text" class="form-control" name="name" [(ngModel)]="input.name">
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="sex" class="form-control" type="text" autocomplete="off" name="sex" required>
-                                <label for="sex">性别</label>
+                            <div class="row" *ngIf="input.emailAddress">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.is-focused]="input.emailAddress">
+                                        <label class="control-label">邮箱</label>
+                                        <input type="email" class="form-control" name="email" [(ngModel)]="input.emailAddress">
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="email" class="form-control" type="email" name="EmailAddress" [(ngModel)]="input.emailAddress" [class.edited]="input.emailAddress" required>
-                                <label for="email">电子邮箱</label>
+                            <div class="row">
+                                <!-- <label class="col-xs-12 label-on-left">性别</label> -->
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios" checked="true">男
+                                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios">女
+                                    </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <button class="btn btn-submit btn-block save-btn" type="submit" (click)="save()" [disabled]="!userProfile.form.valid">保存</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="user-profile back" (click)="showEdit()">
-                <div class="wrap card-shadow">
-                    <div class="avatar-wrap">
-                        <img [src]="getUserPicture()" width="100%" alt="defaultAvatar">
-                    </div>
-
-                    <div class="profile-body">
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名为空" name="UserName" [(ngModel)]="userProfileData.userName" readonly autofocus>
-                            </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="nickName" class="form-control" type="text" autocomplete="off" placeholder="昵称为空" name="nickName" [(ngModel)]="userProfileData.nickName" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="name" class="form-control" type="text" autocomplete="off" placeholder="姓名为空" name="name" [(ngModel)]="userProfileData.name" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="sex" class="form-control" type="text" autocomplete="off" placeholder="性别为空" name="sex" value="男" readonly>
-                            </div>
-                        </div>
-
-                        <div class="form-item">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="email" class="form-control" type="email" placeholder="电子邮箱为空" name="EmailAddress" [(ngModel)]="userProfileData.emailAddress" readonly>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="btn btn-block btn-danger" type="button" (click)="cancel()">取消</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-block btn-warning" type="submit" (click)="save()">保存</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12 back" (click)="showEdit()">
+                    <div class="card">
+                        <div class="avatar-wrap">
+                            <img [src]="userProfileData.profilePictureUrl">
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.has-success]="userProfileData.userName">
+                                        <label class="control-label"></label>
+                                        <input type="text" class="form-control" name="username" [(ngModel)]="userProfileData.userName" readonly>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.has-success]="userProfileData.nickName">
+                                        <label class="control-label"></label>
+                                        <input type="text" class="form-control" name="nickname" [(ngModel)]="userProfileData.nickName" readonly>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.has-success]="userProfileData.name">
+                                        <label class="control-label"></label>
+                                        <input type="text" class="form-control" name="name" [(ngModel)]="userProfileData.name" readonly>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [class.has-success]="userProfileData.emailAddress">
+                                        <label class="control-label"></label>
+                                        <input type="email" class="form-control" name="email" [(ngModel)]="userProfileData.emailAddress" readonly>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- <label class="col-xs-12 label-on-left">性别</label> -->
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios" checked="true" disabled>男
+                                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios" disabled>女
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

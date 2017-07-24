@@ -1,6 +1,6 @@
 import { Component, ViewContainerRef, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
-
+declare var $:any;
 @Component({
     templateUrl: './admin.component.html'
 })
@@ -17,6 +17,7 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        $.material.init();
     }
 
 

@@ -1,41 +1,27 @@
 .user-profile {
-    padding: 0 12px;
-    .wrap {
-        width: 100%;
-        position: relative;
-        border-radius: 6px;
-        padding: 40px 10px 20px;
-        background-color: #FFF;
-        .avatar-wrap {
-            width: 80px;
-            height: 80px;
-            line-height: 70px;
+    margin-top: 40px;
+    .avatar-wrap {
+        width: 80px;
+        height: 80px;
+        line-height: 70px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+        border-radius: 50%;
+        background-color: #e5e5e5;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        font-size: 44px;
+        font-weight: 100;
+        .vapps-icon-app-add {
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            overflow: hidden;
-            border-radius: 50%;
-            background-color: #e5e5e5;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            font-size: 44px;
-            font-weight: 100;
-        }
-        .profile-body {
-            .form-item {
-                width: 100%;
-                height: 66px;
-                .input {
-                    height: 66px;
-                    line-height: 66px;
-                    display: block;
-                }
-            }
-            .save-btn {
-                padding: 10px 14px 10px 14px!important;
-                font-size: 14px;
-            }
+            font-size: 24px;
+            color: #999;
         }
     }
 }

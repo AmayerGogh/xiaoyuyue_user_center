@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CurrentUserProfileEditDto } from "@shared/service-proxies/service-proxies";
 import { ProfileServiceProxy, PictureServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppGender } from "shared/AppEnums";
-
+declare var $: any;
 @Component({
     selector: 'xiaoyuyue-user-profile',
     templateUrl: './user-profile.component.html',
@@ -10,9 +10,8 @@ import { AppGender } from "shared/AppEnums";
 })
 export class UserProfileComponent implements OnInit {
     title: string = "用户中心";
-    filpActive: boolean = false;
+    filpActive: boolean = true;
     localPictureUrl: string;
-    defaultAvatar: string = "/assets/common/images/default-profile-picture.png";
     userProfileData: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
     input: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
 
@@ -23,6 +22,7 @@ export class UserProfileComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        $.material.init();
         this.loadData();
         this.initFileUploader();
     }
@@ -39,7 +39,7 @@ export class UserProfileComponent implements OnInit {
                 this.filpActive = true;
             })
     }
-    
+
 
     save(): void {
         this.input.gender = AppGender.Male;
@@ -48,6 +48,10 @@ export class UserProfileComponent implements OnInit {
             .subscribe(result => {
                 this.filpActive = true;
             });
+    }
+
+    cancel(): void {
+        this.filpActive = true;
     }
 
     initFileUploader(): void {
@@ -171,10 +175,6 @@ export class UserProfileComponent implements OnInit {
     showEdit(): void {
         this.input = this.userProfileData;
         this.filpActive = false;
-    }
-
-    getUserPicture(): string {
-        return this.userProfileData.profilePictureUrl ? this.userProfileData.profilePictureUrl : this.defaultAvatar;
     }
 
 }

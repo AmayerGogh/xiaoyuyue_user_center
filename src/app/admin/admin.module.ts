@@ -49,6 +49,7 @@ import { CancelBookingModalComponent } from './booking-order/cancel-booking-moda
     ],
     providers: [
         TenantService
-    ]
+    ],
+    bootstrap: [AdminComponent]
 })
 export class BookingOrderModule { }

@@ -6,4 +6,6 @@
 })
 export class RootComponent {
     
+    ngOnInit(): void {
+    }
 }

@@ -19,7 +19,6 @@ import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
 import { NgxAniModule } from 'ngxani';
 import { AppModule } from "app";
 import { IndexModule } from './index/main.module';
-
 export function appInitializerFactory(injector: Injector) {
     return () => {
         abp.ui.setBusy();
@@ -35,6 +34,8 @@ export function appInitializerFactory(injector: Injector) {
                         } else {
                             $('body').attr('class', 'page-md login');
                         }
+
+
 
                         abp.ui.clearBusy();
                         resolve(result);
