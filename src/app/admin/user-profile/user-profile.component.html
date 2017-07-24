@@ -5,38 +5,44 @@
                 <div class="wrap card-shadow">
                     <div class="avatar-wrap" id="uploadAreaWrap">
                         <div class="img-area" id="uploadArea">
-                            <img width="100%" id="profilePicture">
+                            <img width="100%" id="profilePicture" [src]="userProfileData.profilePictureUrl">
+
                         </div>
                     </div>
 
                     <div class="profile-body">
                         <div class="form-item">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名" name="UserName" [(ngModel)]="input.userName" required autofocus>
+                                <input id="userName" class="form-control" type="text" autocomplete="off" name="UserName" [(ngModel)]="input.userName" [class.edited]="input.userName" required autofocus>
+                                <label for="userName">用户名</label>
                             </div>
                         </div>
 
                         <div class="form-item">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="nickName" class="form-control" type="text" autocomplete="off" placeholder="昵称" name="nickName" [(ngModel)]="input.nickName" required>
+                                <input id="nickName" class="form-control" type="text" autocomplete="off" name="nickName" [(ngModel)]="input.nickName" [class.edited]="input.nickName" required>
+                                <label for="nickName">昵称</label>
                             </div>
                         </div>
 
                         <div class="form-item">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="name" class="form-control" type="text" autocomplete="off" placeholder="姓名" name="name" [(ngModel)]="input.name" required>
+                                <input id="name" class="form-control" type="text" autocomplete="off" name="name" [(ngModel)]="input.name" [class.edited]="input.name" required>
+                                <label for="name">姓名</label>
                             </div>
                         </div>
 
                         <div class="form-item">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="sex" class="form-control" type="text" autocomplete="off" placeholder="性别" name="sex" [(ngModel)]="input.gender">
+                                <input id="sex" class="form-control" type="text" autocomplete="off" name="sex" required>
+                                <label for="sex">性别</label>
                             </div>
                         </div>
 
                         <div class="form-item">
                             <div class="form-group form-md-line-input form-md-floating-label">
-                                <input id="email" class="form-control" type="email" placeholder="电子邮箱" name="EmailAddress" [(ngModel)]="input.emailAddress">
+                                <input id="email" class="form-control" type="email" name="EmailAddress" [(ngModel)]="input.emailAddress" [class.edited]="input.emailAddress" required>
+                                <label for="email">电子邮箱</label>
                             </div>
                         </div>
 

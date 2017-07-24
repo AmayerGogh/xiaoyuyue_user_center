@@ -28,8 +28,8 @@
         "mobile": false,
         "styles": [
             "assets/metronic/global/plugins/jquery-file-upload/css/jquery.fileupload.css",
-            "assets/metronic/global/css/components-md.css",
             "assets/metronic/libs/bootstrap/css/bootstrap.css",
+            "assets/md-pro/css/material-dashboard.css",
 
             "../node_modules/toastr/build/toastr.css",
             "../node_modules/sweetalert/dist/sweetalert.css",
@@ -46,11 +46,11 @@
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/jqueryui/jquery-ui.min.js",
+            "../node_modules/bootstrap/dist/js/bootstrap.js",
             "../node_modules/js-cookie/src/js.cookie.js",
 
             "../node_modules/fastclick/lib/fastclick.js",
             "../node_modules/lodash/lodash.min.js",
-            "../node_modules/bootstrap/dist/js/bootstrap.js",
             "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
             "../node_modules/jquery-backstretch/jquery.backstretch.min.js",
 
@@ -78,7 +78,10 @@
             "../src/assets/common/js/flatpickr-zh.js",
 
             "../node_modules/timeago/jquery.timeago.js",
-            "../node_modules/bootstrap-select/dist/js/bootstrap-select.js"
+            "../node_modules/bootstrap-select/dist/js/bootstrap-select.js",
+
+            "assets/md-pro/js/core/material.min.js",
+            "assets/md-pro/js/core/jquery.validate.min.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {
