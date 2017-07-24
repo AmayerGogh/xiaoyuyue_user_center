@@ -20,6 +20,7 @@ import { BookingDetailComponent } from './booking-order/booking-detail/booking-d
 import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
 import { BookingManageComponent } from './booking-order/booking-manage/booking-manage.component';
 import { CancelBookingModalComponent } from './booking-order/cancel-booking-modal/cancel-booking-modal.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
     imports: [
@@ -46,7 +47,7 @@ import { CancelBookingModalComponent } from './booking-order/cancel-booking-moda
         BookingManageComponent,
         CancelBookingModalComponent,
         UserProfileComponent
-    ],
+],
     providers: [
         TenantService
     ],

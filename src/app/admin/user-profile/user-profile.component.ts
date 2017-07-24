@@ -22,11 +22,11 @@ export class UserProfileComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        $.material.init();
         this.loadData();
         this.initFileUploader();
     }
     ngAfterViewInit() {
+        $.material.init();
         // TODO: 暂时处理
         $("#headerTitle").text("个人中心");
     }

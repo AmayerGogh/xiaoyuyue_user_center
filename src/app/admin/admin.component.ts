@@ -17,7 +17,6 @@ export class AdminComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        $.material.init();
     }
 
 

@@ -32,6 +32,10 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
                                 path: '', component: UserProfileComponent
                             }
                         ]
+                    },
+                    {
+                        path: 'settings',
+                        loadChildren: 'app/admin/settings/settings.module#SettingsModule'
                     }
                 ]
             }
