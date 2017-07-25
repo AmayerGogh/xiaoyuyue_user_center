@@ -812,6 +812,69 @@ export class BookingServiceProxy {
 }
 
 @Injectable()
+export class BookingRecordServiceProxy {
+    private http: Http = null; 
+    private baseUrl: string = undefined; 
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http; 
+        this.baseUrl = baseUrl ? baseUrl : ""; 
+    }
+
+    /**
+     * @return Success
+     */
+    recordBookingAccess(input: BookingAccessRecordInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BookingRecord/RecordBookingAccess";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processRecordBookingAccess(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processRecordBookingAccess(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processRecordBookingAccess(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    protected throwException(message: string, status: number, response: string, result?: any): any {
+        if(result !== null && result !== undefined)
+            throw result;
+        else
+            throw new SwaggerException(message, status, response, null);
+    }
+}
+
+@Injectable()
 export class CachingServiceProxy {
     private http: Http = null; 
     private baseUrl: string = undefined; 
@@ -7478,19 +7541,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
+     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = "";
@@ -11726,6 +11789,68 @@ export class JoinBookingResultDto {
     clone() {
         const json = this.toJSON();
         return new JoinBookingResultDto(JSON.parse(json));
+    }
+}
+
+export class BookingAccessRecordInput {
+    /** 是否是每天首次 */
+    firstTimeOfDay: boolean;
+    /** 访问Url */
+    accessUrl: string;
+    /** 预约Id */
+    bookingId: number;
+    /** 客户端操作系统名称 */
+    osName: string;
+    /** 设备品牌 */
+    deviceBrand: string;
+    /** 来源 */
+    source: BookingAccessRecordInputSource;
+    /** 微信内来源 */
+    weChatSource: BookingAccessRecordInputWeChatSource;
+    /** 是否是手机 */
+    isWap: boolean;
+    /** 停留时间 */
+    standingTime: number;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.firstTimeOfDay = data["firstTimeOfDay"] !== undefined ? data["firstTimeOfDay"] : undefined;
+            this.accessUrl = data["accessUrl"] !== undefined ? data["accessUrl"] : undefined;
+            this.bookingId = data["bookingId"] !== undefined ? data["bookingId"] : undefined;
+            this.osName = data["osName"] !== undefined ? data["osName"] : undefined;
+            this.deviceBrand = data["deviceBrand"] !== undefined ? data["deviceBrand"] : undefined;
+            this.source = data["source"] !== undefined ? data["source"] : undefined;
+            this.weChatSource = data["weChatSource"] !== undefined ? data["weChatSource"] : undefined;
+            this.isWap = data["isWap"] !== undefined ? data["isWap"] : undefined;
+            this.standingTime = data["standingTime"] !== undefined ? data["standingTime"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): BookingAccessRecordInput {
+        return new BookingAccessRecordInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["firstTimeOfDay"] = this.firstTimeOfDay !== undefined ? this.firstTimeOfDay : undefined;
+        data["accessUrl"] = this.accessUrl !== undefined ? this.accessUrl : undefined;
+        data["bookingId"] = this.bookingId !== undefined ? this.bookingId : undefined;
+        data["osName"] = this.osName !== undefined ? this.osName : undefined;
+        data["deviceBrand"] = this.deviceBrand !== undefined ? this.deviceBrand : undefined;
+        data["source"] = this.source !== undefined ? this.source : undefined;
+        data["weChatSource"] = this.weChatSource !== undefined ? this.weChatSource : undefined;
+        data["isWap"] = this.isWap !== undefined ? this.isWap : undefined;
+        data["standingTime"] = this.standingTime !== undefined ? this.standingTime : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BookingAccessRecordInput(JSON.parse(json));
     }
 }
 
@@ -21742,6 +21867,22 @@ export enum JoinBookingInputGender {
     _0 = 0, 
     _1 = 1, 
     _2 = 2, 
+}
+
+export enum BookingAccessRecordInputSource {
+    _10 = 10, 
+    _20 = 20, 
+    _30 = 30, 
+    _40 = 40, 
+    _50 = 50, 
+}
+
+export enum BookingAccessRecordInputWeChatSource {
+    _10 = 10, 
+    _20 = 20, 
+    _30 = 30, 
+    _40 = 40, 
+    _50 = 50, 
 }
 
 export enum FriendDtoState {

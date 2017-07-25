@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CurrentUserProfileEditDto } from "@shared/service-proxies/service-proxies";
 import { ProfileServiceProxy, PictureServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppGender } from "shared/AppEnums";
@@ -36,6 +36,7 @@ export class UserProfileComponent implements OnInit {
             .getCurrentUserProfileForEdit()
             .subscribe(result => {
                 this.userProfileData = result;
+                result ? this.input = result : this.input = new CurrentUserProfileEditDto();
                 this.filpActive = true;
             })
     }
@@ -173,7 +174,6 @@ export class UserProfileComponent implements OnInit {
     }
 
     showEdit(): void {
-        this.input = this.userProfileData;
         this.filpActive = false;
     }
 

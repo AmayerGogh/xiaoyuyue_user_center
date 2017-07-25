@@ -44,7 +44,7 @@ export class VerificationCodeType {
     static Login: number =  CodeSendInputCodeType._20;
     static ChangePassword: number =  CodeSendInputCodeType._30;
     static ChangeEmail: number =  CodeSendInputCodeType._40;
-    static PhoneBinding: number =  CodeSendInputCodeType._50;
+    static PhoneUnbinding: number =  CodeSendInputCodeType._50;
     static PhoneVerify: number =  CodeSendInputCodeType._60;
 }
 

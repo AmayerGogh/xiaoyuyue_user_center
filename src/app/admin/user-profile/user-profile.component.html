@@ -3,46 +3,46 @@
         <!-- <div class="rotating-container"> -->
         <form #userProfile="ngForm">
             <div class="rotating">
-                <div class="col-md-12 front">
+                <div class="col-md-12 front" *ngIf="input">
                     <div class="card">
                         <div class="avatar-wrap" id="uploadArea">
                             <img [src]="input.profilePictureUrl" id="profilePicture">
                             <span *ngIf="!input.profilePictureUrl" class="vapps-icon-app-add"></span>
                         </div>
                         <div class="card-content">
-                            <div class="row" *ngIf="input.userName">
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating" [class.is-focused]="input.userName">
+                                    <div class="form-group label-floating" [ngClass]="{'is-focused': input.userName}">
                                         <label class="control-label">用户名</label>
                                         <input type="text" class="form-control" name="username" [(ngModel)]="input.userName">
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" *ngIf="input.nickName">
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating" [class.is-focused]="input.nickName">
+                                    <div class="form-group label-floating">
                                         <label class="control-label">昵称</label>
-                                        <input type="text" class="form-control" name="nickname" [(ngModel)]="input.nickName">
+                                        <input type="text" class="form-control" name="nickname" [(value)]="input.nickName">
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" *ngIf="input.name">
+                            <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group label-floating" [class.is-focused]="input.name">
                                         <label class="control-label">姓名</label>
-                                        <input type="text" class="form-control" name="name" [(ngModel)]="input.name">
+                                        <input type="text" class="form-control" name="name" [(value)]="input.name">
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row" *ngIf="input.emailAddress">
+                            <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating" [class.is-focused]="input.emailAddress">
+                                    <div class="form-group label-floating">
                                         <label class="control-label">邮箱</label>
-                                        <input type="email" class="form-control" name="email" [(ngModel)]="input.emailAddress">
+                                        <input type="email" class="form-control" name="email" [(value)]="input.emailAddress">
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                 <div class="col-xs-6">
                                     <div class="radio">
                                         <label class="col-xs-12">
-                                        <input type="radio" name="optionsRadios" checked="true">男
+                                        <input type="radio" name="radios" checked="true">男
                                     </label>
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                 <div class="col-xs-6">
                                     <div class="radio">
                                         <label class="col-xs-12">
-                                        <input type="radio" name="optionsRadios">女
+                                        <input type="radio" name="radios">女
                                     </label>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group label-floating" [class.has-success]="userProfileData.userName">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" name="username" [(ngModel)]="userProfileData.userName" readonly>
+                                        <input type="text" class="form-control" name="backusername" [(ngModel)]="userProfileData.userName" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
@@ -98,7 +98,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group label-floating" [class.has-success]="userProfileData.nickName">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" name="nickname" [(ngModel)]="userProfileData.nickName" readonly>
+                                        <input type="text" class="form-control" name="backnickname" [(ngModel)]="userProfileData.nickName" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group label-floating" [class.has-success]="userProfileData.name">
                                         <label class="control-label"></label>
-                                        <input type="text" class="form-control" name="name" [(ngModel)]="userProfileData.name" readonly>
+                                        <input type="text" class="form-control" name="backname" [(ngModel)]="userProfileData.name" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
@@ -117,7 +117,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group label-floating" [class.has-success]="userProfileData.emailAddress">
                                         <label class="control-label"></label>
-                                        <input type="email" class="form-control" name="email" [(ngModel)]="userProfileData.emailAddress" readonly>
+                                        <input type="email" class="form-control" name="backemail" [(ngModel)]="userProfileData.emailAddress" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
                                 </div>
