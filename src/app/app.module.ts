@@ -21,11 +21,13 @@ import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from '@shared/common/session/app-session.service';
 
 import { SideBarComponent } from "app/shared/side-bar/side-bar.component";
+import { UploaderComponent } from './shared/uploader/uploader.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         SideBarComponent,
+        UploaderComponent
     ],
     imports: [
         ngCommon.CommonModule,
