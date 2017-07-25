@@ -1,12 +1,14 @@
 <div class="header">
-    <div class="top-fixed clearfix">
-        <span class="icon pull-left vapps-icon-app-logo"></span>
-        <span class="icon pull-right " (click)="isShowSubMenu(selectIndex)" [ngClass]="{'vapps-icon-app-menu': !isShowSubMenuFlag, 'vapps-icon-app-close': isShowSubMenuFlag}"></span>
+    <div class="top-fixed ani clearfix" [ngClass]="{'fade-in': isShowSubMenuFlag, 'fade-out': !isShowSubMenuFlag}">
+        <div class="content">
+            <span class="icon pull-left vapps-icon-app-logo"></span>
+            <span class="icon pull-right " (click)="isShowSubMenu(selectIndex)" [ngClass]="{'vapps-icon-app-menu': !isShowSubMenuFlag, 'vapps-icon-app-close': isShowSubMenuFlag}"></span>
+        </div>
     </div>
 
     <div class="sub-menu ani" [ngClass]="{'fade-in': isShowSubMenuFlag, 'fade-out': !isShowSubMenuFlag}">
-        <div class="sub-menu-item" (click)="isShowSubMenu(0)" [class.active]="selectIndex == 0"><a href="#">首页</a></div>
+        <div class="sub-menu-item" (click)="isShowSubMenu(0)" [class.active]="selectIndex == 0"><a routerLink="/">首页</a></div>
         <div class="sub-menu-item" (click)="isShowSubMenu()" routerLinkActive="active"><a routerLink="/intro">了解</a></div>
-        <div class="sub-menu-item" *ngFor="let item of menuArr; let index=index;" (click)="isShowSubMenu(index+2)" [class.active]="selectIndex == index+2"><a [href]="'#page-'+(index+2)">{{item}}</a></div>
+        <div class="sub-menu-item" *ngFor="let item of menuArr; let index=index;" (click)="isShowSubMenu(index+2)" [class.active]="selectIndex == index+2"><a href="javascript:;">{{item}}</a></div>
     </div>
 </div>

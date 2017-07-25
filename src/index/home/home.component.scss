@@ -12,14 +12,16 @@
             .top-text {
                 width: 100%;
                 position: absolute;
-                top: 100px;
-                padding: 0 50px;
+                top: 160px;
+                text-align: center;
                 p {
-                    font-size: 48px;
+                    font-size: 30px;
                     color: #FFF;
+                    margin-bottom: 30px;
                 }
                 p:nth-child(2) {
-                    padding-left: 96px;
+                    // padding-left: 90px;
+                    font-size: 46px;
                 }
             }
             .top-action {
@@ -124,3 +126,5 @@
             }
         }
     }
+    
+    @media screen and (max-width: 400px) {}

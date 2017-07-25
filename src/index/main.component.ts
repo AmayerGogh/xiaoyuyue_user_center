@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class IndexComponent implements OnInit {
+    subMenuFlg: boolean;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  isShowSubMenuFlag(flag: boolean): void {
+      this.subMenuFlg = flag;
   }
 
 }
