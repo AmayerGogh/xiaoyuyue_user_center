@@ -35,9 +35,8 @@ export class LoadingComponent implements OnInit {
                         let response_type = "code";
                         let scope = "snsapi_userinfo";
 
-                        let authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURI(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
+                        let authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
                         window.location.href = authUrl;
-                        // this._router.navigateByUrl(authUrl);
                     }
                 }
             });

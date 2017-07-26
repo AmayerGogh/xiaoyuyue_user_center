@@ -23,7 +23,7 @@ import { AppRouteGuard } from './auth/auth-route-guard';
     ],
     declarations: [
         TimeZoneComboComponent,
-        JqPluginDirective,
+        JqPluginDirective
 ],
     exports: [
         TimeZoneComboComponent,

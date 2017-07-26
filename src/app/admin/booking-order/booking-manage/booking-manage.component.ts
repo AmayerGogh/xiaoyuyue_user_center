@@ -13,7 +13,8 @@ import { CancelBookingModalComponent } from "app/admin/booking-order/cancel-book
   styleUrls: ['./booking-manage.component.scss']
 })
 export class BookingManageComponent extends AppComponentBase implements OnInit {
-  personBookingDatas: BookingOrderListDto[];
+    personBookingTotalCount: number;
+    personBookingDatas: BookingOrderListDto[];
   status: Status3[] = [AppStatus.State1, AppStatus.State2, AppStatus.State5];
   bookingName: string = "";
   // pageSize: number = AppConsts.grid.defaultPageSize;
@@ -21,6 +22,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
   skip: number = 0;
   sort: any;
   actionFlag: boolean[] = [];
+  slogan: string = "啥都没有，赶紧去预约吧";
 
   @ViewChild('cancelBookingModal') cancelBookingModal: CancelBookingModalComponent;
 
@@ -57,6 +59,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
       .getBookingOrders(this.bookingName, this.status , sorting, maxResultCount, skipCount)
       .subscribe(result => {
         this.personBookingDatas = result.items;
+        this.personBookingTotalCount = result.totalCount;
       });
   }
 

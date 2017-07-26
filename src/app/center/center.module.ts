@@ -16,6 +16,7 @@ import { CenterComponent } from "app/center/center.component";
 import { CenterSideBarComponent } from "app/center/layout/side-bar/side-bar.component";
 import { CenterHeaderComponent } from "app/center/layout/header/header.component";
 import { MainUserComponent } from 'app/center/main-user/main-user.component';
+import { EmptyPageComponent } from './empty-page/empty-page.component';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { MainUserComponent } from 'app/center/main-user/main-user.component';
         MainUserComponent,
         CenterComponent,
         CenterHeaderComponent,
-        CenterSideBarComponent
+        CenterSideBarComponent,
+        EmptyPageComponent
     ],
     providers: [
         AppStorageService,

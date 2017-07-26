@@ -21,6 +21,7 @@ import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.compon
 import { BookingManageComponent } from './booking-order/booking-manage/booking-manage.component';
 import { CancelBookingModalComponent } from './booking-order/cancel-booking-modal/cancel-booking-modal.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
 
 @NgModule({
     imports: [
@@ -46,7 +47,8 @@ import { SettingsComponent } from './settings/settings.component';
         AdminSideBarComponent,
         BookingManageComponent,
         CancelBookingModalComponent,
-        UserProfileComponent
+        UserProfileComponent,
+        EmptyPageComponent
 ],
     providers: [
         TenantService

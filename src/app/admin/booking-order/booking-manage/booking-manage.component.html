@@ -1,4 +1,4 @@
-<div class="booking-manage" *ngIf="personBookingDatas">
+<div class="booking-manage" *ngIf="personBookingTotalCount > 0; else empty">
     <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
         <div class="top-wrap clearfix">
             <div class="title pull-left">{{dataItem.bookingName}}</div>
@@ -31,3 +31,9 @@
     </div>
     <xiaoyuyue-cancel-booking-modal #cancelBookingModal></xiaoyuyue-cancel-booking-modal>
 </div>
+
+<ng-template #empty>
+    <div class="empty-wrap">
+        <xiaoyuyue-empty-page [text]="slogan"></xiaoyuyue-empty-page>
+    </div>
+</ng-template>

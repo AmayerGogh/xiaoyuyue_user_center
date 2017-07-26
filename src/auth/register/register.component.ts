@@ -38,7 +38,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
     ngOnInit() {
         $.material.init();
-        if (this.appSession.tenant == null) {
+        if (this.is_weixn()) {
             this._router.navigate(['auth/login']);
             return;
         }
@@ -115,4 +115,13 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
             self._smsBtn.nativeElement.innerHTML = this.l("AgainSendValidateCode");
         }, 60000);
     }
+
+    is_weixn() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
+        return true;
+    } else {
+        return false;
+    }
+}
 }

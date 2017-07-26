@@ -27,7 +27,7 @@ import { UploaderComponent } from './shared/uploader/uploader.component';
     declarations: [
         AppComponent,
         SideBarComponent,
-        UploaderComponent
+        UploaderComponent,
     ],
     imports: [
         ngCommon.CommonModule,
