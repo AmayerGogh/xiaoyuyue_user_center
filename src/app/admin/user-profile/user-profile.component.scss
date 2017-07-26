@@ -1,5 +1,6 @@
 .user-profile {
     margin-top: 40px;
+    padding-top: 55px;
     .avatar-wrap {
         width: 80px;
         height: 80px;
@@ -23,5 +24,8 @@
             font-size: 24px;
             color: #999;
         }
+    }
+    .card-content {
+        margin-top: 40px;
     }
 }
