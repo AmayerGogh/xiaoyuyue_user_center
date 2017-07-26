@@ -34,9 +34,6 @@ export class IndexHeaderComponent implements OnInit {
                     marginTop: "10px",
                     transform: "scale(1)"
                 });
-                $('.header').css({
-                    position: "absolute"
-                })
                 return;
             }
             $('.top-fixed').css({
@@ -47,9 +44,6 @@ export class IndexHeaderComponent implements OnInit {
                 marginTop: 0,
                 transform: "scale(1.04)"
             });
-            $('.header').css({
-                position: "fixed"
-            })
         })
     }
 
