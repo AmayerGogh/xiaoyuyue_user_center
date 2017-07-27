@@ -6,7 +6,6 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { RegisterModel } from './register.model';
 import { LoginService } from "shared/services/login.service";
 import { VerificationCodeType } from "shared/AppEnums";
-declare var $: any;
 
 @Component({
     templateUrl: './register.component.html',
@@ -37,7 +36,6 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        $.material.init();
         if (this.is_weixn()) {
             this._router.navigate(['auth/login']);
             return;

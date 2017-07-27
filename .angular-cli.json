@@ -78,6 +78,7 @@
             "../node_modules/timeago/jquery.timeago.js",
             "../node_modules/bootstrap-select/dist/js/bootstrap-select.js",
 
+            "../node_modules/arrive/src/arrive.js",
             "../src/assets/md-pro/js/core/material.min.js",
             "../src/assets/md-pro/js/core/jquery.validate.min.js"
         ],

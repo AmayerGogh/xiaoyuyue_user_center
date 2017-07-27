@@ -3,7 +3,6 @@ import { Location } from '@angular/common';
 import { ProfileServiceProxy, BindingPhoneNumInput, SMSServiceProxy, CodeSendInput } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { VerificationCodeType } from 'shared/AppEnums';
-declare var $: any;
 @Component({
     selector: 'xiaoyuyue-new-phone',
     templateUrl: './new-phone.component.html',
@@ -23,7 +22,6 @@ export class NewPhoneComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        $.material.init();
     }
 
     ngAfterViewInit() {

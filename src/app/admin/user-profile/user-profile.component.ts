@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CurrentUserProfileEditDto } from "@shared/service-proxies/service-proxies";
 import { ProfileServiceProxy, PictureServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppGender } from "shared/AppEnums";
-declare var $: any;
 @Component({
     selector: 'xiaoyuyue-user-profile',
     templateUrl: './user-profile.component.html',
@@ -23,10 +22,8 @@ export class UserProfileComponent implements OnInit {
 
     ngOnInit() {
         this.loadData();
-        this.initFileUploader();
     }
     ngAfterViewInit() {
-        $.material.init();
         // TODO: 暂时处理
         $("#headerTitle").text("个人中心");
     }
@@ -36,14 +33,13 @@ export class UserProfileComponent implements OnInit {
             .getCurrentUserProfileForEdit()
             .subscribe(result => {
                 this.userProfileData = result;
-                result ? this.input = result : this.input = new CurrentUserProfileEditDto();
+                result ? this.input = new CurrentUserProfileEditDto(result) : this.input = new CurrentUserProfileEditDto();
                 this.filpActive = true;
             })
     }
 
 
     save(): void {
-        this.input.gender = AppGender.Male;
         this._profileServiceProxy
             .updateCurrentUserProfile(this.input)
             .subscribe(result => {
@@ -52,6 +48,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     cancel(): void {
+        this.input = new CurrentUserProfileEditDto(this.userProfileData);
         this.filpActive = true;
     }
 
@@ -106,19 +103,14 @@ export class UserProfileComponent implements OnInit {
                                     var fileItem = files[i].getNative(),
                                         url = window.URL;
                                     self.localPictureUrl = url.createObjectURL(fileItem);
-                                    self._$profilePicture.attr("src", self.localPictureUrl);
-                                    self._$profilePicture.attr("width", "100%");
                                 }
-                                console.log('加入上传');
                             });
                         },
                         'BeforeUpload': function (up, file) {
                             // 每个文件上传前,处理相关的事情
-                            console.log('上传之前');
                         },
                         'UploadProgress': function (up, file) {
                             // 每个文件上传时,处理相关的事情
-                            console.log('正在上传');
                         },
                         'FileUploaded': function (up, file, info) {
                             // 每个文件上传成功后,处理相关的事情
@@ -129,11 +121,10 @@ export class UserProfileComponent implements OnInit {
                             //  }
                             // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-                            console.log("上传成功");
-
                             var res = JSON.parse(info).result;
                             self.input.profilePictureUrl = res.originalUrl;
                             self.input.profilePictureId = res.pictureId;
+
                             //   self.uploadPictureInfo.pictureUrl = self._sanitizer.bypassSecurityTrustResourceUrl(currentPicUrl);
                             //   self.uploadPictureInfo.pictureId = currentPicId;
                             //   self.picUploadInfoHandler.emit(self.uploadPictureInfo);
@@ -144,12 +135,9 @@ export class UserProfileComponent implements OnInit {
                             //上传出错时,处理相关的事情
                             //   self.loading = false;
                             //   self.notify.error("上传失败，请重新上传");
-                            console.log('上传出错');
                         },
                         'UploadComplete': function () {
                             //队列文件处理完毕后,处理相关的事情
-                            uploader.destroy();
-                            console.log('完成流程');
                         },
                         'Key': function (up, file) {
                             // 若想在前端对每个文件的key进行个性化处理，可以配置该函数
@@ -167,13 +155,17 @@ export class UserProfileComponent implements OnInit {
                     }
                 });
                 // 销毁实例
-                $("#cancelUpload").on("click", function () {
+                $("#cancelBtn").on("click", () => {
                     uploader.destroy();
                 });
+                $("#saveBtn").on("click", () => {
+                    uploader.destroy();
+                })
             });
     }
 
     showEdit(): void {
+        this.initFileUploader();
         this.filpActive = false;
     }
 

@@ -3,7 +3,6 @@ import { ProfileServiceProxy, ChangePasswordInput } from '@shared/service-proxie
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Location } from '@angular/common';
 
-declare var $: any;
 @Component({
   selector: 'xiaoyuyue-passwd',
   templateUrl: './passwd.component.html',
@@ -21,7 +20,6 @@ export class PasswdComponent extends AppComponentBase implements OnInit  {
     }
 
   ngOnInit() {
-      $.material.init();
   }
 
       ngAfterViewInit() {
