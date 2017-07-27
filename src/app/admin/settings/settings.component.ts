@@ -1,10 +1,11 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
 import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
     selector: 'xiaoyuyue-settings',
     templateUrl: './settings.component.html',
-    styleUrls: ['./settings.component.scss']
+    styleUrls: ['./settings.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class SettingsComponent extends AppComponentBase implements OnInit {
 

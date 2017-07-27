@@ -1,4 +1,5 @@
 .security {
+    padding-top: 55px;
     .title {
         padding: 10px 10px 0;
         small {
@@ -28,6 +29,7 @@
                 }
                 .content {
                     position: absolute;
+                    width: 100%;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
@@ -35,6 +37,23 @@
                     .text {
                         font-size: 14px;
                         margin-top: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .security {
+        .card-wrap {
+            .card {
+                .item {
+                    font-size: 36px;
+                    .content {
+                        .text {
+                            margin-top: 8px;
+                        }
                     }
                 }
             }

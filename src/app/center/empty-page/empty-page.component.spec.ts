@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EmptyDataComponent } from './empty-data.component';
+import { EmptyPageComponent } from './empty-page.component';
 
-describe('EmptyDataComponent', () => {
-  let component: EmptyDataComponent;
-  let fixture: ComponentFixture<EmptyDataComponent>;
+describe('EmptyPageComponent', () => {
+  let component: EmptyPageComponent;
+  let fixture: ComponentFixture<EmptyPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmptyDataComponent ]
+      declarations: [ EmptyPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmptyDataComponent);
+    fixture = TestBed.createComponent(EmptyPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
