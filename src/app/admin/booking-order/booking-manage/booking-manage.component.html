@@ -1,32 +1,49 @@
-<div class="booking-manage" *ngIf="personBookingTotalCount > 0; else empty">
-    <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
-        <div class="top-wrap clearfix">
-            <div class="title pull-left">{{dataItem.bookingName}}</div>
-            <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[index], 'rotate-360': !actionFlag[index]}"><span class="vapps-icon-app-drop-down"></span></div>
+<div class="booking-manage">
+    <div class="serach">
+        <div class="form-group label-floating">
+            <label class="control-label"></label>
+            <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容">
+            <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
         </div>
-        <div class="content">
-            <div class="content-item">
-                <span class="name">预约机构 : </span>
-                <span class="desc">{{dataItem.outletName}}</span>
+    </div>
+
+    <ul class="card tabs">
+        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;" (click)="orderSerach(index)"> {{ statuItem }}</li>
+    </ul>
+
+    <div *ngIf="personBookingTotalCount > 0; else empty">
+        <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
+            <div class="top-wrap clearfix">
+                <div class="title pull-left">{{dataItem.bookingName}} <span class="tips" [ngClass]="setTipsClass(dataItem.status)">{{ bookingOrderStatusName[dataItem.status] }}</span></div>
+                <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[index], 'rotate-360': !actionFlag[index]}"><span class="vapps-icon-app-drop-down"></span></div>
             </div>
-            <div class="content-item">
-                <span class="name">预约时间 : </span>
-                <span class="desc">{{t(dataItem.bookingDate)}}</span>
+            <div class="content">
+                <div class="content-item">
+                    <span class="name">预约机构 : </span>
+                    <span class="desc">{{dataItem.outletName}}</span>
+                </div>
+                <div class="content-item">
+                    <span class="name">预约时间 : </span>
+                    <span class="desc">{{t(dataItem.bookingDate)}}</span>
+                </div>
+                <div class="content-item">
+                    <span class="name">预约电话 : </span>
+                    <span class="desc">{{dataItem.phoneNum}}</span>
+                </div>
+                <div class="content-item">
+                    <span class="name">应约人数 : </span>
+                    <span class="desc">{{dataItem.subscriberNum}}</span>
+                </div>
+                <div class="stick-booking" *ngIf="dataItem.sticked">
+                    <img src="/assets/common/images/booking/stick-booking.svg" alt="stick">
+                </div>
             </div>
-            <div class="content-item">
-                <span class="name">预约电话 : </span>
-                <span class="desc">{{dataItem.phoneNum}}</span>
+            <div class="bottom-action" *ngIf="actionFlag[index]">
+                <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a><span class="icon vapps-icon-app-detail"></span>查看详情</a>
+                </span><span class="line">|</span>
+                <span class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>
+                <span class="action-item" (click)="skickBooking(dataItem.id)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
             </div>
-            <div class="content-item">
-                <span class="name">应约人数 : </span>
-                <span class="desc">{{dataItem.subscriberNum}}</span>
-            </div>
-        </div>
-        <div class="bottom-action" *ngIf="actionFlag[index]">
-            <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a><span class="icon vapps-icon-app-detail"></span>查看详情</a>
-            </span><span class="line">|</span>
-            <span class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>
-            <span class="action-item" (click)="skickBooking()"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
         </div>
     </div>
     <xiaoyuyue-cancel-booking-modal #cancelBookingModal></xiaoyuyue-cancel-booking-modal>

@@ -7,14 +7,14 @@
 
             <div class="login-body">
                 <div class="form-item">
-                    <div class="form-group form-md-line-input form-md-floating-label">
-                        <input id="userName" class="form-control" type="text" autocomplete="off" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required maxlength="256" maxlength="32" [class.edited]="loginService.authenticateModel.loginCertificate && loginService.authenticateModel.loginCertificate.length > 0">
+                    <div class="form-group label-floating">
+                        <input class="form-control" type="text" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required autofocus>
                     </div>
                 </div>
 
                 <div class="form-item">
-                    <div class="form-group form-md-line-input form-md-floating-label">
-                        <input id="password" class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required autofocus maxlength="256" [class.edited]="loginService.authenticateModel.password && loginService.authenticateModel.password.length > 0">
+                    <div class="form-group label-floating">
+                        <input class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required>
                     </div>
                 </div>
 

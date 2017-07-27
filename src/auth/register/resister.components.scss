@@ -1,20 +1,23 @@
 .register-wrap {
     width: 380px;
     position: relative;
-    margin: 80px auto 20px;
-    padding: 80px 20px 20px;
+    display: block;
+    margin: 100px auto 0;
+    padding: 60px 30px 30px;
     background-color: #FFF;
     .register-title {
         width: 340px;
         position: absolute;
         top: -40px;
+        left: 50%;
+        transform: translateX(-50%);
         background: url("/assets/common/images/login/bg-gradient.jpg");
         background-repeat: repeat-y;
         color: #FFF;
         background-color: #ff9742;
         text-align: center;
         border-radius: 8px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1), 0 6px 10px rgba(0, 0, 0, 0.1);
         .title {
             height: 100px;
             line-height: 100px;

@@ -8,7 +8,7 @@
                         <div class="avatar-wrap">
                             <div class="img" *ngIf="!localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + input.profilePictureUrl + ')'}"></div>
                             <div class="img" *ngIf="localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + localPictureUrl + ')'}"></div>
-                            <span *ngIf="!input.profilePictureUrl" class="vapps-icon-app-add"></span>
+                            <span *ngIf="!userProfileData.profilePictureUrl && (userProfileData.profilePictureUrl || !localPictureUrl)" class="vapps-icon-app-add"></span>
                         </div>
                         <div class="card-content">
                             <div class="row">
