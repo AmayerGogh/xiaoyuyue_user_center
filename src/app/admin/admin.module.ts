@@ -51,7 +51,7 @@ import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
         EmptyPageComponent
 ],
     providers: [
-        TenantService
+        TenantService,
     ],
     bootstrap: [AdminComponent]
 })

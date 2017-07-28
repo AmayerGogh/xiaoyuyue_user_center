@@ -44,8 +44,9 @@ export class VerificationCodeType {
     static Login: number =  CodeSendInputCodeType._20;
     static ChangePassword: number =  CodeSendInputCodeType._30;
     static ChangeEmail: number =  CodeSendInputCodeType._40;
-    static PhoneUnbinding: number =  CodeSendInputCodeType._50;
-    static PhoneVerify: number =  CodeSendInputCodeType._60;
+    static PhoneBinding: number =  CodeSendInputCodeType._50;
+    static PhoneUnBinding: number =  CodeSendInputCodeType._60;
+    static PhoneVerify: number =  CodeSendInputCodeType._70;
 }
 
 export class AppStatus {
