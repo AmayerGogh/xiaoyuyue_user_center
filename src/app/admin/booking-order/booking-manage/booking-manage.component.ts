@@ -65,7 +65,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
             });
     }
 
-    orderSerach(index: number): void {
+    orderSwitch(index: number): void {
         this.currentTabIndex = index;
         if (index == 0) {
             this.status = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
@@ -80,6 +80,12 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
         } else {
             this.message.warn("努力完善中", "敬请期待");
         }
+        this.loadPersonBookingData();
+    }
+
+    orderSerach(keywords: string): void {
+        this.bookingName = keywords;
+        this.status = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
         this.loadPersonBookingData();
     }
 
