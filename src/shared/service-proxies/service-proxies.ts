@@ -756,7 +756,7 @@ export class BookingServiceProxy {
     }
 
     /**
-     * 应约
+     * 应约(需要登录)
      * @return Success
      */
     joinBooking(input: JoinBookingInput): Observable<JoinBookingResultDto> {
@@ -823,10 +823,11 @@ export class BookingRecordServiceProxy {
     }
 
     /**
+     * 记录预约访问情况
      * @return Success
      */
-    recordBookingAccess(input: BookingAccessRecordInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/BookingRecord/RecordBookingAccess";
+    recordBookingAccessAsync(input: BookingAccessRecordInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BookingRecord/RecordBookingAccessAsync";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input ? input.toJS() : null);
@@ -841,11 +842,11 @@ export class BookingRecordServiceProxy {
         };
 
         return this.http.request(url_, options_).map((response) => {
-            return this.processRecordBookingAccess(response);
+            return this.processRecordBookingAccessAsync(response);
         }).catch((response: any) => {
             if (response instanceof Response) {
                 try {
-                    return Observable.of(this.processRecordBookingAccess(response));
+                    return Observable.of(this.processRecordBookingAccessAsync(response));
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -854,7 +855,52 @@ export class BookingRecordServiceProxy {
         });
     }
 
-    protected processRecordBookingAccess(response: Response): void {
+    protected processRecordBookingAccessAsync(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 记录预约分享情况
+     * @return Success
+     */
+    recordBookingShareAsync(input: BookingShareRecordInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/BookingRecord/RecordBookingShareAsync";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processRecordBookingShareAsync(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processRecordBookingShareAsync(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processRecordBookingShareAsync(response: Response): void {
         const responseText = response.text();
         const status = response.status; 
 
@@ -1913,56 +1959,6 @@ export class FileServiceProxy {
             let result200: UploadPictureOutput = null;
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? UploadPictureOutput.fromJS(resultData200) : new UploadPictureOutput();
-            return result200;
-        } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
-        }
-        return null;
-    }
-
-    /**
-     * 获取存储空间域名
-     * @return Success
-     */
-    getBucketDomain(bucket: string): Observable<string> {
-        let url_ = this.baseUrl + "/api/services/app/File/GetBucketDomain?";
-        if (bucket !== undefined)
-            url_ += "bucket=" + encodeURIComponent("" + bucket) + "&"; 
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = "";
-        
-        let options_ = {
-            body: content_,
-            method: "get",
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8", 
-                "Accept": "application/json; charset=UTF-8"
-            })
-        };
-
-        return this.http.request(url_, options_).map((response) => {
-            return this.processGetBucketDomain(response);
-        }).catch((response: any) => {
-            if (response instanceof Response) {
-                try {
-                    return Observable.of(this.processGetBucketDomain(response));
-                } catch (e) {
-                    return <Observable<string>><any>Observable.throw(e);
-                }
-            } else
-                return <Observable<string>><any>Observable.throw(response);
-        });
-    }
-
-    protected processGetBucketDomain(response: Response): string {
-        const responseText = response.text();
-        const status = response.status; 
-
-        if (status === 200) {
-            let result200: string = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
-            result200 = resultData200 !== undefined ? resultData200 : null;
             return result200;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
@@ -6392,6 +6388,51 @@ export class ProfileServiceProxy {
     }
 
     /**
+     * 修改绑定手机
+     * @return Success
+     */
+    changeBindingPhoneNum(input: ChangeBindingPhoneNumInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Profile/ChangeBindingPhoneNum";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processChangeBindingPhoneNum(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processChangeBindingPhoneNum(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processChangeBindingPhoneNum(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
      * 解绑手机
      * @return Success
      */
@@ -7180,6 +7221,51 @@ export class SMSServiceProxy {
             let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? SendResult.fromJS(resultData200) : new SendResult();
             return result200;
+        } else if (status !== 200 && status !== 204) {
+            this.throwException("An unexpected server error occurred.", status, responseText);
+        }
+        return null;
+    }
+
+    /**
+     * 验证当前用户的验证码
+     * @return Success
+     */
+    checkCodeByCurrentUserAsync(input: CheckUserCodeInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/SMS/CheckCodeByCurrentUserAsync";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input ? input.toJS() : null);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json; charset=UTF-8", 
+                "Accept": "application/json; charset=UTF-8"
+            })
+        };
+
+        return this.http.request(url_, options_).map((response) => {
+            return this.processCheckCodeByCurrentUserAsync(response);
+        }).catch((response: any) => {
+            if (response instanceof Response) {
+                try {
+                    return Observable.of(this.processCheckCodeByCurrentUserAsync(response));
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response);
+        });
+    }
+
+    protected processCheckCodeByCurrentUserAsync(response: Response): void {
+        const responseText = response.text();
+        const status = response.status; 
+
+        if (status === 200) {
+            return null;
         } else if (status !== 200 && status !== 204) {
             this.throwException("An unexpected server error occurred.", status, responseText);
         }
@@ -11854,6 +11940,45 @@ export class BookingAccessRecordInput {
     }
 }
 
+/** 分享预约记录 */
+export class BookingShareRecordInput {
+    /** 预约Id */
+    bookingId: number;
+    /** 分享Url */
+    shareUrl: string;
+    /** 分享目标 */
+    target: BookingShareRecordInputTarget;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.bookingId = data["bookingId"] !== undefined ? data["bookingId"] : undefined;
+            this.shareUrl = data["shareUrl"] !== undefined ? data["shareUrl"] : undefined;
+            this.target = data["target"] !== undefined ? data["target"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): BookingShareRecordInput {
+        return new BookingShareRecordInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["bookingId"] = this.bookingId !== undefined ? this.bookingId : undefined;
+        data["shareUrl"] = this.shareUrl !== undefined ? this.shareUrl : undefined;
+        data["target"] = this.target !== undefined ? this.target : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new BookingShareRecordInput(JSON.parse(json));
+    }
+}
+
 export class ListResultDtoOfCacheDto {
     items: CacheDto[];
 
@@ -13995,6 +14120,8 @@ export class SMSSettingsEditDto {
     bindingPhoneVerificationTempId: number;
     /** 登陆模板 */
     loginVerificationTempId: number;
+    /** 手机验证模板 */
+    phoneVerificationTempId: number;
     /** 可用短信模板 */
     availableSmsTemplates: SelectListItemDto[];
 
@@ -14006,6 +14133,7 @@ export class SMSSettingsEditDto {
             this.unBindingPhoneVerificationTempId = data["unBindingPhoneVerificationTempId"] !== undefined ? data["unBindingPhoneVerificationTempId"] : undefined;
             this.bindingPhoneVerificationTempId = data["bindingPhoneVerificationTempId"] !== undefined ? data["bindingPhoneVerificationTempId"] : undefined;
             this.loginVerificationTempId = data["loginVerificationTempId"] !== undefined ? data["loginVerificationTempId"] : undefined;
+            this.phoneVerificationTempId = data["phoneVerificationTempId"] !== undefined ? data["phoneVerificationTempId"] : undefined;
             if (data["availableSmsTemplates"] && data["availableSmsTemplates"].constructor === Array) {
                 this.availableSmsTemplates = [];
                 for (let item of data["availableSmsTemplates"])
@@ -14026,6 +14154,7 @@ export class SMSSettingsEditDto {
         data["unBindingPhoneVerificationTempId"] = this.unBindingPhoneVerificationTempId !== undefined ? this.unBindingPhoneVerificationTempId : undefined;
         data["bindingPhoneVerificationTempId"] = this.bindingPhoneVerificationTempId !== undefined ? this.bindingPhoneVerificationTempId : undefined;
         data["loginVerificationTempId"] = this.loginVerificationTempId !== undefined ? this.loginVerificationTempId : undefined;
+        data["phoneVerificationTempId"] = this.phoneVerificationTempId !== undefined ? this.phoneVerificationTempId : undefined;
         if (this.availableSmsTemplates && this.availableSmsTemplates.constructor === Array) {
             data["availableSmsTemplates"] = [];
             for (let item of this.availableSmsTemplates)
@@ -17652,6 +17781,7 @@ export class CurrentUserProfileEditDto {
     userName: string;
     /** 邮箱地址 */
     emailAddress: string;
+    phoneNumber: string;
     /** 时区 */
     timezone: string;
     /** 性别 */
@@ -17667,6 +17797,7 @@ export class CurrentUserProfileEditDto {
             this.nickName = data["nickName"] !== undefined ? data["nickName"] : undefined;
             this.userName = data["userName"] !== undefined ? data["userName"] : undefined;
             this.emailAddress = data["emailAddress"] !== undefined ? data["emailAddress"] : undefined;
+            this.phoneNumber = data["phoneNumber"] !== undefined ? data["phoneNumber"] : undefined;
             this.timezone = data["timezone"] !== undefined ? data["timezone"] : undefined;
             this.gender = data["gender"] !== undefined ? data["gender"] : undefined;
             this.profilePictureUrl = data["profilePictureUrl"] !== undefined ? data["profilePictureUrl"] : undefined;
@@ -17684,6 +17815,7 @@ export class CurrentUserProfileEditDto {
         data["nickName"] = this.nickName !== undefined ? this.nickName : undefined;
         data["userName"] = this.userName !== undefined ? this.userName : undefined;
         data["emailAddress"] = this.emailAddress !== undefined ? this.emailAddress : undefined;
+        data["phoneNumber"] = this.phoneNumber !== undefined ? this.phoneNumber : undefined;
         data["timezone"] = this.timezone !== undefined ? this.timezone : undefined;
         data["gender"] = this.gender !== undefined ? this.gender : undefined;
         data["profilePictureUrl"] = this.profilePictureUrl !== undefined ? this.profilePictureUrl : undefined;
@@ -17766,6 +17898,44 @@ export class BindingPhoneNumInput {
     clone() {
         const json = this.toJSON();
         return new BindingPhoneNumInput(JSON.parse(json));
+    }
+}
+
+export class ChangeBindingPhoneNumInput {
+    /** 解绑码 */
+    validCode: string;
+    /** 手机号码 */
+    newTelephone: string;
+    /** 手机验证码 */
+    bundlingCode: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.validCode = data["validCode"] !== undefined ? data["validCode"] : undefined;
+            this.newTelephone = data["newTelephone"] !== undefined ? data["newTelephone"] : undefined;
+            this.bundlingCode = data["bundlingCode"] !== undefined ? data["bundlingCode"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): ChangeBindingPhoneNumInput {
+        return new ChangeBindingPhoneNumInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["validCode"] = this.validCode !== undefined ? this.validCode : undefined;
+        data["newTelephone"] = this.newTelephone !== undefined ? this.newTelephone : undefined;
+        data["bundlingCode"] = this.bundlingCode !== undefined ? this.bundlingCode : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new ChangeBindingPhoneNumInput(JSON.parse(json));
     }
 }
 
@@ -18545,6 +18715,44 @@ export class CodeSendInput {
     clone() {
         const json = this.toJSON();
         return new CodeSendInput(JSON.parse(json));
+    }
+}
+
+export class CheckUserCodeInput {
+    /** 验证码 */
+    code: string;
+    /** 验证码类型 */
+    codeType: CheckUserCodeInputCodeType;
+    /** 验证码结果字符串 */
+    captchaResponse: string;
+
+    constructor(data?: any) {
+        if (data !== undefined) {
+            this.code = data["code"] !== undefined ? data["code"] : undefined;
+            this.codeType = data["codeType"] !== undefined ? data["codeType"] : undefined;
+            this.captchaResponse = data["captchaResponse"] !== undefined ? data["captchaResponse"] : undefined;
+        }
+    }
+
+    static fromJS(data: any): CheckUserCodeInput {
+        return new CheckUserCodeInput(data);
+    }
+
+    toJS(data?: any) {
+        data = data === undefined ? {} : data;
+        data["code"] = this.code !== undefined ? this.code : undefined;
+        data["codeType"] = this.codeType !== undefined ? this.codeType : undefined;
+        data["captchaResponse"] = this.captchaResponse !== undefined ? this.captchaResponse : undefined;
+        return data; 
+    }
+
+    toJSON() {
+        return JSON.stringify(this.toJS());
+    }
+
+    clone() {
+        const json = this.toJSON();
+        return new CheckUserCodeInput(JSON.parse(json));
     }
 }
 
@@ -21885,6 +22093,14 @@ export enum BookingAccessRecordInputWeChatSource {
     _50 = 50, 
 }
 
+export enum BookingShareRecordInputTarget {
+    _10 = 10, 
+    _20 = 20, 
+    _30 = 30, 
+    _40 = 40, 
+    _50 = 50, 
+}
+
 export enum FriendDtoState {
     _1 = 1, 
     _2 = 2, 
@@ -22018,6 +22234,7 @@ export enum UserCodeSendInputCodeType {
     _40 = 40, 
     _50 = 50, 
     _60 = 60, 
+    _70 = 70, 
 }
 
 export enum CodeSendInputCodeType {
@@ -22027,6 +22244,17 @@ export enum CodeSendInputCodeType {
     _40 = 40, 
     _50 = 50, 
     _60 = 60, 
+    _70 = 70, 
+}
+
+export enum CheckUserCodeInputCodeType {
+    _10 = 10, 
+    _20 = 20, 
+    _30 = 30, 
+    _40 = 40, 
+    _50 = 50, 
+    _60 = 60, 
+    _70 = 70, 
 }
 
 export class SwaggerException extends Error {

@@ -9,6 +9,8 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     styleUrls: ['./current-phone.component.scss']
 })
 export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
+    currentPhoneNum: string;
+    encryptPhoneNum: string;
     isSendSMS: boolean;
     code: string;
     @ViewChild("smsBtn") smsBtn: ElementRef;
@@ -23,6 +25,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
+        this.getUserPhoneNum();
     }
 
     ngAfterViewInit() {
@@ -38,15 +41,11 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
             })
     }
 
-    getUserPhoneNum(): void {
-
-    }
-
     // 发送验证码
     send() {
         let input: CodeSendInput = new CodeSendInput();
         // 暂时手机号码写死
-        input.targetNumber = '18599926714';
+        input.targetNumber = this.currentPhoneNum;
         input.codeType = VerificationCodeType.PhoneUnbinding;
         input.captchaResponse = "";
         // input.captchaResponse = this.captchaResolved();
@@ -74,4 +73,17 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         }, 60000);
     }
 
+    getUserPhoneNum(): void {
+        this._profileServiceProxy
+        .getCurrentUserProfileForEdit()
+        .subscribe( result => {
+            this.currentPhoneNum = result.phoneNumber;
+            this.encrypt();
+        })
+    }
+
+
+    private encrypt() : void {
+        this.encryptPhoneNum = "•••••••" + this.currentPhoneNum.substr(this.currentPhoneNum.length - 4);
+    }
 }

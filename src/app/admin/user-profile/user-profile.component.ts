@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit {
             .getCurrentUserProfileForEdit()
             .subscribe(result => {
                 this.userProfileData = result;
-                result ? this.input = new CurrentUserProfileEditDto(result) : this.input = new CurrentUserProfileEditDto();
+                this.input = new CurrentUserProfileEditDto(result);
                 this.filpActive = true;
             })
     }
@@ -44,6 +44,7 @@ export class UserProfileComponent implements OnInit {
             .updateCurrentUserProfile(this.input)
             .subscribe(result => {
                 this.filpActive = true;
+                this.loadData();
             });
     }
 
