@@ -53,7 +53,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         // });
         // this.clearCookie();
         if (this.is_weixn()) {
-            this._router.navigate(['/auth/loading']);
+            this._router.navigate(['/auth/external-auth']);
         }
     }
 

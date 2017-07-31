@@ -112,8 +112,8 @@ export class LoginService {
         });
     }
 
-    init(): void {
-        this.initExternalLoginProviders();
+    init(callback?: any): void {
+        this.initExternalLoginProviders(callback);
     }
 
     private processAuthenticateResult(authenticateResult: AuthenticateResultModel, redirectUrl?: string) {
@@ -175,8 +175,7 @@ export class LoginService {
             );
         }
         UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
-        debugger;
-        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl+"/app/center";
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + "/app/center";
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {
@@ -191,14 +190,20 @@ export class LoginService {
         this.rememberMe = false;
     }
 
-    private initExternalLoginProviders() {
+    private initExternalLoginProviders(callback?: any) {
+        if (this.externalLoginProviders.length > 0) {
+            return;
+        }
         this._tokenAuthService
             .getExternalAuthenticationProviders()
             .subscribe((providers: ExternalLoginProviderInfoModel[]) => {
                 this.externalLoginProviders = _.map(providers, p => {
-                    console.log(p);
                     return new ExternalLoginProvider(p);
                 });
+
+                if (callback) {
+                    callback(this.externalLoginProviders);
+                }
             });
     }
 
