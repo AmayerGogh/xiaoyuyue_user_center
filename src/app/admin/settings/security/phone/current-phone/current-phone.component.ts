@@ -68,8 +68,12 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
     private getPhoneNum(realTimePhoneNum: string): void {
 
+        if (this.time <= 0) {
+            return;
+        }
+
         if (realTimePhoneNum !== this.existentPhoneNum) {
-            this.smsBtn.nativeElement.innerHTML = "发送验证码";
+            this.smsBtn.nativeElement.innerHTML = "重新发送";
             this.isSendNewPhone = false;
             clearInterval(this.sendSMSTimer);
         } else {
@@ -89,6 +93,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         this._SMSServiceProxy
             .sendCodeAsync(this.codeSendInput)
             .subscribe(result => {
+                this.time = 60;
                 this.anginSend(event);
             });
     }
@@ -104,7 +109,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         let timer = setTimeout(() => {
             clearTimeout(timer);
             clearInterval(this.sendSMSTimer);
-            this.time = 60;
+
             this.isSendSMS = false;
             this.isSendNewPhone = false;
             event.target.innerHTML = this.l("AgainSendValidateCode");

@@ -39,128 +39,128 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         super(injector);
     }
 
-clearCookie() {
-    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-    if (keys) {
-        for (var i = keys.length; i--;)
-            document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString()+"; path=/";
-    }
-}
-
-ngOnInit(): void {
-    // this._activatedRoute.queryParams.subscribe((params: Params) => {
-    //     this.loginService.externalLoginCallback(params);
-    // });
-    // this.clearCookie();
-    if(this.is_weixn()) {
-        this._router.navigate(['/auth/loading']);
-    }
-}
-
-ngAfterViewInit(): void {
-    let self = this;
-    // 解决Chrome浏览器自动填充的BUG
-    setTimeout(() => {
-    $("input:-webkit-autofill").addClass("edited")
-}, 600);
-
-$(document).click(() => {
-    self.flag = true;
-    $("#externalLogin").css({
-        opacity: 0,
-        transform: "scale(0)"
-    });
-    $("#external_login_container").css({
-        opacity: 0
-    });
-})
+    clearCookie() {
+        var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+        if (keys) {
+            for (var i = keys.length; i--;)
+                document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString() + "; path=/";
+        }
     }
 
-get multiTenancySideIsTeanant(): boolean {
-    return this._sessionService.tenantId > 0;
-}
-
-get isSelfRegistrationAllowed(): boolean {
-    if (!this._sessionService.tenantId) {
-        return false;
+    ngOnInit(): void {
+        // this._activatedRoute.queryParams.subscribe((params: Params) => {
+        //     this.loginService.externalLoginCallback(params);
+        // });
+        // this.clearCookie();
+        if (this.is_weixn()) {
+            this._router.navigate(['/auth/loading']);
+        }
     }
 
-    return this.setting.getBoolean('App.UserManagement.AllowSelfRegistration');
-}
+    ngAfterViewInit(): void {
+        let self = this;
+        // 解决Chrome浏览器自动填充的BUG
+        setTimeout(() => {
+            $("input:-webkit-autofill").addClass("edited")
+        }, 600);
 
-
-login(): void {
-    if(!this.loginService.authenticateModel.loginCertificate || !this.loginService.authenticateModel.password) {
-    this.message.error(this.l('UserNameOrPasswdCannotForNull'), this.l('CannotLogin'));
-    return;
-}
-
-this.submitting = true;
-this.loginService.authenticate(
-    () => this.submitting = false
-);
+        $(document).click(() => {
+            self.flag = true;
+            $("#externalLogin").css({
+                opacity: 0,
+                transform: "scale(0)"
+            });
+            $("#external_login_container").css({
+                opacity: 0
+            });
+        })
     }
 
-is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
-        return true;
-    } else {
-        return false;
+    get multiTenancySideIsTeanant(): boolean {
+        return this._sessionService.tenantId > 0;
     }
-}
 
-externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
-    $event.cancelBubble = true;
-    this.flag && this.loginService.externalAuthenticate(provider); //执行第三方登陆逻辑
+    get isSelfRegistrationAllowed(): boolean {
+        if (!this._sessionService.tenantId) {
+            return false;
+        }
 
-    if (provider.name == 'WeChat' && this.flag) {
-        // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
-        this.animationShow(elementRef, externalContent);
-    } else {
-        this.animationHide(elementRef, externalContent);
+        return this.setting.getBoolean('App.UserManagement.AllowSelfRegistration');
     }
-    this.flag = !this.flag;
-}
+
+
+    login(): void {
+        if (!this.loginService.authenticateModel.loginCertificate || !this.loginService.authenticateModel.password) {
+            this.message.error(this.l('UserNameOrPasswdCannotForNull'), this.l('CannotLogin'));
+            return;
+        }
+
+        this.submitting = true;
+        this.loginService.authenticate(
+            () => this.submitting = false
+        );
+    }
+
+    is_weixn() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
+        $event.cancelBubble = true;
+        this.flag && this.loginService.externalAuthenticate(provider); //执行第三方登陆逻辑
+
+        if (provider.name == 'WeChat' && this.flag) {
+            // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
+            this.animationShow(elementRef, externalContent);
+        } else {
+            this.animationHide(elementRef, externalContent);
+        }
+        this.flag = !this.flag;
+    }
 
     // NgxAni动画
     private animationShow(externalAni, externalContent) {
-    this._ngxAni.to(externalAni, .6, {
-        transform: "scale(1)",
-        opacity: .8,
-        "ease": this._ngxAni['easeOutBack'],
-        onComplete: () => {
-            // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
-            setTimeout(() => {
-                this._ngxAni.to(externalContent, 1, {
-                    opacity: 1
-                })
-            }, 10);
-        }
-    });
-}
+        this._ngxAni.to(externalAni, .6, {
+            transform: "scale(1)",
+            opacity: .8,
+            "ease": this._ngxAni['easeOutBack'],
+            onComplete: () => {
+                // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
+                setTimeout(() => {
+                    this._ngxAni.to(externalContent, 1, {
+                        opacity: 1
+                    })
+                }, 10);
+            }
+        });
+    }
 
 
     private animationHide(externalAni, externalContent) {
-    console.log(externalAni);
-    this._ngxAni.to(externalAni, .4, {
-        transform: "scale(0)",
-        opacity: 0,
-    });
-    this._ngxAni.to(externalContent, 1, {
-        opacity: 0
-    })
-}
+        console.log(externalAni);
+        this._ngxAni.to(externalAni, .4, {
+            transform: "scale(0)",
+            opacity: 0,
+        });
+        this._ngxAni.to(externalContent, 1, {
+            opacity: 0
+        })
+    }
 
-// add after
-//是否账号登录
-isOrdinaryLogin() {
-    this.ordinaryLogin = true;
-}
-//是否手机验证登录
-isPhoneLogin() {
-    this.ordinaryLogin = false;
-}
+    // add after
+    //是否账号登录
+    isOrdinaryLogin() {
+        this.ordinaryLogin = true;
+    }
+    //是否手机验证登录
+    isPhoneLogin() {
+        this.ordinaryLogin = false;
+    }
 
 }
 
