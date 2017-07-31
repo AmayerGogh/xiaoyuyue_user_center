@@ -153,7 +153,6 @@ export class LoginService {
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
         var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
-
         this._tokenService.setToken(
             accessToken,
             tokenExpireDate
@@ -303,7 +302,6 @@ export class LoginService {
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
         this.externalAuthenticateAsync(model).then((result: ExternalAuthenticateResultModel) => {
-            console.log(result);
             if (result.waitingForActivation) {
                 this._messageService.info("您已成功注册,请完善基本信息!");
                 // this._router.navigate(['/account/supplementary-external-register', result.userId]);

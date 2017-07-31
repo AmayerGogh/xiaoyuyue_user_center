@@ -10,6 +10,10 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     styleUrls: ['./current-phone.component.scss']
 })
 export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
+    time: number = 60;
+    sendSMSTimer: NodeJS.Timer;
+    existentPhoneNum: string;
+    isSendNewPhone: boolean = false;
     isVerified: boolean = false;
     currentPhoneNum: string;
     encryptPhoneNum: string;
@@ -42,12 +46,12 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
     verificationPhoneNum(): void {
         this.checkUserCodeInput.code = this.code;
         this.checkUserCodeInput.codeType = VerificationCodeType.PhoneUnBinding;
-        this._SMSServiceProxy
-            .checkCodeByCurrentUserAsync(this.checkUserCodeInput)
-            .subscribe(() => {
-                this.isVerified = true;
-                this.codeSendInput = new CodeSendInput();
-            })
+        this.isVerified = true;
+        // this._SMSServiceProxy
+        //     .checkCodeByCurrentUserAsync(this.checkUserCodeInput)
+        //     .subscribe(() => {
+        //         this.codeSendInput = new CodeSendInput();
+        //     })
     }
 
     bindPhone(): void {
@@ -62,12 +66,24 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
             });
     }
 
-    // 发送验证码
-    send(event) {
-        console.log(event);
+    private getPhoneNum(realTimePhoneNum: string): void {
 
-        this.codeSendInput.targetNumber = this.currentPhoneNum;
+        if (realTimePhoneNum !== this.existentPhoneNum) {
+            this.smsBtn.nativeElement.innerHTML = "发送验证码";
+            this.isSendNewPhone = false;
+            clearInterval(this.sendSMSTimer);
+        } else {
+            this.isSendNewPhone = true;
+        }
+    }
+
+    // 发送验证码
+    send(event, tel) {
+
+        this.existentPhoneNum = tel;
+        this.codeSendInput.targetNumber = tel;
         this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
+        console.log(this.existentPhoneNum);
         // input.captchaResponse = this.captchaResolved();
 
         this._SMSServiceProxy
@@ -78,16 +94,19 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
     }
 
     anginSend(event) {
-        let time = 60;
         this.isSendSMS = true;
-        let set = setInterval(() => {
-            time--;
-            event.target.innerHTML = `${time} 秒`;
+        this.isSendNewPhone = true;
+        this.sendSMSTimer = setInterval(() => {
+            this.time--;
+            event.target.innerHTML = `${this.time} 秒`;
         }, 1000)
 
-        setTimeout(() => {
-            clearInterval(set);
+        let timer = setTimeout(() => {
+            clearTimeout(timer);
+            clearInterval(this.sendSMSTimer);
+            this.time = 60;
             this.isSendSMS = false;
+            this.isSendNewPhone = false;
             event.target.innerHTML = this.l("AgainSendValidateCode");
         }, 60000);
     }

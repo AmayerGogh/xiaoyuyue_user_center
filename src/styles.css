@@ -54,14 +54,14 @@ a:focus {
     height: 100%;
 }
 
-.modal .modal-dialog {
+
+/* .modal .modal-dialog {
     top: 50%;
-    transform: translate(0, -75%);
 }
 
 .modal .modal-content {
     transform: translate(0, -50%);
-}
+} */
 
 .btn {
     font-weight: normal !important;

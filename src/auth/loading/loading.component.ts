@@ -26,7 +26,6 @@ export class LoadingComponent implements OnInit {
                     return new ExternalLoginProvider(p);
                 });
 
-                console.log(this.externalLoginProviders);
                 for (let i = 0; i < this.externalLoginProviders.length; i++) {
                     if (this.externalLoginProviders[i].name == "WeChatMP") {
                         let authBaseUrl = "https://open.weixin.qq.com/connect/oauth2/authorize";
