@@ -33,7 +33,7 @@ export class ExternalAuthComponent implements OnInit {
                         if (externalLoginProviders[i].name == "WeChatMP") {
                             let authBaseUrl = "https://open.weixin.qq.com/connect/oauth2/authorize";
                             let appid = externalLoginProviders[i].clientId;
-                            let redirect_url = AppConsts.appBaseUrl + '/auth/loading' + '?providerName=' + ExternalLoginProvider.WECHATMP;
+                            let redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.WECHATMP;
                             let response_type = "code";
                             let scope = "snsapi_userinfo";
 

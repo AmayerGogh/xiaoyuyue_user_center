@@ -152,7 +152,8 @@ export class LoginService {
     }
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
-        var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        let tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
         this._tokenService.setToken(
             accessToken,
             tokenExpireDate
@@ -174,13 +175,18 @@ export class LoginService {
                 abp.appPath
             );
         }
-        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
-        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + "/app/center";
+
         if (redirectUrl) {
-            location.href = redirectUrl;
+            this._router.navigate(['/app/center']);
         } else {
-            location.href = initialUrl;
+            // window.location.href = UrlHelper.redirectUrl;
+            this._router.navigate(['/app/admin/order/list']);
         }
+        // if (redirectUrl) {
+        //     location.href = redirectUrl;
+        // } else {
+        //     location.href = initialUrl;
+        // }
     }
 
     private clear(): void {
@@ -303,7 +309,6 @@ export class LoginService {
 
     private wechatLogin(params: Params) {
         var model = new ExternalAuthenticateModel();
-        let redirectUrl = AppConsts.appBaseUrl + "/app/center";
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];

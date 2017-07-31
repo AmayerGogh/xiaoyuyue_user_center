@@ -21,7 +21,7 @@ import { ExternalAuthComponent } from "auth/external-auth/external-auth.componen
                 component: AuthComponent,
                 children: [
                     { path: 'login', component: LoginComponent},
-                    { path: 'external-auth', component: ExternalAuthComponent},
+                    { path: 'external', component: ExternalAuthComponent},
                     { path: 'register', component: RegisterComponent },
                     { path: 'forgot-password', component: ForgotPasswordComponent },
                     { path: 'reset-password', component: ResetPasswordComponent },
