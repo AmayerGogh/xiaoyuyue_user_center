@@ -139,8 +139,8 @@ export class LoginService {
 
         } else if (authenticateResult.accessToken) {
             //Successfully logged in
-
-            this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, redirectUrl);
+            UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+            this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, UrlHelper.redirectUrl);
 
         } else {
             //Unexpected result!
@@ -153,7 +153,7 @@ export class LoginService {
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
         let tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
-        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+
         this._tokenService.setToken(
             accessToken,
             tokenExpireDate
@@ -177,10 +177,9 @@ export class LoginService {
         }
 
         if (redirectUrl) {
-            this._router.navigate(['/app/center']);
+            window.location.href = redirectUrl;
         } else {
-            // window.location.href = UrlHelper.redirectUrl;
-            this._router.navigate(['/app/admin/order/list']);
+            this._router.navigate(['/app/center']);
         }
         // if (redirectUrl) {
         //     location.href = redirectUrl;
