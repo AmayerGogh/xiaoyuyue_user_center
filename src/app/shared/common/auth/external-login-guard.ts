@@ -25,7 +25,7 @@ export class ExternalLoginGuard implements CanActivate {
     canActivate(params: Params): boolean { 
         var providerName = undefined;
         // debugger;
-        this._activatedRoute.queryParams.subscribe((params: Params) => {
+        this._activatedRoute.queryParams.skip(1).subscribe((params: Params) => {
             providerName = params['providerName'];
             if (providerName !== undefined) {
                 this._LoginService.externalLoginCallback(params);

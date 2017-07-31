@@ -301,7 +301,7 @@ export class LoginService {
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
-        this.externalAuthenticateAsync(model).then((result: ExternalAuthenticateResultModel) => {
+        this.externalAuthenticateAsync(model).done((result: ExternalAuthenticateResultModel) => {
             if (result.waitingForActivation) {
                 this._messageService.info("您已成功注册,请完善基本信息!");
                 // this._router.navigate(['/account/supplementary-external-register', result.userId]);
