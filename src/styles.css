@@ -3,6 +3,7 @@
 html,
 body {
     background-color: #F1F1F1;
+    overflow: auto;
 }
 
 html,

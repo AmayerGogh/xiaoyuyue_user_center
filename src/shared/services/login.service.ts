@@ -175,6 +175,7 @@ export class LoginService {
             );
         }
         UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+        debugger;
         let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl+"/app/center";
         if (redirectUrl) {
             location.href = redirectUrl;
