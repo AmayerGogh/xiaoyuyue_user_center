@@ -73,7 +73,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         }
 
         if (realTimePhoneNum !== this.existentPhoneNum) {
-            this.smsBtn.nativeElement.innerHTML = "重新发送";
+            this.smsBtn.nativeElement.innerHTML = "发送验证码";
             this.isSendNewPhone = false;
             clearInterval(this.sendSMSTimer);
         } else {
@@ -81,14 +81,42 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         }
     }
 
+    VerificationCodeType(codeType: any): void {
+        switch (codeType) {
+            case '10':
+                this.codeSendInput.codeType = VerificationCodeType.Register;
+                break;
+            case '20':
+                this.codeSendInput.codeType = VerificationCodeType.Login;
+                break;
+            case '30':
+                this.codeSendInput.codeType = VerificationCodeType.ChangePassword;
+                break;
+            case '40':
+                this.codeSendInput.codeType = VerificationCodeType.ChangeEmail;
+                break;
+            case '50':
+                this.codeSendInput.codeType = VerificationCodeType.PhoneBinding;
+                break;
+            case '60':
+                this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
+                break;
+            case '70':
+                this.codeSendInput.codeType = VerificationCodeType.PhoneVerify;
+                break;
+            default:
+                break;
+
+        }
+    }
+
     // 发送验证码
-    send(event, tel) {
+    send(event, tel, codeType) {
 
         this.existentPhoneNum = tel;
         this.codeSendInput.targetNumber = tel;
-        this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
-        console.log(this.existentPhoneNum);
-        // input.captchaResponse = this.captchaResolved();
+        this.VerificationCodeType(codeType);
+        // this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
 
         this._SMSServiceProxy
             .sendCodeAsync(this.codeSendInput)
