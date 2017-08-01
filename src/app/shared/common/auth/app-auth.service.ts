@@ -9,10 +9,14 @@ export class AppAuthService {
         private _utilsService: UtilsService
     ) { }
 
-    logout(reload?: boolean): void {
+    logout(reload?: boolean, returnUrl?: string): void {
         abp.auth.clearToken();
         if (reload !== false) {
-            location.href = AppConsts.appBaseUrl;
+            if (returnUrl) {
+                location.href = returnUrl;
+            } else {
+                location.href = AppConsts.appBaseUrl;
+            }
         }
     }
 
