@@ -2,6 +2,7 @@ export class AdminPermissions {
     static readonly permissionName:string ="Admin";
         
     static readonly tenantDashboard ="Admin.Tenant.Dashboard";
+    static readonly hostDashboard ="Admin.Host.Dashboard";
 
     static readonly userManage = "Admin.UserManage";
 

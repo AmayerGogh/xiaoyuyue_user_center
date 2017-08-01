@@ -11,6 +11,7 @@ import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { AppAuthService } from './auth/app-auth.service';
 import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { AppRouteGuard } from './auth/auth-route-guard';
+import { AppLocalizationService } from "app/shared/common/localization/app-localization.service";
 
 @NgModule({
     imports: [
@@ -24,10 +25,13 @@ import { AppRouteGuard } from './auth/auth-route-guard';
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective
-],
+    ],
     exports: [
         TimeZoneComboComponent,
         JqPluginDirective,
+    ],
+    providers: [
+        AppLocalizationService
     ]
 })
 export class AppCommonModule {

@@ -70,12 +70,12 @@ export class AppPreBootstrap {
 
     private static impersonatedAuthenticate(impersonationToken: string, tenantId: number, callback: () => void): JQueryPromise<any> {
         abp.multiTenancy.setTenantIdCookie(tenantId);
-
+        const cookieLangValue = abp.utils.getCookieValue("Abp.Localization.CultureName");
         return abp.ajax({
             url: AppConsts.remoteServiceBaseUrl + '/api/TokenAuth/ImpersonatedAuthenticate?impersonationToken=' + impersonationToken,
             method: 'POST',
             headers: {
-                'Accept-Language': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                '.AspNetCore.Culture': ('c=' + cookieLangValue + '|uic=' + cookieLangValue),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {
@@ -88,12 +88,12 @@ export class AppPreBootstrap {
 
     private static linkedAccountAuthenticate(switchAccountToken: string, tenantId: number, callback: () => void): JQueryPromise<any> {
         abp.multiTenancy.setTenantIdCookie(tenantId);
-
+        const cookieLangValue = abp.utils.getCookieValue("Abp.Localization.CultureName");
         return abp.ajax({
             url: AppConsts.remoteServiceBaseUrl + '/api/TokenAuth/LinkedAccountAuthenticate?switchAccountToken=' + switchAccountToken,
             method: 'POST',
             headers: {
-                'Accept-Language': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                '.AspNetCore.Culture': ('c=' + cookieLangValue + '|uic=' + cookieLangValue),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {
@@ -105,12 +105,13 @@ export class AppPreBootstrap {
     }
 
     private static getUserConfiguration(callback: () => void): JQueryPromise<any> {
+        const cookieLangValue = abp.utils.getCookieValue("Abp.Localization.CultureName");
         return abp.ajax({
             url: AppConsts.remoteServiceBaseUrl + '/AbpUserConfiguration/GetAll',
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + abp.auth.getToken(),
-                'Accept-Language': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                '.AspNetCore.Culture': ('c=' + cookieLangValue + '|uic=' + cookieLangValue),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
             }
         }).done(result => {
@@ -119,9 +120,10 @@ export class AppPreBootstrap {
             abp.clock.provider = this.getCurrentClockProvider(result.clock.provider);
 
             moment.locale(abp.localization.currentLanguage.name);
-
+            (window as any).moment.locale(abp.localization.currentLanguage.name);
             if (abp.clock.provider.supportsMultipleTimezone) {
                 moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
+                (window as any).moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
             }
             abp.event.trigger('abp.dynamicScriptsInitialized');
 

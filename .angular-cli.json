@@ -8,6 +8,7 @@
         "outDir": "dist",
         "assets": [
             "assets",
+            "favicon.ico",
             {
                 "glob": "**.*",
                 "input": "../node_modules/bootstrap-select/dist/js/i18n/",
