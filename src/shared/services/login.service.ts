@@ -176,16 +176,13 @@ export class LoginService {
             );
         }
 
+        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + "app/center";
         if (redirectUrl) {
-            window.location.href = redirectUrl;
+            location.href = redirectUrl;
         } else {
-            this._router.navigate(['/app/center']);
+            location.href = initialUrl;
         }
-        // if (redirectUrl) {
-        //     location.href = redirectUrl;
-        // } else {
-        //     location.href = initialUrl;
-        // }
     }
 
     private clear(): void {
