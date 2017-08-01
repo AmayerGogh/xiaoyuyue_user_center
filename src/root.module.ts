@@ -19,6 +19,10 @@ import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
 import { NgxAniModule } from 'ngxani';
 import { AppModule } from "app";
 import { IndexModule } from './index/main.module';
+
+import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { AppAuthService } from '@app/shared/common/auth/app-auth.service';
+
 export function appInitializerFactory(injector: Injector) {
     return () => {
         abp.ui.setBusy();
@@ -52,6 +56,14 @@ export function appInitializerFactory(injector: Injector) {
 
 export function getRemoteServiceBaseUrl(): string {
     return AppConsts.remoteServiceBaseUrl;
+}
+
+function handleLogoutRequest(authService: AppAuthService) {
+    var currentUrl = UrlHelper.initialUrl;
+    var returnUrl = UrlHelper.getReturnUrl();
+    if (currentUrl.indexOf(('account/logout')) >= 0 && returnUrl) {
+        authService.logout(true, returnUrl);
+    }
 }
 
 @NgModule({
