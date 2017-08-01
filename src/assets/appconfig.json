@@ -1,4 +1,4 @@
 ﻿{
-    "remoteServiceBaseUrl": "http://localhost:5001",
-    "appBaseUrl": "http://localhost:5201"
+    "remoteServiceBaseUrl": "http://api.xiaoyuyue.com/",
+    "appBaseUrl": "http://user.xiaoyuyue.com/"
 }
