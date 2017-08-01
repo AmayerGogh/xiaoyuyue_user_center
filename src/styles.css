@@ -2,7 +2,7 @@
 
 html,
 body {
-    background-color: #F1F1F1;
+    background-color: #FFF;
     overflow: auto;
 }
 
@@ -91,4 +91,11 @@ a:focus {
 
 .radio label .check:after {
     background-color: #FF9641;
+}
+
+.form-control[disabled],
+fieldset[disabled] .form-control,
+.form-group .form-control[disabled],
+fieldset[disabled] .form-group .form-control {
+    border-bottom: 1px solid #D2D2D2;
 }

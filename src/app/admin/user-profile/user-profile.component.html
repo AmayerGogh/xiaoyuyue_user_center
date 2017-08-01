@@ -89,8 +89,8 @@
                         <div class="card-content">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label"></label>
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.userName}">
+                                        <label class="control-label">用户名</label>
                                         <input type="text" class="form-control" name="backusername" [(ngModel)]="userProfileData.userName" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
@@ -98,8 +98,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label"></label>
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.nickName}">
+                                        <label class="control-label">昵称</label>
                                         <input type="text" class="form-control" name="backnickname" [(ngModel)]="userProfileData.nickName" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
@@ -107,8 +107,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label"></label>
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.name}">
+                                        <label class="control-label">姓名</label>
                                         <input type="text" class="form-control" name="backname" [(ngModel)]="userProfileData.name" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>
@@ -117,8 +117,8 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="form-group label-floating">
-                                        <label class="control-label"></label>
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.emailAddress}">
+                                        <label class="control-label">邮箱</label>
                                         <input type="email" class="form-control" name="backemail" [(ngModel)]="userProfileData.emailAddress" disabled>
                                         <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
                                     </div>

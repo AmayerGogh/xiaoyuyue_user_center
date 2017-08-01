@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Injector } from '@angular/core';
-import { ProfileServiceProxy, CodeSendInput, SMSServiceProxy, CheckUserCodeInput, ChangeBindingPhoneNumInput } from '@shared/service-proxies/service-proxies';
+import { ProfileServiceProxy, CodeSendInput, SMSServiceProxy, CheckUserCodeInput, ChangeBindingPhoneNumInput, BindingPhoneNumInput } from '@shared/service-proxies/service-proxies';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { VerificationCodeType } from 'shared/AppEnums';
@@ -10,6 +10,7 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     styleUrls: ['./current-phone.component.scss']
 })
 export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
+    bindingPhoneNumInput: BindingPhoneNumInput = new BindingPhoneNumInput();
     time: number = 60;
     sendSMSTimer: NodeJS.Timer;
     existentPhoneNum: string;
@@ -40,7 +41,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
     ngAfterViewInit() {
         // TODO: 暂时处理
-        $("#headerTitle").text("更换手机");
+        this.currentPhoneNum ? $("#headerTitle").text("更换手机") : $("#headerTitle").text("绑定手机");
     }
 
     verificationPhoneNum(): void {
@@ -54,7 +55,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         //     })
     }
 
-    bindPhone(): void {
+    changeBindPhone(): void {
         this.changeBindingPhoneNumInput.validCode = this.code;
         this._profileServiceProxy
             .changeBindingPhoneNum(this.changeBindingPhoneNumInput)
@@ -62,6 +63,18 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
                 this._location.back();
                 setTimeout(() => {
                     this.notify.success("更绑成功");
+                }, 1000);
+            });
+    }
+
+    bindPhone(): void {
+        this.changeBindingPhoneNumInput.validCode = this.code;
+        this._profileServiceProxy
+            .bindingPhoneNum(this.bindingPhoneNumInput)
+            .subscribe(() => {
+                this._location.back();
+                setTimeout(() => {
+                    this.notify.success("绑定成功");
                 }, 1000);
             });
     }
@@ -155,6 +168,9 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
 
     private encrypt(): void {
+        if (!this.currentPhoneNum) {
+            return;
+        }
         this.encryptPhoneNum = "•••••••" + this.currentPhoneNum.substr(this.currentPhoneNum.length - 4);
     }
 }

@@ -55,6 +55,10 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         if (this.is_weixn()) {
             this._router.navigate(['/auth/external']);
         }
+
+        if (this._sessionService.userId) {
+            this._router.navigate(['/app/center']);
+        }
     }
 
     ngAfterViewInit(): void {
