@@ -10,8 +10,8 @@ import { SendTwoFactorCodeComponent } from './login/send-two-factor-code.compone
 import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code.component';
 // import { AppRouteGuard } from "admin/shared/common/auth/auth-route-guard";
 import { AuthComponent } from "auth/auth.component";
-import { LoadingComponent } from './loading/loading.component';
 import { ExternalLoginGuard } from "app/shared/common/auth/external-login-guard";
+import { ExternalAuthComponent } from "auth/external-auth/external-auth.component";
 
 @NgModule({
     imports: [
@@ -21,7 +21,7 @@ import { ExternalLoginGuard } from "app/shared/common/auth/external-login-guard"
                 component: AuthComponent,
                 children: [
                     { path: 'login', component: LoginComponent},
-                    { path: 'loading', component: LoadingComponent, canActivate: [ExternalLoginGuard] },
+                    { path: 'external', component: ExternalAuthComponent},
                     { path: 'register', component: RegisterComponent },
                     { path: 'forgot-password', component: ForgotPasswordComponent },
                     { path: 'reset-password', component: ResetPasswordComponent },

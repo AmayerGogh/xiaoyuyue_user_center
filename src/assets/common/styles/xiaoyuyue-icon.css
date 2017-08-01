@@ -218,7 +218,6 @@
 
 .vapps-icon-app-phone:before {
     content: "\e928";
-    color: #ff9641;
 }
 
 .vapps-icon-app-preview:before {
@@ -233,7 +232,6 @@
 
 .vapps-icon-app-qr-code:before {
     content: "\e92b";
-    color: #ff9641;
 }
 
 .vapps-icon-app-refurbish:before {

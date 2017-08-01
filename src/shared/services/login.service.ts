@@ -112,8 +112,8 @@ export class LoginService {
         });
     }
 
-    init(): void {
-        this.initExternalLoginProviders();
+    init(callback?: any): void {
+        this.initExternalLoginProviders(callback);
     }
 
     private processAuthenticateResult(authenticateResult: AuthenticateResultModel, redirectUrl?: string) {
@@ -139,8 +139,8 @@ export class LoginService {
 
         } else if (authenticateResult.accessToken) {
             //Successfully logged in
-
-            this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, redirectUrl);
+            UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+            this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, UrlHelper.redirectUrl);
 
         } else {
             //Unexpected result!
@@ -152,7 +152,7 @@ export class LoginService {
     }
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
-        var tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        let tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
         this._tokenService.setToken(
             accessToken,
@@ -175,13 +175,17 @@ export class LoginService {
                 abp.appPath
             );
         }
-        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
-        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl+"/app/center";
+
         if (redirectUrl) {
-            location.href = redirectUrl;
+            window.location.href = redirectUrl;
         } else {
-            location.href = initialUrl;
+            this._router.navigate(['/app/center']);
         }
+        // if (redirectUrl) {
+        //     location.href = redirectUrl;
+        // } else {
+        //     location.href = initialUrl;
+        // }
     }
 
     private clear(): void {
@@ -191,14 +195,20 @@ export class LoginService {
         this.rememberMe = false;
     }
 
-    private initExternalLoginProviders() {
+    private initExternalLoginProviders(callback?: any) {
+        if (this.externalLoginProviders.length > 0) {
+            return;
+        }
         this._tokenAuthService
             .getExternalAuthenticationProviders()
             .subscribe((providers: ExternalLoginProviderInfoModel[]) => {
                 this.externalLoginProviders = _.map(providers, p => {
-                    console.log(p);
                     return new ExternalLoginProvider(p);
                 });
+
+                if (callback) {
+                    callback(this.externalLoginProviders);
+                }
             });
     }
 
@@ -298,12 +308,10 @@ export class LoginService {
 
     private wechatLogin(params: Params) {
         var model = new ExternalAuthenticateModel();
-        let redirectUrl = AppConsts.appBaseUrl + "/app/center";
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
-        this.externalAuthenticateAsync(model).then((result: ExternalAuthenticateResultModel) => {
-            console.log(result);
+        this.externalAuthenticateAsync(model).done((result: ExternalAuthenticateResultModel) => {
             if (result.waitingForActivation) {
                 this._messageService.info("您已成功注册,请完善基本信息!");
                 // this._router.navigate(['/account/supplementary-external-register', result.userId]);

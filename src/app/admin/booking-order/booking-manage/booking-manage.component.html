@@ -2,13 +2,13 @@
     <div class="serach">
         <div class="form-group label-floating">
             <label class="control-label"></label>
-            <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容">
+            <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
             <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
         </div>
     </div>
 
     <ul class="card tabs">
-        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;" (click)="orderSerach(index)"> {{ statuItem }}</li>
+        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;" (click)="orderSwitch(index)"> {{ statuItem }}</li>
     </ul>
 
     <div *ngIf="personBookingTotalCount > 0; else empty">

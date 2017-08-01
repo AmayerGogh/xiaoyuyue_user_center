@@ -11,7 +11,6 @@ import { CommonModule } from '@shared/common/common.module';
 import { TenantChangeComponent } from './shared/tenant-change.component';
 import { TenantChangeModalComponent } from './shared/tenant-change-modal.component';
 import { LoginComponent } from './login/login.component';
-import { LoadingComponent } from './loading/loading.component';
 import { RegisterComponent } from './register/register.component';
 import { TenantRegistrationHelperService } from './register/tenant-registration-helper.service';
 import { ForgotPasswordComponent } from './password/forgot-password.component';
@@ -30,6 +29,7 @@ import { LuosimaoCaptcha } from "auth/shared/luosimao-captcha/luosimao-captcha.c
 import { HeaderComponent } from "auth/layout/header/header.component";
 import { FooterComponent } from "auth/layout/footer/footer.component";
 import { BackgroundImgComponent } from "auth/layout/background-img/background-img.component";
+import { ExternalAuthComponent } from './external-auth/external-auth.component';
 
 @NgModule({
     imports: [
@@ -53,7 +53,7 @@ import { BackgroundImgComponent } from "auth/layout/background-img/background-im
         TenantChangeComponent,
         TenantChangeModalComponent,
         LoginComponent,
-        LoadingComponent,
+        ExternalAuthComponent,
         RegisterComponent,
         ForgotPasswordComponent,
         ResetPasswordComponent,

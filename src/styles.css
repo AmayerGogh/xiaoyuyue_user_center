@@ -3,6 +3,7 @@
 html,
 body {
     background-color: #F1F1F1;
+    overflow: auto;
 }
 
 html,
@@ -54,14 +55,14 @@ a:focus {
     height: 100%;
 }
 
-.modal .modal-dialog {
+
+/* .modal .modal-dialog {
     top: 50%;
-    transform: translate(0, -75%);
 }
 
 .modal .modal-content {
     transform: translate(0, -50%);
-}
+} */
 
 .btn {
     font-weight: normal !important;
