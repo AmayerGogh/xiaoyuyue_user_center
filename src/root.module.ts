@@ -21,11 +21,14 @@ import { AppModule } from "app";
 import { IndexModule } from './index/main.module';
 
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { AppAuthService } from '@app/shared/common/auth/app-auth.service';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 export function appInitializerFactory(injector: Injector) {
     return () => {
         abp.ui.setBusy();
+
+        handleLogoutRequest(injector.get(AppAuthService));
+
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
