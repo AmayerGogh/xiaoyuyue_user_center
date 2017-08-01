@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
     }
     ngAfterViewInit() {
         // TODO: 暂时处理
-        $("#headerTitle").text("个人中心");
+        $("#headerTitle").text("个人信息");
     }
 
     loadData(): void {

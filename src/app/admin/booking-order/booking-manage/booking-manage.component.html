@@ -41,12 +41,12 @@
             <div class="bottom-action" *ngIf="actionFlag[index]">
                 <span class="action-item" (click)="showBookingDetail(dataItem.id)"><a><span class="icon vapps-icon-app-detail"></span>查看详情</a>
                 </span><span class="line">|</span>
-                <span class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>
+                <span *ngIf="!(dataItem.status == 4)" class="action-item" (click)="cancelBooking(dataItem.id)"><span class="icon vapps-icon-app-cancel-booking"></span>取消预约</span><span class="line">|</span>
                 <span class="action-item" (click)="skickBooking(dataItem.id)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
             </div>
         </div>
     </div>
-    <xiaoyuyue-cancel-booking-modal #cancelBookingModal></xiaoyuyue-cancel-booking-modal>
+    <xiaoyuyue-cancel-booking-modal (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-cancel-booking-modal>
 </div>
 
 <ng-template #empty>

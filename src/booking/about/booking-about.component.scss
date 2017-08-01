@@ -4,6 +4,7 @@
     .btn {
         line-height: 1;
         padding: 0;
+        margin: 0;
     }
     .about-item+.about-item {
         margin-top: 20px;
@@ -11,8 +12,8 @@
     .about-header {
         width: 100%;
         .intro-wrap {
-            text-indent: 2em;
             font-size: 14px;
+            text-align: justify;
         }
     }
     .about-body {
@@ -36,7 +37,7 @@
     .about-footer {
         width: 100%;
         position: relative;
-        padding-bottom: 85px;
+        padding-bottom: 40px;
         .item+.item {
             margin-top: 10px;
         }

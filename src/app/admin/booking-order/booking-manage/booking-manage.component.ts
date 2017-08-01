@@ -25,7 +25,7 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
     sort: any;
     actionFlag: boolean[] = [];
     slogan: string = "啥都没有，赶紧去预约吧";
-    bookingOrderStatusName: string[] = ["全部", "待确认", "已确认", "待评价", "已完成"];
+    bookingOrderStatusName: string[] = ["全部", "待确认", "已确认", "待评价", "已取消"];
 
     @ViewChild('cancelBookingModal') cancelBookingModal: CancelBookingModalComponent;
 
@@ -126,5 +126,11 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
             status5: status == 5
         }
         return tipsClass;
+    }
+
+    getIsCancelBooking(event: boolean): void {
+        if (event) {
+            this.loadPersonBookingData();
+        }
     }
 }
