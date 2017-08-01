@@ -24,11 +24,11 @@ export class AppAuthService {
     }
 
     recordRedirectUrl(): void {
-        let exdate = new Date()
-        exdate.setDate(exdate.getDate() + 1)
+        let exdate = new Date();
+        exdate.setDate(exdate.getDate() + 1);
         this._utilsService.deleteCookie("UrlHelper.redirectUrl", '/');
         // 测试域名
-        let domainArr = ["http://vapps.oicp.io/", "http://localhost:5201/"]
+        let domainArr = ["http://user.xiaoyuyue.com/", "http://localhost:5201/"];
         if (domainArr.indexOf(location.href) < 0) {
             this._utilsService.setCookieValue("UrlHelper.redirectUrl", location.href, exdate, '/');
         }
