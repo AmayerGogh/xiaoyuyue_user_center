@@ -26,24 +26,18 @@ import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 export function appInitializerFactory(injector: Injector) {
     return () => {
         abp.ui.setBusy();
-
         handleLogoutRequest(injector.get(AppAuthService));
-
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
-
                         //Css classes based on the layout
                         if (abp.session.userId) {
                             $('body').attr('class', 'page-md page-header-fixed page-sidebar-closed-hide-logo page-footer-fixed theme-2');
                         } else {
                             $('body').attr('class', 'page-md login');
                         }
-
-
-
                         abp.ui.clearBusy();
                         resolve(result);
                     },
