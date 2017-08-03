@@ -84,7 +84,6 @@ export class BookingManageComponent extends AppComponentBase implements OnInit {
     }
 
     orderSerach(keywords: string): void {
-        console.log(true);
         this.bookingName = keywords;
         this.status = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
         this.loadPersonBookingData();
