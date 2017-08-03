@@ -44,10 +44,6 @@ export class CenterHeaderComponent extends AppComponentBase implements OnInit {
             if (result && result.profilePicture) {
                 this.profilePicture = result.profilePicture;
                 // this.safeProfilePicture = this.sanitizer.bypassSecurityTrustStyle(this.profilePicture);
-                // console.log(result.profilePicture);
-                
-                // console.log(this.safeProfilePicture);
-                
             }
         });
     }

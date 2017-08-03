@@ -18,12 +18,9 @@ export class HomeComponent implements OnInit {
   }
 
   getPageOffsetTop(): void {
-    console.log($(".page"));
     let self = this;
     $(".page").each(function() {
       self.pagesArr.push($(this).offset().top);
-      console.log(this);
     })
-    console.log(this.pagesArr);
   }
 }

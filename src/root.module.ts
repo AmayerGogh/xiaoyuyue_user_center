@@ -19,24 +19,19 @@ import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
 import { NgxAniModule } from 'ngxani';
 import { AppModule } from "app";
 import { IndexModule } from './index/main.module';
+
+import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+
 export function appInitializerFactory(injector: Injector) {
     return () => {
         abp.ui.setBusy();
+        handleLogoutRequest(injector.get(AppAuthService));
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
-
-                        //Css classes based on the layout
-                        if (abp.session.userId) {
-                            $('body').attr('class', 'page-md page-header-fixed page-sidebar-closed-hide-logo page-footer-fixed theme-2');
-                        } else {
-                            $('body').attr('class', 'page-md login');
-                        }
-
-
-
                         abp.ui.clearBusy();
                         resolve(result);
                     },
@@ -52,6 +47,14 @@ export function appInitializerFactory(injector: Injector) {
 
 export function getRemoteServiceBaseUrl(): string {
     return AppConsts.remoteServiceBaseUrl;
+}
+
+function handleLogoutRequest(authService: AppAuthService) {
+    var currentUrl = UrlHelper.initialUrl;
+    var returnUrl = UrlHelper.getReturnUrl();
+    if (currentUrl.indexOf(('account/logout')) >= 0 && returnUrl) {
+        authService.logout(true, returnUrl);
+    }
 }
 
 @NgModule({
