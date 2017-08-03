@@ -1,4 +1,5 @@
 ﻿import * as moment from 'moment';
+
 import { AppConsts } from '@shared/AppConsts';
 import { UrlHelper } from './shared/helpers/UrlHelper';
 import { LocalizedResourcesHelper } from './shared/helpers/LocalizedResourcesHelper';
@@ -123,7 +124,7 @@ export class AppPreBootstrap {
             (window as any).moment.locale(abp.localization.currentLanguage.name);
             if (abp.clock.provider.supportsMultipleTimezone) {
                 moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
-                (window as any).moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
+                // (window as any).moment.tz.setDefault(abp.timing.timeZoneInfo.iana.timeZoneId);
             }
             abp.event.trigger('abp.dynamicScriptsInitialized');
 

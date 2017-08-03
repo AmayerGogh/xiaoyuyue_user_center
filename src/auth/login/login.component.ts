@@ -55,6 +55,10 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         if (this.is_weixn()) {
             this._router.navigate(['/auth/external']);
         }
+
+        if (this._sessionService.userId) {
+            this._router.navigate(['/app/center']);
+        }
     }
 
     ngAfterViewInit(): void {
@@ -142,7 +146,6 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
 
 
     private animationHide(externalAni, externalContent) {
-        console.log(externalAni);
         this._ngxAni.to(externalAni, .4, {
             transform: "scale(0)",
             opacity: 0,

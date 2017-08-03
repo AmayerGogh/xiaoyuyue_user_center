@@ -26,7 +26,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {
-            this._appAuthService.recordRedirectUrl();
+            this._appAuthService.recordRedirectUrl(); 
             this._router.navigate(['/auth/login']);
             return false;
         }

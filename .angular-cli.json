@@ -22,9 +22,9 @@
         "prefix": "xiaoyuyue",
         "mobile": false,
         "styles": [
-            "assets/md-pro/css/material-dashboard.css",
 
             "../node_modules/bootstrap/dist/css/bootstrap.css",
+            "assets/md-pro/css/material-dashboard.css",
             "../node_modules/toastr/build/toastr.css",
             "../node_modules/sweetalert/dist/sweetalert.css",
 

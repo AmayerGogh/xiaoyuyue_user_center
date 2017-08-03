@@ -32,12 +32,6 @@ export function appInitializerFactory(injector: Injector) {
                 var appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
-                        //Css classes based on the layout
-                        if (abp.session.userId) {
-                            $('body').attr('class', 'page-md page-header-fixed page-sidebar-closed-hide-logo page-footer-fixed theme-2');
-                        } else {
-                            $('body').attr('class', 'page-md login');
-                        }
                         abp.ui.clearBusy();
                         resolve(result);
                     },
