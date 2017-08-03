@@ -22,15 +22,12 @@
         "prefix": "xiaoyuyue",
         "mobile": false,
         "styles": [
-
             "../node_modules/bootstrap/dist/css/bootstrap.css",
             "assets/md-pro/css/material-dashboard.css",
             "../node_modules/toastr/build/toastr.css",
             "../node_modules/sweetalert/dist/sweetalert.css",
-
             "assets/common/styles/xiaoyuyue-icon.css",
             "assets/common/styles/flatpickr.css",
-
             "app/shared/layout.scss",
             "app/shared/core.less",
             "app/shared/skin.less",
@@ -39,21 +36,15 @@
         ],
         "scripts": [
             "../node_modules/jquery/dist/jquery.min.js",
-            "../node_modules/js-cookie/src/js.cookie.js",
-
-            "../node_modules/fastclick/lib/fastclick.js",
             "../node_modules/lodash/lodash.min.js",
             "../node_modules/jquery-slimscroll/jquery.slimscroll.min.js",
             "../node_modules/jquery-backstretch/jquery.backstretch.min.js",
-
-            "../node_modules/toastr/toastr.js",
-            "../node_modules/block-ui/jquery.blockUI.js",
+            "../node_modules/toastr/build/toastr.min.js",
             "../node_modules/spin.js/spin.min.js",
             "../node_modules/spin.js/jquery.spin.js",
-            "../node_modules/sweetalert/dist/sweetalert-dev.js",
+            "../node_modules/sweetalert/dist/sweetalert.min.js",
             "../node_modules/moment/min/moment-with-locales.min.js",
             "../node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
-
             "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
@@ -61,19 +52,18 @@
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.spin.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.sweet-alert.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.moment.js",
-
-            "../src/assets/common/js/moxie-2.1.9.js",
-            "../src/assets/common/js/plupload-2.1.9.dev.js",
-            "../node_modules/qiniu-js/dist/qiniu.js",
-
-            "../src/assets/common/js/flatpickr.js",
-            "../src/assets/common/js/flatpickr-zh.js",
-
             "../node_modules/timeago/jquery.timeago.js",
-
-            "../node_modules/arrive/src/arrive.js",
-            "../src/assets/md-pro/js/core/material.min.js",
-            "../src/assets/md-pro/js/core/jquery.validate.min.js"
+            "../node_modules/arrive/minified/arrive.min.js",
+            "../node_modules/jquery-validation/dist/jquery.validate.min.js",
+            
+            "../src/assets/common/js/js.cookie.min.js",
+            "../src/assets/common/js/fastclick.min.js",
+            "../src/assets/common/js/jquery.blockUI.min.js",
+            "../src/assets/common/js/moxie-2.1.9.min.js",
+            "../src/assets/common/js/plupload-2.1.9.min.js",
+            "../src/assets/common/js/flatpickr.min.js",
+            "../src/assets/common/js/flatpickr-zh.js",
+            "../src/assets/md-pro/js/core/material.min.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

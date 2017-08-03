@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { CurrentUserProfileEditDto } from "@shared/service-proxies/service-proxies";
 import { ProfileServiceProxy, PictureServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppGender } from "shared/AppEnums";
+import '@node_modules/qiniu-js/dist/qiniu.min';
 @Component({
     selector: 'xiaoyuyue-user-profile',
     templateUrl: './user-profile.component.html',
