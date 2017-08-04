@@ -3,12 +3,14 @@ import { CurrentUserProfileEditDto } from "@shared/service-proxies/service-proxi
 import { ProfileServiceProxy, PictureServiceProxy } from '@shared/service-proxies/service-proxies';
 import { AppGender } from "shared/AppEnums";
 import '@node_modules/qiniu-js/dist/qiniu.min';
+
 @Component({
     selector: 'xiaoyuyue-user-profile',
     templateUrl: './user-profile.component.html',
     styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+    
     title: string = "用户中心";
     filpActive: boolean = true;
     localPictureUrl: string;

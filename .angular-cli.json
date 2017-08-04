@@ -45,6 +45,7 @@
             "../node_modules/sweetalert/dist/sweetalert.min.js",
             "../node_modules/moment/min/moment-with-locales.min.js",
             "../node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
+            "../src/assets/common/js/jquery.blockUI.min.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.jquery.js",
             "../node_modules/abp-web-resources/Abp/Framework/scripts/libs/abp.toastr.js",
@@ -58,9 +59,7 @@
             
             "../src/assets/common/js/js.cookie.min.js",
             "../src/assets/common/js/fastclick.min.js",
-            "../src/assets/common/js/jquery.blockUI.min.js",
-            "../src/assets/common/js/moxie-2.1.9.min.js",
-            "../src/assets/common/js/plupload-2.1.9.min.js",
+            "../src/assets/common/js/plupload-2.1.9.full.min.js",
             "../src/assets/common/js/flatpickr.min.js",
             "../src/assets/common/js/flatpickr-zh.js",
             "../src/assets/md-pro/js/core/material.min.js"
