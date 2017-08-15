@@ -7,14 +7,14 @@ import { FileUploadModule } from '@node_modules/ng2-file-upload';
 
 import { UtilsModule } from '@shared/utils/utils.module'
 
-import { AppStorageService } from "shared/services/storage.service";
-import { TenantService } from "shared/services/tenant.service";
+import { AppStorageService } from 'shared/services/storage.service';
+import { TenantService } from 'shared/services/tenant.service';
 
-import { AppCommonModule } from "app/shared/common/app-common.module";
+import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { AdminHeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { AdminRoutingModule } from "app/admin/admin-routing.module";
-import { AdminComponent } from "app/admin/admin.component";
+import { AdminRoutingModule } from 'app/admin/admin-routing.module';
+import { AdminComponent } from 'app/admin/admin.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BookingDetailComponent } from './booking-order/booking-detail/booking-detial.component';
 import { AdminSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
@@ -49,7 +49,7 @@ import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
         CancelBookingModalComponent,
         UserProfileComponent,
         EmptyPageComponent
-],
+    ],
     providers: [
         TenantService,
     ],

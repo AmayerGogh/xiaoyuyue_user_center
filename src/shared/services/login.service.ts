@@ -12,29 +12,20 @@ import { UtilsService } from '@abp/utils/utils.service';
 import { Http, Headers, Response } from '@angular/http';
 
 import * as _ from 'lodash';
-declare const FB: any; //Facebook API
-declare const gapi: any; //Facebook API
-declare const WL: any; //Microsoft API
+declare const FB: any; // Facebook API
+declare const gapi: any; // Facebook API
+declare const WL: any; // Microsoft API
 
 export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
 
-    static readonly FACEBOOK: string = 'Facebook';
-    static readonly GOOGLE: string = 'Google';
-    static readonly MICROSOFT: string = 'Microsoft';
-    static readonly WECHAT: string = 'WeChat';
-    static readonly WECHATMP: string = 'WeChatMP';
+    static readonly FACEBOOK = 'Facebook';
+    static readonly GOOGLE = 'Google';
+    static readonly MICROSOFT = 'Microsoft';
+    static readonly WECHAT = 'WeChat';
+    static readonly WECHATMP = 'WeChatMP';
 
     icon: string;
     initialized = false;
-
-    constructor(providerInfo: ExternalLoginProviderInfoModel) {
-        super();
-
-        this.name = providerInfo.name;
-        this.clientId = providerInfo.clientId;
-        this.icon = ExternalLoginProvider.getSocialIcon(this.name);
-        this.initialized = providerInfo.name == 'WeChat';
-    }
 
     private static getSocialIcon(providerName: string): string {
         providerName = providerName.toLowerCase();
@@ -45,20 +36,26 @@ export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
 
         return providerName;
     }
+
+    constructor(providerInfo: ExternalLoginProviderInfoModel) {
+        super();
+
+        this.name = providerInfo.name;
+        this.clientId = providerInfo.clientId;
+        this.icon = ExternalLoginProvider.getSocialIcon(this.name);
+        this.initialized = providerInfo.name === 'WeChat';
+    }
 }
 
 @Injectable()
 export class LoginService {
-    throwException: any;
-    jsonParseReviver: any;
-
     static readonly twoFactorRememberClientTokenName = 'TwoFactorRememberClientToken';
 
+    throwException: any;
+    jsonParseReviver: any;
     authenticateModel: AuthenticateModel;
     authenticateResult: AuthenticateResultModel;
-
     externalLoginProviders: ExternalLoginProvider[] = [];
-
     rememberMe: boolean;
 
     constructor(
@@ -75,7 +72,7 @@ export class LoginService {
     authenticate(finallyCallback?: () => void, redirectUrl?: string): void {
         finallyCallback = finallyCallback || (() => { });
 
-        //We may switch to localStorage instead of cookies
+        // We may switch to localStorage instead of cookies
         this.authenticateModel.twoFactorRememberClientToken = this._utilsService.getCookieValue(LoginService.twoFactorRememberClientTokenName);
 
         this._tokenAuthService
@@ -94,18 +91,18 @@ export class LoginService {
                 gapi.auth2.getAuthInstance().signIn();
             } else if (provider.name === ExternalLoginProvider.MICROSOFT) {
                 WL.login({
-                    scope: ["wl.signin", "wl.basic", "wl.emails"]
+                    scope: ['wl.signin', 'wl.basic', 'wl.emails']
                 });
             } else if (provider.name === ExternalLoginProvider.WECHAT) {
                 jQuery.getScript('http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js', () => {
-                    var wxLogin = new WxLogin({
-                        id: "external_login_container",
+                    const wxLogin = new WxLogin({
+                        id: 'external_login_container',
                         appid: provider.clientId,
-                        scope: "snsapi_login",
-                        redirect_uri: AppConsts.appBaseUrl + AppConsts.externalLoginUrl + '?providerName=' + ExternalLoginProvider.WECHAT,/*暂用测试域名*/
-                        state: "xiaoyuyue",
-                        style: "black",
-                        href: "https://static.vapps.com.cn/vappszero/wechat-login.css"
+                        scope: 'snsapi_login',
+                        redirect_uri: AppConsts.appBaseUrl + AppConsts.externalLoginUrl + '?providerName=' + ExternalLoginProvider.WECHAT, /*暂用测试域名*/
+                        state: 'xiaoyuyue',
+                        style: 'black',
+                        href: 'https://static.vapps.com.cn/vappszero/wechat-login.css'
                     });
                 });
             }
@@ -120,7 +117,7 @@ export class LoginService {
         this.authenticateResult = authenticateResult;
 
         if (authenticateResult.shouldResetPassword) {
-            //Password reset
+            // Password reset
 
             this._router.navigate(['account/reset-password'], {
                 queryParams: {
@@ -133,17 +130,17 @@ export class LoginService {
             this.clear();
 
         } else if (authenticateResult.requiresTwoFactorVerification) {
-            //Two factor authentication
+            // Two factor authentication
 
             this._router.navigate(['account/send-code']);
 
         } else if (authenticateResult.accessToken) {
-            //Successfully logged in
-            UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
+            // Successfully logged in
+            UrlHelper.redirectUrl = this._utilsService.getCookieValue('UrlHelper.redirectUrl');
             this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, UrlHelper.redirectUrl);
 
         } else {
-            //Unexpected result!
+            // Unexpected result!
 
             this._logService.warn('Unexpected authenticateResult!');
             this._router.navigate(['auth/login']);
@@ -171,13 +168,13 @@ export class LoginService {
             this._utilsService.setCookieValue(
                 LoginService.twoFactorRememberClientTokenName,
                 twoFactorRememberClientToken,
-                new Date(new Date().getTime() + 365 * 86400000), //1 year
+                new Date(new Date().getTime() + 365 * 86400000), // 1 year
                 abp.appPath
             );
         }
 
-        UrlHelper.redirectUrl = this._utilsService.getCookieValue("UrlHelper.redirectUrl");
-        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + "app/center";
+        UrlHelper.redirectUrl = this._utilsService.getCookieValue('UrlHelper.redirectUrl');
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + 'app/center';
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {
@@ -250,12 +247,12 @@ export class LoginService {
             });
         } else if (loginProvider.name === ExternalLoginProvider.MICROSOFT) {
             jQuery.getScript('//js.live.net/v5.0/wl.js', () => {
-                WL.Event.subscribe("auth.login", this.microsoftLogin);
+                WL.Event.subscribe('auth.login', this.microsoftLogin);
                 WL.init({
                     client_id: loginProvider.clientId,
-                    scope: ["wl.signin", "wl.basic", "wl.emails"],
+                    scope: ['wl.signin', 'wl.basic', 'wl.emails'],
                     redirect_uri: AppConsts.appBaseUrl,
-                    response_type: "token"
+                    response_type: 'token'
                 });
             });
         } else if (loginProvider.name === ExternalLoginProvider.WECHAT) {
@@ -276,7 +273,7 @@ export class LoginService {
             this._tokenAuthService.externalAuthenticate(model)
                 .subscribe((result: ExternalAuthenticateResultModel) => {
                     if (result.waitingForActivation) {
-                        this._messageService.info("您已成功注册,请完善基本信息!");
+                        this._messageService.info('您已成功注册,请完善基本信息!');
                         return;
                     }
 
@@ -294,7 +291,7 @@ export class LoginService {
             this._tokenAuthService.externalAuthenticate(model)
                 .subscribe((result: ExternalAuthenticateResultModel) => {
                     if (result.waitingForActivation) {
-                        this._messageService.info("您已成功注册,请完善基本信息!");
+                        this._messageService.info('您已成功注册,请完善基本信息!');
                         return;
                     }
 
@@ -310,7 +307,7 @@ export class LoginService {
         model.providerKey = params['code'];
         this.externalAuthenticateAsync(model).done((result: ExternalAuthenticateResultModel) => {
             if (result.waitingForActivation) {
-                this._messageService.info("您已成功注册,请完善基本信息!");
+                this._messageService.info('您已成功注册,请完善基本信息!');
                 // this._router.navigate(['/account/supplementary-external-register', result.userId]);
                 return;
             }
@@ -327,11 +324,11 @@ export class LoginService {
         var model = new ExternalAuthenticateModel();
         model.authProvider = ExternalLoginProvider.MICROSOFT;
         model.providerAccessCode = WL.getSession().access_token;
-        model.providerKey = WL.getSession().id; //How to get id?
+        model.providerKey = WL.getSession().id; // How to get id?
         this._tokenAuthService.externalAuthenticate(model)
             .subscribe((result: ExternalAuthenticateResultModel) => {
                 if (result.waitingForActivation) {
-                    this._messageService.info("您已成功注册,请完善基本信息!");
+                    this._messageService.info('您已成功注册,请完善基本信息!');
                     return;
                 }
 
@@ -343,8 +340,8 @@ export class LoginService {
     * @return Success
     */
     externalAuthenticateAsync(model: ExternalAuthenticateModel): JQueryPromise<ExternalAuthenticateResultModel> {
-        let url_ = AppConsts.remoteServiceBaseUrl + "/api/TokenAuth/ExternalAuthenticate";
-        url_ = url_.replace(/[?&]$/, "");
+        let url_ = AppConsts.remoteServiceBaseUrl + '/api/TokenAuth/ExternalAuthenticate';
+        url_ = url_.replace(/[?&]$/, '');
 
         const content_ = JSON.stringify(model ? model.toJSON() : null);
 
@@ -364,7 +361,7 @@ export class LoginService {
             data: content_,
             async: false,
             headers: {
-                'Accept-Language': abp.utils.getCookieValue("Abp.Localization.CultureName"),
+                'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
                 // "Content-Type": "application/json; charset=UTF-8",
                 // "Accept": "application/json; charset=UTF-8"
@@ -380,11 +377,11 @@ export class LoginService {
 
         if (status === 200) {
             let result200: ExternalAuthenticateResultModel = null;
-            let resultData200 = responseText === "" ? null : JSON.parse(responseText, this.jsonParseReviver);
+            let resultData200 = responseText === '' ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? ExternalAuthenticateResultModel.fromJS(resultData200) : new ExternalAuthenticateResultModel();
             return result200;
         } else if (status !== 200 && status !== 204) {
-            this.throwException("An unexpected server error occurred.", status, responseText);
+            this.throwException('An unexpected server error occurred.', status, responseText);
         }
         return null;
     }

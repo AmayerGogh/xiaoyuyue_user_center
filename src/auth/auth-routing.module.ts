@@ -9,9 +9,9 @@ import { ConfirmEmailComponent } from './email-activation/confirm-email.componen
 import { SendTwoFactorCodeComponent } from './login/send-two-factor-code.component';
 import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code.component';
 // import { AppRouteGuard } from "admin/shared/common/auth/auth-route-guard";
-import { AuthComponent } from "auth/auth.component";
-import { ExternalLoginGuard } from "app/shared/common/auth/external-login-guard";
-import { ExternalAuthComponent } from "auth/external-auth/external-auth.component";
+import { AuthComponent } from 'auth/auth.component';
+import { ExternalLoginGuard } from 'app/shared/common/auth/external-login-guard';
+import { ExternalAuthComponent } from 'auth/external-auth/external-auth.component';
 
 @NgModule({
     imports: [
@@ -20,8 +20,8 @@ import { ExternalAuthComponent } from "auth/external-auth/external-auth.componen
                 path: '',
                 component: AuthComponent,
                 children: [
-                    { path: 'login', component: LoginComponent},
-                    { path: 'external', component: ExternalAuthComponent},
+                    { path: 'login', component: LoginComponent },
+                    { path: 'external', component: ExternalAuthComponent },
                     { path: 'register', component: RegisterComponent },
                     { path: 'forgot-password', component: ForgotPasswordComponent },
                     { path: 'reset-password', component: ResetPasswordComponent },

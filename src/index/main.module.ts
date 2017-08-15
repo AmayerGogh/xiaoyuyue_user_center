@@ -1,5 +1,5 @@
 import * as ngCommon from '@angular/common';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { HomeComponent } from './home/home.component';
