@@ -1,15 +1,26 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as _ from 'lodash';
+
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Component({
   selector: 'xiaoyuyue-side-bar',
   templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss']
+  styleUrls: ['./side-bar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class SideBarComponent implements OnInit {
+export class HomeSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
-  constructor() { }
+  constructor(
+    private _authService: AppAuthService
+  ) { }
 
   ngOnInit() {
+    const self = this;
+    $('.menu-item').click(() => {
+      self.hideSideBar();
+    })
   }
   showSideBar() {
     this.sideBarEle.nativeElement.style.display = 'block';
@@ -27,5 +38,8 @@ export class SideBarComponent implements OnInit {
     })
   }
 
+  logout() {
+    this._authService.logout();
+  }
 
 }

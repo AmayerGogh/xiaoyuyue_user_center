@@ -3,9 +3,9 @@ import { LocalizationService } from '@abp/localization/localization.service';
 import { AppConsts } from '@shared/AppConsts';
 
 @Injectable()
-export class AppLocalizationService extends  LocalizationService {
+export class AppLocalizationService extends LocalizationService {
     l(key: string, ...args: any[]): string {
-        let localizedText = this.localize(key,  AppConsts.localization.defaultLocalizationSourceName);
+        let localizedText = this.localize(key, AppConsts.localization.defaultLocalizationSourceName);
 
         if (!localizedText) {
             localizedText = key;

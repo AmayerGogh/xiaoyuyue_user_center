@@ -1,25 +1,34 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
-import { HomeComponent } from "index/home/home.component";
+import { NgModule } from '@angular/core';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: 'app',
-                canActivate: [AppRouteGuard],
-                canActivateChild: [AppRouteGuard],
+                path: '',
                 children: [
+                    // {
+                    //     path: '',
+                    //     loadChildren: 'app/index/index.module#IndexModule', // Lazy load admin module
+                    //     data: { preload: true }
+                    // },
                     {
-                        path: 'admin',
-                        loadChildren: 'app/admin/admin.module#BookingOrderModule', //Lazy load admin module
+                        path: 'auth',
+                        loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load account module
                         data: { preload: true }
                     },
                     {
-                        path: 'center',
-                        loadChildren: 'app/center/center.module#CenterModule',
+                        path: 'booking',
+                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'user',
+                        canActivate: [AppRouteGuard],
+                        canActivateChild: [AppRouteGuard],
+                        loadChildren: 'app/user/user.module#HomeModule', // Lazy load admin module
                         data: { preload: true }
                     }
                 ]
@@ -28,4 +37,6 @@ import { HomeComponent } from "index/home/home.component";
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}
