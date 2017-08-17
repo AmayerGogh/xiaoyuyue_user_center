@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IndexComponent } from 'index/main.component';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
+import { IndexComponent } from 'mobile/main.component';
 
 describe('IndexComponent', () => {
   let component: IndexComponent;

@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
 import { HomeComponent } from './home/home.component';
+import { IndexComponent } from 'mobile/main.component';
 import { IntroductionComponent } from './introduction/introduction.component';
-import { IndexComponent } from "index/main.component";
+import { NgModule } from '@angular/core';
 
 @NgModule({
     imports: [

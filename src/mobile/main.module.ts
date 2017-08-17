@@ -1,12 +1,14 @@
 import * as ngCommon from '@angular/common';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+
 import { FormsModule } from '@angular/forms';
-import { IntroductionComponent } from './introduction/introduction.component';
 import { HomeComponent } from './home/home.component';
-import { IndexRoutingModule } from "index/main-routing.module";
-import { IndexComponent } from "index/main.component";
-import { IndexHeaderComponent } from './layout/header/header.component';
+import { IndexComponent } from "mobile/main.component";
 import { IndexFooterComponent } from './layout/footer/footer.component';
+import { IndexHeaderComponent } from './layout/header/header.component';
+import { IndexRoutingModule } from "mobile/main-routing.module";
+import { IntroductionComponent } from './introduction/introduction.component';
 
 @NgModule({
     imports: [

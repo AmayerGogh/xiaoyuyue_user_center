@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
-import { HomeComponent } from "index/home/home.component";
+import { HomeComponent } from 'mobile/home/home.component';
+import { NgModule } from '@angular/core';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { HomeComponent } from "index/home/home.component";
                 children: [
                     {
                         path: 'admin',
-                        loadChildren: 'app/admin/admin.module#BookingOrderModule', //Lazy load admin module
+                        loadChildren: 'app/admin/admin.module#BookingOrderModule',
                         data: { preload: true }
                     },
                     {

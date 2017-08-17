@@ -125,7 +125,7 @@ export class UserProfileComponent implements OnInit {
                             //  }
                             // 参考http://developer.qiniu.com/docs/v6/api/overview/up/response/simple-response.html
 
-                            var res = JSON.parse(info).result;
+                            var res = JSON.parse(info.response).result;
                             self.input.profilePictureUrl = res.originalUrl;
                             self.input.profilePictureId = res.pictureId;
 
