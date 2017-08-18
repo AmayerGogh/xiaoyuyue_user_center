@@ -1,17 +1,18 @@
 import * as ngCommon from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ModalModule } from 'ngx-bootstrap';
 
-import { UtilsModule } from '@shared/utils/utils.module';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+
 import { AbpModule } from '@abp/abp.module';
-import { CommonModule } from '@shared/common/common.module';
-
-import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { AppAuthService } from './auth/app-auth.service';
-import { JqPluginDirective } from './libs/jq-plugin.directive';
-import { AppRouteGuard } from './auth/auth-route-guard';
 import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
+import { AppRouteGuard } from './auth/auth-route-guard';
+import { CommonModule } from '@shared/common/common.module';
+import { DeviceSwtichGuard } from './auth/device-switch.service';
+import { FormsModule } from '@angular/forms';
+import { JqPluginDirective } from './libs/jq-plugin.directive';
+import { ModalModule } from 'ngx-bootstrap';
+import { TimeZoneComboComponent } from './timing/timezone-combo.component';
+import { UtilsModule } from '@shared/utils/utils.module';
 
 @NgModule({
     imports: [
@@ -40,7 +41,7 @@ export class AppCommonModule {
             ngModule: AppCommonModule,
             providers: [
                 AppAuthService,
-                AppRouteGuard
+                AppRouteGuard,
             ]
         }
     }
