@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from './layout/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { IntroductionComponent } from './introduction/introduction.component';
-import { MobileComponent } from 'mobile/mobile.component';
-import { MobileRoutingModule } from 'mobile/mobile-routing.module';
+import { MobileComponent } from './mobile.component';
+import { MobileRoutingModule } from './mobile-routing.module';
 
 @NgModule({
     imports: [

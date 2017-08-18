@@ -7,13 +7,13 @@ import { NgModule } from '@angular/core';
     imports: [
         RouterModule.forChild([
             {
-                path: '',
+                path: 'app',
                 children: [
-                    // {
-                    //     path: '',
-                    //     loadChildren: 'app/index/index.module#IndexModule', // Lazy load admin module
-                    //     data: { preload: true }
-                    // },
+                    {
+                        path: 'index',
+                        loadChildren: 'app/index/index.module#IndexModule', // Lazy load admin module
+                        data: { preload: true }
+                    },
                     {
                         path: 'auth',
                         loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load account module

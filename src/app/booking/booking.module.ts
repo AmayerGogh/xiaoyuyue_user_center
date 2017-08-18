@@ -14,7 +14,7 @@ import { BookingRoutingModule } from './booking-routing.module';
 import { BookingService } from 'shared/services/booking.service';
 import { BookingSideBarComponent } from './layout/side-bar/side-bar.component';
 import { BookingTimeComponent } from './time/booking-time.component';
-import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploadModule } from '@node_modules/ng2-file-upload';
 import { FooterAdComponent } from './layout/footer-ad/footer-ad.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';

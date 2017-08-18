@@ -11,7 +11,6 @@ import { AppSessionService } from '@shared/common/session/app-session.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@shared/common/common.module';
-import { IndexModule } from 'app/index/index.module';
 import { NgxAniModule } from 'ngxani';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
@@ -57,7 +56,6 @@ function handleLogoutRequest(authService: AppAuthService) {
         BrowserModule,
         BrowserAnimationsModule,
         AppModule,
-        IndexModule,
         CommonModule.forRoot(),
         AbpModule,
         ServiceProxyModule,

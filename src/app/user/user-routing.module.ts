@@ -1,7 +1,7 @@
 import { Router, RouterModule } from '@angular/router';
 
 import { AdminPermissions } from '@shared/AdminPermissions';
-import { AppRouteGuard } from "app/shared/common/auth/auth-route-guard";
+import { AppRouteGuard } from 'app/shared/common/auth/auth-route-guard';
 import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
 import { HomeComponent } from './home/home.component';

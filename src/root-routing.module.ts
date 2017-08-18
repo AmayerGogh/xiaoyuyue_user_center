@@ -3,11 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
-    // {
-    //     path: 'auth',
-    //     loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load account module
-    //     data: { preload: true }
-    // },
+    {
+        path: 'app',
+        loadChildren: 'app/app.module#AppModule', // Lazy load account module
+        data: { preload: true }
+    },
     // {
     //     path: 'booking',
     //     loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module

@@ -29,8 +29,6 @@ import { UtilsModule } from '@shared/utils/utils.module'
         FileUploadModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
-        TooltipModule.forRoot(),
-        PopoverModule.forRoot(),
 
         UserRoutingModule,
         UtilsModule,
