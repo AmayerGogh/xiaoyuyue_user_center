@@ -1,4 +1,5 @@
-﻿import { Component, ElementRef, Input, AfterViewInit } from '@angular/core';
+﻿import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
+
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -11,9 +12,9 @@ export class FriendProfilePictureComponent implements AfterViewInit {
     @Input() profilePictureId: number;
     @Input() userId: number;
     @Input() tenantId: number;
-    @Input() cssClass: string = 'media-object';
+    @Input() cssClass = 'media-object';
 
-    profilePicture: string = "/assets/common/images/default-profile-picture.png";
+    profilePicture = '/assets/common/images/default-profile-picture.png';
 
     constructor(
         private _profileService: ProfileServiceProxy

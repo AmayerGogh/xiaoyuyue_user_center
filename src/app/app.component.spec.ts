@@ -1,11 +1,12 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
+
+import { APP_BASE_HREF } from '@angular/common';
 import { AppComponent } from './app.component';
 import { RootModule } from '../root.module';
-import { APP_BASE_HREF } from '@angular/common';
 
-describe('App: AbpZeroTemplate', () => {
+describe('App: Xiaoyuyue', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [
@@ -16,8 +17,8 @@ describe('App: AbpZeroTemplate', () => {
     }));
 
     it('should create the app', async(() => {
-        let fixture = TestBed.createComponent(AppComponent);
-        let app = fixture.debugElement.componentInstance;
+        const fixture = TestBed.createComponent(AppComponent);
+        const app = fixture.debugElement.componentInstance;
         expect(app).toBeTruthy();
     }));
 

@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
 import { BookingServiceProxy, OrganizationInfoDto } from '../service-proxies/service-proxies';
+
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class BookingService {
     organizationInfoData: OrganizationInfoDto = undefined;
-    bookingId: number = 38;
-    source: string = "";
+    bookingId = 38;
+    source = '';
     constructor(
         private _bookingServiceProxy: BookingServiceProxy
     ) { }
@@ -18,6 +19,6 @@ export class BookingService {
             .getJoinBookingInfo(this.source, this.bookingId)
             .subscribe(result => {
                 this.organizationInfoData = result.organizationInfo;
-            })
+            });
     }
 }

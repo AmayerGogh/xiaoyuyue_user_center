@@ -2,16 +2,13 @@
 
 html,
 body {
-    background-color: #FFF;
     overflow: auto;
 }
 
 html,
-body,
-.header {
+body {
     width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
+    height: 100%;
 }
 
 a,

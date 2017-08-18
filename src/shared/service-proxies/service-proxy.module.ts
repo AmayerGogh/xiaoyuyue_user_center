@@ -1,6 +1,6 @@
-﻿import { NgModule } from '@angular/core';
+﻿import * as ApiServiceProxies from './service-proxies';
 
-import * as ApiServiceProxies from './service-proxies';
+import { NgModule } from '@angular/core';
 
 @NgModule({
     providers: [
@@ -20,7 +20,7 @@ import * as ApiServiceProxies from './service-proxies';
         ApiServiceProxies.BookingServiceProxy,
         ApiServiceProxies.SMSTemplateServiceProxy,
         ApiServiceProxies.PerBookingOrderServiceProxy,
-        
+
     ]
 })
 export class ServiceProxyModule { }

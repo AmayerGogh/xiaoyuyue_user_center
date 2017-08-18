@@ -1,27 +1,21 @@
-﻿import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, Injector, APP_INITIALIZER } from '@angular/core';
+﻿import { ABP_HTTP_PROVIDER, AbpModule } from '@abp/abp.module';
+import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
+import { AbpHttpConfiguration, IErrorInfo } from 'abp-ng2-module/src/abpHttp';
 
-import { AbpModule, ABP_HTTP_PROVIDER } from '@abp/abp.module';
-
-import { CommonModule } from '@shared/common/common.module';
-import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
-import { RootRoutingModule } from './root-routing.module';
-
-import { AppConsts } from '@shared/AppConsts';
-import { AppSessionService } from '@shared/common/session/app-session.service';
 import { API_BASE_URL } from '@shared/service-proxies/service-proxies';
-
-import { RootComponent } from './root.component';
-import { AppPreBootstrap } from './AppPreBootstrap';
-import { AbpHttpConfiguration, IErrorInfo } from "abp-ng2-module/src/abpHttp";
-
-import { NgxAniModule } from 'ngxani';
-import { AppModule } from "app";
-import { IndexModule } from './index/main.module';
-
-import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { AppConsts } from '@shared/AppConsts';
+import { AppModule } from './app/app.module';
+import { AppPreBootstrap } from './AppPreBootstrap';
+import { AppSessionService } from '@shared/common/session/app-session.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@shared/common/common.module';
+import { NgxAniModule } from 'ngxani';
+import { RootComponent } from './root.component';
+import { RootRoutingModule } from './root-routing.module';
+import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
+import { UrlHelper } from '@shared/helpers/UrlHelper';
 
 export function appInitializerFactory(injector: Injector) {
     return () => {
@@ -62,7 +56,6 @@ function handleLogoutRequest(authService: AppAuthService) {
         BrowserModule,
         BrowserAnimationsModule,
         AppModule,
-        IndexModule,
         CommonModule.forRoot(),
         AbpModule,
         ServiceProxyModule,

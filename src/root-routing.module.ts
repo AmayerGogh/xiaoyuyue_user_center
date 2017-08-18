@@ -1,17 +1,9 @@
+import { RouterModule, Routes } from '@angular/router';
+
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-    {
-        path: 'auth',
-        loadChildren: 'auth/auth.module#AuthModule', //Lazy load account module
-        data: { preload: true }
-    },
-    {
-    path: 'booking',
-    loadChildren: 'booking/booking.module#BookingModule', //Lazy load account module
-    data: { preload: true }
-    }    
+
 ];
 
 @NgModule({
@@ -19,4 +11,6 @@ const routes: Routes = [
     exports: [RouterModule],
     providers: []
 })
-export class RootRoutingModule { }
+export class RootRoutingModule {
+
+}

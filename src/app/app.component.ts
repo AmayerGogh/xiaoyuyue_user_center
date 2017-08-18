@@ -1,4 +1,5 @@
-import { Component, ViewContainerRef, OnInit, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewContainerRef } from '@angular/core';
+
 import { AppConsts } from '@shared/AppConsts';
 
 @Component({
@@ -11,7 +12,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-       
     }
 
     ngAfterViewInit(): void {

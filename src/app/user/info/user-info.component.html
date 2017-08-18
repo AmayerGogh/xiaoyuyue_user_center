@@ -1,0 +1,152 @@
+<div class="user-profile">
+    <div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
+        <!-- <div class="rotating-container"> -->
+        <form #userProfile="ngForm">
+            <div class="rotating clearfix">
+                <div class="col-md-12 front" *ngIf="!filpActive">
+                    <div class="card">
+                        <div class="avatar-wrap">
+                            <div class="img" *ngIf="!localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + input.profilePictureUrl + ')'}"></div>
+                            <div class="img" *ngIf="localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + localPictureUrl + ')'}"></div>
+                            <span *ngIf="!userProfileData.profilePictureUrl && (userProfileData.profilePictureUrl || !localPictureUrl)" class="vapps-icon-app-add"></span>
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">用户名</label>
+                                        <input type="text" class="form-control" name="username" [(ngModel)]="input.userName" autofocus required>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">昵称</label>
+                                        <input type="text" class="form-control" name="nickname" [(ngModel)]="input.nickName" required>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">姓名</label>
+                                        <input type="text" class="form-control" name="name" [(ngModel)]="input.name" required>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">邮箱</label>
+                                        <input type="email" class="form-control" name="email" [(ngModel)]="input.emailAddress" required>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <!-- <label class="col-xs-12 label-on-left">性别</label> -->
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                            <input type="radio" [(ngModel)]="input.gender" [value]="1" name="radios">男
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                            <input type="radio" [(ngModel)]="input.gender" [value]="2"  name="radios" >女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button class="btn btn-block" type="button" (click)="cancel()">取消</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button class="btn btn-block btn-warning" type="submit" (click)="save()" [disabled]="!userProfile.form.valid">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 back" (click)="showEdit()" *ngIf="filpActive">
+                    <div class="card">
+                        <div class="avatar-wrap">
+                            <div class="img" [ngStyle]="{'background-image': 'url(' + userProfileData.profilePictureUrl + ')'}"></div>
+                            <!-- <img [src]="userProfileData.profilePictureUrl"> -->
+                        </div>
+                        <div class="card-content">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.userName}">
+                                        <label class="control-label">用户名</label>
+                                        <input type="text" class="form-control" name="backusername" [(ngModel)]="userProfileData.userName" disabled>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.nickName}">
+                                        <label class="control-label">昵称</label>
+                                        <input type="text" class="form-control" name="backnickname" [(ngModel)]="userProfileData.nickName" disabled>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.name}">
+                                        <label class="control-label">姓名</label>
+                                        <input type="text" class="form-control" name="backname" [(ngModel)]="userProfileData.name" disabled>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group label-floating" [ngClass]="{'is-empty': !userProfileData.emailAddress}">
+                                        <label class="control-label">邮箱</label>
+                                        <input type="email" class="form-control" name="backemail" [(ngModel)]="userProfileData.emailAddress" disabled>
+                                        <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" *ngIf="userProfileData.gender">
+                                <!-- <label class="col-xs-12 label-on-left">性别</label> -->
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios" [value]="1" [(ngModel)]="userProfileData.gender"  disabled>男
+                                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <div class="radio">
+                                        <label class="col-xs-12">
+                                        <input type="radio" name="optionsRadios" [value]="2" [(ngModel)]="userProfileData.gender" disabled>女
+                                    </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

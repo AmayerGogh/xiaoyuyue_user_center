@@ -1,25 +1,37 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
-import { HomeComponent } from "index/home/home.component";
+import { NgModule } from '@angular/core';
 
 @NgModule({
     imports: [
         RouterModule.forChild([
             {
-                path: 'app',
-                canActivate: [AppRouteGuard],
-                canActivateChild: [AppRouteGuard],
+                path: '',
                 children: [
                     {
-                        path: 'admin',
-                        loadChildren: 'app/admin/admin.module#BookingOrderModule', //Lazy load admin module
+                        path: '',
+                        loadChildren: 'app/index/index.module#IndexModule', // Lazy load index module
                         data: { preload: true }
                     },
                     {
-                        path: 'center',
-                        loadChildren: 'app/center/center.module#CenterModule',
+                        path: 'auth',
+                        loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load auth module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'user/home',
+                        loadChildren: 'app/home/home.module#HomeModule', // Lazy load home module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'user',
+                        loadChildren: 'app/user/user.module#UserModule', // Lazy load user module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'booking',
+                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load booking module
                         data: { preload: true }
                     }
                 ]
@@ -28,4 +40,6 @@ import { HomeComponent } from "index/home/home.component";
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}
