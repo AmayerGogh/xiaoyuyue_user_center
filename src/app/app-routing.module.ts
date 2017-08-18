@@ -24,7 +24,7 @@ import { NgModule } from '@angular/core';
                         loadChildren: 'app/user/user.module#UserModule', // Lazy load admin module
                         data: { preload: true }
                     }, {
-                        path: '',
+                        path: 'booking',
                         loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module
                         data: { preload: true }
                     }

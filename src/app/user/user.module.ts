@@ -6,11 +6,9 @@ import { AppStorageService } from 'shared/services/storage.service';
 import { BookingCancelComponent } from './booking/cancel/booking-cancel.component';
 import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
-import { BookingModule } from './../booking/booking.module';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
-import { HomeModule } from './home/home.module';
 import { IndexModule } from './../index/index.module';
 import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings/settings.component';
@@ -29,9 +27,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        HomeModule,
         IndexModule,
-        BookingModule,
         SettingsModule,
         FileUploadModule,
         ModalModule.forRoot(),

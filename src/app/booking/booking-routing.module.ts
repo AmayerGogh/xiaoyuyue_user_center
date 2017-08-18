@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
     imports: [
         RouterModule.forChild([
             {
-                path: 'booking',
+                path: '',
                 component: BookingComponent,
                 children: [
                     { path: '', redirectTo: 'about' },

@@ -23,6 +23,6 @@ import { TimeLineComponent } from './time-line/time-line.component';
         RouterModule
     ]
 })
-export class AdminRoutingModule {
+export class HomeRoutingModule {
 
 }

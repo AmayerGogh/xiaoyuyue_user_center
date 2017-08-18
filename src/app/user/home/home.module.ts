@@ -8,6 +8,7 @@ import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
 import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from 'app/user/home/layout/header/home-header.component';
+import { HomeRoutingModule } from './home-routing.module';
 import { HomeSideBarComponent } from 'app/user/home/layout/side-bar/home-side-bar.component';
 import { NgModule } from '@angular/core';
 import { TenantService } from 'shared/services/tenant.service';
@@ -26,6 +27,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         TooltipModule.forRoot(),
         PopoverModule.forRoot(),
 
+        HomeRoutingModule,
         UtilsModule,
         AppCommonModule,
     ],

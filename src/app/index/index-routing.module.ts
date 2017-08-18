@@ -6,13 +6,18 @@ import { RouterModule } from '@angular/router';
         RouterModule.forChild([
             {
                 path: '',
-                loadChildren: 'app/index/desktop/desktop.module#DesktopModule',
-                data: { preload: true }
-            },
-            {
-                path: 'mobile',
-                loadChildren: 'app/index/mobile/mobile.module#MobileModule',
-                data: { preload: true }
+                children: [
+                    {
+                        path: '',
+                        loadChildren: 'app/index/desktop/desktop.module#DesktopModule',
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'mobile',
+                        loadChildren: 'app/index/mobile/mobile.module#MobileModule',
+                        data: { preload: true }
+                    }
+                ]
             }
         ])
     ],
