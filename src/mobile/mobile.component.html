@@ -1,0 +1,9 @@
+<div class="wp-wrap">
+    <div class="move">
+        <xiaoyuyue-index-header (isSubMenu)="isShowSubMenuFlag($event)"></xiaoyuyue-index-header>
+        <div class="content ani" [ngClass]="{'fade-in': subMenuFlg, 'fade-out': !isShowSubMenuFlag}">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <xiaoyuyue-index-footer></xiaoyuyue-index-footer>
+</div>

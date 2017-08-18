@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +7,7 @@ import { Router } from '@angular/router';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class IndexHeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit {
     selectIndex: number;
     isShowSubMenuFlag: boolean = false;
     href: string = location.href;

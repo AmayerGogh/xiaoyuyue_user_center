@@ -1,7 +1,11 @@
 .header {
     width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
     position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 100;
     .top-fixed {
         position: relative;

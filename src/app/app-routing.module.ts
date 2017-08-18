@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
-import { HomeComponent } from 'mobile/home/home.component';
 import { NgModule } from '@angular/core';
 
 @NgModule({
