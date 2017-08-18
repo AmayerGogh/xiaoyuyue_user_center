@@ -45,6 +45,8 @@ export class AppPreBootstrap {
             const tenancyName = subdomainTenancyNameFinder.getCurrentTenancyNameOrNull(result.appBaseUrl);
 
             AppConsts.appBaseUrlFormat = result.appBaseUrl;
+            AppConsts.appBusinessBaseUrl = result.appBusinessBaseUrl;
+            
             AppConsts.remoteServiceBaseUrlFormat = result.remoteServiceBaseUrl;
 
             if (tenancyName == null) {

@@ -17,7 +17,7 @@ import { UserInfoComponent } from './info/user-info.component';
                 canActivateChild: [AppRouteGuard],
                 component: UserComponent,
                 children: [
-                    { path: '', redirectTo: '/user/home' },
+                    { path: '', redirectTo: '/user/home', pathMatch: 'full' },
                     {
                         path: 'booking',
                         children: [

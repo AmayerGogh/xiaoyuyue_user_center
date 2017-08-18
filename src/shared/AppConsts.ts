@@ -5,6 +5,7 @@
     static remoteServiceBaseUrl: string;
     static remoteServiceBaseUrlFormat: string;
     static appBaseUrl: string;
+    static appBusinessBaseUrl: string;
     static appBaseUrlFormat: string;
     static readonly externalLoginUrl = '/auth/login';
     
