@@ -1,0 +1,91 @@
+.home-wrap {
+    width: 100%;
+    background-color: rgba(232, 232, 232, 0.39);
+    .common-max-width {
+        width: 900px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    .content-title {
+        padding: 40px 0;
+        font-size: 24px;
+        text-align: center;
+        color: rgb(47, 47, 47);
+    }
+    .banner-wrap {
+        width: 100%;
+        background: url(/assets/common/images/login/banner-3.png) no-repeat center;
+        background-size: cover;
+        .banner-slogan {
+            padding-top: 200px;
+            padding-bottom: 140px;
+        }
+    }
+    .about-me-wrap {
+        padding-bottom: 200px;
+        background: url(/assets/common/images/index/about/banner.png) no-repeat center;
+        background-size: cover;
+        .card-content {
+            height: 200px;
+            .text-item {
+                font-size: 12px;
+                text-align: center;
+            }
+            .text-title {
+                font-size: 16px;
+            }
+        }
+    }
+    .how-table-wrap {
+        padding-bottom: 140px;
+        background-color: #EEE;
+    }
+    .how-booking-wrap {
+        padding-bottom: 140px;
+        background-color: #FFF;
+    }
+    .usage-scene-wrap {
+        padding-bottom: 200px;
+        background: url(/assets/common/images/index/scene/banner.png) no-repeat center;
+        background-size: cover;
+        .content-title {
+            color: #FFF;
+        }
+        .card-content {
+            .text-item {
+                font-size: 12px;
+                text-align: center;
+            }
+            .text-title {
+                font-size: 16px;
+            }
+        }
+    }
+    .contact-us-wrap {
+        padding-bottom: 140px;
+        // background: url(/assets/common/images/index/contact/banner.jpg) no-repeat center;
+        // background-size: cover;
+        background-color: #EEE;
+        color: #000;
+        .content-title {
+            padding-bottom: 10px;
+            text-align: left;
+        }
+        .flex-block {
+            display: flex;
+            .flex-left {
+                color: #FF9641;
+                font-size: 30px;
+                padding-top: 8px;
+                width: 64px;
+                text-align: right;
+            }
+            .flex-right {
+                margin-left: 10px;
+            }
+        }
+        .contact-form {
+            margin-top: 40px;
+        }
+    }
+}

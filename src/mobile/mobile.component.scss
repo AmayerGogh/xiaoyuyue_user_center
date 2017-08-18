@@ -1,0 +1,20 @@
+.wp-wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    .content {
+        position: relative;
+        right: 0;
+        &.ani {
+            transition: all 0.6s cubic-bezier(.4, 0.01, 0, 0.96)
+        }
+        &.ani.fade-in {
+            right: 280px;
+        }
+        &.ani.fade-out {
+            right: 0;
+        }
+    }
+}
