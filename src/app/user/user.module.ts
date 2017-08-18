@@ -10,7 +10,6 @@ import { BookingModule } from './../booking/booking.module';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
-import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import { IndexModule } from './../index/index.module';
 import { NgModule } from '@angular/core';
@@ -44,8 +43,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
     ],
     declarations: [
         UserComponent,
-        HomeComponent,
-
         BookingInfoComponent,
         UserHeaderComponent,
         UserFooterComponent,

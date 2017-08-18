@@ -6,7 +6,7 @@ import { AppStorageService } from 'shared/services/storage.service';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
-import { HomeComponent } from 'app/user/home/home.component';
+import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from 'app/user/home/layout/header/home-header.component';
 import { HomeSideBarComponent } from 'app/user/home/layout/side-bar/home-side-bar.component';
 import { NgModule } from '@angular/core';
@@ -30,6 +30,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         AppCommonModule,
     ],
     declarations: [
+        HomeComponent,
         TimeLineComponent,
         HomeSideBarComponent,
         HomeHeaderComponent,
