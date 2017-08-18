@@ -5,9 +5,9 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@an
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 
 @Component({
-  selector: 'xiaoyuyue-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.scss'],
+  selector: 'xiaoyuyue-home-side-bar',
+  templateUrl: './home-side-bar.component.html',
+  styleUrls: ['./home-side-bar.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
 export class HomeSideBarComponent implements OnInit {
@@ -41,5 +41,4 @@ export class HomeSideBarComponent implements OnInit {
   logout() {
     this._authService.logout();
   }
-
 }

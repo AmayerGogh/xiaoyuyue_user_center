@@ -24,16 +24,5 @@ import { TimeLineComponent } from './time-line/time-line.component';
     ]
 })
 export class AdminRoutingModule {
-    constructor(private router: Router) {
-        router.events.subscribe(() => {
-            this.hideOpenJTableDropdownMenus();
-        });
-    }
 
-    hideOpenJTableDropdownMenus(): void {
-        const $dropdownMenus = $('.dropdown-menu.tether-element');
-        $dropdownMenus.css({
-            'display': 'none'
-        });
-    }
 }

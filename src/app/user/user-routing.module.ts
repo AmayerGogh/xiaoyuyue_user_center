@@ -13,19 +13,18 @@ import { UserInfoComponent } from './info/user-info.component';
     imports: [
         RouterModule.forChild([
             {
-                path: 'user',
+                path: '',
                 canActivate: [AppRouteGuard],
                 canActivateChild: [AppRouteGuard],
                 component: UserComponent,
                 children: [
                     {
-                        path: '',
+                        path: 'home',
                         component: HomeComponent
                     },
                     {
                         path: 'booking',
                         children: [
-                            { path: '', redirectTo: 'list' },
                             {
                                 path: 'list', component: BookingListComponent
                             },

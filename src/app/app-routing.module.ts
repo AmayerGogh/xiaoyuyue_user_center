@@ -7,10 +7,10 @@ import { NgModule } from '@angular/core';
     imports: [
         RouterModule.forChild([
             {
-                path: 'app',
+                path: '',
                 children: [
                     {
-                        path: 'index',
+                        path: '',
                         loadChildren: 'app/index/index.module#IndexModule', // Lazy load admin module
                         data: { preload: true }
                     },
@@ -20,13 +20,12 @@ import { NgModule } from '@angular/core';
                         data: { preload: true }
                     },
                     {
-                        path: 'booking',
-                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module
-                        data: { preload: true }
-                    },
-                    {
                         path: 'user',
                         loadChildren: 'app/user/user.module#UserModule', // Lazy load admin module
+                        data: { preload: true }
+                    }, {
+                        path: '',
+                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module
                         data: { preload: true }
                     }
                 ]

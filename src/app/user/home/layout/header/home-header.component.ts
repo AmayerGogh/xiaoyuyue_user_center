@@ -6,9 +6,9 @@ import { Location } from '@angular/common';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
-    selector: 'xiaoyuyue-center-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss']
+    selector: 'xiaoyuyue-home-header',
+    templateUrl: './home-header.component.html',
+    styleUrls: ['./home-header.component.scss']
 })
 export class HomeHeaderComponent extends AppComponentBase implements OnInit {
     safeProfilePicture: SafeStyle;

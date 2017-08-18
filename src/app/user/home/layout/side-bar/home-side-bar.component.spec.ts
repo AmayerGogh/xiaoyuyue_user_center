@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
-import { HomeSideBarComponent } from './side-bar.component';
+import { HomeSideBarComponent } from './home-side-bar.component';
 
 describe('HomeSideBarComponent', () => {
   let component: HomeSideBarComponent;

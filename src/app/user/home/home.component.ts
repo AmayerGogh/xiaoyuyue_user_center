@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { SideBarComponent } from 'app/shared/side-bar/side-bar.component';
+import { HomeSideBarComponent } from 'app/user/home//layout/side-bar/home-side-bar.component';
 
 @Component({
     templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit, AfterViewInit {
     toggleSideBarFlag: boolean;
-    @ViewChild('sideBarModel') sideBarModel: SideBarComponent;
+    @ViewChild('sideBarModel') sideBarModel: HomeSideBarComponent;
 
     public constructor(
     ) {

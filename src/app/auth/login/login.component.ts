@@ -1,16 +1,18 @@
-import { Component, Injector, OnInit, AfterViewInit, Output, ElementRef } from '@angular/core';
-import { Location } from '@angular/common';
-import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Http, Headers } from '@angular/http';
-import { TokenAuthServiceProxy, AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel } from '@shared/service-proxies/service-proxies';
+import * as _ from 'lodash';
+
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output } from '@angular/core';
+import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ExternalLoginProvider, LoginService } from "shared/services/login.service";
+import { Headers, Http } from '@angular/http';
+
+import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
-import { AbpSessionService } from '@abp/session/abp-session.service';
-import { LoginService, ExternalLoginProvider } from "shared/services/login.service";
-import { TooltipConfig } from "ngx-bootstrap";
+import { Location } from '@angular/common';
 import { NgxAni } from "ngxani";
-import * as _ from 'lodash';
+import { TooltipConfig } from "ngx-bootstrap";
+import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     templateUrl: './login.component.html',
@@ -57,7 +59,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         }
 
         if (this._sessionService.userId) {
-            this._router.navigate(['/app/center']);
+            this._router.navigate(['/user/home']);
         }
     }
 

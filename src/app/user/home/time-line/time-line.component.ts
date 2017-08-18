@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'xiaoyuyue-time-line',
-    templateUrl: './main-user.component.html',
-    styleUrls: ['./main-user.component.scss']
+    templateUrl: './time-line.component.html',
+    styleUrls: ['./time-line.component.scss']
 })
 export class TimeLineComponent implements OnInit {
     totalCount: number;

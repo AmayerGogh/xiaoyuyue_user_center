@@ -5,13 +5,13 @@ import { RouterModule } from '@angular/router';
     imports: [
         RouterModule.forChild([
             {
-                path: 'desktop',
-                loadChildren: 'desktop/desktop.module#DesktopModule',
+                path: '',
+                loadChildren: 'app/index/desktop/desktop.module#DesktopModule',
                 data: { preload: true }
             },
             {
                 path: 'mobile',
-                loadChildren: 'mobile/mobile.module#MobileModule',
+                loadChildren: 'app/index/mobile/mobile.module#MobileModule',
                 data: { preload: true }
             }
         ])

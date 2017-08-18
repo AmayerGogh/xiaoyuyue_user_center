@@ -7,12 +7,12 @@ import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
 import { HomeComponent } from 'app/user/home/home.component';
+import { HomeHeaderComponent } from 'app/user/home/layout/header/home-header.component';
+import { HomeSideBarComponent } from 'app/user/home/layout/side-bar/home-side-bar.component';
 import { NgModule } from '@angular/core';
 import { TenantService } from 'shared/services/tenant.service';
 import { TimeLineComponent } from './time-line/time-line.component';
-import { UserHeaderComponent } from 'app/user/layout/header/header.component';
-import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
-import { UtilsModule } from '@shared/utils/utils.module'
+import { UtilsModule } from '@shared/utils/utils.module';
 
 @NgModule({
     imports: [
@@ -31,13 +31,14 @@ import { UtilsModule } from '@shared/utils/utils.module'
     ],
     declarations: [
         TimeLineComponent,
-        HomeComponent,
-        UserHeaderComponent,
-        UserSideBarComponent,
+        HomeSideBarComponent,
+        HomeHeaderComponent,
         EmptyPageComponent
     ],
     providers: [
         AppStorageService,
+        HomeSideBarComponent,
+        HomeHeaderComponent,
         TenantService
     ]
 })
