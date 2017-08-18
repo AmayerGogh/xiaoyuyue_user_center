@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { HomeSideBarComponent } from 'app/user/home//layout/side-bar/home-side-bar.component';
+import { HomeSideBarComponent } from 'app/home/layout/side-bar/home-side-bar.component';
 
 @Component({
     templateUrl: './home.component.html'

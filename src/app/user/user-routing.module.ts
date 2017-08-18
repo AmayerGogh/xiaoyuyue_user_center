@@ -18,11 +18,6 @@ import { UserInfoComponent } from './info/user-info.component';
                 component: UserComponent,
                 children: [
                     {
-                        path: 'home',
-                        loadChildren: 'app/user/home/home.module#HomeModule',
-                        data: { preload: true }
-                    },
-                    {
                         path: 'booking',
                         children: [
                             {

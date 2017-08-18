@@ -59,7 +59,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         }
 
         if (this._sessionService.userId) {
-            this._router.navigate(['/user/home']);
+            this._router.navigate(['/home']);
         }
     }
 
@@ -67,16 +67,16 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         let self = this;
         // 解决Chrome浏览器自动填充的BUG
         setTimeout(() => {
-            $("input:-webkit-autofill").addClass("edited")
+            $("input:-webkit-autofill").addClass('edited')
         }, 600);
 
         $(document).click(() => {
             self.flag = true;
-            $("#externalLogin").css({
+            $('#externalLogin').css({
                 opacity: 0,
-                transform: "scale(0)"
+                transform: 'scale(0)'
             });
-            $("#external_login_container").css({
+            $('#external_login_container').css({
                 opacity: 0
             });
         })
@@ -109,7 +109,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
 
     is_weixn() {
         var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
+        if (ua.match(/MicroMessenger/i) + '' == 'micromessenger') {
             return true;
         } else {
             return false;
@@ -132,9 +132,9 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
     // NgxAni动画
     private animationShow(externalAni, externalContent) {
         this._ngxAni.to(externalAni, .6, {
-            transform: "scale(1)",
+            transform: 'scale(1)',
             opacity: .8,
-            "ease": this._ngxAni['easeOutBack'],
+            'ease': this._ngxAni['easeOutBack'],
             onComplete: () => {
                 // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
                 setTimeout(() => {
@@ -149,7 +149,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
 
     private animationHide(externalAni, externalContent) {
         this._ngxAni.to(externalAni, .4, {
-            transform: "scale(0)",
+            transform: 'scale(0)',
             opacity: 0,
         });
         this._ngxAni.to(externalContent, 1, {

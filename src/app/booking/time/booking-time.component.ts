@@ -1,13 +1,15 @@
-import { Component, OnInit, ViewEncapsulation, Injector, ViewChild } from '@angular/core';
-import { appModuleAnimation } from "shared/animations/routerTransition";
-import { AppComponentBase } from "shared/common/app-component-base";
-import { JoinBookingDataInfo, BookingServiceProxy, JoinBookingInput } from 'shared/service-proxies/service-proxies';
 import * as moment from 'moment';
+
+import { ActivatedRoute, Router } from '@angular/router';
+import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput } from 'shared/service-proxies/service-proxies';
+import { Component, Injector, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
-import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { UtilsService } from '@abp/utils/utils.service';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-booking-time',
@@ -17,15 +19,15 @@ import { UtilsService } from '@abp/utils/utils.service';
     encapsulation: ViewEncapsulation.None
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit {
-    defaultEnableBookingDate: string[] = ["1970-01-01"];
-    selectIndex: number = 0;
+    defaultEnableBookingDate: string[] = ['1970-01-01'];
+    selectIndex = 0;
     enableBookingDate: Date[] = [];
-    selectDate: string = "";
+    selectDate = '';
     input: JoinBookingInput = new JoinBookingInput();
 
     href: string = document.location.href;
-    bookingId: string = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
-    source: string = "";
+    bookingId: string = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
+    source = '';
     availableDateItemData: JoinBookingDataInfo[] = [];
 
     @ViewChild('optimalBookingTimeModel') optimalBookingTimeModel: OptimalBookingTimeModelComponent;
@@ -45,13 +47,13 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
         this.loadBookingData();
     }
     ngAfterViewInit() {
-        let self = this;
-        if (this._appAuthService.isLogin() && this.href.indexOf("?") >= 0) {
+        const self = this;
+        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
             this._route
                 .queryParams
                 .subscribe(params => {
-                    this.input.date = moment(new Date(params["date"]));
-                    this.selectIndex = params["index"];
+                    this.input.date = moment(new Date(params['date']));
+                    this.selectIndex = params['index'];
                 });
 
             // this.input
@@ -61,9 +63,9 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
     }
 
     loadBookingData() {
-        let self = this;
-        if (this.href.indexOf("?") >= 0) {
-            this.bookingId = this.bookingId.split("?")[0];
+        const self = this;
+        if (this.href.indexOf('?') >= 0) {
+            this.bookingId = this.bookingId.split('?')[0];
         }
         this._bookingServiceProxy
             .getJoinBookingInfo(this.source, parseInt(this.bookingId))
@@ -77,11 +79,11 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
                     this.enableBookingDate.push(new Date(result.availableDateItem[i].date.toDate()));
                 }
                 this.input.date = moment(this.enableBookingDate[0]);
-                $(".flatpickr").flatpickr({
+                $('.flatpickr').flatpickr({
                     inline: true,
-                    minDate: "today",
-                    "locale": "zh",
-                    disableMobile: "true",
+                    minDate: 'today',
+                    'locale': 'zh',
+                    disableMobile: 'true',
                     enable: self.enableBookingDate.length == 0 ? self.defaultEnableBookingDate : self.enableBookingDate,
                     defaultDate: self.enableBookingDate[0],
                     onChange: function (selectedDates, dateStr, instance) {
@@ -90,21 +92,21 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
                         self.optimalBookingTimeModel.save(self.input);
                     },
                     // enable: ["2017-06-22", "2017-06-23"]
-                })
-            })
+                });
+            });
     }
 
     selectOptimalTime(index) {
         this.selectIndex = index;
         if (!this._appAuthService.isLogin()) {
-            let exdate = new Date();
+            const exdate = new Date();
             let href = location.href;
             exdate.setDate(exdate.getDate() + 1);
-            this.selectDate = this.input.date.utcOffset("+08:00").format("YYYY-MM-DD");
+            this.selectDate = this.input.date.utcOffset('+08:00').format('YYYY-MM-DD');
             href += `?date=${this.selectDate}&index=${index}`;
 
             this._router.navigate(['/auth/login']);
-            this._utilsService.setCookieValue("UrlHelper.redirectUrl", href, exdate, "/");
+            this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
         this.replyBookingModel.show();

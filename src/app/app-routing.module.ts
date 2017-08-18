@@ -11,21 +11,26 @@ import { NgModule } from '@angular/core';
                 children: [
                     {
                         path: '',
-                        loadChildren: 'app/index/index.module#IndexModule', // Lazy load admin module
+                        loadChildren: 'app/index/index.module#IndexModule', // Lazy load index module
                         data: { preload: true }
                     },
                     {
                         path: 'auth',
-                        loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load account module
+                        loadChildren: 'app/auth/auth.module#AuthModule', // Lazy load auth module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'home',
+                        loadChildren: 'app/home/home.module#HomeModule', // Lazy load home module
                         data: { preload: true }
                     },
                     {
                         path: 'user',
-                        loadChildren: 'app/user/user.module#UserModule', // Lazy load admin module
+                        loadChildren: 'app/user/user.module#UserModule', // Lazy load user module
                         data: { preload: true }
                     }, {
                         path: 'booking',
-                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load account module
+                        loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load booking module
                         data: { preload: true }
                     }
                 ]

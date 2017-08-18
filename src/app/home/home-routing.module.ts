@@ -1,7 +1,8 @@
 import { Router, RouterModule } from '@angular/router';
 
 import { AdminPermissions } from '@shared/AdminPermissions';
-import { HomeComponent } from 'app/user/home/home.component';
+import { AppRouteGuard } from 'app/shared/common/auth/auth-route-guard';
+import { HomeComponent } from 'app/home/home.component';
 import { NgModule } from '@angular/core';
 import { TimeLineComponent } from './time-line/time-line.component';
 
@@ -10,6 +11,8 @@ import { TimeLineComponent } from './time-line/time-line.component';
         RouterModule.forChild([
             {
                 path: '',
+                canActivate: [AppRouteGuard],
+                canActivateChild: [AppRouteGuard],
                 component: HomeComponent,
                 children: [
                     {
