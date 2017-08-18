@@ -20,7 +20,7 @@ import { NgModule } from '@angular/core';
                         data: { preload: true }
                     },
                     {
-                        path: 'home',
+                        path: 'user/home',
                         loadChildren: 'app/home/home.module#HomeModule', // Lazy load home module
                         data: { preload: true }
                     },

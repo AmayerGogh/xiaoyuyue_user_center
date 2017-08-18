@@ -1,4 +1,5 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+
 import { AppComponentBase } from '@shared/common/app-component-base';
 
 @Component({
@@ -19,11 +20,11 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
 
     ngAfterViewInit() {
         // TODO: 暂时处理
-        $("#headerTitle").text("账户安全");
+        $('#headerTitle').text('账户安全');
     }
 
     stayTuned(): void {
-        this.message.info("正在完善中...", "敬请期待");
+        this.message.info('正在完善中...', '敬请期待');
     }
 
 }
