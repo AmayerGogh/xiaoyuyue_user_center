@@ -3,7 +3,6 @@ import * as ngCommon from '@angular/common';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { ModalModule, TooltipModule } from 'ngx-bootstrap';
 
-import { AbpModule } from 'abp-ng2-module/src/abp.module';
 import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { BookedComponent } from './booked/booked.component';
@@ -38,8 +37,6 @@ import { UtilsModule } from 'shared/utils/utils.module';
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
         FileUploadModule,
-
-        AbpModule,
 
         AppRoutingModule,
 

@@ -2,7 +2,6 @@ import * as ngCommon from '@angular/common';
 
 import { HttpModule, JsonpModule } from '@angular/http';
 
-import { AbpModule } from '@abp/abp.module';
 import { AppConsts } from '@shared/AppConsts';
 import { AuthComponent } from './auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
@@ -38,8 +37,6 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
 
         ModalModule.forRoot(),
         TooltipModule.forRoot(),
-
-        AbpModule,
 
         CommonModule,
 

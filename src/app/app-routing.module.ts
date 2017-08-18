@@ -26,9 +26,7 @@ import { NgModule } from '@angular/core';
                     },
                     {
                         path: 'user',
-                        canActivate: [AppRouteGuard],
-                        canActivateChild: [AppRouteGuard],
-                        loadChildren: 'app/user/user.module#HomeModule', // Lazy load admin module
+                        loadChildren: 'app/user/user.module#UserModule', // Lazy load admin module
                         data: { preload: true }
                     }
                 ]
