@@ -8,11 +8,7 @@ import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
-import { FileUploadModule } from '@node_modules/ng2-file-upload';
-import { IndexModule } from './../index/index.module';
 import { NgModule } from '@angular/core';
-import { SettingsComponent } from './settings/settings.component';
-import { SettingsModule } from './settings/settings.module';
 import { TenantService } from 'shared/services/tenant.service';
 import { UserComponent } from './user.component';
 import { UserFooterComponent } from './layout/footer/footer.component';
@@ -27,9 +23,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        IndexModule,
-        SettingsModule,
-        FileUploadModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
 

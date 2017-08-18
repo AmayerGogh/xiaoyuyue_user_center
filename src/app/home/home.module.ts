@@ -5,7 +5,6 @@ import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { AppStorageService } from 'shared/services/storage.service';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './empty-page/empty-page.component';
-import { FileUploadModule } from '@node_modules/ng2-file-upload';
 import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from 'app/home/layout/header/home-header.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -21,7 +20,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
         ReactiveFormsModule,
         CommonModule,
 
-        FileUploadModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
         TooltipModule.forRoot(),
