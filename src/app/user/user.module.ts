@@ -3,9 +3,9 @@ import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-boots
 
 import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { AppStorageService } from 'shared/services/storage.service';
-import { BookingInfoComponent } from './booking-order/booking-detail/booking-detial.component';
-import { BookingManageComponent } from './booking-order/booking-manage/booking-manage.component';
-import { CancelBookingModalComponent } from './booking-order/cancel-booking-modal/booking-cancel.component';
+import { BookingCancelComponent } from './booking/cancel/booking-cancel.component';
+import { BookingInfoComponent } from './booking/info/booking-info.component';
+import { BookingListComponent } from './booking/list/booking-list.component';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
 import { FileUploadModule } from '@node_modules/ng2-file-upload';
@@ -15,9 +15,9 @@ import { TenantService } from 'shared/services/tenant.service';
 import { UserComponent } from './user.component';
 import { UserFooterComponent } from './layout/footer/footer.component';
 import { UserHeaderComponent } from './layout/header/header.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserInfoComponent } from './info/user-info.component';
 import { UserRoutingModule } from './user-routing.module';
-import { UserSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
+import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 import { UtilsModule } from '@shared/utils/utils.module'
 
 @NgModule({
@@ -42,9 +42,9 @@ import { UtilsModule } from '@shared/utils/utils.module'
         UserHeaderComponent,
         UserFooterComponent,
         UserSideBarComponent,
-        BookingManageComponent,
-        CancelBookingModalComponent,
-        UserProfileComponent,
+        BookingListComponent,
+        BookingCancelComponent,
+        UserInfoComponent,
         EmptyPageComponent
     ],
     providers: [

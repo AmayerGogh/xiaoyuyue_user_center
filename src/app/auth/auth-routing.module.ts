@@ -1,17 +1,19 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { AuthComponent } from './auth.component';
+import { ConfirmEmailComponent } from './shared/email-activation/confirm-email.component';
+import { EmailActivationComponent } from './shared/email-activation/email-activation.component';
+import { ExternalAuthComponent } from './external-auth/external-auth.component';
+import { ExternalLoginGuard } from 'app/shared/common/auth/external-login-guard';
 import { ForgotPasswordComponent } from './password/forgot-password.component';
+import { LoginComponent } from './login/login.component';
+import { NgModule } from '@angular/core';
+import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './password/reset-password.component';
-import { EmailActivationComponent } from './email-activation/email-activation.component';
-import { ConfirmEmailComponent } from './email-activation/confirm-email.component';
+import { RouterModule } from '@angular/router';
 import { SendTwoFactorCodeComponent } from './login/send-two-factor-code.component';
 import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code.component';
+
 // import { AppRouteGuard } from "admin/shared/common/auth/auth-route-guard";
-import { AuthComponent } from 'auth/auth.component';
-import { ExternalLoginGuard } from 'app/shared/common/auth/external-login-guard';
-import { ExternalAuthComponent } from 'auth/external-auth/external-auth.component';
+
 
 @NgModule({
     imports: [
@@ -40,4 +42,6 @@ import { ExternalAuthComponent } from 'auth/external-auth/external-auth.componen
         ExternalLoginGuard
     ]
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {
+
+}

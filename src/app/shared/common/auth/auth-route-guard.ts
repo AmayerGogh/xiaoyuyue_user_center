@@ -1,17 +1,18 @@
-﻿import { Injectable } from '@angular/core';
-import { PermissionCheckerService } from "@abp/auth/permission-checker.service";
-import { AppSessionService } from '@shared/common/session/app-session.service';
-import { AdminPermissions } from '@shared/AdminPermissions';
-import { UrlHelper } from '@shared/helpers/UrlHelper';
-
-import {
-    CanActivate, Router,
+﻿import {
     ActivatedRouteSnapshot,
-    RouterStateSnapshot,
-    CanActivateChild
+    CanActivate,
+    CanActivateChild,
+    Router,
+    RouterStateSnapshot
 } from '@angular/router';
-import { UtilsService } from '@abp/utils/utils.service';
+
+import { AdminPermissions } from '@shared/AdminPermissions';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { AppSessionService } from '@shared/common/session/app-session.service';
+import { Injectable } from '@angular/core';
+import { PermissionCheckerService } from "@abp/auth/permission-checker.service";
+import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { UtilsService } from '@abp/utils/utils.service';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild {
@@ -26,7 +27,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {
-            this._appAuthService.recordRedirectUrl(); 
+            this._appAuthService.recordRedirectUrl();
             this._router.navigate(['/auth/login']);
             return false;
         }
@@ -51,22 +52,22 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
         if (!this._sessionService.user) {
             return '/auth/login';
         }
-        
-        if (this._permissionChecker.isGranted(AdminPermissions.hostDashboard)) {
-            return '/app/admin/hostDashboard';
-        }
 
-        if (this._permissionChecker.isGranted(AdminPermissions.tenantDashboard)) {
-            return '/app/center';
-        }
+        // if (this._permissionChecker.isGranted(AdminPermissions.hostDashboard)) {
+        //     return '/app/user/hostDashboard';
+        // }
 
-        if (this._permissionChecker.isGranted(AdminPermissions.userManage_Tenants)) {
-            return '/app/admin/tenants';
-        }
+        // if (this._permissionChecker.isGranted(AdminPermissions.tenantDashboard)) {
+        //     return '/app/center';
+        // }
 
-        if (this._permissionChecker.isGranted(AdminPermissions.userManage)) {
-            return '/app/admin/user';
-        }
+        // if (this._permissionChecker.isGranted(AdminPermissions.userManage_Tenants)) {
+        //     return '/app/user/tenants';
+        // }
+
+        // if (this._permissionChecker.isGranted(AdminPermissions.userManage)) {
+        //     return '/user/info';
+        // }
 
         return '/app/notifications';
     }

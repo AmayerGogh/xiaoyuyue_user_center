@@ -1,8 +1,9 @@
-﻿import { Component, AfterViewInit, ElementRef, ViewChild, Injector, Input, Output, EventEmitter } from '@angular/core';
-import { TimingServiceProxy, NameValueDto, DefaultTimezoneScope } from '@shared/service-proxies/service-proxies';
-import { AppComponentBase } from '@shared/common/app-component-base';
+﻿import * as moment from 'moment';
 
-import * as moment from 'moment';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Injector, Input, Output, ViewChild } from '@angular/core';
+import { DefaultTimezoneScope, NameValueDto, TimingServiceProxy } from '@shared/service-proxies/service-proxies';
+
+import { AppComponentBase } from '@shared/common/app-component-base';
 
 @Component({
     selector: 'date-range-picker',
@@ -65,7 +66,7 @@ export class DateRangePickerComponent extends AppComponentBase implements AfterV
                 singleDatePicker: this.isSingleDatePicker
             };
         }
-      
+
         $element.daterangepicker(
             $.extend(true, this.createDateRangePickerOptions(), this.dateRangePickerOptions, _selectedDateRange), (start, end, label) => {
                 this.startDate = start;

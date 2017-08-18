@@ -38,6 +38,6 @@ export class TimeLineComponent implements OnInit {
     }
 
     showBookingDetail(bookingId: number) {
-        this._router.navigate(['/app/admin/order/detail', bookingId]);
+        this._router.navigate(['/user/booking/list/detail', bookingId]);
     }
 }

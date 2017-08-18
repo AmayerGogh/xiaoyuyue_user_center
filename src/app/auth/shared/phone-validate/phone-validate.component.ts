@@ -1,6 +1,7 @@
-import { Component, OnInit, Injector, ElementRef, Directive, ViewChild } from '@angular/core';
-import { AppComponentBase } from "shared/common/app-component-base";
 import { CodeSendInput, SMSServiceProxy } from "shared/service-proxies/service-proxies";
+import { Component, Directive, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+
+import { AppComponentBase } from "shared/common/app-component-base";
 import { VerificationCodeType } from "shared/AppEnums";
 
 @Component({
@@ -38,7 +39,7 @@ export class PhoneValidateComponent extends AppComponentBase implements OnInit {
   }
 
   captchaResolved(): string {
-    let captchaResponse = $('#lc-captcha-response').val();
+    let captchaResponse = $('#lc-captcha-response').val().toString();
     return captchaResponse;
   }
 

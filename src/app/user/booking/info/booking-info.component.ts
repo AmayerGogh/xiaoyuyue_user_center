@@ -5,8 +5,8 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
   selector: 'xiaoyuyue-booking-info',
-  templateUrl: './booking-detail.component.html',
-  styleUrls: ['./booking-detail.component.scss']
+  templateUrl: './booking-info.component.html',
+  styleUrls: ['./booking-info.component.scss']
 })
 export class BookingInfoComponent extends AppComponentBase implements OnInit, AfterViewInit {
   bookingOrderForEdidData: GetPersonBookingOrderOutput;

@@ -18,6 +18,15 @@ interface JQuery {
     slimScroll(...any): any;
 }
 
+interface JQuery {
+    daterangepicker(...any): any;
+}
+
+interface JQuery {
+    datepicker(...any): any;
+}
+
+
 // interface JQuery {
 //     backstretch(...any): any;
 // }

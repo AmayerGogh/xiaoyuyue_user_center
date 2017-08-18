@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
-import { UserSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
+import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 
 @Component({
   selector: 'xiaoyuyue-booked',
@@ -13,7 +13,7 @@ export class BookedComponent implements OnInit {
   bookingDate: string;
   bookingCustomer: string;
   bookingName: string;
-  toggleSideBarFlag: boolean = false;
+  toggleSideBarFlag = false;
   @ViewChild('sideBarModel') sideBarModel: UserSideBarComponent;
   constructor(
     private _route: ActivatedRoute
@@ -32,10 +32,10 @@ export class BookedComponent implements OnInit {
     this._route
       .queryParams
       .subscribe(params => {
-        this.bookingName = params["bookingName"];
-        this.bookingCustomer = params["bookingCustomer"];
-        this.bookingDate = params["bookingDate"];
-        this.hourOfDay = params["hourOfDay"];
+        this.bookingName = params['bookingName'];
+        this.bookingCustomer = params['bookingCustomer'];
+        this.bookingDate = params['bookingDate'];
+        this.hourOfDay = params['hourOfDay'];
       })
   }
 

@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
-import { UserSideBarComponent } from 'app/admin/layout/side-bar/side-bar.component';
+import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 
 @Component({
-    templateUrl: './admin.component.html'
+    templateUrl: './user.component.html'
 })
 export class UserComponent implements OnInit, AfterViewInit {
-    toggleSideBarFlag: boolean = false;
-    title: string = "维普氏科技";
+    toggleSideBarFlag = false;
+    title = '维普氏科技';
     @ViewChild('sideBarModel') sideBarModel: UserSideBarComponent;
     public constructor(
     ) {
