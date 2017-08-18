@@ -1,6 +1,14 @@
 .user-profile {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
     margin-top: 40px;
     padding-top: 55px;
+    .rotating {
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+    }
     .avatar-wrap {
         width: 80px;
         height: 80px;

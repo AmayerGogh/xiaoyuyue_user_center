@@ -28,7 +28,8 @@ import { NgModule } from '@angular/core';
                         path: 'user',
                         loadChildren: 'app/user/user.module#UserModule', // Lazy load user module
                         data: { preload: true }
-                    }, {
+                    },
+                    {
                         path: 'booking',
                         loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load booking module
                         data: { preload: true }
