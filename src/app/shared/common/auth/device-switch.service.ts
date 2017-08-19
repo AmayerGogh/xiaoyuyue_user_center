@@ -22,8 +22,6 @@ export class DeviceSwtichGuard implements CanActivate, CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         device.addClasses(document.documentElement);
 
-        console.log(state.url);
-
         if (device.mobile && state.url === '/mobile') {
             return true;
         } else if ((device.tablet || device.desktop) && state.url === '/') {
