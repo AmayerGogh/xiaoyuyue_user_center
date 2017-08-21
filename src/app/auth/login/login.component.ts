@@ -59,7 +59,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         }
 
         if (this._sessionService.userId) {
-            this._router.navigate(['/home']);
+            this._router.navigate(['/user/home']);
         }
     }
 

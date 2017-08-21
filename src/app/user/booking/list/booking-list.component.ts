@@ -91,7 +91,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     }
 
     showBookingDetail(bookingId: number) {
-        this._router.navigate(['/user/order/info', bookingId]);
+        this._router.navigate(['/user/booking/info', bookingId]);
     }
 
     cancelBooking(bookingId: number) {
