@@ -71,7 +71,6 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
             .getJoinBookingInfo(this.source, parseInt(this.bookingId))
             .subscribe(result => {
                 this.availableDateItemData = result.availableDateItem;
-                console.log(this.availableDateItemData);
 
                 // 测试, 如果没有选择时间段,那么就赋值默认的一个id
                 this.input.bookingItemId = this.availableDateItemData[0] ? this.availableDateItemData[0].times[0].id : 0;

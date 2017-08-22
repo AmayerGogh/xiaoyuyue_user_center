@@ -3,7 +3,16 @@
         <div class="intro-wrap">{{businessAboutData.description}}</div>
     </div>
     <div class="about-body about-item">
-        <div class="banner-wrap item" *ngIf="businessAboutData.pictures[0]"><img [src]="businessAboutData.pictures[0]" width="100%" alt=""></div>
+        <div class="banner-wrap item" *ngIf="businessAboutData">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let item of businessAboutData.pictures">
+                        <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
         <div class="video-wrap item" *ngIf="businessAboutData.videoUrl"></div>
     </div>
     <div class="about-footer about-item">
