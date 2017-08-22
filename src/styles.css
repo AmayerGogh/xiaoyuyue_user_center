@@ -1,16 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
-html,
-body {
-    overflow: auto;
-}
-
 html,
 body {
     width: 100%;
-    max-width: 480px;
     height: 100%;
-    margin:  0 auto;
 }
 
 a,
