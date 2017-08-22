@@ -1,8 +1,9 @@
 <div class="header">
     <div class="top-fixed ani clearfix" [ngClass]="{'fade-in': isShowSubMenuFlag, 'fade-out': !isShowSubMenuFlag}">
+        <div class="bg-cover" (click)="isShowSubMenu()"></div>
         <div class="content">
             <span class="icon pull-left vapps-icon-app-logo"></span>
-            <span class="icon pull-right " (click)="isShowSubMenu(selectIndex)" [ngClass]="{'vapps-icon-app-menu': !isShowSubMenuFlag, 'vapps-icon-app-close': isShowSubMenuFlag}"></span>
+            <span class="icon pull-right" (click)="isShowSubMenu(selectIndex)" [ngClass]="{'vapps-icon-app-menu': !isShowSubMenuFlag, 'vapps-icon-app-close': isShowSubMenuFlag}"></span>
         </div>
     </div>
 

@@ -9,9 +9,21 @@
     z-index: 100;
     .top-fixed {
         position: relative;
+        z-index: 101;
         height: 66px;
         padding: 0 24px;
         color: #FFF;
+        .bg-cover {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0);
+            visibility: hidden;
+            transition: all .15s;
+        }
         .icon {
             font-size: 26px;
             line-height: 66px;
@@ -25,9 +37,17 @@
         }
         &.ani.fade-in {
             right: 280px;
+            .bg-cover {
+                background-color: rgba(0, 0, 0, .4);
+                visibility: visible;
+            }
         }
         &.ani.fade-out {
             right: 0;
+            .bg-cover {
+                background-color: rgba(0, 0, 0, 0);
+                visibility: hidden;
+            }
         }
         .content {
             position: relative;

@@ -16,7 +16,7 @@ export class TimeLineComponent implements OnInit {
     skipCount: number;
     maxResultCount: number;
     startDataTime: moment.Moment;
-    slogan = '啥都没有，感觉去预约吧';
+    slogan = '啥都没有，赶紧去预约吧';
 
     constructor
         (
