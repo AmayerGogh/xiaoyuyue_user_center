@@ -18,7 +18,6 @@ export class appLoadingBusy {
             let spanEle = $('<span></span>').text(element).addClass('effect-text');
             effectTextWrap.append(spanEle);
         });
-        console.log(appLoadingBusyWrap);
     };
 
     static clearBusy(): void {

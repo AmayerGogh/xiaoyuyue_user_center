@@ -1,6 +1,7 @@
 .booking-about {
     width: 100%;
     padding: 20px;
+    padding-bottom: 50px;
     .btn {
         line-height: 1;
         padding: 0;
@@ -26,6 +27,13 @@
             height: 184px;
             background-color: #CCC;
             overflow: hidden;
+            .img {
+                width: 100%;
+                height: 184px;
+                display: inline-block;
+                background-size: cover;
+                background-position: center;
+            }
         }
         .video-wrap {
             width: 100%;

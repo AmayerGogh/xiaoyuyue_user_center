@@ -27,6 +27,7 @@
             "../node_modules/toastr/build/toastr.css",
             "../node_modules/sweetalert/dist/sweetalert.css",
             "assets/common/styles/xiaoyuyue-icon.css",
+            "assets/Swiper-3.4.2/dist/css/swiper.css",
             "assets/common/styles/flatpickr.css",
             "app/shared/layout.scss",
             "app/shared/core.less",
