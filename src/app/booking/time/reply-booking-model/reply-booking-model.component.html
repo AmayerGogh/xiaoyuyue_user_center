@@ -1,6 +1,7 @@
 <div class="reply-booking">
     <form #relpyBookingFrom="ngForm">
-        <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel" aria-hidden="true" [config]="{backdrop: 'static'}">
+        <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel"
+            aria-hidden="true" [config]="{backdrop: 'static'}">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -12,7 +13,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.date}">
-                                    <input class="form-control edited" type="text" [value]="t(input.date)" readonly disabled>
+                                    <input class="form-control edited" type="text" value="{{ t(input.date) }} {{ hourOfDay }}" readonly disabled>
                                     <label class="control-label">预约时间</label>
                                 </div>
                             </div>
