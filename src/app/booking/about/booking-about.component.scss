@@ -12,6 +12,11 @@
     }
     .about-header {
         width: 100%;
+        .title-name {
+            font-size: 15px;
+            color: #FF9641;
+            margin-bottom: 4px;
+        }
         .intro-wrap {
             font-size: 14px;
             text-align: justify;

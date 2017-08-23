@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput } from 'shared/service-proxies/service-proxies';
+import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
 import { Component, Injector, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
@@ -71,6 +71,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
             .getJoinBookingInfo(this.source, parseInt(this.bookingId))
             .subscribe(result => {
                 this.availableDateItemData = result.availableDateItem;
+                this.selectDate = result.availableDateItem[0].date.utcOffset('+08:00').format('YYYY-MM-DD');
 
                 // 测试, 如果没有选择时间段,那么就赋值默认的一个id
                 this.input.bookingItemId = this.availableDateItemData[0] ? this.availableDateItemData[0].times[0].id : 0;
@@ -87,16 +88,17 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
                     defaultDate: self.enableBookingDate[0],
                     onChange: function (selectedDates, dateStr, instance) {
                         self.input.date = moment(new Date(selectedDates));
-                        self.optimalBookingTimeModel.show();
-                        self.optimalBookingTimeModel.save(self.input);
+                        // self.optimalBookingTimeModel.show();
+                        // self.optimalBookingTimeModel.save(self.input);
                     },
                     // enable: ["2017-06-22", "2017-06-23"]
                 });
             });
     }
 
-    selectOptimalTime(index) {
+    selectOptimalTime(index: number, time: JoinBookingTimeInfo) {
         this.selectIndex = index;
+        
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
             let href = location.href;
@@ -108,7 +110,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
             this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
-        this.replyBookingModel.show();
+        this.replyBookingModel.show(time.hourOfDay);
         this.replyBookingModel.save(this.input);
     }
 }

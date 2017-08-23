@@ -11,7 +11,7 @@
     .menu-wrap {
         display: flex;
         background-color: #FFF;
-        border-bottom: 1px solid #CCC;
+        box-shadow: 0 1px 4px 0px #CCC;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         .menu-item.active {

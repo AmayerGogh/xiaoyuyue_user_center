@@ -1,5 +1,6 @@
 <div class="booking-about" [@routerTransition] *ngIf="businessAboutData">
     <div class="about-header about-item">
+        <h5 class="title-name">{{ businessAboutData.name }}</h5>
         <div class="intro-wrap">{{businessAboutData.description}}</div>
     </div>
     <div class="about-body about-item">
@@ -24,7 +25,7 @@
                     <span class="desc">{{businessAboutData.outletAddress}}</span>
                 </div>
             </div>
-            <div class="item-right"><span class="btn btn-view vapps-icon-app-location"></span></div>
+            <div class="item-right"><span class="btn primary-bgcolor  vapps-icon-app-location"></span></div>
         </div>
         <div class="contact item">
             <div class="item-left">
@@ -34,7 +35,7 @@
                     <span class="desc">{{businessAboutData.contactorName}}</span>
                 </div>
             </div>
-            <div class="item-right"><span class="btn btn-view vapps-icon-app-qr-code"></span></div>
+            <div class="item-right"><span class="btn primary-bgcolor  vapps-icon-app-qr-code"></span></div>
         </div>
         <div class="phone item">
             <div class="item-left">
@@ -44,7 +45,7 @@
                     <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
                 </div>
             </div>
-            <div class="item-right"><a [href]="'tel:'+businessAboutData.contactorPhoneNum"><span class="btn btn-view vapps-icon-app-phone"></span></a></div>
+            <div class="item-right"><a [href]="'tel:'+businessAboutData.contactorPhoneNum"><span class="btn primary-bgcolor  vapps-icon-app-phone"></span></a></div>
         </div>
     </div>
     <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad>
