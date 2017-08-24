@@ -1,8 +1,7 @@
-import * as moment from 'moment';
-
 import { BookingTimelineDto, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 import { Component, OnInit } from '@angular/core';
 
+import { Moment } from 'moment';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,7 +14,7 @@ export class TimeLineComponent implements OnInit {
     perBookingOrderData: BookingTimelineDto[];
     skipCount: number;
     maxResultCount: number;
-    startDataTime: moment.Moment;
+    startDataTime: Moment;
     slogan = '啥都没有，赶紧去预约吧';
 
     constructor

@@ -1,10 +1,9 @@
-import { Component, ViewContainerRef, OnInit, Injector, ViewEncapsulation } from '@angular/core';
-import { AppConsts } from '@shared/AppConsts';
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { Component, Injector, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 
-import * as moment from 'moment';
-import { LoginService } from "shared/services/login.service";
-import { BookingServiceProxy } from "shared/service-proxies/service-proxies";
+import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppConsts } from '@shared/AppConsts';
+import { BookingServiceProxy } from 'shared/service-proxies/service-proxies';
+import { LoginService } from 'shared/services/login.service';
 
 @Component({
     templateUrl: './auth.component.html',
@@ -17,7 +16,6 @@ export class AuthComponent extends AppComponentBase implements OnInit {
 
     private viewContainerRef: ViewContainerRef;
 
-    currentYear: number = moment().year();
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
 
     public constructor(
@@ -43,5 +41,5 @@ export class AuthComponent extends AppComponentBase implements OnInit {
         return (AppConsts.appBaseUrlFormat && AppConsts.appBaseUrlFormat.indexOf(AppConsts.tenancyNamePlaceHolderInUrl) >= 0);
     }
 
-    
+
 }
