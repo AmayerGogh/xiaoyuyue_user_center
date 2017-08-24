@@ -3,30 +3,28 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output } from '@angular/core';
 import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
-import { ExternalLoginProvider, LoginService } from "shared/services/login.service";
+import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { Headers, Http } from '@angular/http';
 
 import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
 import { Location } from '@angular/common';
-import { NgxAni } from "ngxani";
-import { TooltipConfig } from "ngx-bootstrap";
+import { NgxAni } from 'ngxani';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     templateUrl: './login.component.html',
     animations: [accountModuleAnimation()],
-    styleUrls: ['./login.component.scss'],
-    providers: [{ provide: TooltipConfig, useFactory: getAlertConfig }]
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends AppComponentBase implements AfterViewInit {
     externalLoginProviders: ExternalLoginProvider[];
 
-    submitting: boolean = false;
-    flag: boolean = true;
+    submitting = false;
+    flag = true;
     // 普通登录或者手机验证登录，默认普通登录
-    ordinaryLogin: boolean = true;
+    ordinaryLogin = true;
 
     constructor(
         injector: Injector,
@@ -45,7 +43,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
         if (keys) {
             for (var i = keys.length; i--;)
-                document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString() + "; path=/";
+                document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString() + '; path=/';
         }
     }
 
@@ -67,7 +65,7 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
         let self = this;
         // 解决Chrome浏览器自动填充的BUG
         setTimeout(() => {
-            $("input:-webkit-autofill").addClass('edited')
+            $('input:-webkit-autofill').addClass('edited')
         }, 600);
 
         $(document).click(() => {
@@ -166,14 +164,5 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
     isPhoneLogin() {
         this.ordinaryLogin = false;
     }
-
-}
-
-
-export function getAlertConfig(): TooltipConfig {
-    return Object.assign(new TooltipConfig(), {
-        placement: 'top',
-        container: 'body'
-    });
 
 }
