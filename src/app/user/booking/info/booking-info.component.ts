@@ -2,6 +2,8 @@ import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
 import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { MediaCompressFormat } from "shared/AppConsts";
+import { PictureUrlHelper } from './../../../../shared/helpers/PictureUrlHelper';
 
 @Component({
   selector: 'xiaoyuyue-booking-info',
@@ -35,6 +37,9 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
       .getBookingOrderForEdit(bookingId)
       .subscribe(result => {
         this.bookingOrderForEdidData = result;
+        this.bookingOrderForEdidData.bookingInfo.outletPictureUrl =
+          PictureUrlHelper.getOutletPictuCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
       })
   }
+
 }

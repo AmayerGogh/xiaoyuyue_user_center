@@ -26,6 +26,9 @@ export class HeaderComponent implements OnInit {
     }
     ngAfterViewInit() {
         $(window).on('scroll', () => {
+            if (this.selectIndex >= 1 ) {
+                return;
+            }
             if ($(window).scrollTop() <= 0) {
                 $('.top-fixed').css({
                     backgroundColor: "rgba(0,0,0,0)"
@@ -54,13 +57,13 @@ export class HeaderComponent implements OnInit {
         this.selectIndex = index;
         if (this.selectIndex == 1) {
             $('.top-fixed').css({
-                backgroundColor: "#FF9641"
+                'backgroundColor': 'rgb(255, 150, 65)'
             });
         }
         this.isSubMenu.emit(this.isShowSubMenuFlag);
 
         if (index == 1) {
-            this._router.navigate(['/intro']);
+            this._router.navigate(['/mobile/intro']);
         }
     }
 

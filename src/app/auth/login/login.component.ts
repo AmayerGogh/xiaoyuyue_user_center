@@ -18,7 +18,7 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     animations: [accountModuleAnimation()],
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent extends AppComponentBase implements AfterViewInit {
+export class LoginComponent extends AppComponentBase implements OnInit, AfterViewInit {
     externalLoginProviders: ExternalLoginProvider[];
 
     submitting = false;
@@ -40,10 +40,11 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
     }
 
     clearCookie() {
-        var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+        const keys = document.cookie.match(/[^ =;]+(?=\=)/g);
         if (keys) {
-            for (var i = keys.length; i--;)
+            for (let i = keys.length; i--;) {
                 document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString() + '; path=/';
+            }
         }
     }
 
@@ -156,13 +157,12 @@ export class LoginComponent extends AppComponentBase implements AfterViewInit {
     }
 
     // add after
-    //是否账号登录
+    // 是否账号登录
     isOrdinaryLogin() {
         this.ordinaryLogin = true;
     }
-    //是否手机验证登录
+    // 是否手机验证登录
     isPhoneLogin() {
         this.ordinaryLogin = false;
     }
-
 }
