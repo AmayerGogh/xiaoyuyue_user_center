@@ -111,10 +111,14 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     }
 
     setActionFlag(index: number) {
-        for (let i = 0; i < this.actionFlag.length; i++) {
-            this.actionFlag[i] = false;
-        }
         this.actionFlag[index] = !this.actionFlag[index];
+        this.actionFlag.forEach((element, i) => {
+            if (i !== index) {
+                this.actionFlag[i] = false;
+            } else {
+                this.actionFlag[index] = !!this.actionFlag[index];
+            }
+        });
     }
 
     setTipsClass(status: number): any {

@@ -78,14 +78,14 @@
             .page-3 {
                 .page3-content {
                     padding: 0 26px;
-                    .title {
-                        font-size: 30px;
-                        color: #FF9641;
-                    }
                     .logo-wrap {
-                        margin-bottom: 8px;
+                        margin-bottom: 18px;
                         .logo {
                             vertical-align: bottom;
+                        }
+                        .title {
+                            font-size: 24px;
+                            color: #FF9641;
                         }
                     }
                     .slogan {
@@ -122,5 +122,5 @@
             }
         }
     }
-    
+
     @media screen and (max-width: 400px) {}
