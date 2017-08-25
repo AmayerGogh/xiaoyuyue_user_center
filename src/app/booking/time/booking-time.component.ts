@@ -48,6 +48,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     }
 
     ngAfterViewInit() {
+        this.bookingId = this._route.snapshot.paramMap.get('date');
         const self = this;
         if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
             this._route
@@ -59,7 +60,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
 
             // this.input
             this.replyBookingModel.show();
-            this.replyBookingModel.save(this.input);
+            // this.replyBookingModel.save(this.input);
         }
     }
 

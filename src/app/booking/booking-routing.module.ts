@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
                 component: BookingComponent,
             },
             {
-                path: 'booked/:id', component: BookedComponent
+                path: 'booked', component: BookedComponent
             }
         ])
     ],

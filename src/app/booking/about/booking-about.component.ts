@@ -23,10 +23,6 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
     @Input()
     businessAboutData: JoinBookingInfoDto;
 
-    href: string = document.location.href;
-    bookingId: string = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
-    source = '';
-
     public constructor(
         injector: Injector,
         private _bookingServiceProxy: BookingServiceProxy
