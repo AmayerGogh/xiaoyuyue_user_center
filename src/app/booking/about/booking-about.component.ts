@@ -20,10 +20,13 @@ declare var Swiper: any;
 })
 
 export class BookingAboutComponent extends AppComponentBase implements OnInit, AfterViewInit {
+    @Input()
+    businessAboutData: JoinBookingInfoDto;
+
     href: string = document.location.href;
     bookingId: string = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
     source = '';
-    businessAboutData: JoinBookingInfoDto;
+
     public constructor(
         injector: Injector,
         private _bookingServiceProxy: BookingServiceProxy
@@ -32,7 +35,6 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
     }
 
     ngOnInit(): void {
-        this.loadBookingData();
     }
 
     ngAfterViewInit() {
@@ -47,18 +49,5 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
             paginationClickable: true
         });
         console.log(swiper);
-    }
-
-    loadBookingData() {
-        if (this.href.indexOf('?') >= 0) {
-            this.bookingId = this.bookingId.split('?')[0];
-        }
-        this._bookingServiceProxy
-            .getJoinBookingInfo(this.source, parseInt(this.bookingId))
-            .subscribe(result => {
-                this.businessAboutData = result.bookingInfo;
-
-                this.businessAboutData.pictures = _.map(this.businessAboutData.pictures, PictureUrlHelper.getBookingPictureCompressUrl);
-            })
     }
 }

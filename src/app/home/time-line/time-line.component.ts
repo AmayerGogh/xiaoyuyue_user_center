@@ -47,7 +47,7 @@ export class TimeLineComponent implements OnInit {
     }
 
     converTimelineData(item: BookingTimelineDto): BookingTimelineDto {
-        item.orgLogoUrl = PictureUrlHelper.getTimelinePictuCompressUrl(item.orgLogoUrl);
+        item.orgLogoUrl = PictureUrlHelper.getTimelinePicCompressUrl(item.orgLogoUrl);
         return item;
     }
 }

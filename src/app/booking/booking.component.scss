@@ -1,6 +1,40 @@
 #booking {
     width: 100%;
     max-width: 480px;
-    margin:  0 auto;
+    margin: 0 auto;
     background-color: #FFF;
+}
+
+.side-bar {
+    width: 100%;
+    height: 49px;
+    background-color: rgba(0, 0, 0, .6);
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    .menu-wrap {
+        display: flex;
+        background-color: #FFF;
+        box-shadow: 0 1px 4px 0px #CCC;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        .menu-item.active {
+            .item {
+                color: #FF9641;
+                border-bottom: 2px solid #FF9641;
+            }
+        }
+        .menu-item {
+            flex: 1;
+            line-height: 49px;
+            text-align: center;
+            .item {
+                display: inline-block;
+                color: #333;
+            }
+        }
+    }
 }

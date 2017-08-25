@@ -38,7 +38,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
       .subscribe(result => {
         this.bookingOrderForEdidData = result;
         this.bookingOrderForEdidData.bookingInfo.outletPictureUrl =
-          PictureUrlHelper.getOutletPictuCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
+          PictureUrlHelper.getOutletPicCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
       })
   }
 
