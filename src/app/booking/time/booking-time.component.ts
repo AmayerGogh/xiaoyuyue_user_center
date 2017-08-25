@@ -1,8 +1,6 @@
-import * as moment from 'moment';
-
 import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, Injector, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
-import { Component, Injector, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
@@ -18,7 +16,7 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     animations: [appModuleAnimation()],
     encapsulation: ViewEncapsulation.None
 })
-export class BookingTimeComponent extends AppComponentBase implements OnInit {
+export class BookingTimeComponent extends AppComponentBase implements OnInit, AfterViewInit {
     defaultEnableBookingDate: string[] = ['1970-01-01'];
     selectIndex = 0;
     enableBookingDate: Date[] = [];
@@ -84,7 +82,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
                     minDate: 'today',
                     'locale': 'zh',
                     disableMobile: 'true',
-                    enable: self.enableBookingDate.length == 0 ? self.defaultEnableBookingDate : self.enableBookingDate,
+                    enable: self.enableBookingDate.length === 0 ? self.defaultEnableBookingDate : self.enableBookingDate,
                     defaultDate: self.enableBookingDate[0],
                     onChange: function (selectedDates, dateStr, instance) {
                         self.input.date = moment(new Date(selectedDates));
@@ -98,7 +96,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit {
 
     selectOptimalTime(index: number, time: JoinBookingTimeInfo) {
         this.selectIndex = index;
-        
+
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
             let href = location.href;

@@ -1,6 +1,5 @@
-﻿import { Injectable } from '@angular/core';
-import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
-import * as moment from 'moment';
+﻿import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class DateTimeService {

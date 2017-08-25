@@ -1,5 +1,4 @@
 ﻿import * as _ from 'lodash';
-import * as moment from 'moment';
 
 import { CompilerOptions, NgModuleRef, Type } from '@angular/core';
 
@@ -46,12 +45,12 @@ export class AppPreBootstrap {
 
             AppConsts.appBaseUrlFormat = result.appBaseUrl;
             AppConsts.appBusinessBaseUrl = result.appBusinessBaseUrl;
-            
+
             AppConsts.remoteServiceBaseUrlFormat = result.remoteServiceBaseUrl;
 
             if (tenancyName == null) {
-                AppConsts.appBaseUrl = result.appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + ".", "");
-                AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + ".", '');
+                AppConsts.appBaseUrl = result.appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + '.', '');
+                AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl + '.', '');
             } else {
                 AppConsts.appBaseUrl = result.appBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
                 AppConsts.remoteServiceBaseUrl = result.remoteServiceBaseUrl.replace(AppConsts.tenancyNamePlaceHolderInUrl, tenancyName);
@@ -139,7 +138,7 @@ export class AppPreBootstrap {
     private static setEncryptedTokenCookie(encryptedToken: string) {
         new UtilsService().setCookieValue(AppConsts.authorization.encrptedAuthTokenName,
             encryptedToken,
-            new Date(new Date().getTime() + 365 * 86400000), //1 year
+            new Date(new Date().getTime() + 365 * 86400000), // 1 year
             abp.appPath
         );
     }
