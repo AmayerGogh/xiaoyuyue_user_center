@@ -1,6 +1,6 @@
 <div class="booking-edit" *ngIf="bookingOrderForEdidData">
     <div class="tenant-wrap card-shadow">
-        <div class="tenant-bg-wrap"><img src="/assets/common/images/booking/tenant-bg.png" width="100%" alt="tenant-bg"></div>
+        <div class="tenant-bg-wrap"><img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg"></div>
         <div class="tenant-info">
             <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}}{{bookingOrderForEdidData.bookingInfo.outletName}}</div>
             <div class="contact">
