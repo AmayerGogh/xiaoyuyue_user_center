@@ -44,6 +44,5 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
-        console.log(swiper);
     }
 }

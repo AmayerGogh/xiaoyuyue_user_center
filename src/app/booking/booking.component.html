@@ -1,16 +1,16 @@
-<div id="booking">
-    <xiaoyuyue-booking-header *ngIf="bookingData" [organizationInfoData]="bookingData.organizationInfo"></xiaoyuyue-booking-header>
+<div id="booking" *ngIf="bookingData">
+    <xiaoyuyue-booking-header [organizationInfoData]="bookingData.organizationInfo"></xiaoyuyue-booking-header>
 
     <tabset class="side-bar tab-container tabbable-line">
-        <tab heading="预约介绍" *ngIf="bookingData">
+        <tab heading="预约介绍">
             <xiaoyuyue-booking-about [businessAboutData]="bookingData.bookingInfo"></xiaoyuyue-booking-about>
         </tab>
 
-        <tab heading="预约时间" *ngIf="bookingData">
+        <tab heading="预约时间" [active]="showReplyBookingModel">
             <xiaoyuyue-booking-time [availableDateItemData]="bookingData.availableDateItem"></xiaoyuyue-booking-time>
         </tab>
 
-        <tab heading="客户评价" *ngIf="bookingData">
+        <tab heading="客户评价">
             <xiaoyuyue-booking-comments></xiaoyuyue-booking-comments>
         </tab>
     </tabset>

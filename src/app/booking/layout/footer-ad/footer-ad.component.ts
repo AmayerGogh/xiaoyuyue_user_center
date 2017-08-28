@@ -24,6 +24,5 @@ export class FooterAdComponent implements OnInit {
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
-        console.log(swiper);
     }
 }

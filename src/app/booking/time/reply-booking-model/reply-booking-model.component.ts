@@ -1,17 +1,20 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookingServiceProxy, JoinBookingInput } from 'shared/service-proxies/service-proxies';
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
+import { Moment } from 'moment';
 
 @Component({
     selector: 'xiaoyuyue-reply-booking-model',
     templateUrl: './reply-booking-model.component.html',
-    styleUrls: ['./reply-booking-model.component.scss']
+    styleUrls: ['./reply-booking-model.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
+    bookingTime: Moment;
     hourOfDay: string;
     input: JoinBookingInput = new JoinBookingInput();
     @ViewChild('replyBookingModel') modal: ModalDirective;
@@ -38,12 +41,13 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     save(input: JoinBookingInput) {
         this.input = input;
+        this.bookingTime = input.date;
     }
 
     submit() {
         // 临时测试
         this.input.age = 0;
-        this.input.emailAddress = "";
+        this.input.emailAddress = '';
         this.input.gender = 0;
 
         this._bookingServiceProxy
