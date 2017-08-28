@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { AfterViewInit, Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
@@ -14,11 +14,11 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     templateUrl: './booking-time.component.html',
     styleUrls: ['./booking-time.component.scss'],
     animations: [appModuleAnimation()],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit, AfterViewInit {
-    @Input()
-    availableDateItemData: JoinBookingDataInfo[] = [];
+    hourOfDay: string;
 
     defaultEnableBookingDate: string[] = ['1970-01-01'];
     selectIndex = 0;
@@ -30,6 +30,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     bookingId: string = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
     source = '';
 
+    @Input() availableDateItemData: JoinBookingDataInfo[] = [];
     @ViewChild('optimalBookingTimeModel') optimalBookingTimeModel: OptimalBookingTimeModelComponent;
     @ViewChild('replyBookingModel') replyBookingModel: ReplyBookingModelComponent;
     public constructor(
@@ -58,14 +59,15 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
                     this.selectIndex = params['index'];
                 });
 
-            // this.input
             this.replyBookingModel.show();
             this.replyBookingModel.save(this.input);
         }
     }
 
     loadBookingTimeData() {
-        if (this.availableDateItemData.length > 0) {
+        let defaultTimeItem = this.availableDateItemData[0];
+
+        if (typeof defaultTimeItem === 'object' && defaultTimeItem.hasOwnProperty('date')) {
             this.selectDate = this.availableDateItemData[0].date.utcOffset('+08:00').format('YYYY-MM-DD');
         }
         // 测试, 如果没有选择时间段,那么就赋值默认的一个id
@@ -92,13 +94,14 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
 
     selectOptimalTime(index: number, time: JoinBookingTimeInfo) {
         this.selectIndex = index;
+        this.hourOfDay = time.hourOfDay;
 
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
             let href = location.href;
             exdate.setDate(exdate.getDate() + 1);
             this.selectDate = this.input.date.utcOffset('+08:00').format('YYYY-MM-DD');
-            href += `?date=${this.selectDate}&index=${index}`;
+            href += `?date=${this.selectDate}&index=${this.selectIndex}`;
 
             this._router.navigate(['/auth/login']);
             this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
