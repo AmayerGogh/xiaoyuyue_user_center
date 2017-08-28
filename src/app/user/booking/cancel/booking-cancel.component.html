@@ -1,5 +1,6 @@
 <div class="cancel-booking">
-    <div bsModal #cancelBookingModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cancelBookingModel" aria-hidden="true" [config]="{backdrop: 'static'}">
+    <div bsModal #cancelBookingModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="cancelBookingModel"
+        aria-hidden="true" [config]="{backdrop: 'static'}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -29,15 +30,14 @@
                             </label>
                         </div>
                         <div class="refuse-reason-item radio">
-                            <div class="refuse-reason-item radio">
-                                <label>
-                                <input type="radio" name="refuseReason3" value="其它原因">其它原因
+                            <label>
+                                <input type="radio" name="refuseReason4" value="其它原因" [(ngModel)]="input.refuseReason">其它原因
                             </label>
-                            </div>
-                            <div class="form-group label-floating" style="padding: 0 10px;">
-                                <textarea class="form-control" rows="5" placeholder="告诉我们您的想法和意见..."></textarea>
-                            </div>
                         </div>
+                        <div class="form-group label-floating" style="padding: 0 10px;">
+                            <textarea class="form-control" rows="5" placeholder="告诉我们您的想法和意见..." [(ngModel)]="input.refuseReason"></textarea>
+                        </div>
+
                     </div>
                     <div class="footer">
                         <button type="submit" class="btn btn-block primary-bgcolor" (click)="submit()">确认</button>

@@ -17,12 +17,13 @@ export class LocalizedResourcesHelper {
             cssPostfix = '-rtl';
             $('html').attr('dir', 'rtl');
         }
-        return $.Deferred().resolve();
+        return;
+        // return $.Deferred().resolve();
     }
 
     private static loadLocalizedScripts(): JQueryPromise<any> {
         if (!abp.session.userId) {
-            return $.Deferred().resolve();
+            // return $.Deferred().resolve();
         }
 
         const currentCulture = abp.localization.currentLanguage.name;

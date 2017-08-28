@@ -11,11 +11,10 @@ import { NgModule } from '@angular/core';
         RouterModule.forChild([
             {
                 path: '',
-                canActivate: [DeviceSwtichGuard],
                 // canActivateChild: [DeviceSwtichGuard],
                 component: MobileComponent,
                 children: [
-                    { path: '', component: HomeComponent },
+                    { path: '', component: HomeComponent, canActivate: [DeviceSwtichGuard] },
                     { path: 'intro', component: IntroductionComponent },
                 ]
             }

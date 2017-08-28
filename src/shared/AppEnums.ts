@@ -1,4 +1,4 @@
-﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, FriendDtoState, DefaultTimezoneScope, UserNotificationState, IsTenantAvailableOutputState, CodeSendInputCodeType, Status, CurrentUserProfileEditDtoGender } from '@shared/service-proxies/service-proxies';
+﻿import { ChatMessageDtoReadState, ChatMessageDtoSide, CodeSendInputCodeType, CurrentUserProfileEditDtoGender, DefaultTimezoneScope, FriendDtoState, IsTenantAvailableOutputState, Status, UserNotificationState } from '@shared/service-proxies/service-proxies';
 
 export class AppChatMessageReadState {
     static Unread: number = ChatMessageDtoReadState._1;
