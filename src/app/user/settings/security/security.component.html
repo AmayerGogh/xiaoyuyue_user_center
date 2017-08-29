@@ -1,32 +1,34 @@
 <div class="security clearfix">
-    <h5 class="title">安全信息<small>完善账户安全信息，更好地保护您的数据安全</small></h5>
-    <div class="card-wrap">
-        <div class="card" routerLink="/user/settings/passwd">
-            <div class="item">
-                <div class="content">
-                    <span class="icon vapps-icon-app-change-passwd"></span>
-                    <p class="text">更换密码</p>
+    <div [@routerTransition]>
+        <h5 class="title">安全信息<small>完善账户安全信息，更好地保护您的数据安全</small></h5>
+        <div class="card-wrap">
+            <div class="card" routerLink="/user/settings/passwd">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-change-passwd"></span>
+                        <p class="text">更换密码</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-wrap">
-        <div class="card" routerLink="/user/settings/change-phone">
-            <div class="item">
-                <div class="content">
-                    <span class="icon vapps-icon-app-validate-phone"></span>
-                    <p class="text">更换手机</p>
+        <div class="card-wrap">
+            <div class="card" routerLink="/user/settings/change-phone">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-validate-phone"></span>
+                        <p class="text">更换手机</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-wrap">
-        <!-- <div class="card" routerLink="/user/settings/email"> -->
-        <div class="card" (click)="stayTuned()">
-            <div class="item">
-                <div class="content">
-                    <span class="icon vapps-icon-app-validate-email"></span>
-                    <p class="text">更换邮箱</p>
+        <div class="card-wrap">
+            <!-- <div class="card" routerLink="/user/settings/email"> -->
+            <div class="card" (click)="stayTuned()">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-validate-email"></span>
+                        <p class="text">更换邮箱</p>
+                    </div>
                 </div>
             </div>
         </div>

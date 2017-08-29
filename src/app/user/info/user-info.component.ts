@@ -5,11 +5,13 @@ import { PictureServiceProxy, ProfileServiceProxy } from '@shared/service-proxie
 
 import { AppGender } from 'shared/AppEnums';
 import { CurrentUserProfileEditDto } from '@shared/service-proxies/service-proxies';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-user-info',
     templateUrl: './user-info.component.html',
-    styleUrls: ['./user-info.component.scss']
+    styleUrls: ['./user-info.component.scss'],
+    animations: [appModuleAnimation()]
 })
 export class UserInfoComponent implements OnInit, AfterViewInit {
 

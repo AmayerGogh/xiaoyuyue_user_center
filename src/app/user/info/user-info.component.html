@@ -1,7 +1,7 @@
 <div class="user-profile">
     <div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
         <!-- <div class="rotating-container"> -->
-        <form #userProfile="ngForm">
+        <form #userProfile="ngForm" [@routerTransition]>
             <div class="rotating clearfix">
                 <div class="col-md-12 front" *ngIf="!filpActive">
                     <div class="card">

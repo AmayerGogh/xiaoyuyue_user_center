@@ -1,21 +1,23 @@
 <div class="settings">
-    <div class="card-wrap">
-        <div class="card" routerLink="/user/settings/security">
-            <div class="item">
-                <div class="content">
-                    <span class="icon vapps-icon-app-user-security"></span>
-                    <p class="text">账户安全</p>
+    <div [@routerTransition]>
+        <div class="card-wrap">
+            <div class="card" routerLink="/user/settings/security">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-user-security"></span>
+                        <p class="text">账户安全</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="card-wrap">
-        <!-- <div class="card" routerLink="/user/settings/suggest"> -->
-        <div class="card" (click)="stayTuned()">
-            <div class="item">
-                <div class="content">
-                    <span class="icon vapps-icon-app-suggest"></span>
-                    <p class="text">意见反馈</p>
+        <div class="card-wrap">
+            <!-- <div class="card" routerLink="/user/settings/suggest"> -->
+            <div class="card" (click)="stayTuned()">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-suggest"></span>
+                        <p class="text">意见反馈</p>
+                    </div>
                 </div>
             </div>
         </div>

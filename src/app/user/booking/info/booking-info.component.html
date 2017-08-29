@@ -1,4 +1,4 @@
-<div class="booking-edit" *ngIf="bookingOrderForEdidData">
+<div class="booking-edit" *ngIf="bookingOrderForEdidData" [@routerTransition]>
     <div class="tenant-wrap card-shadow">
         <div class="tenant-bg-wrap"><img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg"></div>
         <div class="tenant-info">

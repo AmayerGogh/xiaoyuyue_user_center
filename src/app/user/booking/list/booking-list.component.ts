@@ -7,11 +7,13 @@ import { AppStatus } from 'shared/AppEnums';
 import { BookingCancelComponent } from './../cancel/booking-cancel.component';
 import { PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 import { Router } from '@angular/router';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-booking-list',
     templateUrl: './booking-list.component.html',
-    styleUrls: ['./booking-list.component.scss']
+    styleUrls: ['./booking-list.component.scss'],
+    animations: [appModuleAnimation()]
 })
 export class BookingListComponent extends AppComponentBase implements OnInit, AfterViewInit {
     currentTabIndex = 0;
