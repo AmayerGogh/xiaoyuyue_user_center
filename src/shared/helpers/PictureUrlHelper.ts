@@ -5,15 +5,15 @@ export class PictureUrlHelper {
         return url + '?' + compressProt;
     }
 
-    static getBookingPictureCompressUrl(url: string): string {
+    static getBookingPicCompressUrl(url: string): string {
         return url + '?' + MediaCompressFormat.bookingPictureFormat;
     }
 
-    static getTimelinePictuCompressUrl(url: string): string {
+    static getTimelinePicCompressUrl(url: string): string {
         return url + '?' + MediaCompressFormat.timelinePictureFormat;
     }
 
-    static getOutletPictuCompressUrl(url: string): string {
+    static getOutletPicCompressUrl(url: string): string {
         return url + '?' + MediaCompressFormat.outletPictureFormat;
     }
 }

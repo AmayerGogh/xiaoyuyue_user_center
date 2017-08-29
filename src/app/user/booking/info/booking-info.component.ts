@@ -4,11 +4,13 @@ import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy } from 'shared
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat } from "shared/AppConsts";
 import { PictureUrlHelper } from './../../../../shared/helpers/PictureUrlHelper';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
   selector: 'xiaoyuyue-booking-info',
   templateUrl: './booking-info.component.html',
-  styleUrls: ['./booking-info.component.scss']
+  styleUrls: ['./booking-info.component.scss'],
+  animations: [appModuleAnimation()]
 })
 export class BookingInfoComponent extends AppComponentBase implements OnInit, AfterViewInit {
   bookingOrderForEdidData: GetPersonBookingOrderOutput;
@@ -38,7 +40,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
       .subscribe(result => {
         this.bookingOrderForEdidData = result;
         this.bookingOrderForEdidData.bookingInfo.outletPictureUrl =
-          PictureUrlHelper.getOutletPictuCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
+          PictureUrlHelper.getOutletPicCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
       })
   }
 

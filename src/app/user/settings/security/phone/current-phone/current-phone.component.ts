@@ -1,13 +1,17 @@
-import { Component, OnInit, ElementRef, ViewChild, Injector } from '@angular/core';
-import { ProfileServiceProxy, CodeSendInput, SMSServiceProxy, CheckUserCodeInput, ChangeBindingPhoneNumInput, BindingPhoneNumInput } from '@shared/service-proxies/service-proxies';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { VerificationCodeType } from 'shared/AppEnums';
+import { BindingPhoneNumInput, ChangeBindingPhoneNumInput, CheckUserCodeInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { VerificationCodeType } from 'shared/AppEnums';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
+
 @Component({
     selector: 'xiaoyuyue-current-phone',
     templateUrl: './current-phone.component.html',
-    styleUrls: ['./current-phone.component.scss']
+    styleUrls: ['./current-phone.component.scss'],
+    animations: [appModuleAnimation()]
 })
 export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
     bindingPhoneNumInput: BindingPhoneNumInput = new BindingPhoneNumInput();

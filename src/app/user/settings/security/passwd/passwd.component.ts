@@ -1,12 +1,15 @@
-import { Component, OnInit, Injector } from '@angular/core';
-import { ProfileServiceProxy, ChangePasswordInput } from '@shared/service-proxies/service-proxies';
+import { ChangePasswordInput, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
+import { Component, Injector, OnInit } from '@angular/core';
+
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Location } from '@angular/common';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
   selector: 'xiaoyuyue-passwd',
   templateUrl: './passwd.component.html',
-  styleUrls: ['./passwd.component.scss']
+  styleUrls: ['./passwd.component.scss'],
+  animations: [appModuleAnimation()]
 })
 export class PasswdComponent extends AppComponentBase implements OnInit  {
     input: ChangePasswordInput = new ChangePasswordInput();

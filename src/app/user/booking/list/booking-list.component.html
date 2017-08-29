@@ -1,4 +1,4 @@
-<div class="booking-manage">
+<div class="booking-manage" [@routerTransition]>
     <div class="serach">
         <div class="form-group label-floating">
             <label class="control-label"></label>
@@ -13,7 +13,7 @@
     </ul>
 
     <div *ngIf="personBookingTotalCount > 0; else empty">
-        <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
+        <div [@routerTransition] class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
             <div class="top-wrap clearfix">
                 <div class="title pull-left">{{dataItem.bookingName}} <span class="tips" [ngClass]="setTipsClass(dataItem.status)">{{ bookingOrderStatusName[dataItem.status] }}</span></div>
                 <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[index], 'rotate-360': !actionFlag[index]}"><span class="vapps-icon-app-drop-down"></span></div>
@@ -48,7 +48,8 @@
                     <span class="icon vapps-icon-app-cancel"></span> 取消预约
                 </span>
                 <span *ngIf="!(dataItem.status == 4)" class="line">|</span>
-                <span class="action-item" (click)="skickBooking(dataItem.id)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
+                <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
+                <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false)"><span class="icon vapps-icon-app-at-top-2 rotate-180"></span>取消置顶</span>
             </div>
         </div>
     </div>
@@ -56,7 +57,7 @@
 </div>
 
 <ng-template #empty>
-    <div class="empty-wrap">
+    <div class="empty-wrap" [@routerTransition]>
         <xiaoyuyue-empty-page [text]="slogan"></xiaoyuyue-empty-page>
     </div>
 </ng-template>

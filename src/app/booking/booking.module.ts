@@ -1,7 +1,7 @@
 import * as ngCommon from '@angular/common';
 
 import { HttpModule, JsonpModule } from '@angular/http';
-import { ModalModule, TooltipModule } from 'ngx-bootstrap';
+import { ModalModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { BookedComponent } from './booked/booked.component';
 import { BookingAboutComponent } from './about/booking-about.component';
@@ -28,6 +28,7 @@ import { UtilsModule } from 'shared/utils/utils.module';
         BookingRoutingModule,
 
         ModalModule.forRoot(),
+        TabsModule.forRoot(),
         TooltipModule.forRoot(),
 
         UtilsModule,
