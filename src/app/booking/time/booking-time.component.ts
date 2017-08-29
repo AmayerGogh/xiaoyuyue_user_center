@@ -61,7 +61,9 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     }
 
     ngAfterViewInit() {
-        this.replyBookingModel.show();
+        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
+            this.replyBookingModel.show();
+        }
     }
 
     loadBookingTimeData() {

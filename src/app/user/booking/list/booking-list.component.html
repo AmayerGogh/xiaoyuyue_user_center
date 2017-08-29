@@ -48,7 +48,8 @@
                     <span class="icon vapps-icon-app-cancel"></span> 取消预约
                 </span>
                 <span *ngIf="!(dataItem.status == 4)" class="line">|</span>
-                <span class="action-item" (click)="skickBooking(dataItem.id)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
+                <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
+                <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false)"><span class="icon vapps-icon-app-at-top-2 rotate-180"></span>取消置顶</span>
             </div>
         </div>
     </div>

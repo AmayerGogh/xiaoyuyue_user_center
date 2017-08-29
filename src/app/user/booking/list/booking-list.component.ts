@@ -100,10 +100,11 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
         this.cancelBookingModal.show(bookingId);
     }
 
-    skickBooking(id): void {
+    // 取消或者置顶预约
+    toggleSkickBooking(id: number, toggleFlag: boolean): void {
         this.stickedInput = new StickedInput();
         this.stickedInput.id = id;
-        this.stickedInput.sticked = true;
+        this.stickedInput.sticked = toggleFlag;
         this._perBookingOrderServiceProxy
             .stickedBookingOrder(this.stickedInput)
             .subscribe(() => {
