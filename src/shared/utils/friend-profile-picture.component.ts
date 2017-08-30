@@ -1,6 +1,6 @@
 ﻿import { AfterViewInit, Component, ElementRef, Input } from '@angular/core';
 
-import { MediaPath } from "shared/AppConsts";
+import { MediaPath } from 'shared/AppConsts';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
