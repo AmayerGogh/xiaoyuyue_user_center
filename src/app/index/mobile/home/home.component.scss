@@ -48,74 +48,72 @@
                 }
             }
         }
-        .page-wrap {
-            .page {
-                .interlayer {
-                    height: 54px;
-                    background-color: #c6d3d4;
-                    margin-bottom: 30px;
+        .page {
+            .interlayer {
+                height: 54px;
+                background-color: #c6d3d4;
+                margin-bottom: 30px;
+            }
+            .content {
+                padding: 0 26px;
+                .title {
+                    font-size: 30px;
+                    text-align: center;
+                    color: #FF9641;
+                    margin-bottom: 42px;
                 }
-                .content {
-                    padding: 0 26px;
-                    .title {
-                        font-size: 30px;
-                        text-align: center;
-                        color: #FF9641;
-                        margin-bottom: 42px;
-                    }
-                    .desc {
-                        font-size: 20px;
-                        text-align: left;
-                        line-height: 2;
-                        margin-bottom: 42px;
-                        color: #000;
-                    }
-                    .material-wrap {
-                        text-align: center;
-                    }
+                .desc {
+                    font-size: 20px;
+                    text-align: left;
+                    line-height: 2;
+                    margin-bottom: 42px;
+                    color: #000;
+                }
+                .material-wrap {
+                    text-align: center;
                 }
             }
-            .page-3 {
-                .page3-content {
-                    padding: 0 26px;
-                    .logo-wrap {
-                        margin-bottom: 18px;
-                        .logo {
-                            vertical-align: bottom;
-                        }
-                        .title {
-                            font-size: 24px;
-                            color: #FF9641;
-                        }
+        }
+        .page-3 {
+            .page3-content {
+                padding: 0 26px;
+                .logo-wrap {
+                    margin-bottom: 18px;
+                    .logo {
+                        vertical-align: bottom;
                     }
-                    .slogan {
-                        margin-bottom: 50px;
+                    .title {
+                        font-size: 24px;
+                        color: #FF9641;
+                    }
+                }
+                .slogan {
+                    margin-bottom: 50px;
+                    font-size: 18px;
+                    color: #000;
+                }
+                .about-wrap {
+                    .about-title {
                         font-size: 18px;
                         color: #000;
                     }
-                    .about-wrap {
-                        .about-title {
-                            font-size: 18px;
+                    .about-item+.about-item {
+                        margin-top: 10px;
+                    }
+                    .about-item {
+                        display: flex;
+                        line-height: 1;
+                        .name {
+                            width: 60px;
+                            flex: 0 0 60px;
+                            font-size: 16px;
                             color: #000;
                         }
-                        .about-item+.about-item {
-                            margin-top: 10px;
-                        }
-                        .about-item {
-                            display: flex;
-                            line-height: 1;
-                            .name {
-                                width: 60px;
-                                flex: 0 0 60px;
-                                font-size: 16px;
-                                color: #000;
-                            }
-                            .desc {
-                                flex: 1;
-                                font-size: 16px;
-                                margin: 0;
-                                color: #000;
-                            }
+                        .desc {
+                            flex: 1;
+                            font-size: 16px;
+                            margin: 0;
+                            color: #000;
                         }
                     }
                 }
