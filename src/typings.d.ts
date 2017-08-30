@@ -77,6 +77,10 @@ FastClick.attach(document.body);
 interface JQuery {
     inputmask(...any): any;
 }
+
+interface JQuery {
+    fullpage(...any): any;
+}
 interface Window {
     FileReader: any;
     webkitURL: any;

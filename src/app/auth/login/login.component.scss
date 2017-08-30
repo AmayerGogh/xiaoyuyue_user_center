@@ -23,6 +23,7 @@
         }
     }
     .login-body {
+        text-align: center;
         .form-item {
             width: 100%;
         }
@@ -31,10 +32,10 @@
             margin-top: 20px;
         }
         .login-btn-wrap {
-            line-height: 30px;
-            background-color: #FF9641;
-            border-radius: 30px;
-            font-size: 18px;
+            background-color: #FF9641; // border-radius: 30px;
+            font-size: 16px;
+            margin: 0 auto;
+            margin-top: 20px;
         }
         .extra-login {
             margin-top: 50px;
