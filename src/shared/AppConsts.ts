@@ -1,5 +1,5 @@
 ﻿import { Booking } from './service-proxies/service-proxies';
-import { ExternalLoginProvider } from 'shared/services/login.service';
+import { state } from '@angular/core';
 
 export class AppConsts {
 
@@ -31,6 +31,11 @@ export class AppConsts {
         pageSizes: [5, 10, 20, 50, 100],
         maxPageSize: 1000,
     }
+}
+
+export class MediaPath {
+
+    static defaultProfilePictureUrl = '/assets/common/images/default-profile-picture.png';
 }
 
 export class MediaCompressFormat {

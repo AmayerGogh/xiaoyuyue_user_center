@@ -1,34 +1,39 @@
 import '@node_modules/qiniu-js/dist/qiniu.min';
 
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { PictureServiceProxy, ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppGender } from 'shared/AppEnums';
 import { CurrentUserProfileEditDto } from '@shared/service-proxies/service-proxies';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { MediaPath } from 'shared/AppConsts';
 
 @Component({
     selector: 'xiaoyuyue-user-info',
     templateUrl: './user-info.component.html',
-    styleUrls: ['./user-info.component.scss'],
-    animations: [appModuleAnimation()]
+    styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit, AfterViewInit {
+export class UserInfoComponent extends AppComponentBase implements OnInit, AfterViewInit {
 
     title = '用户中心';
     filpActive = true;
-    localPictureUrl: string;
+    defaultProfilePictureUrl = MediaPath.defaultProfilePictureUrl;
+    localPictureUrl = '';
     userProfileData: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
     input: CurrentUserProfileEditDto = new CurrentUserProfileEditDto();
 
     private _$profilePicture: JQuery;
     constructor(
+        injector: Injector,
         private _profileServiceProxy: ProfileServiceProxy,
         private _pictureServiceProxy: PictureServiceProxy
-    ) { }
+    ) {
+        super(injector)
+    }
 
     ngOnInit() {
         this.loadData();
+        // this.userProfileData.profilePictureUrl = '';
     }
     ngAfterViewInit() {
         // TODO: 暂时处理
