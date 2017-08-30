@@ -11,10 +11,10 @@ import { Moment } from 'moment';
     selector: 'xiaoyuyue-reply-booking-model',
     templateUrl: './reply-booking-model.component.html',
     styleUrls: ['./reply-booking-model.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
-    bookingTime: Moment;
+    bookingTime: string;
     hourOfDay: string;
     input: JoinBookingInput = new JoinBookingInput();
     @ViewChild('replyBookingModel') modal: ModalDirective;
@@ -41,7 +41,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     save(input: JoinBookingInput) {
         this.input = input;
-        this.bookingTime = input.date;
+        this.bookingTime = this.t(input.date);
     }
 
     submit() {

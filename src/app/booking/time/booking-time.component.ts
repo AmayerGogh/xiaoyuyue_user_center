@@ -15,7 +15,7 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     styleUrls: ['./booking-time.component.scss'],
     animations: [appModuleAnimation()],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookingTimeComponent extends AppComponentBase implements OnInit, AfterViewInit {
     hourOfDay: string;
@@ -46,21 +46,23 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
 
     ngOnInit(): void {
         this.loadBookingTimeData();
-    }
 
-    ngAfterViewInit() {
         this.bookingId = this._route.snapshot.paramMap.get('date');
         const self = this;
         if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
             this._route
                 .queryParams
                 .subscribe(params => {
-                    this.input.date = moment(new Date(params['date']));
-                    this.selectIndex = params['index'];
+                    self.input.date = moment(new Date(params['date']));
+                    self.selectIndex = params['index'];
+                    self.replyBookingModel.save(self.input);
                 });
+        }
+    }
 
+    ngAfterViewInit() {
+        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
             this.replyBookingModel.show();
-            this.replyBookingModel.save(this.input);
         }
     }
 
