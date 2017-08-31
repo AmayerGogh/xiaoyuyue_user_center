@@ -49,25 +49,24 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         this.loadBookingTimeData();
 
         const self = this;
-        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
-            this._route
-                .queryParams
-                .subscribe(params => {
-
-                    const now = moment();
-                    self.input.date = moment(new Date(params['date']));
-                    self.selectIndex = params['index'];
-                    // this.hourOfDay = _.result(_.find(this.availableDateItemData, { 'date': self.input.date }), 'times')[self.selectIndex];
-                    self.replyBookingModel.save(self.input);
+        if (this.ifLoginCallBack()) {
+            this._route.queryParams.subscribe(params => {
+                const now = moment();
+                self.input.date = moment(new Date(params['date'])).local();
+                self.selectIndex = params['index'];
+                self.availableDateItemData.forEach(item => {
+                    if (item.date.isSame(self.input.date)) {
+                        self.hourOfDay = item.times[self.selectIndex].hourOfDay
+                    }
                 });
+                self.replyBookingModel.init(self.input, self.hourOfDay);
+            });
         }
     }
 
     ngAfterViewInit() {
-
-        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
-
-            this.replyBookingModel.show(this.hourOfDay);
+        if (this.ifLoginCallBack()) {
+            this.replyBookingModel.show();
         }
     }
 
@@ -114,7 +113,15 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
-        this.replyBookingModel.show(time.hourOfDay);
-        this.replyBookingModel.save(this.input);
+        this.replyBookingModel.init(this.input, time.hourOfDay);
+        this.replyBookingModel.show();
+    }
+
+    ifLoginCallBack() {
+        if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
+            return true
+        } else {
+            return false;
+        }
     }
 }

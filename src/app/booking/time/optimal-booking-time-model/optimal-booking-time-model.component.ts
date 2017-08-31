@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { JoinBookingInput } from 'shared/service-proxies/service-proxies';
 import { ModalDirective } from 'ngx-bootstrap';
 import { ReplyBookingModelComponent } from '../reply-booking-model/reply-booking-model.component';
-import { JoinBookingInput } from 'shared/service-proxies/service-proxies';
-import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -38,6 +39,6 @@ export class OptimalBookingTimeModelComponent implements OnInit {
   }
 
   save(input: JoinBookingInput) {
-    this.replyBookingModel.save(input);
+    this.replyBookingModel.init(input);
   }
 }

@@ -30,8 +30,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     ngOnInit() {
     }
 
-    show(hourOfDay?: string): void {
-        this.hourOfDay = hourOfDay;
+    show(): void {
         this.modal.show();
     }
 
@@ -39,9 +38,10 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.modal.hide();
     }
 
-    save(input: JoinBookingInput) {
+    init(input: JoinBookingInput, hourOfDay?: string) {
         this.input = input;
         this.bookingTime = this.t(input.date);
+        this.hourOfDay = hourOfDay;
     }
 
     submit() {
@@ -49,7 +49,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.input.age = 0;
         this.input.emailAddress = '';
         this.input.gender = 0;
-
+        console.log(this.input.name);
         this._bookingServiceProxy
             .joinBooking(this.input)
             .subscribe(result => {

@@ -1,6 +1,6 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
 import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 
 @Component({
@@ -16,7 +16,8 @@ export class BookedComponent implements OnInit {
   toggleSideBarFlag = false;
   @ViewChild('sideBarModel') sideBarModel: UserSideBarComponent;
   constructor(
-    private _route: ActivatedRoute
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,10 @@ export class BookedComponent implements OnInit {
       .queryParams
       .subscribe(params => {
         this.bookingName = params['bookingName'];
+        if (!this.bookingName) {
+          this._router.navigate(['/']);
+        }
+
         this.bookingCustomer = params['bookingCustomer'];
         this.bookingDate = params['bookingDate'];
         this.hourOfDay = params['hourOfDay'];

@@ -2,7 +2,7 @@
     <form #relpyBookingFrom="ngForm">
         <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel"
             aria-hidden="true" [config]="{backdrop: 'static'}">
-            <div class="modal-dialog">
+            <div class="modal-dialog" *ngIf="hourOfDay">
                 <div class="modal-content">
                     <div class="modal-header">
                         <span class="close" (click)="close()">X</span>
