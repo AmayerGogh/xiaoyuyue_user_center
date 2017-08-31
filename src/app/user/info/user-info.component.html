@@ -1,7 +1,7 @@
 <div class="user-profile">
     <div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
         <!-- <div class="rotating-container"> -->
-        <form #userProfile="ngForm">
+        <form #userProfile="ngForm" [@routerTransition]>
             <div class="rotating clearfix">
                 <div class="col-md-12 front" *ngIf="!filpActive">
                     <div class="card">
@@ -68,7 +68,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row op-btn">
                                 <div class="col-xs-6">
                                     <button class="btn btn-block" type="button" (click)="cancel()">取消</button>
                                 </div>
@@ -83,7 +83,8 @@
                 <div class="col-md-12 back" (click)="showEdit()" *ngIf="filpActive">
                     <div class="card">
                         <div class="avatar-wrap">
-                            <div class="img" [ngStyle]="{'background-image': 'url(' + userProfileData.profilePictureUrl + ')'}"></div>
+                            <div class="img" *ngIf="!userProfileData.profilePictureUrl" [ngStyle]="{'background-image': 'url(' + defaultProfilePictureUrl + ')'}"></div>
+                            <div class="img" *ngIf="userProfileData.profilePictureUrl" [ngStyle]="{'background-image': 'url(' + userProfileData.profilePictureUrl + ')'}"></div>
                             <!-- <img [src]="userProfileData.profilePictureUrl"> -->
                         </div>
                         <div class="card-content">

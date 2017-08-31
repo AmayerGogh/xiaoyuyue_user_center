@@ -11,10 +11,10 @@ import { Moment } from 'moment';
     selector: 'xiaoyuyue-reply-booking-model',
     templateUrl: './reply-booking-model.component.html',
     styleUrls: ['./reply-booking-model.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
-    bookingTime: Moment;
+    bookingTime: string;
     hourOfDay: string;
     input: JoinBookingInput = new JoinBookingInput();
     @ViewChild('replyBookingModel') modal: ModalDirective;
@@ -30,8 +30,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     ngOnInit() {
     }
 
-    show(hourOfDay?: string): void {
-        this.hourOfDay = hourOfDay;
+    show(): void {
         this.modal.show();
     }
 
@@ -39,9 +38,10 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.modal.hide();
     }
 
-    save(input: JoinBookingInput) {
+    init(input: JoinBookingInput, hourOfDay?: string) {
         this.input = input;
-        this.bookingTime = input.date;
+        this.bookingTime = this.t(input.date);
+        this.hourOfDay = hourOfDay;
     }
 
     submit() {
@@ -49,13 +49,13 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.input.age = 0;
         this.input.emailAddress = '';
         this.input.gender = 0;
-
+        console.log(this.input.name);
         this._bookingServiceProxy
             .joinBooking(this.input)
             .subscribe(result => {
                 this.close();
                 // let bookedDetail = "?bookingname=" + result.bookingName + "&bookingcustomer=" + result.bookingCustomer + "&bookingdate=" + result.bookingDate + "&hourofday=" + result.hourOfDay;
-                this._router.navigate(['/booking/booked/'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
+                this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
     }
 

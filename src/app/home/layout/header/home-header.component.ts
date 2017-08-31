@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-brow
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { Location } from '@angular/common';
+import { MediaPath } from 'shared/AppConsts';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
@@ -13,7 +14,7 @@ import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 export class HomeHeaderComponent extends AppComponentBase implements OnInit {
     safeProfilePicture: SafeStyle;
     shownLoginName = '';
-    profilePicture = '/assets/common/images/default-profile-picture.png';
+    profilePicture = MediaPath.defaultProfilePictureUrl;
     toggleSideBarFlag: boolean;
 
     @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();

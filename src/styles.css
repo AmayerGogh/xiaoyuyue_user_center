@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+
 html,
 body {
     width: 100%;
@@ -9,6 +10,13 @@ a,
 a:hover,
 a:focus {
     text-decoration: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    border-bottom: 1px solid #D2D2D2 !important;
 }
 
 .bas-reset {
@@ -89,4 +97,27 @@ fieldset[disabled] .form-control,
 .form-group .form-control[disabled],
 fieldset[disabled] .form-group .form-control {
     border-bottom: 1px solid #D2D2D2;
+}
+
+.btn,
+.navbar .navbar-nav>li>a.btn {
+    font-size: 14px;
+}
+
+.radio label span {
+    left: 0px;
+}
+
+a {
+    color: #FF9641;
+}
+
+/* 覆盖FullPage样式 */
+#fp-nav ul li a span, .fp-slidesNav ul li a span,
+#fp-nav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li a.active span, .fp-slidesNav ul li:hover a.active span {
+    background: #FF9641;
+}
+
+#fp-nav ul li .fp-tooltip {
+    color: #FF9641;
 }

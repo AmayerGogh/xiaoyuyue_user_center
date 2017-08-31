@@ -2,6 +2,10 @@
     width: 100%;
     height: 80px;
     line-height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     background-color: #FF9641;
     .common-max-width {
         width: 900px;
