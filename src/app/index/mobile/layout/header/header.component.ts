@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
     href: string = location.href;
     isDefaultSelect: boolean = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length).length > 0;
     menuArr: string[] = ["公众号", "应用场景", "关于我们"];
+    menuAnchorsArr: string[] = ["/mobile#sence", "/mobile#scanSode", "/mobile#about"];
     @Output() isSubMenu: EventEmitter<boolean> = new EventEmitter();
 
     constructor(

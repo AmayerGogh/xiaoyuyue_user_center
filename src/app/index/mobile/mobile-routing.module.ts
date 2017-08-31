@@ -11,7 +11,7 @@ import { NgModule } from '@angular/core';
         RouterModule.forChild([
             {
                 path: '',
-                // canActivateChild: [DeviceSwtichGuard],
+                canActivateChild: [DeviceSwtichGuard],
                 component: MobileComponent,
                 children: [
                     { path: '', component: HomeComponent, canActivate: [DeviceSwtichGuard] },

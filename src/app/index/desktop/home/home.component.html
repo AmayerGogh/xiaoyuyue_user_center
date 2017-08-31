@@ -1,6 +1,7 @@
-<div class="home-wrap">
+<div class="home-wrap" id="fullpage">
     <!-- banner -->
-    <div class="banner-wrap">
+    <xiaoyuyue-header></xiaoyuyue-header>
+    <div class="banner-wrap section">
         <div class="banner-slogan common-max-width">
             <h2>小微企业预约工具<br><small>便捷创建预约工具</small></h2>
             <button class="btn primary-bgcolor" (click)="createBooking()">PC创建</button>
@@ -8,7 +9,7 @@
     </div>
 
     <!-- 关于我们 -->
-    <div class="about-me-wrap">
+    <div class="about-me-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">关于我们</h3>
             <div class="row">
@@ -27,7 +28,12 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="card-head">
-                            <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2">
+                            <!-- <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2"> -->
+                            <div class="video">
+                                    <video controls="controls" draggable="" poster="/assets/common/images/index/about/bg2.jpg" preload="metadata" [src]="" type="video/mp4" width="100%">
+                                        您的浏览器不支持 video 标签。
+                                    </video>
+                                </div>
                         </div>
                         <div class="card-content">
                             <p class="text-item text-title">小预约</p>
@@ -53,7 +59,7 @@
     </div>
 
     <!-- 如何建表 -->
-    <div class="how-table-wrap">
+    <div class="how-table-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">如何建表</h3>
             <div class="row">
@@ -83,7 +89,7 @@
     </div>
 
     <!-- 如何应约 -->
-    <div class="how-booking-wrap">
+    <div class="how-booking-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">如何应约</h3>
             <div class="row">
@@ -114,7 +120,7 @@
 
 
     <!-- 使用场景 -->
-    <div class="usage-scene-wrap">
+    <div class="usage-scene-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">使用场景</h3>
             <div class="row">
@@ -153,7 +159,7 @@
     </div>
 
     <!-- 联系我们 -->
-    <div class="contact-us-wrap">
+    <div class="contact-us-wrap section">
         <div class="common-max-width">
             <div class="row">
                 <div class="col-lg-6">
@@ -215,4 +221,6 @@
             </div>
         </div>
     </div>
+    
+    <xiaoyuyue-footer></xiaoyuyue-footer>
 </div>

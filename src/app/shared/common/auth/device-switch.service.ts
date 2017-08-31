@@ -22,13 +22,12 @@ export class DeviceSwtichGuard implements CanActivate, CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         device.addClasses(document.documentElement);
 
-        if (device.mobile && state.url === '/mobile') {
+        if (device.mobile && (state.url.indexOf('/mobile') >= 0 || state.url.indexOf('mobile#') >= 0)) {
             return true;
-        } else if ((device.tablet || device.desktop) && state.url === '/') {
+        } else if ((device.tablet || device.desktop) && (state.url === '/' || state.url.indexOf('/#') >= 0)) {
             return true;
         }
         this._router.navigate([this.selectBestRoute()]);
-        return false;
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -37,8 +36,10 @@ export class DeviceSwtichGuard implements CanActivate, CanActivateChild {
 
     selectBestRoute(): string {
         if (device.mobile) {
+            console.log(device.mobile);
             return '/mobile';
-        } else  {
+        } else {
+            console.log(device.mobile);
             return '/';
         }
     }
