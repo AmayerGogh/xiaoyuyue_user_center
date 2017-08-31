@@ -18,7 +18,7 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     encapsulation: ViewEncapsulation.None
 })
 export class BookingComponent extends AppComponentBase implements OnInit {
-    showReplyBookingModel: boolean = false;
+    showReplyBookingModel = false;
 
     href: string = document.location.href;
     bookingId;
@@ -34,8 +34,8 @@ export class BookingComponent extends AppComponentBase implements OnInit {
         this._route
         .queryParams
         .subscribe(params => {
-            let date = moment(new Date(params['date']));
-            let selectIndex = params['index'];
+            const date = moment(new Date(params['date']));
+            const selectIndex = params['index'];
             if (date && selectIndex) {
                 this.showReplyBookingModel = true;
             }
@@ -53,6 +53,6 @@ export class BookingComponent extends AppComponentBase implements OnInit {
             .subscribe(result => {
                 this.bookingData = result;
                 this.bookingData.bookingInfo.pictures = _.map(this.bookingData.bookingInfo.pictures, PictureUrlHelper.getBookingPicCompressUrl);
-            }); 
+            });
     }
 }

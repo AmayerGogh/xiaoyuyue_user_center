@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
@@ -27,7 +29,6 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     input: JoinBookingInput = new JoinBookingInput();
 
     href: string = document.location.href;
-    bookingId: string = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
     source = '';
 
     @Input() availableDateItemData: JoinBookingDataInfo[] = [];
@@ -47,27 +48,31 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     ngOnInit(): void {
         this.loadBookingTimeData();
 
-        this.bookingId = this._route.snapshot.paramMap.get('date');
         const self = this;
         if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
             this._route
                 .queryParams
                 .subscribe(params => {
+
+                    const now = moment();
                     self.input.date = moment(new Date(params['date']));
                     self.selectIndex = params['index'];
+                    // this.hourOfDay = _.result(_.find(this.availableDateItemData, { 'date': self.input.date }), 'times')[self.selectIndex];
                     self.replyBookingModel.save(self.input);
                 });
         }
     }
 
     ngAfterViewInit() {
+
         if (this._appAuthService.isLogin() && this.href.indexOf('?') >= 0) {
-            this.replyBookingModel.show();
+
+            this.replyBookingModel.show(this.hourOfDay);
         }
     }
 
     loadBookingTimeData() {
-        let defaultTimeItem = this.availableDateItemData[0];
+        const defaultTimeItem = this.availableDateItemData[0];
 
         if (typeof defaultTimeItem === 'object' && defaultTimeItem.hasOwnProperty('date')) {
             this.selectDate = this.availableDateItemData[0].date.utcOffset('+08:00').format('YYYY-MM-DD');
@@ -85,7 +90,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             disableMobile: 'true',
             enable: this.enableBookingDate.length === 0 ? this.defaultEnableBookingDate : this.enableBookingDate,
             defaultDate: this.enableBookingDate[0],
-            onChange: function (selectedDates, dateStr, instance) {
+            onChange: (selectedDates, dateStr, instance) => {
                 this.input.date = moment(new Date(selectedDates));
                 // self.optimalBookingTimeModel.show();
                 // self.optimalBookingTimeModel.save(self.input);
@@ -102,8 +107,8 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             const exdate = new Date();
             let href = location.href;
             exdate.setDate(exdate.getDate() + 1);
-            this.selectDate = this.input.date.utcOffset('+08:00').format('YYYY-MM-DD');
-            href += `?date=${this.selectDate}&index=${this.selectIndex}`;
+            this.selectDate = this.input.date.utcOffset('+08:00').format('YYYY/MM/DD');
+            href += encodeURI(`?date=${this.selectDate}&index=${this.selectIndex}`);
 
             this._router.navigate(['/auth/login']);
             this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
