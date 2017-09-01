@@ -108,6 +108,10 @@ fieldset[disabled] .form-group .form-control {
     left: 0px;
 }
 
+a {
+    color: #FF9641;
+}
+
 /* 覆盖FullPage样式 */
 #fp-nav ul li a span, .fp-slidesNav ul li a span,
 #fp-nav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li a.active span, .fp-slidesNav ul li:hover a.active span {

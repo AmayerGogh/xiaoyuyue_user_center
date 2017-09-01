@@ -10,12 +10,13 @@ import { RouterModule } from '@angular/router';
     imports: [
         RouterModule.forChild([
             {
-                path: ':id',
-                component: BookingComponent,
+                path: 'booked', component: BookedComponent, pathMatch: 'full'
             },
             {
-                path: 'booked', component: BookedComponent
+                path: ':id',
+                component: BookingComponent,
             }
+
         ])
     ],
     exports: [

@@ -1,7 +1,8 @@
+import { ActivatedRoute, Params } from '@angular/router';
+import { ComboboxItemDto, CommonLookupServiceProxy, EntityDto, GetTenantFeaturesEditOutput, TenantEditDto, TenantServiceProxy, UpdateTenantFeaturesInput } from 'shared/service-proxies/service-proxies';
 import { Injectable, Injector, Input } from '@angular/core';
-import { CommonLookupServiceProxy, ComboboxItemDto, TenantServiceProxy, TenantEditDto, UpdateTenantFeaturesInput, GetTenantFeaturesEditOutput, EntityDto } from "shared/service-proxies/service-proxies";
-import { AppServiceBase } from "shared/services/base.service";
-import { ActivatedRoute, Params } from "@angular/router";
+
+import { AppServiceBase } from 'shared/services/base.service';
 
 @Injectable()
 export class TenantService extends AppServiceBase {

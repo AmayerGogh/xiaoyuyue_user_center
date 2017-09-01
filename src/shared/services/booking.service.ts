@@ -16,7 +16,7 @@ export class BookingService {
 
     loadBookingData() {
         this._bookingServiceProxy
-            .getJoinBookingInfo(this.source, this.bookingId)
+            .getJoinBookingInfo(this.bookingId)
             .subscribe(result => {
                 this.organizationInfoData = result.organizationInfo;
             });

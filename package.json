@@ -73,6 +73,7 @@
     "ts-helpers": "^1.1.2",
     "ts-node": "^3.3.0",
     "typescript": "^2.4.2",
+    "ua-device": "^0.1.10",
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
