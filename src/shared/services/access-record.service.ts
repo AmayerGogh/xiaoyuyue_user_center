@@ -6,17 +6,39 @@ import { AppConsts } from './../AppConsts';
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { UtilsService } from '@abp/utils/utils.service';
+import { async } from '@angular/core/testing';
 import { device } from 'device.js';
 
 const UA = require('ua-device');
 
 @Injectable()
 export class AccessRecordService {
+    outputUa;
+    firstTimeOfDay = true;
+    bookingId;
+    source;
+    weChatSource;
+    accessTime;
+    href;
     constructor(
         private _utilsService: UtilsService,
         private _bookingRecordService: BookingRecordServiceProxy,
         private _appAuthService: AppAuthService
     ) { }
+
+    init(bookingId: number, source: string, weChatSource: string, href: string) {
+        this.bookingId = bookingId;
+        this.source = source;
+        this.weChatSource = weChatSource;
+        this.href = href;
+        this.accessTime = moment();
+        this.outputUa = new UA(window.navigator.userAgent);
+        // 是否首次
+        const bookingidString = this._utilsService.getCookieValue(AppConsts.accessRecord.bookings);
+        if (bookingidString) {
+            this.firstTimeOfDay = bookingidString.split(',').indexOf(bookingId.toString()) < 0;
+        }
+    }
 
     setBookingAccessDailyCookies(bookingId: number) {
         const bookingIdString = bookingId.toString();
@@ -35,31 +57,42 @@ export class AccessRecordService {
         }
     }
 
-    recordBookingAccess(bookingId: number, source: string, weChatSource: string, accessTime: Moment, href: string) {
-        const outputUa = new UA(window.navigator.userAgent);
-
-        // 是否首次
-        const bookingidString = this._utilsService.getCookieValue(AppConsts.accessRecord.bookings);
-        let firstTimeOfDay = true;
-        if (bookingidString) {
-            firstTimeOfDay = bookingidString.split(',').indexOf(bookingId.toString()) < 0;
-        }
-        const hoverSecond = moment().diff(accessTime);
-        const brand = outputUa.device.manufacturer;
-        const isWap = (outputUa.device.type === 'mobile');
-
+    recordBookingAccess(finallyCallback: () => void) {
         const input = new BookingAccessRecordInput();
-        input.firstTimeOfDay = firstTimeOfDay;
-        input.accessUrl = href;
-        input.bookingId = bookingId;
-        input.osName = outputUa.os.name; // 操作系统
-        input.deviceBrand = outputUa.device.manufacturer; // 设备品牌
-        input.source = BookingAccessSourceType.getType(source); // 访问渠道
-        input.weChatSource = WeChatAccessSourceType.getType(source); // 微信内来源
-        input.isWap = (outputUa.device.type === 'mobile'); // 是否移动端
-        input.standingTime = moment().diff(accessTime); // 计算停留时间
-        this._bookingRecordService
-            .recordBookingAccessAsync(input).toPromise()
-            .then(result => { });
+        input.firstTimeOfDay = this.firstTimeOfDay;
+        input.accessUrl = this.href;
+        input.bookingId = this.bookingId;
+        input.osName = this.outputUa.os.name; // 操作系统
+        input.deviceBrand = this.outputUa.device.manufacturer; // 设备品牌
+        input.source = BookingAccessSourceType.getType(this.source); // 访问渠道
+        input.weChatSource = WeChatAccessSourceType.getType(this.source); // 微信内来源
+        input.isWap = (this.outputUa.device.type === 'mobile'); // 是否移动端
+        input.standingTime = moment().diff(this.accessTime); // 计算停留时间
+        const data = JSON.stringify(input.toJSON());
+        // this._bookingRecordService
+        //     .recordBookingAccessAsync(input)
+        //     .toPromise().then(result => {
+        //         finallyCallback();
+        //     });
+
+        return abp.ajax({
+            url: AppConsts.remoteServiceBaseUrl + '/api/services/app/BookingRecord/RecordBookingAccessAsync',
+            method: 'POST',
+            async: false,
+            data: data,
+            headers: {
+                Authorization: 'Bearer ' + abp.auth.getToken(),
+                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
+            },
+            success: function (result) {
+                console.log('');
+
+            },
+            error: function (result, status) {
+                console.log('');
+            }
+        }).done(result => {
+            finallyCallback();
+        });
     }
 }

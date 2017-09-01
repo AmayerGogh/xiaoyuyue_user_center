@@ -29,7 +29,6 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     href: string = document.location.href;
     bookingId;
     bookingData: JoinBookingOutput;
-    accessTime;
     source = '';
     wechatSource = '';
 
@@ -58,13 +57,12 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
                 this.wechatSource = params['wechatSource'];
             });
 
-        this.accessTime = moment();
         this.bookingId = this._route.snapshot.paramMap.get('id');
     }
 
     ngAfterViewInit(): void {
         this.loadBookingData();
-
+        this._accessRecordService.init(this.bookingId, this.source, this.wechatSource, this.href);
     }
 
     loadBookingData() {
@@ -88,19 +86,16 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     ngOnDestroy() {
-        this._accessRecordService.recordBookingAccess(this.bookingId, this.source, this.wechatSource, this.accessTime, this.href);
-        ;
+        this._accessRecordService.recordBookingAccess(() => {
+            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        });
     }
 
     @HostListener('window:beforeunload')
     closeWindow() {
-        this._accessRecordService.recordBookingAccess(this.bookingId, this.source, this.wechatSource, this.accessTime, this.href);
-        this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
-    }
-
-    recordBookingAccess() {
-        // 计算停留时间
-        const hoverSecond = moment().diff(this.accessTime);
+        const result = this._accessRecordService.recordBookingAccess(() => {
+            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        });
     }
     public isBookingHandler(flag: boolean): void {
         this.selectTab(1);
