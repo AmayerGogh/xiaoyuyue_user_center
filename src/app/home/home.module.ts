@@ -9,6 +9,7 @@ import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from 'app/home/layout/header/home-header.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeSideBarComponent } from 'app/home/layout/side-bar/home-side-bar.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { TenantService } from 'shared/services/tenant.service';
 import { TimeLineComponent } from './time-line/time-line.component';
@@ -19,7 +20,8 @@ import { UtilsModule } from '@shared/utils/utils.module';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-
+        
+        InfiniteScrollModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
         TooltipModule.forRoot(),

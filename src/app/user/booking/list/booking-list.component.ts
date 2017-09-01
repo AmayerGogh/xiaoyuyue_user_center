@@ -16,14 +16,18 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     animations: [appModuleAnimation()]
 })
 export class BookingListComponent extends AppComponentBase implements OnInit, AfterViewInit {
+    isLoaded: boolean = false;
+    isLoading: boolean = false;
+    infiniteScrollDistance: number = 2;
+    infiniteScrollThrottle: number = 300;
     currentTabIndex = 0;
     personBookingTotalCount: number;
+    allPrsonBookingDatas: any[] = [];
     personBookingDatas: BookingOrderListDto[];
     stickedInput: StickedInput = new StickedInput();
     status: Status3[] = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
     bookingName = '';
-    // pageSize: number = AppConsts.grid.defaultPageSize;
-    pageSize: number;
+    pageSize: number = 10;
     skip = 0;
     sort: any;
     actionFlag: boolean[] = [];
@@ -60,10 +64,15 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
             //   sorting = state.sort[0].field + " " + state.sort[0].dir;
             // }
         }
+        this.isLoading = true;
         this._perBookingOrderServiceProxy
             .getBookingOrders(this.bookingName, this.status, sorting, maxResultCount, skipCount)
+            .finally(() => {
+                this.isLoading = false;
+            })
             .subscribe(result => {
                 this.personBookingDatas = result.items;
+                this.allPrsonBookingDatas.push(this.personBookingDatas);
                 this.personBookingTotalCount = result.totalCount;
             });
     }
@@ -82,7 +91,12 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
             this.status = [AppStatus.State5];
         } else {
             this.message.warn('努力完善中', '敬请期待');
+            this.allPrsonBookingDatas = [];
+            this.skip = 0;
+            return;
         }
+        this.allPrsonBookingDatas = [];
+        this.skip = 0;
         this.loadPersonBookingData();
     }
 
@@ -139,5 +153,15 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
         if (event) {
             this.loadPersonBookingData();
         }
+    }
+
+    public onScrollDown(): void {
+
+        if (this.skip > (this.personBookingTotalCount-this.pageSize)) {
+            this.isLoaded = true;
+            return;
+        }
+        this.skip += this.pageSize;
+        this.loadPersonBookingData();
     }
 }
