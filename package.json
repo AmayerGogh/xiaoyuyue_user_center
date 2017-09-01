@@ -57,6 +57,7 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "ngx-bootstrap": "^1.8.1",
+    "ngx-infinite-scroll": "^0.5.1",
     "ngxani": "^1.2.2",
     "push.js": "^1.0.4",
     "qiniu-js": "1.0.19",
