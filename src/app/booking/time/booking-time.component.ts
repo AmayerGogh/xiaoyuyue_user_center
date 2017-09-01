@@ -124,4 +124,9 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             return false;
         }
     }
+
+    showOptimalBookingTimeModel(): void {
+        this.replyBookingModel.show();
+        this.replyBookingModel.init(this.input, this.availableDateItemData[0].times[0].hourOfDay);
+    }
 }
