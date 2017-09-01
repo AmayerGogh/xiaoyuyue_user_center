@@ -31,6 +31,10 @@ export class AppConsts {
         pageSizes: [5, 10, 20, 50, 100],
         maxPageSize: 1000,
     }
+
+    static readonly accessRecord = {
+        bookings: 'access_bookings'
+    };
 }
 
 export class MediaPath {

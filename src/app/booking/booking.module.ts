@@ -3,6 +3,7 @@ import * as ngCommon from '@angular/common';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { ModalModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
+import { AccessRecordService } from 'shared/services/access-record.service';
 import { BookedComponent } from './booked/booked.component';
 import { BookingAboutComponent } from './about/booking-about.component';
 import { BookingCommentsComponent } from './comments/booking-comments.component';
@@ -46,7 +47,8 @@ import { UtilsModule } from 'shared/utils/utils.module';
         FooterAdComponent
     ],
     providers: [
-        BookingService
+        BookingService,
+        AccessRecordService
     ]
 })
 export class BookingModule {
