@@ -8,6 +8,7 @@ import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { TenantService } from 'shared/services/tenant.service';
 import { UserComponent } from './user.component';
@@ -25,6 +26,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         CommonModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
+        InfiniteScrollModule,
 
         UserRoutingModule,
         UtilsModule,

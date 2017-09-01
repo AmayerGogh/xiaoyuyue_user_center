@@ -14,12 +14,18 @@ import { Router } from '@angular/router';
     styleUrls: ['./time-line.component.scss']
 })
 export class TimeLineComponent implements OnInit {
+    allPerBookingOrderData: any[] = [];
     totalCount: number;
-    perBookingOrderData: BookingTimelineDto[];
-    skipCount: number;
-    maxResultCount: number;
+    perBookingOrderData: BookingTimelineDto[] = [];
+    skipCount: number = 0;
+    maxResultCount: number = 10;
     startDataTime: Moment;
     slogan = '啥都没有，赶紧去预约吧';
+
+    infiniteScrollDistance: number = 2;
+    infiniteScrollThrottle: number = 300;
+    isLoaded: boolean = false;
+    isLoading: boolean = false;
 
     constructor
         (
@@ -36,9 +42,8 @@ export class TimeLineComponent implements OnInit {
             .getBookingTimeline(this.startDataTime, this.maxResultCount, this.skipCount)
             .subscribe(result => {
                 this.totalCount = result.totalCount;
-                this.perBookingOrderData = result.items;
-
-                this.perBookingOrderData = _.map(this.perBookingOrderData, this.converTimelineData);
+                this.perBookingOrderData = _.map(result.items, this.converTimelineData);
+                this.allPerBookingOrderData.push(this.perBookingOrderData);
             })
     }
 
@@ -49,5 +54,14 @@ export class TimeLineComponent implements OnInit {
     converTimelineData(item: BookingTimelineDto): BookingTimelineDto {
         item.orgLogoUrl = PictureUrlHelper.getTimelinePicCompressUrl(item.orgLogoUrl);
         return item;
+    }
+
+    public onScrollDown(): void {
+        if (this.skipCount > (this.totalCount - this.maxResultCount)) {
+            this.isLoaded = true;
+            return;
+        }
+        this.skipCount += this.maxResultCount;
+        this.loadData();
     }
 }

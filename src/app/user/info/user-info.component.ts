@@ -7,11 +7,13 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppGender } from 'shared/AppEnums';
 import { CurrentUserProfileEditDto } from '@shared/service-proxies/service-proxies';
 import { MediaPath } from 'shared/AppConsts';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-user-info',
     templateUrl: './user-info.component.html',
-    styleUrls: ['./user-info.component.scss']
+    styleUrls: ['./user-info.component.scss'],
+    animations: [appModuleAnimation()]
 })
 export class UserInfoComponent extends AppComponentBase implements OnInit, AfterViewInit {
 
