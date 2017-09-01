@@ -20,6 +20,7 @@ import { NgModule } from '@angular/core';
         ApiServiceProxies.BookingServiceProxy,
         ApiServiceProxies.SMSTemplateServiceProxy,
         ApiServiceProxies.PerBookingOrderServiceProxy,
+        ApiServiceProxies.BookingRecordServiceProxy
 
     ]
 })
