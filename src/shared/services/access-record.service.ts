@@ -57,6 +57,7 @@ export class AccessRecordService {
         }
     }
 
+
     recordBookingAccess(finallyCallback: () => void) {
         const input = new BookingAccessRecordInput();
         input.firstTimeOfDay = this.firstTimeOfDay;
@@ -69,30 +70,30 @@ export class AccessRecordService {
         input.isWap = (this.outputUa.device.type === 'mobile'); // 是否移动端
         input.standingTime = moment().diff(this.accessTime); // 计算停留时间
         const data = JSON.stringify(input.toJSON());
-        // this._bookingRecordService
-        //     .recordBookingAccessAsync(input)
-        //     .toPromise().then(result => {
-        //         finallyCallback();
-        //     });
+        this._bookingRecordService
+            .recordBookingAccessAsync(input)
+            .subscribe(result => {
+                finallyCallback();
+            });
 
-        return abp.ajax({
-            url: AppConsts.remoteServiceBaseUrl + '/api/services/app/BookingRecord/RecordBookingAccessAsync',
-            method: 'POST',
-            async: false,
-            data: data,
-            headers: {
-                Authorization: 'Bearer ' + abp.auth.getToken(),
-                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
-            },
-            success: function (result) {
-                console.log('');
+        // return abp.ajax({
+        //     url: AppConsts.remoteServiceBaseUrl + '/api/services/app/BookingRecord/RecordBookingAccessAsync',
+        //     method: 'POST',
+        //     async: false,
+        //     data: data,
+        //     headers: {
+        //         Authorization: 'Bearer ' + abp.auth.getToken(),
+        //         'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
+        //     },
+        //     success: function (result) {
+        //         console.log('');
 
-            },
-            error: function (result, status) {
-                console.log('');
-            }
-        }).done(result => {
-            finallyCallback();
-        });
+        //     },
+        //     error: function (result, status) {
+        //         console.log('');
+        //     }
+        // }).done(result => {
+        //     finallyCallback();
+        // });
     }
 }
