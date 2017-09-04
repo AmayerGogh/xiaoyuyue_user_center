@@ -121,3 +121,8 @@ a {
 #fp-nav ul li .fp-tooltip {
     color: #FF9641;
 }
+
+/* 覆盖bootstrap tabs样式 */
+.side-bar .nav-tabs {
+    margin-bottom: 4px; /* 给底部阴影留出边距 */
+}
