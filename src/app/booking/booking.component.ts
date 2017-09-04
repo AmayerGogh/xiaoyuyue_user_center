@@ -80,8 +80,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             this.optimalBookingTime = undefined;
             return;
         }
-        let bookingData = this.bookingData.availableDateItem[0].date.local().format('YYYY-MM-DD');
-        let bookingTime = this.bookingData.availableDateItem[0].times[0].hourOfDay;
+        const bookingData = this.bookingData.availableDateItem[0].date.local().format('YYYY-MM-DD');
+        const bookingTime = this.bookingData.availableDateItem[0].times[0].hourOfDay;
         this.optimalBookingTime = bookingData + ' ' + bookingTime;
     }
 
@@ -91,7 +91,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         });
     }
 
-    @HostListener('window:beforeunload')
+    @HostListener('window:pagehide')
     closeWindow() {
         const result = this._accessRecordService.recordBookingAccess(() => {
             this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
