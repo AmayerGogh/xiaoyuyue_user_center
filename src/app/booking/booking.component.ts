@@ -1,10 +1,11 @@
 import * as _ from 'lodash';
 
+import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, HostListener, Injector, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingInfoDto, JoinBookingOutput } from 'shared/service-proxies/service-proxies';
 
 import { AccessRecordService } from 'shared/services/access-record.service';
-import { ActivatedRoute } from '@angular/router';
+import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
 import { Moment } from 'moment';
@@ -38,7 +39,10 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         injector: Injector,
         private _route: ActivatedRoute,
         private _accessRecordService: AccessRecordService,
-        private _bookingServiceProxy: BookingServiceProxy
+        private _bookingServiceProxy: BookingServiceProxy,
+        private _appAuthService: AppAuthService,
+        private _utilsService: UtilsService,
+        private _router: Router
     ) {
         super(injector);
     }
@@ -98,6 +102,14 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         });
     }
     public isBookingHandler(flag: boolean): void {
+        if (!this._appAuthService.isLogin()) {
+            const exdate = new Date();
+            let href = location.href;
+            exdate.setDate(exdate.getDate() + 1);
+
+            this._router.navigate(['/auth/login']);
+            this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
+        }
         this.selectTab(1);
         this.bookingTimeModel.showOptimalBookingTimeModel();
     }
