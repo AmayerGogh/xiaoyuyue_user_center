@@ -67,6 +67,9 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     ngAfterViewInit(): void {
         this.loadBookingData();
         this._accessRecordService.init(this.bookingId, this.source, this.wechatSource, this.href);
+        this._accessRecordService.recordBookingAccess(() => {
+            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        });
     }
 
     loadBookingData() {
@@ -90,17 +93,17 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     ngOnDestroy() {
-        this._accessRecordService.recordBookingAccess(() => {
-            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
-        });
+        // this._accessRecordService.recordBookingAccess(() => {
+        //     this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        // });
     }
 
-    @HostListener('window:pagehide')
-    closeWindow() {
-        const result = this._accessRecordService.recordBookingAccess(() => {
-            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
-        });
-    }
+    // @HostListener('window:pagehide')
+    // closeWindow() {
+    //     const result = this._accessRecordService.recordBookingAccess(() => {
+    //         this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+    //     });
+    // }
     public isBookingHandler(flag: boolean): void {
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
