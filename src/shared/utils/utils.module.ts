@@ -1,16 +1,14 @@
-﻿import { CurrencyInputDirective } from './currency-input.directive';
-import { MinValueValidator } from './validation/min-value-validator.directive';
-import { NgModule } from '@angular/core';
-
-import { FileDownloadService } from './file-download.service';
-import { EqualValidator } from './validation/equal-validator.directive';
-import { PasswordComplexityValidator } from './validation/password-complexity-validator.directive'
-import { ButtonBusyDirective } from './button-busy.directive'
-import { AutoFocusDirective } from './auto-focus.directive'
+﻿import { AutoFocusDirective } from './auto-focus.directive'
 import { BusyIfDirective } from './busy-if.directive';
+import { ButtonBusyDirective } from './button-busy.directive'
+import { CurrencyInputDirective } from './currency-input.directive';
+import { EqualValidator } from './validation/equal-validator.directive';
+import { FileDownloadService } from './file-download.service';
 import { LocalStorageService } from './local-storage.service';
-import { FriendProfilePictureComponent } from './friend-profile-picture.component';
+import { MinValueValidator } from './validation/min-value-validator.directive';
 import { MomentFormatPipe } from './moment-format.pipe';
+import { NgModule } from '@angular/core';
+import { PasswordComplexityValidator } from './validation/password-complexity-validator.directive'
 
 @NgModule({
     providers: [
@@ -24,7 +22,6 @@ import { MomentFormatPipe } from './moment-format.pipe';
         ButtonBusyDirective,
         AutoFocusDirective,
         BusyIfDirective,
-        FriendProfilePictureComponent,
         MomentFormatPipe,
         CurrencyInputDirective
     ],
@@ -35,7 +32,6 @@ import { MomentFormatPipe } from './moment-format.pipe';
         ButtonBusyDirective,
         AutoFocusDirective,
         BusyIfDirective,
-        FriendProfilePictureComponent,
         MomentFormatPipe,
         CurrencyInputDirective
     ]

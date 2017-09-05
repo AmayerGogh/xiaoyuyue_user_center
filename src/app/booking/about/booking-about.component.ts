@@ -24,7 +24,7 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
     businessAboutData: JoinBookingInfoDto;
     @Input()
     optimalBookingTime: string;
-    @Output() 
+    @Output()
     isBooking: EventEmitter<boolean> = new EventEmitter();
 
     public constructor(
