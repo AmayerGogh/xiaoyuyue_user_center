@@ -45,7 +45,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
     ngAfterViewInit() {
         // TODO: 暂时处理
-        this.currentPhoneNum ? $("#headerTitle").text("更换手机") : $("#headerTitle").text("绑定手机");
+        $('#headerTitle').text('更绑手机')
     }
 
     verificationPhoneNum(): void {

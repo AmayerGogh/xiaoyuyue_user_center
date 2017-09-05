@@ -44,7 +44,7 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
     }
 
     initSwiper(): void {
-        const swiper = new Swiper('.swiper-container', {
+        const swiper = new Swiper('#bookingAboutSwiperContainer', {
             pagination: '.swiper-pagination',
             paginationClickable: true
         });
