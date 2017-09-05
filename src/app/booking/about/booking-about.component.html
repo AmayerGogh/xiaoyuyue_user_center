@@ -14,7 +14,7 @@
     </div>
     <div class="about-body about-item">
         <div class="banner-wrap item" *ngIf="businessAboutData">
-            <div class="swiper-container">
+            <div class="swiper-container" id="bookingAboutSwiperContainer">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let item of businessAboutData.pictures">
                         <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span>
@@ -44,7 +44,9 @@
                     <span class="desc">{{businessAboutData.contactorName}}</span>
                 </div>
             </div>
-            <div class="item-right"><span class="btn primary-bgcolor  vapps-icon-app-qr-code"></span></div>
+            <ng-template #popTemplate ><img [src]="businessAboutData.contactorWechatUrl" width="150px" ></ng-template>
+            <!-- <img [src]="businessAboutData.contactorWechatUrl" width="150px" > -->
+            <div class="item-right" placement="left" [tooltip]="popTemplate"><span class="btn primary-bgcolor  vapps-icon-app-qr-code"></span></div>
         </div>
         <div class="phone item">
             <div class="item-left">

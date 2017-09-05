@@ -7,7 +7,8 @@ export class appLoadingBusy {
     static setBusy(): void {
         let bodyEle = $('body');
         let effectTextWrap = $('<div></div>').addClass('effect-text-wrap');
-        let imgLogo = $('<img>').addClass('logo').attr('src','/assets/common/images/login/logo-colorized.jpg');
+        let imgLogo = $('<img>').addClass('logo').attr('src', '/assets/common/images/login/logo-colorized.jpg');
+        imgLogo.attr('width', '96px');
         let appLoadingBusyWrap = $('<div></div>').addClass('app-loading-busy-wrap');
 
         bodyEle.append(appLoadingBusyWrap);
@@ -21,6 +22,6 @@ export class appLoadingBusy {
     };
 
     static clearBusy(): void {
-       $('.app-loading-busy-wrap').remove();
-     };
+        $('.app-loading-busy-wrap').remove();
+    };
 };
