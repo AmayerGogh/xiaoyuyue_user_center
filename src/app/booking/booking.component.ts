@@ -67,6 +67,9 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     ngAfterViewInit(): void {
         this.loadBookingData();
         this._accessRecordService.init(this.bookingId, this.source, this.wechatSource, this.href);
+        this._accessRecordService.recordBookingAccess(() => {
+            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        });
     }
 
     loadBookingData() {
@@ -84,23 +87,23 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             this.optimalBookingTime = undefined;
             return;
         }
-        let bookingData = this.bookingData.availableDateItem[0].date.local().format('YYYY-MM-DD');
-        let bookingTime = this.bookingData.availableDateItem[0].times[0].hourOfDay;
+        const bookingData = this.bookingData.availableDateItem[0].date.local().format('YYYY-MM-DD');
+        const bookingTime = this.bookingData.availableDateItem[0].times[0].hourOfDay;
         this.optimalBookingTime = bookingData + ' ' + bookingTime;
     }
 
     ngOnDestroy() {
-        this._accessRecordService.recordBookingAccess(() => {
-            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
-        });
+        // this._accessRecordService.recordBookingAccess(() => {
+        //     this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+        // });
     }
 
-    @HostListener('window:beforeunload')
-    closeWindow() {
-        const result = this._accessRecordService.recordBookingAccess(() => {
-            this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
-        });
-    }
+    // @HostListener('window:pagehide')
+    // closeWindow() {
+    //     const result = this._accessRecordService.recordBookingAccess(() => {
+    //         this._accessRecordService.setBookingAccessDailyCookies(this.bookingId);
+    //     });
+    // }
     public isBookingHandler(flag: boolean): void {
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
