@@ -4,6 +4,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { ModalModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { AccessRecordService } from 'shared/services/access-record.service';
+import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { BookedComponent } from './booked/booked.component';
 import { BookingAboutComponent } from './about/booking-about.component';
 import { BookingCommentsComponent } from './comments/booking-comments.component';
@@ -13,6 +14,7 @@ import { BookingRoutingModule } from './booking-routing.module';
 import { BookingService } from 'shared/services/booking.service';
 import { BookingSideBarComponent } from './layout/side-bar/side-bar.component';
 import { BookingTimeComponent } from './time/booking-time.component';
+import { CommonModule } from 'shared/common/common.module';
 import { FooterAdComponent } from './layout/footer-ad/footer-ad.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -32,7 +34,8 @@ import { UtilsModule } from 'shared/utils/utils.module';
         TabsModule.forRoot(),
         TooltipModule.forRoot(),
 
-        UtilsModule,
+        AppCommonModule,
+        UtilsModule
     ],
     declarations: [
         BookingComponent,

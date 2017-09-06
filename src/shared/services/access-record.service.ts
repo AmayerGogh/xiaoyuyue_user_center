@@ -1,4 +1,4 @@
-import { BookingAccessRecordInput, BookingRecordServiceProxy, OutletServiceServiceProxy } from './../service-proxies/service-proxies';
+import { BookingAccessRecordInput, BookingRecordServiceProxy, BookingShareRecordInput, OutletServiceServiceProxy } from './../service-proxies/service-proxies';
 import { BookingAccessSourceType, WeChatAccessSourceType } from './../AppEnums';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
@@ -6,6 +6,7 @@ import { AppConsts } from './../AppConsts';
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { UtilsService } from '@abp/utils/utils.service';
+import { WeChatShareResultDto } from "app/shared/utils/wechat-share-timeline.input.dto";
 import { async } from '@angular/core/testing';
 import { device } from 'device.js';
 
@@ -57,7 +58,6 @@ export class AccessRecordService {
         }
     }
 
-
     recordBookingAccess(finallyCallback: () => void) {
         const input = new BookingAccessRecordInput();
         input.firstTimeOfDay = this.firstTimeOfDay;
@@ -95,5 +95,19 @@ export class AccessRecordService {
         // }).done(result => {
         //     finallyCallback();
         // });
+    }
+
+    recordBookingShare(resultDto: WeChatShareResultDto, finallyCallback: () => void) {
+        const input = new BookingShareRecordInput();
+
+        input.bookingId = this.bookingId;
+        input.shareUrl = this.href;
+        input.target = BookingAccessSourceType.getType(resultDto.target); // 分享渠道 ;
+        const data = JSON.stringify(input.toJSON());
+        this._bookingRecordService
+            .recordBookingShareAsync(input)
+            .subscribe(result => {
+                finallyCallback();
+            });
     }
 }

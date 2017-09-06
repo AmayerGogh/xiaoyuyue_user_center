@@ -3,10 +3,12 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, HostListener, Injector, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingInfoDto, JoinBookingOutput } from 'shared/service-proxies/service-proxies';
+import { WeChatShareInputDto, WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 
 import { AccessRecordService } from 'shared/services/access-record.service';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppConsts } from 'shared/AppConsts';
 import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
@@ -32,6 +34,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     bookingData: JoinBookingOutput;
     source = '';
     wechatSource = '';
+    shareInput: WeChatShareInputDto = new WeChatShareInputDto();
 
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
     @ViewChild('bookingTimeModel') bookingTimeModel: BookingTimeComponent;
@@ -58,7 +61,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
                 }
 
                 this.source = params['source'];
-                this.wechatSource = params['wechatSource'];
+                this.wechatSource = params['from'];
             });
 
         this.bookingId = this._route.snapshot.paramMap.get('id');
@@ -79,6 +82,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
                 this.bookingData = result;
                 this.bookingData.bookingInfo.pictures = _.map(this.bookingData.bookingInfo.pictures, PictureUrlHelper.getBookingPicCompressUrl);
                 this.getOptimalBookingTime();
+                this.initWechatShareConfig();
             });
     }
 
@@ -107,7 +111,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     public isBookingHandler(flag: boolean): void {
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();
-            let href = location.href;
+            const href = location.href;
             exdate.setDate(exdate.getDate() + 1);
 
             this._router.navigate(['/auth/login']);
@@ -119,5 +123,19 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
 
     selectTab(tabId: number) {
         this.staticTabs.tabs[tabId].active = true;
+    }
+
+    initWechatShareConfig() {
+        this.shareInput.sourceUrl = this.href;
+        this.shareInput.title = this.bookingData.bookingInfo.name;
+        this.shareInput.desc = this.bookingData.bookingInfo.description;
+        this.shareInput.imgUrl = this.bookingData.organizationInfo.logoUrl;
+        this.shareInput.link = AppConsts.appBaseUrl + '/booking/' + this.bookingId + '?source=wechat';
+    }
+
+    shareCallBack(result: WeChatShareResultDto) {
+        if (result) {
+            this._accessRecordService.recordBookingShare(result, () => { });
+        }
     }
 }

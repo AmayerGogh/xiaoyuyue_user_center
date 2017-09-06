@@ -9,19 +9,13 @@ import { NgModule } from '@angular/core';
         ApiServiceProxies.TenantRegistrationServiceProxy,
         ApiServiceProxies.TokenAuthServiceProxy,
 
-        ApiServiceProxies.OrgBookingServiceProxy,
-        ApiServiceProxies.PerBookingOrderServiceProxy,
-        ApiServiceProxies.OutletServiceServiceProxy,
         ApiServiceProxies.PictureServiceProxy,
-        ApiServiceProxies.SMSTemplateServiceProxy,
-
         ApiServiceProxies.ProfileServiceProxy,
         ApiServiceProxies.SMSServiceProxy,
         ApiServiceProxies.BookingServiceProxy,
-        ApiServiceProxies.SMSTemplateServiceProxy,
         ApiServiceProxies.PerBookingOrderServiceProxy,
-        ApiServiceProxies.BookingRecordServiceProxy
-
+        ApiServiceProxies.BookingRecordServiceProxy,
+        ApiServiceProxies.WeChatJSServiceProxy
     ]
 })
 export class ServiceProxyModule { }
