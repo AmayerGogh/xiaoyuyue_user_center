@@ -21,6 +21,10 @@ export class WeChatShareTimelineComponent extends AppComponentBase implements On
     }
 
     ngOnInit(): void {
+        this.initWeChatShareConfig();
+    }
+
+    initWeChatShareConfig() {
         this.result.shareUrl = this.input.sourceUrl;
         this.result.target = 'WeChat';
         const nonceStr = RandomHelper.randomString(10);

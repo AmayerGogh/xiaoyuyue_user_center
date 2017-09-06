@@ -63,7 +63,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     }
 
     ngAfterViewInit(): void {
-        let self = this;
+        const self = this;
         // 解决Chrome浏览器自动填充的BUG
         setTimeout(() => {
             $('input:-webkit-autofill').addClass('edited')
@@ -106,20 +106,11 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         );
     }
 
-    is_weixn() {
-        var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) + '' == 'micromessenger') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
         $event.cancelBubble = true;
         this.flag && this.loginService.externalAuthenticate(provider); //执行第三方登陆逻辑
 
-        if (provider.name == 'WeChat' && this.flag) {
+        if (provider.name === 'WeChat' && this.flag) {
             // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
             this.animationShow(elementRef, externalContent);
         } else {
