@@ -65,4 +65,13 @@ export abstract class AppComponentBase {
     omitString(str: string): string {
         return abp.utils.truncateStringWithPostfix(str, 20);
     }
+
+    is_weixn() {
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + '' === 'micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
