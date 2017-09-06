@@ -225,3 +225,5 @@ interface String {
 // }
 
 declare var moment: any;
+
+declare var wx: any;
