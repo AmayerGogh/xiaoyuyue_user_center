@@ -2,17 +2,18 @@
     <div class="tenant-wrap card-shadow">
         <div class="tenant-bg-wrap"><img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg"></div>
         <div class="tenant-info">
-            <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}}{{bookingOrderForEdidData.bookingInfo.outletName}}</div>
+            <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}} {{bookingOrderForEdidData.bookingInfo.outletName}}</div>
             <div class="contact">
                 <span class="item-left">
                     <div class="content-wrap">
                         <span class="item-left gray-icon vapps-icon-app-contact"></span>
-                <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
-            </div>
-            </span>
-            <span class="item-right text-center">
-                <span class="orange-icon vapps-icon-app-qr-code"></span>
-            </span>
+                        <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
+                    </div>
+                </span>
+                <ng-template #popTemplate ><img [src]="bookingOrderForEdidData.bookingInfo.contactorQrcode" width="150px" ></ng-template>
+                <span class="item-right text-center" placement="left" [tooltip]="popTemplate">
+                    <span class="orange-icon vapps-icon-app-qr-code"></span>
+                </span>
         </div>
     </div>
 </div>

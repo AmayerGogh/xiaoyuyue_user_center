@@ -14,15 +14,15 @@ export class FooterAdComponent implements OnInit {
     }
 
     ngAfterViewInit() {
-        setTimeout(() => {
-            this.initSwiper();
-        }, 500);
+        // setTimeout(() => {
+        //     this.initSwiper();
+        // }, 500);
     }
 
     initSwiper(): void {
         var swiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination',
-            paginationClickable: true
+            // pagination: '.swiper-pagination',
+            // paginationClickable: true
         });
     }
 }

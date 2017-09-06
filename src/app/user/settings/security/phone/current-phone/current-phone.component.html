@@ -1,6 +1,6 @@
 <!-- 验证旧手机  -->
-<div class="current-phone-wrap" *ngIf="!currentPhoneNum ? false :  !isVerified">
-    <div [@routerTransition]>
+<div class="current-phone-wrap">
+    <div [@routerTransition]  *ngIf="!currentPhoneNum ? false :  !isVerified">
         <form #currentPhoneFrom="ngForm">
             <div class="card">
                 <div class="row">

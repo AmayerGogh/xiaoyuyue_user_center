@@ -26,6 +26,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         CommonModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
+        TooltipModule.forRoot(),
         InfiniteScrollModule,
 
         UserRoutingModule,
