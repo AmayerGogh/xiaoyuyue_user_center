@@ -11,7 +11,7 @@ export class AppAuthService {
     ) { }
 
     logout(reload?: boolean, returnUrl?: string): void {
-        abp.auth.clearToken();
+        this._cookiesService.clearToken();
         if (reload !== false) {
             if (returnUrl) {
                 location.href = returnUrl;
