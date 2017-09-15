@@ -3,10 +3,11 @@ import { BookingAccessSourceType, WeChatAccessSourceType } from './../AppEnums';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppConsts } from './../AppConsts';
+import { CookiesService } from './cookies.service';
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
 import { UtilsService } from '@abp/utils/utils.service';
-import { WeChatShareResultDto } from "app/shared/utils/wechat-share-timeline.input.dto";
+import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { async } from '@angular/core/testing';
 import { device } from 'device.js';
 
@@ -22,7 +23,7 @@ export class AccessRecordService {
     accessTime;
     href;
     constructor(
-        private _utilsService: UtilsService,
+        private _cookiesService: CookiesService,
         private _bookingRecordService: BookingRecordServiceProxy,
         private _appAuthService: AppAuthService
     ) { }
@@ -35,7 +36,7 @@ export class AccessRecordService {
         this.accessTime = moment();
         this.outputUa = new UA(window.navigator.userAgent);
         // 是否首次
-        const bookingidString = this._utilsService.getCookieValue(AppConsts.accessRecord.bookings);
+        const bookingidString = this._cookiesService.getCookieValue(AppConsts.accessRecord.bookings);
         if (bookingidString) {
             this.firstTimeOfDay = bookingidString.split(',').indexOf(bookingId.toString()) < 0;
         }
@@ -44,16 +45,16 @@ export class AccessRecordService {
     setBookingAccessDailyCookies(bookingId: number) {
         const bookingIdString = bookingId.toString();
         const cookiesExpireDate = moment().endOf('day').toDate();
-        const bookingidString = this._utilsService.getCookieValue(AppConsts.accessRecord.bookings);
+        const bookingidString = this._cookiesService.getCookieValue(AppConsts.accessRecord.bookings);
         let bookingIds = [];
         if (bookingidString) {
-            bookingIds = this._utilsService.getCookieValue(AppConsts.accessRecord.bookings).split(',');
+            bookingIds = this._cookiesService.getCookieValue(AppConsts.accessRecord.bookings).split(',');
         }
         if (bookingIds.indexOf(bookingIdString) >= 0) {
             return;
         } else {
             bookingIds.push(bookingIdString);
-            this._utilsService.setCookieValue(AppConsts.accessRecord.bookings, bookingIds.join(','), cookiesExpireDate,
+            this._cookiesService.setCookieValue(AppConsts.accessRecord.bookings, bookingIds.join(','), cookiesExpireDate,
                 abp.appPath)
         }
     }

@@ -14,5 +14,5 @@
             <xiaoyuyue-booking-comments></xiaoyuyue-booking-comments>
         </tab>
     </tabset>
-    <wechat-share-timeline *ngIf="is_weixn()" (successAction)="shareCallBack($event)" [input]="shareInput"></wechat-share-timeline>
+    <wechat-share-timeline (successAction)="shareCallBack($event)" [input]="shareInput"></wechat-share-timeline>
 </div>

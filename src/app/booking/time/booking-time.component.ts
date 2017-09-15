@@ -6,6 +6,7 @@ import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBooking
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { CookiesService } from 'shared/services/cookies.service';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
 import { UtilsService } from '@abp/utils/utils.service';
@@ -40,7 +41,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         private _router: Router,
         private _bookingServiceProxy: BookingServiceProxy,
         private _appAuthService: AppAuthService,
-        private _utilsService: UtilsService,
+        private _cookiesService: CookiesService,
     ) {
         super(injector);
     }
@@ -110,7 +111,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             href += encodeURI(`?date=${this.selectDate}&index=${this.selectIndex}`);
 
             this._router.navigate(['/auth/login']);
-            this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
+            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
         this.replyBookingModel.init(this.input, time.hourOfDay);
