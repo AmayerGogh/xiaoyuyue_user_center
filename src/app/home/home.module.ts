@@ -2,7 +2,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { AppCommonModule } from 'app/shared/common/app-common.module';
-import { AppStorageService } from 'shared/services/storage.service';
 import { CommonModule } from '@angular/common';
 import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { HomeComponent } from './home.component';
@@ -11,7 +10,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeSideBarComponent } from 'app/home/layout/side-bar/home-side-bar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
-import { TenantService } from 'shared/services/tenant.service';
 import { TimeLineComponent } from './time-line/time-line.component';
 import { UtilsModule } from '@shared/utils/utils.module';
 
@@ -20,7 +18,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        
+
         InfiniteScrollModule,
         ModalModule.forRoot(),
         TabsModule.forRoot(),
@@ -39,10 +37,8 @@ import { UtilsModule } from '@shared/utils/utils.module';
         EmptyPageComponent
     ],
     providers: [
-        AppStorageService,
         HomeSideBarComponent,
-        HomeHeaderComponent,
-        TenantService
+        HomeHeaderComponent
     ]
 })
 export class HomeModule {

@@ -61,7 +61,6 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
         LuosimaoCaptcha
     ],
     providers: [
-        LoginService,
         TenantRegistrationHelperService,
         TooltipModule
     ]

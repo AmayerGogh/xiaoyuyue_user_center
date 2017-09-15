@@ -10,6 +10,7 @@ import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from 'shared/AppConsts';
 import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
+import { CookiesService } from './../../shared/services/cookies.service';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
@@ -44,7 +45,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         private _accessRecordService: AccessRecordService,
         private _bookingServiceProxy: BookingServiceProxy,
         private _appAuthService: AppAuthService,
-        private _utilsService: UtilsService,
+        private _cookiesService: CookiesService,
         private _router: Router
     ) {
         super(injector);
@@ -115,7 +116,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             exdate.setDate(exdate.getDate() + 1);
 
             this._router.navigate(['/auth/login']);
-            this._utilsService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
+            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
         }
         this.selectTab(1);
         this.bookingTimeModel.showOptimalBookingTimeModel();
