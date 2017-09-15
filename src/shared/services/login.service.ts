@@ -2,11 +2,11 @@ import * as _ from 'lodash';
 
 import { AuthenticateModel, AuthenticateResultModel, ExternalAuthenticateModel, ExternalAuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy, WebLogServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Headers, Http, Response } from '@angular/http';
+import { Injectable, transition } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
 import { AppConsts } from '@shared/AppConsts';
 import { CookiesService } from 'shared/services/cookies.service';
-import { Injectable } from '@angular/core';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
@@ -265,7 +265,7 @@ export class LoginService {
 
     private facebookLoginStatusChangeCallback(resp) {
         if (resp.status === 'connected') {
-            var model = new ExternalAuthenticateModel();
+            const model = new ExternalAuthenticateModel();
             model.authProvider = ExternalLoginProvider.FACEBOOK;
             model.providerAccessCode = resp.authResponse.accessToken;
             model.providerKey = resp.authResponse.userID;
@@ -283,7 +283,7 @@ export class LoginService {
 
     private googleLoginStatusChangeCallback(isSignedIn) {
         if (isSignedIn) {
-            var model = new ExternalAuthenticateModel();
+            const model = new ExternalAuthenticateModel();
             model.authProvider = ExternalLoginProvider.GOOGLE;
             model.providerAccessCode = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
             model.providerKey = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
@@ -300,7 +300,7 @@ export class LoginService {
     }
 
     private wechatLogin(params: Params) {
-        var model = new ExternalAuthenticateModel();
+        const model = new ExternalAuthenticateModel();
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
@@ -311,7 +311,7 @@ export class LoginService {
                 return;
             }
 
-            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds, true);
         });
     }
 
@@ -320,7 +320,7 @@ export class LoginService {
     */
     private microsoftLogin() {
         this._logService.debug(WL.getSession());
-        var model = new ExternalAuthenticateModel();
+        const model = new ExternalAuthenticateModel();
         model.authProvider = ExternalLoginProvider.MICROSOFT;
         model.providerAccessCode = WL.getSession().access_token;
         model.providerKey = WL.getSession().id; // How to get id?
@@ -352,7 +352,7 @@ export class LoginService {
         //         "Accept": "application/json; charset=UTF-8"
         //     })
         // };
-        var defer = $.Deferred();
+        const defer = $.Deferred();
 
         return abp.ajax({
             url: url_,
