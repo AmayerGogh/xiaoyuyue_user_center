@@ -135,7 +135,7 @@ export class LoginService {
 
         } else if (authenticateResult.accessToken) {
             // Successfully logged in
-            UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+            // this._utilsService.getCookieValue('UrlHelper.redirectUrl');
             this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, UrlHelper.redirectUrl);
 
         } else {
@@ -172,8 +172,9 @@ export class LoginService {
             );
         }
 
-        UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
-        const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
+        UrlHelper.redirectUrl = this._utilsService.getCookieValue('UrlHelper.redirectUrl');
+        this._utilsService.deleteCookie('UrlHelper.redirectUrl', '/');
+        let initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {

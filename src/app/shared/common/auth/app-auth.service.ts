@@ -31,11 +31,6 @@ export class AppAuthService {
     recordRedirectUrl(): void {
         const exdate = new Date();
         exdate.setDate(exdate.getDate() + 1);
-        this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
-        // 测试域名
-        const domainArr = ['http://user.xiaoyuyue.com/', 'http://localhost:5201/'];
-        if (domainArr.indexOf(location.href) < 0) {
-            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
-        }
+        this._utilsService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
     }
 }
