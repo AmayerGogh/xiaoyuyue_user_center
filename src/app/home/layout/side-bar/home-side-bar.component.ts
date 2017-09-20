@@ -14,10 +14,13 @@ export class HomeSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
   constructor(
     private _authService: AppAuthService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
     const self = this;
+    this.hideSideBar();
     $('.menu-item').click(() => {
       self.hideSideBar();
     })
