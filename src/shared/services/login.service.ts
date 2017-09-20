@@ -2,13 +2,13 @@ import * as _ from 'lodash';
 
 import { AuthenticateModel, AuthenticateResultModel, ExternalAuthenticateModel, ExternalAuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy, WebLogServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Headers, Http, Response } from '@angular/http';
+import { Injectable, transition } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
 import { AppConsts } from '@shared/AppConsts';
-import { Injectable } from '@angular/core';
+import { CookiesService } from 'shared/services/cookies.service';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
-import { TokenService } from '@abp/auth/token.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { UtilsService } from '@abp/utils/utils.service';
 
@@ -61,10 +61,9 @@ export class LoginService {
     constructor(
         private _tokenAuthService: TokenAuthServiceProxy,
         private _router: Router,
-        private _utilsService: UtilsService,
         private _messageService: MessageService,
-        private _tokenService: TokenService,
-        private _logService: LogService
+        private _logService: LogService,
+        private _cookiesService: CookiesService
     ) {
         this.clear();
     }
@@ -73,7 +72,7 @@ export class LoginService {
         finallyCallback = finallyCallback || (() => { });
 
         // We may switch to localStorage instead of cookies
-        this.authenticateModel.twoFactorRememberClientToken = this._utilsService.getCookieValue(LoginService.twoFactorRememberClientTokenName);
+        this.authenticateModel.twoFactorRememberClientToken = this._cookiesService.getCookieValue(LoginService.twoFactorRememberClientTokenName);
 
         this._tokenAuthService
             .authenticate(this.authenticateModel)
@@ -149,15 +148,15 @@ export class LoginService {
     }
 
     private login(tenantId: number, accessToken: string, encryptedAccessToken: string, expireInSeconds: number, rememberMe?: boolean, twoFactorRememberClientToken?: string, redirectUrl?: string): void {
-        let tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
+        const tokenExpireDate = rememberMe ? (new Date(new Date().getTime() + 1000 * expireInSeconds)) : undefined;
 
-        this._tokenService.setToken(
+        this._cookiesService.setToken(
             accessToken,
             tokenExpireDate
         );
-        abp.multiTenancy.setTenantIdCookie(tenantId);
+        this._cookiesService.setTenantIdCookie(tenantId);
 
-        this._utilsService.setCookieValue(
+        this._cookiesService.setCookieValue(
             AppConsts.authorization.encrptedAuthTokenName,
             encryptedAccessToken,
             tokenExpireDate,
@@ -165,7 +164,7 @@ export class LoginService {
         );
 
         if (twoFactorRememberClientToken) {
-            this._utilsService.setCookieValue(
+            this._cookiesService.setCookieValue(
                 LoginService.twoFactorRememberClientTokenName,
                 twoFactorRememberClientToken,
                 new Date(new Date().getTime() + 365 * 86400000), // 1 year
@@ -267,7 +266,7 @@ export class LoginService {
 
     private facebookLoginStatusChangeCallback(resp) {
         if (resp.status === 'connected') {
-            var model = new ExternalAuthenticateModel();
+            const model = new ExternalAuthenticateModel();
             model.authProvider = ExternalLoginProvider.FACEBOOK;
             model.providerAccessCode = resp.authResponse.accessToken;
             model.providerKey = resp.authResponse.userID;
@@ -285,7 +284,7 @@ export class LoginService {
 
     private googleLoginStatusChangeCallback(isSignedIn) {
         if (isSignedIn) {
-            var model = new ExternalAuthenticateModel();
+            const model = new ExternalAuthenticateModel();
             model.authProvider = ExternalLoginProvider.GOOGLE;
             model.providerAccessCode = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
             model.providerKey = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
@@ -302,7 +301,7 @@ export class LoginService {
     }
 
     private wechatLogin(params: Params) {
-        var model = new ExternalAuthenticateModel();
+        const model = new ExternalAuthenticateModel();
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
@@ -313,7 +312,7 @@ export class LoginService {
                 return;
             }
 
-            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
+            this.login(result.tenantId, result.accessToken, result.encryptedAccessToken, result.expireInSeconds, true);
         });
     }
 
@@ -322,7 +321,7 @@ export class LoginService {
     */
     private microsoftLogin() {
         this._logService.debug(WL.getSession());
-        var model = new ExternalAuthenticateModel();
+        const model = new ExternalAuthenticateModel();
         model.authProvider = ExternalLoginProvider.MICROSOFT;
         model.providerAccessCode = WL.getSession().access_token;
         model.providerKey = WL.getSession().id; // How to get id?
@@ -354,7 +353,7 @@ export class LoginService {
         //         "Accept": "application/json; charset=UTF-8"
         //     })
         // };
-        var defer = $.Deferred();
+        const defer = $.Deferred();
 
         return abp.ajax({
             url: url_,
@@ -378,7 +377,7 @@ export class LoginService {
 
         if (status === 200) {
             let result200: ExternalAuthenticateResultModel = null;
-            let resultData200 = responseText === '' ? null : JSON.parse(responseText, this.jsonParseReviver);
+            const resultData200 = responseText === '' ? null : JSON.parse(responseText, this.jsonParseReviver);
             result200 = resultData200 ? ExternalAuthenticateResultModel.fromJS(resultData200) : new ExternalAuthenticateResultModel();
             return result200;
         } else if (status !== 200 && status !== 204) {

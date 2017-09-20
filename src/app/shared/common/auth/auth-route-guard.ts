@@ -9,8 +9,9 @@
 import { AdminPermissions } from '@shared/AdminPermissions';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppSessionService } from '@shared/common/session/app-session.service';
+import { CookiesService } from 'shared/services/cookies.service';
 import { Injectable } from '@angular/core';
-import { PermissionCheckerService } from "@abp/auth/permission-checker.service";
+import { PermissionCheckerService } from '@abp/auth/permission-checker.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { UtilsService } from '@abp/utils/utils.service';
 
@@ -20,7 +21,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
     constructor(
         private _permissionChecker: PermissionCheckerService,
         private _router: Router,
-        private _utilsService: UtilsService,
+        private _cookiesService: CookiesService,
         private _appAuthService: AppAuthService,
         private _sessionService: AppSessionService,
     ) { }

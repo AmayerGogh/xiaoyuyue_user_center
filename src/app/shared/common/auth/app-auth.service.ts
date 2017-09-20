@@ -1,4 +1,5 @@
 ﻿import { AppConsts } from '@shared/AppConsts';
+import { CookiesService } from 'shared/services/cookies.service';
 import { Injectable } from '@angular/core';
 import { UtilsService } from '@abp/utils/utils.service';
 
@@ -6,11 +7,11 @@ import { UtilsService } from '@abp/utils/utils.service';
 export class AppAuthService {
 
     constructor(
-        private _utilsService: UtilsService
+        private _cookiesService: CookiesService
     ) { }
 
     logout(reload?: boolean, returnUrl?: string): void {
-        abp.auth.clearToken();
+        this._cookiesService.clearToken();
         if (reload !== false) {
             if (returnUrl) {
                 location.href = returnUrl;

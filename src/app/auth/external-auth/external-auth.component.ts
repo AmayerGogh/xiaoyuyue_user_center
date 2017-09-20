@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, Params, ActivatedRoute } from '@angular/router';
-import { TokenAuthServiceProxy, ExternalLoginProviderInfoModel } from '@shared/service-proxies/service-proxies';
-import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import * as _ from 'lodash';
+
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
+import { ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
+
 import { AppConsts } from '@shared/AppConsts';
 
 @Component({
@@ -30,14 +32,14 @@ export class ExternalAuthComponent implements OnInit {
             } else {
                 this._loginService.init((externalLoginProviders) => {
                     for (let i = 0; i < externalLoginProviders.length; i++) {
-                        if (externalLoginProviders[i].name == "WeChatMP") {
-                            let authBaseUrl = "https://open.weixin.qq.com/connect/oauth2/authorize";
-                            let appid = externalLoginProviders[i].clientId;
-                            let redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.WECHATMP;
-                            let response_type = "code";
-                            let scope = "snsapi_userinfo";
+                        if (externalLoginProviders[i].name === 'WeChatMP') {
+                            const authBaseUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+                            const appid = externalLoginProviders[i].clientId;
+                            const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.WECHATMP;
+                            const response_type = 'code';
+                            const scope = 'snsapi_userinfo';
 
-                            let authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
+                            const authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
                             window.location.href = authUrl;
                         }
                     }

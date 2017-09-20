@@ -10,7 +10,9 @@ export class SideBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.hideSideBar();
   }
+
   showSideBar() {
     this.sideBarEle.nativeElement.style.display = 'block';
     $('html').css({

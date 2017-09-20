@@ -16,10 +16,10 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     animations: [appModuleAnimation()]
 })
 export class BookingListComponent extends AppComponentBase implements OnInit, AfterViewInit {
-    isLoaded: boolean = false;
-    isLoading: boolean = false;
-    infiniteScrollDistance: number = 2;
-    infiniteScrollThrottle: number = 300;
+    isLoaded = false;
+    isLoading = false;
+    infiniteScrollDistance = 2;
+    infiniteScrollThrottle = 300;
     currentTabIndex = 0;
     personBookingTotalCount: number;
     allPrsonBookingDatas: any[] = [];
@@ -27,7 +27,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     stickedInput: StickedInput = new StickedInput();
     status: Status2[] = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
     bookingName = '';
-    pageSize: number = 10;
+    pageSize = 10;
     skip = 0;
     sort: any;
     actionFlag: boolean[] = [];
@@ -157,7 +157,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
 
     public onScrollDown(): void {
 
-        if (this.skip > (this.personBookingTotalCount-this.pageSize)) {
+        if (this.skip > (this.personBookingTotalCount - this.pageSize)) {
             this.isLoaded = true;
             return;
         }
