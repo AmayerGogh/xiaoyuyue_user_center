@@ -30,6 +30,6 @@ export class AppAuthService {
     recordRedirectUrl(): void {
         const exdate = new Date();
         exdate.setDate(exdate.getDate() + 1);
-        this._utilsService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
+        this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
     }
 }
