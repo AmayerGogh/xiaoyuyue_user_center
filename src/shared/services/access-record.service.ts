@@ -6,7 +6,6 @@ import { AppConsts } from './../AppConsts';
 import { CookiesService } from './cookies.service';
 import { Injectable } from '@angular/core';
 import { Moment } from 'moment';
-import { UtilsService } from '@abp/utils/utils.service';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { async } from '@angular/core/testing';
 import { device } from 'device.js';

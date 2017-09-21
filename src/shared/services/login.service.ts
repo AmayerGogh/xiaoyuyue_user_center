@@ -10,7 +10,6 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { UtilsService } from '@abp/utils/utils.service';
 
 declare const FB: any; // Facebook API
 declare const gapi: any; // Facebook API

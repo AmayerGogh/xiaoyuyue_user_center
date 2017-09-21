@@ -7,6 +7,7 @@ import { AbpModule } from '@abp/abp.module';
 import { AppCommonModule } from './shared/common/app-common.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { BreadcrumbService } from 'shared/services/bread-crumb.service';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
@@ -38,4 +39,9 @@ import { UtilsModule } from '@shared/utils/utils.module';
     providers: [
     ]
 })
-export class AppModule { }
+export class AppModule {
+    // 提前 注册 BreadcrumbService
+    constructor(private breadcrumbService: BreadcrumbService) {
+
+    }
+}

@@ -10,10 +10,13 @@ import { RouterModule } from '@angular/router';
     imports: [
         RouterModule.forChild([
             {
-                path: 'booked', component: BookedComponent, pathMatch: 'full'
+                path: 'booked',
+                data: { breadcrumb: 'Page.Booked' },
+                component: BookedComponent, pathMatch: 'full'
             },
             {
                 path: ':id',
+                data: { breadcrumb: 'Page.JoinBooking' },
                 component: BookingComponent,
             }
 

@@ -22,10 +22,10 @@ import { UserInfoComponent } from './info/user-info.component';
                         path: 'booking',
                         children: [
                             {
-                                path: 'list', component: BookingListComponent
+                                path: 'list', component: BookingListComponent, data: { breadcrumb: 'Menu.ManageBooking' }
                             },
                             {
-                                path: 'info/:id', component: BookingInfoComponent
+                                path: 'info/:id', component: BookingInfoComponent, data: { breadcrumb: 'Menu.BookingInfo' }
                             }
                         ]
                     },
@@ -33,7 +33,7 @@ import { UserInfoComponent } from './info/user-info.component';
                         path: 'info',
                         children: [
                             {
-                                path: '', component: UserInfoComponent
+                                path: '', component: UserInfoComponent, data: { breadcrumb: 'Menu.Account.BaseInfo' }
                             }
                         ]
                     },

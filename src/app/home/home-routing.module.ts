@@ -16,7 +16,9 @@ import { TimeLineComponent } from './time-line/time-line.component';
                 component: HomeComponent,
                 children: [
                     {
-                        path: '', component: TimeLineComponent
+                        path: '',
+                        data: { breadcrumb: 'Menu.UserCenter' },
+                        component: TimeLineComponent
                     },
                 ]
             }

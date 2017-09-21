@@ -43,10 +43,6 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         this.getUserPhoneNum();
     }
 
-    ngAfterViewInit() {
-        // TODO: 暂时处理
-        $('#headerTitle').text('更绑手机')
-    }
 
     verificationPhoneNum(): void {
         this.checkUserCodeInput.code = this.code;

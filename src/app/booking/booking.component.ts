@@ -15,7 +15,6 @@ import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { TabsetComponent } from 'ngx-bootstrap';
-import { UtilsService } from '@abp/utils/utils.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({

@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Breadcrumb, BreadcrumbService } from 'shared/services/bread-crumb.service';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { Location } from '@angular/common';
 
 @Component({
@@ -7,14 +9,23 @@ import { Location } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class UserHeaderComponent implements OnInit {
+export class UserHeaderComponent extends AppComponentBase implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
-  @Input() title: string;
+  title: string;
   toggleSideBarFlag = false;
 
-  constructor(
-    private _location: Location
-  ) { }
+  constructor(injector: Injector,
+    private _location: Location,
+    breadcrumbService: BreadcrumbService
+  ) {
+    super(injector);
+
+    this.breadcrumbService.breadcrumbChanged.subscribe((crumbs) => {
+      this.title = this.createHearderTitle(this.breadcrumbService.breadcrumbs);
+    });
+
+    this.title = this.createHearderTitle(this.breadcrumbService.breadcrumbs);
+  }
 
   ngOnInit() {
   }
@@ -28,4 +39,17 @@ export class UserHeaderComponent implements OnInit {
     this._location.back();
   }
 
+  createHearderTitle(routesCollection: Breadcrumb[]): string {
+
+    const titles = routesCollection.filter((route) => route.displayName);
+
+    return this.hearderTitlesToString(titles);
+  }
+
+  hearderTitlesToString(titles) {
+    return titles.reduce((prev, curr) => {
+      // return `${this.l(curr.displayName)} - ${prev}`;
+      return `${this.l(curr.displayName)}`;
+    }, '');
+  }
 }

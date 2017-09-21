@@ -1,7 +1,6 @@
 ﻿import { AppConsts } from '@shared/AppConsts';
 import { CookiesService } from 'shared/services/cookies.service';
 import { Injectable } from '@angular/core';
-import { UtilsService } from '@abp/utils/utils.service';
 
 @Injectable()
 export class AppAuthService {

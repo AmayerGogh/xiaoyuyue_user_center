@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+
+import { ActivatedRoute } from '@angular/router';
+import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
   selector: 'xiaoyuyue-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class BookingSideBarComponent implements OnInit {
+export class BookingSideBarComponent extends AppComponentBase implements OnInit {
 
   href: string = document.location.href;
-  bookingId: any = this.href.substr(this.href.lastIndexOf("/") + 1, this.href.length);
+  bookingId;
 
-  constructor() { }
+  constructor(injector: Injector,
+    private _route: ActivatedRoute) {
+    super(injector);
+  }
 
   ngOnInit() {
-    this.bookingId = parseInt(this.bookingId);
-    if (this.href.indexOf("?") >= 0) {
-      this.bookingId += '';
-      this.bookingId = this.bookingId.split("?")[0];
-    }
+    this.bookingId = this._route.snapshot.paramMap.get('id');
   }
 
 }

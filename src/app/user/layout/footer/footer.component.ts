@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+
+import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
   selector: 'xiaoyuyue-footer',
@@ -6,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss']
 })
 export class UserFooterComponent implements OnInit {
-
-  constructor() { }
 
   ngOnInit() {
   }

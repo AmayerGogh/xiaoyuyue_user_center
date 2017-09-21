@@ -23,7 +23,6 @@ export class SettingsComponent extends AppComponentBase implements OnInit, After
 
     ngAfterViewInit() {
         // TODO: 暂时处理
-        $('#headerTitle').text('设置管理');
     }
 
     stayTuned(): void {
