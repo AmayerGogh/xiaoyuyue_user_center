@@ -23,8 +23,6 @@ export class UserHeaderComponent extends AppComponentBase implements OnInit {
     this.breadcrumbService.breadcrumbChanged.subscribe((crumbs) => {
       this.title = this.createHearderTitle(this.breadcrumbService.breadcrumbs);
     });
-
-    this.title = this.createHearderTitle(this.breadcrumbService.breadcrumbs);
   }
 
   ngOnInit() {

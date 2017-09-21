@@ -43,12 +43,6 @@ export abstract class AppComponentBase {
         this.activatedRoute = injector.get(ActivatedRoute);
         this.titleService = injector.get(Title);
         this.breadcrumbService = injector.get(BreadcrumbService);
-
-        // this.breadcrumbService.breadcrumbChanged.subscribe((crumbs) => {
-        //     this.titleService.setTitle(this.createTitle(crumbs));
-        // });
-
-        // this.titleService.setTitle(this.createTitle(this.breadcrumbService.breadcrumbs));
     }
 
     l(key: string, ...args: any[]): string {
