@@ -21,7 +21,9 @@ export class WeChatShareTimelineComponent extends AppComponentBase implements On
     }
 
     ngOnInit(): void {
-        this.initWeChatShareConfig();
+        if (this.isWeiXin()) {
+            this.initWeChatShareConfig();
+        }
     }
 
     initWeChatShareConfig() {
@@ -85,5 +87,14 @@ export class WeChatShareTimelineComponent extends AppComponentBase implements On
                 });
             });
         });
+    }
+
+    private isWeiXin() {
+        var ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + '' == 'micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
