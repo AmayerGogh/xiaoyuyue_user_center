@@ -7,7 +7,6 @@ import { CookiesService } from './shared/services/cookies.service';
 import { LocalizedResourcesHelper } from './shared/helpers/LocalizedResourcesHelper';
 import { SubdomainTenancyNameFinder } from '@shared/helpers/SubdomainTenancyNameFinder';
 import { UrlHelper } from './shared/helpers/UrlHelper';
-import { UtilsService } from '@abp/utils/utils.service';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 declare var $: any;
@@ -139,7 +138,7 @@ export class AppPreBootstrap {
     }
 
     private static setEncryptedTokenCookie(encryptedToken: string) {
-        new UtilsService().setCookieValue(AppConsts.authorization.encrptedAuthTokenName,
+        new CookiesService().setCookieValue(AppConsts.authorization.encrptedAuthTokenName,
             encryptedToken,
             new Date(new Date().getTime() + 365 * 86400000), // 1 year
             abp.appPath

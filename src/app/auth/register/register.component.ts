@@ -1,11 +1,12 @@
-import { Component, Injector, OnInit, NgModule, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { AccountServiceProxy, PasswordComplexitySetting, ProfileServiceProxy, CodeSendInput, SMSServiceProxy, TenantRegistrationServiceProxy, RegisterTenantInput } from '@shared/service-proxies/service-proxies'
+import { AccountServiceProxy, CodeSendInput, PasswordComplexitySetting, ProfileServiceProxy, RegisterTenantInput, SMSServiceProxy, TenantRegistrationServiceProxy } from '@shared/service-proxies/service-proxies'
+import { Component, ElementRef, Injector, NgModule, OnInit, ViewChild } from '@angular/core';
+
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
-import { RegisterModel } from './register.model';
 import { LoginService } from "shared/services/login.service";
+import { RegisterModel } from './register.model';
+import { Router } from '@angular/router';
 import { VerificationCodeType } from "shared/AppEnums";
+import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     templateUrl: './register.component.html',
@@ -36,7 +37,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        if (this.is_weixn()) {
+        if (this.isWeiXin()) {
             this._router.navigate(['auth/login']);
             return;
         }
@@ -113,12 +114,12 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
         }, 60000);
     }
 
-    is_weixn() {
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
-        return true;
-    } else {
-        return false;
+    isWeiXin() {
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
+            return true;
+        } else {
+            return false;
+        }
     }
-}
 }

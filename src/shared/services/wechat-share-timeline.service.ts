@@ -1,27 +1,25 @@
-import { Component, ElementRef, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRouteSnapshot, Event, NavigationEnd, Router } from '@angular/router';
+import { EventEmitter, Injectable } from '@angular/core';
 import { WeChatShareInputDto, WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppServiceBase } from 'shared/services/base.service';
 import { RandomHelper } from 'shared/helpers/RandomHelper';
-import { WeChatJSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { TitleService } from 'shared/services/title.service';
+import { WeChatJSServiceProxy } from 'shared/service-proxies/service-proxies';
 
-@Component({
-    selector: 'wechat-share-timeline',
-    template: ``
-})
-export class WeChatShareTimelineComponent extends AppComponentBase implements OnInit {
+export declare class Breadcrumb {
+    displayName: string;
+    terminal: boolean;
+    url: string;
+}
 
-    @Output() successAction = new EventEmitter<WeChatShareResultDto>();
-    @Input() input: WeChatShareInputDto;
+@Injectable()
+export class WeChatShareTimelineService {
+    successAction = new EventEmitter<WeChatShareResultDto>();
+    input: WeChatShareInputDto = new WeChatShareInputDto();
     result: WeChatShareResultDto = new WeChatShareResultDto();
     constructor(
-        private _wechatJSService: WeChatJSServiceProxy,
-        injector: Injector) {
-        super(injector);
-    }
-
-    ngOnInit(): void {
-        this.initWeChatShareConfig();
+        private _wechatJSService: WeChatJSServiceProxy) {
     }
 
     initWeChatShareConfig() {
@@ -85,5 +83,14 @@ export class WeChatShareTimelineComponent extends AppComponentBase implements On
                 });
             });
         });
+    }
+
+    private isWeiXin() {
+        const ua = window.navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + '' == 'micromessenger') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

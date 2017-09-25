@@ -11,13 +11,13 @@ const routes: Routes = [
     {
         path: '',
         children: [
-            { path: '', component: SettingsComponent},
-            { path: 'settings', component: SettingsComponent},
-            { path: 'security', component: SecurityComponent},
-            { path: 'suggest', component: SuggestComponent},
-            { path: 'passwd', component: PasswdComponent},
-            { path: 'change-phone', component: CurrentPhoneComponent},
-            { path: 'email', component: EmailComponent}
+            { path: '', component: SettingsComponent, data: { breadcrumb: 'Menu.Settings' } },
+            // { path: 'settings', component: SettingsComponent, data: { breadcrumb: 'Menu.Settings' } },
+            { path: 'security', component: SecurityComponent, data: { breadcrumb: 'Menu.Security' } },
+            { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
+            { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
+            { path: 'change-phone', component: CurrentPhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
+            { path: 'email', component: EmailComponent, data: { breadcrumb: 'Menu.BindingPhone' } }
         ]
     }
 ];

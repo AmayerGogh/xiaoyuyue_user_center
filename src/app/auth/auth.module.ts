@@ -12,6 +12,7 @@ import { ExternalAuthComponent } from './external-auth/external-auth.component';
 import { ForgotPasswordComponent } from './password/forgot-password.component';
 import { FormsModule } from '@angular/forms';
 import { LanguageSwitchComponent } from './language-switch.component';
+import { LocalizationService } from 'abp-ng2-module/src/localization/localization.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './../../shared/services/login.service';
 import { LuosimaoCaptcha } from './shared/luosimao-captcha/luosimao-captcha.component';
@@ -66,5 +67,26 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
     ]
 })
 export class AuthModule {
+    constructor(private localization: LocalizationService) {
 
+    }
+
+    public l(key: string, ...args: any[]): string {
+        let localizedText = this.localization.localize(key, AppConsts.localization.defaultLocalizationSourceName);
+
+        if (localizedText === key) {
+            localizedText = this.localization.localize(key, AppConsts.localization.commonLocalizationSourceName);
+        }
+
+        if (!localizedText) {
+            localizedText = key;
+        }
+
+        if (!args || !args.length) {
+            return localizedText;
+        }
+
+        args.unshift(localizedText);
+        return abp.utils.formatString.apply(this, args);
+    }
 }

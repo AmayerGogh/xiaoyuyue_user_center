@@ -22,15 +22,15 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
                 path: '',
                 component: AuthComponent,
                 children: [
-                    { path: 'login', component: LoginComponent },
-                    { path: 'external', component: ExternalAuthComponent },
-                    { path: 'register', component: RegisterComponent },
-                    { path: 'forgot-password', component: ForgotPasswordComponent },
-                    { path: 'reset-password', component: ResetPasswordComponent },
-                    { path: 'email-activation', component: EmailActivationComponent },
-                    { path: 'confirm-email', component: ConfirmEmailComponent },
-                    { path: 'send-code', component: SendTwoFactorCodeComponent },
-                    { path: 'verify-code', component: ValidateTwoFactorCodeComponent }
+                    { path: 'login', component: LoginComponent, data: { breadcrumb: 'Page.Login' } },
+                    { path: 'external', component: ExternalAuthComponent, data: { breadcrumb: 'Page.External' } },
+                    { path: 'register', component: RegisterComponent, data: { breadcrumb: 'Page.Register' } },
+                    { path: 'forgot-password', component: ForgotPasswordComponent, data: { breadcrumb: 'Page.ForgotPassword' } },
+                    { path: 'reset-password', component: ResetPasswordComponent, data: { breadcrumb: 'Page.ResetPassword' } },
+                    { path: 'email-activation', component: EmailActivationComponent, data: { breadcrumb: 'Page.EmailActivation' } },
+                    { path: 'confirm-email', component: ConfirmEmailComponent, data: { breadcrumb: 'Page.ConfirmEmail' } },
+                    { path: 'send-code', component: SendTwoFactorCodeComponent, data: { breadcrumb: 'Page.SendCode' } },
+                    { path: 'verify-code', component: ValidateTwoFactorCodeComponent, data: { breadcrumb: 'Page.VerifyCode' } }
                 ]
             }
         ])

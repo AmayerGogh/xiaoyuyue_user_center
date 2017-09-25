@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
 import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 
+import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from 'shared/common/app-component-base';
-import { MediaCompressFormat } from "shared/AppConsts";
-import { PictureUrlHelper } from './../../../../shared/helpers/PictureUrlHelper';
+import { MediaCompressFormat } from 'shared/AppConsts';
+import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
@@ -16,13 +17,15 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
   bookingOrderForEdidData: GetPersonBookingOrderOutput;
 
   href: string = document.location.href;
-  bookingId: any = +this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length);
+  bookingId;
 
   constructor(
     injector: Injector,
+    private _route: ActivatedRoute,
     private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
   ) {
     super(injector);
+    this.bookingId = this._route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {

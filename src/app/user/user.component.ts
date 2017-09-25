@@ -7,7 +7,6 @@ import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.componen
 })
 export class UserComponent implements OnInit, AfterViewInit {
     toggleSideBarFlag = false;
-    title = '维普氏科技';
     @ViewChild('sideBarModel') sideBarModel: UserSideBarComponent;
     public constructor(
     ) {

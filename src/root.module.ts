@@ -15,6 +15,7 @@ import { NgxAniModule } from 'ngxani';
 import { RootComponent } from './root.component';
 import { RootRoutingModule } from './root-routing.module';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
+import { ServicesModule } from 'shared/services/services.module';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 import { appLoadingBusy } from './shared/animations/loadingTransition';
 
@@ -25,7 +26,7 @@ export function appInitializerFactory(injector: Injector) {
         handleLogoutRequest(injector.get(AppAuthService));
         return new Promise<boolean>((resolve, reject) => {
             AppPreBootstrap.run(() => {
-                var appSessionService: AppSessionService = injector.get(AppSessionService);
+                const appSessionService: AppSessionService = injector.get(AppSessionService);
                 appSessionService.init().then(
                     (result) => {
                         // abp.ui.clearBusy();
@@ -48,8 +49,8 @@ export function getRemoteServiceBaseUrl(): string {
 }
 
 function handleLogoutRequest(authService: AppAuthService) {
-    var currentUrl = UrlHelper.initialUrl;
-    var returnUrl = UrlHelper.getReturnUrl();
+    const currentUrl = UrlHelper.initialUrl;
+    const returnUrl = UrlHelper.getReturnUrl();
     if (currentUrl.indexOf(('account/logout')) >= 0 && returnUrl) {
         authService.logout(true, returnUrl);
     }
@@ -63,7 +64,7 @@ function handleLogoutRequest(authService: AppAuthService) {
         CommonModule.forRoot(),
         AbpModule,
         ServiceProxyModule,
-
+        ServicesModule,
         RootRoutingModule,
 
         NgxAniModule

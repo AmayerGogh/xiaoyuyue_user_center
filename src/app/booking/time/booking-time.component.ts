@@ -9,7 +9,6 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 import { CookiesService } from 'shared/services/cookies.service';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
-import { UtilsService } from '@abp/utils/utils.service';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({

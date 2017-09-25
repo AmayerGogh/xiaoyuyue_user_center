@@ -10,7 +10,6 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { UtilsService } from '@abp/utils/utils.service';
 
 declare const FB: any; // Facebook API
 declare const gapi: any; // Facebook API
@@ -135,7 +134,7 @@ export class LoginService {
 
         } else if (authenticateResult.accessToken) {
             // Successfully logged in
-            UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+            // this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
             this.login(authenticateResult.tenantId, authenticateResult.accessToken, authenticateResult.encryptedAccessToken, authenticateResult.expireInSeconds, this.rememberMe, authenticateResult.twoFactorRememberClientToken, UrlHelper.redirectUrl);
 
         } else {
@@ -173,6 +172,7 @@ export class LoginService {
         }
 
         UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+        this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
         const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
         if (redirectUrl) {
             location.href = redirectUrl;
@@ -344,16 +344,6 @@ export class LoginService {
 
         const content_ = JSON.stringify(model ? model.toJSON() : null);
 
-        // let options_ = {
-        //     body: content_,
-        //     method: "post",
-        //     headers: new Headers({
-        //         "Content-Type": "application/json; charset=UTF-8",
-        //         "Accept": "application/json; charset=UTF-8"
-        //     })
-        // };
-        const defer = $.Deferred();
-
         return abp.ajax({
             url: url_,
             method: 'POST',
@@ -362,8 +352,6 @@ export class LoginService {
             headers: {
                 'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
-                // "Content-Type": "application/json; charset=UTF-8",
-                // "Accept": "application/json; charset=UTF-8"
             }
         }).done(response => {
             return response;

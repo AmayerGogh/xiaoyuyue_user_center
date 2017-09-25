@@ -13,7 +13,6 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { Injectable } from '@angular/core';
 import { PermissionCheckerService } from '@abp/auth/permission-checker.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { UtilsService } from '@abp/utils/utils.service';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild {

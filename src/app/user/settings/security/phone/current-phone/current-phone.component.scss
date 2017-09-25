@@ -1,9 +1,15 @@
 .current-phone-wrap,
 .new-phone-wrap {
     min-height: 100vh;
-    padding: 35px 10px 10px;
+    padding: 40px 10px 10px;
     .card {
-        padding: 20px 16px 20px;
+        padding: 0px 16px 20px;
+        .card-header.card-header-text {
+            display: inline-block;
+            .title-icon {
+                font-size: 30px;
+            }
+        }
         .vaildate-code {
             position: absolute;
             right: 2px;

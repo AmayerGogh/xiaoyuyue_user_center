@@ -20,11 +20,6 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
     }
 
-    ngAfterViewInit() {
-        // TODO: 暂时处理
-        $('#headerTitle').text('账户安全');
-    }
-
     stayTuned(): void {
         this.message.info('正在完善中...', '敬请期待');
     }

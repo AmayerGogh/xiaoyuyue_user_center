@@ -25,11 +25,6 @@ export class PasswdComponent extends AppComponentBase implements OnInit  {
   ngOnInit() {
   }
 
-      ngAfterViewInit() {
-        // TODO: 暂时处理
-        $("#headerTitle").text("更换密码");
-    }
-
   save(): void {
       this._profileServiceProxy
       .changePassword(this.input)
