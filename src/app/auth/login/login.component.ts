@@ -53,7 +53,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         //     this.loginService.externalLoginCallback(params);
         // });
         // this.clearCookie();
-        if (this.is_weixn()) {
+        if (this.isWeiXin()) {
             this._router.navigate(['/auth/external']);
         }
 

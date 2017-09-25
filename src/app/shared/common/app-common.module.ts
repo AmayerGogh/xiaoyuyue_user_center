@@ -13,7 +13,6 @@ import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { ModalModule } from 'ngx-bootstrap';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
-import { WeChatShareTimelineComponent } from './wechat/share-timeline';
 
 @NgModule({
     imports: [
@@ -27,12 +26,10 @@ import { WeChatShareTimelineComponent } from './wechat/share-timeline';
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective,
-        WeChatShareTimelineComponent
     ],
     exports: [
         TimeZoneComboComponent,
         JqPluginDirective,
-        WeChatShareTimelineComponent
     ],
     providers: [
         AppLocalizationService
