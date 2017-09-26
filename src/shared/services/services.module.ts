@@ -5,6 +5,7 @@ import { LoginService } from 'shared/services/login.service';
 import { NgModule } from '@angular/core';
 import { TenantService } from 'shared/services/tenant.service';
 import { TitleService } from 'shared/services/title.service';
+import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 
 @NgModule({
     providers: [
@@ -13,7 +14,8 @@ import { TitleService } from 'shared/services/title.service';
         LoginService,
         CookiesService,
         BreadcrumbService,
-        TitleService
+        TitleService,
+        WeChatShareTimelineService
     ]
 })
 export class ServicesModule { }

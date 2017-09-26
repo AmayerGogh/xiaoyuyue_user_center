@@ -82,7 +82,7 @@ export abstract class AppComponentBase {
         return abp.utils.truncateStringWithPostfix(str, 20);
     }
 
-    is_weixn() {
+    isWeiXin() {
         const ua = navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) + '' === 'micromessenger') {
             return true;
@@ -90,4 +90,5 @@ export abstract class AppComponentBase {
             return false;
         }
     }
+
 }

@@ -344,16 +344,6 @@ export class LoginService {
 
         const content_ = JSON.stringify(model ? model.toJSON() : null);
 
-        // let options_ = {
-        //     body: content_,
-        //     method: "post",
-        //     headers: new Headers({
-        //         "Content-Type": "application/json; charset=UTF-8",
-        //         "Accept": "application/json; charset=UTF-8"
-        //     })
-        // };
-        const defer = $.Deferred();
-
         return abp.ajax({
             url: url_,
             method: 'POST',
@@ -362,8 +352,6 @@ export class LoginService {
             headers: {
                 'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
                 'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
-                // "Content-Type": "application/json; charset=UTF-8",
-                // "Accept": "application/json; charset=UTF-8"
             }
         }).done(response => {
             return response;

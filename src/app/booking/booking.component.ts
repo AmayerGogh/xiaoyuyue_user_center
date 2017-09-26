@@ -3,7 +3,6 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, HostListener, Injector, Input, OnDestroy, OnInit, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingInfoDto, JoinBookingOutput } from 'shared/service-proxies/service-proxies';
-import { WeChatShareInputDto, WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 
 import { AccessRecordService } from 'shared/services/access-record.service';
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
@@ -15,6 +14,8 @@ import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
+import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
@@ -34,7 +35,6 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     bookingData: JoinBookingOutput;
     source = '';
     wechatSource = '';
-    shareInput: WeChatShareInputDto = new WeChatShareInputDto();
 
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
     @ViewChild('bookingTimeModel') bookingTimeModel: BookingTimeComponent;
@@ -45,7 +45,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         private _bookingServiceProxy: BookingServiceProxy,
         private _appAuthService: AppAuthService,
         private _cookiesService: CookiesService,
-        private _router: Router
+        private _router: Router,
+        private _weChatShareTimelineService: WeChatShareTimelineService
     ) {
         super(injector);
     }
@@ -126,11 +127,17 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     initWechatShareConfig() {
-        this.shareInput.sourceUrl = this.href;
-        this.shareInput.title = this.bookingData.bookingInfo.name;
-        this.shareInput.desc = this.bookingData.bookingInfo.description;
-        this.shareInput.imgUrl = this.bookingData.organizationInfo.logoUrl;
-        this.shareInput.link = AppConsts.appBaseUrl + '/booking/' + this.bookingId + '?source=wechat';
+        if (this.bookingData && this.isWeiXin()) {
+            this._weChatShareTimelineService.input.sourceUrl = this.href;
+            this._weChatShareTimelineService.input.title = this.l('ShareBooking', this.bookingData.bookingInfo.name);
+            this._weChatShareTimelineService.input.desc = this.l(this.bookingData.bookingInfo.name);
+            this._weChatShareTimelineService.input.imgUrl = this.bookingData.organizationInfo.logoUrl;
+            this._weChatShareTimelineService.input.link = AppConsts.appBaseUrl + '/booking/' + this.bookingId + '?source=wechat';
+            this._weChatShareTimelineService.initWeChatShareConfig();
+            this._weChatShareTimelineService.successAction.subscribe(result => {
+                this.shareCallBack(result);
+            })
+        }
     }
 
     shareCallBack(result: WeChatShareResultDto) {
