@@ -51,7 +51,8 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         const self = this;
         if (this.ifLoginCallBack()) {
             this._route.queryParams.subscribe(params => {
-                const now = moment();
+                if (!params['date']) { return;}
+
                 self.input.date = moment(new Date(params['date'])).local();
                 self.selectIndex = params['index'];
                 self.availableDateItemData.forEach(item => {
