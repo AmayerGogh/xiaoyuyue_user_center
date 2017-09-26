@@ -9,6 +9,7 @@ import { Headers, Http } from '@angular/http';
 import { AbpSessionService } from '@abp/session/abp-session.service';
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
+import { AppSessionService } from 'shared/common/session/app-session.service';
 import { Location } from '@angular/common';
 import { NgxAni } from 'ngxani';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
@@ -32,33 +33,20 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         private _router: Router,
         private _location: Location,
         private _activatedRoute: ActivatedRoute,
-        private _sessionService: AbpSessionService,
+        private _sessionService: AppSessionService,
         private _tokenAuthService: TokenAuthServiceProxy,
         private _ngxAni: NgxAni
     ) {
         super(injector);
     }
 
-    clearCookie() {
-        const keys = document.cookie.match(/[^ =;]+(?=\=)/g);
-        if (keys) {
-            for (let i = keys.length; i--;) {
-                document.cookie = keys[i] + '=0;expires=' + new Date(0).toUTCString() + '; path=/';
-            }
-        }
-    }
-
     ngOnInit(): void {
-        // this._activatedRoute.queryParams.subscribe((params: Params) => {
-        //     this.loginService.externalLoginCallback(params);
-        // });
-        // this.clearCookie();
+        if (this._sessionService.user) {
+            this._router.navigate(['/user/home']);
+        }
+
         if (this.isWeiXin()) {
             this._router.navigate(['/auth/external']);
-        }
-
-        if (this._sessionService.userId) {
-            this._router.navigate(['/user/home']);
         }
     }
 
@@ -92,7 +80,6 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
 
         return this.setting.getBoolean('App.UserManagement.AllowSelfRegistration');
     }
-
 
     login(): void {
         if (!this.loginService.authenticateModel.loginCertificate || !this.loginService.authenticateModel.password) {
@@ -135,7 +122,6 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
             }
         });
     }
-
 
     private animationHide(externalAni, externalContent) {
         this._ngxAni.to(externalAni, .4, {

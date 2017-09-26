@@ -25,13 +25,15 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
     }
 
     initWechatShareConfig() {
-        this._weChatShareTimelineService.input.sourceUrl = document.location.href;
-        this._weChatShareTimelineService.input.title = this.l('ShareApp');
-        this._weChatShareTimelineService.input.desc = this.l('Slogan');
-        this._weChatShareTimelineService.input.imgUrl = AppConsts.appBaseUrl + '/assets/common/images/logo.jpg';
-        this._weChatShareTimelineService.input.link = AppConsts.appBaseUrl;
+        if (this.isWeiXin()) {
+            this._weChatShareTimelineService.input.sourceUrl = document.location.href;
+            this._weChatShareTimelineService.input.title = this.l('ShareApp');
+            this._weChatShareTimelineService.input.desc = this.l('Slogan');
+            this._weChatShareTimelineService.input.imgUrl = AppConsts.appBaseUrl + '/assets/common/images/logo.jpg';
+            this._weChatShareTimelineService.input.link = AppConsts.appBaseUrl;
 
-        this._weChatShareTimelineService.initWeChatShareConfig();
+            this._weChatShareTimelineService.initWeChatShareConfig();
+        }
     }
 
     shareCallBack(result: WeChatShareResultDto) {
