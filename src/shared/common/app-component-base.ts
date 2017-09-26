@@ -1,5 +1,4 @@
 ﻿import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Breadcrumb, BreadcrumbService } from 'shared/services/bread-crumb.service';
 import { Injector, OnInit } from '@angular/core';
 
 import { AbpMultiTenancyService } from '@abp/multi-tenancy/abp-multi-tenancy.service';
@@ -28,8 +27,6 @@ export abstract class AppComponentBase {
     appSession: AppSessionService;
     router: Router;
     activatedRoute: ActivatedRoute;
-    titleService: Title;
-    breadcrumbService: BreadcrumbService;
     constructor(injector: Injector) {
         this.localization = injector.get(LocalizationService);
         this.permission = injector.get(PermissionCheckerService);
@@ -41,8 +38,6 @@ export abstract class AppComponentBase {
         this.appSession = injector.get(AppSessionService);
         this.router = injector.get(Router);
         this.activatedRoute = injector.get(ActivatedRoute);
-        this.titleService = injector.get(Title);
-        this.breadcrumbService = injector.get(BreadcrumbService);
     }
 
     l(key: string, ...args: any[]): string {
