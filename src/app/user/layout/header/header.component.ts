@@ -16,7 +16,7 @@ export class UserHeaderComponent extends AppComponentBase implements OnInit {
 
   constructor(injector: Injector,
     private _location: Location,
-    breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService
   ) {
     super(injector);
 

@@ -28,6 +28,12 @@ export class TitleService {
         this.titleService.setTitle(`${routeTitle} - ${title}`);
     }
 
+    setSingleTitle(title: string) {
+        const newTitle = `${title} - ${this.l('Xiaoyuyue')}`;
+
+        this.titleService.setTitle(newTitle);
+    }
+
     private titlesToString(titles) {
         return titles.reduce((prev, curr) => {
             return `${this.l(curr.displayName)}`;
