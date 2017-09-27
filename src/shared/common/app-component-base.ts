@@ -73,7 +73,7 @@ export abstract class AppComponentBase {
         return localDatetimeString;
     }
 
-    //  date 日期转换
+    // date 日期转换
     d(momentTime: Moment, format: string = 'YYYY-MM-DD'): string {
         if (momentTime === undefined) {
             return '';
