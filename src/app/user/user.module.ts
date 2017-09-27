@@ -2,11 +2,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { AppCommonModule } from 'app/shared/common/app-common.module';
+import { AppModule } from 'app';
 import { BookingCancelComponent } from './booking/cancel/booking-cancel.component';
 import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
 import { CommonModule } from '@angular/common';
-import { EmptyPageComponent } from './shared/empty-page/empty-page.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { UserComponent } from './user.component';
@@ -30,6 +30,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         UserRoutingModule,
         UtilsModule,
         AppCommonModule,
+        AppModule
     ],
     declarations: [
         UserComponent,
@@ -39,8 +40,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
         UserSideBarComponent,
         BookingListComponent,
         BookingCancelComponent,
-        UserInfoComponent,
-        EmptyPageComponent
+        UserInfoComponent
     ],
     providers: [
     ],

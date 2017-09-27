@@ -2,8 +2,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalModule, PopoverModule, TabsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { AppCommonModule } from 'app/shared/common/app-common.module';
+import { AppModule } from 'app';
 import { CommonModule } from '@angular/common';
-import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { HomeComponent } from './home.component';
 import { HomeHeaderComponent } from 'app/home/layout/header/home-header.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -28,13 +28,13 @@ import { UtilsModule } from '@shared/utils/utils.module';
         HomeRoutingModule,
         UtilsModule,
         AppCommonModule,
+        AppModule
     ],
     declarations: [
         HomeComponent,
         TimeLineComponent,
         HomeSideBarComponent,
-        HomeHeaderComponent,
-        EmptyPageComponent
+        HomeHeaderComponent
     ],
     providers: [
         HomeSideBarComponent,
