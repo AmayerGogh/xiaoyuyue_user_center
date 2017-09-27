@@ -28,7 +28,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
         HomeRoutingModule,
         UtilsModule,
         AppCommonModule,
-        AppModule
     ],
     declarations: [
         HomeComponent,

@@ -8,7 +8,6 @@ import { AppCommonModule } from './shared/common/app-common.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BreadcrumbService } from 'shared/services/bread-crumb.service';
-import { EmptyPageComponent } from 'app/shared/empty-page/empty-page.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module';
@@ -21,8 +20,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
     declarations: [
         AppComponent,
         SideBarComponent,
-        UploaderComponent,
-        EmptyPageComponent
+        UploaderComponent
     ],
     imports: [
         ngCommon.CommonModule,
@@ -39,9 +37,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
         ServicesModule
     ],
     providers: [
-    ],
-    exports: [
-        EmptyPageComponent
     ]
 })
 export class AppModule {

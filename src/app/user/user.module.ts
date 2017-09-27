@@ -30,7 +30,6 @@ import { UtilsModule } from '@shared/utils/utils.module';
         UserRoutingModule,
         UtilsModule,
         AppCommonModule,
-        AppModule
     ],
     declarations: [
         UserComponent,
