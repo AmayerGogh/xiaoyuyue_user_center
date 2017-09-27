@@ -63,8 +63,18 @@ export abstract class AppComponentBase {
         return this.permission.isGranted(permissionName);
     }
 
-
+    // 时间转换
     t(momentTime: Moment, format: string = 'YYYY-MM-DD HH:mm'): string {
+        if (momentTime === undefined) {
+            return '';
+        }
+
+        const localDatetimeString = momentTime.local().format(format);
+        return localDatetimeString;
+    }
+
+    //  date 日期转换
+    d(momentTime: Moment, format: string = 'YYYY-MM-DD'): string {
         if (momentTime === undefined) {
             return '';
         }
