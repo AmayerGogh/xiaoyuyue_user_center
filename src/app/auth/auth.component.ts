@@ -1,9 +1,10 @@
-import { Component, Injector, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, Injector, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
 import { BookingServiceProxy } from 'shared/service-proxies/service-proxies';
 import { LoginService } from 'shared/services/login.service';
+import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 
 @Component({
     templateUrl: './auth.component.html',
@@ -12,8 +13,7 @@ import { LoginService } from 'shared/services/login.service';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class AuthComponent extends AppComponentBase implements OnInit {
-
+export class AuthComponent extends AppComponentBase implements OnInit, AfterViewInit {
     private viewContainerRef: ViewContainerRef;
 
     remoteServiceBaseUrl: string = AppConsts.remoteServiceBaseUrl;
@@ -22,6 +22,7 @@ export class AuthComponent extends AppComponentBase implements OnInit {
         injector: Injector,
         private _loginService: LoginService,
         viewContainerRef: ViewContainerRef,
+        private _weChatShareTimelineService: WeChatShareTimelineService,
         private _bookingServiceProxy: BookingServiceProxy
     ) {
         super(injector);
@@ -35,6 +36,21 @@ export class AuthComponent extends AppComponentBase implements OnInit {
 
     ngOnInit(): void {
         $('body').attr('class', 'page-md login');
+    }
+
+    ngAfterViewInit(): void {
+        this.initWechatShareConfig();
+    }
+
+    initWechatShareConfig() {
+        if (this.isWeiXin()) {
+            this._weChatShareTimelineService.input.sourceUrl = document.location.href;
+            this._weChatShareTimelineService.input.title = this.l('ShareApp');
+            this._weChatShareTimelineService.input.desc = this.l('Slogan');
+            this._weChatShareTimelineService.input.imgUrl = AppConsts.appBaseUrl + '/assets/common/images/logo.jpg';
+            this._weChatShareTimelineService.input.link = AppConsts.appBaseUrl;
+            this._weChatShareTimelineService.initWeChatShareConfig();
+        }
     }
 
     private supportsTenancyNameInUrl() {

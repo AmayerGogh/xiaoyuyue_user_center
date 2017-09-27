@@ -1,9 +1,8 @@
-import { RouterModule, Routes } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
 import { BreadcrumbService } from 'shared/services/bread-crumb.service';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [

@@ -14,6 +14,7 @@ import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { TitleService } from 'shared/services/title.service';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
@@ -46,7 +47,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         private _appAuthService: AppAuthService,
         private _cookiesService: CookiesService,
         private _router: Router,
-        private _weChatShareTimelineService: WeChatShareTimelineService
+        private _weChatShareTimelineService: WeChatShareTimelineService,
+        private _titleService: TitleService
     ) {
         super(injector);
     }
@@ -82,7 +84,10 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             .subscribe(result => {
                 this.bookingData = result;
                 this.bookingData.bookingInfo.pictures = _.map(this.bookingData.bookingInfo.pictures, PictureUrlHelper.getBookingPicCompressUrl);
+
                 this.getOptimalBookingTime();
+
+                this._titleService.setSingleTitle(this.bookingData.bookingInfo.name);
                 this.initWechatShareConfig();
             });
     }

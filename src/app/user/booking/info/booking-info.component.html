@@ -7,13 +7,13 @@
                 <span class="item-left">
                     <div class="content-wrap">
                         <span class="item-left gray-icon vapps-icon-app-contact"></span>
-                        <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
-                    </div>
-                </span>
-                <ng-template #popTemplate ><img [src]="bookingOrderForEdidData.bookingInfo.contactorQrcode" width="150px" ></ng-template>
-                <span class="item-right text-center" placement="left" [tooltip]="popTemplate">
+                <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
+            </div>
+            </span>
+            <ng-template #popTemplate><img [src]="bookingOrderForEdidData.bookingInfo.contactorQrcode" width="150px"></ng-template>
+            <span class="item-right text-center" placement="left" [tooltip]="popTemplate">
                     <span class="orange-icon vapps-icon-app-qr-code"></span>
-                </span>
+            </span>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
             </div>
             <div class="content-item">
                 <span class="name">预约时间 : </span>
-                <span class="desc">{{t(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
+                <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
             </div>
             <div class="content-item">
                 <span class="name">应约人数 : </span>
