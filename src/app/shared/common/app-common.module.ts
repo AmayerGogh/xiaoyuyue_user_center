@@ -8,6 +8,7 @@ import { AppLocalizationService } from 'app/shared/common/localization/app-local
 import { AppRouteGuard } from './auth/auth-route-guard';
 import { CommonModule } from '@shared/common/common.module';
 import { DeviceSwtichGuard } from './auth/device-switch.service';
+import { EmptyPageComponent } from 'app/shared/common/empty-page/empty-page.component';
 import { FormsModule } from '@angular/forms';
 import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { ModalModule } from 'ngx-bootstrap';
@@ -26,9 +27,11 @@ import { UtilsModule } from '@shared/utils/utils.module';
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective,
+        EmptyPageComponent
     ],
     exports: [
         TimeZoneComboComponent,
+        EmptyPageComponent,
         JqPluginDirective,
     ],
     providers: [

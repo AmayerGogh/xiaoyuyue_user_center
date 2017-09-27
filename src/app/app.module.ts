@@ -20,7 +20,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
     declarations: [
         AppComponent,
         SideBarComponent,
-        UploaderComponent,
+        UploaderComponent
     ],
     imports: [
         ngCommon.CommonModule,
