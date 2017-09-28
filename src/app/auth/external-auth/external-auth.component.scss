@@ -1,36 +1,6 @@
-#loading {
-    height: 100%;
-    text-align: center;
-    position: relative;
-    .wrap {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        img {
-            animation: loading 2s infinite linear;
-        }
-    }
-}
-
-@keyframes loading {
-    from {
-        transform: rotate(0);
-        -webkit-transform: rotate(0);
-    }
-    to {
-        transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
-    }
-}
-
-@-webkit-keyframes loading {
-    from {
-        transform: rotate(0);
-        -webkit-transform: rotate(0);
-    }
-    to {
-        transform: rotate(360deg);
-        -webkit-transform: rotate(360deg);
+// app启动动画
+.app-loading-busy-wrap {
+    .effect-text-wrap {
+        letter-spacing: 0;
     }
 }
