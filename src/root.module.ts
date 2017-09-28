@@ -30,12 +30,12 @@ export function appInitializerFactory(injector: Injector) {
                 appSessionService.init().then(
                     (result) => {
                         // abp.ui.clearBusy();
-                        // appLoadingBusy.clearBusy();
+                        appLoadingBusy.clearBusy();
                         resolve(result);
                     },
                     (err) => {
                         // abp.ui.clearBusy();
-                        // appLoadingBusy.clearBusy();
+                        appLoadingBusy.clearBusy();
                         reject(err);
                     }
                 );
