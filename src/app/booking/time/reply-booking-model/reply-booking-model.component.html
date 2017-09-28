@@ -1,11 +1,10 @@
 <div class="reply-booking">
     <form #relpyBookingFrom="ngForm">
-        <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel"
-            aria-hidden="true" [config]="{backdrop: 'static'}">
+        <div bsModal #replyBookingModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="optimalBookingTimeModel" aria-hidden="true">
             <div class="modal-dialog" *ngIf="hourOfDay">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <span class="close" (click)="close()">X</span>
+                        <span class="close vapps-icon-app-close" (click)="close()"></span>
                     </div>
 
                     <div class="modal-body">
