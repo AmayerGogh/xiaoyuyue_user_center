@@ -1,7 +1,8 @@
 .settings {
     min-height: 100vh;
     padding-top: 35px;
-    width: 480px;
+    max-width: 480px;
+    width: 100%;
     margin: 0 auto;
     font-size: 0;
     .card-wrap {
