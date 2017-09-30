@@ -94,27 +94,27 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         }
     }
 
-    VerificationCodeType(codeType: any): void {
+    VerificationCodeType(codeType: number): void {
         switch (codeType) {
-            case '10':
+            case 10:
                 this.codeSendInput.codeType = VerificationCodeType.Register;
                 break;
-            case '20':
+            case 20:
                 this.codeSendInput.codeType = VerificationCodeType.Login;
                 break;
-            case '30':
+            case 30:
                 this.codeSendInput.codeType = VerificationCodeType.ChangePassword;
                 break;
-            case '40':
+            case 40:
                 this.codeSendInput.codeType = VerificationCodeType.ChangeEmail;
                 break;
-            case '50':
+            case 50:
                 this.codeSendInput.codeType = VerificationCodeType.PhoneBinding;
                 break;
-            case '60':
+            case 60:
                 this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
                 break;
-            case '70':
+            case 70:
                 this.codeSendInput.codeType = VerificationCodeType.PhoneVerify;
                 break;
             default:
