@@ -16,6 +16,7 @@ import { Moment } from 'moment';
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
     bookingTime: string;
     hourOfDay: string;
+    saving: boolean = false;
     input: JoinBookingInput = new JoinBookingInput();
     @ViewChild('replyBookingModel') modal: ModalDirective;
     constructor(
@@ -49,23 +50,14 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.input.age = 0;
         this.input.emailAddress = '';
         this.input.gender = 0;
+
+        this.saving = true;
         this._bookingServiceProxy
             .joinBooking(this.input)
+            .finally(() => { this.saving = false; })
             .subscribe(result => {
                 this.close();
                 this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
-    }
-
-    getNameHandler(event: any) {
-        this.input.name = event.target.value;
-    }
-
-    getPhoneNumberHandler(event: any) {
-        this.input.phoneNumber = event.target.value;
-    }
-
-    getSubscriberNumHandler(event: any) {
-        this.input.subscriberNum = event.target.value;
     }
 }
