@@ -2,6 +2,7 @@ import { AfterViewInit, Component, Injector, OnInit, ViewContainerRef } from '@a
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
+import { Meta } from '@angular/platform-browser';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 
@@ -12,9 +13,13 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
 
     public constructor(
         injector: Injector,
-        private _weChatShareTimelineService: WeChatShareTimelineService
+        private _weChatShareTimelineService: WeChatShareTimelineService,
+        private meta: Meta
     ) {
         super(injector);
+        this.meta.updateTag({ name: 'generator', content: this.l('MetaGenerator') });
+        this.meta.updateTag({ name: 'keywords', content: this.l('MetaKey') });
+        this.meta.updateTag({ name: 'description', content: this.l('MetaDescription') });
     }
 
     ngOnInit(): void {
