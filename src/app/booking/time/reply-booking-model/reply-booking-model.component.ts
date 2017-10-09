@@ -6,6 +6,7 @@ import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Moment } from 'moment';
+import { LocalStorageService } from 'shared/utils/local-storage.service';
 
 @Component({
     selector: 'xiaoyuyue-reply-booking-model',
@@ -23,7 +24,8 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         injector: Injector,
         private _route: ActivatedRoute,
         private _router: Router,
-        private _bookingServiceProxy: BookingServiceProxy
+        private _bookingServiceProxy: BookingServiceProxy,
+        private _localStorageService: LocalStorageService
     ) {
         super(injector);
     }
@@ -43,6 +45,14 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.input = input;
         this.bookingTime = this.t(input.date);
         this.hourOfDay = hourOfDay;
+        
+        let temp = `JoinBookingInfoCache-${this._route.snapshot.paramMap.get('id')}`
+        this._localStorageService.getItem(temp, () => {})
+        .then( (result: JoinBookingInput) => {
+            this.input.name = result.name;
+            this.input.phoneNumber = result.phoneNumber;
+            this.input.subscriberNum = result.subscriberNum;
+        })
     }
 
     submit() {
@@ -57,7 +67,9 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
             .finally(() => { this.saving = false; })
             .subscribe(result => {
                 this.close();
-                this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.t(result.bookingDate), hourOfDay: result.hourOfDay } });
+                let temp = `JoinBookingInfoCache-${this._route.snapshot.paramMap.get('id')}`
+                this._localStorageService.setItem(temp, this.input);
+                this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.d(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
     }
 }
