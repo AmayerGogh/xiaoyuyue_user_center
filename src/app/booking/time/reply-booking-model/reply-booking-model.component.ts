@@ -47,7 +47,6 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.bookingTime = this.t(input.date);
         this.hourOfDay = hourOfDay;
 
-
         this._localStorageService.getItem(this.cacheKey)
             .then((result: JoinBookingInput) => {
                 if (result) {
