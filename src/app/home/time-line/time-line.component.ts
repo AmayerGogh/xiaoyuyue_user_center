@@ -23,7 +23,7 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     startDataTime: Moment;
     slogan = '啥都没有，赶紧去预约吧';
 
-    infiniteScrollDistance = 2;
+    infiniteScrollDistance = 1;
     infiniteScrollThrottle = 300;
     isLoaded = false;
     isLoading = false;

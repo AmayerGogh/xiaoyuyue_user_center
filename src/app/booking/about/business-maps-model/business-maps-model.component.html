@@ -1,0 +1,13 @@
+<div class="modal fade" bsModal #businessMapsModel="bs-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">地图</h4>
+                <span class="vapps-icon-app-close pull-right" (click)="hide()"></span>
+            </div>
+            <div class="modal-body" *ngIf="addressUrl">
+                <iframe width="100%" height="400px" frameborder=0 scrolling="no " [src]="addressUrl"></iframe>
+            </div>
+        </div>
+    </div>
+</div>

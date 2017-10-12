@@ -2,13 +2,15 @@ import 'assets/swiper/js/swiper.min'
 
 import * as _ from 'lodash';
 
-import { AfterViewInit, Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { BookingServiceProxy, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat } from 'shared/AppConsts';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { BusinessMapsModelComponent } from './business-maps-model/business-maps-model.component';
+import { ContactorModelComponent } from './contactor-model/contactor-model.component';
 
 declare var Swiper: any;
 
@@ -27,6 +29,8 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
     @Output()
     isBooking: EventEmitter<boolean> = new EventEmitter();
 
+    @ViewChild('businessMapsModel') businessMapsModel: BusinessMapsModelComponent;
+    @ViewChild('contactorModel') contactorModel: ContactorModelComponent;
     public constructor(
         injector: Injector,
         private _bookingServiceProxy: BookingServiceProxy
@@ -52,5 +56,13 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
 
     atOnceBooking(): void {
         this.isBooking.emit(true);
+    }
+
+    showBusinessMap(): void {
+        this.businessMapsModel.show();
+    }
+
+    showContactorModel(): void {
+        this.contactorModel.show(this.businessAboutData.contactorName, this.businessAboutData.contactorWechatUrl);
     }
 }

@@ -18,7 +18,7 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
 export class BookingListComponent extends AppComponentBase implements OnInit, AfterViewInit {
     isLoaded = false;
     isLoading = false;
-    infiniteScrollDistance = 2;
+    infiniteScrollDistance = 1;
     infiniteScrollThrottle = 300;
     currentTabIndex = 0;
     personBookingTotalCount: number;

@@ -34,7 +34,7 @@
                     <span class="desc">{{businessAboutData.outletAddress}}</span>
                 </div>
             </div>
-            <div class="item-right"><span class="btn primary-bgcolor  vapps-icon-app-location"></span></div>
+            <div class="item-right" (click)=showBusinessMap()><span class="btn primary-bgcolor  vapps-icon-app-location"></span></div>
         </div>
         <div class="contact item">
             <div class="item-left">
@@ -44,9 +44,9 @@
                     <span class="desc">{{businessAboutData.contactorName}}</span>
                 </div>
             </div>
-            <ng-template #popTemplate ><img [src]="businessAboutData.contactorWechatUrl" width="150px" ></ng-template>
+            <!-- <ng-template #popTemplate><img [src]="businessAboutData.contactorWechatUrl" width="150px"></ng-template> -->
             <!-- <img [src]="businessAboutData.contactorWechatUrl" width="150px" > -->
-            <div class="item-right" placement="left" [tooltip]="popTemplate"><span class="btn primary-bgcolor  vapps-icon-app-qr-code"></span></div>
+            <div class="item-right" (click)="showContactorModel()"><span class="btn primary-bgcolor vapps-icon-app-qr-code"></span></div>
         </div>
         <div class="phone item">
             <div class="item-left">
@@ -61,3 +61,6 @@
     </div>
     <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad>
 </div>
+
+<xiaoyuyue-contactor-model #contactorModel></xiaoyuyue-contactor-model>
+<xiaoyuyue-business-maps-model #businessMapsModel [businessAboutData]="businessAboutData"></xiaoyuyue-business-maps-model>
