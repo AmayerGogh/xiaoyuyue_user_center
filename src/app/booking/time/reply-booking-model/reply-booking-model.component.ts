@@ -59,6 +59,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     submit() {
         // 临时测试
+        debugger
         this.input.age = 0;
         this.input.emailAddress = '';
         this.input.gender = 0;

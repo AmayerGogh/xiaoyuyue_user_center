@@ -97,9 +97,15 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         });
     }
 
-    selectOptimalTime(index: number, time: JoinBookingTimeInfo) {
+    selectOptimalTime(index: number, date: string, time: JoinBookingTimeInfo) {
+        debugger
         this.selectIndex = index;
         this.hourOfDay = time.hourOfDay;
+        this.availableDateItemData.forEach((element, index) => {
+            if (element.date.format('YYYY-MM-DD') === date) {
+                this.input.bookingItemId = element.times[0].id;
+            }
+        });
 
         if (!this._appAuthService.isLogin()) {
             const exdate = new Date();

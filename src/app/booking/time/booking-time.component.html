@@ -4,7 +4,7 @@
         <div *ngFor="let availableDateItem of availableDateItemData;">
             <div class="valid-time-wrap clearfix" *ngIf="d(availableDateItem.date) == selectDate">
                 <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxQueueNum<=0, 'active': selectIndex == index}" *ngFor="let time of availableDateItem.times; let index=index">
-                    <span class="time-content" (click)="selectOptimalTime(index, time)">{{time.hourOfDay}}</span>
+                    <span class="time-content" (click)="selectOptimalTime(index, d(availableDateItem.date), time)">{{time.hourOfDay}}</span>
                 </div>
             </div>
         </div>
