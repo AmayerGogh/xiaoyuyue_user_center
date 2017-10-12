@@ -28,7 +28,7 @@ export class AccountServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -42,12 +42,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -67,7 +67,7 @@ export class AccountServiceProxy {
     }
 
     protected processIsTenantAvailable(response: Response): Observable<IsTenantAvailableOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -91,12 +91,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -116,7 +116,7 @@ export class AccountServiceProxy {
     }
 
     protected processIsTenantNameExist(response: Response): Observable<boolean> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -140,12 +140,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -165,7 +165,7 @@ export class AccountServiceProxy {
     }
 
     protected processRegister(response: Response): Observable<RegisterOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -189,12 +189,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -213,7 +213,7 @@ export class AccountServiceProxy {
     }
 
     protected processSendPasswordResetCode(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -234,12 +234,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -259,7 +259,7 @@ export class AccountServiceProxy {
     }
 
     protected processResetPassword(response: Response): Observable<ResetPasswordOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -283,12 +283,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -307,7 +307,7 @@ export class AccountServiceProxy {
     }
 
     protected processSendEmailActivationLink(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -328,12 +328,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -352,7 +352,7 @@ export class AccountServiceProxy {
     }
 
     protected processActivateEmail(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -373,12 +373,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -398,7 +398,7 @@ export class AccountServiceProxy {
     }
 
     protected processImpersonate(response: Response): Observable<ImpersonateOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -424,7 +424,7 @@ export class AccountServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -444,7 +444,7 @@ export class AccountServiceProxy {
     }
 
     protected processBackToImpersonator(response: Response): Observable<ImpersonateOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -468,12 +468,12 @@ export class AccountServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -493,7 +493,7 @@ export class AccountServiceProxy {
     }
 
     protected processSwitchToLinkedAccount(response: Response): Observable<SwitchToLinkedAccountOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -515,7 +515,7 @@ export class AuditLogServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -539,35 +539,35 @@ export class AuditLogServiceProxy {
     getAuditLogs(startDate: Moment, endDate: Moment, userName: string, serviceName: string, methodName: string, browserInfo: string, hasException: boolean, minExecutionDuration: number, maxExecutionDuration: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfAuditLogListDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogs?";
         if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         if (userName !== undefined)
-            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
         if (serviceName !== undefined)
-            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&"; 
+            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&";
         if (methodName !== undefined)
-            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&"; 
+            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&";
         if (browserInfo !== undefined)
-            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&"; 
+            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&";
         if (hasException !== undefined)
-            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&"; 
+            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&";
         if (minExecutionDuration !== undefined)
-            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&"; 
+            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&";
         if (maxExecutionDuration !== undefined)
-            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
+            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -587,7 +587,7 @@ export class AuditLogServiceProxy {
     }
 
     protected processGetAuditLogs(response: Response): Observable<PagedResultDtoOfAuditLogListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -621,35 +621,35 @@ export class AuditLogServiceProxy {
     getAuditLogsToExcel(startDate: Moment, endDate: Moment, userName: string, serviceName: string, methodName: string, browserInfo: string, hasException: boolean, minExecutionDuration: number, maxExecutionDuration: number, sorting: string, maxResultCount: number, skipCount: number): Observable<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogsToExcel?";
         if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         if (userName !== undefined)
-            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
         if (serviceName !== undefined)
-            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&"; 
+            url_ += "ServiceName=" + encodeURIComponent("" + serviceName) + "&";
         if (methodName !== undefined)
-            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&"; 
+            url_ += "MethodName=" + encodeURIComponent("" + methodName) + "&";
         if (browserInfo !== undefined)
-            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&"; 
+            url_ += "BrowserInfo=" + encodeURIComponent("" + browserInfo) + "&";
         if (hasException !== undefined)
-            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&"; 
+            url_ += "HasException=" + encodeURIComponent("" + hasException) + "&";
         if (minExecutionDuration !== undefined)
-            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&"; 
+            url_ += "MinExecutionDuration=" + encodeURIComponent("" + minExecutionDuration) + "&";
         if (maxExecutionDuration !== undefined)
-            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
+            url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -669,7 +669,7 @@ export class AuditLogServiceProxy {
     }
 
     protected processGetAuditLogsToExcel(response: Response): Observable<FileDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -691,7 +691,7 @@ export class BookingServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -703,13 +703,13 @@ export class BookingServiceProxy {
     getJoinBookingInfo(id: number): Observable<JoinBookingOutput> {
         let url_ = this.baseUrl + "/api/services/app/Booking/GetJoinBookingInfo?";
         if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -729,7 +729,7 @@ export class BookingServiceProxy {
     }
 
     protected processGetJoinBookingInfo(response: Response): Observable<JoinBookingOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -753,12 +753,12 @@ export class BookingServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -778,7 +778,7 @@ export class BookingServiceProxy {
     }
 
     protected processJoinBooking(response: Response): Observable<JoinBookingResultDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -800,7 +800,7 @@ export class BookingDataStatisticsServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -813,13 +813,13 @@ export class BookingDataStatisticsServiceProxy {
     getBusCenterDataStatistics(date: string): Observable<BusCenterDataStatisticsDto> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBusCenterDataStatistics?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -839,7 +839,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBusCenterDataStatistics(response: Response): Observable<BusCenterDataStatisticsDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -862,13 +862,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingData(date: string): Observable<BookingDataStatisticsDto> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingData?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -888,7 +888,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingData(response: Response): Observable<BookingDataStatisticsDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -914,7 +914,7 @@ export class BookingDataStatisticsServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -934,7 +934,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetCurrentlyBookingData(response: Response): Observable<CurrentlyBookingDataDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -961,13 +961,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingConverRate(date: string): Observable<BookingConverRateDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingConverRate?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -987,7 +987,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingConverRate(response: Response): Observable<BookingConverRateDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1014,13 +1014,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingAccessTime(date: string): Observable<BookingAccessChannelDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessTime?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1040,7 +1040,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingAccessTime(response: Response): Observable<BookingAccessChannelDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1067,13 +1067,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingAccessSource(date: string): Observable<GetBookingAccessSourceOutput> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessSource?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1093,7 +1093,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingAccessSource(response: Response): Observable<GetBookingAccessSourceOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1116,13 +1116,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingAccessRegion(date: string): Observable<BookingAccessRegionDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessRegion?";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1142,7 +1142,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingAccessRegion(response: Response): Observable<BookingAccessRegionDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1170,15 +1170,15 @@ export class BookingDataStatisticsServiceProxy {
     getBookingSaturation(outletId: number, date: string): Observable<GetBookingSaturationOutput> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingSaturation?";
         if (outletId !== undefined)
-            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&";
         if (date !== undefined)
-            url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
+            url_ += "Date=" + encodeURIComponent("" + date) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1198,7 +1198,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingSaturation(response: Response): Observable<GetBookingSaturationOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1220,13 +1220,13 @@ export class BookingDataStatisticsServiceProxy {
     getBookingHeat(bookingId: number): Observable<BookingHeatDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingHeat?";
         if (bookingId !== undefined)
-            url_ += "bookingId=" + encodeURIComponent("" + bookingId) + "&"; 
+            url_ += "bookingId=" + encodeURIComponent("" + bookingId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1246,7 +1246,7 @@ export class BookingDataStatisticsServiceProxy {
     }
 
     protected processGetBookingHeat(response: Response): Observable<BookingHeatDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1272,7 +1272,7 @@ export class BookingRecordServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -1286,12 +1286,12 @@ export class BookingRecordServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -1310,7 +1310,7 @@ export class BookingRecordServiceProxy {
     }
 
     protected processRecordBookingAccessAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1331,12 +1331,12 @@ export class BookingRecordServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -1355,7 +1355,7 @@ export class BookingRecordServiceProxy {
     }
 
     protected processRecordBookingShareAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1374,7 +1374,7 @@ export class CachingServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -1390,7 +1390,7 @@ export class CachingServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1410,7 +1410,7 @@ export class CachingServiceProxy {
     }
 
     protected processGetAllCaches(response: Response): Observable<ListResultDtoOfCacheDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1435,12 +1435,12 @@ export class CachingServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -1459,7 +1459,7 @@ export class CachingServiceProxy {
     }
 
     protected processClearCache(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1482,7 +1482,7 @@ export class CachingServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -1501,7 +1501,7 @@ export class CachingServiceProxy {
     }
 
     protected processClearAllCaches(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1520,7 +1520,7 @@ export class ChatServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -1536,7 +1536,7 @@ export class ChatServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1556,7 +1556,7 @@ export class ChatServiceProxy {
     }
 
     protected processGetUserChatFriendsWithSettings(response: Response): Observable<GetUserChatFriendsWithSettingsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1581,17 +1581,17 @@ export class ChatServiceProxy {
     getUserChatMessages(tenantId: number, userId: number, minMessageId: number): Observable<ListResultDtoOfChatMessageDto> {
         let url_ = this.baseUrl + "/api/services/app/Chat/GetUserChatMessages?";
         if (tenantId !== undefined)
-            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
+            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&";
         if (userId !== undefined)
-            url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
+            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
         if (minMessageId !== undefined)
-            url_ += "MinMessageId=" + encodeURIComponent("" + minMessageId) + "&"; 
+            url_ += "MinMessageId=" + encodeURIComponent("" + minMessageId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1611,7 +1611,7 @@ export class ChatServiceProxy {
     }
 
     protected processGetUserChatMessages(response: Response): Observable<ListResultDtoOfChatMessageDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1635,12 +1635,12 @@ export class ChatServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -1659,7 +1659,7 @@ export class ChatServiceProxy {
     }
 
     protected processMarkAllUnreadMessagesOfUserAsRead(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1678,7 +1678,7 @@ export class CommonLookupServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -1689,13 +1689,13 @@ export class CommonLookupServiceProxy {
     getEditionsForCombobox(onlyFreeItems: boolean): Observable<ListResultDtoOfSubscribableEditionComboboxItemDto> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetEditionsForCombobox?";
         if (onlyFreeItems !== undefined)
-            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
+            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1715,7 +1715,7 @@ export class CommonLookupServiceProxy {
     }
 
     protected processGetEditionsForCombobox(response: Response): Observable<ListResultDtoOfSubscribableEditionComboboxItemDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1739,12 +1739,12 @@ export class CommonLookupServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1764,7 +1764,7 @@ export class CommonLookupServiceProxy {
     }
 
     protected processFindUsers(response: Response): Observable<PagedResultDtoOfNameValueDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1790,7 +1790,7 @@ export class CommonLookupServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1810,7 +1810,7 @@ export class CommonLookupServiceProxy {
     }
 
     protected processGetDefaultEditionName(response: Response): Observable<GetDefaultEditionNameOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1833,13 +1833,13 @@ export class CommonLookupServiceProxy {
     getEnumSelectItemSource(enumName: string): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetEnumSelectItemSource?";
         if (enumName !== undefined)
-            url_ += "enumName=" + encodeURIComponent("" + enumName) + "&"; 
+            url_ += "enumName=" + encodeURIComponent("" + enumName) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1859,7 +1859,7 @@ export class CommonLookupServiceProxy {
     }
 
     protected processGetEnumSelectItemSource(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1885,7 +1885,7 @@ export class EditionServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -1901,7 +1901,7 @@ export class EditionServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1921,7 +1921,7 @@ export class EditionServiceProxy {
     }
 
     protected processGetEditions(response: Response): Observable<ListResultDtoOfEditionListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1943,13 +1943,13 @@ export class EditionServiceProxy {
     getEditionForEdit(id: number): Observable<GetEditionEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -1969,7 +1969,7 @@ export class EditionServiceProxy {
     }
 
     protected processGetEditionForEdit(response: Response): Observable<GetEditionEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -1993,12 +1993,12 @@ export class EditionServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2017,7 +2017,7 @@ export class EditionServiceProxy {
     }
 
     protected processCreateOrUpdateEdition(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2036,13 +2036,13 @@ export class EditionServiceProxy {
     deleteEdition(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Edition/DeleteEdition?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2061,7 +2061,7 @@ export class EditionServiceProxy {
     }
 
     protected processDeleteEdition(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2083,17 +2083,17 @@ export class EditionServiceProxy {
     getEditionComboboxItems(selectedEditionId: number, addAllItem: boolean, onlyFreeItems: boolean): Observable<SubscribableEditionComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionComboboxItems?";
         if (selectedEditionId !== undefined)
-            url_ += "selectedEditionId=" + encodeURIComponent("" + selectedEditionId) + "&"; 
+            url_ += "selectedEditionId=" + encodeURIComponent("" + selectedEditionId) + "&";
         if (addAllItem !== undefined)
-            url_ += "addAllItem=" + encodeURIComponent("" + addAllItem) + "&"; 
+            url_ += "addAllItem=" + encodeURIComponent("" + addAllItem) + "&";
         if (onlyFreeItems !== undefined)
-            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
+            url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2113,7 +2113,7 @@ export class EditionServiceProxy {
     }
 
     protected processGetEditionComboboxItems(response: Response): Observable<SubscribableEditionComboboxItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2139,7 +2139,7 @@ export class EditionViewServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -2155,7 +2155,7 @@ export class EditionViewServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2175,7 +2175,7 @@ export class EditionViewServiceProxy {
     }
 
     protected processGetEditionsForSelect(response: Response): Observable<EditionsSelectOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2197,13 +2197,13 @@ export class EditionViewServiceProxy {
     getEdition(editionId: number): Observable<EditionSelectDto> {
         let url_ = this.baseUrl + "/api/services/app/EditionView/GetEdition?";
         if (editionId !== undefined)
-            url_ += "editionId=" + encodeURIComponent("" + editionId) + "&"; 
+            url_ += "editionId=" + encodeURIComponent("" + editionId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2223,7 +2223,7 @@ export class EditionViewServiceProxy {
     }
 
     protected processGetEdition(response: Response): Observable<EditionSelectDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2245,7 +2245,7 @@ export class FileServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -2260,17 +2260,17 @@ export class FileServiceProxy {
     downloadTempFile(fileName: string, fileType: string, fileToken: string): Observable<void> {
         let url_ = this.baseUrl + "/api/File/DownloadTempFile?";
         if (fileName !== undefined)
-            url_ += "FileName=" + encodeURIComponent("" + fileName) + "&"; 
+            url_ += "FileName=" + encodeURIComponent("" + fileName) + "&";
         if (fileType !== undefined)
-            url_ += "FileType=" + encodeURIComponent("" + fileType) + "&"; 
+            url_ += "FileType=" + encodeURIComponent("" + fileType) + "&";
         if (fileToken !== undefined)
-            url_ += "FileToken=" + encodeURIComponent("" + fileToken) + "&"; 
+            url_ += "FileToken=" + encodeURIComponent("" + fileToken) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2289,7 +2289,7 @@ export class FileServiceProxy {
     }
 
     protected processDownloadTempFile(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2310,12 +2310,12 @@ export class FileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2335,7 +2335,7 @@ export class FileServiceProxy {
     }
 
     protected processUploadPictureCallBack(response: Response): Observable<UploadPictureOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2357,7 +2357,7 @@ export class FriendshipServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -2371,12 +2371,12 @@ export class FriendshipServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2396,7 +2396,7 @@ export class FriendshipServiceProxy {
     }
 
     protected processCreateFriendshipRequest(response: Response): Observable<FriendDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2420,12 +2420,12 @@ export class FriendshipServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2445,7 +2445,7 @@ export class FriendshipServiceProxy {
     }
 
     protected processCreateFriendshipRequestByUserName(response: Response): Observable<FriendDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2469,12 +2469,12 @@ export class FriendshipServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2493,7 +2493,7 @@ export class FriendshipServiceProxy {
     }
 
     protected processBlockUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2514,12 +2514,12 @@ export class FriendshipServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2538,7 +2538,7 @@ export class FriendshipServiceProxy {
     }
 
     protected processUnblockUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2559,12 +2559,12 @@ export class FriendshipServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2583,7 +2583,7 @@ export class FriendshipServiceProxy {
     }
 
     protected processAcceptFriendshipRequest(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2602,7 +2602,7 @@ export class HostDashboardServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -2613,17 +2613,17 @@ export class HostDashboardServiceProxy {
     getDashboardStatisticsData(incomeStatisticsDateInterval: IncomeStatisticsDateInterval, startDate: Moment, endDate: Moment): Observable<HostDashboardData> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetDashboardStatisticsData?";
         if (incomeStatisticsDateInterval !== undefined)
-            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
+            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&";
         if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2643,7 +2643,7 @@ export class HostDashboardServiceProxy {
     }
 
     protected processGetDashboardStatisticsData(response: Response): Observable<HostDashboardData> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2664,17 +2664,17 @@ export class HostDashboardServiceProxy {
     getIncomeStatistics(incomeStatisticsDateInterval: IncomeStatisticsDateInterval2, startDate: Moment, endDate: Moment): Observable<GetIncomeStatisticsDataOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetIncomeStatistics?";
         if (incomeStatisticsDateInterval !== undefined)
-            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
+            url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&";
         if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2694,7 +2694,7 @@ export class HostDashboardServiceProxy {
     }
 
     protected processGetIncomeStatistics(response: Response): Observable<GetIncomeStatisticsDataOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2715,15 +2715,15 @@ export class HostDashboardServiceProxy {
     getEditionTenantStatistics(startDate: Moment, endDate: Moment): Observable<GetEditionTenantStatisticsOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetEditionTenantStatistics?";
         if (startDate !== undefined)
-            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "StartDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "EndDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2743,7 +2743,7 @@ export class HostDashboardServiceProxy {
     }
 
     protected processGetEditionTenantStatistics(response: Response): Observable<GetEditionTenantStatisticsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2765,7 +2765,7 @@ export class HostSettingsServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -2781,7 +2781,7 @@ export class HostSettingsServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2801,7 +2801,7 @@ export class HostSettingsServiceProxy {
     }
 
     protected processGetAllSettings(response: Response): Observable<HostSettingsEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2825,12 +2825,12 @@ export class HostSettingsServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2849,7 +2849,7 @@ export class HostSettingsServiceProxy {
     }
 
     protected processUpdateAllSettings(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2870,12 +2870,12 @@ export class HostSettingsServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2894,7 +2894,7 @@ export class HostSettingsServiceProxy {
     }
 
     protected processUpdateExternalAuthentication(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2917,7 +2917,7 @@ export class HostSettingsServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -2937,7 +2937,7 @@ export class HostSettingsServiceProxy {
     }
 
     protected processGetVerificationCodeSettingsAsync(response: Response): Observable<VerificationCodeSettingsEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -2961,12 +2961,12 @@ export class HostSettingsServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -2985,7 +2985,7 @@ export class HostSettingsServiceProxy {
     }
 
     protected processSendTestEmail(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3004,7 +3004,7 @@ export class IncomeStatisticsServiceServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -3015,17 +3015,17 @@ export class IncomeStatisticsServiceServiceProxy {
     getIncomeStatisticsData(startDate: Moment, endDate: Moment, dateInterval: DateInterval): Observable<IncomeStastistic[]> {
         let url_ = this.baseUrl + "/api/services/app/IncomeStatisticsService/GetIncomeStatisticsData?";
         if (startDate !== undefined)
-            url_ += "startDate=" + encodeURIComponent("" + startDate.toJSON()) + "&"; 
+            url_ += "startDate=" + encodeURIComponent("" + startDate.toJSON()) + "&";
         if (endDate !== undefined)
-            url_ += "endDate=" + encodeURIComponent("" + endDate.toJSON()) + "&"; 
+            url_ += "endDate=" + encodeURIComponent("" + endDate.toJSON()) + "&";
         if (dateInterval !== undefined)
-            url_ += "dateInterval=" + encodeURIComponent("" + dateInterval) + "&"; 
+            url_ += "dateInterval=" + encodeURIComponent("" + dateInterval) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3045,7 +3045,7 @@ export class IncomeStatisticsServiceServiceProxy {
     }
 
     protected processGetIncomeStatisticsData(response: Response): Observable<IncomeStastistic[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3071,7 +3071,7 @@ export class LanguageServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -3087,7 +3087,7 @@ export class LanguageServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3107,7 +3107,7 @@ export class LanguageServiceProxy {
     }
 
     protected processGetLanguages(response: Response): Observable<GetLanguagesOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3129,13 +3129,13 @@ export class LanguageServiceProxy {
     getLanguageForEdit(id: number): Observable<GetLanguageForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguageForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3155,7 +3155,7 @@ export class LanguageServiceProxy {
     }
 
     protected processGetLanguageForEdit(response: Response): Observable<GetLanguageForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3179,12 +3179,12 @@ export class LanguageServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3203,7 +3203,7 @@ export class LanguageServiceProxy {
     }
 
     protected processCreateOrUpdateLanguage(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3222,13 +3222,13 @@ export class LanguageServiceProxy {
     deleteLanguage(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/DeleteLanguage?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3247,7 +3247,7 @@ export class LanguageServiceProxy {
     }
 
     protected processDeleteLanguage(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3268,12 +3268,12 @@ export class LanguageServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3292,7 +3292,7 @@ export class LanguageServiceProxy {
     }
 
     protected processSetDefaultLanguage(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3319,27 +3319,27 @@ export class LanguageServiceProxy {
     getLanguageTexts(maxResultCount: number, skipCount: number, sorting: string, sourceName: string, baseLanguageName: string, targetLanguageName: string, targetValueFilter: string, filterText: string): Observable<PagedResultDtoOfLanguageTextListDto> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguageTexts?";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (sourceName !== undefined)
-            url_ += "SourceName=" + encodeURIComponent("" + sourceName) + "&"; 
+            url_ += "SourceName=" + encodeURIComponent("" + sourceName) + "&";
         if (baseLanguageName !== undefined)
-            url_ += "BaseLanguageName=" + encodeURIComponent("" + baseLanguageName) + "&"; 
+            url_ += "BaseLanguageName=" + encodeURIComponent("" + baseLanguageName) + "&";
         if (targetLanguageName !== undefined)
-            url_ += "TargetLanguageName=" + encodeURIComponent("" + targetLanguageName) + "&"; 
+            url_ += "TargetLanguageName=" + encodeURIComponent("" + targetLanguageName) + "&";
         if (targetValueFilter !== undefined)
-            url_ += "TargetValueFilter=" + encodeURIComponent("" + targetValueFilter) + "&"; 
+            url_ += "TargetValueFilter=" + encodeURIComponent("" + targetValueFilter) + "&";
         if (filterText !== undefined)
-            url_ += "FilterText=" + encodeURIComponent("" + filterText) + "&"; 
+            url_ += "FilterText=" + encodeURIComponent("" + filterText) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3359,7 +3359,7 @@ export class LanguageServiceProxy {
     }
 
     protected processGetLanguageTexts(response: Response): Observable<PagedResultDtoOfLanguageTextListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3383,12 +3383,12 @@ export class LanguageServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3407,7 +3407,7 @@ export class LanguageServiceProxy {
     }
 
     protected processUpdateLanguageText(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3426,7 +3426,7 @@ export class MessageServiceServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -3442,7 +3442,7 @@ export class MessageServiceServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3462,7 +3462,7 @@ export class MessageServiceServiceProxy {
     }
 
     protected processGetAvailableTokenList(response: Response): Observable<TokensListDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3488,7 +3488,7 @@ export class NotificationServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -3503,17 +3503,17 @@ export class NotificationServiceProxy {
     getUserNotifications(state: State, maxResultCount: number, skipCount: number): Observable<GetNotificationsOutput> {
         let url_ = this.baseUrl + "/api/services/app/Notification/GetUserNotifications?";
         if (state !== undefined)
-            url_ += "State=" + encodeURIComponent("" + state) + "&"; 
+            url_ += "State=" + encodeURIComponent("" + state) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3533,7 +3533,7 @@ export class NotificationServiceProxy {
     }
 
     protected processGetUserNotifications(response: Response): Observable<GetNotificationsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3559,7 +3559,7 @@ export class NotificationServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3578,7 +3578,7 @@ export class NotificationServiceProxy {
     }
 
     protected processSetAllNotificationsAsRead(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3599,12 +3599,12 @@ export class NotificationServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3623,7 +3623,7 @@ export class NotificationServiceProxy {
     }
 
     protected processSetNotificationAsRead(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3646,7 +3646,7 @@ export class NotificationServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3666,7 +3666,7 @@ export class NotificationServiceProxy {
     }
 
     protected processGetNotificationSettings(response: Response): Observable<GetNotificationSettingsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3690,12 +3690,12 @@ export class NotificationServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -3714,7 +3714,7 @@ export class NotificationServiceProxy {
     }
 
     protected processUpdateNotificationSettings(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3733,7 +3733,7 @@ export class OrganizationUnitServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -3749,7 +3749,7 @@ export class OrganizationUnitServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3769,7 +3769,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processGetOrganizationUnits(response: Response): Observable<ListResultDtoOfOrganizationUnitDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3795,19 +3795,19 @@ export class OrganizationUnitServiceProxy {
     getOrganizationUnitUsers(id: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfOrganizationUnitUserListDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/GetOrganizationUnitUsers?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3827,7 +3827,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processGetOrganizationUnitUsers(response: Response): Observable<PagedResultDtoOfOrganizationUnitUserListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3851,12 +3851,12 @@ export class OrganizationUnitServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3876,7 +3876,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processCreateOrganizationUnit(response: Response): Observable<OrganizationUnitDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3900,12 +3900,12 @@ export class OrganizationUnitServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3925,7 +3925,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processUpdateOrganizationUnit(response: Response): Observable<OrganizationUnitDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3949,12 +3949,12 @@ export class OrganizationUnitServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -3974,7 +3974,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processMoveOrganizationUnit(response: Response): Observable<OrganizationUnitDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -3996,13 +3996,13 @@ export class OrganizationUnitServiceProxy {
     deleteOrganizationUnit(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/DeleteOrganizationUnit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4021,7 +4021,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processDeleteOrganizationUnit(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4042,12 +4042,12 @@ export class OrganizationUnitServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4066,7 +4066,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processAddUsersToOrganizationUnit(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4087,15 +4087,15 @@ export class OrganizationUnitServiceProxy {
     removeUserFromOrganizationUnit(userId: number, organizationUnitId: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/RemoveUserFromOrganizationUnit?";
         if (userId !== undefined)
-            url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
+            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
         if (organizationUnitId !== undefined)
-            url_ += "OrganizationUnitId=" + encodeURIComponent("" + organizationUnitId) + "&"; 
+            url_ += "OrganizationUnitId=" + encodeURIComponent("" + organizationUnitId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4114,7 +4114,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processRemoveUserFromOrganizationUnit(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4135,12 +4135,12 @@ export class OrganizationUnitServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4160,7 +4160,7 @@ export class OrganizationUnitServiceProxy {
     }
 
     protected processFindUsers(response: Response): Observable<PagedResultDtoOfNameValueDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4182,7 +4182,7 @@ export class OrgBookingServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -4202,27 +4202,27 @@ export class OrgBookingServiceProxy {
     getBookings(name: string, outletId: number, isActive: boolean, startCreationTime: Moment, endCreationTime: Moment, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingListDto> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookings?";
         if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (outletId !== undefined)
-            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&";
         if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
         if (startCreationTime !== undefined)
-            url_ += "StartCreationTime=" + encodeURIComponent("" + startCreationTime.toJSON()) + "&"; 
+            url_ += "StartCreationTime=" + encodeURIComponent("" + startCreationTime.toJSON()) + "&";
         if (endCreationTime !== undefined)
-            url_ += "EndCreationTime=" + encodeURIComponent("" + endCreationTime.toJSON()) + "&"; 
+            url_ += "EndCreationTime=" + encodeURIComponent("" + endCreationTime.toJSON()) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4242,7 +4242,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetBookings(response: Response): Observable<PagedResultDtoOfBookingListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4264,13 +4264,13 @@ export class OrgBookingServiceProxy {
     getAvailableBookingDateAndTime(id: number): Observable<GetBookingDateAndTimeOutput> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetAvailableBookingDateAndTime?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4290,7 +4290,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetAvailableBookingDateAndTime(response: Response): Observable<GetBookingDateAndTimeOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4312,13 +4312,13 @@ export class OrgBookingServiceProxy {
     getBookingForEdit(id: number): Observable<GetBookingForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookingForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4338,7 +4338,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetBookingForEdit(response: Response): Observable<GetBookingForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4360,13 +4360,13 @@ export class OrgBookingServiceProxy {
     getBookingDetail(id: number): Observable<GetBookingDetailOutput> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookingDetail?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4386,7 +4386,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetBookingDetail(response: Response): Observable<GetBookingDetailOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4412,7 +4412,7 @@ export class OrgBookingServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4432,7 +4432,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetBookingSelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4460,12 +4460,12 @@ export class OrgBookingServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4485,7 +4485,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processCreateOrUpdateBooking(response: Response): Observable<EntityDtoOfInt64> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4509,12 +4509,12 @@ export class OrgBookingServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4533,7 +4533,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processActivedOrDisableBooking(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4552,13 +4552,13 @@ export class OrgBookingServiceProxy {
     deleteBooking(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/DeleteBooking?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4577,7 +4577,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processDeleteBooking(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4596,142 +4596,142 @@ export class OrgBookingServiceProxy {
     getItemDatetime(tenantId: number, name: string, description: string, hint: string, templateId: number, contactorId: number, contactor_Name: string, contactor_PhoneNum: string, contactor_WechatQrcodeUrl: string, contactor_TenantId: number, contactor_OutletId: number, contactor_IsDefault: boolean, contactor_IsDeleted: boolean, contactor_DeleterUserId: number, contactor_DeletionTime: Moment, contactor_LastModificationTime: Moment, contactor_LastModifierUserId: number, contactor_CreationTime: Moment, contactor_CreatorUserId: number, contactor_Id: number, outletId: number, outlet_TenantId: number, outlet_Name: string, outlet_Longitude: string, outlet_PhoneNum: string, outlet_BusinessHours: string, outlet_Province: string, outlet_ProvinceId: number, outlet_City: string, outlet_CityId: number, outlet_District: string, outlet_DistrictId: number, outlet_DetailAddress: string, outlet_PictureId: number, outlet_IsActive: boolean, outlet_Contactors: any[], outlet_IsDeleted: boolean, outlet_DeleterUserId: number, outlet_DeletionTime: Moment, outlet_LastModificationTime: Moment, outlet_LastModifierUserId: number, outlet_CreationTime: Moment, outlet_CreatorUserId: number, outlet_Id: number, needGender: boolean, needAge: boolean, needEmail: boolean, sticked: boolean, isActive: boolean, pV: number, uV: number, items: any[], pictures: any[], isDeleted: boolean, deleterUserId: number, deletionTime: Moment, lastModificationTime: Moment, lastModifierUserId: number, creationTime: Moment, creatorUserId: number, id: number): Observable<string[]> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetItemDatetime?";
         if (tenantId !== undefined)
-            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
+            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&";
         if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (description !== undefined)
-            url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
+            url_ += "Description=" + encodeURIComponent("" + description) + "&";
         if (hint !== undefined)
-            url_ += "Hint=" + encodeURIComponent("" + hint) + "&"; 
+            url_ += "Hint=" + encodeURIComponent("" + hint) + "&";
         if (templateId !== undefined)
-            url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&"; 
+            url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&";
         if (contactorId !== undefined)
-            url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&"; 
+            url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&";
         if (contactor_Name !== undefined)
-            url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&"; 
+            url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&";
         if (contactor_PhoneNum !== undefined)
-            url_ += "Contactor.PhoneNum=" + encodeURIComponent("" + contactor_PhoneNum) + "&"; 
+            url_ += "Contactor.PhoneNum=" + encodeURIComponent("" + contactor_PhoneNum) + "&";
         if (contactor_WechatQrcodeUrl !== undefined)
-            url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&"; 
+            url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&";
         if (contactor_TenantId !== undefined)
-            url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&"; 
+            url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&";
         if (contactor_OutletId !== undefined)
-            url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&"; 
+            url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&";
         if (contactor_IsDefault !== undefined)
-            url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&"; 
+            url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&";
         if (contactor_IsDeleted !== undefined)
-            url_ += "Contactor.IsDeleted=" + encodeURIComponent("" + contactor_IsDeleted) + "&"; 
+            url_ += "Contactor.IsDeleted=" + encodeURIComponent("" + contactor_IsDeleted) + "&";
         if (contactor_DeleterUserId !== undefined)
-            url_ += "Contactor.DeleterUserId=" + encodeURIComponent("" + contactor_DeleterUserId) + "&"; 
+            url_ += "Contactor.DeleterUserId=" + encodeURIComponent("" + contactor_DeleterUserId) + "&";
         if (contactor_DeletionTime !== undefined)
-            url_ += "Contactor.DeletionTime=" + encodeURIComponent("" + contactor_DeletionTime.toJSON()) + "&"; 
+            url_ += "Contactor.DeletionTime=" + encodeURIComponent("" + contactor_DeletionTime.toJSON()) + "&";
         if (contactor_LastModificationTime !== undefined)
-            url_ += "Contactor.LastModificationTime=" + encodeURIComponent("" + contactor_LastModificationTime.toJSON()) + "&"; 
+            url_ += "Contactor.LastModificationTime=" + encodeURIComponent("" + contactor_LastModificationTime.toJSON()) + "&";
         if (contactor_LastModifierUserId !== undefined)
-            url_ += "Contactor.LastModifierUserId=" + encodeURIComponent("" + contactor_LastModifierUserId) + "&"; 
+            url_ += "Contactor.LastModifierUserId=" + encodeURIComponent("" + contactor_LastModifierUserId) + "&";
         if (contactor_CreationTime !== undefined)
-            url_ += "Contactor.CreationTime=" + encodeURIComponent("" + contactor_CreationTime.toJSON()) + "&"; 
+            url_ += "Contactor.CreationTime=" + encodeURIComponent("" + contactor_CreationTime.toJSON()) + "&";
         if (contactor_CreatorUserId !== undefined)
-            url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&"; 
+            url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&";
         if (contactor_Id !== undefined)
-            url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&"; 
+            url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&";
         if (outletId !== undefined)
-            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
+            url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&";
         if (outlet_TenantId !== undefined)
-            url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&"; 
+            url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&";
         if (outlet_Name !== undefined)
-            url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&"; 
+            url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&";
         if (outlet_Longitude !== undefined)
-            url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&"; 
+            url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&";
         if (outlet_PhoneNum !== undefined)
-            url_ += "Outlet.PhoneNum=" + encodeURIComponent("" + outlet_PhoneNum) + "&"; 
+            url_ += "Outlet.PhoneNum=" + encodeURIComponent("" + outlet_PhoneNum) + "&";
         if (outlet_BusinessHours !== undefined)
-            url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&"; 
+            url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&";
         if (outlet_Province !== undefined)
-            url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&"; 
+            url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&";
         if (outlet_ProvinceId !== undefined)
-            url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&"; 
+            url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&";
         if (outlet_City !== undefined)
-            url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&"; 
+            url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&";
         if (outlet_CityId !== undefined)
-            url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&"; 
+            url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&";
         if (outlet_District !== undefined)
-            url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&"; 
+            url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&";
         if (outlet_DistrictId !== undefined)
-            url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&"; 
+            url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&";
         if (outlet_DetailAddress !== undefined)
-            url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&"; 
+            url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&";
         if (outlet_PictureId !== undefined)
-            url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&"; 
+            url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&";
         if (outlet_IsActive !== undefined)
-            url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&"; 
+            url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&";
         if (outlet_Contactors !== undefined)
-            outlet_Contactors.forEach((item, index) => { 
+            outlet_Contactors.forEach((item, index) => {
                 for (let attr in item)
                     url_ += "Outlet.Contactors[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
             });
         if (outlet_IsDeleted !== undefined)
-            url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&"; 
+            url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&";
         if (outlet_DeleterUserId !== undefined)
-            url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&"; 
+            url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&";
         if (outlet_DeletionTime !== undefined)
-            url_ += "Outlet.DeletionTime=" + encodeURIComponent("" + outlet_DeletionTime.toJSON()) + "&"; 
+            url_ += "Outlet.DeletionTime=" + encodeURIComponent("" + outlet_DeletionTime.toJSON()) + "&";
         if (outlet_LastModificationTime !== undefined)
-            url_ += "Outlet.LastModificationTime=" + encodeURIComponent("" + outlet_LastModificationTime.toJSON()) + "&"; 
+            url_ += "Outlet.LastModificationTime=" + encodeURIComponent("" + outlet_LastModificationTime.toJSON()) + "&";
         if (outlet_LastModifierUserId !== undefined)
-            url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&"; 
+            url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&";
         if (outlet_CreationTime !== undefined)
-            url_ += "Outlet.CreationTime=" + encodeURIComponent("" + outlet_CreationTime.toJSON()) + "&"; 
+            url_ += "Outlet.CreationTime=" + encodeURIComponent("" + outlet_CreationTime.toJSON()) + "&";
         if (outlet_CreatorUserId !== undefined)
-            url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&"; 
+            url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&";
         if (outlet_Id !== undefined)
-            url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&"; 
+            url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&";
         if (needGender !== undefined)
-            url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&"; 
+            url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&";
         if (needAge !== undefined)
-            url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&"; 
+            url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&";
         if (needEmail !== undefined)
-            url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&"; 
+            url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&";
         if (sticked !== undefined)
-            url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&"; 
+            url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&";
         if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
         if (pV !== undefined)
-            url_ += "PV=" + encodeURIComponent("" + pV) + "&"; 
+            url_ += "PV=" + encodeURIComponent("" + pV) + "&";
         if (uV !== undefined)
-            url_ += "UV=" + encodeURIComponent("" + uV) + "&"; 
+            url_ += "UV=" + encodeURIComponent("" + uV) + "&";
         if (items !== undefined)
-            items.forEach((item, index) => { 
+            items.forEach((item, index) => {
                 for (let attr in item)
                     url_ += "Items[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
             });
         if (pictures !== undefined)
-            pictures.forEach((item, index) => { 
+            pictures.forEach((item, index) => {
                 for (let attr in item)
                     url_ += "Pictures[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
             });
         if (isDeleted !== undefined)
-            url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&"; 
+            url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&";
         if (deleterUserId !== undefined)
-            url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&"; 
+            url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&";
         if (deletionTime !== undefined)
-            url_ += "DeletionTime=" + encodeURIComponent("" + deletionTime.toJSON()) + "&"; 
+            url_ += "DeletionTime=" + encodeURIComponent("" + deletionTime.toJSON()) + "&";
         if (lastModificationTime !== undefined)
-            url_ += "LastModificationTime=" + encodeURIComponent("" + lastModificationTime.toJSON()) + "&"; 
+            url_ += "LastModificationTime=" + encodeURIComponent("" + lastModificationTime.toJSON()) + "&";
         if (lastModifierUserId !== undefined)
-            url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&"; 
+            url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&";
         if (creationTime !== undefined)
-            url_ += "CreationTime=" + encodeURIComponent("" + creationTime.toJSON()) + "&"; 
+            url_ += "CreationTime=" + encodeURIComponent("" + creationTime.toJSON()) + "&";
         if (creatorUserId !== undefined)
-            url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&"; 
+            url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4751,7 +4751,7 @@ export class OrgBookingServiceProxy {
     }
 
     protected processGetItemDatetime(response: Response): Observable<string[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4777,7 +4777,7 @@ export class OrgBookingOrderServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -4804,41 +4804,41 @@ export class OrgBookingOrderServiceProxy {
     getOrders(bookingId: number, bookingName: string, customerName: string, bookingDate: Moment, hourOfDay: string, startMinute: number, endMinute: number, phoneNumber: string, gender: Gender, creationStartDate: Moment, creationEndDate: Moment, status: Status[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfOrgBookingOrderListDto> {
         let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrders?";
         if (bookingId !== undefined)
-            url_ += "BookingId=" + encodeURIComponent("" + bookingId) + "&"; 
+            url_ += "BookingId=" + encodeURIComponent("" + bookingId) + "&";
         if (bookingName !== undefined)
-            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
+            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&";
         if (customerName !== undefined)
-            url_ += "CustomerName=" + encodeURIComponent("" + customerName) + "&"; 
+            url_ += "CustomerName=" + encodeURIComponent("" + customerName) + "&";
         if (bookingDate !== undefined)
-            url_ += "BookingDate=" + encodeURIComponent("" + bookingDate.toJSON()) + "&"; 
+            url_ += "BookingDate=" + encodeURIComponent("" + bookingDate.toJSON()) + "&";
         if (hourOfDay !== undefined)
-            url_ += "HourOfDay=" + encodeURIComponent("" + hourOfDay) + "&"; 
+            url_ += "HourOfDay=" + encodeURIComponent("" + hourOfDay) + "&";
         if (startMinute !== undefined)
-            url_ += "StartMinute=" + encodeURIComponent("" + startMinute) + "&"; 
+            url_ += "StartMinute=" + encodeURIComponent("" + startMinute) + "&";
         if (endMinute !== undefined)
-            url_ += "EndMinute=" + encodeURIComponent("" + endMinute) + "&"; 
+            url_ += "EndMinute=" + encodeURIComponent("" + endMinute) + "&";
         if (phoneNumber !== undefined)
-            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&"; 
+            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&";
         if (gender !== undefined)
-            url_ += "Gender=" + encodeURIComponent("" + gender) + "&"; 
+            url_ += "Gender=" + encodeURIComponent("" + gender) + "&";
         if (creationStartDate !== undefined)
-            url_ += "CreationStartDate=" + encodeURIComponent("" + creationStartDate.toJSON()) + "&"; 
+            url_ += "CreationStartDate=" + encodeURIComponent("" + creationStartDate.toJSON()) + "&";
         if (creationEndDate !== undefined)
-            url_ += "CreationEndDate=" + encodeURIComponent("" + creationEndDate.toJSON()) + "&"; 
+            url_ += "CreationEndDate=" + encodeURIComponent("" + creationEndDate.toJSON()) + "&";
         if (status !== undefined)
             status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4858,7 +4858,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processGetOrders(response: Response): Observable<PagedResultDtoOfOrgBookingOrderListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4880,13 +4880,13 @@ export class OrgBookingOrderServiceProxy {
     getOrderDetail(id: number): Observable<OrgBookingOrderInfolDto> {
         let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrderDetail?";
         if (id !== undefined)
-            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -4906,7 +4906,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processGetOrderDetail(response: Response): Observable<OrgBookingOrderInfolDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4930,12 +4930,12 @@ export class OrgBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4954,7 +4954,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processBatchConfirmBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -4975,12 +4975,12 @@ export class OrgBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -4999,7 +4999,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processConfirmBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5020,12 +5020,12 @@ export class OrgBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5044,7 +5044,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processComplateBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5065,12 +5065,12 @@ export class OrgBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5089,7 +5089,7 @@ export class OrgBookingOrderServiceProxy {
     }
 
     protected processRemarkBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5108,7 +5108,7 @@ export class OutletServiceServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -5124,19 +5124,19 @@ export class OutletServiceServiceProxy {
     getOutlets(name: string, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfOutletListDto> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/GetOutlets?";
         if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5156,7 +5156,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processGetOutlets(response: Response): Observable<PagedResultDtoOfOutletListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5182,7 +5182,7 @@ export class OutletServiceServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5202,7 +5202,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processGetOutletSelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5228,13 +5228,13 @@ export class OutletServiceServiceProxy {
     getOutletForEdit(id: number): Observable<GetOutletForEditDto> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/GetOutletForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5254,7 +5254,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processGetOutletForEdit(response: Response): Observable<GetOutletForEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5278,12 +5278,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5302,7 +5302,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processCreateOrUpdateOutlet(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5321,13 +5321,13 @@ export class OutletServiceServiceProxy {
     deleteOutlet(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/DeleteOutlet?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5346,7 +5346,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processDeleteOutlet(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5365,13 +5365,13 @@ export class OutletServiceServiceProxy {
     getContactorSelectList(outletId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/GetContactorSelectList?";
         if (outletId !== undefined)
-            url_ += "outletId=" + encodeURIComponent("" + outletId) + "&"; 
+            url_ += "outletId=" + encodeURIComponent("" + outletId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5391,7 +5391,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processGetContactorSelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5419,12 +5419,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5443,7 +5443,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processCreateOrUpdateContactor(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5462,13 +5462,13 @@ export class OutletServiceServiceProxy {
     deleteContactor(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/DeleteContactor?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5487,7 +5487,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processDeleteContactor(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5508,12 +5508,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5532,7 +5532,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processCreateOutlet(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5553,12 +5553,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5577,7 +5577,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processUpdateOutlet(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5598,12 +5598,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5622,7 +5622,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processCreateContactor(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5643,12 +5643,12 @@ export class OutletServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -5667,7 +5667,7 @@ export class OutletServiceServiceProxy {
     }
 
     protected processUpdateContactor(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5686,7 +5686,7 @@ export class PaymentServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -5697,13 +5697,13 @@ export class PaymentServiceProxy {
     getPaymentInfo(upgradeEditionId: number): Observable<PaymentInfoDto> {
         let url_ = this.baseUrl + "/api/services/app/Payment/GetPaymentInfo?";
         if (upgradeEditionId !== undefined)
-            url_ += "UpgradeEditionId=" + encodeURIComponent("" + upgradeEditionId) + "&"; 
+            url_ += "UpgradeEditionId=" + encodeURIComponent("" + upgradeEditionId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5723,7 +5723,7 @@ export class PaymentServiceProxy {
     }
 
     protected processGetPaymentInfo(response: Response): Observable<PaymentInfoDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5746,12 +5746,12 @@ export class PaymentServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5771,7 +5771,7 @@ export class PaymentServiceProxy {
     }
 
     protected processCreatePayment(response: Response): Observable<any> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5800,12 +5800,12 @@ export class PaymentServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5825,7 +5825,7 @@ export class PaymentServiceProxy {
     }
 
     protected processExecutePayment(response: Response): Observable<any> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5855,17 +5855,17 @@ export class PaymentServiceProxy {
     getPaymentHistory(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfSubscriptionPaymentListDto> {
         let url_ = this.baseUrl + "/api/services/app/Payment/GetPaymentHistory?";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5885,7 +5885,7 @@ export class PaymentServiceProxy {
     }
 
     protected processGetPaymentHistory(response: Response): Observable<PagedResultDtoOfSubscriptionPaymentListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5907,7 +5907,7 @@ export class PerBookingOrderServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -5921,17 +5921,17 @@ export class PerBookingOrderServiceProxy {
     getBookingTimeline(startDataTime: Moment, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingTimelineDto> {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingTimeline?";
         if (startDataTime !== undefined)
-            url_ += "StartDataTime=" + encodeURIComponent("" + startDataTime.toJSON()) + "&"; 
+            url_ += "StartDataTime=" + encodeURIComponent("" + startDataTime.toJSON()) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -5951,7 +5951,7 @@ export class PerBookingOrderServiceProxy {
     }
 
     protected processGetBookingTimeline(response: Response): Observable<PagedResultDtoOfBookingTimelineDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -5978,21 +5978,21 @@ export class PerBookingOrderServiceProxy {
     getBookingOrders(bookingName: string, status: Status2[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingOrderListDto> {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrders?";
         if (bookingName !== undefined)
-            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
+            url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&";
         if (status !== undefined)
             status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6012,7 +6012,7 @@ export class PerBookingOrderServiceProxy {
     }
 
     protected processGetBookingOrders(response: Response): Observable<PagedResultDtoOfBookingOrderListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6034,13 +6034,13 @@ export class PerBookingOrderServiceProxy {
     getBookingOrderForEdit(id: number): Observable<GetPersonBookingOrderOutput> {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrderForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6060,7 +6060,7 @@ export class PerBookingOrderServiceProxy {
     }
 
     protected processGetBookingOrderForEdit(response: Response): Observable<GetPersonBookingOrderOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6084,12 +6084,12 @@ export class PerBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6108,7 +6108,7 @@ export class PerBookingOrderServiceProxy {
     }
 
     protected processCancelBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6129,12 +6129,12 @@ export class PerBookingOrderServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6153,7 +6153,7 @@ export class PerBookingOrderServiceProxy {
     }
 
     protected processStickedBookingOrder(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6172,7 +6172,7 @@ export class PermissionServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -6188,7 +6188,7 @@ export class PermissionServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6208,7 +6208,7 @@ export class PermissionServiceProxy {
     }
 
     protected processGetAllPermissions(response: Response): Observable<ListResultDtoOfFlatPermissionWithLevelDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6230,7 +6230,7 @@ export class PictureServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -6246,19 +6246,19 @@ export class PictureServiceProxy {
     getPictureAsync(groupId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfPictureListDto> {
         let url_ = this.baseUrl + "/api/services/app/Picture/GetPictureAsync?";
         if (groupId !== undefined)
-            url_ += "GroupId=" + encodeURIComponent("" + groupId) + "&"; 
+            url_ += "GroupId=" + encodeURIComponent("" + groupId) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6278,7 +6278,7 @@ export class PictureServiceProxy {
     }
 
     protected processGetPictureAsync(response: Response): Observable<PagedResultDtoOfPictureListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6304,7 +6304,7 @@ export class PictureServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6324,7 +6324,7 @@ export class PictureServiceProxy {
     }
 
     protected processGetPictureUploadToken(response: Response): Observable<UploadTokenOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6346,13 +6346,13 @@ export class PictureServiceProxy {
     uploadAsync(groupId: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/UploadAsync?";
         if (groupId !== undefined)
-            url_ += "groupId=" + encodeURIComponent("" + groupId) + "&"; 
+            url_ += "groupId=" + encodeURIComponent("" + groupId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6371,7 +6371,7 @@ export class PictureServiceProxy {
     }
 
     protected processUploadAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6392,12 +6392,12 @@ export class PictureServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6416,7 +6416,7 @@ export class PictureServiceProxy {
     }
 
     protected processCreateOrUpdatePicture(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6435,13 +6435,13 @@ export class PictureServiceProxy {
     deleteAsync(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/DeleteAsync?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6460,7 +6460,7 @@ export class PictureServiceProxy {
     }
 
     protected processDeleteAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6483,7 +6483,7 @@ export class PictureServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6503,7 +6503,7 @@ export class PictureServiceProxy {
     }
 
     protected processGetPictureGroupAsync(response: Response): Observable<PictureGroupListDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6531,12 +6531,12 @@ export class PictureServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6555,7 +6555,7 @@ export class PictureServiceProxy {
     }
 
     protected processCreateOrUpdatePictureGroup(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6574,13 +6574,13 @@ export class PictureServiceProxy {
     deleteGroupAsync(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/DeleteGroupAsync?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6599,7 +6599,7 @@ export class PictureServiceProxy {
     }
 
     protected processDeleteGroupAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6618,7 +6618,7 @@ export class ProfileServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -6634,7 +6634,7 @@ export class ProfileServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -6654,7 +6654,7 @@ export class ProfileServiceProxy {
     }
 
     protected processGetCurrentUserProfileForEdit(response: Response): Observable<CurrentUserProfileEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6678,12 +6678,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6702,7 +6702,7 @@ export class ProfileServiceProxy {
     }
 
     protected processUpdateCurrentUserProfile(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6723,12 +6723,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6747,7 +6747,7 @@ export class ProfileServiceProxy {
     }
 
     protected processChangePassword(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6768,12 +6768,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6792,7 +6792,7 @@ export class ProfileServiceProxy {
     }
 
     protected processChangePasswordByPhone(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6813,12 +6813,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6837,7 +6837,7 @@ export class ProfileServiceProxy {
     }
 
     protected processBindingPhoneNum(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6858,12 +6858,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6882,7 +6882,7 @@ export class ProfileServiceProxy {
     }
 
     protected processChangeBindingPhoneNum(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6901,13 +6901,13 @@ export class ProfileServiceProxy {
     unBindingPhoneNum(code: string): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Profile/UnBindingPhoneNum?";
         if (code !== undefined)
-            url_ += "code=" + encodeURIComponent("" + code) + "&"; 
+            url_ += "code=" + encodeURIComponent("" + code) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6926,7 +6926,7 @@ export class ProfileServiceProxy {
     }
 
     protected processUnBindingPhoneNum(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6947,12 +6947,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -6971,7 +6971,7 @@ export class ProfileServiceProxy {
     }
 
     protected processUpdateProfilePicture(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -6994,7 +6994,7 @@ export class ProfileServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7014,7 +7014,7 @@ export class ProfileServiceProxy {
     }
 
     protected processGetPasswordComplexitySetting(response: Response): Observable<GetPasswordComplexitySettingOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7040,7 +7040,7 @@ export class ProfileServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7060,7 +7060,7 @@ export class ProfileServiceProxy {
     }
 
     protected processGetProfilePicture(response: Response): Observable<GetProfilePictureOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7085,17 +7085,17 @@ export class ProfileServiceProxy {
     getFriendProfilePictureById(profilePictureId: number, userId: number, tenantId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetFriendProfilePictureById?";
         if (profilePictureId !== undefined)
-            url_ += "ProfilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
+            url_ += "ProfilePictureId=" + encodeURIComponent("" + profilePictureId) + "&";
         if (userId !== undefined)
-            url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
+            url_ += "UserId=" + encodeURIComponent("" + userId) + "&";
         if (tenantId !== undefined)
-            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
+            url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7115,7 +7115,7 @@ export class ProfileServiceProxy {
     }
 
     protected processGetFriendProfilePictureById(response: Response): Observable<GetProfilePictureOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7138,13 +7138,13 @@ export class ProfileServiceProxy {
     getProfilePictureById(profilePictureId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetProfilePictureById?";
         if (profilePictureId !== undefined)
-            url_ += "profilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
+            url_ += "profilePictureId=" + encodeURIComponent("" + profilePictureId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7164,7 +7164,7 @@ export class ProfileServiceProxy {
     }
 
     protected processGetProfilePictureById(response: Response): Observable<GetProfilePictureOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7188,12 +7188,12 @@ export class ProfileServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7212,7 +7212,7 @@ export class ProfileServiceProxy {
     }
 
     protected processChangeLanguage(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7231,7 +7231,7 @@ export class RoleServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -7248,21 +7248,21 @@ export class RoleServiceProxy {
     getRoles(displayName: string, permission: string, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfRoleListDto> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetRoles?";
         if (displayName !== undefined)
-            url_ += "DisplayName=" + encodeURIComponent("" + displayName) + "&"; 
+            url_ += "DisplayName=" + encodeURIComponent("" + displayName) + "&";
         if (permission !== undefined)
-            url_ += "Permission=" + encodeURIComponent("" + permission) + "&"; 
+            url_ += "Permission=" + encodeURIComponent("" + permission) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7282,7 +7282,7 @@ export class RoleServiceProxy {
     }
 
     protected processGetRoles(response: Response): Observable<PagedResultDtoOfRoleListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7304,13 +7304,13 @@ export class RoleServiceProxy {
     getRoleForEdit(id: number): Observable<GetRoleForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Role/GetRoleForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7330,7 +7330,7 @@ export class RoleServiceProxy {
     }
 
     protected processGetRoleForEdit(response: Response): Observable<GetRoleForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7354,12 +7354,12 @@ export class RoleServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7378,7 +7378,7 @@ export class RoleServiceProxy {
     }
 
     protected processCreateOrUpdateRole(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7397,13 +7397,13 @@ export class RoleServiceProxy {
     deleteRole(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Role/DeleteRole?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7422,7 +7422,7 @@ export class RoleServiceProxy {
     }
 
     protected processDeleteRole(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7441,7 +7441,7 @@ export class SessionServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -7457,7 +7457,7 @@ export class SessionServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7477,7 +7477,7 @@ export class SessionServiceProxy {
     }
 
     protected processGetCurrentLoginInformations(response: Response): Observable<GetCurrentLoginInformationsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7499,7 +7499,7 @@ export class SMSServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -7513,12 +7513,12 @@ export class SMSServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7538,7 +7538,7 @@ export class SMSServiceProxy {
     }
 
     protected processBatchSendAsync(response: Response): Observable<SendResult> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7562,12 +7562,12 @@ export class SMSServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7587,7 +7587,7 @@ export class SMSServiceProxy {
     }
 
     protected processSendCodeByCurrentUserAsync(response: Response): Observable<SendResult> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7611,12 +7611,12 @@ export class SMSServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7636,7 +7636,7 @@ export class SMSServiceProxy {
     }
 
     protected processSendCodeAsync(response: Response): Observable<SendResult> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7660,12 +7660,12 @@ export class SMSServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7684,7 +7684,7 @@ export class SMSServiceProxy {
     }
 
     protected processCheckCodeByCurrentUserAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7703,7 +7703,7 @@ export class SMSTemplateServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -7722,25 +7722,25 @@ export class SMSTemplateServiceProxy {
     getSMSTemplates(name: string, templateCode: string, providerName: string, isActived: boolean, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfSMSTemplateListDto> {
         let url_ = this.baseUrl + "/api/services/app/SMSTemplate/GetSMSTemplates?";
         if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (templateCode !== undefined)
-            url_ += "TemplateCode=" + encodeURIComponent("" + templateCode) + "&"; 
+            url_ += "TemplateCode=" + encodeURIComponent("" + templateCode) + "&";
         if (providerName !== undefined)
-            url_ += "ProviderName=" + encodeURIComponent("" + providerName) + "&"; 
+            url_ += "ProviderName=" + encodeURIComponent("" + providerName) + "&";
         if (isActived !== undefined)
-            url_ += "IsActived=" + encodeURIComponent("" + isActived) + "&"; 
+            url_ += "IsActived=" + encodeURIComponent("" + isActived) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7760,7 +7760,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processGetSMSTemplates(response: Response): Observable<PagedResultDtoOfSMSTemplateListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7786,7 +7786,7 @@ export class SMSTemplateServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7806,7 +7806,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processGetAvailableSMSTemplates(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7832,13 +7832,13 @@ export class SMSTemplateServiceProxy {
     getSMSTemplateForEdit(id: number): Observable<GetSMSTemplateForEditDto> {
         let url_ = this.baseUrl + "/api/services/app/SMSTemplate/GetSMSTemplateForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7858,7 +7858,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processGetSMSTemplateForEdit(response: Response): Observable<GetSMSTemplateForEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7882,12 +7882,12 @@ export class SMSTemplateServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7906,7 +7906,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processCreateOrUpdate(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7925,13 +7925,13 @@ export class SMSTemplateServiceProxy {
     deleteAsync(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SMSTemplate/DeleteAsync?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -7950,7 +7950,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processDeleteAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -7973,7 +7973,7 @@ export class SMSTemplateServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -7993,7 +7993,7 @@ export class SMSTemplateServiceProxy {
     }
 
     protected processGetSMSProviders(response: Response): Observable<SMSProviderInfoDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8019,7 +8019,7 @@ export class StateServiceServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -8034,17 +8034,17 @@ export class StateServiceServiceProxy {
     getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8064,7 +8064,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetProvinces(response: Response): Observable<PagedResultDtoOfProvinceListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8090,7 +8090,7 @@ export class StateServiceServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8110,7 +8110,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetProvinceSelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8138,12 +8138,12 @@ export class StateServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8162,7 +8162,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processCreateOrUpdateProvince(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8181,13 +8181,13 @@ export class StateServiceServiceProxy {
     deleteProvince(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteProvince?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8206,7 +8206,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processDeleteProvince(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8229,19 +8229,19 @@ export class StateServiceServiceProxy {
     getCitys(provinceId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfCityListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetCitys?";
         if (provinceId !== undefined)
-            url_ += "ProvinceId=" + encodeURIComponent("" + provinceId) + "&"; 
+            url_ += "ProvinceId=" + encodeURIComponent("" + provinceId) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8261,7 +8261,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetCitys(response: Response): Observable<PagedResultDtoOfCityListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8284,13 +8284,13 @@ export class StateServiceServiceProxy {
     getCitySelectList(provinceId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetCitySelectList?";
         if (provinceId !== undefined)
-            url_ += "provinceId=" + encodeURIComponent("" + provinceId) + "&"; 
+            url_ += "provinceId=" + encodeURIComponent("" + provinceId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8310,7 +8310,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetCitySelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8338,12 +8338,12 @@ export class StateServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8362,7 +8362,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processCreateOrUpdateCity(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8381,13 +8381,13 @@ export class StateServiceServiceProxy {
     deleteCity(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteCity?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8406,7 +8406,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processDeleteCity(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8429,19 +8429,19 @@ export class StateServiceServiceProxy {
     getDistricts(ctyId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfDistrictListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetDistricts?";
         if (ctyId !== undefined)
-            url_ += "CtyId=" + encodeURIComponent("" + ctyId) + "&"; 
+            url_ += "CtyId=" + encodeURIComponent("" + ctyId) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8461,7 +8461,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetDistricts(response: Response): Observable<PagedResultDtoOfDistrictListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8484,13 +8484,13 @@ export class StateServiceServiceProxy {
     getDistrictSelectList(cityId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetDistrictSelectList?";
         if (cityId !== undefined)
-            url_ += "cityId=" + encodeURIComponent("" + cityId) + "&"; 
+            url_ += "cityId=" + encodeURIComponent("" + cityId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8510,7 +8510,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processGetDistrictSelectList(response: Response): Observable<SelectListItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8538,12 +8538,12 @@ export class StateServiceServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8562,7 +8562,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processCreateOrUpdateDistrict(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8581,13 +8581,13 @@ export class StateServiceServiceProxy {
     deleteDistrict(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteDistrict?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8606,7 +8606,7 @@ export class StateServiceServiceProxy {
     }
 
     protected processDeleteDistrict(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8625,7 +8625,7 @@ export class TenantServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -8649,35 +8649,35 @@ export class TenantServiceProxy {
     getTenants(tenancyName: string, name: string, subscriptionEndDateStart: Moment, subscriptionEndDateEnd: Moment, creationDateStart: Moment, creationDateEnd: Moment, editionId: number, editionIdSpecified: boolean, isActive: boolean, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfTenantListDto> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenants?";
         if (tenancyName !== undefined)
-            url_ += "TenancyName=" + encodeURIComponent("" + tenancyName) + "&"; 
+            url_ += "TenancyName=" + encodeURIComponent("" + tenancyName) + "&";
         if (name !== undefined)
-            url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
+            url_ += "Name=" + encodeURIComponent("" + name) + "&";
         if (subscriptionEndDateStart !== undefined)
-            url_ += "SubscriptionEndDateStart=" + encodeURIComponent("" + subscriptionEndDateStart.toJSON()) + "&"; 
+            url_ += "SubscriptionEndDateStart=" + encodeURIComponent("" + subscriptionEndDateStart.toJSON()) + "&";
         if (subscriptionEndDateEnd !== undefined)
-            url_ += "SubscriptionEndDateEnd=" + encodeURIComponent("" + subscriptionEndDateEnd.toJSON()) + "&"; 
+            url_ += "SubscriptionEndDateEnd=" + encodeURIComponent("" + subscriptionEndDateEnd.toJSON()) + "&";
         if (creationDateStart !== undefined)
-            url_ += "CreationDateStart=" + encodeURIComponent("" + creationDateStart.toJSON()) + "&"; 
+            url_ += "CreationDateStart=" + encodeURIComponent("" + creationDateStart.toJSON()) + "&";
         if (creationDateEnd !== undefined)
-            url_ += "CreationDateEnd=" + encodeURIComponent("" + creationDateEnd.toJSON()) + "&"; 
+            url_ += "CreationDateEnd=" + encodeURIComponent("" + creationDateEnd.toJSON()) + "&";
         if (editionId !== undefined)
-            url_ += "EditionId=" + encodeURIComponent("" + editionId) + "&"; 
+            url_ += "EditionId=" + encodeURIComponent("" + editionId) + "&";
         if (editionIdSpecified !== undefined)
-            url_ += "EditionIdSpecified=" + encodeURIComponent("" + editionIdSpecified) + "&"; 
+            url_ += "EditionIdSpecified=" + encodeURIComponent("" + editionIdSpecified) + "&";
         if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8697,7 +8697,7 @@ export class TenantServiceProxy {
     }
 
     protected processGetTenants(response: Response): Observable<PagedResultDtoOfTenantListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8721,12 +8721,12 @@ export class TenantServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8745,7 +8745,7 @@ export class TenantServiceProxy {
     }
 
     protected processCreateTenant(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8764,13 +8764,13 @@ export class TenantServiceProxy {
     getTenantForEdit(id: number): Observable<GetTenantForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8790,7 +8790,7 @@ export class TenantServiceProxy {
     }
 
     protected processGetTenantForEdit(response: Response): Observable<GetTenantForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8814,12 +8814,12 @@ export class TenantServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8838,7 +8838,7 @@ export class TenantServiceProxy {
     }
 
     protected processUpdateTenant(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8857,13 +8857,13 @@ export class TenantServiceProxy {
     deleteTenant(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/DeleteTenant?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8882,7 +8882,7 @@ export class TenantServiceProxy {
     }
 
     protected processDeleteTenant(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8901,13 +8901,13 @@ export class TenantServiceProxy {
     getTenantFeaturesForEdit(id: number): Observable<GetTenantFeaturesEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantFeaturesForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -8927,7 +8927,7 @@ export class TenantServiceProxy {
     }
 
     protected processGetTenantFeaturesForEdit(response: Response): Observable<GetTenantFeaturesEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8951,12 +8951,12 @@ export class TenantServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -8975,7 +8975,7 @@ export class TenantServiceProxy {
     }
 
     protected processUpdateTenantFeatures(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -8996,12 +8996,12 @@ export class TenantServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9020,7 +9020,7 @@ export class TenantServiceProxy {
     }
 
     protected processResetTenantSpecificFeatures(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9041,12 +9041,12 @@ export class TenantServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9065,7 +9065,7 @@ export class TenantServiceProxy {
     }
 
     protected processUnlockTenantAdmin(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9084,7 +9084,7 @@ export class TenantDashboardServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9099,7 +9099,7 @@ export class TenantDashboardServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9119,7 +9119,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetMemberActivity(response: Response): Observable<GetMemberActivityOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9140,13 +9140,13 @@ export class TenantDashboardServiceProxy {
     getDashboardData(salesSummaryDatePeriod: SalesSummaryDatePeriod): Observable<GetDashboardDataOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetDashboardData?";
         if (salesSummaryDatePeriod !== undefined)
-            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
+            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9166,7 +9166,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetDashboardData(response: Response): Observable<GetDashboardDataOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9187,13 +9187,13 @@ export class TenantDashboardServiceProxy {
     getSalesSummary(salesSummaryDatePeriod: SalesSummaryDatePeriod2): Observable<GetSalesSummaryOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetSalesSummary?";
         if (salesSummaryDatePeriod !== undefined)
-            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
+            url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9213,7 +9213,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetSalesSummary(response: Response): Observable<GetSalesSummaryOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9234,13 +9234,13 @@ export class TenantDashboardServiceProxy {
     getWorldMap(input: any): Observable<GetWorldMapOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetWorldMap?";
         if (input !== undefined)
-            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+            url_ += "input=" + encodeURIComponent("" + input) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9260,7 +9260,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetWorldMap(response: Response): Observable<GetWorldMapOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9281,13 +9281,13 @@ export class TenantDashboardServiceProxy {
     getServerStats(input: any): Observable<GetServerStatsOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetServerStats?";
         if (input !== undefined)
-            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+            url_ += "input=" + encodeURIComponent("" + input) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9307,7 +9307,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetServerStats(response: Response): Observable<GetServerStatsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9328,13 +9328,13 @@ export class TenantDashboardServiceProxy {
     getGeneralStats(input: any): Observable<GetGeneralStatsOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetGeneralStats?";
         if (input !== undefined)
-            url_ += "input=" + encodeURIComponent("" + input) + "&"; 
+            url_ += "input=" + encodeURIComponent("" + input) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9354,7 +9354,7 @@ export class TenantDashboardServiceProxy {
     }
 
     protected processGetGeneralStats(response: Response): Observable<GetGeneralStatsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9376,7 +9376,7 @@ export class TenantInfoServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9392,7 +9392,7 @@ export class TenantInfoServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9412,7 +9412,7 @@ export class TenantInfoServiceProxy {
     }
 
     protected processGetTenantInfoForEdit(response: Response): Observable<TenantInfoEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9436,12 +9436,12 @@ export class TenantInfoServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9460,7 +9460,7 @@ export class TenantInfoServiceProxy {
     }
 
     protected processUpdateTenantInfo(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9479,7 +9479,7 @@ export class TenantRegistrationServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9493,12 +9493,12 @@ export class TenantRegistrationServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9518,7 +9518,7 @@ export class TenantRegistrationServiceProxy {
     }
 
     protected processRegisterTenant(response: Response): Observable<RegisterTenantOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9544,7 +9544,7 @@ export class TenantRegistrationServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9563,7 +9563,7 @@ export class TenantRegistrationServiceProxy {
     }
 
     protected processGrantAllPermissionsAsync(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9582,7 +9582,7 @@ export class TenantSettingsServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9598,7 +9598,7 @@ export class TenantSettingsServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9618,7 +9618,7 @@ export class TenantSettingsServiceProxy {
     }
 
     protected processGetAllSettings(response: Response): Observable<TenantSettingsEditDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9642,12 +9642,12 @@ export class TenantSettingsServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9666,7 +9666,7 @@ export class TenantSettingsServiceProxy {
     }
 
     protected processUpdateAllSettings(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9689,7 +9689,7 @@ export class TenantSettingsServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9708,7 +9708,7 @@ export class TenantSettingsServiceProxy {
     }
 
     protected processClearLogo(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9731,7 +9731,7 @@ export class TenantSettingsServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9750,7 +9750,7 @@ export class TenantSettingsServiceProxy {
     }
 
     protected processClearBackgroundPicture(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9771,12 +9771,12 @@ export class TenantSettingsServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -9795,7 +9795,7 @@ export class TenantSettingsServiceProxy {
     }
 
     protected processSendTestEmail(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9814,7 +9814,7 @@ export class TimingServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9827,13 +9827,13 @@ export class TimingServiceProxy {
     getTimezones(defaultTimezoneScope: DefaultTimezoneScope): Observable<ListResultDtoOfNameValueDto> {
         let url_ = this.baseUrl + "/api/services/app/Timing/GetTimezones?";
         if (defaultTimezoneScope !== undefined)
-            url_ += "DefaultTimezoneScope=" + encodeURIComponent("" + defaultTimezoneScope) + "&"; 
+            url_ += "DefaultTimezoneScope=" + encodeURIComponent("" + defaultTimezoneScope) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9853,7 +9853,7 @@ export class TimingServiceProxy {
     }
 
     protected processGetTimezones(response: Response): Observable<ListResultDtoOfNameValueDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9876,13 +9876,13 @@ export class TimingServiceProxy {
     getTimezoneComboboxItems(selectedTimezoneId: string): Observable<ComboboxItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/Timing/GetTimezoneComboboxItems?";
         if (selectedTimezoneId !== undefined)
-            url_ += "SelectedTimezoneId=" + encodeURIComponent("" + selectedTimezoneId) + "&"; 
+            url_ += "SelectedTimezoneId=" + encodeURIComponent("" + selectedTimezoneId) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9902,7 +9902,7 @@ export class TimingServiceProxy {
     }
 
     protected processGetTimezoneComboboxItems(response: Response): Observable<ComboboxItemDto[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9928,7 +9928,7 @@ export class TokenAuthServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -9942,12 +9942,12 @@ export class TokenAuthServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -9967,7 +9967,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processAuthenticate(response: Response): Observable<AuthenticateResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -9991,12 +9991,12 @@ export class TokenAuthServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10016,7 +10016,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processPhoneNumAuthenticate(response: Response): Observable<AuthenticateResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10040,12 +10040,12 @@ export class TokenAuthServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10064,7 +10064,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processSendTwoFactorAuthCode(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10083,13 +10083,13 @@ export class TokenAuthServiceProxy {
     impersonatedAuthenticate(impersonationToken: string): Observable<ImpersonatedAuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/ImpersonatedAuthenticate?";
         if (impersonationToken !== undefined)
-            url_ += "impersonationToken=" + encodeURIComponent("" + impersonationToken) + "&"; 
+            url_ += "impersonationToken=" + encodeURIComponent("" + impersonationToken) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10109,7 +10109,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processImpersonatedAuthenticate(response: Response): Observable<ImpersonatedAuthenticateResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10131,13 +10131,13 @@ export class TokenAuthServiceProxy {
     linkedAccountAuthenticate(switchAccountToken: string): Observable<SwitchedAccountAuthenticateResultModel> {
         let url_ = this.baseUrl + "/api/TokenAuth/LinkedAccountAuthenticate?";
         if (switchAccountToken !== undefined)
-            url_ += "switchAccountToken=" + encodeURIComponent("" + switchAccountToken) + "&"; 
+            url_ += "switchAccountToken=" + encodeURIComponent("" + switchAccountToken) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10157,7 +10157,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processLinkedAccountAuthenticate(response: Response): Observable<SwitchedAccountAuthenticateResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10183,7 +10183,7 @@ export class TokenAuthServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10203,7 +10203,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processGetExternalAuthenticationProviders(response: Response): Observable<ExternalLoginProviderInfoModel[]> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10231,12 +10231,12 @@ export class TokenAuthServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10256,7 +10256,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processExternalAuthenticate(response: Response): Observable<ExternalAuthenticateResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10275,26 +10275,26 @@ export class TokenAuthServiceProxy {
      * 第三方账号绑定
      * @return Success
      */
-    externalBinging(model: ExternalBingingModel): Observable<void> {
-        let url_ = this.baseUrl + "/api/TokenAuth/ExternalBinging";
+    externalBinding(model: ExternalBindingModel): Observable<void> {
+        let url_ = this.baseUrl + "/api/TokenAuth/ExternalBinding";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
         return this.http.request(url_, options_).flatMap((response_) => {
-            return this.processExternalBinging(response_);
+            return this.processExternalBinding(response_);
         }).catch((response_: any) => {
             if (response_ instanceof Response) {
                 try {
-                    return this.processExternalBinging(response_);
+                    return this.processExternalBinding(response_);
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -10303,8 +10303,53 @@ export class TokenAuthServiceProxy {
         });
     }
 
-    protected processExternalBinging(response: Response): Observable<void> {
-        const status = response.status; 
+    protected processExternalBinding(response: Response): Observable<void> {
+        const status = response.status;
+
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText);
+        }
+        return Observable.of<void>(<any>null);
+    }
+
+    /**
+     * 第三方账号解绑
+     * @return Success
+     */
+    externalUnBinding(model: ExternalUnBindingModel): Observable<void> {
+        let url_ = this.baseUrl + "/api/TokenAuth/ExternalUnBinding";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(model);
+
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json",
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processExternalUnBinding(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processExternalUnBinding(response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processExternalUnBinding(response: Response): Observable<void> {
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10325,12 +10370,12 @@ export class TokenAuthServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(model);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10350,7 +10395,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processSupplementAuth(response: Response): Observable<SupplementAuthResultModel> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10374,15 +10419,15 @@ export class TokenAuthServiceProxy {
     testNotification(message: string, severity: string): Observable<void> {
         let url_ = this.baseUrl + "/api/TokenAuth/TestNotification?";
         if (message !== undefined)
-            url_ += "message=" + encodeURIComponent("" + message) + "&"; 
+            url_ += "message=" + encodeURIComponent("" + message) + "&";
         if (severity !== undefined)
-            url_ += "severity=" + encodeURIComponent("" + severity) + "&"; 
+            url_ += "severity=" + encodeURIComponent("" + severity) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10401,7 +10446,7 @@ export class TokenAuthServiceProxy {
     }
 
     protected processTestNotification(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10420,7 +10465,7 @@ export class UserServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -10444,35 +10489,35 @@ export class UserServiceProxy {
     getUsers(userName: string, surname: string, email: string, isEmailConfirmed: boolean, phoneNumber: string, isPhoneConfirmed: boolean, isActive: boolean, permission: string, roleIds: number[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfUserListDto> {
         let url_ = this.baseUrl + "/api/services/app/User/GetUsers?";
         if (userName !== undefined)
-            url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
+            url_ += "UserName=" + encodeURIComponent("" + userName) + "&";
         if (surname !== undefined)
-            url_ += "Surname=" + encodeURIComponent("" + surname) + "&"; 
+            url_ += "Surname=" + encodeURIComponent("" + surname) + "&";
         if (email !== undefined)
-            url_ += "Email=" + encodeURIComponent("" + email) + "&"; 
+            url_ += "Email=" + encodeURIComponent("" + email) + "&";
         if (isEmailConfirmed !== undefined)
-            url_ += "IsEmailConfirmed=" + encodeURIComponent("" + isEmailConfirmed) + "&"; 
+            url_ += "IsEmailConfirmed=" + encodeURIComponent("" + isEmailConfirmed) + "&";
         if (phoneNumber !== undefined)
-            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&"; 
+            url_ += "PhoneNumber=" + encodeURIComponent("" + phoneNumber) + "&";
         if (isPhoneConfirmed !== undefined)
-            url_ += "IsPhoneConfirmed=" + encodeURIComponent("" + isPhoneConfirmed) + "&"; 
+            url_ += "IsPhoneConfirmed=" + encodeURIComponent("" + isPhoneConfirmed) + "&";
         if (isActive !== undefined)
-            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
+            url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&";
         if (permission !== undefined)
-            url_ += "Permission=" + encodeURIComponent("" + permission) + "&"; 
+            url_ += "Permission=" + encodeURIComponent("" + permission) + "&";
         if (roleIds !== undefined)
             roleIds.forEach(item => { url_ += "RoleIds=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10492,7 +10537,7 @@ export class UserServiceProxy {
     }
 
     protected processGetUsers(response: Response): Observable<PagedResultDtoOfUserListDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10518,7 +10563,7 @@ export class UserServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10538,7 +10583,7 @@ export class UserServiceProxy {
     }
 
     protected processGetUsersToExcel(response: Response): Observable<FileDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10560,13 +10605,13 @@ export class UserServiceProxy {
     getUserForEdit(id: number): Observable<GetUserForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/User/GetUserForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10586,7 +10631,7 @@ export class UserServiceProxy {
     }
 
     protected processGetUserForEdit(response: Response): Observable<GetUserForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10608,13 +10653,13 @@ export class UserServiceProxy {
     getUserPermissionsForEdit(id: number): Observable<GetUserPermissionsForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/User/GetUserPermissionsForEdit?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -10634,7 +10679,7 @@ export class UserServiceProxy {
     }
 
     protected processGetUserPermissionsForEdit(response: Response): Observable<GetUserPermissionsForEditOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10658,12 +10703,12 @@ export class UserServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10682,7 +10727,7 @@ export class UserServiceProxy {
     }
 
     protected processResetUserSpecificPermissions(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10703,12 +10748,12 @@ export class UserServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "put",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10727,7 +10772,7 @@ export class UserServiceProxy {
     }
 
     protected processUpdateUserPermissions(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10748,12 +10793,12 @@ export class UserServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10772,7 +10817,7 @@ export class UserServiceProxy {
     }
 
     protected processCreateOrUpdateUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10791,13 +10836,13 @@ export class UserServiceProxy {
     deleteUser(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/DeleteUser?";
         if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+            url_ += "Id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "delete",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10816,7 +10861,7 @@ export class UserServiceProxy {
     }
 
     protected processDeleteUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10837,12 +10882,12 @@ export class UserServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10861,7 +10906,7 @@ export class UserServiceProxy {
     }
 
     protected processUnlockUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10880,7 +10925,7 @@ export class UserConfigurationServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -10892,13 +10937,13 @@ export class UserConfigurationServiceProxy {
     getAll(sourceName: string): Observable<void> {
         let url_ = this.baseUrl + "/api/UserConfiguration/GetAll?";
         if (sourceName !== undefined)
-            url_ += "sourceName=" + encodeURIComponent("" + sourceName) + "&"; 
+            url_ += "sourceName=" + encodeURIComponent("" + sourceName) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10917,7 +10962,7 @@ export class UserConfigurationServiceProxy {
     }
 
     protected processGetAll(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10936,7 +10981,7 @@ export class UserLinkServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -10950,12 +10995,12 @@ export class UserLinkServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -10974,7 +11019,7 @@ export class UserLinkServiceProxy {
     }
 
     protected processLinkToUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -10996,17 +11041,17 @@ export class UserLinkServiceProxy {
     getLinkedUsers(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfLinkedUserDto> {
         let url_ = this.baseUrl + "/api/services/app/UserLink/GetLinkedUsers?";
         if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&";
         if (maxResultCount !== undefined)
-            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
+            url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&";
         if (skipCount !== undefined)
-            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
+            url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11026,7 +11071,7 @@ export class UserLinkServiceProxy {
     }
 
     protected processGetLinkedUsers(response: Response): Observable<PagedResultDtoOfLinkedUserDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11052,7 +11097,7 @@ export class UserLinkServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11072,7 +11117,7 @@ export class UserLinkServiceProxy {
     }
 
     protected processGetRecentlyUsedLinkedUsers(response: Response): Observable<ListResultDtoOfLinkedUserDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11096,12 +11141,12 @@ export class UserLinkServiceProxy {
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
-        
+
         let options_ = {
             body: content_,
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             })
         };
 
@@ -11120,7 +11165,7 @@ export class UserLinkServiceProxy {
     }
 
     protected processUnlinkUser(response: Response): Observable<void> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11139,7 +11184,7 @@ export class UserLoginServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -11155,7 +11200,7 @@ export class UserLoginServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11175,7 +11220,7 @@ export class UserLoginServiceProxy {
     }
 
     protected processGetRecentUserLoginAttempts(response: Response): Observable<ListResultDtoOfUserLoginAttemptDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11197,7 +11242,7 @@ export class WebLogServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -11213,7 +11258,7 @@ export class WebLogServiceProxy {
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11233,7 +11278,7 @@ export class WebLogServiceProxy {
     }
 
     protected processGetLatestWebLogs(response: Response): Observable<GetLatestWebLogsOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11259,7 +11304,7 @@ export class WebLogServiceProxy {
         let options_ = {
             method: "post",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11279,7 +11324,7 @@ export class WebLogServiceProxy {
     }
 
     protected processDownloadWebLogs(response: Response): Observable<FileDto> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11301,7 +11346,7 @@ export class WeChatJSServiceProxy {
     private baseUrl: string;
     protected jsonParseReviver: (key: string, value: any) => any = undefined;
 
-    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+    constructor( @Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
         this.http = http;
         this.baseUrl = baseUrl ? baseUrl : "";
     }
@@ -11316,17 +11361,17 @@ export class WeChatJSServiceProxy {
     getJsApiSignature(sourceUrl: string, nonceStr: string, timestamp: string): Observable<GetJsApiSignatureOutput> {
         let url_ = this.baseUrl + "/api/services/app/WeChatJS/GetJsApiSignature?";
         if (sourceUrl !== undefined)
-            url_ += "SourceUrl=" + encodeURIComponent("" + sourceUrl) + "&"; 
+            url_ += "SourceUrl=" + encodeURIComponent("" + sourceUrl) + "&";
         if (nonceStr !== undefined)
-            url_ += "NonceStr=" + encodeURIComponent("" + nonceStr) + "&"; 
+            url_ += "NonceStr=" + encodeURIComponent("" + nonceStr) + "&";
         if (timestamp !== undefined)
-            url_ += "Timestamp=" + encodeURIComponent("" + timestamp) + "&"; 
+            url_ += "Timestamp=" + encodeURIComponent("" + timestamp) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
             method: "get",
             headers: new Headers({
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             })
         };
@@ -11346,7 +11391,7 @@ export class WeChatJSServiceProxy {
     }
 
     protected processGetJsApiSignature(response: Response): Observable<GetJsApiSignatureOutput> {
-        const status = response.status; 
+        const status = response.status;
 
         if (status === 200) {
             const _responseText = response.text();
@@ -11390,7 +11435,7 @@ export class IsTenantAvailableInput implements IIsTenantAvailableInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["tenancyName"] = this.tenancyName;
-        return data; 
+        return data;
     }
 }
 
@@ -11431,7 +11476,7 @@ export class IsTenantAvailableOutput implements IIsTenantAvailableOutput {
         data = typeof data === 'object' ? data : {};
         data["state"] = this.state;
         data["tenantId"] = this.tenantId;
-        return data; 
+        return data;
     }
 }
 
@@ -11482,7 +11527,7 @@ export class RegisterInput implements IRegisterInput {
         data["phoneNumber"] = this.phoneNumber;
         data["registerCode"] = this.registerCode;
         data["password"] = this.password;
-        return data; 
+        return data;
     }
 }
 
@@ -11525,7 +11570,7 @@ export class RegisterOutput implements IRegisterOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["canLogin"] = this.canLogin;
-        return data; 
+        return data;
     }
 }
 
@@ -11562,7 +11607,7 @@ export class SendPasswordResetCodeInput implements ISendPasswordResetCodeInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["emailAddress"] = this.emailAddress;
-        return data; 
+        return data;
     }
 }
 
@@ -11607,7 +11652,7 @@ export class ResetPasswordInput implements IResetPasswordInput {
         data["userId"] = this.userId;
         data["resetCode"] = this.resetCode;
         data["password"] = this.password;
-        return data; 
+        return data;
     }
 }
 
@@ -11652,7 +11697,7 @@ export class ResetPasswordOutput implements IResetPasswordOutput {
         data = typeof data === 'object' ? data : {};
         data["canLogin"] = this.canLogin;
         data["userName"] = this.userName;
-        return data; 
+        return data;
     }
 }
 
@@ -11691,7 +11736,7 @@ export class SendEmailActivationLinkInput implements ISendEmailActivationLinkInp
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["emailAddress"] = this.emailAddress;
-        return data; 
+        return data;
     }
 }
 
@@ -11732,7 +11777,7 @@ export class ActivateEmailInput implements IActivateEmailInput {
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["confirmationCode"] = this.confirmationCode;
-        return data; 
+        return data;
     }
 }
 
@@ -11775,7 +11820,7 @@ export class ImpersonateInput implements IImpersonateInput {
         data = typeof data === 'object' ? data : {};
         data["tenantId"] = this.tenantId;
         data["userId"] = this.userId;
-        return data; 
+        return data;
     }
 }
 
@@ -11818,7 +11863,7 @@ export class ImpersonateOutput implements IImpersonateOutput {
         data = typeof data === 'object' ? data : {};
         data["impersonationToken"] = this.impersonationToken;
         data["tenancyName"] = this.tenancyName;
-        return data; 
+        return data;
     }
 }
 
@@ -11861,7 +11906,7 @@ export class SwitchToLinkedAccountInput implements ISwitchToLinkedAccountInput {
         data = typeof data === 'object' ? data : {};
         data["targetTenantId"] = this.targetTenantId;
         data["targetUserId"] = this.targetUserId;
-        return data; 
+        return data;
     }
 }
 
@@ -11904,7 +11949,7 @@ export class SwitchToLinkedAccountOutput implements ISwitchToLinkedAccountOutput
         data = typeof data === 'object' ? data : {};
         data["switchAccountToken"] = this.switchAccountToken;
         data["tenancyName"] = this.tenancyName;
-        return data; 
+        return data;
     }
 }
 
@@ -11953,7 +11998,7 @@ export class PagedResultDtoOfAuditLogListDto implements IPagedResultDtoOfAuditLo
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12045,7 +12090,7 @@ export class AuditLogListDto implements IAuditLogListDto {
         data["exception"] = this.exception;
         data["customData"] = this.customData;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -12117,7 +12162,7 @@ export class FileDto implements IFileDto {
         data["fileName"] = this.fileName;
         data["fileType"] = this.fileType;
         data["fileToken"] = this.fileToken;
-        return data; 
+        return data;
     }
 }
 
@@ -12174,7 +12219,7 @@ export class JoinBookingOutput implements IJoinBookingOutput {
             for (let item of this.availableDateItem)
                 data["availableDateItem"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12236,7 +12281,7 @@ export class OrganizationInfoDto implements IOrganizationInfoDto {
         data["logoUrl"] = this.logoUrl;
         data["backgroundPictureUrl"] = this.backgroundPictureUrl;
         data["outletPictureUrl"] = this.outletPictureUrl;
-        return data; 
+        return data;
     }
 }
 
@@ -12331,7 +12376,7 @@ export class JoinBookingInfoDto implements IJoinBookingInfoDto {
         data["outletName"] = this.outletName;
         data["outletAddress"] = this.outletAddress;
         data["outletLongitude"] = this.outletLongitude;
-        return data; 
+        return data;
     }
 }
 
@@ -12400,7 +12445,7 @@ export class JoinBookingDataInfo implements IJoinBookingDataInfo {
             for (let item of this.times)
                 data["times"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12452,7 +12497,7 @@ export class JoinBookingTimeInfo implements IJoinBookingTimeInfo {
         data["maxBookingNum"] = this.maxBookingNum;
         data["maxQueueNum"] = this.maxQueueNum;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -12527,7 +12572,7 @@ export class JoinBookingInput implements IJoinBookingInput {
         data["age"] = this.age;
         data["subscriberNum"] = this.subscriberNum;
         data["source"] = this.source;
-        return data; 
+        return data;
     }
 }
 
@@ -12592,7 +12637,7 @@ export class JoinBookingResultDto implements IJoinBookingResultDto {
         data["bookingCustomer"] = this.bookingCustomer;
         data["bookingDate"] = this.bookingDate ? this.bookingDate.toISOString() : <any>undefined;
         data["hourOfDay"] = this.hourOfDay;
-        return data; 
+        return data;
     }
 }
 
@@ -12670,7 +12715,7 @@ export class BusCenterDataStatisticsDto implements IBusCenterDataStatisticsDto {
             for (let item of this.bookingAccessRegions)
                 data["bookingAccessRegions"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12714,7 +12759,7 @@ export class BookingDataStatisticsDto implements IBookingDataStatisticsDto {
         data = typeof data === 'object' ? data : {};
         data["today"] = this.today ? this.today.toJSON() : <any>undefined;
         data["history"] = this.history ? this.history.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -12761,7 +12806,7 @@ export class BookingConverRateDto implements IBookingConverRateDto {
         data["name"] = this.name;
         data["bookingOrderNum"] = this.bookingOrderNum;
         data["accessNum"] = this.accessNum;
-        return data; 
+        return data;
     }
 }
 
@@ -12813,7 +12858,7 @@ export class BookingAccessChannelDto implements IBookingAccessChannelDto {
             for (let item of this.times)
                 data["times"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12863,7 +12908,7 @@ export class GetBookingAccessSourceOutput implements IGetBookingAccessSourceOutp
             for (let item of this.channels)
                 data["channels"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -12906,7 +12951,7 @@ export class BookingAccessRegionDto implements IBookingAccessRegionDto {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["num"] = this.num;
-        return data; 
+        return data;
     }
 }
 
@@ -12977,7 +13022,7 @@ export class DailyDataStatistics implements IDailyDataStatistics {
         data["waitConfirmNum"] = this.waitConfirmNum;
         data["complateNum"] = this.complateNum;
         data["cancelNum"] = this.cancelNum;
-        return data; 
+        return data;
     }
 }
 
@@ -13034,7 +13079,7 @@ export class BookingAccessTimeDto implements IBookingAccessTimeDto {
         data = typeof data === 'object' ? data : {};
         data["hour"] = this.hour;
         data["num"] = this.num;
-        return data; 
+        return data;
     }
 }
 
@@ -13077,7 +13122,7 @@ export class BookingAccessSourceDto implements IBookingAccessSourceDto {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["num"] = this.num;
-        return data; 
+        return data;
     }
 }
 
@@ -13120,7 +13165,7 @@ export class CurrentlyBookingDataDto implements ICurrentlyBookingDataDto {
         data = typeof data === 'object' ? data : {};
         data["date"] = this.date;
         data["bookingNum"] = this.bookingNum;
-        return data; 
+        return data;
     }
 }
 
@@ -13175,7 +13220,7 @@ export class GetBookingSaturationOutput implements IGetBookingSaturationOutput {
             for (let item of this.bookings)
                 data["bookings"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -13236,7 +13281,7 @@ export class OutletBookingListDto implements IOutletBookingListDto {
         data["subQueueNum"] = this.subQueueNum;
         data["subBookedNum"] = this.subBookedNum;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -13291,7 +13336,7 @@ export class BookingHeatDto implements IBookingHeatDto {
         data["hourOfDay"] = this.hourOfDay;
         data["bookingOrderNum"] = this.bookingOrderNum;
         data["bookingOrderRate"] = this.bookingOrderRate;
-        return data; 
+        return data;
     }
 }
 
@@ -13364,7 +13409,7 @@ export class BookingAccessRecordInput implements IBookingAccessRecordInput {
         data["weChatSource"] = this.weChatSource;
         data["isWap"] = this.isWap;
         data["standingTime"] = this.standingTime;
-        return data; 
+        return data;
     }
 }
 
@@ -13426,7 +13471,7 @@ export class BookingShareRecordInput implements IBookingShareRecordInput {
         data["bookingId"] = this.bookingId;
         data["shareUrl"] = this.shareUrl;
         data["target"] = this.target;
-        return data; 
+        return data;
     }
 }
 
@@ -13475,7 +13520,7 @@ export class ListResultDtoOfCacheDto implements IListResultDtoOfCacheDto {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -13511,7 +13556,7 @@ export class CacheDto implements ICacheDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        return data; 
+        return data;
     }
 }
 
@@ -13547,7 +13592,7 @@ export class EntityDtoOfString implements IEntityDtoOfString {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -13595,7 +13640,7 @@ export class GetUserChatFriendsWithSettingsOutput implements IGetUserChatFriends
             for (let item of this.friends)
                 data["friends"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -13654,7 +13699,7 @@ export class FriendDto implements IFriendDto {
         data["unreadMessageCount"] = this.unreadMessageCount;
         data["isOnline"] = this.isOnline;
         data["state"] = this.state;
-        return data; 
+        return data;
     }
 }
 
@@ -13704,7 +13749,7 @@ export class ListResultDtoOfChatMessageDto implements IListResultDtoOfChatMessag
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -13772,7 +13817,7 @@ export class ChatMessageDto implements IChatMessageDto {
         data["message"] = this.message;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -13829,7 +13874,7 @@ export class MarkAllUnreadMessagesOfUserAsReadInput implements IMarkAllUnreadMes
         data = typeof data === 'object' ? data : {};
         data["tenantId"] = this.tenantId;
         data["userId"] = this.userId;
-        return data; 
+        return data;
     }
 }
 
@@ -13875,7 +13920,7 @@ export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListR
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -13919,7 +13964,7 @@ export class SubscribableEditionComboboxItemDto implements ISubscribableEditionC
         data["value"] = this.value;
         data["displayText"] = this.displayText;
         data["isSelected"] = this.isSelected;
-        return data; 
+        return data;
     }
 }
 
@@ -13967,7 +14012,7 @@ export class FindUsersInput implements IFindUsersInput {
         data["maxResultCount"] = this.maxResultCount;
         data["skipCount"] = this.skipCount;
         data["filter"] = this.filter;
-        return data; 
+        return data;
     }
 }
 
@@ -14017,7 +14062,7 @@ export class PagedResultDtoOfNameValueDto implements IPagedResultDtoOfNameValueD
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14056,7 +14101,7 @@ export class NameValueDto implements INameValueDto {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["value"] = this.value;
-        return data; 
+        return data;
     }
 }
 
@@ -14092,7 +14137,7 @@ export class GetDefaultEditionNameOutput implements IGetDefaultEditionNameOutput
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        return data; 
+        return data;
     }
 }
 
@@ -14130,7 +14175,7 @@ export class SelectListItemDto implements ISelectListItemDto {
         data = typeof data === 'object' ? data : {};
         data["text"] = this.text;
         data["value"] = this.value;
-        return data; 
+        return data;
     }
 }
 
@@ -14174,7 +14219,7 @@ export class ListResultDtoOfEditionListDto implements IListResultDtoOfEditionLis
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14218,7 +14263,7 @@ export class EditionListDto implements IEditionListDto {
         data["displayName"] = this.displayName;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -14278,7 +14323,7 @@ export class GetEditionEditOutput implements IGetEditionEditOutput {
             for (let item of this.features)
                 data["features"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14340,7 +14385,7 @@ export class EditionEditDto implements IEditionEditDto {
         data["trialDayCount"] = this.trialDayCount;
         data["waitingDayAfterExpire"] = this.waitingDayAfterExpire;
         data["expiringEditionId"] = this.expiringEditionId;
-        return data; 
+        return data;
     }
 }
 
@@ -14403,7 +14448,7 @@ export class FlatFeatureDto implements IFlatFeatureDto {
         data["description"] = this.description;
         data["defaultValue"] = this.defaultValue;
         data["inputType"] = this.inputType ? this.inputType.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -14418,7 +14463,7 @@ export interface IFlatFeatureDto {
 
 export class FeatureInputTypeDto implements IFeatureInputTypeDto {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
     validator: IValueValidator;
     itemSource: LocalizableComboboxItemSourceDto;
 
@@ -14464,20 +14509,20 @@ export class FeatureInputTypeDto implements IFeatureInputTypeDto {
         }
         data["validator"] = this.validator ? this.validator.toJSON() : <any>undefined;
         data["itemSource"] = this.itemSource ? this.itemSource.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
 export interface IFeatureInputTypeDto {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
     validator: IValueValidator;
     itemSource: LocalizableComboboxItemSourceDto;
 }
 
 export class IValueValidator implements IIValueValidator {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
 
     constructor(data?: IIValueValidator) {
         if (data) {
@@ -14517,13 +14562,13 @@ export class IValueValidator implements IIValueValidator {
                     data["attributes"][key] = this.attributes[key];
             }
         }
-        return data; 
+        return data;
     }
 }
 
 export interface IIValueValidator {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
 }
 
 export class LocalizableComboboxItemSourceDto implements ILocalizableComboboxItemSourceDto {
@@ -14561,7 +14606,7 @@ export class LocalizableComboboxItemSourceDto implements ILocalizableComboboxIte
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14599,7 +14644,7 @@ export class LocalizableComboboxItemDto implements ILocalizableComboboxItemDto {
         data = typeof data === 'object' ? data : {};
         data["value"] = this.value;
         data["displayText"] = this.displayText;
-        return data; 
+        return data;
     }
 }
 
@@ -14646,7 +14691,7 @@ export class CreateOrUpdateEditionDto implements ICreateOrUpdateEditionDto {
             for (let item of this.featureValues)
                 data["featureValues"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14704,7 +14749,7 @@ export class EditionsSelectOutput implements IEditionsSelectOutput {
                 data["editionsWithFeatures"].push(item.toJSON());
         }
         data["tenantEditionId"] = this.tenantEditionId;
-        return data; 
+        return data;
     }
 }
 
@@ -14759,7 +14804,7 @@ export class FlatFeatureSelectDto implements IFlatFeatureSelectDto {
         data["defaultValue"] = this.defaultValue;
         data["inputType"] = this.inputType ? this.inputType.toJSON() : <any>undefined;
         data["textHtmlColor"] = this.textHtmlColor;
-        return data; 
+        return data;
     }
 }
 
@@ -14811,7 +14856,7 @@ export class EditionWithFeaturesDto implements IEditionWithFeaturesDto {
             for (let item of this.featureValues)
                 data["featureValues"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -14822,7 +14867,7 @@ export interface IEditionWithFeaturesDto {
 
 export class IInputType implements IIInputType {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
     validator: IValueValidator;
 
     constructor(data?: IIInputType) {
@@ -14865,13 +14910,13 @@ export class IInputType implements IIInputType {
             }
         }
         data["validator"] = this.validator ? this.validator.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
 export interface IIInputType {
     name: string;
-    attributes: { [key: string] : any; };
+    attributes: { [key: string]: any; };
     validator: IValueValidator;
 }
 
@@ -14937,7 +14982,7 @@ export class EditionSelectDto implements IEditionSelectDto {
         data["waitingDayAfterExpire"] = this.waitingDayAfterExpire;
         data["isFree"] = this.isFree;
         data["additionalData"] = this.additionalData ? this.additionalData.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -15011,7 +15056,7 @@ export class UploadPictureInput implements IUploadPictureInput {
         data["creatorUserId"] = this.creatorUserId;
         data["tenantId"] = this.tenantId;
         data["groupId"] = this.groupId;
-        return data; 
+        return data;
     }
 }
 
@@ -15061,7 +15106,7 @@ export class UploadPictureOutput implements IUploadPictureOutput {
         data = typeof data === 'object' ? data : {};
         data["pictureId"] = this.pictureId;
         data["originalUrl"] = this.originalUrl;
-        return data; 
+        return data;
     }
 }
 
@@ -15100,7 +15145,7 @@ export class CreateFriendshipRequestInput implements ICreateFriendshipRequestInp
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
-        return data; 
+        return data;
     }
 }
 
@@ -15139,7 +15184,7 @@ export class CreateFriendshipRequestByUserNameInput implements ICreateFriendship
         data = typeof data === 'object' ? data : {};
         data["tenancyName"] = this.tenancyName;
         data["userName"] = this.userName;
-        return data; 
+        return data;
     }
 }
 
@@ -15178,7 +15223,7 @@ export class BlockUserInput implements IBlockUserInput {
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
-        return data; 
+        return data;
     }
 }
 
@@ -15217,7 +15262,7 @@ export class UnblockUserInput implements IUnblockUserInput {
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
-        return data; 
+        return data;
     }
 }
 
@@ -15256,7 +15301,7 @@ export class AcceptFriendshipRequestInput implements IAcceptFriendshipRequestInp
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["tenantId"] = this.tenantId;
-        return data; 
+        return data;
     }
 }
 
@@ -15366,7 +15411,7 @@ export class HostDashboardData implements IHostDashboardData {
         data["subscriptionEndDateStart"] = this.subscriptionEndDateStart ? this.subscriptionEndDateStart.toISOString() : <any>undefined;
         data["subscriptionEndDateEnd"] = this.subscriptionEndDateEnd ? this.subscriptionEndDateEnd.toISOString() : <any>undefined;
         data["tenantCreationStartDate"] = this.tenantCreationStartDate ? this.tenantCreationStartDate.toISOString() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -15421,7 +15466,7 @@ export class IncomeStastistic implements IIncomeStastistic {
         data["label"] = this.label;
         data["date"] = this.date ? this.date.toISOString() : <any>undefined;
         data["amount"] = this.amount;
-        return data; 
+        return data;
     }
 }
 
@@ -15461,7 +15506,7 @@ export class TenantEdition implements ITenantEdition {
         data = typeof data === 'object' ? data : {};
         data["label"] = this.label;
         data["value"] = this.value;
-        return data; 
+        return data;
     }
 }
 
@@ -15500,7 +15545,7 @@ export class ExpiringTenant implements IExpiringTenant {
         data = typeof data === 'object' ? data : {};
         data["tenantName"] = this.tenantName;
         data["remainingDayCount"] = this.remainingDayCount;
-        return data; 
+        return data;
     }
 }
 
@@ -15542,7 +15587,7 @@ export class RecentTenant implements IRecentTenant {
         data["id"] = this.id;
         data["name"] = this.name;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -15587,7 +15632,7 @@ export class GetIncomeStatisticsDataOutput implements IGetIncomeStatisticsDataOu
             for (let item of this.incomeStatistics)
                 data["incomeStatistics"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -15630,7 +15675,7 @@ export class GetEditionTenantStatisticsOutput implements IGetEditionTenantStatis
             for (let item of this.editionStatistics)
                 data["editionStatistics"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -15690,7 +15735,7 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
         data["security"] = this.security ? this.security.toJSON() : <any>undefined;
         data["externalAuthentication"] = this.externalAuthentication ? this.externalAuthentication.toJSON() : <any>undefined;
         data["smsSettings"] = this.smsSettings ? this.smsSettings.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -15743,7 +15788,7 @@ export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
         data = typeof data === 'object' ? data : {};
         data["timezone"] = this.timezone;
         data["timezoneForComparison"] = this.timezoneForComparison;
-        return data; 
+        return data;
     }
 }
 
@@ -15782,7 +15827,7 @@ export class HostUserManagementSettingsEditDto implements IHostUserManagementSet
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["isEmailConfirmationRequiredForLogin"] = this.isEmailConfirmationRequiredForLogin;
-        return data; 
+        return data;
     }
 }
 
@@ -15851,7 +15896,7 @@ export class EmailSettingsEditDto implements IEmailSettingsEditDto {
         data["smtpDomain"] = this.smtpDomain;
         data["smtpEnableSsl"] = this.smtpEnableSsl;
         data["smtpUseDefaultCredentials"] = this.smtpUseDefaultCredentials;
-        return data; 
+        return data;
     }
 }
 
@@ -15915,7 +15960,7 @@ export class TenantManagementSettingsEditDto implements ITenantManagementSetting
         data["isNewRegisteredTenantActiveByDefault"] = this.isNewRegisteredTenantActiveByDefault;
         data["useCaptchaOnRegistration"] = this.useCaptchaOnRegistration;
         data["defaultEditionId"] = this.defaultEditionId;
-        return data; 
+        return data;
     }
 }
 
@@ -15977,7 +16022,7 @@ export class SecuritySettingsEditDto implements ISecuritySettingsEditDto {
         data["userLockOut"] = this.userLockOut ? this.userLockOut.toJSON() : <any>undefined;
         data["twoFactorLogin"] = this.twoFactorLogin ? this.twoFactorLogin.toJSON() : <any>undefined;
         data["verificationCode"] = this.verificationCode ? this.verificationCode.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -16053,7 +16098,7 @@ export class ExternalAuthenticationEditDto implements IExternalAuthenticationEdi
             for (let item of this.externalAuthenticationProviders)
                 data["externalAuthenticationProviders"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -16137,7 +16182,7 @@ export class SMSSettingsEditDto implements ISMSSettingsEditDto {
             for (let item of this.availableSmsTemplates)
                 data["availableSmsTemplates"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -16199,7 +16244,7 @@ export class PasswordComplexitySetting implements IPasswordComplexitySetting {
         data["requireNonAlphanumeric"] = this.requireNonAlphanumeric;
         data["requireUppercase"] = this.requireUppercase;
         data["requiredLength"] = this.requiredLength;
-        return data; 
+        return data;
     }
 }
 
@@ -16244,7 +16289,7 @@ export class UserLockOutSettingsEditDto implements IUserLockOutSettingsEditDto {
         data["isEnabled"] = this.isEnabled;
         data["maxFailedAccessAttemptsBeforeLockout"] = this.maxFailedAccessAttemptsBeforeLockout;
         data["defaultAccountLockoutSeconds"] = this.defaultAccountLockoutSeconds;
-        return data; 
+        return data;
     }
 }
 
@@ -16293,7 +16338,7 @@ export class TwoFactorLoginSettingsEditDto implements ITwoFactorLoginSettingsEdi
         data["isEmailProviderEnabled"] = this.isEmailProviderEnabled;
         data["isSmsProviderEnabled"] = this.isSmsProviderEnabled;
         data["isRememberBrowserEnabled"] = this.isRememberBrowserEnabled;
-        return data; 
+        return data;
     }
 }
 
@@ -16341,7 +16386,7 @@ export class VerificationCodeSettingsEditDto implements IVerificationCodeSetting
         data["isEnabled"] = this.isEnabled;
         data["availableSecond"] = this.availableSecond;
         data["minimumSendInterval"] = this.minimumSendInterval;
-        return data; 
+        return data;
     }
 }
 
@@ -16398,7 +16443,7 @@ export class ExternalAuthenticationProviderEditDto implements IExternalAuthentic
         data["appId"] = this.appId;
         data["appSecret"] = this.appSecret;
         data["showOnLoginPage"] = this.showOnLoginPage;
-        return data; 
+        return data;
     }
 }
 
@@ -16443,7 +16488,7 @@ export class SendTestEmailInput implements ISendTestEmailInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["emailAddress"] = this.emailAddress;
-        return data; 
+        return data;
     }
 }
 
@@ -16490,7 +16535,7 @@ export class GetLanguagesOutput implements IGetLanguagesOutput {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -16562,7 +16607,7 @@ export class ApplicationLanguageListDto implements IApplicationLanguageListDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -16631,7 +16676,7 @@ export class GetLanguageForEditOutput implements IGetLanguageForEditOutput {
             for (let item of this.flags)
                 data["flags"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -16678,7 +16723,7 @@ export class ApplicationLanguageEditDto implements IApplicationLanguageEditDto {
         data["name"] = this.name;
         data["icon"] = this.icon;
         data["isEnabled"] = this.isEnabled;
-        return data; 
+        return data;
     }
 }
 
@@ -16723,7 +16768,7 @@ export class ComboboxItemDto implements IComboboxItemDto {
         data["value"] = this.value;
         data["displayText"] = this.displayText;
         data["isSelected"] = this.isSelected;
-        return data; 
+        return data;
     }
 }
 
@@ -16760,7 +16805,7 @@ export class CreateOrUpdateLanguageInput implements ICreateOrUpdateLanguageInput
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["language"] = this.language ? this.language.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -16795,7 +16840,7 @@ export class SetDefaultLanguageInput implements ISetDefaultLanguageInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        return data; 
+        return data;
     }
 }
 
@@ -16841,7 +16886,7 @@ export class PagedResultDtoOfLanguageTextListDto implements IPagedResultDtoOfLan
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -16883,7 +16928,7 @@ export class LanguageTextListDto implements ILanguageTextListDto {
         data["key"] = this.key;
         data["baseValue"] = this.baseValue;
         data["targetValue"] = this.targetValue;
-        return data; 
+        return data;
     }
 }
 
@@ -16933,7 +16978,7 @@ export class UpdateLanguageTextInput implements IUpdateLanguageTextInput {
         data["sourceName"] = this.sourceName;
         data["key"] = this.key;
         data["value"] = this.value;
-        return data; 
+        return data;
     }
 }
 
@@ -16978,7 +17023,7 @@ export class TokensListDto implements ITokensListDto {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["value"] = this.value;
-        return data; 
+        return data;
     }
 }
 
@@ -17029,7 +17074,7 @@ export class GetNotificationsOutput implements IGetNotificationsOutput {
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -17079,7 +17124,7 @@ export class UserNotification implements IUserNotification {
         data["state"] = this.state;
         data["notification"] = this.notification ? this.notification.toJSON() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -17154,7 +17199,7 @@ export class TenantNotification implements ITenantNotification {
         data["severity"] = this.severity;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -17172,7 +17217,7 @@ export interface ITenantNotification {
 
 export class NotificationData implements INotificationData {
     type: string;
-    properties: { [key: string] : any; };
+    properties: { [key: string]: any; };
 
     constructor(data?: INotificationData) {
         if (data) {
@@ -17212,13 +17257,13 @@ export class NotificationData implements INotificationData {
                     data["properties"][key] = this.properties[key];
             }
         }
-        return data; 
+        return data;
     }
 }
 
 export interface INotificationData {
     type: string;
-    properties: { [key: string] : any; };
+    properties: { [key: string]: any; };
 }
 
 export class EntityDtoOfGuid implements IEntityDtoOfGuid {
@@ -17248,7 +17293,7 @@ export class EntityDtoOfGuid implements IEntityDtoOfGuid {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -17296,7 +17341,7 @@ export class GetNotificationSettingsOutput implements IGetNotificationSettingsOu
             for (let item of this.notifications)
                 data["notifications"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -17347,7 +17392,7 @@ export class NotificationSubscriptionWithDisplayNameDto implements INotification
         data["description"] = this.description;
         data["name"] = this.name;
         data["isSubscribed"] = this.isSubscribed;
-        return data; 
+        return data;
     }
 }
 
@@ -17402,7 +17447,7 @@ export class UpdateNotificationSettingsInput implements IUpdateNotificationSetti
             for (let item of this.notifications)
                 data["notifications"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -17446,7 +17491,7 @@ export class NotificationSubscriptionDto implements INotificationSubscriptionDto
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["isSubscribed"] = this.isSubscribed;
-        return data; 
+        return data;
     }
 }
 
@@ -17493,7 +17538,7 @@ export class ListResultDtoOfOrganizationUnitDto implements IListResultDtoOfOrgan
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -17552,7 +17597,7 @@ export class OrganizationUnitDto implements IOrganizationUnitDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -17606,7 +17651,7 @@ export class PagedResultDtoOfOrganizationUnitUserListDto implements IPagedResult
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -17660,7 +17705,7 @@ export class OrganizationUnitUserListDto implements IOrganizationUnitUserListDto
         data["profilePictureId"] = this.profilePictureId;
         data["addedTime"] = this.addedTime ? this.addedTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -17706,7 +17751,7 @@ export class CreateOrganizationUnitInput implements ICreateOrganizationUnitInput
         data = typeof data === 'object' ? data : {};
         data["parentId"] = this.parentId;
         data["displayName"] = this.displayName;
-        return data; 
+        return data;
     }
 }
 
@@ -17749,7 +17794,7 @@ export class UpdateOrganizationUnitInput implements IUpdateOrganizationUnitInput
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["displayName"] = this.displayName;
-        return data; 
+        return data;
     }
 }
 
@@ -17792,7 +17837,7 @@ export class MoveOrganizationUnitInput implements IMoveOrganizationUnitInput {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["newParentId"] = this.newParentId;
-        return data; 
+        return data;
     }
 }
 
@@ -17841,7 +17886,7 @@ export class UsersToOrganizationUnitInput implements IUsersToOrganizationUnitInp
                 data["userIds"].push(item);
         }
         data["organizationUnitId"] = this.organizationUnitId;
-        return data; 
+        return data;
     }
 }
 
@@ -17886,7 +17931,7 @@ export class FindOrganizationUnitUsersInput implements IFindOrganizationUnitUser
         data["maxResultCount"] = this.maxResultCount;
         data["skipCount"] = this.skipCount;
         data["filter"] = this.filter;
-        return data; 
+        return data;
     }
 }
 
@@ -17935,7 +17980,7 @@ export class PagedResultDtoOfBookingListDto implements IPagedResultDtoOfBookingL
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -18044,7 +18089,7 @@ export class BookingListDto implements IBookingListDto {
         }
         data["pictureUrl"] = this.pictureUrl;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18133,7 +18178,7 @@ export class GetBookingDateAndTimeOutput implements IGetBookingDateAndTimeOutput
             for (let item of this.availableTimes)
                 data["availableTimes"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -18220,7 +18265,7 @@ export class GetBookingForEditOutput implements IGetBookingForEditOutput {
             for (let item of this.availableContactors)
                 data["availableContactors"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -18305,7 +18350,7 @@ export class BookingEditDto implements IBookingEditDto {
         data["needEmail"] = this.needEmail;
         data["sticked"] = this.sticked;
         data["isActive"] = this.isActive;
-        return data; 
+        return data;
     }
 }
 
@@ -18389,7 +18434,7 @@ export class BookingItemEditDto implements IBookingItemEditDto {
         data["bookedNum"] = this.bookedNum;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18450,7 +18495,7 @@ export class BookingPictureEditDto implements IBookingPictureEditDto {
         data["pictureUrl"] = this.pictureUrl;
         data["displayOrder"] = this.displayOrder;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18575,7 +18620,7 @@ export class GetBookingDetailOutput implements IGetBookingDetailOutput {
                 data["pictures"].push(item);
         }
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18669,7 +18714,7 @@ export class CreateOrUpdateBookingInput implements ICreateOrUpdateBookingInput {
             for (let item of this.bookingPictures)
                 data["bookingPictures"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -18709,7 +18754,7 @@ export class EntityDtoOfInt64 implements IEntityDtoOfInt64 {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18747,7 +18792,7 @@ export class ActiveOrDisableInput implements IActiveOrDisableInput {
         data = typeof data === 'object' ? data : {};
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18822,7 +18867,7 @@ export class Contactor implements IContactor {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -18912,7 +18957,7 @@ export class BookingItem implements IBookingItem {
         data["deletionTime"] = this.deletionTime ? this.deletionTime.toISOString() : <any>undefined;
         data["booking"] = this.booking ? this.booking.toJSON() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19052,7 +19097,7 @@ export class Booking implements IBooking {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19186,7 +19231,7 @@ export class Outlet implements IOutlet {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19255,7 +19300,7 @@ export class BookingPicture implements IBookingPicture {
         data["pictureId"] = this.pictureId;
         data["displayOrder"] = this.displayOrder;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19305,7 +19350,7 @@ export class PagedResultDtoOfOrgBookingOrderListDto implements IPagedResultDtoOf
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -19382,7 +19427,7 @@ export class OrgBookingOrderListDto implements IOrgBookingOrderListDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["profilePictureUrl"] = this.profilePictureUrl;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19486,7 +19531,7 @@ export class OrgBookingOrderInfolDto implements IOrgBookingOrderInfolDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["profilePictureUrl"] = this.profilePictureUrl;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19554,7 +19599,7 @@ export class BatchConfirmInput implements IBatchConfirmInput {
             for (let item of this.ids)
                 data["ids"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -19594,7 +19639,7 @@ export class RemarkBookingOrderInput implements IRemarkBookingOrderInput {
         data = typeof data === 'object' ? data : {};
         data["remark"] = this.remark;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19642,7 +19687,7 @@ export class PagedResultDtoOfOutletListDto implements IPagedResultDtoOfOutletLis
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -19718,7 +19763,7 @@ export class OutletListDto implements IOutletListDto {
         data["isActive"] = this.isActive;
         data["contactor"] = this.contactor ? this.contactor.toJSON() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -19794,7 +19839,7 @@ export class ContactorEditDto implements IContactorEditDto {
         data["wechatQrcodeUrl"] = this.wechatQrcodeUrl;
         data["outletId"] = this.outletId;
         data["isDefault"] = this.isDefault;
-        return data; 
+        return data;
     }
 }
 
@@ -19889,7 +19934,7 @@ export class GetOutletForEditDto implements IGetOutletForEditDto {
             for (let item of this.availableDistricts)
                 data["availableDistricts"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -19978,7 +20023,7 @@ export class OutletEditDto implements IOutletEditDto {
         data["pictureId"] = this.pictureId;
         data["pictureUrl"] = this.pictureUrl;
         data["isActive"] = this.isActive;
-        return data; 
+        return data;
     }
 }
 
@@ -20049,7 +20094,7 @@ export class CreateOrUpdateOutletInput implements ICreateOrUpdateOutletInput {
             for (let item of this.contactors)
                 data["contactors"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20090,7 +20135,7 @@ export class PaymentInfoDto implements IPaymentInfoDto {
         data = typeof data === 'object' ? data : {};
         data["edition"] = this.edition ? this.edition.toJSON() : <any>undefined;
         data["additionalPrice"] = this.additionalPrice;
-        return data; 
+        return data;
     }
 }
 
@@ -20135,7 +20180,7 @@ export class CreatePaymentDto implements ICreatePaymentDto {
         data["editionPaymentType"] = this.editionPaymentType;
         data["paymentPeriodType"] = this.paymentPeriodType;
         data["subscriptionPaymentGatewayType"] = this.subscriptionPaymentGatewayType;
-        return data; 
+        return data;
     }
 }
 
@@ -20151,7 +20196,7 @@ export class ExecutePaymentDto implements IExecutePaymentDto {
     editionPaymentType: ExecutePaymentDtoEditionPaymentType;
     editionId: number;
     paymentPeriodType: ExecutePaymentDtoPaymentPeriodType;
-    additionalData: { [key: string] : string; };
+    additionalData: { [key: string]: string; };
 
     constructor(data?: IExecutePaymentDto) {
         if (data) {
@@ -20197,7 +20242,7 @@ export class ExecutePaymentDto implements IExecutePaymentDto {
                     data["additionalData"][key] = this.additionalData[key];
             }
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20206,7 +20251,7 @@ export interface IExecutePaymentDto {
     editionPaymentType: ExecutePaymentDtoEditionPaymentType;
     editionId: number;
     paymentPeriodType: ExecutePaymentDtoPaymentPeriodType;
-    additionalData: { [key: string] : string; };
+    additionalData: { [key: string]: string; };
 }
 
 export class PagedResultDtoOfSubscriptionPaymentListDto implements IPagedResultDtoOfSubscriptionPaymentListDto {
@@ -20247,7 +20292,7 @@ export class PagedResultDtoOfSubscriptionPaymentListDto implements IPagedResultD
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20322,7 +20367,7 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["creatorUserId"] = this.creatorUserId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20381,7 +20426,7 @@ export class PagedResultDtoOfBookingTimelineDto implements IPagedResultDtoOfBook
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20433,7 +20478,7 @@ export class BookingTimelineDto implements IBookingTimelineDto {
         data["outlet"] = this.outlet;
         data["orgLogoUrl"] = this.orgLogoUrl;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20487,7 +20532,7 @@ export class PagedResultDtoOfBookingOrderListDto implements IPagedResultDtoOfBoo
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20560,7 +20605,7 @@ export class BookingOrderListDto implements IBookingOrderListDto {
         data["sticked"] = this.sticked;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20619,7 +20664,7 @@ export class GetPersonBookingOrderOutput implements IGetPersonBookingOrderOutput
         data = typeof data === 'object' ? data : {};
         data["bookingInfo"] = this.bookingInfo ? this.bookingInfo.toJSON() : <any>undefined;
         data["orderInfo"] = this.orderInfo ? this.orderInfo.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -20686,7 +20731,7 @@ export class BookingInfoDto implements IBookingInfoDto {
         data["contactorPhoneNum"] = this.contactorPhoneNum;
         data["contactorQrcode"] = this.contactorQrcode;
         data["outletPictureUrl"] = this.outletPictureUrl;
-        return data; 
+        return data;
     }
 }
 
@@ -20781,7 +20826,7 @@ export class BookingOrderInfo implements IBookingOrderInfo {
         data["refuseReason"] = this.refuseReason;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20843,7 +20888,7 @@ export class CancelBookingOrderInput implements ICancelBookingOrderInput {
         data = typeof data === 'object' ? data : {};
         data["refuseReason"] = this.refuseReason;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20884,7 +20929,7 @@ export class StickedInput implements IStickedInput {
         data = typeof data === 'object' ? data : {};
         data["sticked"] = this.sticked;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -20929,7 +20974,7 @@ export class ListResultDtoOfFlatPermissionWithLevelDto implements IListResultDto
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -20985,7 +21030,7 @@ export class FlatPermissionWithLevelDto implements IFlatPermissionWithLevelDto {
         data["displayName"] = this.displayName;
         data["description"] = this.description;
         data["isGrantedByDefault"] = this.isGrantedByDefault;
-        return data; 
+        return data;
     }
 }
 
@@ -21042,7 +21087,7 @@ export class PagedResultDtoOfPictureListDto implements IPagedResultDtoOfPictureL
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -21098,7 +21143,7 @@ export class PictureListDto implements IPictureListDto {
         data["mimeType"] = this.mimeType;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -21146,7 +21191,7 @@ export class UploadTokenOutput implements IUploadTokenOutput {
         data = typeof data === 'object' ? data : {};
         data["token"] = this.token;
         data["expirationOnUtc"] = this.expirationOnUtc ? this.expirationOnUtc.toISOString() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -21202,7 +21247,7 @@ export class CreateOrUpdatePictureInput implements ICreateOrUpdatePictureInput {
         data["tenantId"] = this.tenantId;
         data["groupId"] = this.groupId;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -21267,7 +21312,7 @@ export class PictureGroupListDto implements IPictureGroupListDto {
         data["creatorUserId"] = this.creatorUserId;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -21315,7 +21360,7 @@ export class CreateOrUpdatePictureGroupInput implements ICreateOrUpdatePictureGr
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -21383,7 +21428,7 @@ export class CurrentUserProfileEditDto implements ICurrentUserProfileEditDto {
         data["gender"] = this.gender;
         data["profilePictureUrl"] = this.profilePictureUrl;
         data["profilePictureId"] = this.profilePictureId;
-        return data; 
+        return data;
     }
 }
 
@@ -21439,7 +21484,7 @@ export class ChangePasswordInput implements IChangePasswordInput {
         data = typeof data === 'object' ? data : {};
         data["currentPassword"] = this.currentPassword;
         data["newPassword"] = this.newPassword;
-        return data; 
+        return data;
     }
 }
 
@@ -21482,7 +21527,7 @@ export class ChangePasswordByPhoneInput implements IChangePasswordByPhoneInput {
         data = typeof data === 'object' ? data : {};
         data["code"] = this.code;
         data["newPassword"] = this.newPassword;
-        return data; 
+        return data;
     }
 }
 
@@ -21525,7 +21570,7 @@ export class BindingPhoneNumInput implements IBindingPhoneNumInput {
         data = typeof data === 'object' ? data : {};
         data["phoneNum"] = this.phoneNum;
         data["code"] = this.code;
-        return data; 
+        return data;
     }
 }
 
@@ -21572,7 +21617,7 @@ export class ChangeBindingPhoneNumInput implements IChangeBindingPhoneNumInput {
         data["validCode"] = this.validCode;
         data["newTelephone"] = this.newTelephone;
         data["bundlingCode"] = this.bundlingCode;
-        return data; 
+        return data;
     }
 }
 
@@ -21613,7 +21658,7 @@ export class UpdateProfilePictureInput implements IUpdateProfilePictureInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["profilePictureId"] = this.profilePictureId;
-        return data; 
+        return data;
     }
 }
 
@@ -21649,7 +21694,7 @@ export class GetPasswordComplexitySettingOutput implements IGetPasswordComplexit
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["setting"] = this.setting ? this.setting.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -21684,7 +21729,7 @@ export class GetProfilePictureOutput implements IGetProfilePictureOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["profilePicture"] = this.profilePicture;
-        return data; 
+        return data;
     }
 }
 
@@ -21720,7 +21765,7 @@ export class ChangeUserLanguageDto implements IChangeUserLanguageDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["languageName"] = this.languageName;
-        return data; 
+        return data;
     }
 }
 
@@ -21767,7 +21812,7 @@ export class PagedResultDtoOfRoleListDto implements IPagedResultDtoOfRoleListDto
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -21823,7 +21868,7 @@ export class RoleListDto implements IRoleListDto {
         data["isDefault"] = this.isDefault;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -21893,7 +21938,7 @@ export class GetRoleForEditOutput implements IGetRoleForEditOutput {
             for (let item of this.grantedPermissionNames)
                 data["grantedPermissionNames"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -21942,7 +21987,7 @@ export class RoleEditDto implements IRoleEditDto {
         data["id"] = this.id;
         data["displayName"] = this.displayName;
         data["isDefault"] = this.isDefault;
-        return data; 
+        return data;
     }
 }
 
@@ -21999,7 +22044,7 @@ export class FlatPermissionDto implements IFlatPermissionDto {
         data["displayName"] = this.displayName;
         data["description"] = this.description;
         data["isGrantedByDefault"] = this.isGrantedByDefault;
-        return data; 
+        return data;
     }
 }
 
@@ -22056,7 +22101,7 @@ export class CreateOrUpdateRoleInput implements ICreateOrUpdateRoleInput {
             for (let item of this.grantedPermissionNames)
                 data["grantedPermissionNames"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -22100,7 +22145,7 @@ export class GetCurrentLoginInformationsOutput implements IGetCurrentLoginInform
         data["user"] = this.user ? this.user.toJSON() : <any>undefined;
         data["tenant"] = this.tenant ? this.tenant.toJSON() : <any>undefined;
         data["application"] = this.application ? this.application.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -22117,6 +22162,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     emailAddress: string;
     profilePictureId: string;
     phoneNumber: string;
+    weChat: string;
     id: number;
 
     constructor(data?: IUserLoginInfoDto) {
@@ -22136,6 +22182,7 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
             this.emailAddress = data["emailAddress"];
             this.profilePictureId = data["profilePictureId"];
             this.phoneNumber = data["phoneNumber"];
+            this.weChat = data["weChat"];
             this.id = data["id"];
         }
     }
@@ -22154,8 +22201,9 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["emailAddress"] = this.emailAddress;
         data["profilePictureId"] = this.profilePictureId;
         data["phoneNumber"] = this.phoneNumber;
+        data["weChat"] = this.weChat;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -22166,6 +22214,7 @@ export interface IUserLoginInfoDto {
     emailAddress: string;
     profilePictureId: string;
     phoneNumber: string;
+    weChat: string;
     id: number;
 }
 
@@ -22229,7 +22278,7 @@ export class TenantLoginInfoDto implements ITenantLoginInfoDto {
         data["subscriptionDateString"] = this.subscriptionDateString;
         data["creationTimeString"] = this.creationTimeString;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -22251,7 +22300,7 @@ export interface ITenantLoginInfoDto {
 export class ApplicationInfoDto implements IApplicationInfoDto {
     version: string;
     releaseDate: Moment;
-    features: { [key: string] : boolean; };
+    features: { [key: string]: boolean; };
 
     constructor(data?: IApplicationInfoDto) {
         if (data) {
@@ -22293,14 +22342,14 @@ export class ApplicationInfoDto implements IApplicationInfoDto {
                     data["features"][key] = this.features[key];
             }
         }
-        return data; 
+        return data;
     }
 }
 
 export interface IApplicationInfoDto {
     version: string;
     releaseDate: Moment;
-    features: { [key: string] : boolean; };
+    features: { [key: string]: boolean; };
 }
 
 export class EditionInfoDto implements IEditionInfoDto {
@@ -22348,7 +22397,7 @@ export class EditionInfoDto implements IEditionInfoDto {
         data["isHighestEdition"] = this.isHighestEdition;
         data["isFree"] = this.isFree;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -22407,7 +22456,7 @@ export class BatchSendSMSInput implements IBatchSendSMSInput {
         }
         data["content"] = this.content;
         data["captchaResponse"] = this.captchaResponse;
-        return data; 
+        return data;
     }
 }
 
@@ -22457,7 +22506,7 @@ export class SendResult implements ISendResult {
         data["errorMessage"] = this.errorMessage;
         data["successCount"] = this.successCount;
         data["failCount"] = this.failCount;
-        return data; 
+        return data;
     }
 }
 
@@ -22500,7 +22549,7 @@ export class UserCodeSendInput implements IUserCodeSendInput {
         data = typeof data === 'object' ? data : {};
         data["codeType"] = this.codeType;
         data["captchaResponse"] = this.captchaResponse;
-        return data; 
+        return data;
     }
 }
 
@@ -22547,7 +22596,7 @@ export class CodeSendInput implements ICodeSendInput {
         data["targetNumber"] = this.targetNumber;
         data["codeType"] = this.codeType;
         data["captchaResponse"] = this.captchaResponse;
-        return data; 
+        return data;
     }
 }
 
@@ -22596,7 +22645,7 @@ export class CheckUserCodeInput implements ICheckUserCodeInput {
         data["code"] = this.code;
         data["codeType"] = this.codeType;
         data["captchaResponse"] = this.captchaResponse;
-        return data; 
+        return data;
     }
 }
 
@@ -22647,7 +22696,7 @@ export class PagedResultDtoOfSMSTemplateListDto implements IPagedResultDtoOfSMST
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -22703,7 +22752,7 @@ export class SMSTemplateListDto implements ISMSTemplateListDto {
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -22796,7 +22845,7 @@ export class GetSMSTemplateForEditDto implements IGetSMSTemplateForEditDto {
                 data["availabelSmsProviders"].push(item.toJSON());
         }
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -22860,7 +22909,7 @@ export class SMSTemplateItemDto implements ISMSTemplateItemDto {
         data["id"] = this.id;
         data["dataItemName"] = this.dataItemName;
         data["dataItemValue"] = this.dataItemValue;
-        return data; 
+        return data;
     }
 }
 
@@ -22907,7 +22956,7 @@ export class SMSProviderInfoDto implements ISMSProviderInfoDto {
         data = typeof data === 'object' ? data : {};
         data["displayName"] = this.displayName;
         data["systemName"] = this.systemName;
-        return data; 
+        return data;
     }
 }
 
@@ -22974,7 +23023,7 @@ export class CreateOrUpdateSMSTemplateInput implements ICreateOrUpdateSMSTemplat
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23029,7 +23078,7 @@ export class SMSTemplateItemInput implements ISMSTemplateItemInput {
         data["id"] = this.id;
         data["dataItemName"] = this.dataItemName;
         data["dataItemValue"] = this.dataItemValue;
-        return data; 
+        return data;
     }
 }
 
@@ -23080,7 +23129,7 @@ export class PagedResultDtoOfProvinceListDto implements IPagedResultDtoOfProvinc
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23128,7 +23177,7 @@ export class ProvinceListDto implements IProvinceListDto {
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23181,7 +23230,7 @@ export class CreateOrUpdateProvinceInput implements ICreateOrUpdateProvinceInput
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23233,7 +23282,7 @@ export class PagedResultDtoOfCityListDto implements IPagedResultDtoOfCityListDto
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23281,7 +23330,7 @@ export class CityListDto implements ICityListDto {
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23338,7 +23387,7 @@ export class CreateOrUpdateCityInput implements ICreateOrUpdateCityInput {
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23392,7 +23441,7 @@ export class PagedResultDtoOfDistrictListDto implements IPagedResultDtoOfDistric
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23440,7 +23489,7 @@ export class DistrictListDto implements IDistrictListDto {
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23497,7 +23546,7 @@ export class CreateOrUpdateDistrictInput implements ICreateOrUpdateDistrictInput
         data["display"] = this.display;
         data["isActive"] = this.isActive;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23551,7 +23600,7 @@ export class PagedResultDtoOfTenantListDto implements IPagedResultDtoOfTenantLis
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23611,7 +23660,7 @@ export class TenantListDto implements ITenantListDto {
         data["isActive"] = this.isActive;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23701,7 +23750,7 @@ export class CreateTenantInput implements ICreateTenantInput {
         data["isActive"] = this.isActive;
         data["subscriptionEndDateUtc"] = this.subscriptionEndDateUtc ? this.subscriptionEndDateUtc.toISOString() : <any>undefined;
         data["isInTrialPeriod"] = this.isInTrialPeriod;
-        return data; 
+        return data;
     }
 }
 
@@ -23765,7 +23814,7 @@ export class GetTenantForEditOutput implements IGetTenantForEditOutput {
         data["tenant"] = this.tenant ? this.tenant.toJSON() : <any>undefined;
         data["features"] = this.features ? this.features.toJSON() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23836,7 +23885,7 @@ export class TenantEditDto implements ITenantEditDto {
                 data["features"].push(item.toJSON());
         }
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -23902,7 +23951,7 @@ export class GetTenantFeaturesEditOutput implements IGetTenantFeaturesEditOutput
             for (let item of this.features)
                 data["features"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23951,7 +24000,7 @@ export class UpdateTenantFeaturesInput implements IUpdateTenantFeaturesInput {
             for (let item of this.featureValues)
                 data["featureValues"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -23989,7 +24038,7 @@ export class EntityDto implements IEntityDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -24032,7 +24081,7 @@ export class GetMemberActivityOutput implements IGetMemberActivityOutput {
             for (let item of this.memberActivities)
                 data["memberActivities"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -24079,7 +24128,7 @@ export class MemberActivity implements IMemberActivity {
         data["cases"] = this.cases;
         data["closed"] = this.closed;
         data["rate"] = this.rate;
-        return data; 
+        return data;
     }
 }
 
@@ -24203,7 +24252,7 @@ export class GetDashboardDataOutput implements IGetDashboardDataOutput {
             for (let item of this.timeLineItems)
                 data["timeLineItems"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -24259,7 +24308,7 @@ export class SalesSummaryData implements ISalesSummaryData {
         data["period"] = this.period;
         data["sales"] = this.sales;
         data["profit"] = this.profit;
-        return data; 
+        return data;
     }
 }
 
@@ -24314,7 +24363,7 @@ export class TimeLineItem implements ITimeLineItem {
         data["shortDate"] = this.shortDate;
         data["titleDate"] = this.titleDate;
         data["text"] = this.text;
-        return data; 
+        return data;
     }
 }
 
@@ -24363,7 +24412,7 @@ export class GetSalesSummaryOutput implements IGetSalesSummaryOutput {
             for (let item of this.salesSummary)
                 data["salesSummary"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -24406,7 +24455,7 @@ export class GetWorldMapOutput implements IGetWorldMapOutput {
             for (let item of this.countries)
                 data["countries"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -24444,7 +24493,7 @@ export class WorldMapCountry implements IWorldMapCountry {
         data = typeof data === 'object' ? data : {};
         data["countryName"] = this.countryName;
         data["color"] = this.color;
-        return data; 
+        return data;
     }
 }
 
@@ -24510,7 +24559,7 @@ export class GetServerStatsOutput implements IGetServerStatsOutput {
             for (let item of this.loadRate)
                 data["loadRate"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -24553,7 +24602,7 @@ export class GetGeneralStatsOutput implements IGetGeneralStatsOutput {
         data["transactionPercent"] = this.transactionPercent;
         data["newVisitPercent"] = this.newVisitPercent;
         data["bouncePercent"] = this.bouncePercent;
-        return data; 
+        return data;
     }
 }
 
@@ -24615,7 +24664,7 @@ export class TenantInfoEditDto implements ITenantInfoEditDto {
         data["logoUrl"] = this.logoUrl;
         data["backgroundPictureId"] = this.backgroundPictureId;
         data["backgroundPictureUrl"] = this.backgroundPictureUrl;
-        return data; 
+        return data;
     }
 }
 
@@ -24680,7 +24729,7 @@ export class RegisterTenantInput implements IRegisterTenantInput {
         data["registerCode"] = this.registerCode;
         data["password"] = this.password;
         data["captchaResponse"] = this.captchaResponse;
-        return data; 
+        return data;
     }
 }
 
@@ -24745,7 +24794,7 @@ export class RegisterTenantOutput implements IRegisterTenantOutput {
         data["isTenantActive"] = this.isTenantActive;
         data["isActive"] = this.isActive;
         data["isEmailConfirmationRequired"] = this.isEmailConfirmationRequired;
-        return data; 
+        return data;
     }
 }
 
@@ -24804,7 +24853,7 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
         data["ldap"] = this.ldap ? this.ldap.toJSON() : <any>undefined;
         data["security"] = this.security ? this.security.toJSON() : <any>undefined;
         data["externalAuthentication"] = this.externalAuthentication ? this.externalAuthentication.toJSON() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -24855,7 +24904,7 @@ export class TenantUserManagementSettingsEditDto implements ITenantUserManagemen
         data["isNewRegisteredUserActiveByDefault"] = this.isNewRegisteredUserActiveByDefault;
         data["isEmailConfirmationRequiredForLogin"] = this.isEmailConfirmationRequiredForLogin;
         data["useCaptchaOnRegistration"] = this.useCaptchaOnRegistration;
-        return data; 
+        return data;
     }
 }
 
@@ -24911,7 +24960,7 @@ export class LdapSettingsEditDto implements ILdapSettingsEditDto {
         data["domain"] = this.domain;
         data["userName"] = this.userName;
         data["password"] = this.password;
-        return data; 
+        return data;
     }
 }
 
@@ -24964,7 +25013,7 @@ export class ListResultDtoOfNameValueDto implements IListResultDtoOfNameValueDto
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -25020,7 +25069,7 @@ export class AuthenticateModel implements IAuthenticateModel {
         data["rememberClient"] = this.rememberClient;
         data["twoFactorRememberClientToken"] = this.twoFactorRememberClientToken;
         data["singleSignIn"] = this.singleSignIn;
-        return data; 
+        return data;
     }
 }
 
@@ -25111,7 +25160,7 @@ export class AuthenticateResultModel implements IAuthenticateResultModel {
                 data["twoFactorAuthProviders"].push(item);
         }
         data["twoFactorRememberClientToken"] = this.twoFactorRememberClientToken;
-        return data; 
+        return data;
     }
 }
 
@@ -25174,7 +25223,7 @@ export class PhoneAuthenticateModel implements IPhoneAuthenticateModel {
         data["phoneNum"] = this.phoneNum;
         data["loginCode"] = this.loginCode;
         data["rememberClient"] = this.rememberClient;
-        return data; 
+        return data;
     }
 }
 
@@ -25219,7 +25268,7 @@ export class SendTwoFactorAuthCodeModel implements ISendTwoFactorAuthCodeModel {
         data = typeof data === 'object' ? data : {};
         data["userId"] = this.userId;
         data["provider"] = this.provider;
-        return data; 
+        return data;
     }
 }
 
@@ -25266,7 +25315,7 @@ export class ImpersonatedAuthenticateResultModel implements IImpersonatedAuthent
         data["accessToken"] = this.accessToken;
         data["encryptedAccessToken"] = this.encryptedAccessToken;
         data["expireInSeconds"] = this.expireInSeconds;
-        return data; 
+        return data;
     }
 }
 
@@ -25316,7 +25365,7 @@ export class SwitchedAccountAuthenticateResultModel implements ISwitchedAccountA
         data["accessToken"] = this.accessToken;
         data["encryptedAccessToken"] = this.encryptedAccessToken;
         data["expireInSeconds"] = this.expireInSeconds;
-        return data; 
+        return data;
     }
 }
 
@@ -25366,7 +25415,7 @@ export class ExternalLoginProviderInfoModel implements IExternalLoginProviderInf
         data["name"] = this.name;
         data["clientId"] = this.clientId;
         data["showOnLoginPage"] = this.showOnLoginPage;
-        return data; 
+        return data;
     }
 }
 
@@ -25419,7 +25468,7 @@ export class ExternalAuthenticateModel implements IExternalAuthenticateModel {
         data["providerKey"] = this.providerKey;
         data["providerAccessCode"] = this.providerAccessCode;
         data["singleSignIn"] = this.singleSignIn;
-        return data; 
+        return data;
     }
 }
 
@@ -25486,7 +25535,7 @@ export class ExternalAuthenticateResultModel implements IExternalAuthenticateRes
         data["expireInSeconds"] = this.expireInSeconds;
         data["waitingForActivation"] = this.waitingForActivation;
         data["needSupplementary"] = this.needSupplementary;
-        return data; 
+        return data;
     }
 }
 
@@ -25507,7 +25556,7 @@ export interface IExternalAuthenticateResultModel {
     needSupplementary: boolean;
 }
 
-export class ExternalBingingModel implements IExternalBingingModel {
+export class ExternalBindingModel implements IExternalBindingModel {
     /** 认证类型 */
     authProvider: string;
     /** 认证秘钥 */
@@ -25515,7 +25564,7 @@ export class ExternalBingingModel implements IExternalBingingModel {
     /** 认证访问码 */
     providerAccessCode: string;
 
-    constructor(data?: IExternalBingingModel) {
+    constructor(data?: IExternalBindingModel) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -25532,8 +25581,8 @@ export class ExternalBingingModel implements IExternalBingingModel {
         }
     }
 
-    static fromJS(data: any): ExternalBingingModel {
-        let result = new ExternalBingingModel();
+    static fromJS(data: any): ExternalBindingModel {
+        let result = new ExternalBindingModel();
         result.init(data);
         return result;
     }
@@ -25543,17 +25592,54 @@ export class ExternalBingingModel implements IExternalBingingModel {
         data["authProvider"] = this.authProvider;
         data["providerKey"] = this.providerKey;
         data["providerAccessCode"] = this.providerAccessCode;
-        return data; 
+        return data;
     }
 }
 
-export interface IExternalBingingModel {
+export interface IExternalBindingModel {
     /** 认证类型 */
     authProvider: string;
     /** 认证秘钥 */
     providerKey: string;
     /** 认证访问码 */
     providerAccessCode: string;
+}
+
+export class ExternalUnBindingModel implements IExternalUnBindingModel {
+    /** 认证类型 */
+    authProvider: string;
+
+    constructor(data?: IExternalUnBindingModel) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.authProvider = data["authProvider"];
+        }
+    }
+
+    static fromJS(data: any): ExternalUnBindingModel {
+        let result = new ExternalUnBindingModel();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["authProvider"] = this.authProvider;
+        return data;
+    }
+}
+
+export interface IExternalUnBindingModel {
+    /** 认证类型 */
+    authProvider: string;
 }
 
 /** 补充认证 */
@@ -25585,7 +25671,7 @@ export class SupplementAuthModel implements ISupplementAuthModel {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["tenantName"] = this.tenantName;
-        return data; 
+        return data;
     }
 }
 
@@ -25635,7 +25721,7 @@ export class SupplementAuthResultModel implements ISupplementAuthResultModel {
         data["accessToken"] = this.accessToken;
         data["encryptedAccessToken"] = this.encryptedAccessToken;
         data["expireInSeconds"] = this.expireInSeconds;
-        return data; 
+        return data;
     }
 }
 
@@ -25686,7 +25772,7 @@ export class PagedResultDtoOfUserListDto implements IPagedResultDtoOfUserListDto
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -25774,7 +25860,7 @@ export class UserListDto implements IUserListDto {
         data["isActive"] = this.isActive;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -25836,7 +25922,7 @@ export class UserListRoleDto implements IUserListRoleDto {
         data = typeof data === 'object' ? data : {};
         data["roleId"] = this.roleId;
         data["roleName"] = this.roleName;
-        return data; 
+        return data;
     }
 }
 
@@ -25907,7 +25993,7 @@ export class GetUserForEditOutput implements IGetUserForEditOutput {
             for (let item of this.externalLogins)
                 data["externalLogins"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -25995,7 +26081,7 @@ export class UserEditDto implements IUserEditDto {
         data["shouldChangePasswordOnNextLogin"] = this.shouldChangePasswordOnNextLogin;
         data["isTwoFactorEnabled"] = this.isTwoFactorEnabled;
         data["isLockoutEnabled"] = this.isLockoutEnabled;
-        return data; 
+        return data;
     }
 }
 
@@ -26068,7 +26154,7 @@ export class UserRoleDto implements IUserRoleDto {
         data["roleName"] = this.roleName;
         data["roleDisplayName"] = this.roleDisplayName;
         data["isAssigned"] = this.isAssigned;
-        return data; 
+        return data;
     }
 }
 
@@ -26132,7 +26218,7 @@ export class GetUserPermissionsForEditOutput implements IGetUserPermissionsForEd
             for (let item of this.grantedPermissionNames)
                 data["grantedPermissionNames"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26199,7 +26285,7 @@ export class ExternalUserLoginDto implements IExternalUserLoginDto {
         data["refreshToken"] = this.refreshToken;
         data["accessTokenOutDataTime"] = this.accessTokenOutDataTime ? this.accessTokenOutDataTime.toISOString() : <any>undefined;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -26262,7 +26348,7 @@ export class UpdateUserPermissionsInput implements IUpdateUserPermissionsInput {
             for (let item of this.grantedPermissionNames)
                 data["grantedPermissionNames"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26333,7 +26419,7 @@ export class CreateOrUpdateUserInput implements ICreateOrUpdateUserInput {
         }
         data["sendActivationEmail"] = this.sendActivationEmail;
         data["setRandomPassword"] = this.setRandomPassword;
-        return data; 
+        return data;
     }
 }
 
@@ -26386,7 +26472,7 @@ export class LinkToUserInput implements ILinkToUserInput {
         data["tenancyName"] = this.tenancyName;
         data["usernameOrEmailAddress"] = this.usernameOrEmailAddress;
         data["password"] = this.password;
-        return data; 
+        return data;
     }
 }
 
@@ -26437,7 +26523,7 @@ export class PagedResultDtoOfLinkedUserDto implements IPagedResultDtoOfLinkedUse
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26486,7 +26572,7 @@ export class LinkedUserDto implements ILinkedUserDto {
         data["username"] = this.username;
         data["lastLoginTime"] = this.lastLoginTime ? this.lastLoginTime.toISOString() : <any>undefined;
         data["id"] = this.id;
-        return data; 
+        return data;
     }
 }
 
@@ -26534,7 +26620,7 @@ export class ListResultDtoOfLinkedUserDto implements IListResultDtoOfLinkedUserD
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26574,7 +26660,7 @@ export class UnlinkUserInput implements IUnlinkUserInput {
         data = typeof data === 'object' ? data : {};
         data["tenantId"] = this.tenantId;
         data["userId"] = this.userId;
-        return data; 
+        return data;
     }
 }
 
@@ -26620,7 +26706,7 @@ export class ListResultDtoOfUserLoginAttemptDto implements IListResultDtoOfUserL
             for (let item of this.items)
                 data["items"].push(item.toJSON());
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26681,7 +26767,7 @@ export class UserLoginAttemptDto implements IUserLoginAttemptDto {
         data["browserInfo"] = this.browserInfo;
         data["result"] = this.result;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
-        return data; 
+        return data;
     }
 }
 
@@ -26738,7 +26824,7 @@ export class GetLatestWebLogsOutput implements IGetLatestWebLogsOutput {
             for (let item of this.latestWebLogLines)
                 data["latestWebLogLines"].push(item);
         }
-        return data; 
+        return data;
     }
 }
 
@@ -26778,7 +26864,7 @@ export class GetJsApiSignatureOutput implements IGetJsApiSignatureOutput {
         data = typeof data === 'object' ? data : {};
         data["appId"] = this.appId;
         data["signature"] = this.signature;
-        return data; 
+        return data;
     }
 }
 
@@ -26790,134 +26876,134 @@ export interface IGetJsApiSignatureOutput {
 }
 
 export enum IncomeStatisticsDateInterval {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum IncomeStatisticsDateInterval2 {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum DateInterval {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 /** 通知状态（可空） */
 export enum State {
-    _0 = 0, 
-    _1 = 1, 
+    _0 = 0,
+    _1 = 1,
 }
 
 /** 性别 */
 export enum Gender {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum Status {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
 }
 
 export enum Status2 {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
 }
 
 export enum SalesSummaryDatePeriod {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum SalesSummaryDatePeriod2 {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 /** 默认时区有效范围 */
 export enum DefaultTimezoneScope {
-    _1 = 1, 
-    _2 = 2, 
-    _4 = 4, 
-    _7 = 7, 
+    _1 = 1,
+    _2 = 2,
+    _4 = 4,
+    _7 = 7,
 }
 
 export enum IsTenantAvailableOutputState {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum JoinBookingInputGender {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum JoinBookingInputSource {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
 }
 
 export enum BookingAccessRecordInputSource {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
 }
 
 export enum BookingAccessRecordInputWeChatSource {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
 }
 
 export enum BookingShareRecordInputTarget {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
 }
 
 export enum FriendDtoState {
-    _1 = 1, 
-    _2 = 2, 
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum ChatMessageDtoSide {
-    _1 = 1, 
-    _2 = 2, 
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum ChatMessageDtoReadState {
-    _1 = 1, 
-    _2 = 2, 
+    _1 = 1,
+    _2 = 2,
 }
 
 export class AdditionalData implements IAdditionalData {
-    paypal: { [key: string] : string; };
+    paypal: { [key: string]: string; };
 
     constructor(data?: IAdditionalData) {
         if (data) {
@@ -26955,138 +27041,138 @@ export class AdditionalData implements IAdditionalData {
                     data["Paypal"][key] = this.paypal[key];
             }
         }
-        return data; 
+        return data;
     }
 }
 
 export interface IAdditionalData {
-    paypal: { [key: string] : string; };
+    paypal: { [key: string]: string; };
 }
 
 export enum UserNotificationState {
-    _0 = 0, 
-    _1 = 1, 
+    _0 = 0,
+    _1 = 1,
 }
 
 export enum TenantNotificationSeverity {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
 }
 
 export enum OrgBookingOrderListDtoStatus {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
 }
 
 export enum OrgBookingOrderInfolDtoStatus {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
 }
 
 export enum CreatePaymentDtoEditionPaymentType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum CreatePaymentDtoPaymentPeriodType {
-    _30 = 30, 
-    _365 = 365, 
+    _30 = 30,
+    _365 = 365,
 }
 
 export enum CreatePaymentDtoSubscriptionPaymentGatewayType {
-    _1 = 1, 
+    _1 = 1,
 }
 
 export enum ExecutePaymentDtoGateway {
-    _1 = 1, 
+    _1 = 1,
 }
 
 export enum ExecutePaymentDtoEditionPaymentType {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
 }
 
 export enum ExecutePaymentDtoPaymentPeriodType {
-    _30 = 30, 
-    _365 = 365, 
+    _30 = 30,
+    _365 = 365,
 }
 
 export enum BookingOrderListDtoStatus {
-    _1 = 1, 
-    _2 = 2, 
-    _3 = 3, 
-    _4 = 4, 
-    _5 = 5, 
-    _6 = 6, 
+    _1 = 1,
+    _2 = 2,
+    _3 = 3,
+    _4 = 4,
+    _5 = 5,
+    _6 = 6,
 }
 
 export enum BookingOrderInfoGender {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum CurrentUserProfileEditDtoGender {
-    _0 = 0, 
-    _1 = 1, 
-    _2 = 2, 
+    _0 = 0,
+    _1 = 1,
+    _2 = 2,
 }
 
 export enum TenantLoginInfoDtoPaymentPeriodType {
-    _30 = 30, 
-    _365 = 365, 
+    _30 = 30,
+    _365 = 365,
 }
 
 export enum UserCodeSendInputCodeType {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
-    _60 = 60, 
-    _70 = 70, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
+    _60 = 60,
+    _70 = 70,
 }
 
 export enum CodeSendInputCodeType {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
-    _60 = 60, 
-    _70 = 70, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
+    _60 = 60,
+    _70 = 70,
 }
 
 export enum CheckUserCodeInputCodeType {
-    _10 = 10, 
-    _20 = 20, 
-    _30 = 30, 
-    _40 = 40, 
-    _50 = 50, 
-    _60 = 60, 
-    _70 = 70, 
+    _10 = 10,
+    _20 = 20,
+    _30 = 30,
+    _40 = 40,
+    _50 = 50,
+    _60 = 60,
+    _70 = 70,
 }
 
 export class SwaggerException extends Error {
     message: string;
-    status: number; 
-    response: string; 
-    result: any; 
+    status: number;
+    response: string;
+    result: any;
 
     constructor(message: string, status: number, response: string, result: any) {
         super();
@@ -27099,19 +27185,19 @@ export class SwaggerException extends Error {
 }
 
 function throwException(message: string, status: number, response: string, result?: any): Observable<any> {
-    if(result !== null && result !== undefined)
+    if (result !== null && result !== undefined)
         return Observable.throw(result);
     else
         return Observable.throw(new SwaggerException(message, status, response, null));
 }
 
 function blobToText(blob: any): Observable<string> {
-    return new Observable<string>((observer: any) => { 
-        let reader = new FileReader(); 
-        reader.onload = function() { 
+    return new Observable<string>((observer: any) => {
+        let reader = new FileReader();
+        reader.onload = function () {
             observer.next(this.result);
             observer.complete();
         }
-        reader.readAsText(blob); 
+        reader.readAsText(blob);
     });
 }

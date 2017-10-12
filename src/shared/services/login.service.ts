@@ -263,6 +263,10 @@ export class LoginService {
         this.wechatLogin(params);
     }
 
+    public externalBindingCallback(params: Params): void {
+        this.wechatAuthBinding(params);
+    }
+
     private facebookLoginStatusChangeCallback(resp) {
         if (resp.status === 'connected') {
             const model = new ExternalAuthenticateModel();
@@ -315,6 +319,20 @@ export class LoginService {
         });
     }
 
+    private wechatAuthBinding(params: Params) {
+        const model = new ExternalAuthenticateModel();
+        model.authProvider = params['providerName'];
+        model.providerAccessCode = params['code'];
+        model.providerKey = params['code'];
+        this._tokenAuthService.externalBinding(model).subscribe(() => {
+            UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+            this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
+            const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
+            location.href = initialUrl;
+        });
+    }
+
+
     /**
     * Microsoft login is not completed yet, because of an error thrown by zone.js: https://github.com/angular/zone.js/issues/290
     */
@@ -351,7 +369,8 @@ export class LoginService {
             async: false,
             headers: {
                 'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
-                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie()
+                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
+                Authorization: 'Bearer ' + this._cookiesService.getToken(),
             }
         }).done(response => {
             return response;
@@ -372,6 +391,4 @@ export class LoginService {
         }
         return null;
     }
-
-
 }
