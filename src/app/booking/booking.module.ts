@@ -19,6 +19,8 @@ import { NgModule } from '@angular/core';
 import { OptimalBookingTimeModelComponent } from './time/optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './time/reply-booking-model/reply-booking-model.component';
 import { UtilsModule } from 'shared/utils/utils.module';
+import { BusinessMapsModelComponent } from './about/business-maps-model/business-maps-model.component';
+import { ContactorModelComponent } from './about/contactor-model/contactor-model.component';
 
 @NgModule({
     imports: [
@@ -45,7 +47,9 @@ import { UtilsModule } from 'shared/utils/utils.module';
         OptimalBookingTimeModelComponent,
         ReplyBookingModelComponent,
         BookedComponent,
-        FooterAdComponent
+        FooterAdComponent,
+        BusinessMapsModelComponent,
+        ContactorModelComponent
     ],
     providers: [
     ]
