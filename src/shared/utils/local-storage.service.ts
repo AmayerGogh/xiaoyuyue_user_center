@@ -6,9 +6,15 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class LocalStorageService {
 
+    getItem(key: string) {
+        return localForage.getItem(key).then(result => {
+            return result;
+        });
+    }
+
     // 封装获取localForage，getItem()
     // 接受一个值，获取localForage的目标key
-    getItem(key: string, callback: any) {
+    getItemWithCallBack(key: string, callback: any) {
         return localForage.getItem(key).then(result => {
             if (result) {
                 return this.deepCopy(result);

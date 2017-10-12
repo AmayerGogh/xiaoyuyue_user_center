@@ -4,9 +4,9 @@ import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewChild } from 
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { LocalStorageService } from 'shared/utils/local-storage.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Moment } from 'moment';
-import { LocalStorageService } from 'shared/utils/local-storage.service';
 
 @Component({
     selector: 'xiaoyuyue-reply-booking-model',
@@ -17,8 +17,9 @@ import { LocalStorageService } from 'shared/utils/local-storage.service';
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
     bookingTime: string;
     hourOfDay: string;
-    saving: boolean = false;
+    saving = false;
     input: JoinBookingInput = new JoinBookingInput();
+    cacheKey = 'JoinBookingInfoCache';
     @ViewChild('replyBookingModel') modal: ModalDirective;
     constructor(
         injector: Injector,
@@ -45,14 +46,15 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
         this.input = input;
         this.bookingTime = this.t(input.date);
         this.hourOfDay = hourOfDay;
-        
-        let temp = `JoinBookingInfoCache-${this._route.snapshot.paramMap.get('id')}`
-        this._localStorageService.getItem(temp, () => {})
-        .then( (result: JoinBookingInput) => {
-            this.input.name = result.name;
-            this.input.phoneNumber = result.phoneNumber;
-            this.input.subscriberNum = result.subscriberNum;
-        })
+
+        this._localStorageService.getItem(this.cacheKey)
+            .then((result: JoinBookingInput) => {
+                if (result) {
+                    this.input.name = result.name;
+                    this.input.phoneNumber = result.phoneNumber;
+                    this.input.subscriberNum = result.subscriberNum;
+                }
+            })
     }
 
     submit() {
@@ -67,8 +69,7 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
             .finally(() => { this.saving = false; })
             .subscribe(result => {
                 this.close();
-                let temp = `JoinBookingInfoCache-${this._route.snapshot.paramMap.get('id')}`
-                this._localStorageService.setItem(temp, this.input);
+                this._localStorageService.setItem(this.cacheKey, this.input);
                 this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.d(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
     }
