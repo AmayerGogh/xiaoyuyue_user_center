@@ -95,7 +95,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
 
     externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
         $event.cancelBubble = true;
-        this.flag && this.loginService.externalAuthenticate(provider); //执行第三方登陆逻辑
+        this.flag && this.loginService.externalAuthenticate(provider); // 执行第三方登陆逻辑
 
         if (provider.name === 'WeChat' && this.flag) {
             // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
