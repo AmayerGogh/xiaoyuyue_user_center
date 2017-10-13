@@ -33,7 +33,6 @@ export class ExternalAuthComponent implements OnInit {
     externalLogin(): void {
         const self = this;
         this._activatedRoute.queryParams.subscribe((params: Params) => {
-            debugger;
             if (params['redirectUrl'] !== undefined) {
                 this._cookiesService.setCookieValue('UrlHelper.redirectUrl', params['redirectUrl'], null, '/');
             }
