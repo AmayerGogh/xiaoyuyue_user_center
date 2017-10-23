@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BusinessMpsModelComponent } from './business-mps-model.component';
+import { BusinessMapsModelComponent } from './business-maps-model.component';
 
 describe('BusinessMpsModelComponent', () => {
-  let component: BusinessMpsModelComponent;
-  let fixture: ComponentFixture<BusinessMpsModelComponent>;
+  let component: BusinessMapsModelComponent;
+  let fixture: ComponentFixture<BusinessMapsModelComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BusinessMpsModelComponent ]
+      declarations: [ BusinessMapsModelComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BusinessMpsModelComponent);
+    fixture = TestBed.createComponent(BusinessMapsModelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
