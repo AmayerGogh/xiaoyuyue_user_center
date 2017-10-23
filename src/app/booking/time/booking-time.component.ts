@@ -98,7 +98,6 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     }
 
     selectOptimalTime(index: number, date: string, time: JoinBookingTimeInfo) {
-        debugger
         this.selectIndex = index;
         this.hourOfDay = time.hourOfDay;
         this.availableDateItemData.forEach((element, index) => {
