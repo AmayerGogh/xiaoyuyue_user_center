@@ -4,15 +4,20 @@
     }
 }
 
-.modal-header {
-    padding-top: 15px;
-    padding-right: 15px;
-    .vapps-icon-app-close {
-        width: 34px;
-        height: 34px;
-        &:before {
-            display: inline-block;
-            padding: 10px;
+.modal {
+    .modal-dialog {
+        margin-top: 0px;
+        .modal-header {
+            padding-top: 15px;
+            padding-right: 15px;
+            .vapps-icon-app-close {
+                width: 34px;
+                height: 34px;
+                &:before {
+                    display: inline-block;
+                    padding: 10px;
+                }
+            }
         }
     }
 }
