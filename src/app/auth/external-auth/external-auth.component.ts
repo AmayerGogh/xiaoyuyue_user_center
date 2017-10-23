@@ -16,7 +16,7 @@ import { element } from 'protractor';
 })
 export class ExternalAuthComponent implements OnInit {
 
-    isAuthBind: boolean;
+    isAuthBind = 'false';
 
     constructor(
         private _router: Router,
@@ -31,8 +31,8 @@ export class ExternalAuthComponent implements OnInit {
     }
 
     externalLogin(): void {
+        const self = this;
         this._activatedRoute.queryParams.subscribe((params: Params) => {
-
             if (params['redirectUrl'] !== undefined) {
                 this._cookiesService.setCookieValue('UrlHelper.redirectUrl', params['redirectUrl'], null, '/');
             }
@@ -42,14 +42,14 @@ export class ExternalAuthComponent implements OnInit {
             }
 
             if (params['isAuthBind'] !== undefined) {
-                this.isAuthBind = params['isAuthBind'];
+                self.isAuthBind = params['isAuthBind'];
             }
 
             if (params['providerName'] !== undefined) {
-                if (!this.isAuthBind) {
-                    this._loginService.externalLoginCallback(params);
-                } else {
+                if (self.isAuthBind === 'true') {
                     this._loginService.externalBindingCallback(params);
+                } else {
+                    this._loginService.externalLoginCallback(params);
                 }
             } else {
                 this._loginService.init((externalLoginProviders) => {
