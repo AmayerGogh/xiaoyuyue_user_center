@@ -11,7 +11,7 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 })
 export class BusinessMapsModelComponent extends AppComponentBase implements OnInit {
     addressUrl: SafeResourceUrl;
-    source: string = 'http://apis.map.qq.com/uri/v1/marker';
+    source: string = 'https://apis.map.qq.com/uri/v1/marker';
     coord: string;
     title: string;
     addr: string;
