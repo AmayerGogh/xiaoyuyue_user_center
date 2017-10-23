@@ -1,12 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookingServiceProxy, JoinBookingInput } from 'shared/service-proxies/service-proxies';
-import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { BookingServiceProxy, JoinBookingInput, JoinBookingInputGender, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
+import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewChild, Input } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { LocalStorageService } from 'shared/utils/local-storage.service';
 import { ModalDirective } from 'ngx-bootstrap';
 import { Moment } from 'moment';
+import { SelectHelper } from 'shared/helpers/SelectHelper';
 
 @Component({
     selector: 'xiaoyuyue-reply-booking-model',
@@ -20,6 +21,10 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     saving = false;
     input: JoinBookingInput = new JoinBookingInput();
     cacheKey = 'JoinBookingInfoCache';
+    genderSelectListData: Object[] = SelectHelper.GenderList();
+    defaultGenderSelect: string = '0';
+
+    @Input() bookingInfoData: JoinBookingInfoDto = new JoinBookingInfoDto();
     @ViewChild('replyBookingModel') modal: ModalDirective;
     constructor(
         injector: Injector,
@@ -58,11 +63,6 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
     }
 
     submit() {
-        // 临时测试
-        this.input.age = 0;
-        this.input.emailAddress = '';
-        this.input.gender = 0;
-
         this.saving = true;
         this._bookingServiceProxy
             .joinBooking(this.input)
@@ -72,5 +72,9 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
                 this._localStorageService.setItem(this.cacheKey, this.input);
                 this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.d(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
+    }
+
+    selectGenderHandler(gender: JoinBookingInputGender): void {
+        this.input.gender = gender;
     }
 }

@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
+import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
@@ -32,6 +32,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     source = '';
 
     @Input() availableDateItemData: JoinBookingDataInfo[] = [];
+    @Input() bookingInfoData: JoinBookingInfoDto = new JoinBookingInfoDto();
     @ViewChild('optimalBookingTimeModel') optimalBookingTimeModel: OptimalBookingTimeModelComponent;
     @ViewChild('replyBookingModel') replyBookingModel: ReplyBookingModelComponent;
     public constructor(
