@@ -75,8 +75,11 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         if (typeof defaultTimeItem === 'object' && defaultTimeItem.hasOwnProperty('date')) {
             this.selectDate = this.availableDateItemData[0].date.utcOffset('+08:00').format('YYYY-MM-DD');
         }
-        // 测试, 如果没有选择时间段,那么就赋值默认的一个id
-        this.input.bookingItemId = this.availableDateItemData[0] ? this.availableDateItemData[0].times[0].id : 0;
+
+        if (typeof defaultTimeItem === 'object' && defaultTimeItem.hasOwnProperty('times')) {
+            this.input.bookingItemId = this.availableDateItemData[0] ? this.availableDateItemData[0].times[0].id : 0;
+        }
+
         for (let i = 0; i < this.availableDateItemData.length; i++) {
             this.enableBookingDate.push(new Date(this.availableDateItemData[i].date.toDate()));
         }
