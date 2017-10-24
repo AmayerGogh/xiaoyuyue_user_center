@@ -1,12 +1,13 @@
 import * as _ from 'lodash';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Component, OnInit, transition } from '@angular/core';
+import { AfterViewInit, Component, Injector, OnInit, transition } from '@angular/core';
 import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
 
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
-import { CookiesService } from './../../../shared/services/cookies.service';
+import { CookiesService } from 'shared/services/cookies.service';
 import { element } from 'protractor';
 
 @Component({
@@ -14,19 +15,26 @@ import { element } from 'protractor';
     templateUrl: './external-auth.component.html',
     styleUrls: ['./external-auth.component.scss']
 })
-export class ExternalAuthComponent implements OnInit {
+export class ExternalAuthComponent extends AppComponentBase implements OnInit, AfterViewInit {
 
     isAuthBind = 'false';
 
     constructor(
+        injector: Injector,
         private _router: Router,
         private _loginService: LoginService,
         private _activatedRoute: ActivatedRoute,
         private _tokenAuthService: TokenAuthServiceProxy,
         private _cookiesService: CookiesService
-    ) { }
+    ) {
+        super(injector);
+    }
 
     ngOnInit() {
+
+    }
+
+    ngAfterViewInit(): void {
         this.externalLogin();
     }
 
