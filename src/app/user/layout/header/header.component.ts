@@ -1,5 +1,5 @@
 import { Breadcrumb, BreadcrumbService } from 'shared/services/bread-crumb.service';
-import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { Location } from '@angular/common';
@@ -7,7 +7,8 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'xiaoyuyue-admin-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserHeaderComponent extends AppComponentBase implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
