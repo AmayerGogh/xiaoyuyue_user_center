@@ -21051,7 +21051,11 @@ export class BookingOrderInfo implements IBookingOrderInfo {
     /** 取消理由 */
     refuseReason: string;
     /** 创建时间 */
+<<<<<<< HEAD
     creationTime: moment.Moment;
+=======
+    creationTime: Moment;
+>>>>>>> develop
     /** 预约状态 */
     status: BookingOrderInfoStatus;
     id: number;
@@ -21143,7 +21147,11 @@ export interface IBookingOrderInfo {
     /** 取消理由 */
     refuseReason: string;
     /** 创建时间 */
+<<<<<<< HEAD
     creationTime: moment.Moment;
+=======
+    creationTime: Moment;
+>>>>>>> develop
     /** 预约状态 */
     status: BookingOrderInfoStatus;
     id: number;
