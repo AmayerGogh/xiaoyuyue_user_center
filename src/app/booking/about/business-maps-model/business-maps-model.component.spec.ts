@@ -1,8 +1,9 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-
-import { BusinessMapsModelComponent } from './business-maps-model.component';
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+
+import { BusinessMapsModelComponent } from './business-maps-model.component';
 
 describe('BusinessMpsModelComponent', () => {
   let component: BusinessMapsModelComponent;
@@ -10,9 +11,9 @@ describe('BusinessMpsModelComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BusinessMapsModelComponent]
+      declarations: [ BusinessMapsModelComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

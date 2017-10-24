@@ -10,4 +10,16 @@ export class SelectHelper {
             displayText: "否",
         }];
     }
+
+    static GenderList(): Object[] {
+        return [
+            {
+                value: 1,
+                displayText: '男',
+            },
+            {
+                value: 2,
+                displayText: '女',
+            }];
+    }
 }

@@ -1,50 +1,68 @@
-import { AfterViewInit, Component, Injector, OnInit } from '@angular/core';
-import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
+import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy, BookingOrderInfoStatus } from 'shared/service-proxies/service-proxies';
 
 import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat } from 'shared/AppConsts';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { BookingCancelComponent } from 'app/user/booking/cancel/booking-cancel.component';
 
 @Component({
-  selector: 'xiaoyuyue-booking-info',
-  templateUrl: './booking-info.component.html',
-  styleUrls: ['./booking-info.component.scss'],
-  animations: [appModuleAnimation()]
+    selector: 'xiaoyuyue-booking-info',
+    templateUrl: './booking-info.component.html',
+    styleUrls: ['./booking-info.component.scss'],
+    animations: [appModuleAnimation()]
 })
 export class BookingInfoComponent extends AppComponentBase implements OnInit, AfterViewInit {
-  bookingOrderForEdidData: GetPersonBookingOrderOutput;
+    bookingOrderForEdidData: GetPersonBookingOrderOutput;
 
-  href: string = document.location.href;
-  bookingId;
+    href: string = document.location.href;
+    bookingId;
+    bookingStatus: BookingOrderInfoStatus;
+    outletPictureUrl: string = '/assets/common/images/booking/tenant-bg.png';
 
-  constructor(
-    injector: Injector,
-    private _route: ActivatedRoute,
-    private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
-  ) {
-    super(injector);
-    this.bookingId = this._route.snapshot.paramMap.get('id');
-  }
+    @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;
+    constructor(
+        injector: Injector,
+        private _route: ActivatedRoute,
+        private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
+    ) {
+        super(injector);
+        this.bookingId = this._route.snapshot.paramMap.get('id');
+    }
 
-  ngOnInit() {
-    this.loadBookingOrderForEditData(this.bookingId);
-  }
+    ngOnInit() {
+        this.loadBookingOrderForEditData(this.bookingId);
+    }
 
-  ngAfterViewInit() {
-    // TODO: 暂时处理
-    $('#headerTitle').text('应约详情');
-  }
+    ngAfterViewInit() {
+        // TODO: 暂时处理
+        $('#headerTitle').text('应约详情');
+    }
 
-  loadBookingOrderForEditData(bookingId: number) {
-    this._perBookingOrderServiceProxy
-      .getBookingOrderForEdit(bookingId)
-      .subscribe(result => {
-        this.bookingOrderForEdidData = result;
-        this.bookingOrderForEdidData.bookingInfo.outletPictureUrl =
-          PictureUrlHelper.getOutletPicCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
-      })
-  }
+    loadBookingOrderForEditData(bookingId: number) {
+        this._perBookingOrderServiceProxy
+            .getBookingOrderForEdit(bookingId)
+            .subscribe(result => {
+                this.bookingOrderForEdidData = result;
+                this.bookingStatus = result.orderInfo.status;
+                this.bookingOrderForEdidData.bookingInfo.outletPictureUrl = this.getOutletPictureUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
+            })
+    }
+
+    cancelBooking() {
+        this.cancelBookingModal.show(this.bookingId);
+    }
+
+    getIsCancelBooking(event: boolean): void {
+        if (event) {
+            this.loadBookingOrderForEditData(this.bookingId);
+        }
+    }
+
+    private getOutletPictureUrl(url: string): string {
+        return url === '' ? this.outletPictureUrl : PictureUrlHelper.getOutletPicCompressUrl(url);
+    }
 
 }

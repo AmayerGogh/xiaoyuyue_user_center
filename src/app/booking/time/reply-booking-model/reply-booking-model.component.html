@@ -43,6 +43,32 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-xs-12" *ngIf="bookingInfoData.needEmail">
+                                <div class="form-group label-floating" [ngClass]="{'is-empty': !input.emailAddress}">
+                                    <input class="form-control" type="email" name="emailAddress" [(ngModel)]="input.emailAddress" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" required>
+                                    <label class="control-label">电子邮箱</label>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6" *ngIf="bookingInfoData.needGender">
+                                <!-- <input class="form-control" type="number" name="gender" [(ngModel)]="input.gender" required>
+                                    <label class="control-label">性别</label> -->
+                                <select class="gender-select form-group label-floating" name="gender" [ngModel]="defaultGenderSelect" (ngModelChange)="selectGenderHandler($event)">
+                                        <option value="0" selected>性别</option>
+                                        <option [value]="listItem.value" *ngFor="let listItem of genderSelectListData">{{ listItem.displayText }}</option>
+                                    </select>
+                            </div>
+
+                            <div class="col-xs-6" *ngIf="bookingInfoData.needAge">
+                                <div class="form-group label-floating" [ngClass]="{'is-empty': !input.age}">
+                                    <input class="form-control" type="number" name="age" [(ngModel)]="input.age" required>
+                                    <label class="control-label">年龄</label>
+                                </div>
+                            </div>
+
+                        </div>
+
                         <div class="footer row">
                             <div class="col-xs-12">
                                 <button type="submit" class="btn primary-bgcolor btn-block" [disabled]="!relpyBookingForm.form.valid" (click)="submit()" [buttonBusy]="saving" [busyText]="'提交中...'"><i class="fa fa-check"></i> <span>提交</span></button>

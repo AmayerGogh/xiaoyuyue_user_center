@@ -4,7 +4,7 @@ import { PerBookingOrderServiceProxy, Status2 } from 'shared/service-proxies/ser
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
-import { AppStatus } from 'shared/AppEnums';
+import { BookingOrderStatus } from 'shared/AppEnums';
 import { BookingCancelComponent } from './../cancel/booking-cancel.component';
 import { Router } from '@angular/router';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
@@ -25,7 +25,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     allPrsonBookingDatas: any[] = [];
     personBookingDatas: BookingOrderListDto[];
     stickedInput: StickedInput = new StickedInput();
-    status: Status2[] = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
+    status: Status2[] = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
     bookingName = '';
     pageSize = 10;
     skip = 0;
@@ -80,15 +80,15 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     orderSwitch(index: number): void {
         this.currentTabIndex = index;
         if (index === 0) {
-            this.status = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
+            this.status = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
         } else if (index === 1) {
-            this.status = [AppStatus.State1];
+            this.status = [BookingOrderStatus.State1];
         } else if (index === 2) {
-            this.status = [AppStatus.State2];
+            this.status = [BookingOrderStatus.State2];
         } else if (index === 4) {
-            this.status = [AppStatus.State4];
+            this.status = [BookingOrderStatus.State4];
         } else if (index === 5) {
-            this.status = [AppStatus.State5];
+            this.status = [BookingOrderStatus.State5];
         } else {
             this.message.warn('努力完善中', '敬请期待');
             this.allPrsonBookingDatas = [];
@@ -102,7 +102,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
 
     orderSerach(keywords: string): void {
         this.bookingName = keywords;
-        this.status = [AppStatus.State1, AppStatus.State2, AppStatus.State3, AppStatus.State4, AppStatus.State5];
+        this.status = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
         this.loadPersonBookingData();
     }
 

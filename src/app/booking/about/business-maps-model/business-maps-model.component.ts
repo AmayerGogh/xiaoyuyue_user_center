@@ -11,11 +11,13 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 })
 export class BusinessMapsModelComponent extends AppComponentBase implements OnInit {
     addressUrl: SafeResourceUrl;
-    source: string = 'http://apis.map.qq.com/uri/v1/marker';
-    coord: string;
-    title: string;
-    addr: string;
-    referer: string = 'xiaoyuyue_webapp';
+    source: string = 'https://uri.amap.com/marker';
+    lng: string;
+    lat: string;
+    name: string;
+    src: string = 'xiaoyuyue_webapp';
+    coordinate: string = 'gaode';
+    callnative: string = '1';
 
     @ViewChild('businessMapsModel') businessMapsModel: ModalDirective;
     @Input()
@@ -40,10 +42,10 @@ export class BusinessMapsModelComponent extends AppComponentBase implements OnIn
     }
 
     mapsAddress(): void {
-        this.coord = this.businessAboutData.outletLongitude;
-        this.title = this.businessAboutData.outletName;
-        this.addr = this.businessAboutData.outletAddress;
+        this.lat = this.businessAboutData.outletLongitude.split(',')[0];
+        this.lng = this.businessAboutData.outletLongitude.split(',')[1];
+        this.name = this.businessAboutData.outletAddress + this.businessAboutData.outletName;
 
-        this.addressUrl = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.source}?marker=coord:${this.coord};title:${this.title};addr:${this.addr}&referer=${this.referer}`)
+        this.addressUrl = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.source}?position=${this.lng},${this.lat}&name=${this.name}&src=${this.src}&coordinate=${this.coordinate}&callnative=${this.callnative}`)
     }
 }
