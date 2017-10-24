@@ -45,5 +45,7 @@ export class BusinessMapsModelComponent extends AppComponentBase implements OnIn
         this.addr = this.businessAboutData.outletAddress;
 
         this.addressUrl = this._sanitizer.bypassSecurityTrustResourceUrl(`${this.source}?marker=coord:${this.coord};title:${this.title};addr:${this.addr}&referer=${this.referer}`)
+        console.log(this.addressUrl);
+        
     }
 }

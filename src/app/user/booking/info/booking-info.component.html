@@ -48,7 +48,7 @@
                 <span class="name">应约人数 : </span>
                 <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
             </div>
-            <div class="content-item">
+            <div class="content-item" *ngIf="bookingOrderForEdidData.orderInfo.hit">
                 <span class="name">温馨提示 : </span>
                 <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
             </div>
@@ -74,5 +74,5 @@
     </div>
 </div>
 
-<button class="btn btn-submit btn-block cancel-btn" type="button">取消预约</button>
+<button *ngIf="bookingOrderForEdidData.orderInfo.status == 1 || bookingOrderForEdidData.orderInfo.status == 2" class="btn btn-submit btn-block cancel-btn" type="button">取消预约</button>
 </div>

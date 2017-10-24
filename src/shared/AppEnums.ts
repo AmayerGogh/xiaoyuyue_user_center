@@ -49,7 +49,7 @@ export class VerificationCodeType {
     static PhoneVerify: number = CodeSendInputCodeType._70;
 }
 
-export class AppStatus {
+export class BookingOrderStatus {
     static State1: number = Status._1;
     static State2: number = Status._2;
     static State3: number = Status._3;
