@@ -12,7 +12,7 @@
             </span>
             <ng-template #popTemplate><img [src]="bookingOrderForEdidData.bookingInfo.contactorQrcode" width="150px"></ng-template>
             <span class="item-right text-center" placement="left" [tooltip]="popTemplate">
-                <span class="orange-icon vapps-icon-app-qr-code"></span>
+                    <span class="orange-icon vapps-icon-app-qr-code"></span>
             </span>
         </div>
     </div>
@@ -74,5 +74,6 @@
     </div>
 </div>
 
-<button *ngIf="bookingOrderForEdidData.orderInfo.status == 1 || bookingOrderForEdidData.orderInfo.status == 2" class="btn btn-submit btn-block cancel-btn" type="button">取消预约</button>
+<button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn" type="button">取消预约</button>
 </div>
+<xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>

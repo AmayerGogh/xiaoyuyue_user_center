@@ -10,9 +10,13 @@ import { ModalDirective } from 'ngx-bootstrap';
     styleUrls: ['./booking-cancel.component.scss']
 })
 export class BookingCancelComponent extends AppComponentBase implements OnInit {
+    isShowTextarea: boolean = false;
+    routineReason: string;
+    otherReason: string;
+    input: CancelBookingOrderInput = new CancelBookingOrderInput();
+
     @ViewChild('cancelBookingModal') modal: ModalDirective;
     @Output() isCancelBooking: EventEmitter<boolean> = new EventEmitter()
-    input: CancelBookingOrderInput = new CancelBookingOrderInput()
 
     constructor(
         injector: Injector,
@@ -33,7 +37,12 @@ export class BookingCancelComponent extends AppComponentBase implements OnInit {
         this.modal.hide();
     }
 
+    isShowOtherTextarea(flag: boolean): void {
+        this.isShowTextarea = flag;
+    }
+
     submit() {
+        this.input.refuseReason = this.isShowTextarea ? this.otherReason : this.routineReason;
         this._perBookingOrderServiceProxy
             .cancelBookingOrder(this.input)
             .subscribe(result => {
@@ -42,5 +51,10 @@ export class BookingCancelComponent extends AppComponentBase implements OnInit {
                 this.close();
             });
 
+    }
+
+    public onHide() {
+        this.routineReason = '';
+        this.otherReason = '';
     }
 }
