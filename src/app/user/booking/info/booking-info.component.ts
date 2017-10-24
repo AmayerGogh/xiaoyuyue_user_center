@@ -18,7 +18,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
 
     href: string = document.location.href;
     bookingId;
-    outletPictureUrl: string = '/assets/common/images/admin/booking-bg.jpg';
+    outletPictureUrl: string = '/assets/common/images/booking/tenant-bg.png';
 
     constructor(
         injector: Injector,
@@ -43,12 +43,12 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
             .getBookingOrderForEdit(bookingId)
             .subscribe(result => {
                 this.bookingOrderForEdidData = result;
-                this.bookingOrderForEdidData.bookingInfo.outletPictureUrl = this.getOutletPictureUrl();
+                this.bookingOrderForEdidData.bookingInfo.outletPictureUrl = this.getOutletPictureUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
             })
     }
 
-    private getOutletPictureUrl(): string {
-        return this.bookingOrderForEdidData.bookingInfo.outletPictureUrl === '' ? '' : PictureUrlHelper.getOutletPicCompressUrl(this.bookingOrderForEdidData.bookingInfo.outletPictureUrl);
+    private getOutletPictureUrl(url: string): string {
+        return url === '' ? this.outletPictureUrl : PictureUrlHelper.getOutletPicCompressUrl(url);
     }
 
 }
