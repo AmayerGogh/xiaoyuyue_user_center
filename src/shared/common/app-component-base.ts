@@ -87,6 +87,7 @@ export abstract class AppComponentBase {
         return abp.utils.truncateStringWithPostfix(str, 20);
     }
 
+    // 是否微信
     isWeiXin() {
         const ua = navigator.userAgent.toLowerCase();
         if (ua.match(/MicroMessenger/i) + '' === 'micromessenger') {
@@ -95,5 +96,4 @@ export abstract class AppComponentBase {
             return false;
         }
     }
-
 }
