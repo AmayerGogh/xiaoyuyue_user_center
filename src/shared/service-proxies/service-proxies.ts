@@ -21055,6 +21055,9 @@ export class BookingOrderInfo implements IBookingOrderInfo {
     creationTime: moment.Moment;
 =======
     creationTime: Moment;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
     /** 预约状态 */
     status: BookingOrderInfoStatus;
@@ -21151,6 +21154,9 @@ export interface IBookingOrderInfo {
     creationTime: moment.Moment;
 =======
     creationTime: Moment;
+<<<<<<< HEAD
+>>>>>>> develop
+=======
 >>>>>>> develop
     /** 预约状态 */
     status: BookingOrderInfoStatus;
