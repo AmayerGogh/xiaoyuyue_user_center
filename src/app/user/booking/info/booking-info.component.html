@@ -10,10 +10,10 @@
                 <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
             </div>
             </span>
-            <ng-template #popTemplate><img [src]="bookingOrderForEdidData.bookingInfo.contactorQrcode" width="150px"></ng-template>
-            <span class="item-right text-center" placement="left" [tooltip]="popTemplate">
+            <span class="item-right text-center" (click)="showQrcodeModel()">
                     <span class="orange-icon vapps-icon-app-qr-code"></span>
             </span>
+            <xiaoyuyue-qrcode-model #qrcodeModel [qrcodeUrl]="bookingOrderForEdidData.bookingInfo.contactorQrcode"></xiaoyuyue-qrcode-model>
         </div>
     </div>
 </div>
