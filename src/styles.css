@@ -153,3 +153,10 @@ a {
 .modal-backdrop.in {
     display: none;
 }
+
+
+/* toast提示框 */
+
+.toast-success {
+    background-color: #FF9641;
+}
