@@ -1,5 +1,4 @@
-<div class="booking-manage" [@routerTransition] infinite-scroll [scrollWindow]="false" [infiniteScrollDistance]="infiniteScrollDistance"
-    [infiniteScrollThrottle]="infiniteScrollThrottle" (scrolled)="onScrollDown()">
+<div class="booking-manage" [@routerTransition] infinite-scroll [scrollWindow]="false" [infiniteScrollDistance]="infiniteScrollDistance" [infiniteScrollThrottle]="infiniteScrollThrottle" (scrolled)="onScrollDown()">
     <div class="serach">
         <div class="form-group label-floating">
             <label class="control-label"></label>
@@ -9,16 +8,15 @@
     </div>
 
     <ul class="card tabs">
-        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;"
-            (click)="orderSwitch(index)"> {{ statuItem }}</li>
+        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;" (click)="orderSwitch(index)"> {{ statuItem }}</li>
     </ul>
 
     <div *ngIf="allPrsonBookingDatas.length>0 && personBookingTotalCount > 0; else empty">
-        <div class="booking-item-wrap" *ngFor="let personBookingDatas of allPrsonBookingDatas; let index=index">
-            <div class="booking-item box-shadow" (click)="setActionFlag(index)" *ngFor="let dataItem of personBookingDatas; let index=index">
+        <div class="booking-item-wrap" *ngFor="let personBookingDatas of allPrsonBookingDatas; let indexI=index">
+            <div class="booking-item box-shadow" (click)="setActionFlag(indexJ)" *ngFor="let dataItem of personBookingDatas; let indexJ=index">
                 <div class="top-wrap clearfix">
                     <div class="title pull-left">{{dataItem.bookingName}} <span class="tips" [ngClass]="setTipsClass(dataItem.status)">{{ bookingOrderStatusName[dataItem.status] }}</span></div>
-                    <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[index], 'rotate-360': !actionFlag[index]}"><span class="vapps-icon-app-drop-down"></span></div>
+                    <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[indexJ], 'rotate-360': !actionFlag[indexJ]}"><span class="vapps-icon-app-drop-down"></span></div>
                 </div>
                 <div class="content">
                     <div class="content-item">
@@ -41,17 +39,17 @@
                         <img src="/assets/common/images/booking/stick-booking.svg" alt="stick">
                     </div>
                 </div>
-                <div class="bottom-action" *ngIf="actionFlag[index]">
+                <div class="bottom-action" *ngIf="actionFlag[indexJ]">
                     <span class="action-item" (click)="showBookingDetail(dataItem.id)">
                     <span class="icon vapps-icon-app-detail"></span>查看详情
                     </span>
                     <span class="line">|</span>
-                    <span *ngIf="!(dataItem.status == 4)" class="action-item" (click)="cancelBooking(dataItem.id)">
+                    <span *ngIf="!(dataItem.status == 4)" class="action-item" (click)="cancelBooking(dataItem.id, indexI)">
                     <span class="icon vapps-icon-app-cancel"></span>取消预约
                     </span>
                     <span *ngIf="!(dataItem.status == 4)" class="line">|</span>
-                    <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
-                    <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false)"><span class="icon vapps-icon-app-at-top-2 rotate-180"></span>取消置顶</span>
+                    <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true, indexI)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
+                    <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false, indexI)"><span class="icon vapps-icon-app-at-top-2 rotate-180"></span>取消置顶</span>
                 </div>
             </div>
         </div>
