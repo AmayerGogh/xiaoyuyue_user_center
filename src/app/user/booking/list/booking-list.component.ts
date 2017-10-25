@@ -25,7 +25,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     allPrsonBookingDatas: any[] = [];
     personBookingDatas: BookingOrderListDto[];
     stickedInput: StickedInput = new StickedInput();
-    status: Status2[] = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
+    status: Status2[] = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
     bookingName = '';
     pageSize = 10;
     skip = 0;
@@ -72,24 +72,21 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
                 } else {
                     this.allPrsonBookingDatas[this.updateDataIndex] = this.personBookingDatas;
                 }
-
-                console.log(this.allPrsonBookingDatas);
-                
             });
     }
 
     orderSwitch(index: number): void {
         this.currentTabIndex = index;
         if (index === 0) {
-            this.status = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
+            this.status = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
         } else if (index === 1) {
-            this.status = [BookingOrderStatus.State1];
+            this.status = [BookingOrderStatus.WaitConfirm];
         } else if (index === 2) {
-            this.status = [BookingOrderStatus.State2];
+            this.status = [BookingOrderStatus.ConfirmSuccess];
         } else if (index === 4) {
-            this.status = [BookingOrderStatus.State4];
+            this.status = [BookingOrderStatus.Cancel];
         } else if (index === 5) {
-            this.status = [BookingOrderStatus.State5];
+            this.status = [BookingOrderStatus.WaitComment];
         } else {
             this.message.warn('努力完善中', '敬请期待');
             this.allPrsonBookingDatas = [];
@@ -103,7 +100,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
 
     orderSerach(keywords: string): void {
         this.bookingName = keywords;
-        this.status = [BookingOrderStatus.State1, BookingOrderStatus.State2, BookingOrderStatus.State3, BookingOrderStatus.State4, BookingOrderStatus.State5];
+        this.status = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
         this.loadPersonBookingData();
     }
 
@@ -162,6 +159,12 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
         if (event) {
             this.loadPersonBookingData();
         }
+    }
+
+    /* 是否可以取消预约 */
+    isCancelBooking(currentStatus: number): boolean {
+        if (currentStatus === BookingOrderStatus.Cancel || currentStatus === BookingOrderStatus.WaitComment || currentStatus === BookingOrderStatus.Complete) { return false; };
+        return true;
     }
 
     public onScrollDown(): void {

@@ -44,10 +44,10 @@
                     <span class="icon vapps-icon-app-detail"></span>查看详情
                     </span>
                     <span class="line">|</span>
-                    <span *ngIf="!(dataItem.status == 4)" class="action-item" (click)="cancelBooking(dataItem.id, indexI)">
+                    <span *ngIf="isCancelBooking(dataItem.status)" class="action-item" (click)="cancelBooking(dataItem.id, indexI)">
                     <span class="icon vapps-icon-app-cancel"></span>取消预约
                     </span>
-                    <span *ngIf="!(dataItem.status == 4)" class="line">|</span>
+                    <span *ngIf="isCancelBooking(dataItem.status)" class="line">|</span>
                     <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true, indexI)"><span class="icon vapps-icon-app-at-top-2"></span>置顶预约</span>
                     <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false, indexI)"><span class="icon vapps-icon-app-at-top-2 rotate-180"></span>取消置顶</span>
                 </div>
