@@ -11,27 +11,19 @@ import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
 
-declare const FB: any; // Facebook API
-declare const gapi: any; // Facebook API
-declare const WL: any; // Microsoft API
+const UA = require('ua-device');
 
 export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
 
-    static readonly FACEBOOK = 'Facebook';
-    static readonly GOOGLE = 'Google';
-    static readonly MICROSOFT = 'Microsoft';
     static readonly WECHAT = 'WeChat';
     static readonly WECHATMP = 'WeChatMP';
+    static readonly QQ = 'QQ';
 
     icon: string;
     initialized = false;
 
     private static getSocialIcon(providerName: string): string {
         providerName = providerName.toLowerCase();
-
-        if (providerName === 'google') {
-            providerName = 'googleplus';
-        }
 
         return providerName;
     }
@@ -42,14 +34,14 @@ export class ExternalLoginProvider extends ExternalLoginProviderInfoModel {
         this.name = providerInfo.name;
         this.clientId = providerInfo.clientId;
         this.icon = ExternalLoginProvider.getSocialIcon(this.name);
-        this.initialized = providerInfo.name === 'WeChat';
+        this.initialized = (providerInfo.name === 'WeChat' || providerInfo.name === 'QQ');
     }
 }
 
 @Injectable()
 export class LoginService {
     static readonly twoFactorRememberClientTokenName = 'TwoFactorRememberClientToken';
-
+    outputUa: any;
     throwException: any;
     jsonParseReviver: any;
     authenticateModel: AuthenticateModel;
@@ -83,15 +75,7 @@ export class LoginService {
 
     externalAuthenticate(provider: ExternalLoginProvider): void {
         this.ensureExternalLoginProviderInitialized(provider, () => {
-            if (provider.name === ExternalLoginProvider.FACEBOOK) {
-                FB.login();
-            } else if (provider.name === ExternalLoginProvider.GOOGLE) {
-                gapi.auth2.getAuthInstance().signIn();
-            } else if (provider.name === ExternalLoginProvider.MICROSOFT) {
-                WL.login({
-                    scope: ['wl.signin', 'wl.basic', 'wl.emails']
-                });
-            } else if (provider.name === ExternalLoginProvider.WECHAT) {
+            if (provider.name === ExternalLoginProvider.WECHAT) {
                 jQuery.getScript('http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js', () => {
                     const wxLogin = new WxLogin({
                         id: 'external_login_container',
@@ -103,6 +87,23 @@ export class LoginService {
                         href: 'https://static.vapps.com.cn/vappszero/wechat-login.css'
                     });
                 });
+            } else if (provider.name === ExternalLoginProvider.QQ) {
+                const authBaseUrl = 'https://graph.qq.com/oauth/show';
+                const appid = provider.clientId;
+                const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.QQ + '&isAuthBind=false';
+                const response_type = 'code';
+                const state = 'xiaoyuyue';
+                let display;
+                if (this.outputUa.device.type === 'mobile') {
+                    display = 'mobile'
+                } else {
+                    display = 'pc'
+                }
+                const authUrl = `${authBaseUrl}?which=Login&display=${display}&client_id=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&state=${state}`;
+
+                // 是否需要展示手机端样式
+                console.log(authUrl);
+                window.location.href = authUrl;
             }
         });
     }
@@ -211,104 +212,17 @@ export class LoginService {
             return;
         }
 
-        if (loginProvider.name === ExternalLoginProvider.FACEBOOK) {
-            jQuery.getScript('//connect.facebook.net/en_US/sdk.js', () => {
-                FB.init({
-                    appId: loginProvider.clientId,
-                    cookie: false,
-                    xfbml: true,
-                    version: 'v2.5'
-                });
-
-                FB.getLoginStatus(response => {
-                    this.facebookLoginStatusChangeCallback(response);
-                });
-
-                callback();
-            });
-        } else if (loginProvider.name === ExternalLoginProvider.GOOGLE) {
-            jQuery.getScript('https://apis.google.com/js/api.js', () => {
-                gapi.load('client:auth2',
-                    () => {
-                        gapi.client.init({
-                            clientId: loginProvider.clientId,
-                            scope: 'openid profile email'
-                        }).then(() => {
-                            gapi.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
-                                this.googleLoginStatusChangeCallback(isSignedIn);
-                            });
-
-                            this.googleLoginStatusChangeCallback(gapi.auth2.getAuthInstance().isSignedIn.get());
-                        });
-
-                        callback();
-                    });
-            });
-        } else if (loginProvider.name === ExternalLoginProvider.MICROSOFT) {
-            jQuery.getScript('//js.live.net/v5.0/wl.js', () => {
-                WL.Event.subscribe('auth.login', this.microsoftLogin);
-                WL.init({
-                    client_id: loginProvider.clientId,
-                    scope: ['wl.signin', 'wl.basic', 'wl.emails'],
-                    redirect_uri: AppConsts.appBaseUrl,
-                    response_type: 'token'
-                });
-            });
-        } else if (loginProvider.name === ExternalLoginProvider.WECHAT) {
+        if (loginProvider.name === ExternalLoginProvider.WECHAT) {
 
         }
     }
 
     public externalLoginCallback(params: Params): void {
-        this.wechatLogin(params);
-    }
-
-    public externalBindingCallback(params: Params): void {
-        this.wechatAuthBinding(params);
-    }
-
-    private facebookLoginStatusChangeCallback(resp) {
-        if (resp.status === 'connected') {
-            const model = new ExternalAuthenticateModel();
-            model.authProvider = ExternalLoginProvider.FACEBOOK;
-            model.providerAccessCode = resp.authResponse.accessToken;
-            model.providerKey = resp.authResponse.userID;
-            this._tokenAuthService.externalAuthenticate(model)
-                .subscribe((result: ExternalAuthenticateResultModel) => {
-                    if (result.waitingForActivation) {
-                        this._messageService.info('您已成功注册,请完善基本信息!');
-                        return;
-                    }
-
-                    // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
-                });
-        }
-    }
-
-    private googleLoginStatusChangeCallback(isSignedIn) {
-        if (isSignedIn) {
-            const model = new ExternalAuthenticateModel();
-            model.authProvider = ExternalLoginProvider.GOOGLE;
-            model.providerAccessCode = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-            model.providerKey = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
-            this._tokenAuthService.externalAuthenticate(model)
-                .subscribe((result: ExternalAuthenticateResultModel) => {
-                    if (result.waitingForActivation) {
-                        this._messageService.info('您已成功注册,请完善基本信息!');
-                        return;
-                    }
-
-                    // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
-                });
-        }
-    }
-
-    private wechatLogin(params: Params) {
         const model = new ExternalAuthenticateModel();
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
-        this.externalAuthenticateAsync(model).done((result: ExternalAuthenticateResultModel) => {
+        this._tokenAuthService.externalAuthenticate(model).subscribe((result: ExternalAuthenticateResultModel) => {
             if (result.waitingForActivation) {
                 this._messageService.info('您已成功注册,请完善基本信息!');
                 // this._router.navigate(['/account/supplementary-external-register', result.userId]);
@@ -319,7 +233,7 @@ export class LoginService {
         });
     }
 
-    private wechatAuthBinding(params: Params) {
+    public externalBindingCallback(params: Params): void {
         const model = new ExternalAuthenticateModel();
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
@@ -332,50 +246,29 @@ export class LoginService {
         });
     }
 
-
-    /**
-    * Microsoft login is not completed yet, because of an error thrown by zone.js: https://github.com/angular/zone.js/issues/290
-    */
-    private microsoftLogin() {
-        this._logService.debug(WL.getSession());
-        const model = new ExternalAuthenticateModel();
-        model.authProvider = ExternalLoginProvider.MICROSOFT;
-        model.providerAccessCode = WL.getSession().access_token;
-        model.providerKey = WL.getSession().id; // How to get id?
-        this._tokenAuthService.externalAuthenticate(model)
-            .subscribe((result: ExternalAuthenticateResultModel) => {
-                if (result.waitingForActivation) {
-                    this._messageService.info('您已成功注册,请完善基本信息!');
-                    return;
-                }
-
-                // this.login(result.accessToken, result.encryptedAccessToken, result.expireInSeconds);
-            });
-    }
-
     /**
     * @return Success
     */
-    externalAuthenticateAsync(model: ExternalAuthenticateModel): JQueryPromise<ExternalAuthenticateResultModel> {
-        let url_ = AppConsts.remoteServiceBaseUrl + '/api/TokenAuth/ExternalAuthenticate';
-        url_ = url_.replace(/[?&]$/, '');
+    // externalAuthenticateAsync(model: ExternalAuthenticateModel): JQueryPromise<ExternalAuthenticateResultModel> {
+    //     let url_ = AppConsts.remoteServiceBaseUrl + '/api/TokenAuth/ExternalAuthenticate';
+    //     url_ = url_.replace(/[?&]$/, '');
 
-        const content_ = JSON.stringify(model ? model.toJSON() : null);
+    //     const content_ = JSON.stringify(model ? model.toJSON() : null);
 
-        return abp.ajax({
-            url: url_,
-            method: 'POST',
-            data: content_,
-            async: false,
-            headers: {
-                'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
-                'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
-                Authorization: 'Bearer ' + this._cookiesService.getToken(),
-            }
-        }).done(response => {
-            return response;
-        });
-    }
+    //     return abp.ajax({
+    //         url: url_,
+    //         method: 'POST',
+    //         data: content_,
+    //         async: false,
+    //         headers: {
+    //             'Accept-Language': abp.utils.getCookieValue('Abp.Localization.CultureName'),
+    //             'Abp.TenantId': abp.multiTenancy.getTenantIdCookie(),
+    //             Authorization: 'Bearer ' + this._cookiesService.getToken(),
+    //         }
+    //     }).done(response => {
+    //         return response;
+    //     });
+    // }
 
     protected processExternalAuthenticate(response: Response): ExternalAuthenticateResultModel {
         const responseText = response.text();
