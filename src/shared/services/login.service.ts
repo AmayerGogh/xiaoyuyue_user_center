@@ -88,18 +88,13 @@ export class LoginService {
                     });
                 });
             } else if (provider.name === ExternalLoginProvider.QQ) {
-                const authBaseUrl = 'https://graph.qq.com/oauth/show';
+                const authBaseUrl = 'https://graph.qq.com/oauth2.0/authorize';
                 const appid = provider.clientId;
                 const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.QQ + '&isAuthBind=false';
                 const response_type = 'code';
-                const state = 'xiaoyuyue';
-                let display;
-                if (this.outputUa.device.type === 'mobile') {
-                    display = 'mobile'
-                } else {
-                    display = 'pc'
-                }
-                const authUrl = `${authBaseUrl}?which=Login&display=${display}&client_id=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&state=${state}`;
+                const scope = 'get_user_info';
+
+                const authUrl = `${authBaseUrl}?client_id=${appid}&response_type=${response_type}&scope=${scope}&redirect_uri=${encodeURIComponent(redirect_url)}&display=`;
 
                 window.location.href = authUrl;
             }
