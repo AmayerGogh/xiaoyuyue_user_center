@@ -1,0 +1,13 @@
+<div class="xiaoyuyue-model model-fade" [ngClass]="{'in': isShowFlag, 'out': !isShowFlag}">
+    <div class="xiaoyuyue-model-content">
+        <!-- <div class="xiaoyuyue-model-header clearfix">
+            <span class="close vapps-icon-app-close"></span>
+        </div> -->
+        <div class="xiaoyuyue-model-body">
+            <img [src]="qrcodeUrl" alt="qrcodeUrl">
+        </div>
+        <!-- <div class="xiaoyuyue-model-footer">footer</div> -->
+    </div>
+
+    <div class="xiaoyuyue-model-cover" (click)="hide()"></div>
+</div>

@@ -50,11 +50,12 @@ export class VerificationCodeType {
 }
 
 export class BookingOrderStatus {
-    static State1: number = Status._1;
-    static State2: number = Status._2;
-    static State3: number = Status._3;
-    static State4: number = Status._4;
-    static State5: number = Status._5;
+    static WaitConfirm: number = Status._1;
+    static ConfirmSuccess: number = Status._2;
+    static ConfirmFail: number = Status._3;
+    static Cancel: number = Status._4;
+    static WaitComment: number = Status._5;
+    static Complete: number = Status._6;
 }
 
 export class AppGender {

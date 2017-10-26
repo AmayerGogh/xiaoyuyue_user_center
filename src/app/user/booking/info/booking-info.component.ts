@@ -7,6 +7,7 @@ import { MediaCompressFormat } from 'shared/AppConsts';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 import { BookingCancelComponent } from 'app/user/booking/cancel/booking-cancel.component';
+import { QrcodeModelComponent } from './qrcode-model/qrcode-model.component';
 
 @Component({
     selector: 'xiaoyuyue-booking-info',
@@ -23,6 +24,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     outletPictureUrl: string = '/assets/common/images/booking/tenant-bg.png';
 
     @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;
+    @ViewChild('qrcodeModel') qrcodeModel: QrcodeModelComponent;
     constructor(
         injector: Injector,
         private _route: ActivatedRoute,
@@ -65,4 +67,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
         return url === '' ? this.outletPictureUrl : PictureUrlHelper.getOutletPicCompressUrl(url);
     }
 
+    showQrcodeModel(): void {
+        this.qrcodeModel.show();
+    }
 }
