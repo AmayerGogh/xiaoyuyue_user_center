@@ -35,6 +35,7 @@ export class AuthComponent extends AppComponentBase implements OnInit, AfterView
     }
 
     ngOnInit(): void {
+        this._loginService.init();
         $('body').attr('class', 'page-md login');
     }
 

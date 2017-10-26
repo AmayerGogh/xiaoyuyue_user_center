@@ -56,17 +56,6 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         setTimeout(() => {
             $('input:-webkit-autofill').addClass('edited')
         }, 600);
-
-        $(document).click(() => {
-            self.flag = true;
-            $('#externalLogin').css({
-                opacity: 0,
-                transform: 'scale(0)'
-            });
-            $('#external_login_container').css({
-                opacity: 0
-            });
-        })
     }
 
     get multiTenancySideIsTeanant(): boolean {
@@ -93,47 +82,10 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         );
     }
 
-    externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
-        $event.cancelBubble = true;
-        this.flag && this.loginService.externalAuthenticate(provider); // 执行第三方登陆逻辑
-
-        if (provider.name === 'WeChat' && this.flag) {
-            // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
-            this.animationShow(elementRef, externalContent);
-        } else {
-            this.animationHide(elementRef, externalContent);
-        }
-        this.flag = !this.flag;
+    mobileExternalLogin(provider: ExternalLoginProvider): void {
+        this.loginService.externalAuthenticate(provider);
     }
 
-    // NgxAni动画
-    private animationShow(externalAni, externalContent) {
-        this._ngxAni.to(externalAni, .6, {
-            transform: 'scale(1)',
-            opacity: .8,
-            'ease': this._ngxAni['easeOutBack'],
-            onComplete: () => {
-                // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
-                setTimeout(() => {
-                    this._ngxAni.to(externalContent, 1, {
-                        opacity: 1
-                    })
-                }, 10);
-            }
-        });
-    }
-
-    private animationHide(externalAni, externalContent) {
-        this._ngxAni.to(externalAni, .4, {
-            transform: 'scale(0)',
-            opacity: 0,
-        });
-        this._ngxAni.to(externalContent, 1, {
-            opacity: 0
-        })
-    }
-
-    // add after
     // 是否账号登录
     isOrdinaryLogin() {
         this.ordinaryLogin = true;

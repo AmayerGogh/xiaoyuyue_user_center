@@ -8,15 +8,13 @@
             <div class="login-body">
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="text" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate"
-                            name="UserName" required autofocus>
+                        <input class="form-control" type="text" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required autofocus>
                     </div>
                 </div>
 
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress"
-                            required>
+                        <input class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required>
                     </div>
                 </div>
 
@@ -32,9 +30,11 @@
                 <div class="extra-login">
                     <div class="title-text"><span class="text">第三方平台登录</span></div>
                     <div class="login-icon">
-                        <span class="item"><img src="/assets/common/images/login/weChat-x2.png" width="38px" alt="weChat"></span>
-                        <span class="item"><img src="/assets/common/images/login/qq-x2.png" width="38px" alt="weChat"></span>
-                        <span class="item"><img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weChat"></span>
+                        <span class="item"><img src="/assets/common/images/login/qq-x2.png" (click)="mobileExternalLogin(loginService.externalLoginProviders[2])" width="38px" alt="weChat"></span>
+                        <span class="item"><img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weibo"></span>
+                        <span class="item">
+                            <!-- <img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weChat"> -->
+                        </span>
                     </div>
                 </div>
             </div>
