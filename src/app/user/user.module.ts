@@ -41,7 +41,7 @@ import { QrcodeModelComponent } from 'app/user/booking/info/qrcode-model/qrcode-
         BookingListComponent,
         BookingCancelComponent,
         UserInfoComponent,
-        QrcodeModelComponent
+        QrcodeModelComponent,
     ],
     providers: [
     ],
