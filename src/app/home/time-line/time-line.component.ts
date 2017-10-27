@@ -4,10 +4,11 @@ import { BookingTimelineDto, PerBookingOrderServiceProxy } from 'shared/service-
 import { Component, Injector, OnInit } from '@angular/core';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
-import { MediaCompressFormat } from 'shared/AppConsts';
+import { MediaCompressFormat, MediaPath } from 'shared/AppConsts';
 import { Moment } from 'moment';
 import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { Router } from '@angular/router';
+import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
 @Component({
     selector: 'xiaoyuyue-time-line',
@@ -27,11 +28,14 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     infiniteScrollThrottle = 300;
     isLoaded = false;
     isLoading = false;
+    shownLoginName = '';
+    profilePicture = MediaPath.defaultProfilePictureUrl;
 
     constructor
         (
         injector: Injector,
         private _router: Router,
+        private _profileServiceProxy: ProfileServiceProxy,
         private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
         ) {
         super(injector);
@@ -39,6 +43,16 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
 
     ngOnInit() {
         this.loadData();
+        this.getProfilePicture();
+        this.getCurrentLoginInformations();
+    }
+
+    ngAfterViewInit() {
+        this.resetHeaderStyle();
+    }
+
+    ngOnDestroy() {
+        this.beforeHeaderStyle();
     }
 
     loadData(): void {
@@ -51,6 +65,14 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
             })
     }
 
+    resetHeaderStyle(): void {
+        $('#fixed-header').addClass('opacity');
+    }
+
+    beforeHeaderStyle(): void {
+        $('#fixed-header').removeClass('opacity');
+    }
+
     showBookingDetail(bookingId: number) {
         this._router.navigate(['/user/booking/info', bookingId]);
     }
@@ -58,6 +80,19 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     converTimelineData(item: BookingTimelineDto): BookingTimelineDto {
         item.orgLogoUrl = PictureUrlHelper.getTimelinePicCompressUrl(item.orgLogoUrl);
         return item;
+    }
+
+    getCurrentLoginInformations(): void {
+        this.shownLoginName = this.appSession.getShownLoginName();
+    }
+
+    getProfilePicture(): void {
+        this._profileServiceProxy.getProfilePicture().subscribe(result => {
+            if (result && result.profilePicture) {
+                this.profilePicture = result.profilePicture;
+                // this.safeProfilePicture = this.sanitizer.bypassSecurityTrustStyle(this.profilePicture);
+            }
+        });
     }
 
     public onScrollDown(): void {

@@ -14,6 +14,7 @@ import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { ModalModule } from 'ngx-bootstrap';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
+import { AdminHeaderComponent } from 'app/shared/header/header.component';
 
 @NgModule({
     imports: [
@@ -27,11 +28,13 @@ import { UtilsModule } from '@shared/utils/utils.module';
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective,
+        AdminHeaderComponent,
         EmptyPageComponent
     ],
     exports: [
         TimeZoneComboComponent,
         EmptyPageComponent,
+        AdminHeaderComponent,
         JqPluginDirective,
     ],
     providers: [

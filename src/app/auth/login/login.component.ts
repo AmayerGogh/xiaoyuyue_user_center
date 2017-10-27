@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output } from '@angular/core';
-import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output, ViewChild } from '@angular/core';
+import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy, PhoneAuthenticateModel, CodeSendInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
 import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { Headers, Http } from '@angular/http';
 
@@ -13,6 +13,7 @@ import { AppSessionService } from 'shared/common/session/app-session.service';
 import { Location } from '@angular/common';
 import { NgxAni } from 'ngxani';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
+import { VerificationCodeType } from 'shared/AppEnums';
 
 @Component({
     templateUrl: './login.component.html',
@@ -20,13 +21,16 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends AppComponentBase implements OnInit, AfterViewInit {
+    phoneModel: PhoneAuthenticateModel = new PhoneAuthenticateModel();
     externalLoginProviders: ExternalLoginProvider[];
 
-    submitting = false;
     flag = true;
     // 普通登录或者手机验证登录，默认普通登录
     ordinaryLogin = true;
-
+    saving = false;
+    isSendSMS = false;
+    
+    @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
         public loginService: LoginService,
@@ -35,6 +39,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         private _activatedRoute: ActivatedRoute,
         private _sessionService: AppSessionService,
         private _tokenAuthService: TokenAuthServiceProxy,
+        private _SMSServiceProxy: SMSServiceProxy,
         private _ngxAni: NgxAni
     ) {
         super(injector);
@@ -76,9 +81,14 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
             return;
         }
 
-        this.submitting = true;
+        this.saving = true;
+        if (!this.ordinaryLogin) {
+            this.loginService.phoneNumAuth(this.phoneModel, () => this.saving = false);
+            return;
+        }
+
         this.loginService.authenticate(
-            () => this.submitting = false
+            () => this.saving = false
         );
     }
 
@@ -94,4 +104,34 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     isPhoneLogin() {
         this.ordinaryLogin = false;
     }
+
+        // 发送验证码
+        send() {
+            const input: CodeSendInput = new CodeSendInput();
+            input.targetNumber = this.phoneModel.phoneNum;
+            input.codeType = VerificationCodeType.Login;
+            // this.captchaResolved();
+    
+            this._SMSServiceProxy
+                .sendCodeAsync(input)
+                .subscribe(result => {
+                    this.anginSend();
+                });
+        }
+    
+        anginSend() {
+            const self = this;
+            let time = 60;
+            this.isSendSMS = true;
+            const set = setInterval(() => {
+                time--;
+                self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
+            }, 1000);
+    
+            setTimeout(() => {
+                clearInterval(set);
+                self.isSendSMS = false;
+                self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
+            }, 60000);
+        }
 }
