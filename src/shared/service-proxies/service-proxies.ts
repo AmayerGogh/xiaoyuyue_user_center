@@ -7361,6 +7361,53 @@ export class ProfileServiceProxy {
         }
         return Observable.of<void>(<any>null);
     }
+
+    /**
+     * 获取当前用户安全信息
+     * @return Success
+     */
+    getCurrentUserSecurityInfo(): Observable<UserSecurityInfoDto> {
+        let url_ = this.baseUrl + "/api/services/app/Profile/GetCurrentUserSecurityInfo";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processGetCurrentUserSecurityInfo(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetCurrentUserSecurityInfo(response_);
+                } catch (e) {
+                    return <Observable<UserSecurityInfoDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<UserSecurityInfoDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetCurrentUserSecurityInfo(response: Response): Observable<UserSecurityInfoDto> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: UserSecurityInfoDto = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? UserSecurityInfoDto.fromJS(resultData200) : new UserSecurityInfoDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<UserSecurityInfoDto>(<any>null);
+    }
 }
 
 @Injectable()
@@ -8179,19 +8226,19 @@ export class StateServiceServiceProxy {
 
     /**
      * 获取所有省份
+     * @sorting 排序字段 (eg:Id DESC)
      * @maxResultCount 最大结果数量(等同:PageSize)
      * @skipCount 列表跳过数量(等同: PageSize*PageIndex)
-     * @sorting 排序字段 (eg:Id DESC)
      * @return Success
      */
-    getProvinces(maxResultCount: number, skipCount: number, sorting: string): Observable<PagedResultDtoOfProvinceListDto> {
+    getProvinces(sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfProvinceListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
+        if (sorting !== undefined)
+            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         if (maxResultCount !== undefined)
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
         if (skipCount !== undefined)
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
-        if (sorting !== undefined)
-            url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
@@ -19601,6 +19648,8 @@ export interface IPagedResultDtoOfOrgBookingOrderListDto {
 export class OrgBookingOrderListDto implements IOrgBookingOrderListDto {
     /** 应约人名称 */
     customerName: string;
+    /** 应约人性别 */
+    gender: OrgBookingOrderListDtoGender;
     /** 预约名称 */
     bookingName: string;
     /** 门店名称 */
@@ -19633,6 +19682,7 @@ export class OrgBookingOrderListDto implements IOrgBookingOrderListDto {
     init(data?: any) {
         if (data) {
             this.customerName = data["customerName"];
+            this.gender = data["gender"];
             this.bookingName = data["bookingName"];
             this.outletName = data["outletName"];
             this.bookingDate = data["bookingDate"] ? moment(data["bookingDate"].toString()) : <any>undefined;
@@ -19655,6 +19705,7 @@ export class OrgBookingOrderListDto implements IOrgBookingOrderListDto {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["customerName"] = this.customerName;
+        data["gender"] = this.gender;
         data["bookingName"] = this.bookingName;
         data["outletName"] = this.outletName;
         data["bookingDate"] = this.bookingDate ? this.bookingDate.toISOString() : <any>undefined;
@@ -19673,6 +19724,8 @@ export class OrgBookingOrderListDto implements IOrgBookingOrderListDto {
 export interface IOrgBookingOrderListDto {
     /** 应约人名称 */
     customerName: string;
+    /** 应约人性别 */
+    gender: OrgBookingOrderListDtoGender;
     /** 预约名称 */
     bookingName: string;
     /** 门店名称 */
@@ -21150,7 +21203,7 @@ export interface IBookingOrderInfo {
 }
 
 export class CancelBookingOrderInput implements ICancelBookingOrderInput {
-    /** 取消理由 */
+    /** 取消理由（必填） */
     refuseReason: string;
     id: number;
 
@@ -21185,7 +21238,7 @@ export class CancelBookingOrderInput implements ICancelBookingOrderInput {
 }
 
 export interface ICancelBookingOrderInput {
-    /** 取消理由 */
+    /** 取消理由（必填） */
     refuseReason: string;
     id: number;
 }
@@ -22066,6 +22119,57 @@ export interface IChangeUserLanguageDto {
     languageName: string;
 }
 
+export class UserSecurityInfoDto implements IUserSecurityInfoDto {
+    emailAddress: string;
+    phoneNumber: string;
+    weChat: string;
+    qq: string;
+    weiBo: string;
+
+    constructor(data?: IUserSecurityInfoDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.emailAddress = data["emailAddress"];
+            this.phoneNumber = data["phoneNumber"];
+            this.weChat = data["weChat"];
+            this.qq = data["qq"];
+            this.weiBo = data["weiBo"];
+        }
+    }
+
+    static fromJS(data: any): UserSecurityInfoDto {
+        let result = new UserSecurityInfoDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["emailAddress"] = this.emailAddress;
+        data["phoneNumber"] = this.phoneNumber;
+        data["weChat"] = this.weChat;
+        data["qq"] = this.qq;
+        data["weiBo"] = this.weiBo;
+        return data; 
+    }
+}
+
+export interface IUserSecurityInfoDto {
+    emailAddress: string;
+    phoneNumber: string;
+    weChat: string;
+    qq: string;
+    weiBo: string;
+}
+
 export class PagedResultDtoOfRoleListDto implements IPagedResultDtoOfRoleListDto {
     totalCount: number;
     items: RoleListDto[];
@@ -22454,7 +22558,6 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
     emailAddress: string;
     profilePictureId: string;
     phoneNumber: string;
-    weChat: string;
     id: number;
 
     constructor(data?: IUserLoginInfoDto) {
@@ -22474,7 +22577,6 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
             this.emailAddress = data["emailAddress"];
             this.profilePictureId = data["profilePictureId"];
             this.phoneNumber = data["phoneNumber"];
-            this.weChat = data["weChat"];
             this.id = data["id"];
         }
     }
@@ -22493,7 +22595,6 @@ export class UserLoginInfoDto implements IUserLoginInfoDto {
         data["emailAddress"] = this.emailAddress;
         data["profilePictureId"] = this.profilePictureId;
         data["phoneNumber"] = this.phoneNumber;
-        data["weChat"] = this.weChat;
         data["id"] = this.id;
         return data; 
     }
@@ -22506,7 +22607,6 @@ export interface IUserLoginInfoDto {
     emailAddress: string;
     profilePictureId: string;
     phoneNumber: string;
-    weChat: string;
     id: number;
 }
 
@@ -27352,6 +27452,12 @@ export enum TenantNotificationSeverity {
     _2 = 2, 
     _3 = 3, 
     _4 = 4, 
+}
+
+export enum OrgBookingOrderListDtoGender {
+    _0 = 0, 
+    _1 = 1, 
+    _2 = 2, 
 }
 
 export enum OrgBookingOrderListDtoStatus {

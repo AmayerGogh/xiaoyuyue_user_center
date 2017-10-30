@@ -32,5 +32,35 @@
                 </div>
             </div>
         </div>
+
+        <h5 class="title">
+            账户关联
+            <small>关联第三方账号</small>
+        </h5>
+        <div class="clearfix">
+            <!-- 微信绑定 -->
+            <div class="card-wrap col-xs-4 col-sm-3">
+                <div class="card" (click)="linkWechat()">
+                    <div class="item">
+                        <div class="content">
+                            <span class="icon vapps-icon-linked-wechat" style="font-size: 40px;"></span>
+                            <p class="text">{{ linkedWechatText }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QQ绑定 -->
+            <div class="card-wrap col-xs-4 col-sm-3">
+                <div class="card" (click)="linkQQ()">
+                    <div class="item">
+                        <div class="content">
+                            <span class="icon vapps-icon-linked-qq" style="font-size: 40px;"></span>
+                            <p class="text">{{ linkedQQText }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
