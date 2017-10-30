@@ -8,12 +8,11 @@ import { BookedComponent } from './booked/booked.component';
 import { BookingAboutComponent } from './about/booking-about.component';
 import { BookingCommentsComponent } from './comments/booking-comments.component';
 import { BookingComponent } from './booking.component';
-import { BookingHeaderComponent } from './layout/header/header.component';
 import { BookingRoutingModule } from './booking-routing.module';
-import { BookingSideBarComponent } from './layout/side-bar/side-bar.component';
+// import { BookingSideBarComponent } from './layout/side-bar/side-bar.component';
 import { BookingTimeComponent } from './time/booking-time.component';
 import { CommonModule } from 'shared/common/common.module';
-import { FooterAdComponent } from './layout/footer-ad/footer-ad.component';
+// import { FooterAdComponent } from './layout/footer-ad/footer-ad.component';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { OptimalBookingTimeModelComponent } from './time/optimal-booking-time-model/optimal-booking-time-model.component';
@@ -39,15 +38,14 @@ import { ContactorModelComponent } from './about/contactor-model/contactor-model
     ],
     declarations: [
         BookingComponent,
-        BookingHeaderComponent,
-        BookingSideBarComponent,
+        // BookingSideBarComponent,
         BookingAboutComponent,
         BookingTimeComponent,
         BookingCommentsComponent,
         OptimalBookingTimeModelComponent,
         ReplyBookingModelComponent,
         BookedComponent,
-        FooterAdComponent,
+        // FooterAdComponent,
         BusinessMapsModelComponent,
         ContactorModelComponent
     ],

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
+// import { AdminSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 
 @Component({
   selector: 'xiaoyuyue-booked',
@@ -14,7 +14,7 @@ export class BookedComponent implements OnInit {
   bookingCustomer: string;
   bookingName: string;
   toggleSideBarFlag = false;
-  @ViewChild('sideBarModel') sideBarModel: UserSideBarComponent;
+//   @ViewChild('sideBarModel') sideBarModel: AdminSideBarComponent;
   constructor(
     private _route: ActivatedRoute,
     private _router: Router
@@ -24,10 +24,10 @@ export class BookedComponent implements OnInit {
     this.loadData();
   }
 
-  showSideBarHandler(flag) {
-    this.toggleSideBarFlag = flag;
-    this.toggleSideBarFlag && this.sideBarModel.showSideBar();
-  }
+//   showSideBarHandler(flag) {
+//     this.toggleSideBarFlag = flag;
+//     this.toggleSideBarFlag && this.sideBarModel.showSideBar();
+//   }
 
   loadData() {
     this._route

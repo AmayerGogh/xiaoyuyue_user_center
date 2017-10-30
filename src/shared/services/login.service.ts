@@ -10,6 +10,7 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { PhoneAuthenticateModel } from '../service-proxies/service-proxies';
 
 const UA = require('ua-device');
 
@@ -70,6 +71,16 @@ export class LoginService {
             .finally(finallyCallback)
             .subscribe((result: AuthenticateResultModel) => {
                 this.processAuthenticateResult(result, redirectUrl);
+            });
+    }
+
+    phoneNumAuth(phoneModel: PhoneAuthenticateModel, finallyCallback?: () => void): void {
+        finallyCallback = finallyCallback || (() => { });
+        this._tokenAuthService
+            .phoneNumAuthenticate(phoneModel)
+            .finally(finallyCallback)
+            .subscribe((result: AuthenticateResultModel) => {
+                this.processAuthenticateResult(result);
             });
     }
 

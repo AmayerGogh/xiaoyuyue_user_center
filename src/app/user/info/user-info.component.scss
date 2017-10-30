@@ -1,7 +1,7 @@
 .user-profile {
     width: 100%;
     max-width: 480px;
-    min-height: 100vh;
+    min-height: calc(100vh - 31px);
     margin: 0 auto;
     padding-top: 95px;
     .rotating {
