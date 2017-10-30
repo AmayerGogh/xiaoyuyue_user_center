@@ -7,7 +7,7 @@ import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class UserSideBarComponent implements OnInit {
+export class AdminSideBarComponent implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
   constructor(
     private _authService: AppAuthService

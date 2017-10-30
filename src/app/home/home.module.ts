@@ -6,7 +6,7 @@ import { AppModule } from 'app';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
-import { HomeSideBarComponent } from 'app/home/layout/side-bar/home-side-bar.component';
+// import { HomeSideBarComponent } from 'app/home/layout/side-bar/home-side-bar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { TimeLineComponent } from './time-line/time-line.component';
@@ -31,10 +31,8 @@ import { UtilsModule } from '@shared/utils/utils.module';
     declarations: [
         HomeComponent,
         TimeLineComponent,
-        HomeSideBarComponent
     ],
     providers: [
-        HomeSideBarComponent
     ]
 })
 export class HomeModule {

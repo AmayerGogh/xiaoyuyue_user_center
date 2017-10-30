@@ -10,10 +10,8 @@ import { CommonModule } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgModule } from '@angular/core';
 import { UserComponent } from './user.component';
-import { UserFooterComponent } from './layout/footer/footer.component';
 import { UserInfoComponent } from './info/user-info.component';
 import { UserRoutingModule } from './user-routing.module';
-import { UserSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { QrcodeModelComponent } from 'app/user/booking/info/qrcode-model/qrcode-model.component';
 
@@ -34,8 +32,6 @@ import { QrcodeModelComponent } from 'app/user/booking/info/qrcode-model/qrcode-
     declarations: [
         UserComponent,
         BookingInfoComponent,
-        UserFooterComponent,
-        UserSideBarComponent,
         BookingListComponent,
         BookingCancelComponent,
         UserInfoComponent,

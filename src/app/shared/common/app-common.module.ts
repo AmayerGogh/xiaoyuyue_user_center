@@ -15,6 +15,8 @@ import { ModalModule } from 'ngx-bootstrap';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { AdminHeaderComponent } from 'app/shared/header/header.component';
+import { AdminSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
+import { AdminFooterComponent } from 'app/user/layout/footer/footer.component';
 
 @NgModule({
     imports: [
@@ -29,13 +31,18 @@ import { AdminHeaderComponent } from 'app/shared/header/header.component';
         TimeZoneComboComponent,
         JqPluginDirective,
         AdminHeaderComponent,
+        AdminSideBarComponent,
+        AdminFooterComponent,
         EmptyPageComponent
     ],
     exports: [
         TimeZoneComboComponent,
         EmptyPageComponent,
         AdminHeaderComponent,
+        AdminSideBarComponent,
+        AdminFooterComponent,
         JqPluginDirective,
+        
     ],
     providers: [
         AppLocalizationService
