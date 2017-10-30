@@ -3,6 +3,7 @@ import * as ngCommon from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { AbpModule } from '@abp/abp.module';
+import { RouterModule } from '@angular/router';
 import { AppAuthService } from './auth/app-auth.service';
 import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
@@ -26,6 +27,7 @@ import { AdminFooterComponent } from 'app/user/layout/footer/footer.component';
         UtilsModule,
         AbpModule,
         CommonModule,
+        RouterModule
     ],
     declarations: [
         TimeZoneComboComponent,
