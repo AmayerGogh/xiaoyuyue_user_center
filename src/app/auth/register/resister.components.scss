@@ -28,9 +28,10 @@
             position: relative;
             .get-sms-btn {
                 position: absolute;
-                top: 0;
+                top: -14px;
                 right: 0;
                 .btn {
+                    padding: 8px 14px 7px 14px;
                     background-color: #ff9742;
                 }
             }
