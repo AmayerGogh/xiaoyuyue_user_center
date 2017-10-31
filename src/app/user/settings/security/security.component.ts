@@ -122,5 +122,9 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
             }
         }
     }
+
+    stayTuned(): void {
+        this.message.info('正在完善中...', '敬请期待');
+    }
 }
 
