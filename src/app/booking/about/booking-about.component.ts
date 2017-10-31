@@ -2,7 +2,7 @@ import 'assets/swiper/js/swiper.min'
 
 import * as _ from 'lodash';
 
-import { AfterViewInit, Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Injector, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { BookingServiceProxy, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
@@ -18,7 +18,8 @@ declare var Swiper: any;
     selector: 'xiaoyuyue-booking-about',
     templateUrl: './booking-about.component.html',
     styleUrls: ['./booking-about.component.scss'],
-    animations: [appModuleAnimation()]
+    animations: [appModuleAnimation()],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class BookingAboutComponent extends AppComponentBase implements OnInit, AfterViewInit {
@@ -49,6 +50,8 @@ export class BookingAboutComponent extends AppComponentBase implements OnInit, A
 
     initSwiper(): void {
         const swiper = new Swiper('#bookingAboutSwiperContainer', {
+            autoplay : 2000,
+            loop: true,
             pagination: '.swiper-pagination',
             paginationClickable: true
         });

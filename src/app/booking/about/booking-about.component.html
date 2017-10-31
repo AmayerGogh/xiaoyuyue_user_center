@@ -10,7 +10,7 @@
     </div>
     <div class="about-header about-item">
         <h5 class="title-name">{{ businessAboutData.name }}</h5>
-        <div class="intro-wrap">{{businessAboutData.description}}</div>
+        <div class="intro-wrap" [innerHTML]="businessAboutData.description"></div>
     </div>
     <div class="about-body about-item">
         <div class="banner-wrap item" *ngIf="businessAboutData">
