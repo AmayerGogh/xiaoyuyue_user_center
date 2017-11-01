@@ -19,6 +19,7 @@ import { UtilsModule } from 'shared/utils/utils.module';
 import { BusinessMapsModelComponent } from './about/business-maps-model/business-maps-model.component';
 import { ContactorModelComponent } from './about/contactor-model/contactor-model.component';
 import { BookingHeaderComponent } from './layout/header/header.component';
+import { TenantDetailModelComponent } from './layout/tenant-detail-model/tenant-detail-model.component';
 
 @NgModule({
     imports: [
@@ -45,7 +46,8 @@ import { BookingHeaderComponent } from './layout/header/header.component';
         BookedComponent,
         BookingHeaderComponent,
         BusinessMapsModelComponent,
-        ContactorModelComponent
+        ContactorModelComponent,
+        TenantDetailModelComponent
     ],
     providers: [
     ]
