@@ -1,5 +1,5 @@
 <div id="booking" *ngIf="bookingData">
-    <xiaoyuyue-booking-header [organizationInfoData]="bookingData.organizationInfo"></xiaoyuyue-booking-header>
+    <xiaoyuyue-booking-header [organizationInfoData]="bookingData.organizationInfo" (showTenantDetail)="showTenantDetailHandler($event)"></xiaoyuyue-booking-header>
 
     <tabset class="side-bar tab-container tabbable-line" #staticTabs>
         <tab heading="预约介绍">
@@ -14,4 +14,5 @@
             <xiaoyuyue-booking-comments></xiaoyuyue-booking-comments>
         </tab> -->
     </tabset>
+    <xiaoyuyue-tenant-detail-model #tenantDetailModel></xiaoyuyue-tenant-detail-model>
 </div>
