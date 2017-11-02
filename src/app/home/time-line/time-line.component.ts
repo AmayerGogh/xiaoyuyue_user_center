@@ -66,13 +66,13 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     }
 
     resetHeaderStyle(): void {
-        $('#fixed-header').addClass('opacity');
+        $('#fixedHeader').find('.top-title').addClass('opacity-bg');
     }
 
     beforeHeaderStyle(): void {
-        $('#fixed-header').removeClass('opacity');
-    }
+        $('#fixedHeader').find('.top-title').removeClass('opacity-bg');
 
+    }
     showBookingDetail(bookingId: number) {
         this._router.navigate(['/user/booking/info', bookingId]);
     }
