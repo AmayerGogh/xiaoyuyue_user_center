@@ -36,10 +36,8 @@ export class DeviceSwtichGuard implements CanActivate, CanActivateChild {
 
     selectBestRoute(): string {
         if (device.mobile) {
-            console.log(device.mobile);
             return '/mobile';
         } else {
-            console.log(device.mobile);
             return '/';
         }
     }
