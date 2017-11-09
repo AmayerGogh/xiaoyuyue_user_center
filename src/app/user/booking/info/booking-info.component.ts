@@ -4,7 +4,6 @@ import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy, BookingOrderI
 import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat } from 'shared/AppConsts';
-import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 import { BookingCancelComponent } from 'app/user/booking/cancel/booking-cancel.component';
 import { QrcodeModelComponent } from './qrcode-model/qrcode-model.component';
@@ -64,7 +63,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     }
 
     private getOutletPictureUrl(url: string): string {
-        return url === '' ? this.outletPictureUrl : PictureUrlHelper.getOutletPicCompressUrl(url);
+        return url === '' ? this.outletPictureUrl : url;
     }
 
     showQrcodeModel(): void {

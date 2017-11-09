@@ -7,7 +7,6 @@ import { BookingServiceProxy, JoinBookingInfoDto } from 'shared/service-proxies/
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat } from 'shared/AppConsts';
-import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 import { BusinessMapsModelComponent } from './business-maps-model/business-maps-model.component';
 import { ContactorModelComponent } from './contactor-model/contactor-model.component';

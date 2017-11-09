@@ -12,7 +12,6 @@ import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
 import { CookiesService } from './../../shared/services/cookies.service';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
-import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { TabsetComponent } from 'ngx-bootstrap';
 import { TitleService } from 'shared/services/title.service';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
@@ -85,8 +84,6 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             .getJoinBookingInfo(parseInt(this.bookingId, null))
             .subscribe(result => {
                 this.bookingData = result;
-                this.bookingData.bookingInfo.pictures = _.map(this.bookingData.bookingInfo.pictures, PictureUrlHelper.getBookingPicCompressUrl);
-
                 this.getOptimalBookingTime();
 
                 this._titleService.setSingleTitle(this.bookingData.bookingInfo.name);
