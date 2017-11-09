@@ -6,7 +6,6 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { MediaCompressFormat, MediaPath } from 'shared/AppConsts';
 import { Moment } from 'moment';
-import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { Router } from '@angular/router';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 
@@ -78,7 +77,6 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     }
 
     converTimelineData(item: BookingTimelineDto): BookingTimelineDto {
-        item.orgLogoUrl = PictureUrlHelper.getTimelinePicCompressUrl(item.orgLogoUrl);
         return item;
     }
 

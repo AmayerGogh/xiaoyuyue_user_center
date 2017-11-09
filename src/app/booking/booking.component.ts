@@ -12,13 +12,12 @@ import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
 import { CookiesService } from './../../shared/services/cookies.service';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
-import { PictureUrlHelper } from 'shared/helpers/PictureUrlHelper';
 import { TabsetComponent } from 'ngx-bootstrap';
+import { TenantDetailModelComponent } from 'app/booking/layout/tenant-detail-model/tenant-detail-model.component';
 import { TitleService } from 'shared/services/title.service';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
-import { TenantDetailModelComponent } from 'app/booking/layout/tenant-detail-model/tenant-detail-model.component';
 
 @Component({
     templateUrl: './booking.component.html',
@@ -85,8 +84,6 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             .getJoinBookingInfo(parseInt(this.bookingId, null))
             .subscribe(result => {
                 this.bookingData = result;
-                this.bookingData.bookingInfo.pictures = _.map(this.bookingData.bookingInfo.pictures, PictureUrlHelper.getBookingPicCompressUrl);
-
                 this.getOptimalBookingTime();
 
                 this._titleService.setSingleTitle(this.bookingData.bookingInfo.name);
@@ -154,8 +151,6 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     }
 
     showTenantDetailHandler($event): void {
-        console.log($event);
-        console.log(this.bookingData.organizationInfo);
         if ($event) { this.tenantDetailModel.show(this.bookingData.organizationInfo); };
     }
 }

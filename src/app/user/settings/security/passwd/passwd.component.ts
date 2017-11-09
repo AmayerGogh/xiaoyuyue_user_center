@@ -1,11 +1,12 @@
-import { ChangePasswordInput, ProfileServiceProxy, CodeSendInput, ChangePasswordByPhoneInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
-import { Component, Injector, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { ChangePasswordByPhoneInput, ChangePasswordInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { Location } from '@angular/common';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
-import { VerificationCodeType } from 'shared/AppEnums';
 import { AppSessionService } from '@shared/common/session/app-session.service';
+import { Location } from '@angular/common';
+import { VerificationCodeType } from 'shared/AppEnums';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
+
 export class RepeatPasswdDto extends ChangePasswordInput {
     repeatPasswd: string;
 }
@@ -108,8 +109,5 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
             return;
         }
         this.phoneNumText = "•••••••" + this._appSessionService.user.phoneNumber.substr(this._appSessionService.user.phoneNumber.length - 4);
-        console.log(this.phoneNumText);
-        
     }
-
 }
