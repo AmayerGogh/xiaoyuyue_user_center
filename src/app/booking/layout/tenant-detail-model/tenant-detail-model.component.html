@@ -1,5 +1,6 @@
 <div class="tenant-detail-wrap">
-    <div bsModal #tenantDetailModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tenantDetailModel" aria-hidden="true">
+    <div bsModal #tenantDetailModel="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tenantDetailModel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
@@ -13,7 +14,7 @@
                     </div>
 
                     <div class="desc-wrap">
-                        <p class="desc-text">{{ organizationInfoData.description }}</p>
+                        <p class="desc-text" [innerHTML]='organizationInfoData.description'></p>
                     </div>
                 </div>
                 <!-- <div class="modal-footer">
