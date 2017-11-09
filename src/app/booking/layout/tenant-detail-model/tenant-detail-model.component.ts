@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { ModalDirective } from 'ngx-bootstrap';
 import { OrganizationInfoDto } from 'shared/service-proxies/service-proxies';
 
@@ -18,8 +19,6 @@ export class TenantDetailModelComponent implements OnInit {
     }
 
     show(organizationInfoData: OrganizationInfoDto): void {
-        console.log(organizationInfoData);
-        
         this.organizationInfoData = organizationInfoData;
         this.model.show();
     }
