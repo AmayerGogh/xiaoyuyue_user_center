@@ -17,7 +17,8 @@
             <div class="swiper-container" id="bookingAboutSwiperContainer">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" *ngFor="let item of businessAboutData.pictures">
-                        <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span>
+                        <!-- <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span> -->
+                        <img class="img" [src]="item">
                     </div>
                 </div>
                 <div class="swiper-pagination"></div>
@@ -29,12 +30,14 @@
         <div class="address item">
             <div class="item-left">
                 <div class="info-wrap">
-                    <span class="name">地  址</span>
+                    <span class="name">地 址</span>
                     <span class="colon">:</span>
                     <span class="desc">{{businessAboutData.outletAddress}}</span>
                 </div>
             </div>
-            <div class="item-right" (click)=showBusinessMap()><span class="btn primary-bgcolor  vapps-icon-app-location"></span></div>
+            <div class="item-right" (click)=showBusinessMap()>
+                <span class="btn primary-bgcolor  vapps-icon-app-location"></span>
+            </div>
         </div>
         <div class="contact item">
             <div class="item-left">
@@ -46,17 +49,23 @@
             </div>
             <!-- <ng-template #popTemplate><img [src]="businessAboutData.contactorWechatUrl" width="150px"></ng-template> -->
             <!-- <img [src]="businessAboutData.contactorWechatUrl" width="150px" > -->
-            <div class="item-right" (click)="showContactorModel()"><span class="btn primary-bgcolor vapps-icon-app-qr-code"></span></div>
+            <div class="item-right" (click)="showContactorModel()">
+                <span class="btn primary-bgcolor vapps-icon-app-qr-code"></span>
+            </div>
         </div>
         <div class="phone item">
             <div class="item-left">
                 <div class="info-wrap">
-                    <span class="name">手  机</span>
+                    <span class="name">手 机</span>
                     <span class="colon">:</span>
                     <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
                 </div>
             </div>
-            <div class="item-right"><a [href]="'tel:'+businessAboutData.contactorPhoneNum"><span class="btn primary-bgcolor  vapps-icon-app-phone"></span></a></div>
+            <div class="item-right">
+                <a [href]="'tel:'+businessAboutData.contactorPhoneNum">
+                    <span class="btn primary-bgcolor  vapps-icon-app-phone"></span>
+                </a>
+            </div>
         </div>
     </div>
     <!-- <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad> -->
