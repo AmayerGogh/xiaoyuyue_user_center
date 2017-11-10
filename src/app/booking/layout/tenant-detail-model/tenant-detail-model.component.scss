@@ -44,10 +44,25 @@
                     }
                 }
                 .desc-wrap {
-                    padding: 20px;
+                    height: 280px;
                     .desc-text {
+                        position: absolute;
+                        top: 149px;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        overflow: auto;
                         text-indent: 2em;
-                        margin: 0
+                        padding: 20px 20px 0 20px;
+                        margin: 0;
+                        //  对wangEditor内容样式设置
+                        img {
+                            width: 100%;
+                            display: block;
+                        }
+                        p {
+                            margin: 0;
+                        }
                     }
                 }
             }
