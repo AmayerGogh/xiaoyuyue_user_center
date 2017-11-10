@@ -43,6 +43,10 @@ export class BookingCancelComponent extends AppComponentBase implements OnInit {
 
     submit() {
         this.input.refuseReason = this.isShowTextarea ? this.otherReason : this.routineReason;
+        if (this.input.refuseReason === '' || this.input.refuseReason === undefined) {
+            this.message.warn('请告诉我们您要取消的理由');
+            return;
+        }
         this._perBookingOrderServiceProxy
             .cancelBookingOrder(this.input)
             .subscribe(result => {

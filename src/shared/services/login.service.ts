@@ -10,6 +10,7 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { PhoneAuthenticateModel } from '../service-proxies/service-proxies';
 
 const UA = require('ua-device');
 
@@ -73,6 +74,16 @@ export class LoginService {
             });
     }
 
+    phoneNumAuth(phoneModel: PhoneAuthenticateModel, finallyCallback?: () => void): void {
+        finallyCallback = finallyCallback || (() => { });
+        this._tokenAuthService
+            .phoneNumAuthenticate(phoneModel)
+            .finally(finallyCallback)
+            .subscribe((result: AuthenticateResultModel) => {
+                this.processAuthenticateResult(result);
+            });
+    }
+
     externalAuthenticate(provider: ExternalLoginProvider): void {
         this.ensureExternalLoginProviderInitialized(provider, () => {
             if (provider.name === ExternalLoginProvider.WECHAT) {
@@ -88,27 +99,21 @@ export class LoginService {
                     });
                 });
             } else if (provider.name === ExternalLoginProvider.QQ) {
-                const authBaseUrl = 'https://graph.qq.com/oauth/show';
+                const authBaseUrl = 'https://graph.qq.com/oauth2.0/authorize';
                 const appid = provider.clientId;
                 const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.QQ + '&isAuthBind=false';
                 const response_type = 'code';
-                const state = 'xiaoyuyue';
-                let display;
-                if (this.outputUa.device.type === 'mobile') {
-                    display = 'mobile'
-                } else {
-                    display = 'pc'
-                }
-                const authUrl = `${authBaseUrl}?which=Login&display=${display}&client_id=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&state=${state}`;
+                const scope = 'get_user_info';
 
-                // 是否需要展示手机端样式
-                console.log(authUrl);
+                const authUrl = `${authBaseUrl}?client_id=${appid}&response_type=${response_type}&scope=${scope}&redirect_uri=${encodeURIComponent(redirect_url)}&display=`;
+
                 window.location.href = authUrl;
             }
         });
     }
 
     init(callback?: any): void {
+        this.outputUa = new UA(window.navigator.userAgent);
         this.initExternalLoginProviders(callback);
     }
 

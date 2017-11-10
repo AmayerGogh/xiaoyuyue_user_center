@@ -1,4 +1,4 @@
-import { AccountServiceProxy, CodeSendInput, PasswordComplexitySetting, ProfileServiceProxy, RegisterTenantInput, SMSServiceProxy, TenantRegistrationServiceProxy } from '@shared/service-proxies/service-proxies'
+import { AccountServiceProxy, CodeSendInput, PasswordComplexitySetting, ProfileServiceProxy, SMSServiceProxy, RegisterInput, PhoneAuthenticateModel } from '@shared/service-proxies/service-proxies'
 import { Component, ElementRef, Injector, NgModule, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
@@ -14,11 +14,12 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     animations: [accountModuleAnimation()]
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
+    phoneInput: PhoneAuthenticateModel = new PhoneAuthenticateModel();;
     phoneNumber: string;
     isSendSMS: boolean = false;
     confirmPasswd: string;
 
-    model: RegisterTenantInput = new RegisterTenantInput();
+    registerInput: RegisterInput = new RegisterInput();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
 
     saving: boolean = false;
@@ -27,7 +28,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _accountService: AccountServiceProxy,
-        private _tenantRegistrationServiceProxy: TenantRegistrationServiceProxy,
+        private _accountServiceProxy: AccountServiceProxy,
         private _router: Router,
         private readonly _loginService: LoginService,
         private _profileService: ProfileServiceProxy,
@@ -58,12 +59,10 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     register(): void {
 
         this.saving = true;
-        this.model.phoneNumber = "18599926123";
-        this.model.registerCode = "123";
-        this._tenantRegistrationServiceProxy.registerTenant(this.model)
+        this._accountServiceProxy.register(this.registerInput)
             .finally(() => { this.saving = false; })
             .subscribe((result) => {
-                if (!result.isActive) {
+                if (!result.canLogin) {
                     this.notify.success(this.l('SuccessfullyRegistered'));
                     this._router.navigate(['auth/login']);
                     return;
@@ -71,9 +70,14 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
                 //Autheticate
                 this.saving = true;
-                this._loginService.authenticateModel.loginCertificate = this.model.tenancyName;
-                this._loginService.authenticateModel.password = this.model.password;
-                this._loginService.authenticate(() => { this.saving = false; });
+                this.phoneInput.phoneNum = this.registerInput.phoneNumber;
+                this.phoneInput.loginCode = this.registerInput.registerCode;
+                this.phoneInput.rememberClient = true;
+                this._loginService.phoneNumAuth(this.phoneInput, () => this.saving = false);
+
+                // this._loginService.authenticateModel.loginCertificate = this.registerInput.name;
+                // this._loginService.authenticateModel.password = this.registerInput.password;
+                // this._loginService.authenticate(() => { this.saving = false; });
             });
     }
 
@@ -86,7 +90,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     // 发送验证码
     send() {
         let input: CodeSendInput = new CodeSendInput();
-        input.targetNumber = this.model.phoneNumber;
+        input.targetNumber = this.registerInput.phoneNumber;
         input.codeType = VerificationCodeType.Register;
         input.captchaResponse = "";
         // input.captchaResponse = this.captchaResolved();

@@ -1,8 +1,17 @@
  .booking-edit {
      width: 100%;
+     max-width: 480px;
+     margin: 0 auto 0;
+     position: absolute;
+     top: 45px;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     overflow-x: hidden;
+     -webkit-overflow-scrolling: touch;
      padding: 10px;
-     margin-top: 56px;
-     background-color: #f9f9f9;
+     background-color: #EEE;
+     font-size: 16px;
      .cancel-btn {
          font-size: 16px;
      }
@@ -118,8 +127,8 @@
              .content-item {
                  display: flex;
                  .name {
-                     width: 70px;
-                     flex: 0 0 70px;
+                     width: 84px;
+                     flex: 0 0 84px;
                  }
                  .desc {
                      flex: 1;

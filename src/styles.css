@@ -112,9 +112,15 @@ a {
     color: #FF9641;
 }
 
+
 /* 覆盖FullPage样式 */
-#fp-nav ul li a span, .fp-slidesNav ul li a span,
-#fp-nav ul li a.active span, #fp-nav ul li:hover a.active span, .fp-slidesNav ul li a.active span, .fp-slidesNav ul li:hover a.active span {
+
+#fp-nav ul li a span,
+.fp-slidesNav ul li a span,
+#fp-nav ul li a.active span,
+#fp-nav ul li:hover a.active span,
+.fp-slidesNav ul li a.active span,
+.fp-slidesNav ul li:hover a.active span {
     background: #FF9641;
 }
 
@@ -122,16 +128,35 @@ a {
     color: #FF9641;
 }
 
+
 /* 覆盖bootstrap tabs样式 */
+
 .side-bar .nav-tabs {
-    margin-bottom: 4px; /* 给底部阴影留出边距 */
+    margin-bottom: 4px;
+    /* 给底部阴影留出边距 */
 }
 
+
 /* 覆盖swiper样式 */
+
 .swiper-pagination-bullet-active {
     background-color: #FF9641;
 }
 
 .tooltip.in {
     transition: all .15s;
+}
+
+
+/* 由于bootstrap的弹窗modal导致部分不能点击的bug */
+
+.modal-backdrop.in {
+    display: none;
+}
+
+
+/* toast提示框 */
+
+.toast-success {
+    background-color: #FF9641;
 }

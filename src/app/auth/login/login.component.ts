@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output } from '@angular/core';
-import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output, ViewChild } from '@angular/core';
+import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy, PhoneAuthenticateModel, CodeSendInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
 import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { Headers, Http } from '@angular/http';
 
@@ -13,6 +13,7 @@ import { AppSessionService } from 'shared/common/session/app-session.service';
 import { Location } from '@angular/common';
 import { NgxAni } from 'ngxani';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
+import { VerificationCodeType } from 'shared/AppEnums';
 
 @Component({
     templateUrl: './login.component.html',
@@ -20,13 +21,16 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends AppComponentBase implements OnInit, AfterViewInit {
+    phoneModel: PhoneAuthenticateModel = new PhoneAuthenticateModel();
     externalLoginProviders: ExternalLoginProvider[];
 
-    submitting = false;
     flag = true;
     // 普通登录或者手机验证登录，默认普通登录
     ordinaryLogin = true;
-
+    saving = false;
+    isSendSMS = false;
+    
+    @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
         public loginService: LoginService,
@@ -35,6 +39,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         private _activatedRoute: ActivatedRoute,
         private _sessionService: AppSessionService,
         private _tokenAuthService: TokenAuthServiceProxy,
+        private _SMSServiceProxy: SMSServiceProxy,
         private _ngxAni: NgxAni
     ) {
         super(injector);
@@ -56,17 +61,6 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         setTimeout(() => {
             $('input:-webkit-autofill').addClass('edited')
         }, 600);
-
-        $(document).click(() => {
-            self.flag = true;
-            $('#externalLogin').css({
-                opacity: 0,
-                transform: 'scale(0)'
-            });
-            $('#external_login_container').css({
-                opacity: 0
-            });
-        })
     }
 
     get multiTenancySideIsTeanant(): boolean {
@@ -87,53 +81,21 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
             return;
         }
 
-        this.submitting = true;
+        this.saving = true;
+        if (!this.ordinaryLogin) {
+            this.loginService.phoneNumAuth(this.phoneModel, () => this.saving = false);
+            return;
+        }
+
         this.loginService.authenticate(
-            () => this.submitting = false
+            () => this.saving = false
         );
     }
 
-    externalLogin(provider: ExternalLoginProvider, elementRef: object, externalContent: object, $event) {
-        $event.cancelBubble = true;
-        this.flag && this.loginService.externalAuthenticate(provider); // 执行第三方登陆逻辑
-
-        if (provider.name === 'WeChat' && this.flag) {
-            // 由于每次点击都回去请求微信，但是微信图片隐藏时没必要也去请求
-            this.animationShow(elementRef, externalContent);
-        } else {
-            this.animationHide(elementRef, externalContent);
-        }
-        this.flag = !this.flag;
+    mobileExternalLogin(provider: ExternalLoginProvider): void {
+        this.loginService.externalAuthenticate(provider);
     }
 
-    // NgxAni动画
-    private animationShow(externalAni, externalContent) {
-        this._ngxAni.to(externalAni, .6, {
-            transform: 'scale(1)',
-            opacity: .8,
-            'ease': this._ngxAni['easeOutBack'],
-            onComplete: () => {
-                // 利用定时器解决每次请求微信图片会出现延迟，导致显示问题
-                setTimeout(() => {
-                    this._ngxAni.to(externalContent, 1, {
-                        opacity: 1
-                    })
-                }, 10);
-            }
-        });
-    }
-
-    private animationHide(externalAni, externalContent) {
-        this._ngxAni.to(externalAni, .4, {
-            transform: 'scale(0)',
-            opacity: 0,
-        });
-        this._ngxAni.to(externalContent, 1, {
-            opacity: 0
-        })
-    }
-
-    // add after
     // 是否账号登录
     isOrdinaryLogin() {
         this.ordinaryLogin = true;
@@ -142,4 +104,34 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     isPhoneLogin() {
         this.ordinaryLogin = false;
     }
+
+        // 发送验证码
+        send() {
+            const input: CodeSendInput = new CodeSendInput();
+            input.targetNumber = this.phoneModel.phoneNum;
+            input.codeType = VerificationCodeType.Login;
+            // this.captchaResolved();
+    
+            this._SMSServiceProxy
+                .sendCodeAsync(input)
+                .subscribe(result => {
+                    this.anginSend();
+                });
+        }
+    
+        anginSend() {
+            const self = this;
+            let time = 60;
+            this.isSendSMS = true;
+            const set = setInterval(() => {
+                time--;
+                self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
+            }, 1000);
+    
+            setTimeout(() => {
+                clearInterval(set);
+                self.isSendSMS = false;
+                self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
+            }, 60000);
+        }
 }

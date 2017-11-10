@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
         FormsModule,
     ],
     declarations: [
+        
     ]
 })
 export class TimeLineModule {

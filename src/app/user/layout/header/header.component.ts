@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./header.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class UserHeaderComponent extends AppComponentBase implements OnInit {
+export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
   title: string;
   toggleSideBarFlag = false;

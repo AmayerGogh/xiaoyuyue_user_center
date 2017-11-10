@@ -4,36 +4,39 @@
             <div class="logo-wrap">
                 <img src="/assets/common/images/login/logo-colorized.png" width="40px" alt="logo">
             </div>
-            <div class="register-body">
+            <div class="register-body form-horizontal">
                 <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group label-floating">
+                    <label class="col-md-1 col-sm-2 label-on-left">
+                        <span class="vapps-icon-app-login-phone"></span>
+                    </label>
+                    <div class="col-md-11 col-sm-10">
+                        <div class="validate-code-wrap form-group label-floating">
                             <label class="control-label"></label>
-                            <input class="form-control" type="text" name="tenancyName" placeholder="机构名称" required autofocus [(ngModel)]="model.tenancyName">
+                            <input class="form-control" placeholder="{{l('PhoneNumber')}}" type="tel" name="phoneNumber" required [(ngModel)]="registerInput.phoneNumber">
+                            <div class="get-sms-btn">
+                                <button type="button" class="btn" (click)="send()" #smsBtn [disabled]="isSendSMS">{{l('GetVerificationCode')}}</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12">
+                    <label class="col-md-1 col-sm-2 label-on-left">
+                        <span class="vapps-icon-app-login-code"></span>
+                    </label>
+                    <div class="col-md-11 col-sm-10">
                         <div class="form-group label-floating">
                             <label class="control-label"></label>
-                            <input class="form-control" type="password" name="password" placeholder="设置密码" required [(ngModel)]="model.password">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="form-group label-floating">
-                            <label class="control-label"></label>
-                            <input class="form-control" type="password" name="confirmPasswd" placeholder="确认密码" required [(ngModel)]="confirmPasswd">
+                            <input class="form-control" placeholder="{{l('VerificationCode')}}" type="text" name="registerCode" required [(ngModel)]="registerInput.registerCode">
                         </div>
                     </div>
                 </div>
 
                 <div class="register-btn-wrap">
-                    <button class="btn btn-register" type="button" [disabled]="!registerForm.form.valid" (click)="register()">{{l("CreateAnAccount")}}</button>
+                    <button class="btn btn-register" type="button" [disabled]="!registerForm.form.valid" (click)="register()" [buttonBusy]="saving" [busyText]="'注册中...'">
+                        <i></i>
+                        <span>注册用户</span>
+                    </button>
                 </div>
             </div>
             <div class="register-footer"></div>

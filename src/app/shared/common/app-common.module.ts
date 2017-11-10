@@ -3,6 +3,7 @@ import * as ngCommon from '@angular/common';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { AbpModule } from '@abp/abp.module';
+import { RouterModule } from '@angular/router';
 import { AppAuthService } from './auth/app-auth.service';
 import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
@@ -14,6 +15,9 @@ import { JqPluginDirective } from './libs/jq-plugin.directive';
 import { ModalModule } from 'ngx-bootstrap';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
+import { AdminSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
+import { AdminFooterComponent } from 'app/user/layout/footer/footer.component';
+import { AdminHeaderComponent } from 'app/user/layout/header/header.component';
 
 @NgModule({
     imports: [
@@ -23,16 +27,24 @@ import { UtilsModule } from '@shared/utils/utils.module';
         UtilsModule,
         AbpModule,
         CommonModule,
+        RouterModule
     ],
     declarations: [
         TimeZoneComboComponent,
         JqPluginDirective,
+        AdminHeaderComponent,
+        AdminSideBarComponent,
+        AdminFooterComponent,
         EmptyPageComponent
     ],
     exports: [
         TimeZoneComboComponent,
         EmptyPageComponent,
+        AdminHeaderComponent,
+        AdminSideBarComponent,
+        AdminFooterComponent,
         JqPluginDirective,
+        
     ],
     providers: [
         AppLocalizationService
