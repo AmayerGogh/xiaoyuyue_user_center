@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ModalDirective } from 'ngx-bootstrap';
 import { OrganizationInfoDto } from 'shared/service-proxies/service-proxies';
@@ -6,7 +6,8 @@ import { OrganizationInfoDto } from 'shared/service-proxies/service-proxies';
 @Component({
     selector: 'xiaoyuyue-tenant-detail-model',
     templateUrl: './tenant-detail-model.component.html',
-    styleUrls: ['./tenant-detail-model.component.scss']
+    styleUrls: ['./tenant-detail-model.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class TenantDetailModelComponent implements OnInit {
     organizationInfoData: OrganizationInfoDto = new OrganizationInfoDto();
