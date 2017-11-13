@@ -9,12 +9,9 @@ export function accountModuleAnimation() {
 }
 
 export function slideFromBottom() {
-
-    const padding_top = true ? '10px;' : '20px';
-
     return trigger('routerTransition', [
         state('void', style({ 'padding-top': '0px', opacity: '0' })),
-        state('*', style({ 'padding-top': padding_top, opacity: '1' })),
+        state('*', style({ 'padding-top': (window.__wxjs_environment === 'miniprogram') ? '10px;' : '20px', opacity: '1' })),
         transition(':enter', [
             animate('0.33s ease-out', style({ opacity: '1', 'padding-top': '20px' }))
         ])
