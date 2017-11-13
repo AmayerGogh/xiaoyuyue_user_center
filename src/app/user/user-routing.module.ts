@@ -1,4 +1,4 @@
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
 import { AdminPermissions } from '@shared/AdminPermissions';
 import { AppRouteGuard } from 'app/shared/common/auth/auth-route-guard';
@@ -50,4 +50,30 @@ import { UserInfoComponent } from './info/user-info.component';
     ]
 })
 export class UserRoutingModule {
+    iswxjsEnvironment = false;
+    constructor(private router: Router) {
+        this.iswxjsEnvironment = true;
+
+        router.events.subscribe((event: NavigationEnd) => {
+            setTimeout(() => {
+                this.toggleBodyCssClass(event.url);
+            }, 0);
+        });
+    }
+
+    toggleBodyCssClass(url: string): void {
+        if (url && url.indexOf('/booking/') >= 0) {
+            $('#footer').addClass('hidden');
+        } else {
+            $('#footer').removeClass('hidden');
+        }
+
+        if (this.iswxjsEnvironment) {
+            $('.booking-manage').css('top', '0px');
+            $('.booking-edit').css('top', '0px');
+
+            $('.booking-manage').css('padding-top', '0px');
+            $('.user-profile').css('padding-top', '60px');
+        }
+    }
 }

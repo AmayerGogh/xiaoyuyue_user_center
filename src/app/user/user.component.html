@@ -1,6 +1,9 @@
 <div class="booking-wrap">
     <xiaoyuyue-admin-header (toggleFlag)="showSideBarHandler($event)"></xiaoyuyue-admin-header>
     <router-outlet></router-outlet>
-    <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
+    <div id="footer">
+        <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
+    </div>
+
     <xiaoyuyue-admin-side-bar #sideBarModel></xiaoyuyue-admin-side-bar>
 </div>

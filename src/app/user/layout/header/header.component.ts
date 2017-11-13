@@ -27,7 +27,8 @@ export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
+    // this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
+    this.iswxjsEnvironment = true;
   }
 
   showSideBar() {

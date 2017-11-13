@@ -1,20 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SettingsComponent } from './settings.component';
-import { SettingsRoutes } from './settings.routing';
-import { SuggestComponent } from './suggest/suggest.component';
-import { SecurityComponent } from './security/security.component';
-import { PasswdComponent } from './security/passwd/passwd.component';
-import { EmailComponent } from './security/email/email.component';
+
+import { CommonModule } from '@angular/common';
 import { CurrentPhoneComponent } from './security/phone/current-phone/current-phone.component';
+import { EmailComponent } from './security/email/email.component';
+import { NgModule } from '@angular/core';
+import { PasswdComponent } from './security/passwd/passwd.component';
+import { SecurityComponent } from './security/security.component';
+import { SettingsComponent } from './settings.component';
+import { SettingsRoutingModule } from './settings-routing.module';
+import { SuggestComponent } from './suggest/suggest.component';
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        SettingsRoutes
+        SettingsRoutingModule
     ],
     declarations: [
         SettingsComponent,
