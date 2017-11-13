@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { GetPersonBookingOrderOutput, PerBookingOrderServiceProxy, BookingOrderInfoStatus } from 'shared/service-proxies/service-proxies';
+import { BookingOrderInfoStatus, GetPersonBookingOrderOutput, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 
 import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from 'shared/common/app-component-base';
-import { MediaCompressFormat } from 'shared/AppConsts';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
 import { BookingCancelComponent } from 'app/user/booking/cancel/booking-cancel.component';
+import { MediaCompressFormat } from 'shared/AppConsts';
 import { QrcodeModelComponent } from './qrcode-model/qrcode-model.component';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-booking-info',
@@ -21,6 +21,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     bookingId;
     bookingStatus: BookingOrderInfoStatus;
     outletPictureUrl: string = '/assets/common/images/booking/tenant-bg.png';
+    iswxjsEnvironment = false;
 
     @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;
     @ViewChild('qrcodeModel') qrcodeModel: QrcodeModelComponent;
@@ -31,6 +32,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     ) {
         super(injector);
         this.bookingId = this._route.snapshot.paramMap.get('id');
+        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
     }
 
     ngOnInit() {
@@ -38,8 +40,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     }
 
     ngAfterViewInit() {
-        // TODO: 暂时处理
-        $('#headerTitle').text('应约详情');
+        
     }
 
     loadBookingOrderForEditData(bookingId: number) {
