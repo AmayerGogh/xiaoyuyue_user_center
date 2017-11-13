@@ -9,8 +9,7 @@ export function accountModuleAnimation() {
 }
 
 export function slideFromBottom() {
-    console.log(window.__wxjs_environment === 'miniprogram');
-    console.log(window.__wxjs_environment === 'miniprogram' ? '0px;' : '20px')
+    console.log(window.__wxjs_environment);
     return trigger('routerTransition', [
         state('void', style({ 'padding-top': '0px', opacity: '0' })),
         state('*', style({ 'padding-top': (window.__wxjs_environment === 'miniprogram' ? '0px;' : '20px'), opacity: '1' })),
