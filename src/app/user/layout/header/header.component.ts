@@ -14,7 +14,7 @@ export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   @Output() toggleFlag: EventEmitter<boolean> = new EventEmitter();
   title: string;
   toggleSideBarFlag = false;
-
+  iswxjsEnvironment = false;
   constructor(injector: Injector,
     private _location: Location,
     private breadcrumbService: BreadcrumbService
@@ -27,6 +27,11 @@ export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+
+    if (window.__wxjs_environment) {
+      this.iswxjsEnvironment = window.__wxjs_environment === 'miniprogram'
+    }
+
   }
 
   showSideBar() {

@@ -211,6 +211,7 @@ interface Window {
     FileReader: any;
     webkitURL: any;
     mozURL: any;
+    __wxjs_environment: any;
 }
 
 interface HTMLInputEvent extends Event {
@@ -227,3 +228,4 @@ interface String {
 declare var moment: any;
 
 declare var wx: any;
+
