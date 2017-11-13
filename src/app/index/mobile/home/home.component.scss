@@ -37,6 +37,14 @@
                 .login-register {
                     width: 269px;
                     margin: 0 auto;
+                    .action-btn-block {
+                        width: 100%;
+                        display: block;
+                        background-color: rgba(254, 125, 21, 0.78);
+                        font-size: 20px;
+                        padding: 6px 0;
+                        cursor: pointer;
+                    }
                     .action-btn {
                         width: calc(50% - 20px);
                         display: block;
@@ -120,5 +128,5 @@
             }
         }
     }
-
+    
     @media screen and (max-width: 400px) {}
