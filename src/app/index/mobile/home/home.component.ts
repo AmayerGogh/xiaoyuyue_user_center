@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AppConsts } from 'shared/AppConsts';
 
 @Component({
     selector: 'app-home',
@@ -28,5 +29,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         $(".page").each(function () {
             self.pagesArr.push($(this).offset().top);
         })
+    }
+
+    // 跳转机构中心
+    linkToBusiness(): void {
+        window.location.href = AppConsts.appBusinessBaseUrl;
     }
 }
