@@ -52,7 +52,7 @@ import { UserInfoComponent } from './info/user-info.component';
 export class UserRoutingModule {
     iswxjsEnvironment = false;
     constructor(private router: Router) {
-        this.iswxjsEnvironment = true;
+        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
 
         router.events.subscribe((event: NavigationEnd) => {
             setTimeout(() => {

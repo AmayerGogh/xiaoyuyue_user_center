@@ -32,7 +32,7 @@ import { SuggestComponent } from './suggest/suggest.component';
 export class SettingsRoutingModule {
     iswxjsEnvironment = false;
     constructor(private router: Router) {
-        this.iswxjsEnvironment = true;
+        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
 
         router.events.subscribe((event: NavigationEnd) => {
             setTimeout(() => {
