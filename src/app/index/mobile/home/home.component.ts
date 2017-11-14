@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if (!ClientTypeHelper.isWeChatMiniProgram) {
             window.location.href = AppConsts.appBusinessBaseUrl;
         } else {
-            wx.redirectTo({
+            wx.miniProgram.redirectTo({
                 url: 'pages/business-center/business-centerr'
             })
         }
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         if (!ClientTypeHelper.isWeChatMiniProgram) {
             this._router.navigate(['/user/home']);
         } else {
-            wx.redirectTo({
+            wx.miniProgram.redirectTo({
                 url: 'pages/user-center/user-center'
             })
         }
