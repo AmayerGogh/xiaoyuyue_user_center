@@ -1,5 +1,6 @@
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { CurrentPhoneComponent } from './security/phone/current-phone/current-phone.component';
 import { EmailComponent } from './security/email/email.component';
 import { NgModule } from '@angular/core';
@@ -32,7 +33,7 @@ import { SuggestComponent } from './suggest/suggest.component';
 export class SettingsRoutingModule {
     iswxjsEnvironment = false;
     constructor(private router: Router) {
-        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
+        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();;
 
         router.events.subscribe((event: NavigationEnd) => {
             setTimeout(() => {
@@ -45,6 +46,12 @@ export class SettingsRoutingModule {
         if (this.iswxjsEnvironment) {
             $('.settings').css('top', '0px');
             $('.settings').css('padding-top', '0px');
+            $('.security').css('padding-top', '0px');
+
+            $('.change-passwd-wrap').css('padding-top', '0px');
+            $('.current-phone-wrap').css('padding-top', '0px');
+            $('.new-phone-wrap').css('padding-top', '0px');
+
         }
     }
 }

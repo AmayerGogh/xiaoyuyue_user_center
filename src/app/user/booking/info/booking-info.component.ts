@@ -4,6 +4,7 @@ import { BookingOrderInfoStatus, GetPersonBookingOrderOutput, PerBookingOrderSer
 import { ActivatedRoute } from '@angular/router';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { BookingCancelComponent } from 'app/user/booking/cancel/booking-cancel.component';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { MediaCompressFormat } from 'shared/AppConsts';
 import { QrcodeModelComponent } from './qrcode-model/qrcode-model.component';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
@@ -32,7 +33,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     ) {
         super(injector);
         this.bookingId = this._route.snapshot.paramMap.get('id');
-        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
+        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();
     }
 
     ngOnInit() {
@@ -40,7 +41,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     }
 
     ngAfterViewInit() {
-        
+
     }
 
     loadBookingOrderForEditData(bookingId: number) {

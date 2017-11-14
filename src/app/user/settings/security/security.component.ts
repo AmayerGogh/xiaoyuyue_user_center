@@ -1,12 +1,13 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { ExternalUnBindingModel, ProfileServiceProxy, TokenAuthServiceProxy, UserSecurityInfoDto } from 'shared/service-proxies/service-proxies';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
-import { ProfileServiceProxy, ExternalUnBindingModel, TokenAuthServiceProxy, UserSecurityInfoDto } from 'shared/service-proxies/service-proxies';
+import { AppConsts } from 'shared/AppConsts';
 import { AppSessionService } from 'shared/common/session/app-session.service';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { CookiesService } from 'shared/services/cookies.service';
 import { LoginService } from 'shared/services/login.service';
-import { AppConsts } from 'shared/AppConsts';
+import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-security',
@@ -20,6 +21,7 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
     externalWechatUrl: string;
     linkedWechatText: string;
     isBindingQQ: boolean;
+    iswxjsEnvironment = false;
     constructor(
         private injector: Injector,
         private _appSessionService: AppSessionService,
@@ -34,6 +36,7 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
         this._loginService.init();
         this.getUserSecurityInfo();
+        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();
     }
 
     // 获取当前用户安全信息
