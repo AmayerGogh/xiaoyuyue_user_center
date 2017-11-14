@@ -2,6 +2,7 @@ import { Breadcrumb, BreadcrumbService } from 'shared/services/bread-crumb.servi
 import { Component, EventEmitter, Injector, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Location } from '@angular/common';
 
 @Component({
@@ -27,8 +28,7 @@ export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
-    // this.iswxjsEnvironment = true;
+    this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();
   }
 
   showSideBar() {

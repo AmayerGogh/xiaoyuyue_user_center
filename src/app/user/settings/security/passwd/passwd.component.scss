@@ -1,6 +1,6 @@
 .change-passwd-wrap {
     min-height: calc(100vh - 31px);
-    padding-top: 40px;
+    padding-top: 55px;
     .passwd-wrap {
         .card-wrap {
             // display: inline-block;
@@ -16,7 +16,7 @@
                     width: 100%;
                     height: 100%;
                     background: #FFF;
-                    font-size: 34px;
+                    font-size: 40px;
                     &:before {
                         content: "";
                         display: inline-block;
@@ -35,7 +35,7 @@
                             color: #FF9641;
                         }
                         .text {
-                            font-size: 16px;
+                            font-size: 14px;
                             margin-top: 14px;
                             margin-bottom: 0;
                             padding: 0 20px;
@@ -48,7 +48,7 @@
     }
     .use-old-passwd,
     .use-phone {
-        padding: 0 10px 10px;
+        padding: 5px 10px 10px;
         .validate-code-wrap {
             position: relative;
             .get-sms-btn {
@@ -67,8 +67,7 @@
                 .title-icon {
                     font-size: 30px;
                 }
-            }
-            // .btn {
+            } // .btn {
             //     padding: 5px 20px;
             // }
         }

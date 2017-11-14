@@ -4,6 +4,7 @@ import { AdminPermissions } from '@shared/AdminPermissions';
 import { AppRouteGuard } from 'app/shared/common/auth/auth-route-guard';
 import { BookingInfoComponent } from './booking/info/booking-info.component';
 import { BookingListComponent } from './booking/list/booking-list.component';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { NgModule } from '@angular/core';
 import { UserComponent } from './user.component';
 import { UserInfoComponent } from './info/user-info.component';
@@ -50,10 +51,7 @@ import { UserInfoComponent } from './info/user-info.component';
     ]
 })
 export class UserRoutingModule {
-    iswxjsEnvironment = false;
     constructor(private router: Router) {
-        this.iswxjsEnvironment = (window.__wxjs_environment === 'miniprogram');
-
         router.events.subscribe((event: NavigationEnd) => {
             setTimeout(() => {
                 this.toggleBodyCssClass(event.url);
@@ -68,12 +66,12 @@ export class UserRoutingModule {
             $('#footer').removeClass('hidden');
         }
 
-        if (this.iswxjsEnvironment) {
+        if (ClientTypeHelper.isWeChatMiniProgram()) {
             $('.booking-manage').css('top', '0px');
             $('.booking-edit').css('top', '0px');
 
             $('.booking-manage').css('padding-top', '0px');
-            $('.user-profile').css('padding-top', '60px');
+            $('.user-profile').css('padding-top', '30px');
         }
     }
 }
