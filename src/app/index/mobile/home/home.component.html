@@ -9,7 +9,7 @@
             <div class="btn intro border-radius-6" routerLink="/mobile/intro">立刻了解小预约</div>
             <div class="login-register clearfix">
                 <span class="btn action-btn-block login-wrap pull-left border-radius-6" (click)="linkToBusiness()">机构登录</span>
-                <span class="btn action-btn login-wrap pull-left border-radius-6" routerLink="/auth/login">用户登录</span>
+                <span class="btn action-btn login-wrap pull-left border-radius-6" (click)="linkToHome()">用户登录</span>
                 <span class="btn action-btn register-wrap pull-right border-radius-6" routerLink="/auth/register">用户注册</span>
             </div>
         </div>
@@ -19,7 +19,9 @@
         <div class="content">
             <div class="title">一键扫码 轻松预约</div>
             <div class="desc">扫描二维码,关注小预约,可直接创建预约或参与预约活动,轻松管理自己的时间</div>
-            <div class="material-wrap"><img src="/assets/common/images/index/material-1.png" width="260px" alt=""></div>
+            <div class="material-wrap">
+                <img src="/assets/common/images/index/material-1.png" width="260px" alt="">
+            </div>
         </div>
     </a>
     <a class="page page-2 section" id="scanSode">
@@ -27,7 +29,9 @@
         <div class="content">
             <div class="title">随时随地 参与预约</div>
             <div class="desc">只要您关注了小预约,你就可以随时随地预约喜欢的活动,小预约大工具</div>
-            <div class="material-wrap"><img src="/assets/common/images/index/material-2.png" width="260px" alt=""></div>
+            <div class="material-wrap">
+                <img src="/assets/common/images/index/material-2.png" width="260px" alt="">
+            </div>
         </div>
     </a>
     <a class="page page-3 section" id="about">

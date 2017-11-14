@@ -66,7 +66,7 @@ export class UserRoutingModule {
             $('#footer').removeClass('hidden');
         }
 
-        if (ClientTypeHelper.isWeChatMiniProgram()) {
+        if (ClientTypeHelper.isWeChatMiniProgram) {
             $('.booking-manage').css('top', '0px');
             $('.booking-edit').css('top', '0px');
 

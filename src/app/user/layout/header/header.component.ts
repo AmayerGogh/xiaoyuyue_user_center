@@ -28,7 +28,7 @@ export class AdminHeaderComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();
+    this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram;
   }
 
   showSideBar() {

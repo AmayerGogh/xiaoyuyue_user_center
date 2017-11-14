@@ -33,7 +33,7 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     ) {
         super(injector);
         this.bookingId = this._route.snapshot.paramMap.get('id');
-        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();
+        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram;
     }
 
     ngOnInit() {
