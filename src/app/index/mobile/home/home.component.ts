@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             window.location.href = AppConsts.appBusinessBaseUrl;
         } else {
             wx.miniProgram.navigateTo({
-                url: '/pages/business-center/business-centerr'
+                url: '/pages/business-center/business-center'
             })
         }
     }
