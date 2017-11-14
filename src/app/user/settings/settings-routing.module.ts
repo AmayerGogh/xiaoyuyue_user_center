@@ -33,7 +33,7 @@ import { SuggestComponent } from './suggest/suggest.component';
 export class SettingsRoutingModule {
     iswxjsEnvironment = false;
     constructor(private router: Router) {
-        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram();;
+        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram;
 
         router.events.subscribe((event: NavigationEnd) => {
             setTimeout(() => {
@@ -51,7 +51,6 @@ export class SettingsRoutingModule {
             $('.change-passwd-wrap').css('padding-top', '0px');
             $('.current-phone-wrap').css('padding-top', '0px');
             $('.new-phone-wrap').css('padding-top', '0px');
-
         }
     }
 }
