@@ -2,12 +2,13 @@ import * as _ from 'lodash';
 
 import { BookingTimelineDto, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
 import { Component, Injector, OnInit } from '@angular/core';
+import { MediaCompressFormat, MediaPath } from 'shared/AppConsts';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
-import { MediaCompressFormat, MediaPath } from 'shared/AppConsts';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Moment } from 'moment';
-import { Router } from '@angular/router';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'xiaoyuyue-time-line',
@@ -73,7 +74,14 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
 
     }
     showBookingDetail(bookingId: number) {
-        this._router.navigate(['/user/booking/info', bookingId]);
+        const bookingUrl = '/user/booking/info/' + bookingId;
+        if (!ClientTypeHelper.isWeChatMiniProgram) {
+            this._router.navigate([bookingUrl]);
+        } else {
+            wx.miniProgram.redirectTo({
+                url: `/pages/user-center/user-center?route=${encodeURIComponent(bookingUrl)}`
+            })
+        }
     }
 
     converTimelineData(item: BookingTimelineDto): BookingTimelineDto {

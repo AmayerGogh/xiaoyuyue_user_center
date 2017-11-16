@@ -17,14 +17,14 @@ import { TenantDetailModelComponent } from 'app/booking/layout/tenant-detail-mod
 import { TitleService } from 'shared/services/title.service';
 import { WeChatShareResultDto } from 'app/shared/utils/wechat-share-timeline.input.dto';
 import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
+import { appModuleSlowAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     templateUrl: './booking.component.html',
     styleUrls: [
         './booking.component.scss',
     ],
-    animations: [accountModuleAnimation()],
+    animations: [appModuleSlowAnimation()],
     encapsulation: ViewEncapsulation.None
 })
 export class BookingComponent extends AppComponentBase implements OnInit, AfterViewInit, OnDestroy {
