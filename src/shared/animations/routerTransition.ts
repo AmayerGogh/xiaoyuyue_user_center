@@ -4,6 +4,10 @@ export function appModuleAnimation() {
     return slideFromBottom();
 }
 
+export function appModuleSlowAnimation() {
+    return slideSlowFromBottom();
+}
+
 export function accountModuleAnimation() {
     return slideFromUp();
 }
