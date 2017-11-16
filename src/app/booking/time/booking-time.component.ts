@@ -9,13 +9,13 @@ import { AppComponentBase } from 'shared/common/app-component-base';
 import { CookiesService } from 'shared/services/cookies.service';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { appModuleSlowAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-booking-time',
     templateUrl: './booking-time.component.html',
     styleUrls: ['./booking-time.component.scss'],
-    animations: [appModuleAnimation()],
+    animations: [appModuleSlowAnimation()],
     encapsulation: ViewEncapsulation.None,
     // changeDetection: ChangeDetectionStrategy.OnPush
 })

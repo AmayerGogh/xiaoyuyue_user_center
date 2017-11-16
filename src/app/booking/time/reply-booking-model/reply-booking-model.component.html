@@ -54,10 +54,12 @@
                             <div class="col-xs-6" *ngIf="bookingInfoData.needGender">
                                 <!-- <input class="form-control" type="number" name="gender" [(ngModel)]="input.gender" required>
                                     <label class="control-label">性别</label> -->
-                                <select class="gender-select form-group label-floating" name="gender" [ngModel]="defaultGenderSelect" (ngModelChange)="selectGenderHandler($event)">
-                                        <option value="0" selected>性别</option>
-                                        <option [value]="listItem.value" *ngFor="let listItem of genderSelectListData">{{ listItem.displayText }}</option>
-                                    </select>
+                                <div class="gender-select-wrap">
+                                    <select class="gender-select form-group label-floating" name="gender" [ngModel]="defaultGenderSelect" (ngModelChange)="selectGenderHandler($event)">
+                                            <option value="0" selected>性别</option>
+                                            <option [value]="listItem.value" *ngFor="let listItem of genderSelectListData">{{ listItem.displayText }}</option>
+                                        </select>
+                                </div>
                             </div>
 
                             <div class="col-xs-6" *ngIf="bookingInfoData.needAge">
