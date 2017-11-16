@@ -4,8 +4,9 @@ import { PerBookingOrderServiceProxy, Status2 } from 'shared/service-proxies/ser
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
-import { BookingOrderStatus } from 'shared/AppEnums';
 import { BookingCancelComponent } from './../cancel/booking-cancel.component';
+import { BookingOrderStatus } from 'shared/AppEnums';
+import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Router } from '@angular/router';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 
@@ -56,7 +57,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     }
     loadPersonBookingData() {
         if (this.skip < 0) { this.skip = 0 };
-        
+
         this.isLoading = true;
         this._perBookingOrderServiceProxy
             .getBookingOrders(this.bookingName, this.status, this.sort, this.pageSize, this.skip)
@@ -105,7 +106,14 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     }
 
     showBookingDetail(bookingId: number) {
-        this._router.navigate(['/user/booking/info', bookingId]);
+        const bookingUrl = '/user/booking/info/' + bookingId;
+        if (!ClientTypeHelper.isWeChatMiniProgram) {
+            this._router.navigate([bookingUrl]);
+        } else {
+            wx.miniProgram.redirectTo({
+                url: `/pages/user-center/user-center?route=${encodeURIComponent(bookingUrl)}`
+            })
+        }
     }
 
     cancelBooking(bookingId: number, indexI: number) {
@@ -176,7 +184,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
             });
         });
         this.skip = totalCount;
-        
+
         if (this.skip >= this.personBookingTotalCount) {
             return;
         }
