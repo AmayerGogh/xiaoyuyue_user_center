@@ -8,7 +8,8 @@
             <div class="login-body">
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="number" name="phoneNumber" [(ngModel)]="phoneModel.phoneNum" maxlength="11" pattern="(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}" placeholder="{{l('PhoneNumber')}}" autofocus required>
+                        <input class="form-control" type="number" name="phoneNumber" [(ngModel)]="phoneModel.phoneNum" maxlength="11" pattern="^[1][3-8]\d{9}$|^([6|9])\d{7}$|^[0][9]\d{8}$|^[6]([8|6])\d{5}$"
+                            placeholder="{{l('PhoneNumber')}}" autofocus required>
                     </div>
                 </div>
 
@@ -21,10 +22,11 @@
                     </div>
                 </div>
 
-                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!fastLoginForm.form.valid" [buttonBusy]="saving" [busyText]="l('Logging')">
-                            <i></i>
-                            <span>{{l("LogIn")}}</span>
-                    </button>
+                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!fastLoginForm.form.valid"
+                    [buttonBusy]="saving" [busyText]="l('Logging')">
+                    <i></i>
+                    <span>{{l("LogIn")}}</span>
+                </button>
 
                 <div class="form-item clearfix account-action">
                     <span class="pull-left" routerLink="/auth/register">快速注册</span>
@@ -32,7 +34,9 @@
                 </div>
 
                 <div class="extra-login">
-                    <div class="title-text"><span class="text">第三方平台登录</span></div>
+                    <div class="title-text">
+                        <span class="text">第三方平台登录</span>
+                    </div>
                     <!-- <div *ngIf="loginService.externalLoginProviders.length > 0">
                             <ul class="social-icons-wrap">
                                 <li *ngFor="let provider of loginService.externalLoginProviders">
@@ -41,7 +45,10 @@
                             </ul>
                         </div> -->
                     <div class="login-icon">
-                        <span class="item"><img src="/assets/common/images/login/qq-x2.png" (click)="mobileExternalLogin(loginService.externalLoginProviders[2])" width="38px" alt="qq"></span>
+                        <span class="item">
+                            <img src="/assets/common/images/login/qq-x2.png" (click)="mobileExternalLogin(loginService.externalLoginProviders[2])"
+                                width="38px" alt="qq">
+                        </span>
                         <span class="item">
                             <img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weibo">
                         </span>
@@ -63,17 +70,20 @@
             <div class="login-body">
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="text" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate" name="UserName" required autofocus>
+                        <input class="form-control" type="text" placeholder="用户名/手机号/邮箱" [(ngModel)]="loginService.authenticateModel.loginCertificate"
+                            name="UserName" required autofocus>
                     </div>
                 </div>
 
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress" required>
+                        <input class="form-control" type="password" placeholder="密码" [(ngModel)]="loginService.authenticateModel.password" name="EmailAddress"
+                            required>
                     </div>
                 </div>
 
-                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!loginForm.form.valid" [buttonBusy]="saving" [busyText]="l('Logging')">
+                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!loginForm.form.valid"
+                    [buttonBusy]="saving" [busyText]="l('Logging')">
                     <i></i>
                     <span>{{l("LogIn")}}</span>
                 </button>
@@ -84,10 +94,17 @@
                 </div>
 
                 <div class="extra-login">
-                    <div class="title-text"><span class="text">第三方平台登录</span></div>
+                    <div class="title-text">
+                        <span class="text">第三方平台登录</span>
+                    </div>
                     <div class="login-icon">
-                        <span class="item"><img src="/assets/common/images/login/qq-x2.png" (click)="mobileExternalLogin(loginService.externalLoginProviders[2])" width="38px" alt="weChat"></span>
-                        <span class="item"><img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weibo"></span>
+                        <span class="item">
+                            <img src="/assets/common/images/login/qq-x2.png" (click)="mobileExternalLogin(loginService.externalLoginProviders[2])"
+                                width="38px" alt="weChat">
+                        </span>
+                        <span class="item">
+                            <img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weibo">
+                        </span>
                         <span class="item">
                             <!-- <img src="/assets/common/images/login/weibo-x2.png" width="38px" alt="weChat"> -->
                         </span>
