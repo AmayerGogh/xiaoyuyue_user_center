@@ -12422,6 +12422,8 @@ export interface IRegisterInput {
 export class RegisterOutput implements IRegisterOutput {
     /** 能否登陆 */
     canLogin: boolean;
+    /** 随机密码 */
+    randomPassword: string;
 
     constructor(data?: IRegisterOutput) {
         if (data) {
@@ -12435,6 +12437,7 @@ export class RegisterOutput implements IRegisterOutput {
     init(data?: any) {
         if (data) {
             this.canLogin = data["canLogin"];
+            this.randomPassword = data["randomPassword"];
         }
     }
 
@@ -12447,6 +12450,7 @@ export class RegisterOutput implements IRegisterOutput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["canLogin"] = this.canLogin;
+        data["randomPassword"] = this.randomPassword;
         return data; 
     }
 }
@@ -12454,6 +12458,8 @@ export class RegisterOutput implements IRegisterOutput {
 export interface IRegisterOutput {
     /** 能否登陆 */
     canLogin: boolean;
+    /** 随机密码 */
+    randomPassword: string;
 }
 
 export class SendPasswordResetCodeInput implements ISendPasswordResetCodeInput {

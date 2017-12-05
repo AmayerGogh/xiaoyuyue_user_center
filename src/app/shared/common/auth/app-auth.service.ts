@@ -27,12 +27,12 @@ export class AppAuthService {
         return false;
     }
 
-    recordRedirectUrl(): void {
+    recordRedirectUrl(redirectUrl: string): void {
         const exdate = new Date();
         exdate.setDate(exdate.getDate() + 1);
         this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
         if (AppConsts.appBaseUrl.indexOf(location.href) < 0 || AppConsts.appBusinessBaseUrl.indexOf(location.href) < 0) {
-            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
+            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', redirectUrl, exdate, '/');
         }
     }
 }
