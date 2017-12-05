@@ -8,7 +8,7 @@ const routes: Routes = [
     {
         path: '',
         canActivate: [DeviceSwtichGuard],
-        //   canActivateChild: [DeviceSwtichGuard],
+        canActivateChild: [DeviceSwtichGuard],
         component: DesktopComponent,
         children: [
             {

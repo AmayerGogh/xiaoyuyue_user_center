@@ -8,7 +8,6 @@ import { AppAuthService } from './auth/app-auth.service';
 import { AppLocalizationService } from 'app/shared/common/localization/app-localization.service';
 import { AppRouteGuard } from './auth/auth-route-guard';
 import { CommonModule } from '@shared/common/common.module';
-import { DeviceSwtichGuard } from './auth/device-switch.service';
 import { EmptyPageComponent } from 'app/shared/common/empty-page/empty-page.component';
 import { FormsModule } from '@angular/forms';
 import { JqPluginDirective } from './libs/jq-plugin.directive';
