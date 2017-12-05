@@ -548,9 +548,13 @@ export class AuditLogServiceProxy {
      */
     getAuditLogs(startDate: Moment, endDate: Moment, userName: string, serviceName: string, methodName: string, browserInfo: string, hasException: boolean, minExecutionDuration: number, maxExecutionDuration: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfAuditLogListDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogs?";
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
         if (userName !== undefined)
             url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
@@ -568,9 +572,13 @@ export class AuditLogServiceProxy {
             url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -631,9 +639,13 @@ export class AuditLogServiceProxy {
      */
     getAuditLogsToExcel(startDate: Moment, endDate: Moment, userName: string, serviceName: string, methodName: string, browserInfo: string, hasException: boolean, minExecutionDuration: number, maxExecutionDuration: number, sorting: string, maxResultCount: number, skipCount: number): Observable<FileDto> {
         let url_ = this.baseUrl + "/api/services/app/AuditLog/GetAuditLogsToExcel?";
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
         if (userName !== undefined)
             url_ += "UserName=" + encodeURIComponent("" + userName) + "&"; 
@@ -651,9 +663,13 @@ export class AuditLogServiceProxy {
             url_ += "MaxExecutionDuration=" + encodeURIComponent("" + maxExecutionDuration) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -714,7 +730,9 @@ export class BookingServiceProxy {
      */
     getJoinBookingInfo(id: number): Observable<JoinBookingOutput> {
         let url_ = this.baseUrl + "/api/services/app/Booking/GetJoinBookingInfo?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -806,6 +824,57 @@ export class BookingServiceProxy {
         }
         return Observable.of<JoinBookingResultDto>(<any>null);
     }
+
+    /**
+     * 根据预约订单获取预约详情
+     * @return Success
+     */
+    getJoinBookingInfoByOrder(orderId: number): Observable<JoinBookingOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Booking/GetJoinBookingInfoByOrder?";
+        if (orderId === undefined || orderId === null)
+            throw new Error("The parameter 'orderId' must be defined and cannot be null.");
+        else
+            url_ += "orderId=" + encodeURIComponent("" + orderId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processGetJoinBookingInfoByOrder(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetJoinBookingInfoByOrder(response_);
+                } catch (e) {
+                    return <Observable<JoinBookingOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<JoinBookingOutput>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetJoinBookingInfoByOrder(response: Response): Observable<JoinBookingOutput> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: JoinBookingOutput = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? JoinBookingOutput.fromJS(resultData200) : new JoinBookingOutput();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<JoinBookingOutput>(<any>null);
+    }
 }
 
 @Injectable()
@@ -826,7 +895,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBusCenterDataStatistics(date: string): Observable<BusCenterDataStatisticsDto> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBusCenterDataStatistics?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -876,7 +947,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingData(date: string): Observable<BookingDataStatisticsDto> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingData?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -977,7 +1050,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingConverRate(date: string): Observable<BookingConverRateDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingConverRate?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1031,7 +1106,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingAccessTime(date: string): Observable<BookingAccessChannelDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessTime?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1085,7 +1162,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingAccessSource(date: string): Observable<GetBookingAccessSourceOutput> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessSource?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1135,7 +1214,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingAccessRegion(date: string): Observable<BookingAccessRegionDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingAccessRegion?";
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1190,9 +1271,13 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingSaturation(outletId: number, date: string): Observable<GetBookingSaturationOutput> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingSaturation?";
-        if (outletId !== undefined)
+        if (outletId === undefined || outletId === null)
+            throw new Error("The parameter 'outletId' must be defined and cannot be null.");
+        else
             url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
-        if (date !== undefined)
+        if (date === undefined || date === null)
+            throw new Error("The parameter 'date' must be defined and cannot be null.");
+        else
             url_ += "Date=" + encodeURIComponent("" + date) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1241,7 +1326,9 @@ export class BookingDataStatisticsServiceProxy {
      */
     getBookingHeat(bookingId: number): Observable<BookingHeatDto[]> {
         let url_ = this.baseUrl + "/api/services/app/BookingDataStatistics/GetBookingHeat?";
-        if (bookingId !== undefined)
+        if (bookingId === undefined || bookingId === null)
+            throw new Error("The parameter 'bookingId' must be defined and cannot be null.");
+        else
             url_ += "bookingId=" + encodeURIComponent("" + bookingId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -1611,7 +1698,9 @@ export class ChatServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/Chat/GetUserChatMessages?";
         if (tenantId !== undefined)
             url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
-        if (userId !== undefined)
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined and cannot be null.");
+        else
             url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
         if (minMessageId !== undefined)
             url_ += "MinMessageId=" + encodeURIComponent("" + minMessageId) + "&"; 
@@ -1701,6 +1790,60 @@ export class ChatServiceProxy {
         }
         return Observable.of<void>(<any>null);
     }
+
+    /**
+     * @return Success
+     */
+    findMessageAsync(id: number, userId: number): Observable<ChatMessage> {
+        let url_ = this.baseUrl + "/api/services/app/Chat/FindMessageAsync?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "id=" + encodeURIComponent("" + id) + "&"; 
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined and cannot be null.");
+        else
+            url_ += "userId=" + encodeURIComponent("" + userId) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processFindMessageAsync(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processFindMessageAsync(response_);
+                } catch (e) {
+                    return <Observable<ChatMessage>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<ChatMessage>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processFindMessageAsync(response: Response): Observable<ChatMessage> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: ChatMessage = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? ChatMessage.fromJS(resultData200) : new ChatMessage();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<ChatMessage>(<any>null);
+    }
 }
 
 @Injectable()
@@ -1719,7 +1862,9 @@ export class CommonLookupServiceProxy {
      */
     getEditionsForCombobox(onlyFreeItems: boolean): Observable<ListResultDtoOfSubscribableEditionComboboxItemDto> {
         let url_ = this.baseUrl + "/api/services/app/CommonLookup/GetEditionsForCombobox?";
-        if (onlyFreeItems !== undefined)
+        if (onlyFreeItems === undefined || onlyFreeItems === null)
+            throw new Error("The parameter 'onlyFreeItems' must be defined and cannot be null.");
+        else
             url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2073,7 +2218,9 @@ export class EditionServiceProxy {
      */
     deleteEdition(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Edition/DeleteEdition?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2123,9 +2270,13 @@ export class EditionServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/Edition/GetEditionComboboxItems?";
         if (selectedEditionId !== undefined)
             url_ += "selectedEditionId=" + encodeURIComponent("" + selectedEditionId) + "&"; 
-        if (addAllItem !== undefined)
+        if (addAllItem === undefined || addAllItem === null)
+            throw new Error("The parameter 'addAllItem' must be defined and cannot be null.");
+        else
             url_ += "addAllItem=" + encodeURIComponent("" + addAllItem) + "&"; 
-        if (onlyFreeItems !== undefined)
+        if (onlyFreeItems === undefined || onlyFreeItems === null)
+            throw new Error("The parameter 'onlyFreeItems' must be defined and cannot be null.");
+        else
             url_ += "onlyFreeItems=" + encodeURIComponent("" + onlyFreeItems) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2237,7 +2388,9 @@ export class EditionViewServiceProxy {
      */
     getEdition(editionId: number): Observable<EditionSelectDto> {
         let url_ = this.baseUrl + "/api/services/app/EditionView/GetEdition?";
-        if (editionId !== undefined)
+        if (editionId === undefined || editionId === null)
+            throw new Error("The parameter 'editionId' must be defined and cannot be null.");
+        else
             url_ += "editionId=" + encodeURIComponent("" + editionId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2301,11 +2454,17 @@ export class FileServiceProxy {
      */
     downloadTempFile(fileName: string, fileType: string, fileToken: string): Observable<void> {
         let url_ = this.baseUrl + "/api/File/DownloadTempFile?";
-        if (fileName !== undefined)
+        if (fileName === undefined || fileName === null)
+            throw new Error("The parameter 'fileName' must be defined and cannot be null.");
+        else
             url_ += "FileName=" + encodeURIComponent("" + fileName) + "&"; 
-        if (fileType !== undefined)
+        if (fileType === undefined || fileType === null)
+            throw new Error("The parameter 'fileType' must be defined and cannot be null.");
+        else
             url_ += "FileType=" + encodeURIComponent("" + fileType) + "&"; 
-        if (fileToken !== undefined)
+        if (fileToken === undefined || fileToken === null)
+            throw new Error("The parameter 'fileToken' must be defined and cannot be null.");
+        else
             url_ += "FileToken=" + encodeURIComponent("" + fileToken) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2661,11 +2820,17 @@ export class HostDashboardServiceProxy {
      */
     getDashboardStatisticsData(incomeStatisticsDateInterval: IncomeStatisticsDateInterval, startDate: Moment, endDate: Moment): Observable<HostDashboardData> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetDashboardStatisticsData?";
-        if (incomeStatisticsDateInterval !== undefined)
+        if (incomeStatisticsDateInterval === undefined || incomeStatisticsDateInterval === null)
+            throw new Error("The parameter 'incomeStatisticsDateInterval' must be defined and cannot be null.");
+        else
             url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2713,11 +2878,17 @@ export class HostDashboardServiceProxy {
      */
     getIncomeStatistics(incomeStatisticsDateInterval: IncomeStatisticsDateInterval2, startDate: Moment, endDate: Moment): Observable<GetIncomeStatisticsDataOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetIncomeStatistics?";
-        if (incomeStatisticsDateInterval !== undefined)
+        if (incomeStatisticsDateInterval === undefined || incomeStatisticsDateInterval === null)
+            throw new Error("The parameter 'incomeStatisticsDateInterval' must be defined and cannot be null.");
+        else
             url_ += "IncomeStatisticsDateInterval=" + encodeURIComponent("" + incomeStatisticsDateInterval) + "&"; 
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -2765,9 +2936,13 @@ export class HostDashboardServiceProxy {
      */
     getEditionTenantStatistics(startDate: Moment, endDate: Moment): Observable<GetEditionTenantStatisticsOutput> {
         let url_ = this.baseUrl + "/api/services/app/HostDashboard/GetEditionTenantStatistics?";
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "StartDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "EndDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3071,11 +3246,17 @@ export class IncomeStatisticsServiceServiceProxy {
      */
     getIncomeStatisticsData(startDate: Moment, endDate: Moment, dateInterval: DateInterval): Observable<IncomeStastistic[]> {
         let url_ = this.baseUrl + "/api/services/app/IncomeStatisticsService/GetIncomeStatisticsData?";
-        if (startDate !== undefined)
+        if (startDate === undefined || startDate === null)
+            throw new Error("The parameter 'startDate' must be defined and cannot be null.");
+        else
             url_ += "startDate=" + encodeURIComponent(startDate ? "" + startDate.toJSON() : "null") + "&"; 
-        if (endDate !== undefined)
+        if (endDate === undefined || endDate === null)
+            throw new Error("The parameter 'endDate' must be defined and cannot be null.");
+        else
             url_ += "endDate=" + encodeURIComponent(endDate ? "" + endDate.toJSON() : "null") + "&"; 
-        if (dateInterval !== undefined)
+        if (dateInterval === undefined || dateInterval === null)
+            throw new Error("The parameter 'dateInterval' must be defined and cannot be null.");
+        else
             url_ += "dateInterval=" + encodeURIComponent("" + dateInterval) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3120,6 +3301,113 @@ export class IncomeStatisticsServiceServiceProxy {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
         }
         return Observable.of<IncomeStastistic[]>(<any>null);
+    }
+}
+
+@Injectable()
+export class InvoiceServiceProxy {
+    private http: Http;
+    private baseUrl: string;
+    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "";
+    }
+
+    /**
+     * @return Success
+     */
+    getInvoiceInfo(id: number): Observable<InvoiceDto> {
+        let url_ = this.baseUrl + "/api/services/app/Invoice/GetInvoiceInfo?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processGetInvoiceInfo(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetInvoiceInfo(response_);
+                } catch (e) {
+                    return <Observable<InvoiceDto>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<InvoiceDto>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetInvoiceInfo(response: Response): Observable<InvoiceDto> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: InvoiceDto = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? InvoiceDto.fromJS(resultData200) : new InvoiceDto();
+            return Observable.of(result200);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<InvoiceDto>(<any>null);
+    }
+
+    /**
+     * @return Success
+     */
+    createInvoice(input: CreateInvoiceDto): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Invoice/CreateInvoice";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processCreateInvoice(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processCreateInvoice(response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processCreateInvoice(response: Response): Observable<void> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
     }
 }
 
@@ -3282,7 +3570,9 @@ export class LanguageServiceProxy {
      */
     deleteLanguage(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Language/DeleteLanguage?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3381,17 +3671,25 @@ export class LanguageServiceProxy {
      */
     getLanguageTexts(maxResultCount: number, skipCount: number, sorting: string, sourceName: string, baseLanguageName: string, targetLanguageName: string, targetValueFilter: string, filterText: string): Observable<PagedResultDtoOfLanguageTextListDto> {
         let url_ = this.baseUrl + "/api/services/app/Language/GetLanguageTexts?";
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (sourceName !== undefined)
+        if (sourceName === undefined || sourceName === null)
+            throw new Error("The parameter 'sourceName' must be defined and cannot be null.");
+        else
             url_ += "SourceName=" + encodeURIComponent("" + sourceName) + "&"; 
         if (baseLanguageName !== undefined)
             url_ += "BaseLanguageName=" + encodeURIComponent("" + baseLanguageName) + "&"; 
-        if (targetLanguageName !== undefined)
+        if (targetLanguageName === undefined || targetLanguageName === null)
+            throw new Error("The parameter 'targetLanguageName' must be defined and cannot be null.");
+        else
             url_ += "TargetLanguageName=" + encodeURIComponent("" + targetLanguageName) + "&"; 
         if (targetValueFilter !== undefined)
             url_ += "TargetValueFilter=" + encodeURIComponent("" + targetValueFilter) + "&"; 
@@ -3570,9 +3868,13 @@ export class NotificationServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/Notification/GetUserNotifications?";
         if (state !== undefined)
             url_ += "State=" + encodeURIComponent("" + state) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -3866,13 +4168,19 @@ export class OrganizationUnitServiceProxy {
      */
     getOrganizationUnitUsers(id: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfOrganizationUnitUserListDto> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/GetOrganizationUnitUsers?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4071,7 +4379,9 @@ export class OrganizationUnitServiceProxy {
      */
     deleteOrganizationUnit(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/DeleteOrganizationUnit?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4164,9 +4474,13 @@ export class OrganizationUnitServiceProxy {
      */
     removeUserFromOrganizationUnit(userId: number, organizationUnitId: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrganizationUnit/RemoveUserFromOrganizationUnit?";
-        if (userId !== undefined)
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined and cannot be null.");
+        else
             url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
-        if (organizationUnitId !== undefined)
+        if (organizationUnitId === undefined || organizationUnitId === null)
+            throw new Error("The parameter 'organizationUnitId' must be defined and cannot be null.");
+        else
             url_ += "OrganizationUnitId=" + encodeURIComponent("" + organizationUnitId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4283,7 +4597,9 @@ export class OrgBookingServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookings?";
         if (name !== undefined)
             url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
-        if (outletId !== undefined)
+        if (outletId === undefined || outletId === null)
+            throw new Error("The parameter 'outletId' must be defined and cannot be null.");
+        else
             url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
         if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
@@ -4293,9 +4609,13 @@ export class OrgBookingServiceProxy {
             url_ += "EndCreationTime=" + encodeURIComponent(endCreationTime ? "" + endCreationTime.toJSON() : "null") + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4442,7 +4762,9 @@ export class OrgBookingServiceProxy {
      */
     getBookingDetail(id: number): Observable<GetBookingDetailOutput> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetBookingDetail?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4638,7 +4960,9 @@ export class OrgBookingServiceProxy {
      */
     deleteBooking(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/DeleteBooking?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4683,17 +5007,27 @@ export class OrgBookingServiceProxy {
      */
     getItemDatetime(tenantId: number, name: string, description: string, hint: string, templateId: number, contactorId: number, contactor_Name: string, contactor_PhoneNum: string, contactor_WechatQrcodeUrl: string, contactor_TenantId: number, contactor_OutletId: number, contactor_IsDefault: boolean, contactor_IsDeleted: boolean, contactor_DeleterUserId: number, contactor_DeletionTime: Moment, contactor_LastModificationTime: Moment, contactor_LastModifierUserId: number, contactor_CreationTime: Moment, contactor_CreatorUserId: number, contactor_Id: number, outletId: number, outlet_TenantId: number, outlet_Name: string, outlet_Longitude: string, outlet_PhoneNum: string, outlet_BusinessHours: string, outlet_Province: string, outlet_ProvinceId: number, outlet_City: string, outlet_CityId: number, outlet_District: string, outlet_DistrictId: number, outlet_DetailAddress: string, outlet_PictureId: number, outlet_IsActive: boolean, outlet_Contactors: any[], outlet_IsDeleted: boolean, outlet_DeleterUserId: number, outlet_DeletionTime: Moment, outlet_LastModificationTime: Moment, outlet_LastModifierUserId: number, outlet_CreationTime: Moment, outlet_CreatorUserId: number, outlet_Id: number, needGender: boolean, needAge: boolean, needEmail: boolean, sticked: boolean, isActive: boolean, pV: number, uV: number, items: any[], pictures: any[], isDeleted: boolean, deleterUserId: number, deletionTime: Moment, lastModificationTime: Moment, lastModifierUserId: number, creationTime: Moment, creatorUserId: number, id: number): Observable<string[]> {
         let url_ = this.baseUrl + "/api/services/app/OrgBooking/GetItemDatetime?";
-        if (tenantId !== undefined)
+        if (tenantId === undefined || tenantId === null)
+            throw new Error("The parameter 'tenantId' must be defined and cannot be null.");
+        else
             url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
-        if (name !== undefined)
+        if (name === undefined || name === null)
+            throw new Error("The parameter 'name' must be defined and cannot be null.");
+        else
             url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
-        if (description !== undefined)
+        if (description === undefined || description === null)
+            throw new Error("The parameter 'description' must be defined and cannot be null.");
+        else
             url_ += "Description=" + encodeURIComponent("" + description) + "&"; 
         if (hint !== undefined)
             url_ += "Hint=" + encodeURIComponent("" + hint) + "&"; 
-        if (templateId !== undefined)
+        if (templateId === undefined || templateId === null)
+            throw new Error("The parameter 'templateId' must be defined and cannot be null.");
+        else
             url_ += "TemplateId=" + encodeURIComponent("" + templateId) + "&"; 
-        if (contactorId !== undefined)
+        if (contactorId === undefined || contactorId === null)
+            throw new Error("The parameter 'contactorId' must be defined and cannot be null.");
+        else
             url_ += "ContactorId=" + encodeURIComponent("" + contactorId) + "&"; 
         if (contactor_Name !== undefined)
             url_ += "Contactor.Name=" + encodeURIComponent("" + contactor_Name) + "&"; 
@@ -4701,13 +5035,21 @@ export class OrgBookingServiceProxy {
             url_ += "Contactor.PhoneNum=" + encodeURIComponent("" + contactor_PhoneNum) + "&"; 
         if (contactor_WechatQrcodeUrl !== undefined)
             url_ += "Contactor.WechatQrcodeUrl=" + encodeURIComponent("" + contactor_WechatQrcodeUrl) + "&"; 
-        if (contactor_TenantId !== undefined)
+        if (contactor_TenantId === undefined || contactor_TenantId === null)
+            throw new Error("The parameter 'contactor_TenantId' must be defined and cannot be null.");
+        else
             url_ += "Contactor.TenantId=" + encodeURIComponent("" + contactor_TenantId) + "&"; 
-        if (contactor_OutletId !== undefined)
+        if (contactor_OutletId === undefined || contactor_OutletId === null)
+            throw new Error("The parameter 'contactor_OutletId' must be defined and cannot be null.");
+        else
             url_ += "Contactor.OutletId=" + encodeURIComponent("" + contactor_OutletId) + "&"; 
-        if (contactor_IsDefault !== undefined)
+        if (contactor_IsDefault === undefined || contactor_IsDefault === null)
+            throw new Error("The parameter 'contactor_IsDefault' must be defined and cannot be null.");
+        else
             url_ += "Contactor.IsDefault=" + encodeURIComponent("" + contactor_IsDefault) + "&"; 
-        if (contactor_IsDeleted !== undefined)
+        if (contactor_IsDeleted === undefined || contactor_IsDeleted === null)
+            throw new Error("The parameter 'contactor_IsDeleted' must be defined and cannot be null.");
+        else
             url_ += "Contactor.IsDeleted=" + encodeURIComponent("" + contactor_IsDeleted) + "&"; 
         if (contactor_DeleterUserId !== undefined)
             url_ += "Contactor.DeleterUserId=" + encodeURIComponent("" + contactor_DeleterUserId) + "&"; 
@@ -4717,17 +5059,27 @@ export class OrgBookingServiceProxy {
             url_ += "Contactor.LastModificationTime=" + encodeURIComponent(contactor_LastModificationTime ? "" + contactor_LastModificationTime.toJSON() : "null") + "&"; 
         if (contactor_LastModifierUserId !== undefined)
             url_ += "Contactor.LastModifierUserId=" + encodeURIComponent("" + contactor_LastModifierUserId) + "&"; 
-        if (contactor_CreationTime !== undefined)
+        if (contactor_CreationTime === undefined || contactor_CreationTime === null)
+            throw new Error("The parameter 'contactor_CreationTime' must be defined and cannot be null.");
+        else
             url_ += "Contactor.CreationTime=" + encodeURIComponent(contactor_CreationTime ? "" + contactor_CreationTime.toJSON() : "null") + "&"; 
         if (contactor_CreatorUserId !== undefined)
             url_ += "Contactor.CreatorUserId=" + encodeURIComponent("" + contactor_CreatorUserId) + "&"; 
-        if (contactor_Id !== undefined)
+        if (contactor_Id === undefined || contactor_Id === null)
+            throw new Error("The parameter 'contactor_Id' must be defined and cannot be null.");
+        else
             url_ += "Contactor.Id=" + encodeURIComponent("" + contactor_Id) + "&"; 
-        if (outletId !== undefined)
+        if (outletId === undefined || outletId === null)
+            throw new Error("The parameter 'outletId' must be defined and cannot be null.");
+        else
             url_ += "OutletId=" + encodeURIComponent("" + outletId) + "&"; 
-        if (outlet_TenantId !== undefined)
+        if (outlet_TenantId === undefined || outlet_TenantId === null)
+            throw new Error("The parameter 'outlet_TenantId' must be defined and cannot be null.");
+        else
             url_ += "Outlet.TenantId=" + encodeURIComponent("" + outlet_TenantId) + "&"; 
-        if (outlet_Name !== undefined)
+        if (outlet_Name === undefined || outlet_Name === null)
+            throw new Error("The parameter 'outlet_Name' must be defined and cannot be null.");
+        else
             url_ += "Outlet.Name=" + encodeURIComponent("" + outlet_Name) + "&"; 
         if (outlet_Longitude !== undefined)
             url_ += "Outlet.Longitude=" + encodeURIComponent("" + outlet_Longitude) + "&"; 
@@ -4737,28 +5089,40 @@ export class OrgBookingServiceProxy {
             url_ += "Outlet.BusinessHours=" + encodeURIComponent("" + outlet_BusinessHours) + "&"; 
         if (outlet_Province !== undefined)
             url_ += "Outlet.Province=" + encodeURIComponent("" + outlet_Province) + "&"; 
-        if (outlet_ProvinceId !== undefined)
+        if (outlet_ProvinceId === undefined || outlet_ProvinceId === null)
+            throw new Error("The parameter 'outlet_ProvinceId' must be defined and cannot be null.");
+        else
             url_ += "Outlet.ProvinceId=" + encodeURIComponent("" + outlet_ProvinceId) + "&"; 
         if (outlet_City !== undefined)
             url_ += "Outlet.City=" + encodeURIComponent("" + outlet_City) + "&"; 
-        if (outlet_CityId !== undefined)
+        if (outlet_CityId === undefined || outlet_CityId === null)
+            throw new Error("The parameter 'outlet_CityId' must be defined and cannot be null.");
+        else
             url_ += "Outlet.CityId=" + encodeURIComponent("" + outlet_CityId) + "&"; 
         if (outlet_District !== undefined)
             url_ += "Outlet.District=" + encodeURIComponent("" + outlet_District) + "&"; 
-        if (outlet_DistrictId !== undefined)
+        if (outlet_DistrictId === undefined || outlet_DistrictId === null)
+            throw new Error("The parameter 'outlet_DistrictId' must be defined and cannot be null.");
+        else
             url_ += "Outlet.DistrictId=" + encodeURIComponent("" + outlet_DistrictId) + "&"; 
         if (outlet_DetailAddress !== undefined)
             url_ += "Outlet.DetailAddress=" + encodeURIComponent("" + outlet_DetailAddress) + "&"; 
-        if (outlet_PictureId !== undefined)
+        if (outlet_PictureId === undefined || outlet_PictureId === null)
+            throw new Error("The parameter 'outlet_PictureId' must be defined and cannot be null.");
+        else
             url_ += "Outlet.PictureId=" + encodeURIComponent("" + outlet_PictureId) + "&"; 
-        if (outlet_IsActive !== undefined)
+        if (outlet_IsActive === undefined || outlet_IsActive === null)
+            throw new Error("The parameter 'outlet_IsActive' must be defined and cannot be null.");
+        else
             url_ += "Outlet.IsActive=" + encodeURIComponent("" + outlet_IsActive) + "&"; 
         if (outlet_Contactors !== undefined)
             outlet_Contactors && outlet_Contactors.forEach((item, index) => { 
                 for (let attr in item)
                     url_ += "Outlet.Contactors[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
             });
-        if (outlet_IsDeleted !== undefined)
+        if (outlet_IsDeleted === undefined || outlet_IsDeleted === null)
+            throw new Error("The parameter 'outlet_IsDeleted' must be defined and cannot be null.");
+        else
             url_ += "Outlet.IsDeleted=" + encodeURIComponent("" + outlet_IsDeleted) + "&"; 
         if (outlet_DeleterUserId !== undefined)
             url_ += "Outlet.DeleterUserId=" + encodeURIComponent("" + outlet_DeleterUserId) + "&"; 
@@ -4768,25 +5132,43 @@ export class OrgBookingServiceProxy {
             url_ += "Outlet.LastModificationTime=" + encodeURIComponent(outlet_LastModificationTime ? "" + outlet_LastModificationTime.toJSON() : "null") + "&"; 
         if (outlet_LastModifierUserId !== undefined)
             url_ += "Outlet.LastModifierUserId=" + encodeURIComponent("" + outlet_LastModifierUserId) + "&"; 
-        if (outlet_CreationTime !== undefined)
+        if (outlet_CreationTime === undefined || outlet_CreationTime === null)
+            throw new Error("The parameter 'outlet_CreationTime' must be defined and cannot be null.");
+        else
             url_ += "Outlet.CreationTime=" + encodeURIComponent(outlet_CreationTime ? "" + outlet_CreationTime.toJSON() : "null") + "&"; 
         if (outlet_CreatorUserId !== undefined)
             url_ += "Outlet.CreatorUserId=" + encodeURIComponent("" + outlet_CreatorUserId) + "&"; 
-        if (outlet_Id !== undefined)
+        if (outlet_Id === undefined || outlet_Id === null)
+            throw new Error("The parameter 'outlet_Id' must be defined and cannot be null.");
+        else
             url_ += "Outlet.Id=" + encodeURIComponent("" + outlet_Id) + "&"; 
-        if (needGender !== undefined)
+        if (needGender === undefined || needGender === null)
+            throw new Error("The parameter 'needGender' must be defined and cannot be null.");
+        else
             url_ += "NeedGender=" + encodeURIComponent("" + needGender) + "&"; 
-        if (needAge !== undefined)
+        if (needAge === undefined || needAge === null)
+            throw new Error("The parameter 'needAge' must be defined and cannot be null.");
+        else
             url_ += "NeedAge=" + encodeURIComponent("" + needAge) + "&"; 
-        if (needEmail !== undefined)
+        if (needEmail === undefined || needEmail === null)
+            throw new Error("The parameter 'needEmail' must be defined and cannot be null.");
+        else
             url_ += "NeedEmail=" + encodeURIComponent("" + needEmail) + "&"; 
-        if (sticked !== undefined)
+        if (sticked === undefined || sticked === null)
+            throw new Error("The parameter 'sticked' must be defined and cannot be null.");
+        else
             url_ += "Sticked=" + encodeURIComponent("" + sticked) + "&"; 
-        if (isActive !== undefined)
+        if (isActive === undefined || isActive === null)
+            throw new Error("The parameter 'isActive' must be defined and cannot be null.");
+        else
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
-        if (pV !== undefined)
+        if (pV === undefined || pV === null)
+            throw new Error("The parameter 'pV' must be defined and cannot be null.");
+        else
             url_ += "PV=" + encodeURIComponent("" + pV) + "&"; 
-        if (uV !== undefined)
+        if (uV === undefined || uV === null)
+            throw new Error("The parameter 'uV' must be defined and cannot be null.");
+        else
             url_ += "UV=" + encodeURIComponent("" + uV) + "&"; 
         if (items !== undefined)
             items && items.forEach((item, index) => { 
@@ -4798,7 +5180,9 @@ export class OrgBookingServiceProxy {
                 for (let attr in item)
                     url_ += "Pictures[" + index + "]." + attr + "=" + encodeURIComponent("" + item[attr]) + "&";
             });
-        if (isDeleted !== undefined)
+        if (isDeleted === undefined || isDeleted === null)
+            throw new Error("The parameter 'isDeleted' must be defined and cannot be null.");
+        else
             url_ += "IsDeleted=" + encodeURIComponent("" + isDeleted) + "&"; 
         if (deleterUserId !== undefined)
             url_ += "DeleterUserId=" + encodeURIComponent("" + deleterUserId) + "&"; 
@@ -4808,11 +5192,15 @@ export class OrgBookingServiceProxy {
             url_ += "LastModificationTime=" + encodeURIComponent(lastModificationTime ? "" + lastModificationTime.toJSON() : "null") + "&"; 
         if (lastModifierUserId !== undefined)
             url_ += "LastModifierUserId=" + encodeURIComponent("" + lastModifierUserId) + "&"; 
-        if (creationTime !== undefined)
+        if (creationTime === undefined || creationTime === null)
+            throw new Error("The parameter 'creationTime' must be defined and cannot be null.");
+        else
             url_ += "CreationTime=" + encodeURIComponent(creationTime ? "" + creationTime.toJSON() : "null") + "&"; 
         if (creatorUserId !== undefined)
             url_ += "CreatorUserId=" + encodeURIComponent("" + creatorUserId) + "&"; 
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4892,7 +5280,9 @@ export class OrgBookingOrderServiceProxy {
      */
     getOrders(bookingId: number, bookingName: string, customerName: string, bookingDate: Moment, hourOfDay: string, startMinute: number, endMinute: number, phoneNumber: string, gender: Gender, creationStartDate: Moment, creationEndDate: Moment, status: Status[], sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfOrgBookingOrderListDto> {
         let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrders?";
-        if (bookingId !== undefined)
+        if (bookingId === undefined || bookingId === null)
+            throw new Error("The parameter 'bookingId' must be defined and cannot be null.");
+        else
             url_ += "BookingId=" + encodeURIComponent("" + bookingId) + "&"; 
         if (bookingName !== undefined)
             url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
@@ -4914,13 +5304,19 @@ export class OrgBookingOrderServiceProxy {
             url_ += "CreationStartDate=" + encodeURIComponent(creationStartDate ? "" + creationStartDate.toJSON() : "null") + "&"; 
         if (creationEndDate !== undefined)
             url_ += "CreationEndDate=" + encodeURIComponent(creationEndDate ? "" + creationEndDate.toJSON() : "null") + "&"; 
-        if (status !== undefined)
+        if (status === undefined || status === null)
+            throw new Error("The parameter 'status' must be defined and cannot be null.");
+        else
             status && status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -4969,7 +5365,9 @@ export class OrgBookingOrderServiceProxy {
      */
     getOrderDetail(id: number): Observable<OrgBookingOrderInfolDto> {
         let url_ = this.baseUrl + "/api/services/app/OrgBookingOrder/GetOrderDetail?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5222,9 +5620,13 @@ export class OutletServiceServiceProxy {
             url_ += "Name=" + encodeURIComponent("" + name) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5419,7 +5821,9 @@ export class OutletServiceServiceProxy {
      */
     deleteOutlet(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/DeleteOutlet?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5464,7 +5868,9 @@ export class OutletServiceServiceProxy {
      */
     getContactorSelectList(outletId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/GetContactorSelectList?";
-        if (outletId !== undefined)
+        if (outletId === undefined || outletId === null)
+            throw new Error("The parameter 'outletId' must be defined and cannot be null.");
+        else
             url_ += "outletId=" + encodeURIComponent("" + outletId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5563,7 +5969,9 @@ export class OutletServiceServiceProxy {
      */
     deleteContactor(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/OutletService/DeleteContactor?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -5966,9 +6374,13 @@ export class PaymentServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/Payment/GetPaymentHistory?";
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6031,11 +6443,17 @@ export class PerBookingOrderServiceProxy {
      */
     getBookingTimeline(startDataTime: Moment, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfBookingTimelineDto> {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingTimeline?";
-        if (startDataTime !== undefined)
+        if (startDataTime === undefined || startDataTime === null)
+            throw new Error("The parameter 'startDataTime' must be defined and cannot be null.");
+        else
             url_ += "StartDataTime=" + encodeURIComponent(startDataTime ? "" + startDataTime.toJSON() : "null") + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6091,13 +6509,19 @@ export class PerBookingOrderServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrders?";
         if (bookingName !== undefined)
             url_ += "BookingName=" + encodeURIComponent("" + bookingName) + "&"; 
-        if (status !== undefined)
+        if (status === undefined || status === null)
+            throw new Error("The parameter 'status' must be defined and cannot be null.");
+        else
             status && status.forEach(item => { url_ += "Status=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6146,7 +6570,9 @@ export class PerBookingOrderServiceProxy {
      */
     getBookingOrderForEdit(id: number): Observable<GetPersonBookingOrderOutput> {
         let url_ = this.baseUrl + "/api/services/app/PerBookingOrder/GetBookingOrderForEdit?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6362,13 +6788,19 @@ export class PictureServiceProxy {
      */
     getPictureAsync(groupId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfPictureListDto> {
         let url_ = this.baseUrl + "/api/services/app/Picture/GetPictureAsync?";
-        if (groupId !== undefined)
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined and cannot be null.");
+        else
             url_ += "GroupId=" + encodeURIComponent("" + groupId) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6464,7 +6896,9 @@ export class PictureServiceProxy {
      */
     uploadAsync(groupId: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/UploadAsync?";
-        if (groupId !== undefined)
+        if (groupId === undefined || groupId === null)
+            throw new Error("The parameter 'groupId' must be defined and cannot be null.");
+        else
             url_ += "groupId=" + encodeURIComponent("" + groupId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -6504,29 +6938,29 @@ export class PictureServiceProxy {
     }
 
     /**
-     * 创建或更新图片
+     * 更新图片
      * @return Success
      */
-    createOrUpdatePicture(input: CreateOrUpdatePictureInput): Observable<void> {
-        let url_ = this.baseUrl + "/api/services/app/Picture/CreateOrUpdatePicture";
+    updatePicture(input: UpdatePictureInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Picture/UpdatePicture";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(input);
         
         let options_ = {
             body: content_,
-            method: "post",
+            method: "put",
             headers: new Headers({
                 "Content-Type": "application/json", 
             })
         };
 
         return this.http.request(url_, options_).flatMap((response_) => {
-            return this.processCreateOrUpdatePicture(response_);
+            return this.processUpdatePicture(response_);
         }).catch((response_: any) => {
             if (response_ instanceof Response) {
                 try {
-                    return this.processCreateOrUpdatePicture(response_);
+                    return this.processUpdatePicture(response_);
                 } catch (e) {
                     return <Observable<void>><any>Observable.throw(e);
                 }
@@ -6535,7 +6969,7 @@ export class PictureServiceProxy {
         });
     }
 
-    protected processCreateOrUpdatePicture(response: Response): Observable<void> {
+    protected processUpdatePicture(response: Response): Observable<void> {
         const status = response.status; 
 
         let _headers: any = response.headers ? response.headers.toJSON() : {};
@@ -6550,13 +6984,16 @@ export class PictureServiceProxy {
     }
 
     /**
-     * 删除图片
+     * 批量删除图片
+     * @ids 需要删除的图片Id
      * @return Success
      */
-    deleteAsync(id: number): Observable<void> {
+    deleteAsync(ids: number[]): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/DeleteAsync?";
-        if (id !== undefined)
-            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        if (ids === undefined || ids === null)
+            throw new Error("The parameter 'ids' must be defined and cannot be null.");
+        else
+            ids && ids.forEach(item => { url_ += "Ids=" + encodeURIComponent("" + item) + "&"; });
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {
@@ -6581,6 +7018,97 @@ export class PictureServiceProxy {
     }
 
     protected processDeleteAsync(response: Response): Observable<void> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
+    }
+
+    /**
+     * 批量移动图片
+     * @return Success
+     */
+    batchMove2Group(input: BatchMove2GroupInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Picture/BatchMove2Group";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+        
+        let options_ = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processBatchMove2Group(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processBatchMove2Group(response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processBatchMove2Group(response: Response): Observable<void> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
+    }
+
+    /**
+     * 根据Url批量删除图片
+     * @return Success
+     */
+    deleteByUrlAsync(urls: string[]): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Picture/DeleteByUrlAsync?";
+        if (urls !== undefined)
+            urls && urls.forEach(item => { url_ += "Urls=" + encodeURIComponent("" + item) + "&"; });
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = {
+            method: "delete",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_) => {
+            return this.processDeleteByUrlAsync(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processDeleteByUrlAsync(response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processDeleteByUrlAsync(response: Response): Observable<void> {
         const status = response.status; 
 
         let _headers: any = response.headers ? response.headers.toJSON() : {};
@@ -6697,7 +7225,9 @@ export class PictureServiceProxy {
      */
     deleteGroupAsync(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Picture/DeleteGroupAsync?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7219,9 +7749,13 @@ export class ProfileServiceProxy {
      */
     getFriendProfilePictureById(profilePictureId: number, userId: number, tenantId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetFriendProfilePictureById?";
-        if (profilePictureId !== undefined)
+        if (profilePictureId === undefined || profilePictureId === null)
+            throw new Error("The parameter 'profilePictureId' must be defined and cannot be null.");
+        else
             url_ += "ProfilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
-        if (userId !== undefined)
+        if (userId === undefined || userId === null)
+            throw new Error("The parameter 'userId' must be defined and cannot be null.");
+        else
             url_ += "UserId=" + encodeURIComponent("" + userId) + "&"; 
         if (tenantId !== undefined)
             url_ += "TenantId=" + encodeURIComponent("" + tenantId) + "&"; 
@@ -7273,7 +7807,9 @@ export class ProfileServiceProxy {
      */
     getProfilePictureById(profilePictureId: number): Observable<GetProfilePictureOutput> {
         let url_ = this.baseUrl + "/api/services/app/Profile/GetProfilePictureById?";
-        if (profilePictureId !== undefined)
+        if (profilePictureId === undefined || profilePictureId === null)
+            throw new Error("The parameter 'profilePictureId' must be defined and cannot be null.");
+        else
             url_ += "profilePictureId=" + encodeURIComponent("" + profilePictureId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7438,9 +7974,13 @@ export class RoleServiceProxy {
             url_ += "Permission=" + encodeURIComponent("" + permission) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7584,7 +8124,9 @@ export class RoleServiceProxy {
      */
     deleteRole(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Role/DeleteRole?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -7925,9 +8467,13 @@ export class SMSTemplateServiceProxy {
             url_ += "IsActived=" + encodeURIComponent("" + isActived) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8122,7 +8668,9 @@ export class SMSTemplateServiceProxy {
      */
     deleteAsync(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/SMSTemplate/DeleteAsync?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8235,9 +8783,13 @@ export class StateServiceServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetProvinces?";
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8383,7 +8935,9 @@ export class StateServiceServiceProxy {
      */
     deleteProvince(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteProvince?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8432,13 +8986,19 @@ export class StateServiceServiceProxy {
      */
     getCitys(provinceId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfCityListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetCitys?";
-        if (provinceId !== undefined)
+        if (provinceId === undefined || provinceId === null)
+            throw new Error("The parameter 'provinceId' must be defined and cannot be null.");
+        else
             url_ += "ProvinceId=" + encodeURIComponent("" + provinceId) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8488,7 +9048,9 @@ export class StateServiceServiceProxy {
      */
     getCitySelectList(provinceId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetCitySelectList?";
-        if (provinceId !== undefined)
+        if (provinceId === undefined || provinceId === null)
+            throw new Error("The parameter 'provinceId' must be defined and cannot be null.");
+        else
             url_ += "provinceId=" + encodeURIComponent("" + provinceId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8587,7 +9149,9 @@ export class StateServiceServiceProxy {
      */
     deleteCity(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteCity?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8636,13 +9200,19 @@ export class StateServiceServiceProxy {
      */
     getDistricts(ctyId: number, sorting: string, maxResultCount: number, skipCount: number): Observable<PagedResultDtoOfDistrictListDto> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetDistricts?";
-        if (ctyId !== undefined)
+        if (ctyId === undefined || ctyId === null)
+            throw new Error("The parameter 'ctyId' must be defined and cannot be null.");
+        else
             url_ += "CtyId=" + encodeURIComponent("" + ctyId) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8692,7 +9262,9 @@ export class StateServiceServiceProxy {
      */
     getDistrictSelectList(cityId: number): Observable<SelectListItemDto[]> {
         let url_ = this.baseUrl + "/api/services/app/StateService/GetDistrictSelectList?";
-        if (cityId !== undefined)
+        if (cityId === undefined || cityId === null)
+            throw new Error("The parameter 'cityId' must be defined and cannot be null.");
+        else
             url_ += "cityId=" + encodeURIComponent("" + cityId) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8791,7 +9363,9 @@ export class StateServiceServiceProxy {
      */
     deleteDistrict(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/StateService/DeleteDistrict?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8874,15 +9448,21 @@ export class TenantServiceProxy {
             url_ += "CreationDateEnd=" + encodeURIComponent(creationDateEnd ? "" + creationDateEnd.toJSON() : "null") + "&"; 
         if (editionId !== undefined)
             url_ += "EditionId=" + encodeURIComponent("" + editionId) + "&"; 
-        if (editionIdSpecified !== undefined)
+        if (editionIdSpecified === undefined || editionIdSpecified === null)
+            throw new Error("The parameter 'editionIdSpecified' must be defined and cannot be null.");
+        else
             url_ += "EditionIdSpecified=" + encodeURIComponent("" + editionIdSpecified) + "&"; 
         if (isActive !== undefined)
             url_ += "IsActive=" + encodeURIComponent("" + isActive) + "&"; 
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -8977,7 +9557,9 @@ export class TenantServiceProxy {
      */
     getTenantForEdit(id: number): Observable<GetTenantForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantForEdit?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9072,7 +9654,9 @@ export class TenantServiceProxy {
      */
     deleteTenant(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/DeleteTenant?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9117,7 +9701,9 @@ export class TenantServiceProxy {
      */
     getTenantFeaturesForEdit(id: number): Observable<GetTenantFeaturesEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/Tenant/GetTenantFeaturesForEdit?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9361,7 +9947,9 @@ export class TenantDashboardServiceProxy {
      */
     getDashboardData(salesSummaryDatePeriod: SalesSummaryDatePeriod): Observable<GetDashboardDataOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetDashboardData?";
-        if (salesSummaryDatePeriod !== undefined)
+        if (salesSummaryDatePeriod === undefined || salesSummaryDatePeriod === null)
+            throw new Error("The parameter 'salesSummaryDatePeriod' must be defined and cannot be null.");
+        else
             url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -9409,7 +9997,9 @@ export class TenantDashboardServiceProxy {
      */
     getSalesSummary(salesSummaryDatePeriod: SalesSummaryDatePeriod2): Observable<GetSalesSummaryOutput> {
         let url_ = this.baseUrl + "/api/services/app/TenantDashboard/GetSalesSummary?";
-        if (salesSummaryDatePeriod !== undefined)
+        if (salesSummaryDatePeriod === undefined || salesSummaryDatePeriod === null)
+            throw new Error("The parameter 'salesSummaryDatePeriod' must be defined and cannot be null.");
+        else
             url_ += "SalesSummaryDatePeriod=" + encodeURIComponent("" + salesSummaryDatePeriod) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10062,7 +10652,9 @@ export class TimingServiceProxy {
      */
     getTimezones(defaultTimezoneScope: DefaultTimezoneScope): Observable<ListResultDtoOfNameValueDto> {
         let url_ = this.baseUrl + "/api/services/app/Timing/GetTimezones?";
-        if (defaultTimezoneScope !== undefined)
+        if (defaultTimezoneScope === undefined || defaultTimezoneScope === null)
+            throw new Error("The parameter 'defaultTimezoneScope' must be defined and cannot be null.");
+        else
             url_ += "DefaultTimezoneScope=" + encodeURIComponent("" + defaultTimezoneScope) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10757,9 +11349,13 @@ export class UserServiceProxy {
             roleIds && roleIds.forEach(item => { url_ += "RoleIds=" + encodeURIComponent("" + item) + "&"; });
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -10904,7 +11500,9 @@ export class UserServiceProxy {
      */
     getUserPermissionsForEdit(id: number): Observable<GetUserPermissionsForEditOutput> {
         let url_ = this.baseUrl + "/api/services/app/User/GetUserPermissionsForEdit?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11091,7 +11689,9 @@ export class UserServiceProxy {
      */
     deleteUser(id: number): Observable<void> {
         let url_ = this.baseUrl + "/api/services/app/User/DeleteUser?";
-        if (id !== undefined)
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
             url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11302,9 +11902,13 @@ export class UserLinkServiceProxy {
         let url_ = this.baseUrl + "/api/services/app/UserLink/GetLinkedUsers?";
         if (sorting !== undefined)
             url_ += "Sorting=" + encodeURIComponent("" + sorting) + "&"; 
-        if (maxResultCount !== undefined)
+        if (maxResultCount === undefined || maxResultCount === null)
+            throw new Error("The parameter 'maxResultCount' must be defined and cannot be null.");
+        else
             url_ += "MaxResultCount=" + encodeURIComponent("" + maxResultCount) + "&"; 
-        if (skipCount !== undefined)
+        if (skipCount === undefined || skipCount === null)
+            throw new Error("The parameter 'skipCount' must be defined and cannot be null.");
+        else
             url_ += "SkipCount=" + encodeURIComponent("" + skipCount) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -11626,11 +12230,17 @@ export class WeChatJSServiceProxy {
      */
     getJsApiSignature(sourceUrl: string, nonceStr: string, timestamp: string): Observable<GetJsApiSignatureOutput> {
         let url_ = this.baseUrl + "/api/services/app/WeChatJS/GetJsApiSignature?";
-        if (sourceUrl !== undefined)
+        if (sourceUrl === undefined || sourceUrl === null)
+            throw new Error("The parameter 'sourceUrl' must be defined and cannot be null.");
+        else
             url_ += "SourceUrl=" + encodeURIComponent("" + sourceUrl) + "&"; 
-        if (nonceStr !== undefined)
+        if (nonceStr === undefined || nonceStr === null)
+            throw new Error("The parameter 'nonceStr' must be defined and cannot be null.");
+        else
             url_ += "NonceStr=" + encodeURIComponent("" + nonceStr) + "&"; 
-        if (timestamp !== undefined)
+        if (timestamp === undefined || timestamp === null)
+            throw new Error("The parameter 'timestamp' must be defined and cannot be null.");
+        else
             url_ += "Timestamp=" + encodeURIComponent("" + timestamp) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
@@ -12596,6 +13206,7 @@ export class JoinBookingInfoDto implements IJoinBookingInfoDto {
     needAge: boolean;
     /** 需要邮箱 */
     needEmail: boolean;
+    id: number;
 
     constructor(data?: IJoinBookingInfoDto) {
         if (data) {
@@ -12626,6 +13237,7 @@ export class JoinBookingInfoDto implements IJoinBookingInfoDto {
             this.needGender = data["needGender"];
             this.needAge = data["needAge"];
             this.needEmail = data["needEmail"];
+            this.id = data["id"];
         }
     }
 
@@ -12655,6 +13267,7 @@ export class JoinBookingInfoDto implements IJoinBookingInfoDto {
         data["needGender"] = this.needGender;
         data["needAge"] = this.needAge;
         data["needEmail"] = this.needEmail;
+        data["id"] = this.id;
         return data; 
     }
 }
@@ -12687,6 +13300,7 @@ export interface IJoinBookingInfoDto {
     needAge: boolean;
     /** 需要邮箱 */
     needEmail: boolean;
+    id: number;
 }
 
 /** 日期信息 */
@@ -14056,10 +14670,12 @@ export class ChatMessageDto implements IChatMessageDto {
     side: ChatMessageDtoSide;
     /** 读取状态 */
     readState: ChatMessageDtoReadState;
+    receiverReadState: ChatMessageDtoReceiverReadState;
     /** 消息内容 */
     message: string;
     /** 创建时间 */
     creationTime: Moment;
+    sharedMessageId: string;
     id: number;
 
     constructor(data?: IChatMessageDto) {
@@ -14079,8 +14695,10 @@ export class ChatMessageDto implements IChatMessageDto {
             this.targetTenantId = data["targetTenantId"];
             this.side = data["side"];
             this.readState = data["readState"];
+            this.receiverReadState = data["receiverReadState"];
             this.message = data["message"];
             this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
+            this.sharedMessageId = data["sharedMessageId"];
             this.id = data["id"];
         }
     }
@@ -14099,8 +14717,10 @@ export class ChatMessageDto implements IChatMessageDto {
         data["targetTenantId"] = this.targetTenantId;
         data["side"] = this.side;
         data["readState"] = this.readState;
+        data["receiverReadState"] = this.receiverReadState;
         data["message"] = this.message;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["sharedMessageId"] = this.sharedMessageId;
         data["id"] = this.id;
         return data; 
     }
@@ -14120,10 +14740,12 @@ export interface IChatMessageDto {
     side: ChatMessageDtoSide;
     /** 读取状态 */
     readState: ChatMessageDtoReadState;
+    receiverReadState: ChatMessageDtoReceiverReadState;
     /** 消息内容 */
     message: string;
     /** 创建时间 */
     creationTime: Moment;
+    sharedMessageId: string;
     id: number;
 }
 
@@ -14168,6 +14790,81 @@ export interface IMarkAllUnreadMessagesOfUserAsReadInput {
     tenantId: number;
     /** 用户Id */
     userId: number;
+}
+
+export class ChatMessage implements IChatMessage {
+    userId: number;
+    tenantId: number;
+    targetUserId: number;
+    targetTenantId: number;
+    message: string;
+    creationTime: Moment;
+    side: ChatMessageSide;
+    readState: ChatMessageReadState;
+    receiverReadState: ChatMessageReceiverReadState;
+    sharedMessageId: string;
+    id: number;
+
+    constructor(data?: IChatMessage) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.userId = data["userId"];
+            this.tenantId = data["tenantId"];
+            this.targetUserId = data["targetUserId"];
+            this.targetTenantId = data["targetTenantId"];
+            this.message = data["message"];
+            this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
+            this.side = data["side"];
+            this.readState = data["readState"];
+            this.receiverReadState = data["receiverReadState"];
+            this.sharedMessageId = data["sharedMessageId"];
+            this.id = data["id"];
+        }
+    }
+
+    static fromJS(data: any): ChatMessage {
+        let result = new ChatMessage();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["userId"] = this.userId;
+        data["tenantId"] = this.tenantId;
+        data["targetUserId"] = this.targetUserId;
+        data["targetTenantId"] = this.targetTenantId;
+        data["message"] = this.message;
+        data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
+        data["side"] = this.side;
+        data["readState"] = this.readState;
+        data["receiverReadState"] = this.receiverReadState;
+        data["sharedMessageId"] = this.sharedMessageId;
+        data["id"] = this.id;
+        return data; 
+    }
+}
+
+export interface IChatMessage {
+    userId: number;
+    tenantId: number;
+    targetUserId: number;
+    targetTenantId: number;
+    message: string;
+    creationTime: Moment;
+    side: ChatMessageSide;
+    readState: ChatMessageReadState;
+    receiverReadState: ChatMessageReceiverReadState;
+    sharedMessageId: string;
+    id: number;
 }
 
 export class ListResultDtoOfSubscribableEditionComboboxItemDto implements IListResultDtoOfSubscribableEditionComboboxItemDto {
@@ -15306,6 +16003,8 @@ export class UploadPictureInput implements IUploadPictureInput {
     tenantId: number;
     /** 分组Id */
     groupId: number;
+    /** 图片处理接口 */
+    imageMogr2: string;
 
     constructor(data?: IUploadPictureInput) {
         if (data) {
@@ -15324,6 +16023,7 @@ export class UploadPictureInput implements IUploadPictureInput {
             this.creatorUserId = data["creatorUserId"];
             this.tenantId = data["tenantId"];
             this.groupId = data["groupId"];
+            this.imageMogr2 = data["imageMogr2"];
         }
     }
 
@@ -15341,6 +16041,7 @@ export class UploadPictureInput implements IUploadPictureInput {
         data["creatorUserId"] = this.creatorUserId;
         data["tenantId"] = this.tenantId;
         data["groupId"] = this.groupId;
+        data["imageMogr2"] = this.imageMogr2;
         return data; 
     }
 }
@@ -15359,6 +16060,8 @@ export interface IUploadPictureInput {
     tenantId: number;
     /** 分组Id */
     groupId: number;
+    /** 图片处理接口 */
+    imageMogr2: string;
 }
 
 export class UploadPictureOutput implements IUploadPictureOutput {
@@ -15983,6 +16686,8 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
     externalAuthentication: ExternalAuthenticationEditDto = new ExternalAuthenticationEditDto();
     /** 短信设置 */
     smsSettings: SMSSettingsEditDto = new SMSSettingsEditDto();
+    /** 账单信息 */
+    billing: HostBillingSettingsEditDto;
 
     constructor(data?: IHostSettingsEditDto) {
         if (data) {
@@ -16002,6 +16707,7 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
             this.security = data["security"] ? SecuritySettingsEditDto.fromJS(data["security"]) : new SecuritySettingsEditDto();
             this.externalAuthentication = data["externalAuthentication"] ? ExternalAuthenticationEditDto.fromJS(data["externalAuthentication"]) : new ExternalAuthenticationEditDto();
             this.smsSettings = data["smsSettings"] ? SMSSettingsEditDto.fromJS(data["smsSettings"]) : new SMSSettingsEditDto();
+            this.billing = data["billing"] ? HostBillingSettingsEditDto.fromJS(data["billing"]) : <any>undefined;
         }
     }
 
@@ -16020,6 +16726,7 @@ export class HostSettingsEditDto implements IHostSettingsEditDto {
         data["security"] = this.security ? this.security.toJSON() : <any>undefined;
         data["externalAuthentication"] = this.externalAuthentication ? this.externalAuthentication.toJSON() : <any>undefined;
         data["smsSettings"] = this.smsSettings ? this.smsSettings.toJSON() : <any>undefined;
+        data["billing"] = this.billing ? this.billing.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -16039,6 +16746,8 @@ export interface IHostSettingsEditDto {
     externalAuthentication: ExternalAuthenticationEditDto;
     /** 短信设置 */
     smsSettings: SMSSettingsEditDto;
+    /** 账单信息 */
+    billing: HostBillingSettingsEditDto;
 }
 
 export class GeneralSettingsEditDto implements IGeneralSettingsEditDto {
@@ -16490,6 +17199,45 @@ export interface ISMSSettingsEditDto {
     availableSmsTemplates: SelectListItemDto[];
 }
 
+export class HostBillingSettingsEditDto implements IHostBillingSettingsEditDto {
+    legalName: string;
+    address: string;
+
+    constructor(data?: IHostBillingSettingsEditDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.legalName = data["legalName"];
+            this.address = data["address"];
+        }
+    }
+
+    static fromJS(data: any): HostBillingSettingsEditDto {
+        let result = new HostBillingSettingsEditDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["legalName"] = this.legalName;
+        data["address"] = this.address;
+        return data; 
+    }
+}
+
+export interface IHostBillingSettingsEditDto {
+    legalName: string;
+    address: string;
+}
+
 export class PasswordComplexitySetting implements IPasswordComplexitySetting {
     requireDigit: boolean;
     requireLowercase: boolean;
@@ -16780,6 +17528,124 @@ export class SendTestEmailInput implements ISendTestEmailInput {
 export interface ISendTestEmailInput {
     /** 目标邮箱地址 */
     emailAddress: string;
+}
+
+export class InvoiceDto implements IInvoiceDto {
+    amount: number;
+    editionDisplayName: string;
+    invoiceNo: string;
+    invoiceDate: Moment;
+    tenantLegalName: string;
+    tenantAddress: string[];
+    tenantTaxNo: string;
+    hostLegalName: string;
+    hostAddress: string[];
+
+    constructor(data?: IInvoiceDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.amount = data["amount"];
+            this.editionDisplayName = data["editionDisplayName"];
+            this.invoiceNo = data["invoiceNo"];
+            this.invoiceDate = data["invoiceDate"] ? moment(data["invoiceDate"].toString()) : <any>undefined;
+            this.tenantLegalName = data["tenantLegalName"];
+            if (data["tenantAddress"] && data["tenantAddress"].constructor === Array) {
+                this.tenantAddress = [];
+                for (let item of data["tenantAddress"])
+                    this.tenantAddress.push(item);
+            }
+            this.tenantTaxNo = data["tenantTaxNo"];
+            this.hostLegalName = data["hostLegalName"];
+            if (data["hostAddress"] && data["hostAddress"].constructor === Array) {
+                this.hostAddress = [];
+                for (let item of data["hostAddress"])
+                    this.hostAddress.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): InvoiceDto {
+        let result = new InvoiceDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["amount"] = this.amount;
+        data["editionDisplayName"] = this.editionDisplayName;
+        data["invoiceNo"] = this.invoiceNo;
+        data["invoiceDate"] = this.invoiceDate ? this.invoiceDate.toISOString() : <any>undefined;
+        data["tenantLegalName"] = this.tenantLegalName;
+        if (this.tenantAddress && this.tenantAddress.constructor === Array) {
+            data["tenantAddress"] = [];
+            for (let item of this.tenantAddress)
+                data["tenantAddress"].push(item);
+        }
+        data["tenantTaxNo"] = this.tenantTaxNo;
+        data["hostLegalName"] = this.hostLegalName;
+        if (this.hostAddress && this.hostAddress.constructor === Array) {
+            data["hostAddress"] = [];
+            for (let item of this.hostAddress)
+                data["hostAddress"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IInvoiceDto {
+    amount: number;
+    editionDisplayName: string;
+    invoiceNo: string;
+    invoiceDate: Moment;
+    tenantLegalName: string;
+    tenantAddress: string[];
+    tenantTaxNo: string;
+    hostLegalName: string;
+    hostAddress: string[];
+}
+
+export class CreateInvoiceDto implements ICreateInvoiceDto {
+    subscriptionPaymentId: number;
+
+    constructor(data?: ICreateInvoiceDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.subscriptionPaymentId = data["subscriptionPaymentId"];
+        }
+    }
+
+    static fromJS(data: any): CreateInvoiceDto {
+        let result = new CreateInvoiceDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["subscriptionPaymentId"] = this.subscriptionPaymentId;
+        return data; 
+    }
+}
+
+export interface ICreateInvoiceDto {
+    subscriptionPaymentId: number;
 }
 
 export class GetLanguagesOutput implements IGetLanguagesOutput {
@@ -20632,6 +21498,8 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
     payerId: string;
     status: string;
     editionDisplayName: string;
+    tenantId: number;
+    invoiceNo: string;
     lastModificationTime: Moment;
     lastModifierUserId: number;
     creationTime: Moment;
@@ -20658,6 +21526,8 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
             this.payerId = data["payerId"];
             this.status = data["status"];
             this.editionDisplayName = data["editionDisplayName"];
+            this.tenantId = data["tenantId"];
+            this.invoiceNo = data["invoiceNo"];
             this.lastModificationTime = data["lastModificationTime"] ? moment(data["lastModificationTime"].toString()) : <any>undefined;
             this.lastModifierUserId = data["lastModifierUserId"];
             this.creationTime = data["creationTime"] ? moment(data["creationTime"].toString()) : <any>undefined;
@@ -20683,6 +21553,8 @@ export class SubscriptionPaymentListDto implements ISubscriptionPaymentListDto {
         data["payerId"] = this.payerId;
         data["status"] = this.status;
         data["editionDisplayName"] = this.editionDisplayName;
+        data["tenantId"] = this.tenantId;
+        data["invoiceNo"] = this.invoiceNo;
         data["lastModificationTime"] = this.lastModificationTime ? this.lastModificationTime.toISOString() : <any>undefined;
         data["lastModifierUserId"] = this.lastModifierUserId;
         data["creationTime"] = this.creationTime ? this.creationTime.toISOString() : <any>undefined;
@@ -20702,6 +21574,8 @@ export interface ISubscriptionPaymentListDto {
     payerId: string;
     status: string;
     editionDisplayName: string;
+    tenantId: number;
+    invoiceNo: string;
     lastModificationTime: Moment;
     lastModifierUserId: number;
     creationTime: Moment;
@@ -21545,20 +22419,14 @@ export interface IUploadTokenOutput {
     expirationOnUtc: Moment;
 }
 
-export class CreateOrUpdatePictureInput implements ICreateOrUpdatePictureInput {
+export class UpdatePictureInput implements IUpdatePictureInput {
     /** 名称 */
     name: string;
-    /** 图片 Key */
-    key: string;
-    /** 创建者id (回调用,必须大于0) */
-    creatorUserId: number;
-    /** 租户Id */
-    tenantId: number;
     /** 分组Id */
     groupId: number;
     id: number;
 
-    constructor(data?: ICreateOrUpdatePictureInput) {
+    constructor(data?: IUpdatePictureInput) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -21570,16 +22438,13 @@ export class CreateOrUpdatePictureInput implements ICreateOrUpdatePictureInput {
     init(data?: any) {
         if (data) {
             this.name = data["name"];
-            this.key = data["key"];
-            this.creatorUserId = data["creatorUserId"];
-            this.tenantId = data["tenantId"];
             this.groupId = data["groupId"];
             this.id = data["id"];
         }
     }
 
-    static fromJS(data: any): CreateOrUpdatePictureInput {
-        let result = new CreateOrUpdatePictureInput();
+    static fromJS(data: any): UpdatePictureInput {
+        let result = new UpdatePictureInput();
         result.init(data);
         return result;
     }
@@ -21587,27 +22452,69 @@ export class CreateOrUpdatePictureInput implements ICreateOrUpdatePictureInput {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["name"] = this.name;
-        data["key"] = this.key;
-        data["creatorUserId"] = this.creatorUserId;
-        data["tenantId"] = this.tenantId;
         data["groupId"] = this.groupId;
         data["id"] = this.id;
         return data; 
     }
 }
 
-export interface ICreateOrUpdatePictureInput {
+export interface IUpdatePictureInput {
     /** 名称 */
     name: string;
-    /** 图片 Key */
-    key: string;
-    /** 创建者id (回调用,必须大于0) */
-    creatorUserId: number;
-    /** 租户Id */
-    tenantId: number;
     /** 分组Id */
     groupId: number;
     id: number;
+}
+
+export class BatchMove2GroupInput implements IBatchMove2GroupInput {
+    /** 分组Id */
+    groupId: number;
+    /** 需要转移的图片Id */
+    ids: number[] = [];
+
+    constructor(data?: IBatchMove2GroupInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.groupId = data["groupId"];
+            if (data["ids"] && data["ids"].constructor === Array) {
+                this.ids = [];
+                for (let item of data["ids"])
+                    this.ids.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): BatchMove2GroupInput {
+        let result = new BatchMove2GroupInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["groupId"] = this.groupId;
+        if (this.ids && this.ids.constructor === Array) {
+            data["ids"] = [];
+            for (let item of this.ids)
+                data["ids"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface IBatchMove2GroupInput {
+    /** 分组Id */
+    groupId: number;
+    /** 需要转移的图片Id */
+    ids: number[];
 }
 
 export class PictureGroupListDto implements IPictureGroupListDto {
@@ -25210,6 +26117,8 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
     security: SecuritySettingsEditDto = new SecuritySettingsEditDto();
     /** 第三方登陆 */
     externalAuthentication: ExternalAuthenticationEditDto;
+    /** 账单设置 */
+    billing: TenantBillingSettingsEditDto;
 
     constructor(data?: ITenantSettingsEditDto) {
         if (data) {
@@ -25228,6 +26137,7 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
             this.ldap = data["ldap"] ? LdapSettingsEditDto.fromJS(data["ldap"]) : <any>undefined;
             this.security = data["security"] ? SecuritySettingsEditDto.fromJS(data["security"]) : new SecuritySettingsEditDto();
             this.externalAuthentication = data["externalAuthentication"] ? ExternalAuthenticationEditDto.fromJS(data["externalAuthentication"]) : <any>undefined;
+            this.billing = data["billing"] ? TenantBillingSettingsEditDto.fromJS(data["billing"]) : <any>undefined;
         }
     }
 
@@ -25245,6 +26155,7 @@ export class TenantSettingsEditDto implements ITenantSettingsEditDto {
         data["ldap"] = this.ldap ? this.ldap.toJSON() : <any>undefined;
         data["security"] = this.security ? this.security.toJSON() : <any>undefined;
         data["externalAuthentication"] = this.externalAuthentication ? this.externalAuthentication.toJSON() : <any>undefined;
+        data["billing"] = this.billing ? this.billing.toJSON() : <any>undefined;
         return data; 
     }
 }
@@ -25258,6 +26169,8 @@ export interface ITenantSettingsEditDto {
     security: SecuritySettingsEditDto;
     /** 第三方登陆 */
     externalAuthentication: ExternalAuthenticationEditDto;
+    /** 账单设置 */
+    billing: TenantBillingSettingsEditDto;
 }
 
 export class TenantUserManagementSettingsEditDto implements ITenantUserManagementSettingsEditDto {
@@ -25368,6 +26281,55 @@ export interface ILdapSettingsEditDto {
     userName: string;
     /** 密码 */
     password: string;
+}
+
+export class TenantBillingSettingsEditDto implements ITenantBillingSettingsEditDto {
+    /** 注册名称 */
+    legalName: string;
+    /** 地址 */
+    address: string;
+    /** 税号 */
+    taxVatNo: string;
+
+    constructor(data?: ITenantBillingSettingsEditDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.legalName = data["legalName"];
+            this.address = data["address"];
+            this.taxVatNo = data["taxVatNo"];
+        }
+    }
+
+    static fromJS(data: any): TenantBillingSettingsEditDto {
+        let result = new TenantBillingSettingsEditDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["legalName"] = this.legalName;
+        data["address"] = this.address;
+        data["taxVatNo"] = this.taxVatNo;
+        return data; 
+    }
+}
+
+export interface ITenantBillingSettingsEditDto {
+    /** 注册名称 */
+    legalName: string;
+    /** 地址 */
+    address: string;
+    /** 税号 */
+    taxVatNo: string;
 }
 
 export class ListResultDtoOfNameValueDto implements IListResultDtoOfNameValueDto {
@@ -27390,6 +28352,26 @@ export enum ChatMessageDtoSide {
 }
 
 export enum ChatMessageDtoReadState {
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum ChatMessageDtoReceiverReadState {
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum ChatMessageSide {
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum ChatMessageReadState {
+    _1 = 1, 
+    _2 = 2, 
+}
+
+export enum ChatMessageReceiverReadState {
     _1 = 1, 
     _2 = 2, 
 }

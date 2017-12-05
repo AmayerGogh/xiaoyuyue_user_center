@@ -55,6 +55,7 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
     }
 
     loadData(): void {
+        this.startDataTime = moment();
         this._perBookingOrderServiceProxy
             .getBookingTimeline(this.startDataTime, this.maxResultCount, this.skipCount)
             .subscribe(result => {
