@@ -69,14 +69,9 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
 
                 //Autheticate
                 this.saving = true;
-                this.phoneInput.phoneNum = this.registerInput.phoneNumber;
-                this.phoneInput.loginCode = this.registerInput.registerCode;
-                this.phoneInput.rememberClient = true;
-                this._loginService.phoneNumAuth(this.phoneInput, () => this.saving = false);
-
-                // this._loginService.authenticateModel.loginCertificate = this.registerInput.name;
-                // this._loginService.authenticateModel.password = this.registerInput.password;
-                // this._loginService.authenticate(() => { this.saving = false; });
+                this._loginService.authenticateModel.loginCertificate = this.registerInput.phoneNumber;
+                this._loginService.authenticateModel.password = result.randomPassword;
+                this._loginService.authenticate(() => { this.saving = false; });
             });
     }
 
