@@ -1,85 +1,86 @@
-<div class="booking-edit" [ngClass]="{'miniprogram-top': iswxjsEnvironment}" *ngIf="bookingOrderForEdidData" [@routerTransition]>
-    <div class="tenant-wrap card-shadow">
-        <div class="tenant-bg-wrap">
-            <img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg">
-        </div>
-        <div class="tenant-info">
-            <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}} {{bookingOrderForEdidData.bookingInfo.outletName}}</div>
-            <div class="contact">
-                <span class="item-left">
-                    <div class="content-wrap">
-                        <span class="item-left gray-icon vapps-icon-app-contact"></span>
-                        <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
+<div class="booking-edit" [ngClass]="{'miniprogram-top': iswxjsEnvironment}" *ngIf="bookingOrderForEdidData">
+    <div [@routerTransition]>
+        <div class="tenant-wrap card-shadow">
+            <div class="tenant-bg-wrap">
+                <img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg">
+            </div>
+            <div class="tenant-info">
+                <div class="name">{{bookingOrderForEdidData.bookingInfo.tenantName}} {{bookingOrderForEdidData.bookingInfo.outletName}}</div>
+                <div class="contact">
+                    <div class="item-left">
+                        <div class="content-wrap">
+                            <span class="item-left gray-icon vapps-icon-app-contact"></span>
+                            <span class="item-right">{{bookingOrderForEdidData.bookingInfo.contactor}} {{bookingOrderForEdidData.bookingInfo.contactorPhoneNum}}</span>
+                        </div>
                     </div>
-                </span>
-                <span class="item-right text-center" (click)="showQrcodeModel()">
+                    <span class="item-right text-center" (click)="showQrcodeModel()">
                     <span class="orange-icon vapps-icon-app-qr-code"></span>
-                </span>
-                <xiaoyuyue-qrcode-model #qrcodeModel [qrcodeUrl]="bookingOrderForEdidData.bookingInfo.contactorQrcode"></xiaoyuyue-qrcode-model>
+                    </span>
+                    <xiaoyuyue-qrcode-model #qrcodeModel [qrcodeUrl]="bookingOrderForEdidData.bookingInfo.contactorQrcode"></xiaoyuyue-qrcode-model>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="address-wrap card-shadow">
-        <div class="item-left">
-            <div class="content-wrap">
-                <span class="item-left gray-icon vapps-icon-app-location"></span>
-                <span class="item-right">{{bookingOrderForEdidData.bookingInfo.outletAddress}}</span>
+        <div class="address-wrap card-shadow">
+            <div class="item-left">
+                <div class="content-wrap">
+                    <span class="item-left gray-icon vapps-icon-app-location"></span>
+                    <span class="item-right">{{bookingOrderForEdidData.bookingInfo.outletAddress}}</span>
+                </div>
+            </div>
+            <div class="item-right text-center">
+                <a [href]="'tel:'+bookingOrderForEdidData.bookingInfo.contactorPhoneNum">
+                    <span class="orange-icon vapps-icon-app-phone"></span>
+                </a>
             </div>
         </div>
-        <div class="item-right text-center">
-            <a [href]="'tel:'+bookingOrderForEdidData.bookingInfo.contactorPhoneNum">
-                <span class="orange-icon vapps-icon-app-phone"></span>
-            </a>
-        </div>
-    </div>
 
-    <div class="booking-info-wrap card-shadow">
-        <div class="card-item booking-info">
-            <div class="top-wrap">
-                <div class="title">预约信息</div>
-            </div>
-            <div class="content">
-                <div class="content-item">
-                    <span class="name">项目名称 : </span>
-                    <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
+        <div class="booking-info-wrap card-shadow">
+            <div class="card-item booking-info">
+                <div class="top-wrap">
+                    <div class="title">预约信息</div>
                 </div>
-                <div class="content-item">
-                    <span class="name">预约时间 : </span>
-                    <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">应约人数 : </span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
-                </div>
-                <div class="content-item" *ngIf="bookingOrderForEdidData.orderInfo.hit">
-                    <span class="name">温馨提示 : </span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="personal-info-wrap card-shadow">
-        <div class="card-item personal-info">
-            <div class="top-wrap">
-                <div class="title">个人信息</div>
-            </div>
-            <div class="content">
-                <div class="content-item">
-                    <span class="name">姓名 : </span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
-                </div>
-                <div class="content-item">
-                    <span class="name">联系方式 : </span>
-                    <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
+                <div class="content">
+                    <div class="content-item">
+                        <span class="name">项目名称 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">预约时间 : </span>
+                        <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">应约人数 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
+                    </div>
+                    <div class="content-item" *ngIf="bookingOrderForEdidData.orderInfo.hit">
+                        <span class="name">温馨提示 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn"
-        type="button">取消预约</button>
-    <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
+        <div class="personal-info-wrap card-shadow">
+            <div class="card-item personal-info">
+                <div class="top-wrap">
+                    <div class="title">个人信息</div>
+                </div>
+                <div class="content">
+                    <div class="content-item">
+                        <span class="name">姓名 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">联系方式 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn" type="button">取消预约</button>
+        <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
+    </div>
 </div>
 <xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>
