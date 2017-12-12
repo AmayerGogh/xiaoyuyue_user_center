@@ -14,13 +14,13 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 
-import { Observable } from 'rxjs/Observable';
-import { Injectable, Inject, Optional, OpaqueToken } from '@angular/core';
-import { Http, Headers, ResponseContentType, Response } from '@angular/http';
+import { Headers, Http, Response, ResponseContentType } from '@angular/http';
+import { Inject, Injectable, InjectionToken, Optional } from '@angular/core';
 
 import { Moment } from 'moment';
+import { Observable } from 'rxjs/Observable';
 
-export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
+export const API_BASE_URL = new InjectionToken('API_BASE_URL');
 
 @Injectable()
 export class AccountServiceProxy {
