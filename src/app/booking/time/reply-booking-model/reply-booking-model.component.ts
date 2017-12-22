@@ -16,6 +16,7 @@ import { SelectHelper } from 'shared/helpers/SelectHelper';
     // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReplyBookingModelComponent extends AppComponentBase implements OnInit {
+    phoneInputPlaceholder = '';
     bookingTime: string;
     hourOfDay: string;
     saving = false;
@@ -41,6 +42,9 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     show(): void {
         this.modal.show();
+        // setTimeout(() => {
+        //     this.initValidLandlinePhone();
+        // }, 500)
     }
 
     close(): void {
@@ -76,5 +80,28 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
 
     selectGenderHandler(gender: JoinBookingInputGender): void {
         this.input.gender = gender;
+    }
+
+    setPhoneInputTip(): void {
+        this.phoneInputPlaceholder = this.l('Booking.Telephone.Warning');
+    }
+    resetPhoneInputTip(): void {
+        this.phoneInputPlaceholder = '';
+    }
+
+    // 固话验证初始化
+    private initValidLandlinePhone(): void {
+        $('#phoneNumber').inputmask({
+            mask: '+(9{0,4}[86]) 9{4}-9{3,4}-9999{0,1}',
+            oncomplete: () => {
+                debugger
+                let phoneNum = $('#phoneNumber').val() + '';
+                phoneNum = phoneNum.replace(/\+/, '');
+                phoneNum = phoneNum.replace(/\(/, '');
+                phoneNum = phoneNum.replace(/\)/, '');
+                phoneNum = phoneNum.replace(/-/g, '');
+                this.input.phoneNumber = phoneNum;
+            }
+        });
     }
 }

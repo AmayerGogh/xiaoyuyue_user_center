@@ -1,19 +1,19 @@
 @import "variables";
 
 @font-face {
-  font-family: 'xiaoyuyue';
-  src:  url('#{$icomoon-font-path}/xiaoyuyue.eot?o42wgv');
-  src:  url('#{$icomoon-font-path}/xiaoyuyue.eot?o42wgv#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/xiaoyuyue.ttf?o42wgv') format('truetype'),
-    url('#{$icomoon-font-path}/xiaoyuyue.woff?o42wgv') format('woff'),
-    url('#{$icomoon-font-path}/xiaoyuyue.svg?o42wgv#xiaoyuyue') format('svg');
+  font-family: 'xiaoyuyue-user';
+  src:  url('#{$icomoon-font-path}/xiaoyuyue-user.eot?c5og9w');
+  src:  url('#{$icomoon-font-path}/xiaoyuyue-user.eot?c5og9w#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/xiaoyuyue-user.ttf?c5og9w') format('truetype'),
+    url('#{$icomoon-font-path}/xiaoyuyue-user.woff?c5og9w') format('woff'),
+    url('#{$icomoon-font-path}/xiaoyuyue-user.svg?c5og9w#xiaoyuyue-user') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="vapps-icon-"], [class*=" vapps-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'xiaoyuyue' !important;
+  font-family: 'xiaoyuyue-user' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -26,6 +26,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.vapps-icon-app-landline-phone {
+  &:before {
+    content: $vapps-icon-app-landline-phone;
+  }
+}
 .vapps-icon-app-active {
   &:before {
     content: $vapps-icon-app-active;
