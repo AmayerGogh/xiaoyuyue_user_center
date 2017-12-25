@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'xiaoyuyue';
-  src:  url('fonts/xiaoyuyue.eot?o42wgv');
-  src:  url('fonts/xiaoyuyue.eot?o42wgv#iefix') format('embedded-opentype'),
-    url('fonts/xiaoyuyue.ttf?o42wgv') format('truetype'),
-    url('fonts/xiaoyuyue.woff?o42wgv') format('woff'),
-    url('fonts/xiaoyuyue.svg?o42wgv#xiaoyuyue') format('svg');
+  font-family: 'xiaoyuyue-user';
+  src:  url('fonts/xiaoyuyue-user.eot?c5og9w');
+  src:  url('fonts/xiaoyuyue-user.eot?c5og9w#iefix') format('embedded-opentype'),
+    url('fonts/xiaoyuyue-user.ttf?c5og9w') format('truetype'),
+    url('fonts/xiaoyuyue-user.woff?c5og9w') format('woff'),
+    url('fonts/xiaoyuyue-user.svg?c5og9w#xiaoyuyue-user') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="vapps-icon-"], [class*=" vapps-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'xiaoyuyue' !important;
+  font-family: 'xiaoyuyue-user' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.vapps-icon-app-landline-phone:before {
+  content: "\e946";
+}
 .vapps-icon-app-active:before {
   content: "\e900";
 }

@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, Injector, OnInit, Output, ViewChild } from '@angular/core';
-import { AuthenticateModel, AuthenticateResultModel, ExternalLoginProviderInfoModel, TokenAuthServiceProxy, PhoneAuthenticateModel, CodeSendInput, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AuthenticateModel, AuthenticateResultModel, CodeSendInput, ExternalLoginProviderInfoModel, PhoneAuthenticateModel, SMSServiceProxy, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
 import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { Headers, Http } from '@angular/http';
 
@@ -11,9 +11,8 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
 import { AppSessionService } from 'shared/common/session/app-session.service';
 import { Location } from '@angular/common';
-import { NgxAni } from 'ngxani';
-import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { VerificationCodeType } from 'shared/AppEnums';
+import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     templateUrl: './login.component.html',
@@ -29,7 +28,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     ordinaryLogin = true;
     saving = false;
     isSendSMS = false;
-    
+
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
@@ -40,7 +39,6 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         private _sessionService: AppSessionService,
         private _tokenAuthService: TokenAuthServiceProxy,
         private _SMSServiceProxy: SMSServiceProxy,
-        private _ngxAni: NgxAni
     ) {
         super(injector);
     }
@@ -105,33 +103,33 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         this.ordinaryLogin = false;
     }
 
-        // 发送验证码
-        send() {
-            const input: CodeSendInput = new CodeSendInput();
-            input.targetNumber = this.phoneModel.phoneNum;
-            input.codeType = VerificationCodeType.Login;
-            // this.captchaResolved();
-    
-            this._SMSServiceProxy
-                .sendCodeAsync(input)
-                .subscribe(result => {
-                    this.anginSend();
-                });
-        }
-    
-        anginSend() {
-            const self = this;
-            let time = 60;
-            this.isSendSMS = true;
-            const set = setInterval(() => {
-                time--;
-                self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
-            }, 1000);
-    
-            setTimeout(() => {
-                clearInterval(set);
-                self.isSendSMS = false;
-                self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
-            }, 60000);
-        }
+    // 发送验证码
+    send() {
+        const input: CodeSendInput = new CodeSendInput();
+        input.targetNumber = this.phoneModel.phoneNum;
+        input.codeType = VerificationCodeType.Login;
+        // this.captchaResolved();
+
+        this._SMSServiceProxy
+            .sendCodeAsync(input)
+            .subscribe(result => {
+                this.anginSend();
+            });
+    }
+
+    anginSend() {
+        const self = this;
+        let time = 60;
+        this.isSendSMS = true;
+        const set = setInterval(() => {
+            time--;
+            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
+        }, 1000);
+
+        setTimeout(() => {
+            clearInterval(set);
+            self.isSendSMS = false;
+            self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
+        }, 60000);
+    }
 }

@@ -13,6 +13,7 @@ import { CookiesService } from 'shared/services/cookies.service';
 import { Injectable } from '@angular/core';
 import { PermissionCheckerService } from '@abp/auth/permission-checker.service';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { AppConsts } from 'shared/AppConsts';
 
 @Injectable()
 export class AppRouteGuard implements CanActivate, CanActivateChild {
@@ -27,7 +28,7 @@ export class AppRouteGuard implements CanActivate, CanActivateChild {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this._sessionService.user) {
-            this._appAuthService.recordRedirectUrl();
+            this._appAuthService.recordRedirectUrl(AppConsts.appBaseUrl + state.url);
             this._router.navigate(['/auth/login']);
             return false;
         }

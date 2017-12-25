@@ -50,3 +50,4 @@ aspnet-core/test/JMeter/AspNetZeroDotNetCoreSimpleTest.jmx
 /aspnet-core/build/outputs
 
 chromeDummyDir/*
+/package-lock.json
