@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     // 跳转机构中心
     linkToBusiness(): void {
         if (!ClientTypeHelper.isWeChatMiniProgram) {
-            window.location.href = AppConsts.appBusinessBaseUrl;
+            window.location.href = AppConsts.businessCenterUrl;
         } else {
             wx.miniProgram.navigateTo({
                 url: '/pages/business-center/business-center'

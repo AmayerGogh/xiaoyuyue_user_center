@@ -1,5 +1,5 @@
 ﻿{
   "remoteServiceBaseUrl": "http://localhost:5001",
-  "appBaseUrl": "http://vappshk.oicp.net:5201/",
-  "appBusinessBaseUrl": "http://vappshk.oicp.net:5202"
+  "appBaseUrl": "http://www.xiaoyuyue.com",
+  "shareBaseUrl": "http://www.xiaoyuyue.com"
 }

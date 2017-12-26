@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
     }
     createBooking(): void {
-        window.location.href = AppConsts.appBusinessBaseUrl + '/booking/create';
+        window.location.href = AppConsts.businessCenterUrl + '/booking/create';
     }
 
 }

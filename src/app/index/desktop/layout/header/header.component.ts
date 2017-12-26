@@ -15,10 +15,10 @@ export class HeaderComponent implements OnInit {
     }
 
     login(): void {
-        window.location.href = AppConsts.appBusinessBaseUrl + '/auth/login';
+        window.location.href = AppConsts.businessCenterUrl + '/auth/login';
     }
 
     register(): void {
-        window.location.href = AppConsts.appBusinessBaseUrl + '/auth/register';
+        window.location.href = AppConsts.businessCenterUrl + '/auth/register';
     }
 }
