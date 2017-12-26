@@ -13,7 +13,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating">
                                     <input class="form-control edited" type="text" value="{{ d(input.date) }} {{ hourOfDay }}" readonly disabled>
-                                    <label class="control-label">预约时间</label>
+                                    <label class="control-label">{{ l('Booking.Datetime') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                             <div class="col-xs-12">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.name}">
                                     <input class="form-control" type="text" name="name" [(ngModel)]="input.name" autofocus required>
-                                    <label class="control-label">姓名</label>
+                                    <label class="control-label">{{ l('Booking.CustomerName') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -31,14 +31,14 @@
                             <div class="col-xs-6">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.phoneNumber}">
                                     <input class="form-control" type="number" name="phoneNumber" [(ngModel)]="input.phoneNumber" pattern="(13\d|14[57]|15[^4,\D]|17[678]|18\d)\d{8}|170[059]\d{7}" required>
-                                    <label class="control-label">手机号</label>
+                                    <label class="control-label">{{ l('Booking.Phone') }}</label>
                                 </div>
                             </div>
 
                             <div class="col-xs-6">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.subscriberNum}">
                                     <input class="form-control" type="number" name="subscriberNum" [(ngModel)]="input.subscriberNum" required>
-                                    <label class="control-label">预约人数</label>
+                                    <label class="control-label">{{ l('Booking.Num') }}</label>
                                 </div>
                             </div>
                         </div>
@@ -47,16 +47,14 @@
                             <div class="col-xs-12" *ngIf="bookingInfoData.needEmail">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.emailAddress}">
                                     <input class="form-control" type="email" name="emailAddress" [(ngModel)]="input.emailAddress" pattern="^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$" required>
-                                    <label class="control-label">电子邮箱</label>
+                                    <label class="control-label">{{ l('Booking.EmailAddress') }}</label>
                                 </div>
                             </div>
 
                             <div class="col-xs-6" *ngIf="bookingInfoData.needGender">
-                                <!-- <input class="form-control" type="number" name="gender" [(ngModel)]="input.gender" required>
-                                    <label class="control-label">性别</label> -->
-                                <div class="gender-select-wrap">
-                                    <select class="gender-select form-group label-floating" name="gender" [ngModel]="defaultGenderSelect" (ngModelChange)="selectGenderHandler($event)">
-                                            <option value="0" selected>性别</option>
+                                <div class="gender-select-wrap form-group">
+                                    <select class="gender-select form-control label-floating" name="gender" [ngModel]="defaultGenderSelect" (ngModelChange)="selectGenderHandler($event)">
+                                            <option value="0" selected>{{ l('Booking.Gender') }}</option>
                                             <option [value]="listItem.value" *ngFor="let listItem of genderSelectListData">{{ listItem.displayText }}</option>
                                         </select>
                                 </div>
@@ -65,7 +63,7 @@
                             <div class="col-xs-6" *ngIf="bookingInfoData.needAge">
                                 <div class="form-group label-floating" [ngClass]="{'is-empty': !input.age}">
                                     <input class="form-control" type="number" name="age" [(ngModel)]="input.age" required>
-                                    <label class="control-label">年龄</label>
+                                    <label class="control-label">{{ l('Booking.Age') }}</label>
                                 </div>
                             </div>
 

@@ -5,15 +5,15 @@
                 <div class="modal-header">
                     <span class="close" (click)="close()" aria-label="Close"></span>
                     <h4 class="modal-title row">
-                        最佳预约时间
+                        {{ l('Booking.OptimalTime') }}
                     </h4>
                 </div>
 
                 <div class="modal-body">
-                    <p class="modal-tip">根据目前预约的情况,给您推荐最佳预约时间</p>
+                    <p class="modal-tip">{{ l('Booking.OptimalTime.Tips') }}</p>
                     <p class="modal-time">10:00-11:00</p>
                     <div class="footer">
-                        <button type="submit" class="btn primary-bgcolor btn-block" (click)="confirmBookingTime()">选择</button>
+                        <button type="submit" class="btn primary-bgcolor btn-block" (click)="confirmBookingTime()">{{ l('Choose') }}</button>
                     </div>
                 </div>
 

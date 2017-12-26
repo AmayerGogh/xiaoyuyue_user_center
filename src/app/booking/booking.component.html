@@ -2,11 +2,11 @@
     <xiaoyuyue-booking-header [organizationInfoData]="bookingData.organizationInfo" (showTenantDetail)="showTenantDetailHandler($event)"></xiaoyuyue-booking-header>
 
     <tabset class="side-bar tab-container tabbable-line" #staticTabs>
-        <tab heading="预约介绍">
+        <tab heading="{{ l('Booked.Tab.Intro') }}">
             <xiaoyuyue-booking-about (isBooking)="isBookingHandler($event)" [optimalBookingTime]="optimalBookingTime" [businessAboutData]="bookingData.bookingInfo"></xiaoyuyue-booking-about>
         </tab>
 
-        <tab heading="预约时间" [active]="showReplyBookingModel">
+        <tab heading="{{ l('Booked.Tab.Time') }}" [active]="showReplyBookingModel">
             <xiaoyuyue-booking-time #bookingTimeModel [bookingInfoData]="bookingData.bookingInfo" [availableDateItemData]="bookingData.availableDateItem"></xiaoyuyue-booking-time>
         </tab>
 
