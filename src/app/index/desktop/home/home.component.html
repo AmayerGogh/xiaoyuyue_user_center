@@ -3,15 +3,15 @@
     <xiaoyuyue-header></xiaoyuyue-header>
     <div class="banner-wrap section">
         <div class="banner-slogan common-max-width">
-            <h2>小微企业预约工具<br><small>便捷创建预约工具</small></h2>
-            <button class="btn primary-bgcolor" (click)="createBooking()">PC创建</button>
+            <h2>{{ l('MicroCompany.BookingTool') }}<br><small>{{ l('Convenient.BookingTool') }}</small></h2>
+            <button class="btn primary-bgcolor" (click)="createBooking()">{{ l('DesktopCreateBooking') }}</button>
         </div>
     </div>
 
     <!-- 关于我们 -->
     <div class="about-me-wrap section">
         <div class="common-max-width">
-            <h3 class="content-title">关于我们</h3>
+            <h3 class="content-title">{{ l('AboutUs') }}</h3>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -19,9 +19,9 @@
                             <img src="/assets/common/images/index/about/bg1.jpg" alt="bg1">
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">小工具 快省事</p>
-                            <p class="text-item">小预约，帮助小微企业便捷创建预约，</p>
-                            <p class="text-item">管理预约订单，提高流程效率，实现提升效益。</p>
+                            <p class="text-item text-title">{{ l('Xiaoyuyue.Slogan.Title') }}</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.Slogan.Title.Tip1') }}，</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.Slogan.Title.Tip2') }}。</p>
                         </div>
                     </div>
                 </div>
@@ -31,14 +31,14 @@
                             <!-- <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2"> -->
                             <div class="video">
                                 <video controls="controls" draggable="" poster="/assets/common/images/index/about/bg2.jpg" preload="metadata" [src]="introVideoUrl" type="video/mp4" width="100%">
-                                        您的浏览器不支持 video 标签。
+                                        {{ l('Nonsupport.VideoTag') }}。
                                     </video>
                             </div>
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">小预约</p>
-                            <p class="text-item">1分钟，了解小预约，</p>
-                            <p class="text-item">如何创建预约，管理预约，1分钟简单掌握。</p>
+                            <p class="text-item text-title">{{ l('Xiaoyuyue') }}</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.FastKnowledge') }}，</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.FastKnowledge.Tip') }}。</p>
                         </div>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
                             <img src="/assets/common/images/index/about/bg3.jpg" alt="bg3">
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">更多数据支持</p>
-                            <p class="text-item">数据化管理预约，从简单到复杂，</p>
-                            <p class="text-item">从数据判断趋势，了解潜在需求。</p>
+                            <p class="text-item text-title">{{ l('Xiaoyuyue.MoreDataForSupport') }}</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.MoreDataForSupport.Tip1') }}，</p>
+                            <p class="text-item">{{ l('Xiaoyuyue.MoreDataForSupport.Tip2') }}。</p>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
     <!-- 如何建表 -->
     <div class="how-table-wrap section">
         <div class="common-max-width">
-            <h3 class="content-title">如何建表</h3>
+            <h3 class="content-title">{{ l('Xiaoyuyue.HowToCreateBooking') }}</h3>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -91,7 +91,7 @@
     <!-- 如何应约 -->
     <div class="how-booking-wrap section">
         <div class="common-max-width">
-            <h3 class="content-title">如何应约</h3>
+            <h3 class="content-title">{{ l('Xiaoyuyue.HowToJoinBooking') }}</h3>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -122,7 +122,7 @@
     <!-- 使用场景 -->
     <div class="usage-scene-wrap section">
         <div class="common-max-width">
-            <h3 class="content-title">使用场景</h3>
+            <h3 class="content-title">{{ l('Xiaoyuyue.UsageScenario') }}</h3>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -130,7 +130,7 @@
                             <img src="/assets/common/images/index/scene/bg2.jpg" alt="bg2">
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">插花</p>
+                            <p class="text-item text-title">{{ l('ImaginativeFlower') }}</p>
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                             <img src="/assets/common/images/index/scene/bg3.jpg" alt="bg3">
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">烘焙</p>
+                            <p class="text-item text-title">{{ l('Baking') }}</p>
                         </div>
                     </div>
                 </div>
@@ -150,7 +150,7 @@
                             <img src="/assets/common/images/index/scene/bg4.jpg" alt="bg4">
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">读书会</p>
+                            <p class="text-item text-title">{{ l('ReadingParty') }}</p>
                         </div>
                     </div>
                 </div>
@@ -163,19 +163,19 @@
         <div class="common-max-width">
             <div class="row">
                 <div class="col-lg-6">
-                    <h3 class="content-title">联系我们</h3>
-                    <p class="slogan">在生活中预约美好，小预约给你便捷快速的预约体验，帮助小微企业建立秩序，超越传统，节约人力成本，省时省力</p>
+                    <h3 class="content-title">{{ l('ContactUs') }}</h3>
+                    <p class="slogan">{{ l('Slogan') }}</p>
                     <div class="contact-way">
                         <div class="flex-block">
                             <div class="flex-left vapps-icon-app-location"></div>
                             <div class="flex-right ">
-                                <h4>办公地址<br><small>广州市番禺区天安科技园产业大厦503</small></h4>
+                                <h4>{{ l('OfficeAddress') }}<br><small>{{ l('OfficeAddress') }}</small></h4>
                             </div>
                         </div>
                         <div class="flex-block">
                             <div class="flex-left vapps-icon-app-message"></div>
                             <div class="flex-right ">
-                                <h4>联系方式<br><small>020-39141150<br>marketing@vapps.hk</small></h4>
+                                <h4>{{ l('ContactWay') }}<br><small>020-39141150<br>marketing@vapps.hk</small></h4>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                                 <!-- <label class="col-sm-2 label-on-left">With help</label> -->
                                 <div class="col-md-12">
                                     <div class="form-group label-floating is-empty">
-                                        <label class="control-label">姓名</label>
+                                        <label class="control-label">{{ l('Compellation') }}</label>
                                         <input class="form-control" type="text" name="name">
                                     </div>
                                 </div>
@@ -198,7 +198,7 @@
                                 <!-- <label class="col-sm-2 label-on-left">With help</label> -->
                                 <div class="col-md-12">
                                     <div class="form-group label-floating is-empty">
-                                        <label class="control-label">电子邮件</label>
+                                        <label class="control-label">{{ l('EmailAddress') }}</label>
                                         <input class="form-control" type="email" name="email">
                                     </div>
                                 </div>
@@ -208,13 +208,13 @@
                                 <!-- <label class="col-sm-2 label-on-left">With help</label> -->
                                 <div class="col-md-12">
                                     <div class="form-group label-floating is-empty">
-                                        <label class="control-label">告诉我们您的问题或建议...</label>
+                                        <label class="control-label">{{ l('Feedback') }}...</label>
                                         <textarea class="form-control" name="propose" rows="3"></textarea>
                                     </div>
                                 </div>
                             </div>
 
-                            <button class="btn btn-warning">发送消息</button>
+                            <button class="btn btn-warning">{{ l('SeedMessage') }}</button>
                         </div>
                     </div>
                 </div>
