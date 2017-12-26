@@ -5,7 +5,7 @@
     </div>
 
     <div class="content-wrap box-shadow">
-        <div class="tenant-avatar" (click)="showTenantDetailHandler()"><img [src]="organizationInfoData.logoUrl" width="100%" height="100%" alt="logo"></div>
+        <div class="tenant-avatar" (click)="showTenantDetailHandler()" [ngStyle]="{'background-image': 'url(' + organizationInfoData.logoUrl + ')'}">用户头像</div>
         <div class="tenant-name">{{organizationInfoData.name}}</div>
         <div class="tenant-banner">{{organizationInfoData.tagline}}</div>
     </div>
