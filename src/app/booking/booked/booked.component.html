@@ -3,27 +3,27 @@
 <div class="booked-content">
     <div class="content-wrap">
         <div class="finshed-icon">
-            <img src="../../assets/common/images/svg/app-booked.svg" width="48px" alt="已完成">
+            <img src="../../assets/common/images/svg/app-booked.svg" width="48px" alt="{{ l('Completed') }}">
         </div>
-        <p class="success-tip">应约成功</p>
+        <p class="success-tip">{{ l('Booked.Success') }}</p>
 
         <div class="booking-customer-info">
             <p class="booking-item">
-                <span class="item-left">项目</span>
+                <span class="item-left">{{ l('Booked.BookingName') }}</span>
                 <span class="item-right">{{bookingName}}</span>
             </p>
             <p class="booking-item">
-                <span class="item-left">应约人</span>
+                <span class="item-left">{{ l('Booked.BookingCustomer') }}</span>
                 <span class="item-right">{{bookingCustomer}}</span>
             </p>
             <p class="booking-item">
-                <span class="item-left">时间</span>
+                <span class="item-left">{{ l('Booked.BookingDate') }}</span>
                 <span class="item-right">{{bookingDate}} {{hourOfDay}}</span>
             </p>
         </div>
 
         <div class="btn btn-submit">
-            <a (click)="redirectBookingList()" routerLink="/user/booking/list">完成</a>
+            <a (click)="redirectBookingList()" routerLink="/user/booking/list">{{ l('Complete') }}</a>
         </div>
     </div>
 
@@ -31,8 +31,8 @@
         <div class="qr-code-wrap">
             <img src="/assets/common/images/xiaoyuyue-qr-code-x2.png" width="115px" alt="xiaoyuyue-qr-code">
         </div>
-        <p class="xiaoyuyue-tip">关注 小预约 公众号</p>
-        <p class="xiaoyuyue-tip">轻松了解预约详情</p>
+        <p class="xiaoyuyue-tip">{{ l('FollowMe.Tip1') }}</p>
+        <p class="xiaoyuyue-tip">{{ l('FollowMe.Tip2') }}</p>
     </div>
 
     <!-- <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad> -->

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewEncapsulation, Injector } from '@angular/core';
 
 import { AppConsts } from 'shared/AppConsts';
 import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Router } from '@angular/router';
+import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
     selector: 'app-home',
@@ -10,12 +11,15 @@ import { Router } from '@angular/router';
     styleUrls: ['./home.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent extends AppComponentBase implements OnInit, AfterViewInit {
     fullpage: any;
     pagesArr: number[] = [];
     constructor(
+        private injector: Injector,
         private _router: Router
-    ) { }
+    ) {
+        super(injector);
+    }
 
     ngOnInit() {
     }

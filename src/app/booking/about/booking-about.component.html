@@ -1,11 +1,11 @@
 <div class="booking-about" [@routerTransition] *ngIf="businessAboutData">
     <div class="card clearfix optimal-time-wrap" *ngIf="optimalBookingTime">
         <div class="text-tip-wrap pull-left">
-            <p class="tip">最佳预约时间</p>
+            <p class="tip">{{l('Booking.OptimalTime') }}</p>
             <p class="time">{{ optimalBookingTime }}</p>
         </div>
         <div class="pull-right">
-            <button class="btn btn-warning" (click)="atOnceBooking()">立即预约</button>
+            <button class="btn btn-warning" (click)="atOnceBooking()">{{ l('Booking.Now') }}</button>
         </div>
     </div>
     <div class="about-header about-item">
@@ -30,7 +30,7 @@
         <div class="address item">
             <div class="item-left">
                 <div class="info-wrap">
-                    <span class="name">地 址</span>
+                    <span class="name">{{ l('Booking.Address') }}</span>
                     <span class="colon">:</span>
                     <span class="desc">{{businessAboutData.outletAddress}}</span>
                 </div>
@@ -42,7 +42,7 @@
         <div class="contact item">
             <div class="item-left">
                 <div class="info-wrap">
-                    <span class="name">联系人</span>
+                    <span class="name">{{ l('Booking.Contactor') }}</span>
                     <span class="colon">:</span>
                     <span class="desc">{{businessAboutData.contactorName}}</span>
                 </div>
@@ -56,7 +56,7 @@
         <div class="phone item">
             <div class="item-left">
                 <div class="info-wrap">
-                    <span class="name">手 机</span>
+                    <span class="name">{{ l('Booking.Phone') }}</span>
                     <span class="colon">:</span>
                     <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
                 </div>
