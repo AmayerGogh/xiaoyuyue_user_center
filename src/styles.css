@@ -68,13 +68,33 @@ select:-webkit-autofill {
     font-weight: normal !important;
 }
 
+.btn:not(.md-skip):not(.bs-select-all):not(.bs-deselect-all) {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+    padding: 8px 14px 7px 14px;
+}
+
 .btn:hover,
 .btn:focus,
 .btn.focus {
     color: #FFF;
 }
 
+/* 覆盖metronicUI样式*/
 
+.form-group.form-md-line-input {
+    margin-bottom: 15px;
+}
 /* 覆盖material-Pro的样式  */
 
 .form-group.is-focused .form-control {
@@ -165,3 +185,9 @@ a {
 .form-group {
     margin: 10px 0 0 0;
 }
+
+/* sweet-alert弹窗 */
+.swal-footer {
+    text-align: center;
+}
+
