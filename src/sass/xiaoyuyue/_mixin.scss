@@ -41,3 +41,54 @@
 @mixin shadow-big() {
     box-shadow: 0 16px 38px -12px rgba(0, 0, 0, $mdb-shadow-key-penumbra-opacity * 4), 0 4px 25px 0px rgba(0, 0, 0, $mdb-shadow-ambient-shadow-opacity), 0 8px 10px -5px rgba(0, 0, 0, $mdb-shadow-key-umbra-opacity);
 }
+
+/*
+    绝对定位方式居中
+    $type == 1：水平居中
+    $type == 2：垂直居中
+    $type == 3：水平并垂直居中
+*/
+
+@mixin positionMiddle($type) {
+    @if $type==1 {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    @else if $type==2 {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    @else if $type==3 {
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%);
+        transform: translateY(-50%);
+    }
+}
+
+
+/*
+    flex布局方式居中
+    $type == 1：水平居中
+    $type == 2：垂直居中
+    $type == 3：水平并垂直居中
+*/
+
+@mixin flexMiddle($type) {
+    display: flex;
+    flex-direction: column;
+    @if $type==1 {
+        /*水平居中*/
+        justify-content: center;
+    }
+    @else if $type==2 {
+        /*垂直居中*/
+        align-items: center;
+    }
+    @else if $type==3 {
+        /*垂直居中*/
+        align-items: center;
+        /*水平居中*/
+        justify-content: center;
+    }
+}
