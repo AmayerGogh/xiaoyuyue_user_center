@@ -7,10 +7,12 @@ export class AppConsts {
 
     static remoteServiceBaseUrl: string;
     static remoteServiceBaseUrlFormat: string;
+
     static appBaseUrl: string;
-    static appBusinessBaseUrl: string;
-    static bookingPictureFormat: string;
     static appBaseUrlFormat: string;
+
+    static businessCenterUrl: string;
+
     static BookingPicture: string;
     static readonly externalLoginUrl = '/auth/login';
 

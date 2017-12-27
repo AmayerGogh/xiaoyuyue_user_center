@@ -7,10 +7,9 @@ import { ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/s
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
-import { AppSessionService } from '@shared/common/session/app-session.service';
+import { AppSessionService } from 'shared/common/session/app-session.service';
 import { CookiesService } from 'shared/services/cookies.service';
-import { UrlHelper } from '@shared/helpers/UrlHelper';
-import { element } from 'protractor';
+import { UrlHelper } from 'shared/helpers/UrlHelper';
 
 @Component({
     selector: 'xiaoyuyue-loading',
@@ -18,9 +17,7 @@ import { element } from 'protractor';
     styleUrls: ['./external-auth.component.scss']
 })
 export class ExternalAuthComponent extends AppComponentBase implements OnInit, AfterViewInit {
-
     isAuthBind = 'false';
-
     constructor(
         injector: Injector,
         private _router: Router,
@@ -66,21 +63,27 @@ export class ExternalAuthComponent extends AppComponentBase implements OnInit, A
                 }
             } else {
                 this._loginService.init((externalLoginProviders) => {
-                    for (let i = 0; i < externalLoginProviders.length; i++) {
-                        if (externalLoginProviders[i].name === 'WeChatMP') {
-                            const authBaseUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize';
-                            const appid = externalLoginProviders[i].clientId;
-                            const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.WECHATMP + '&isAuthBind=' + this.isAuthBind;
-                            const response_type = 'code';
-                            const scope = 'snsapi_userinfo';
-
-                            const authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
-                            window.location.href = authUrl;
-                        }
+                    if (this.isWeiXin) {
+                        this.weChatExternalAuthRedirect(externalLoginProviders);
                     }
                 });
             }
         });
+    }
+
+    weChatExternalAuthRedirect(externalLoginProviders) {
+        for (let i = 0; i < externalLoginProviders.length; i++) {
+            if (externalLoginProviders[i].name === 'WeChatMP') {
+                const authBaseUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+                const appid = externalLoginProviders[i].clientId;
+                const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + ExternalLoginProvider.WECHATMP + '&isAuthBind=' + this.isAuthBind;
+                const response_type = 'code';
+                const scope = 'snsapi_userinfo';
+
+                const authUrl = `${authBaseUrl}?appid=${appid}&redirect_uri=${encodeURIComponent(redirect_url)}&response_type=${response_type}&scope=${scope}#wechat_redirect`;
+                window.location.href = authUrl;
+            }
+        }
     }
 
     // 如果已登录 直接跳转

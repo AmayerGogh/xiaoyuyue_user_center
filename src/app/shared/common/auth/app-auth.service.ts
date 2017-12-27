@@ -31,7 +31,7 @@ export class AppAuthService {
         const exdate = new Date();
         exdate.setDate(exdate.getDate() + 1);
         this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
-        if (AppConsts.appBaseUrl.indexOf(location.href) < 0 || AppConsts.appBusinessBaseUrl.indexOf(location.href) < 0) {
+        if (AppConsts.appBaseUrl.indexOf(location.href) < 0 || AppConsts.businessCenterUrl.indexOf(location.href) < 0) {
             this._cookiesService.setCookieValue('UrlHelper.redirectUrl', redirectUrl, exdate, '/');
         }
     }
