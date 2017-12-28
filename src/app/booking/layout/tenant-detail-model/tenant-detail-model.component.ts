@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ModalDirective } from 'ngx-bootstrap';
 import { OrganizationInfoDto } from 'shared/service-proxies/service-proxies';
+import { MediaPath } from 'shared/AppConsts';
 
 @Component({
     selector: 'xiaoyuyue-tenant-detail-model',
@@ -26,5 +27,12 @@ export class TenantDetailModelComponent implements OnInit {
 
     hide(): void {
         this.model.hide();
+    }
+
+    getTenantBgUrl(url: string): string {
+        return url ? url : MediaPath.defaultBgUrl;
+    }
+    getTenantLogoUrl(url: string): string {
+        return url ? url : MediaPath.defaultProfilePictureUrl;
     }
 }

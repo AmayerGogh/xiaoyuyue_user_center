@@ -6,7 +6,7 @@
                 <span class="vapps-icon-app-close pull-right" (click)="hide()"></span>
             </div>
             <div class="modal-body">
-                <img [src]="contactorWechatUrl" alt="contactorWechatUrl" width="100%">
+                <img *ngIf="getContactorWechatUrl(contactorWechatUrl)" [src]="getContactorWechatUrl(contactorWechatUrl)" alt="contactorWechatUrl" width="100%">
             </div>
         </div>
     </div>

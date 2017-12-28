@@ -41,8 +41,8 @@ export class AppConsts {
 }
 
 export class MediaPath {
-
     static defaultProfilePictureUrl = '/assets/common/images/default-profile-picture.png';
+    static defaultBgUrl = '/assets/common/images/default-bg.png';
 }
 
 export class MediaCompressFormat {
