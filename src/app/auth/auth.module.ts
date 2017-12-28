@@ -1,6 +1,6 @@
 import * as ngCommon from '@angular/common';
 
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 import { AppConsts } from '@shared/AppConsts';
 import { AuthComponent } from './auth.component';
@@ -32,8 +32,8 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
     imports: [
         ngCommon.CommonModule,
         FormsModule,
-        HttpModule,
-        JsonpModule,
+        HttpClientModule,
+        HttpClientJsonpModule,
 
         ModalModule.forRoot(),
         TooltipModule.forRoot(),

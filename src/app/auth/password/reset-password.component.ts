@@ -8,17 +8,18 @@ import { AppUrlService } from '@shared/common/nav/app-url.service';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 import { ResetPasswordModel } from './reset-password.model';
 import { AppConsts } from '@shared/AppConsts';
-import { LoginService } from "shared/services/login.service";
+import { LoginService } from 'shared/services/login.service';
 
 @Component({
     templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.scss'],
     animations: [accountModuleAnimation()]
 })
 export class ResetPasswordComponent extends AppComponentBase implements OnInit {
 
     model: ResetPasswordModel = new ResetPasswordModel();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
-    saving: boolean = false;
+    saving = false;
 
     constructor(
         injector: Injector,
