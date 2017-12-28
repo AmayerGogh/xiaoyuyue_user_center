@@ -27,7 +27,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
     codeSendInput: CodeSendInput = new CodeSendInput();
     changeBindingPhoneNumInput: ChangeBindingPhoneNumInput = new ChangeBindingPhoneNumInput();
     checkUserCodeInput: CheckUserCodeInput = new CheckUserCodeInput();
-    @ViewChild("smsBtn") smsBtn: ElementRef;
+    @ViewChild('smsBtn') smsBtn: ElementRef;
 
     constructor(
         injector: Injector,
@@ -62,7 +62,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
             .subscribe(() => {
                 this._location.back();
                 setTimeout(() => {
-                    this.notify.success("更绑成功");
+                    this.notify.success('更绑成功');
                 }, 1000);
             });
     }
@@ -74,7 +74,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
             .subscribe(() => {
                 this._location.back();
                 setTimeout(() => {
-                    this.notify.success("绑定成功");
+                    this.notify.success('绑定成功');
                 }, 1000);
             });
     }
@@ -86,40 +86,11 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         }
 
         if (realTimePhoneNum !== this.existentPhoneNum) {
-            this.smsBtn.nativeElement.innerHTML = "发送验证码";
+            this.smsBtn.nativeElement.innerHTML = '发送验证码';
             this.isSendNewPhone = false;
             clearInterval(this.sendSMSTimer);
         } else {
             this.isSendNewPhone = true;
-        }
-    }
-
-    VerificationCodeType(codeType: number): void {
-        switch (codeType) {
-            case 10:
-                this.codeSendInput.codeType = VerificationCodeType.Register;
-                break;
-            case 20:
-                this.codeSendInput.codeType = VerificationCodeType.Login;
-                break;
-            case 30:
-                this.codeSendInput.codeType = VerificationCodeType.ChangePassword;
-                break;
-            case 40:
-                this.codeSendInput.codeType = VerificationCodeType.ChangeEmail;
-                break;
-            case 50:
-                this.codeSendInput.codeType = VerificationCodeType.PhoneBinding;
-                break;
-            case 60:
-                this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
-                break;
-            case 70:
-                this.codeSendInput.codeType = VerificationCodeType.PhoneVerify;
-                break;
-            default:
-                break;
-
         }
     }
 
@@ -128,8 +99,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
         this.existentPhoneNum = tel;
         this.codeSendInput.targetNumber = tel;
-        this.VerificationCodeType(codeType);
-        // this.codeSendInput.codeType = VerificationCodeType.PhoneUnBinding;
+        this.codeSendInput.codeType = codeType;
 
         this._SMSServiceProxy
             .sendCodeAsync(this.codeSendInput)
@@ -153,7 +123,7 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
 
             this.isSendSMS = false;
             this.isSendNewPhone = false;
-            event.target.innerHTML = this.l("AgainSendValidateCode");
+            event.target.innerHTML = this.l('AgainSendValidateCode');
         }, 60000);
     }
 
@@ -171,6 +141,6 @@ export class CurrentPhoneComponent extends AppComponentBase implements OnInit {
         if (!this.currentPhoneNum) {
             return;
         }
-        this.encryptPhoneNum = "•••••••" + this.currentPhoneNum.substr(this.currentPhoneNum.length - 4);
+        this.encryptPhoneNum = '•••••••' + this.currentPhoneNum.substr(this.currentPhoneNum.length - 4);
     }
 }

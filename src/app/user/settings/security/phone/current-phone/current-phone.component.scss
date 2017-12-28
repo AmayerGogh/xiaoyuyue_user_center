@@ -1,7 +1,9 @@
-.current-phone-wrap,
-.new-phone-wrap {
-    min-height: calc(100vh - 55px);
-    padding: 31px 5px 5px;
+.phone-wrap {
+    min-height: calc(100vh - 32px);
+    padding: 60px 15px 0;
+    .form-group {
+        margin: 20px 0 0 0;
+    }
     .card {
         padding: 0px 16px 20px;
         .card-header.card-header-text {

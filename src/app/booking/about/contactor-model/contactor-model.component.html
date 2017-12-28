@@ -2,11 +2,11 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title pull-left">{{ l('Contactor') }}: {{contactorName}}</h4>
+                <h4 class="modal-title pull-left">{{ l('Booking.Contactor') }}: {{contactorName}}</h4>
                 <span class="vapps-icon-app-close pull-right" (click)="hide()"></span>
             </div>
             <div class="modal-body">
-                <img [src]="contactorWechatUrl" alt="contactorWechatUrl" width="100%">
+                <img *ngIf="getContactorWechatUrl(contactorWechatUrl)" [src]="getContactorWechatUrl(contactorWechatUrl)" alt="contactorWechatUrl" width="100%">
             </div>
         </div>
     </div>

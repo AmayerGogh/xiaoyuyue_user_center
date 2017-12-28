@@ -30,4 +30,8 @@ export class ContactorModelComponent extends AppComponentBase implements OnInit 
         this.contactorModel.hide();
     }
 
+    getContactorWechatUrl(contactorWechatUrl: string): string {
+        return contactorWechatUrl ? contactorWechatUrl : null;
+    }
+
 }

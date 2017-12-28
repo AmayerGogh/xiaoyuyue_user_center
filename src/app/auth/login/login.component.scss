@@ -1,3 +1,4 @@
+@import '../../../sass/xiaoyuyue/_mixin';
 .login-wrap {
     width: calc(100% - 60px);
     position: relative;
@@ -22,14 +23,47 @@
             margin-right: 6px;
         }
     }
+    .toggle-wrap {
+        padding: 15px 0;
+        text-align: center;
+        .ordinary-login {
+            border-right: 1px solid #3C4858;
+        }
+        .ordinary-login,
+        .phone-login {
+            position: relative;
+            line-height: 24px;
+            cursor: pointer;
+            .line {
+                width: 60%;
+                height: 2px;
+                position: absolute;
+                top: 28px;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0 auto;
+                background-color: #FF9641;
+            }
+        }
+    }
     .login-body {
         text-align: center;
         .form-item {
             width: 100%;
         }
         .account-action {
+            display: flex;
             color: #FF9641;
             margin-top: 20px;
+            .flex-item {
+                flex: 1;
+                &:first-of-type {
+                    text-align: left;
+                }
+                &:last-of-type {
+                    text-align: right;
+                }
+            }
         }
         .login-btn-wrap {
             background-color: #FF9641; // border-radius: 30px;
@@ -39,7 +73,6 @@
         }
         .extra-login {
             margin-top: 50px;
-            text-align: left;
             .title-text {
                 display: flex;
                 position: relative;
@@ -96,10 +129,12 @@
         a {
             position: absolute;
             bottom: 0;
+            left: 0;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             cursor: pointer;
+            @include positionMiddle(1);
             transition: all .15s;
             &:hover {
                 &.wechat {

@@ -4,10 +4,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div class="top-header" [ngStyle]="{'background-image': 'url(' + organizationInfoData.backgroundPictureUrl + ')'}">
+                    <div class="top-header" [ngStyle]="{'background-image': 'url(' + getTenantBgUrl(organizationInfoData.backgroundPictureUrl) + ')'}">
                         <!-- <div class="avatar-wrap"></div> -->
                         <div class="content">
-                            <img class="logo" width="60px" [src]="organizationInfoData.logoUrl" alt="logo">
+                            <img class="logo" width="60px" [src]="getTenantLogoUrl(organizationInfoData.logoUrl)" alt="logo">
                             <h1 class="tenant-name">{{ organizationInfoData.name }}</h1>
                         </div>
                         <div class="bg-cover"></div>
@@ -17,8 +17,7 @@
                         <p class="desc-text" [innerHTML]='organizationInfoData.description'></p>
                     </div>
                 </div>
-                <!-- <div class="modal-footer">
-                </div> -->
+                <!-- <div class="modal-footer"></div> -->
             </div>
         </div>
     </div>

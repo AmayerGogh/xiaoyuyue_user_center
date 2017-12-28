@@ -38,15 +38,16 @@ export class AppEnumSelectItemSource {
     static UserActivationOption: string = 'UserActivationOption';
 }
 
-// 手机验证的类型
+// 验证码的类型
 export class VerificationCodeType {
     static Register: number = CodeSendInputCodeType._10;
     static Login: number = CodeSendInputCodeType._20;
     static ChangePassword: number = CodeSendInputCodeType._30;
-    static ChangeEmail: number = CodeSendInputCodeType._40;
-    static PhoneBinding: number = CodeSendInputCodeType._50;
-    static PhoneUnBinding: number = CodeSendInputCodeType._60;
-    static PhoneVerify: number = CodeSendInputCodeType._70;
+    static EmailBinding: number = CodeSendInputCodeType._40;
+    static ChangeEmail: number = CodeSendInputCodeType._50;
+    static PhoneBinding: number = CodeSendInputCodeType._60;
+    static PhoneUnBinding: number = CodeSendInputCodeType._70;
+    static PhoneVerify: number = CodeSendInputCodeType._80;
 }
 
 export class BookingOrderStatus {

@@ -7,10 +7,12 @@ export class AppConsts {
 
     static remoteServiceBaseUrl: string;
     static remoteServiceBaseUrlFormat: string;
+
     static appBaseUrl: string;
-    static appBusinessBaseUrl: string;
-    static bookingPictureFormat: string;
     static appBaseUrlFormat: string;
+
+    static businessCenterUrl: string;
+
     static BookingPicture: string;
     static readonly externalLoginUrl = '/auth/login';
 
@@ -39,8 +41,8 @@ export class AppConsts {
 }
 
 export class MediaPath {
-
     static defaultProfilePictureUrl = '/assets/common/images/default-profile-picture.png';
+    static defaultBgUrl = '/assets/common/images/default-bg.png';
 }
 
 export class MediaCompressFormat {
