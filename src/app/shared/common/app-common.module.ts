@@ -17,6 +17,7 @@ import { UtilsModule } from '@shared/utils/utils.module';
 import { AdminSideBarComponent } from 'app/user/layout/side-bar/side-bar.component';
 import { AdminFooterComponent } from 'app/user/layout/footer/footer.component';
 import { AdminHeaderComponent } from 'app/user/layout/header/header.component';
+import { SendCodeComponent } from 'app/shared/common/send-code/send-code.component';
 
 @NgModule({
     imports: [
@@ -34,16 +35,17 @@ import { AdminHeaderComponent } from 'app/user/layout/header/header.component';
         AdminHeaderComponent,
         AdminSideBarComponent,
         AdminFooterComponent,
-        EmptyPageComponent
+        EmptyPageComponent,
+        SendCodeComponent
     ],
     exports: [
         TimeZoneComboComponent,
-        EmptyPageComponent,
+        JqPluginDirective,
         AdminHeaderComponent,
         AdminSideBarComponent,
         AdminFooterComponent,
-        JqPluginDirective,
-        
+        EmptyPageComponent,
+        SendCodeComponent
     ],
     providers: [
         AppLocalizationService

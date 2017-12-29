@@ -111,4 +111,8 @@ export class WeChatAccessSourceType {
     }
 }
 
-
+// 验证的类型
+export class SendCodeType {
+    static ShortMessage: number = 1;
+    static Email: number = 2;
+}

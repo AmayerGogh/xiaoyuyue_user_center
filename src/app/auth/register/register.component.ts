@@ -2,9 +2,9 @@ import { AccountServiceProxy, CodeSendInput, PasswordComplexitySetting, ProfileS
 import { Component, ElementRef, Injector, NgModule, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
-import { LoginService } from "shared/services/login.service";
+import { LoginService } from 'shared/services/login.service';
 import { Router } from '@angular/router';
-import { VerificationCodeType } from "shared/AppEnums";
+import { VerificationCodeType, SendCodeType } from 'shared/AppEnums';
 import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
@@ -13,15 +13,12 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     animations: [accountModuleAnimation()]
 })
 export class RegisterComponent extends AppComponentBase implements OnInit {
-    phoneInput: PhoneAuthenticateModel = new PhoneAuthenticateModel();;
-    phoneNumber: string;
-    isSendSMS: boolean = false;
-    confirmPasswd: string;
-
+    sendCodeType: number = SendCodeType.ShortMessage;
+    codeType = VerificationCodeType.Register;
     registerInput: RegisterInput = new RegisterInput();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
-
-    saving: boolean = false;
+    isPhoneRegister = true;
+    saving = false;
 
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
@@ -67,9 +64,9 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
                     return;
                 }
 
-                //Autheticate
+                // Autheticatee
                 this.saving = true;
-                this._loginService.authenticateModel.loginCertificate = this.registerInput.phoneNumber;
+                this._loginService.authenticateModel.loginCertificate = this.registerInput.phoneNumber ? this.registerInput.phoneNumber : this.registerInput.emailAddress;
                 this._loginService.authenticateModel.password = result.randomPassword;
                 this._loginService.authenticate(() => { this.saving = false; });
             });
@@ -81,43 +78,27 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     //     this.model.captchaResponse = captchaResponse;
     // }
 
-    // 发送验证码
-    send() {
-        let input: CodeSendInput = new CodeSendInput();
-        input.targetNumber = this.registerInput.phoneNumber;
-        input.codeType = VerificationCodeType.Register;
-        input.captchaResponse = "";
-        // input.captchaResponse = this.captchaResolved();
-
-        this._SMSServiceProxy
-            .sendCodeAsync(input)
-            .subscribe(result => {
-                this.anginSend();
-            });
-    }
-
-    anginSend() {
-        let self = this;
-        let time = 60;
-        this.isSendSMS = true;
-        let set = setInterval(() => {
-            time--;
-            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
-        }, 1000)
-
-        setTimeout(() => {
-            clearInterval(set);
-            self.isSendSMS = false;
-            self._smsBtn.nativeElement.innerHTML = this.l("AgainSendValidateCode");
-        }, 60000);
-    }
-
     isWeiXin() {
-        var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) + "" == "micromessenger") {
+        const ua = navigator.userAgent.toLowerCase();
+        if (ua.match(/MicroMessenger/i) + '' === 'micromessenger') {
             return true;
         } else {
             return false;
         }
+    }
+
+    emailRegister(): void {
+        this.sendCodeType = SendCodeType.Email;
+        this.isPhoneRegister = false;
+        this.registerInput.phoneNumber = '';
+        this.registerInput.registerCode = '';
+        this.registerInput.type = 2;
+    }
+    phoneRegister(): void {
+        this.sendCodeType = SendCodeType.ShortMessage;
+        this.isPhoneRegister = true;
+        this.registerInput.emailAddress = '';
+        this.registerInput.registerCode = '';
+        this.registerInput.type = 1;
     }
 }

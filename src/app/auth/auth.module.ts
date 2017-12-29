@@ -27,6 +27,7 @@ import { TenantChangeModalComponent } from './shared/tenant-change-modal.compone
 import { TooltipModule } from 'ngx-bootstrap';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code.component';
+import { AppCommonModule } from 'app/shared/common/app-common.module';
 
 @NgModule({
     imports: [
@@ -39,6 +40,7 @@ import { ValidateTwoFactorCodeComponent } from './login/validate-two-factor-code
         TooltipModule.forRoot(),
 
         CommonModule,
+        AppCommonModule,
 
         UtilsModule,
         AuthRoutingModule
