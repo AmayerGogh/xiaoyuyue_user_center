@@ -51,3 +51,10 @@ export class MediaCompressFormat {
     static timelinePictureFormat = 'imageView2/2/w/100/q/100|imageslim';
     static profilePictureFormat = 'imageView2/2/w/800/q/100|imageslim';
 }
+
+export class SMSProviderDto {
+    static phoneNum: string;
+    static emailAddress: string;
+    static sendCodeSecond = 60;
+    static readonly timeInterval = 1000;
+}
