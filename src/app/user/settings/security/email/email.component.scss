@@ -1,6 +1,24 @@
 .email-wrap {
-    padding: 35px 10px 10px;
+    min-height: calc(100vh - 32px);
+    padding: 60px 15px 0;
+    .form-group {
+        margin: 20px 0 0 0;
+    }
     .card {
-        padding: 50px 16px 20px;
+        padding: 0px 16px 20px;
+        .card-header.card-header-text {
+            display: inline-block;
+            .title-icon {
+                font-size: 30px;
+            }
+        }
+        .vaildate-code {
+            position: absolute;
+            right: 2px;
+            bottom: 8px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            font-size: 14px;
+        }
     }
 }
