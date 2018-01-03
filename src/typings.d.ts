@@ -18,6 +18,10 @@ interface JQuery {
 }
 
 interface JQuery {
+    collapse(...any): any;
+}
+
+interface JQuery {
     daterangepicker(...any): any;
 }
 

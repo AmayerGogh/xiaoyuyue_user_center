@@ -43,7 +43,7 @@ import { RouterModule } from '@angular/router';
                     },
                     {
                         path: 'guide',
-                        loadChildren: 'app/sitemaps/guide/guide.module#GuideRoutes', // Lazy load booking module
+                        loadChildren: 'app/sitemaps/guide/guide.module#GuideModule', // Lazy load booking module
                         data: { preload: true }
                     },
                     {
