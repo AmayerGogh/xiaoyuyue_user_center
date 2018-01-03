@@ -35,7 +35,22 @@ import { RouterModule } from '@angular/router';
                         path: 'booking',
                         loadChildren: 'app/booking/booking.module#BookingModule', // Lazy load booking module
                         data: { preload: true }
-                    }
+                    },
+                    {
+                        path: 'help',
+                        loadChildren: 'app/sitemaps/help/help.module#HelpModule', // Lazy load booking module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'guide',
+                        loadChildren: 'app/sitemaps/guide/guide.module#GuideRoutes', // Lazy load booking module
+                        data: { preload: true }
+                    },
+                    {
+                        path: 'other',
+                        loadChildren: 'app/sitemaps/other/other.module#OtherModule', // Lazy load booking module
+                        data: { preload: true }
+                    },
                 ]
             }
         ])

@@ -8,7 +8,7 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent extends AppComponentBase implements OnInit {
+export class DesktopHeaderComponent extends AppComponentBase implements OnInit {
 
     constructor(
         private injector: Injector
