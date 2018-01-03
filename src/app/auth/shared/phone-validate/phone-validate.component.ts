@@ -32,7 +32,7 @@ export class PhoneValidateComponent extends AppComponentBase implements OnInit {
     this.input.captchaResponse = this.captchaResolved();
 
     this._SMSServiceProxy
-      .sendCodeAsync(this.input)
+      .sendCode(this.input)
       .subscribe(result => {
         this.anginSend();
       });

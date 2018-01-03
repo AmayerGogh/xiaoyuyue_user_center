@@ -107,7 +107,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         // this.captchaResolved();
 
         this._SMSServiceProxy
-            .sendCodeAsync(model)
+            .sendCode(model)
             .subscribe(result => {
                 this.anginSend();
             });

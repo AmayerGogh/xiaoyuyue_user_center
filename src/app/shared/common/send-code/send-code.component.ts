@@ -15,7 +15,7 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
     isSend = false;
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     @Input() codeType;
-    @Input() sendCodeType;
+    @Input() sendCodeType = SendCodeType.ShortMessage;
     @Input() phoneNumber: string;
     @Input() emailAddress: string;
 
@@ -85,7 +85,7 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
         input.codeType = this.codeType;
         // this.captchaResolved();
         this._SMSServiceProxy
-            .sendCodeAsync(input)
+            .sendCode(input)
             .subscribe(result => {
                 this.anginSend();
                 this.codeInterval();
