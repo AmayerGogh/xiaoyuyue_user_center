@@ -9,13 +9,15 @@ import { SecurityComponent } from './security/security.component';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SuggestComponent } from './suggest/suggest.component';
+import { AppCommonModule } from 'app/shared/common/app-common.module';
 
 @NgModule({
     imports: [
         FormsModule,
         ReactiveFormsModule,
         CommonModule,
-        SettingsRoutingModule
+        SettingsRoutingModule,
+        AppCommonModule
     ],
     declarations: [
         SettingsComponent,

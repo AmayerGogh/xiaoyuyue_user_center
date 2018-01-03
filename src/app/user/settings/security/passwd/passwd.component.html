@@ -1,7 +1,7 @@
 <div class="change-passwd-wrap">
     <div class="passwd-wrap" [@routerTransition] *ngIf="showCommandWrap">
         <div class="card-wrap col-xs-4 col-sm-3">
-            <div class="card" (click)="usePhoneChangeEle()">
+            <div class="card" (click)="showUsePhoneChangeEle()">
                 <div class="item">
                     <div class="content">
                         <span class="icon vapps-icon-app-validate-phone"></span>
@@ -16,6 +16,16 @@
                     <div class="content">
                         <span class="icon vapps-icon-app-change-passwd"></span>
                         <p class="text">通过旧密码方式</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-wrap col-xs-4 col-sm-3">
+            <div class="card" (click)="emailChangeHandler()">
+                <div class="item">
+                    <div class="content">
+                        <span class="icon vapps-icon-app-validate-email"></span>
+                        <p class="text">通过邮箱方式</p>
                     </div>
                 </div>
             </div>
