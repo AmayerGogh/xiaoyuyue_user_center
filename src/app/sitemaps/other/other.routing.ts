@@ -22,7 +22,7 @@ import { CaseComponent } from 'app/sitemaps/other/case/case.component';
                         component: FeedbackComponent
                     },
                     {
-                        path: 'case',
+                        path: 'cases',
                         component: CaseComponent
                     }
                 ]

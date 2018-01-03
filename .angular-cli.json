@@ -30,7 +30,7 @@
       "assets/common/styles/flatpickr.css",
       "assets/swiper/css/swiper.css",
       "app/shared/layout.scss",
-      "app/shared/core.less",
+      "app/shared/core.scss",
       "app/shared/skin.less",
       "sass/xiaoyuyue.scss",
       "styles.css"

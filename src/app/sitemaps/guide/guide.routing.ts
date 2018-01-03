@@ -15,17 +15,17 @@ import { GuideComponent } from 'app/sitemaps/guide/guide.component';
                 path: '',
                 component: GuideComponent,
                 children: [
-                    { path: '', redirectTo: 'create', pathMatch: 'full' },
+                    { path: '', redirectTo: 'create-tenant', pathMatch: 'full' },
                     {
-                        path: 'create',
+                        path: 'create-tenant',
                         component: HowToCreateComponent
                     },
                     {
-                        path: 'booking',
+                        path: 'create-booking',
                         component: HowToBookingComponent
                     },
                     {
-                        path: 'manage',
+                        path: 'manage-booking',
                         component: HowToManageComponent
                     }
                 ]
