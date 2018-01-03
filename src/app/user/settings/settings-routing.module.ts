@@ -21,7 +21,7 @@ import { SuggestComponent } from './suggest/suggest.component';
                     { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
                     { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
                     { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
-                    { path: 'email', component: EmailComponent, data: { breadcrumb: 'Menu.BindingPhone' } }
+                    { path: 'email', component: EmailComponent, data: { breadcrumb: '改绑邮箱' } }
                 ]
             }
         ])
