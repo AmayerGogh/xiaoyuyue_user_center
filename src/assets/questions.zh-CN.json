@@ -1,0 +1,18 @@
+{
+	"questions": [{
+		"name": "Q:如何注册小预约？",
+		"content": "<p>小预约登录帐号包括手机号、邮箱、微信、QQ、Facebook、Gmail。其中只有手机号和邮箱需要进行注册后登录，微信、QQ、Facebook、Gmail只需一键登录即可。</p><p>1、手机微信搜索并进入小预约公众号，点击会员中心→时间线 / 机构中心→创建预约，一次授权后便可自动登录。</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/01/01.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/01/02.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/01/03.jpg\"></p><p>2、电脑端打开www.xiaoyuyue.com，首页→右上角注册按钮，即可用手机号或邮箱注册。注册后即可登录</p><p><img src=\"https://static.xiaoyuyue.com/zh-CN/questions/01/04.jpg\"></p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/01/05.jpg\"></p>",
+	},{
+		"name": "Q:如何修改密码？",
+		"content": "<p>1、手机端微信公众号→会员中心→设置管理→账户安全→更换密码</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/02/01.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/02/02.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/02/03.jpg\"></p><p>2、小预约PC端会员中心→右上角机构机构名称下拉→账户安全→登录密码设置。</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/02/04.jpg\"></p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/02/05.jpg\"></p>",
+	},{
+		"name": "Q:如何修改头像、用户名、机构名称？",
+		"content": "<p>1、手机端微信公众号→会员中心→个人信息→点击信息板块进入编辑→编辑后点击保存即可</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/01.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/02.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/03.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/04.jpg\"></p><p>2、小预约PC端会员中心→左侧菜单→机构信息→基本信息→编辑后保存即可。</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/05.jpg\"></p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/03/06.jpg\"></p>",
+	},{
+		"name": "Q:如何绑定手机号、邮箱地址？",
+		"content": "<p>1、手机端微信公众号→会员中心→设置管理→账户安全→绑定手机/绑定邮箱。</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/01.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/02.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/03.jpg\"><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/04.jpg\"></p><p>2、小预约PC端会员中心→右上角机构机构名称下拉→账户安全→绑定手机设置/绑定邮箱设置。</p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/05.jpg\"></p><p><img src=\"https://static.xiaoyuyue.com/questions/zh-CN/04/06.jpg\"></p>",
+	},{
+		"name": "Q:收不到验证码？",
+		"content": "<p>1、请确认您的手机是否在通讯状态（是否开启了飞行模式）；</p><p>2、请检查您输入的手机号是否正确；</p><p>3、不同的供应商消息会有延时，请您耐心等候或者尝试重新获取。</p>",
+	}]
+}
