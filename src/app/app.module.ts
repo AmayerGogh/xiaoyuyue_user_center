@@ -14,11 +14,13 @@ import { ServiceProxyModule } from '@shared/service-proxies/service-proxy.module
 import { ServicesModule } from 'shared/services/services.module';
 import { UploaderComponent } from './shared/uploader/uploader.component';
 import { UtilsModule } from '@shared/utils/utils.module';
+import { PageNotFoundComponent } from 'app/page-not-found/page-not-found.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        UploaderComponent
+        UploaderComponent,
+        PageNotFoundComponent
     ],
     imports: [
         ngCommon.CommonModule,

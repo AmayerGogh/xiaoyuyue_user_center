@@ -394,7 +394,7 @@ input:-webkit-autofill {
         padding: 0 20px 20px;
         .sitemaps-header {
             position: relative;
-            top: -20px;
+            top: -10px;
             left: 0;
             .item {
                 display: inline-block;
@@ -404,7 +404,6 @@ input:-webkit-autofill {
                 border-radius: 4px;
                 text-align: center;
                 color: #000;
-                font-weight: 800;
                 cursor: pointer;
                 &.active {
                     color: #FFF;

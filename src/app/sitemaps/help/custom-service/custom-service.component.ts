@@ -1,36 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { accountModuleAnimation } from 'shared/animations/routerTransition';
+import { SitemapsService } from 'shared/services/sitemaps.service';
 
 @Component({
-  selector: 'xiaoyuyue-custom-service',
-  templateUrl: './custom-service.component.html',
-  styleUrls: ['./custom-service.component.scss'],
-  animations: [accountModuleAnimation()]
+    selector: 'xiaoyuyue-custom-service',
+    templateUrl: './custom-service.component.html',
+    styleUrls: ['./custom-service.component.scss'],
+    animations: [accountModuleAnimation()],
+    encapsulation: ViewEncapsulation.None
 })
 export class CustomServiceComponent implements OnInit {
     resultData: any;
 
-  constructor() { }
+    constructor(
+        private _sitemapsService: SitemapsService
+    ) { }
 
-  ngOnInit() {
-      this.loadData();
-  }
-
-  private loadData(): void {
-    let cookieLangValue = abp.utils.getCookieValue('Abp.Localization.CultureName');
-    if (!cookieLangValue) {
-        cookieLangValue = 'zh-CN';
+    ngOnInit() {
+        this.loadData();
     }
-    const url = `/assets/contacthelp.${cookieLangValue}.json`;
-    $.ajax({
-        url: url,
-        dataType: 'text',
-        type: 'GET',
-        success: result => {
-            result = JSON.parse(result);
-            this.resultData = result.contacthelp;
-        }
-    })
-}
 
+    private loadData(): void {
+        this._sitemapsService.getResultData('contacthelp', (result) => {
+            this.resultData = result;
+        })
+    }
 }

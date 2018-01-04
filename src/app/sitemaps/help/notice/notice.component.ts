@@ -1,37 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { accountModuleAnimation } from 'shared/animations/routerTransition';
+import { SitemapsService } from 'shared/services/sitemaps.service';
 
 @Component({
-  selector: 'xiaoyuyue-notice',
-  templateUrl: './notice.component.html',
-  styleUrls: ['./notice.component.scss'],
-  animations: [accountModuleAnimation()]
-
+    selector: 'xiaoyuyue-notice',
+    templateUrl: './notice.component.html',
+    styleUrls: ['./notice.component.scss'],
+    animations: [accountModuleAnimation()]
 })
 export class NoticeComponent implements OnInit {
     resultData: any;
 
-  constructor() { }
+    constructor(
+        private _sitemapsService: SitemapsService
+    ) { }
 
-  ngOnInit() {
-      this.loadData();
-  }
-
-  private loadData(): void {
-    let cookieLangValue = abp.utils.getCookieValue('Abp.Localization.CultureName');
-    if (!cookieLangValue) {
-        cookieLangValue = 'zh-CN';
+    ngOnInit() {
+        this.loadData();
     }
-    const url = `/assets/protocol.${cookieLangValue}.json`;
-    $.ajax({
-        url: url,
-        dataType: 'text',
-        type: 'GET',
-        success: result => {
-            result = JSON.parse(result);
-            this.resultData = result.protocol;
-        }
-    })
-}
 
+    private loadData(): void {
+        this._sitemapsService.getResultData('protocol', (result) => {
+            this.resultData = result;
+        })
+    }
 }

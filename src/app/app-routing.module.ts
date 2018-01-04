@@ -2,7 +2,10 @@ import { AppComponent } from './app.component';
 import { AppRouteGuard } from './shared/common/auth/auth-route-guard';
 import { BreadcrumbService } from 'shared/services/bread-crumb.service';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { PageNotFoundComponent } from 'app/page-not-found/page-not-found.component';
+import { CookiesService } from 'shared/services/cookies.service';
+import { InitLanguage, AppConsts } from 'shared/AppConsts';
 
 @NgModule({
     imports: [
@@ -51,6 +54,10 @@ import { RouterModule } from '@angular/router';
                         loadChildren: 'app/sitemaps/other/other.module#OtherModule', // Lazy load booking module
                         data: { preload: true }
                     },
+                    {
+                        path: '**',
+                        component: PageNotFoundComponent
+                    }
                 ]
             }
         ])
@@ -58,5 +65,35 @@ import { RouterModule } from '@angular/router';
     exports: [RouterModule]
 })
 export class AppRoutingModule {
+    constructor(
+        private router: Router,
+        private _cookiesService: CookiesService
+    ) {
+        router.events.subscribe((event: NavigationEnd) => {
+            if (!(event instanceof NavigationEnd)) { return; }
 
+            this.initLanguage(event);
+        });
+    }
+
+    initLanguage(event: NavigationEnd): void {
+        if (event.url === '/') { return; }
+        InitLanguage.all.forEach((langName: string) => {
+            let url = event.url;
+            url = url.replace(/\//, '');
+            const value = langName.toLocaleLowerCase().indexOf(url.toLocaleLowerCase());
+            if (value < 0) { return; }
+            this.changeLanguage(langName);
+        });
+    }
+
+    changeLanguage(langName: string) {
+        this._cookiesService.setCookieValue(
+            'Abp.Localization.CultureName',
+            langName,
+            new Date(new Date().getTime() + 5 * 365 * 86400000), // 5 year
+            abp.appPath
+        );
+        window.location.href = AppConsts.appBaseUrl;
+    }
 }
