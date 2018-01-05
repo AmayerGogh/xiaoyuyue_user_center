@@ -16,7 +16,7 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     styleUrls: ['./booking-list.component.scss'],
     animations: [appModuleAnimation()]
 })
-export class BookingListComponent extends AppComponentBase implements OnInit, AfterViewInit {
+export class BookingListComponent extends AppComponentBase implements OnInit {
     isLoaded = false;
     isLoading = false;
     infiniteScrollDistance = 1;
@@ -32,9 +32,12 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     skip = 0;
     sort: any;
     actionFlag: boolean[] = [];
-    slogan = '啥都没有，赶紧去预约吧';
-    bookingOrderStatusName: string[] = ['全部', '待确认', '已确认', '待评价', '已取消'];
-    updateDataIndex: number = -1;
+    slogan = this.l('BookingList.Nothing');
+    bookingOrderStatusName: string[] = [this.l('BookingList.All'), this.l('BookingList.WaitConfirm'),
+    this.l('BookingList.ConfirmSuccess'),
+    this.l('BookingList.WaitComment'),
+    this.l('BookingList.Cancel')];
+    updateDataIndex = -1;
 
     @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;
 
@@ -51,10 +54,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
     ngOnInit() {
         this.loadPersonBookingData();
     }
-    ngAfterViewInit() {
-        // TODO: 暂时处理
-        $('#headerTitle').text('应约管理');
-    }
+
     loadPersonBookingData() {
         if (this.skip < 0) { this.skip = 0 };
 
@@ -89,7 +89,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
         } else if (index === 5) {
             this.status = [BookingOrderStatus.WaitComment];
         } else {
-            this.message.warn('努力完善中', '敬请期待');
+            this.message.warn(this.l('Improving'), this.l('ComingSoon'));
             this.allPrsonBookingDatas = [];
             this.skip = 0;
             return;
@@ -133,9 +133,9 @@ export class BookingListComponent extends AppComponentBase implements OnInit, Af
             .stickedBookingOrder(this.stickedInput)
             .subscribe(() => {
                 if (toggleFlag) {
-                    this.notify.success('置顶成功');
+                    this.notify.success(this.l('StickSuccessed'));
                 } else {
-                    this.notify.success('取消置顶');
+                    this.notify.success(this.l('CancelStick'));
                 }
                 this.loadPersonBookingData();
             });
