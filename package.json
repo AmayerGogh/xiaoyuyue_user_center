@@ -28,7 +28,6 @@
     "arrive": "^2.4.1",
     "bootstrap": "^3.3.7",
     "bootstrap-daterangepicker": "^2.1.25",
-    "fullpage.js": "^2.9.5",
     "font-awesome": "^4.7.0",
     "codelyzer": "^4.0.1",
     "core-js": "^2.5.1",

@@ -13,12 +13,15 @@
         text-align: center;
         color: rgb(47, 47, 47);
     }
+    .section {
+        height: 900px;
+    }
     .banner-wrap {
         width: 100%;
         background: url(/assets/common/images/login/banner-3.jpg) no-repeat center;
         background-size: cover;
         .banner-slogan {
-            padding-top: 384px;
+            padding-top: 340px;
             padding-bottom: 140px;
         }
     }
@@ -67,6 +70,7 @@
         background: url(/assets/common/images/index/contact/map.jpg) no-repeat center;
         background-size: cover;
         background-color: #EEE;
+        @include flexMiddle(3);
         .content {
             width: 90%;
             position: relative;
