@@ -27,6 +27,8 @@
       "assets/md-pro/css/material-dashboard.css",
       "assets/common/styles/xiaoyuyue-icon.css",
       "../node_modules/toastr/build/toastr.css",
+      "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+      "../node_modules/font-awesome/css/font-awesome.css",
       "assets/common/styles/flatpickr.css",
       "assets/swiper/css/swiper.css",
       "app/shared/layout.scss",

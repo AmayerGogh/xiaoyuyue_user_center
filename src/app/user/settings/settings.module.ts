@@ -10,6 +10,7 @@ import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SuggestComponent } from './suggest/suggest.component';
 import { AppCommonModule } from 'app/shared/common/app-common.module';
+import { LangSwitchComponent } from './lang-switch/lang-switch.component';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { AppCommonModule } from 'app/shared/common/app-common.module';
         SuggestComponent,
         PasswdComponent,
         EmailComponent,
-        PhoneComponent
+        PhoneComponent,
+        LangSwitchComponent
     ],
     providers: [
     ]

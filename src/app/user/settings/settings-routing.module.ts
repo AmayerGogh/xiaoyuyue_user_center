@@ -8,6 +8,7 @@ import { PasswdComponent } from './security/passwd/passwd.component';
 import { SecurityComponent } from './security/security.component';
 import { SettingsComponent } from './settings.component';
 import { SuggestComponent } from './suggest/suggest.component';
+import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.component';
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import { SuggestComponent } from './suggest/suggest.component';
                     { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
                     { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
                     { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
-                    { path: 'email', component: EmailComponent, data: { breadcrumb: '改绑邮箱' } }
+                    { path: 'email', component: EmailComponent, data: { breadcrumb: '改绑邮箱' } },
+                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: '语言切换' } }
                 ]
             }
         ])
