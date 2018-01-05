@@ -111,7 +111,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
         // this.captchaResolved();
 
         this._SMSServiceProxy
-            .sendCodeAsync(input)
+            .sendCode(input)
             .subscribe(result => {
                 this.anginSend();
             });

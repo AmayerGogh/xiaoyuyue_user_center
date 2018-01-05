@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
-import { CurrentPhoneComponent } from './security/phone/current-phone/current-phone.component';
+import { PhoneComponent } from './security/phone/phone.component';
 import { EmailComponent } from './security/email/email.component';
 import { NgModule } from '@angular/core';
 import { PasswdComponent } from './security/passwd/passwd.component';
@@ -25,7 +25,7 @@ import { AppCommonModule } from 'app/shared/common/app-common.module';
         SuggestComponent,
         PasswdComponent,
         EmailComponent,
-        CurrentPhoneComponent
+        PhoneComponent
     ],
     providers: [
     ]

@@ -18,6 +18,8 @@ import { AdminSideBarComponent } from 'app/user/layout/side-bar/side-bar.compone
 import { AdminFooterComponent } from 'app/user/layout/footer/footer.component';
 import { AdminHeaderComponent } from 'app/user/layout/header/header.component';
 import { SendCodeComponent } from 'app/shared/common/send-code/send-code.component';
+import { DesktopHeaderComponent } from 'app/index/desktop/layout/header/header.component';
+import { DesktopFooterComponent } from 'app/index/desktop/layout/footer/footer.component';
 
 @NgModule({
     imports: [
@@ -36,7 +38,9 @@ import { SendCodeComponent } from 'app/shared/common/send-code/send-code.compone
         AdminSideBarComponent,
         AdminFooterComponent,
         EmptyPageComponent,
-        SendCodeComponent
+        SendCodeComponent,
+        DesktopHeaderComponent,
+        DesktopFooterComponent
     ],
     exports: [
         TimeZoneComboComponent,
@@ -45,7 +49,9 @@ import { SendCodeComponent } from 'app/shared/common/send-code/send-code.compone
         AdminSideBarComponent,
         AdminFooterComponent,
         EmptyPageComponent,
-        SendCodeComponent
+        SendCodeComponent,
+        DesktopHeaderComponent,
+        DesktopFooterComponent
     ],
     providers: [
         AppLocalizationService

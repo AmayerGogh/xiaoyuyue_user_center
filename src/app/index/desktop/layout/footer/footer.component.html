@@ -4,34 +4,30 @@
             <div class="row">
                 <div class="col-lg-6 footer-nav">
                     <div class="row nav-title">
-                        <div class="col-lg-4">{{ l('AboutUs') }}</div>
-                        <div class="col-lg-4">{{ l('HowToUse') }}</div>
-                        <div class="col-lg-4">{{ l('ContactUs') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.AboutUs') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.HowToUse') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.ContactUs') }}</div>
                     </div>
                     <div class="row sub-title">
-                        <div class="col-lg-4">{{ l('ServiceAndSupport') }}</div>
-                        <div class="col-lg-4">{{ l('AccountSupport') }}</div>
-                        <div class="col-lg-4">{{ l('Other') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.HelpCenter') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.UseGuide') }}</div>
+                        <div class="col-lg-4">{{ l('Sitemaps.Other') }}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">{{ l('Pre-salesAdvice') }}</div>
-                        <div class="col-lg-4">{{ l('LoginFrequentlyAskedQuestions') }}</div>
-                        <div class="col-lg-4">{{ l('Pricing') }}</div>
+                    <div class="row item-content">
+                        <div class="col-lg-4 item" routerLink="/help/problem">{{ l('Sitemaps.CommonProblem') }}</div>
+                        <div class="col-lg-4 item" routerLink="/guide/create-tenant">{{ l('Sitemaps.CreateTenant') }}</div>
+                        <div class="col-lg-4 item" routerLink="/other/informant">{{ l('Sitemaps.ReportCenter') }}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">{{ l('CustomerService') }}</div>
-                        <div class="col-lg-4">{{ l('RechargePayment') }}</div>
-                        <div class="col-lg-4">{{ l('ManagementConsole') }}</div>
+                    <div class="row item-content">
+                        <div class="col-lg-4 item" routerLink="/help/contacthelp">{{ l('Sitemaps.ContactCustomerService') }}</div>
+                        <div class="col-lg-4 item" routerLink="/guide/create-booking">{{ l('Sitemaps.CreateBooking') }}</div>
+                        <div class="col-lg-4 item" routerLink="/other/feedback">{{ l('Sitemaps.Feedback') }}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-4">{{ l('ServiceAnnouncement') }}</div>
-                        <div class="col-lg-4">{{ l('AccountManagement') }}</div>
-                        <div class="col-lg-4">{{ l('BookingCase') }}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">{{ l('ReportCenter') }}</div>
-                        <div class="col-lg-4"></div>
-                        <div class="col-lg-4">{{ l('SubmitSuggestion') }}</div>
+                    <div class="row item-content">
+                        <div class="col-lg-4 item" routerLink="/help/notice">{{ l('Sitemaps.Announcement') }}</div>
+                        <div class="col-lg-4 item" routerLink="/guide/manage-booking"></div>
+                        <!-- <div class="col-lg-4 item" routerLink="/guide/manage-booking">{{ l('Sitemaps.BookingManage') }}</div> -->
+                        <div class="col-lg-4 item" routerLink="/other/cases">{{ l('Sitemaps.ShareCases') }}</div>
                     </div>
                 </div>
                 <div class="col-lg-6 footer-img">

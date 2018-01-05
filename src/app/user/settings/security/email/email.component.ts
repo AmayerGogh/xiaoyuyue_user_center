@@ -1,4 +1,4 @@
-import { BindingEmailInput, ChangeBindingEmailInput, CheckUserCodeInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { BindingEmailInput, ChangeBindingEmailInput, ProfileServiceProxy, SMSServiceProxy, AccountServiceProxy, CheckEmailCodeInput } from '@shared/service-proxies/service-proxies';
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
@@ -14,6 +14,7 @@ import { appModuleAnimation } from 'shared/animations/routerTransition';
     animations: [appModuleAnimation()]
 })
 export class EmailComponent extends AppComponentBase implements OnInit {
+    checkEmailCodeInput: CheckEmailCodeInput = new CheckEmailCodeInput();
     bindingEmailInput: BindingEmailInput = new BindingEmailInput();
     sendCodeType: number = SendCodeType.Email;
     bindingEmailCodeType = VerificationCodeType.EmailBinding;
@@ -21,11 +22,8 @@ export class EmailComponent extends AppComponentBase implements OnInit {
     changeBindingEmailInput: ChangeBindingEmailInput = new ChangeBindingEmailInput();
     emailAddress: string;
     encryptEmailAddress: string;
-
-    isVerified: boolean = false;
+    isVerified = false;
     code: string;
-    // codeSendInput: CodeSendInput = new CodeSendInput();
-    // checkUserCodeInput: CheckUserCodeInput = new CheckUserCodeInput();
     @ViewChild('smsBtn') smsBtn: ElementRef;
 
     constructor(
@@ -33,6 +31,7 @@ export class EmailComponent extends AppComponentBase implements OnInit {
         private _router: Router,
         private _location: Location,
         private _SMSServiceProxy: SMSServiceProxy,
+        private _accountServiceProxy: AccountServiceProxy,
         private _profileServiceProxy: ProfileServiceProxy
     ) {
         super(injector);
@@ -44,14 +43,13 @@ export class EmailComponent extends AppComponentBase implements OnInit {
 
 
     verificationEmailAddress(): void {
-        // this.checkUserCodeInput.code = this.code;
-        // this.checkUserCodeInput.codeType = VerificationCodeType.PhoneUnBinding;
-        this.isVerified = true;
-        // this._SMSServiceProxy
-        //     .checkCodeByCurrentUserAsync(this.checkUserCodeInput)
-        //     .subscribe(() => {
-        //         this.codeSendInput = new CodeSendInput();
-        //     })
+        this.checkEmailCodeInput.code = this.code;
+        this.checkEmailCodeInput.codeType = VerificationCodeType.ChangeEmail;
+        this._accountServiceProxy
+        .checkEmailCodeByCurrentUser(this.checkEmailCodeInput)
+        .subscribe( () => {
+            this.isVerified = true;
+        })
     }
 
     changeBindEmail(): void {
