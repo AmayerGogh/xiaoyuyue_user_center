@@ -1,10 +1,10 @@
-import { BindingEmailInput, ChangeBindingEmailInput, ProfileServiceProxy, SMSServiceProxy, AccountServiceProxy, CheckEmailCodeInput } from '@shared/service-proxies/service-proxies';
+import { AccountServiceProxy, BindingEmailInput, ChangeBindingEmailInput, CheckEmailCodeInput, ProfileServiceProxy, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { SendCodeType, VerificationCodeType } from 'shared/AppEnums';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { VerificationCodeType, SendCodeType } from 'shared/AppEnums';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
@@ -41,15 +41,14 @@ export class EmailComponent extends AppComponentBase implements OnInit {
         this.getUserPhoneNum();
     }
 
-
     verificationEmailAddress(): void {
         this.checkEmailCodeInput.code = this.code;
         this.checkEmailCodeInput.codeType = VerificationCodeType.ChangeEmail;
         this._accountServiceProxy
-        .checkEmailCodeByCurrentUser(this.checkEmailCodeInput)
-        .subscribe( () => {
-            this.isVerified = true;
-        })
+            .checkEmailCodeByCurrentUser(this.checkEmailCodeInput)
+            .subscribe(() => {
+                this.isVerified = true;
+            })
     }
 
     changeBindEmail(): void {
@@ -59,7 +58,7 @@ export class EmailComponent extends AppComponentBase implements OnInit {
             .subscribe(() => {
                 this._location.back();
                 setTimeout(() => {
-                    this.notify.success('更绑成功');
+                    this.notify.success(this.l('ChangeBingingSuccess'));
                 }, 1000);
             });
     }
@@ -71,7 +70,7 @@ export class EmailComponent extends AppComponentBase implements OnInit {
             .subscribe(() => {
                 this._location.back();
                 setTimeout(() => {
-                    this.notify.success('绑定成功');
+                    this.notify.success(this.l('BingingSuccess'));
                 }, 1000);
             });
     }

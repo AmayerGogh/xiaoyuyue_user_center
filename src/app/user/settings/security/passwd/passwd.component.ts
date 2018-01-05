@@ -1,12 +1,11 @@
-import { ChangePasswordByPhoneInput, ChangePasswordInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy, AccountServiceProxy, SendPasswordResetCodeInput } from '@shared/service-proxies/service-proxies';
+import { AccountServiceProxy, ChangePasswordByPhoneInput, ChangePasswordInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy, SendPasswordResetCodeInput } from '@shared/service-proxies/service-proxies';
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppSessionService } from '@shared/common/session/app-session.service';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { VerificationCodeType } from 'shared/AppEnums';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
-import { Router } from '@angular/router';
 
 export class RepeatPasswdDto extends ChangePasswordInput {
     repeatPasswd: string;
@@ -22,17 +21,16 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
     emailAddress: string;
     phoneNum: string;
     phoneNumText: string;
-    isSendSMS: boolean = false;
+    isSendSMS = false;
     input: RepeatPasswdDto = new RepeatPasswdDto();
     byPhoneInput: ChangePasswordByPhoneInput = new ChangePasswordByPhoneInput();
-    showCommandWrap: boolean = true;
-    phoneChangePasswd: boolean = false;
-    oldPasswdChangePasswd: boolean = false;
+    showCommandWrap = true;
+    phoneChangePasswd = false;
+    oldPasswdChangePasswd = false;
 
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
-        private _location: Location,
         private _router: Router,
         private _SMSServiceProxy: SMSServiceProxy,
         private _profileServiceProxy: ProfileServiceProxy,
@@ -52,7 +50,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         this._profileServiceProxy
             .changePassword(this.input)
             .subscribe(result => {
-                this.notify.success('密码修改成功');
+                this.notify.success(this.l('ChangePasswdSuccessed'));
                 this.showCommandWrap = true;
                 this.phoneChangePasswd = false;
                 this.oldPasswdChangePasswd = false;
@@ -65,7 +63,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         this._profileServiceProxy
             .changePasswordByPhone(this.byPhoneInput)
             .subscribe(result => {
-                this.notify.success('密码修改成功');
+                this.notify.success(this.l('ChangePasswdSuccessed'));
                 this.showCommandWrap = true;
                 this.phoneChangePasswd = false;
                 this.oldPasswdChangePasswd = false;
@@ -94,40 +92,11 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         }
         this.sendPasswordResetCodeInput.emailAddress = this.emailAddress;
         this._accountService.sendPasswordResetCode(this.sendPasswordResetCodeInput)
-        .subscribe(() => {
-            this.message.success(this.l('PasswordResetMailSentMessage'));
-        });
-    }
-
-    // 发送验证码
-    send() {
-        const model = new CodeSendInput();
-        model.targetNumber = this.phoneNum;
-        model.codeType = VerificationCodeType.ChangePassword;
-        // this.captchaResolved();
-
-        this._SMSServiceProxy
-            .sendCode(model)
-            .subscribe(result => {
-                this.anginSend();
+            .subscribe(() => {
+                this.message.success(this.l('PasswordResetMailSentMessage'));
             });
     }
 
-    anginSend() {
-        const self = this;
-        let time = 60;
-        this.isSendSMS = true;
-        const set = setInterval(() => {
-            time--;
-            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
-        }, 1000)
-
-        setTimeout(() => {
-            clearInterval(set);
-            self.isSendSMS = false;
-            self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
-        }, 60000);
-    }
     private encrypt(): void {
         if (!this.phoneNum) {
             return;
@@ -140,7 +109,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
             this.encrypt();
             return true;
         } else {
-            this.message.confirm('您当前未绑定手机，绑定手机号才能更改密码', (result) => {
+            this.message.confirm(this.l('Security.ChangePasswd.MustBingPhone'), (result) => {
                 if (result) {
                     this._router.navigate(['/user/settings/phone']);
                 } else {
@@ -155,7 +124,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
             this.encrypt();
             return true;
         } else {
-            this.message.confirm('您当前未绑定邮箱，绑定邮箱才能更改密码', (result) => {
+            this.message.confirm(this.l('Security.ChangePasswd.MustBingEmail'), (result) => {
                 if (result) {
                     this._router.navigate(['/user/settings/email']);
                 } else {
