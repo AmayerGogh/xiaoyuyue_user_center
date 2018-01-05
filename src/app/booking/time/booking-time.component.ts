@@ -2,11 +2,12 @@ import * as _ from 'lodash';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Injector, Input, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInput, JoinBookingTimeInfo, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
+import { BookingServiceProxy, JoinBookingDataInfo, JoinBookingInfoDto, JoinBookingInput, JoinBookingTimeInfo } from 'shared/service-proxies/service-proxies';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { CookiesService } from 'shared/services/cookies.service';
+import { LocalizationHelper } from 'shared/helpers/LocalizationHelper';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
 import { appModuleSlowAnimation } from 'shared/animations/routerTransition';
@@ -88,7 +89,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         $('.flatpickr').flatpickr({
             inline: true,
             minDate: 'today',
-            'locale': 'zh',
+            'locale': LocalizationHelper.getFlatpickrLocale(),
             disableMobile: 'true',
             enable: this.enableBookingDate.length === 0 ? this.defaultEnableBookingDate : this.enableBookingDate,
             defaultDate: this.enableBookingDate[0],
