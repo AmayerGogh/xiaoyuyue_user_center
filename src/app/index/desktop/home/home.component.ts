@@ -9,7 +9,7 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     styleUrls: ['./home.component.scss']
 })
 export class HomeComponent extends AppComponentBase implements OnInit, AfterViewInit {
-    introVideoUrl: string = 'http://static.xiaoyuyue.com/xiaoyuyue_usage_scenario.mp4';
+    introVideoUrl = 'https://static.vapps.com.cn/xiaoyuyue_usage_scenario.mp4';
     constructor(
         private injector: Injector
     ) {

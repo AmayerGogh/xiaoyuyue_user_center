@@ -1,14 +1,10 @@
 <div class="user-profile">
-    <div class="rotating-container" [ngClass]="{'filp-active': filpActive}">
+    <!-- 暂时处理机构信息页面裁剪弹窗fixed遇到perspective导致偏移错误，暂时移除机构信息页面的翻转动画 -->
+    <!-- <div class="rotating-container" [ngClass]="{'filp-active': filpActive}"> -->
         <form #userProfile="ngForm" [@routerTransition]>
             <div class="rotating clearfix">
                 <div class="col-md-12 front" *ngIf="!filpActive">
                     <div class="card">
-                        <!-- <div class="avatar-wrap">
-                            <div class="img" *ngIf="!localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + input.profilePictureUrl + ')'}"></div>
-                            <div class="img" *ngIf="localPictureUrl" id="uploadArea" [ngStyle]="{'background-image': 'url(' + localPictureUrl + ')'}"></div>
-                            <span *ngIf="!userProfileData.profilePictureUrl && (userProfileData.profilePictureUrl || !localPictureUrl)" class="vapps-icon-app-add"></span>
-                        </div> -->
                         <div class="avatar-wrap">
                             <xiaoyuyue-mobile-upload-picture [slogan]="" [borderRadius]="'50%'" [groupId]="groupId" [width]="'80px'" [height]="'80px'"
                                 [existedPicUrl]="input.profilePictureUrl" (picUploadInfoHandler)="getLogoUploadHandler($event)"></xiaoyuyue-mobile-upload-picture>
@@ -142,5 +138,5 @@
                 </div>
             </div>
         </form>
-    </div>
+    <!-- </div> -->
 </div>
