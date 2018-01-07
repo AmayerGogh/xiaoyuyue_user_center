@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { accountModuleAnimation } from 'shared/animations/routerTransition';
+import { Component, Injector, OnInit, ViewEncapsulation } from '@angular/core';
+
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { SitemapsService } from 'shared/services/sitemaps.service';
+import { accountModuleAnimation } from 'shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-custom-service',
@@ -9,12 +11,15 @@ import { SitemapsService } from 'shared/services/sitemaps.service';
     animations: [accountModuleAnimation()],
     encapsulation: ViewEncapsulation.None
 })
-export class CustomServiceComponent implements OnInit {
+export class CustomServiceComponent extends AppComponentBase implements OnInit {
     resultData: any;
 
     constructor(
+        injector: Injector,
         private _sitemapsService: SitemapsService
-    ) { }
+    ) {
+        super(injector);
+    }
 
     ngOnInit() {
         this.loadData();
