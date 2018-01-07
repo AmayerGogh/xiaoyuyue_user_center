@@ -12,17 +12,16 @@
     .avatar-wrap {
         width: 80px;
         height: 80px;
-        line-height: 70px;
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        overflow: hidden;
+        position: relative;
+        top: -40px;
         border-radius: 50%;
+        overflow: hidden;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 1px 5px rgba(0, 0, 0, 0.2);
         text-align: center;
         font-size: 44px;
         font-weight: 100;
+        background-color: #E5E5E5;
+        margin: 0 auto;
         .img {
             width: 80px;
             height: 80px;
@@ -39,9 +38,6 @@
             font-size: 24px;
             color: #999;
         }
-    }
-    .card-content {
-        margin-top: 40px;
     }
     .op-btn {
         margin-top: 10px;

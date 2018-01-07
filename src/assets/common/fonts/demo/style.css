@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'xiaoyuyue-user';
-  src:  url('fonts/xiaoyuyue-user.eot?c5og9w');
-  src:  url('fonts/xiaoyuyue-user.eot?c5og9w#iefix') format('embedded-opentype'),
-    url('fonts/xiaoyuyue-user.ttf?c5og9w') format('truetype'),
-    url('fonts/xiaoyuyue-user.woff?c5og9w') format('woff'),
-    url('fonts/xiaoyuyue-user.svg?c5og9w#xiaoyuyue-user') format('svg');
+  font-family: 'xiaoyuyue-icon';
+  src:  url('fonts/xiaoyuyue-icon.eot?cv1ipy');
+  src:  url('fonts/xiaoyuyue-icon.eot?cv1ipy#iefix') format('embedded-opentype'),
+    url('fonts/xiaoyuyue-icon.ttf?cv1ipy') format('truetype'),
+    url('fonts/xiaoyuyue-icon.woff?cv1ipy') format('woff'),
+    url('fonts/xiaoyuyue-icon.svg?cv1ipy#xiaoyuyue-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 [class^="vapps-icon-"], [class*=" vapps-icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'xiaoyuyue-user' !important;
+  font-family: 'xiaoyuyue-icon' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -24,9 +24,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.vapps-icon-app-landline-phone:before {
-  content: "\e946";
-}
 .vapps-icon-app-active:before {
   content: "\e900";
 }
@@ -96,144 +93,153 @@
 .vapps-icon-app-first-page:before {
   content: "\e916";
 }
-.vapps-icon-app-last-page:before {
+.vapps-icon-app-lang-switch-1:before {
   content: "\e917";
 }
-.vapps-icon-app-link-qq:before {
+.vapps-icon-app-lang-switch-2:before {
   content: "\e918";
 }
-.vapps-icon-app-link-wechat:before {
+.vapps-icon-app-last-page:before {
   content: "\e919";
 }
-.vapps-icon-app-link-weibo:before {
+.vapps-icon-app-link-qq:before {
   content: "\e91a";
 }
-.vapps-icon-app-location:before {
+.vapps-icon-app-link-wechat:before {
   content: "\e91b";
 }
-.vapps-icon-app-logo:before {
+.vapps-icon-app-link-weibo:before {
   content: "\e91c";
 }
-.vapps-icon-app-logo-text:before {
+.vapps-icon-app-location:before {
   content: "\e91d";
 }
-.vapps-icon-app-menu:before {
+.vapps-icon-app-logo:before {
   content: "\e91e";
 }
-.vapps-icon-app-menu-booked:before {
+.vapps-icon-app-logo-text:before {
   content: "\e91f";
 }
-.vapps-icon-app-menu-home:before {
+.vapps-icon-app-menu:before {
   content: "\e920";
 }
-.vapps-icon-app-menu-logout:before {
+.vapps-icon-app-menu-booked:before {
   content: "\e921";
 }
-.vapps-icon-app-menu-personal:before {
+.vapps-icon-app-menu-home:before {
   content: "\e922";
 }
-.vapps-icon-app-menu-setting:before {
+.vapps-icon-app-menu-logout:before {
   content: "\e923";
 }
-.vapps-icon-app-message:before {
+.vapps-icon-app-menu-personal:before {
   content: "\e924";
 }
-.vapps-icon-app-mode-toggle-1:before {
+.vapps-icon-app-menu-setting:before {
   content: "\e925";
 }
-.vapps-icon-app-mode-toggle-2:before {
+.vapps-icon-app-message:before {
   content: "\e926";
 }
-.vapps-icon-app-multitask:before {
+.vapps-icon-app-mode-toggle-1:before {
   content: "\e927";
 }
-.vapps-icon-app-next-page:before {
+.vapps-icon-app-mode-toggle-2:before {
   content: "\e928";
 }
-.vapps-icon-app-phone:before {
+.vapps-icon-app-multitask:before {
   content: "\e929";
 }
-.vapps-icon-app-preview:before {
+.vapps-icon-app-next-page:before {
   content: "\e92a";
 }
-.vapps-icon-app-prev-page:before {
+.vapps-icon-app-phone:before {
   content: "\e92b";
 }
-.vapps-icon-app-qr-code:before {
+.vapps-icon-app-preview:before {
   content: "\e92c";
 }
-.vapps-icon-app-refurbish:before {
+.vapps-icon-app-prev-page:before {
   content: "\e92d";
 }
-.vapps-icon-app-remove:before {
+.vapps-icon-app-qr-code:before {
   content: "\e92e";
 }
-.vapps-icon-app-search:before {
+.vapps-icon-app-refurbish:before {
   content: "\e92f";
 }
-.vapps-icon-app-submit:before {
+.vapps-icon-app-remove:before {
   content: "\e930";
 }
-.vapps-icon-app-suggest:before {
+.vapps-icon-app-search:before {
   content: "\e931";
 }
-.vapps-icon-app-time-line-item-name:before {
+.vapps-icon-app-security:before {
   content: "\e932";
 }
-.vapps-icon-app-time-line-outlet:before {
+.vapps-icon-app-submit:before {
   content: "\e933";
 }
-.vapps-icon-app-time-line-shophours:before {
+.vapps-icon-app-suggest:before {
   content: "\e934";
 }
-.vapps-icon-app-to-bottom:before {
+.vapps-icon-app-time-line-item-name:before {
   content: "\e935";
 }
-.vapps-icon-app-to-top:before {
+.vapps-icon-app-time-line-outlet:before {
   content: "\e936";
 }
-.vapps-icon-app-upload:before {
+.vapps-icon-app-time-line-shophours:before {
   content: "\e937";
 }
-.vapps-icon-app-user-auth:before {
+.vapps-icon-app-to-bottom:before {
   content: "\e938";
 }
-.vapps-icon-app-user-center:before {
+.vapps-icon-app-to-top:before {
   content: "\e939";
 }
-.vapps-icon-app-user-feedback:before {
+.vapps-icon-app-upload:before {
   content: "\e93a";
 }
-.vapps-icon-app-user-info:before {
+.vapps-icon-app-user-auth:before {
   content: "\e93b";
 }
-.vapps-icon-app-user-logout:before {
+.vapps-icon-app-user-center:before {
   content: "\e93c";
 }
-.vapps-icon-app-user-manage:before {
+.vapps-icon-app-user-feedback:before {
   content: "\e93d";
 }
-.vapps-icon-app-user-profile:before {
+.vapps-icon-app-user-info:before {
   content: "\e93e";
 }
-.vapps-icon-app-user-security:before {
+.vapps-icon-app-user-logout:before {
   content: "\e93f";
 }
-.vapps-icon-app-user-setting:before {
+.vapps-icon-app-user-manage:before {
   content: "\e940";
 }
-.vapps-icon-app-validate-email:before {
+.vapps-icon-app-user-profile:before {
   content: "\e941";
 }
-.vapps-icon-app-validate-phone:before {
+.vapps-icon-app-user-security:before {
   content: "\e942";
 }
-.vapps-icon-linked-qq:before {
+.vapps-icon-app-user-setting:before {
   content: "\e943";
 }
-.vapps-icon-linked-wechat:before {
+.vapps-icon-app-validate-email:before {
   content: "\e944";
 }
-.vapps-icon-linked-weibo:before {
+.vapps-icon-app-validate-phone:before {
   content: "\e945";
+}
+.vapps-icon-linked-qq:before {
+  content: "\e946";
+}
+.vapps-icon-linked-wechat:before {
+  content: "\e947";
+}
+.vapps-icon-linked-weibo:before {
+  content: "\e948";
 }

@@ -18,6 +18,10 @@ interface JQuery {
 }
 
 interface JQuery {
+    collapse(...any): any;
+}
+
+interface JQuery {
     daterangepicker(...any): any;
 }
 
@@ -62,6 +66,15 @@ declare var QiniuJsSDK: any;
 declare var plupload: any;
 declare var FileProgress: jQuery;
 
+declare var cropper: any;
+declare var Cropper: any;
+interface JQuery {
+    cropper(...any): any;
+}declare var cropper: any;
+declare var Cropper: any;
+interface JQuery {
+    cropper(...any): any;
+}
 interface JQuery {
     LUOCAPTCHA(...any): any;
 }

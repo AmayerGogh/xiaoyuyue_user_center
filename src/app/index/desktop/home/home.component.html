@@ -1,9 +1,12 @@
 <div class="home-wrap" id="fullpage">
     <!-- banner -->
     <xiaoyuyue-header></xiaoyuyue-header>
-    <div class="banner-wrap section">
+    <div class="banner-wrap">
         <div class="banner-slogan common-max-width">
-            <h2>{{ l('MicroCompany.BookingTool') }}<br><small>{{ l('Convenient.BookingTool') }}</small></h2>
+            <h2>{{ l('MicroCompany.BookingTool') }}
+                <br>
+                <small>{{ l('Convenient.BookingTool') }}</small>
+            </h2>
             <button class="btn primary-bgcolor" (click)="createBooking()">{{ l('DesktopCreateBooking') }}</button>
         </div>
     </div>
@@ -30,9 +33,10 @@
                         <div class="card-head">
                             <!-- <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2"> -->
                             <div class="video">
-                                <video controls="controls" draggable="" poster="/assets/common/images/index/about/bg2.jpg" preload="metadata" [src]="introVideoUrl" type="video/mp4" width="100%">
-                                        {{ l('Nonsupport.VideoTag') }}
-                                    </video>
+                                <video controls="controls" draggable="" poster="/assets/common/images/index/about/bg2.jpg" preload="metadata" [src]="introVideoUrl"
+                                    type="video/mp4" width="100%">
+                                    {{ l('Nonsupport.VideoTag') }}
+                                </video>
                             </div>
                         </div>
                         <div class="card-content">
@@ -161,61 +165,36 @@
     <!-- 联系我们 -->
     <div class="contact-us-wrap section">
         <div class="common-max-width">
-            <div class="row">
-                <div class="col-lg-6">
-                    <h3 class="content-title">{{ l('ContactUs') }}</h3>
-                    <p class="slogan">{{ l('Slogan') }}</p>
-                    <div class="contact-way">
-                        <div class="flex-block">
-                            <div class="flex-left vapps-icon-app-location"></div>
-                            <div class="flex-right ">
-                                <h4>{{ l('OfficeAddressField') }}<br><small>{{ l('OfficeAddress') }}</small></h4>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="content-title">{{ l('ContactUs') }}</h3>
+                        <p class="slogan">{{ l('Slogan') }}</p>
+                        <div class="contact-way">
+                            <div class="flex-block">
+                                <div class="flex-left vapps-icon-app-location"></div>
+                                <div class="flex-right ">
+                                    <h4>{{ l('OfficeAddressField') }}
+                                        <br>
+                                        <small>{{ l('OfficeAddress') }}</small>
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex-block">
-                            <div class="flex-left vapps-icon-app-message"></div>
-                            <div class="flex-right ">
-                                <h4>{{ l('ContactWay') }}<br><small>020-39141150<br>marketing@vapps.hk</small></h4>
+                            <div class="flex-block">
+                                <div class="flex-left vapps-icon-app-message"></div>
+                                <div class="flex-right ">
+                                    <h4>{{ l('ContactWay') }}
+                                        <br>
+                                        <small>020-39141150
+                                            <br>marketing@vapps.hk</small>
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="contact-form col-lg-6">
-                    <div class="card">
-                        <div class="col-lg-12">
-                            <div class="row">
-                                <!-- <label class="col-sm-2 label-on-left">With help</label> -->
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">{{ l('Compellation') }}</label>
-                                        <input class="form-control" type="text" name="name">
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                <!-- <label class="col-sm-2 label-on-left">With help</label> -->
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">{{ l('EmailAddress') }}</label>
-                                        <input class="form-control" type="email" name="email">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <!-- <label class="col-sm-2 label-on-left">With help</label> -->
-                                <div class="col-md-12">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label">{{ l('Feedback') }}</label>
-                                        <textarea class="form-control" name="propose" rows="3"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button class="btn btn-warning">{{ l('SeedMessage') }}</button>
-                        </div>
+                    <div class="contact-qrcode col-lg-6">
+                        <img src="/assets/common/images/index/contact/qr-code.png" width="200px" alt="qrcode">
+                        <p>小预约公众号</p>
                     </div>
                 </div>
             </div>

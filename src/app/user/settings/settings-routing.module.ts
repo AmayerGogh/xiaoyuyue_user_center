@@ -1,13 +1,14 @@
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
 import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
-import { CurrentPhoneComponent } from './security/phone/current-phone/current-phone.component';
+import { PhoneComponent } from './security/phone/phone.component';
 import { EmailComponent } from './security/email/email.component';
 import { NgModule } from '@angular/core';
 import { PasswdComponent } from './security/passwd/passwd.component';
 import { SecurityComponent } from './security/security.component';
 import { SettingsComponent } from './settings.component';
 import { SuggestComponent } from './suggest/suggest.component';
+import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.component';
 
 @NgModule({
     imports: [
@@ -20,8 +21,9 @@ import { SuggestComponent } from './suggest/suggest.component';
                     { path: 'security', component: SecurityComponent, data: { breadcrumb: 'Menu.Security' } },
                     { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
                     { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
-                    { path: 'change-phone', component: CurrentPhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
-                    { path: 'email', component: EmailComponent, data: { breadcrumb: 'Menu.BindingPhone' } }
+                    { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
+                    { path: 'email', component: EmailComponent, data: { breadcrumb: '改绑邮箱' } },
+                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: '语言切换' } }
                 ]
             }
         ])

@@ -18,9 +18,14 @@
                 color: #FF9641;
                 margin-bottom: 20px;
             }
+            .item-content {
+                .item {
+                    cursor: pointer;
+                }
+            }
         }
         .footer-img {
-            text-align: right;
+            text-align: center;
             img {
                 display: inline-block;
                 position: relative;
@@ -28,6 +33,7 @@
                 border-radius: 6px;
                 color: rgba(0, 0, 0, 0.87);
                 background: #fff;
+                margin-bottom: 4px;
             }
         }
     }
