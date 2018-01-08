@@ -1,6 +1,6 @@
 <div [@routerTransition]>
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default" *ngFor="let item of resultData; let index = index;">
+        <div class="panel panel-default problem-content" *ngFor="let item of resultData; let index = index;">
             <div class="panel-heading" role="tab" [id]="'heading'+index">
                 <h4 class="panel-title">
                     <a role="button" data-toggle="collapse" data-parent="#accordion" [href]="'#collapse'+index" aria-expanded="false" aria-controls="'collapse'+index">
