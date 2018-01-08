@@ -69,9 +69,11 @@ export class AppRoutingModule {
         private router: Router,
         private _cookiesService: CookiesService
     ) {
+        this.protectionSourceView();
+
         router.events.subscribe((event: NavigationEnd) => {
             if (!(event instanceof NavigationEnd)) { return; }
-
+            this.protectionSourceView();
             this.initLanguage(event);
         });
     }
@@ -95,5 +97,12 @@ export class AppRoutingModule {
             abp.appPath
         );
         window.location.href = AppConsts.appBaseUrl;
+    }
+
+    // 禁止video标签右键
+    protectionSourceView(): void {
+        $('video').bind('contextmenu', () => {
+            return false;
+        })
     }
 }
