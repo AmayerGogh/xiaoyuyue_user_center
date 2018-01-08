@@ -1,4 +1,4 @@
-<!-- 验证旧手机  -->
+<!-- 验证旧邮箱  -->
 <div class="email-wrap">
     <div class="current-email-wrap">
         <div [@routerTransition] *ngIf="!emailAddress ? false :  !isVerified">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <!-- 验证旧手机后，绑定新手机 -->
+    <!-- 验证旧邮箱后，绑定新邮箱 -->
     <div class="new-email-wrap" *ngIf="!emailAddress ? false :  isVerified">
         <form #newEmailAddressFrom="ngForm">
             <div class="card">
@@ -71,7 +71,7 @@
         </form>
     </div>
 
-    <!-- 没有绑定过手机，绑定手机 -->
+    <!-- 未绑定过邮箱，绑定邮箱 -->
     <div class="new-email-wrap" *ngIf="!emailAddress" [@routerTransition]>
         <form #newEmailAddressFrom="ngForm">
             <div class="card">
