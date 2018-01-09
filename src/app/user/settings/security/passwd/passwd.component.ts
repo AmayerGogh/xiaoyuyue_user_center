@@ -1,9 +1,9 @@
-import { ChangePasswordByPhoneInput, ChangePasswordInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy } from '@shared/service-proxies/service-proxies';
+import { AccountServiceProxy, ChangePasswordByPhoneInput, ChangePasswordInput, CodeSendInput, ProfileServiceProxy, SMSServiceProxy, SendPasswordResetCodeInput } from '@shared/service-proxies/service-proxies';
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 
 import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppSessionService } from '@shared/common/session/app-session.service';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import { VerificationCodeType } from 'shared/AppEnums';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 
@@ -17,20 +17,24 @@ export class RepeatPasswdDto extends ChangePasswordInput {
     animations: [appModuleAnimation()]
 })
 export class PasswdComponent extends AppComponentBase implements OnInit {
+    sendPasswordResetCodeInput: SendPasswordResetCodeInput = new SendPasswordResetCodeInput();
+    emailAddress: string;
+    phoneNum: string;
     phoneNumText: string;
-    isSendSMS: boolean = false;
+    isSendSMS = false;
     input: RepeatPasswdDto = new RepeatPasswdDto();
     byPhoneInput: ChangePasswordByPhoneInput = new ChangePasswordByPhoneInput();
-    phoneChangePasswd: boolean = false;
-    oldPasswdChangePasswd: boolean = false;
-    showCommandWrap: boolean = true;
+    showCommandWrap = true;
+    phoneChangePasswd = false;
+    oldPasswdChangePasswd = false;
 
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
         injector: Injector,
-        private _location: Location,
+        private _router: Router,
         private _SMSServiceProxy: SMSServiceProxy,
         private _profileServiceProxy: ProfileServiceProxy,
+        private _accountService: AccountServiceProxy,
         private _appSessionService: AppSessionService
     ) {
         super(injector);
@@ -38,14 +42,18 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
 
     ngOnInit() {
         this.encrypt();
+        this.emailAddress = this._appSessionService.user.emailAddress;
+        this.phoneNum = this._appSessionService.user.phoneNumber;
     }
     // 使用旧密码更改密码
     oldPasswdChangeHandler(): void {
         this._profileServiceProxy
             .changePassword(this.input)
             .subscribe(result => {
-                this.notify.success('密码修改成功');
+                this.notify.success(this.l('ChangePasswdSuccessed'));
                 this.showCommandWrap = true;
+                this.phoneChangePasswd = false;
+                this.oldPasswdChangePasswd = false;
             });
         this.input = new RepeatPasswdDto();
     }
@@ -55,11 +63,10 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         this._profileServiceProxy
             .changePasswordByPhone(this.byPhoneInput)
             .subscribe(result => {
-                this.notify.success('密码修改成功');
+                this.notify.success(this.l('ChangePasswdSuccessed'));
                 this.showCommandWrap = true;
                 this.phoneChangePasswd = false;
                 this.oldPasswdChangePasswd = false;
-
             });
         this.byPhoneInput = new ChangePasswordByPhoneInput();
     }
@@ -69,45 +76,61 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         this.oldPasswdChangePasswd = true;
         this.phoneChangePasswd = false;
     }
-    usePhoneChangeEle(): void {
+    showUsePhoneChangeEle(): void {
+        const result = this.isBindingPhoneHandler();
+        if (!result) {
+            return;
+        }
         this.showCommandWrap = false;
         this.oldPasswdChangePasswd = false;
         this.phoneChangePasswd = true;
     }
-
-    // 发送验证码
-    send() {
-        let model = new CodeSendInput();
-        model.targetNumber = this._appSessionService.user.phoneNumber;
-        model.codeType = VerificationCodeType.ChangePassword;
-        // this.captchaResolved();
-
-        this._SMSServiceProxy
-            .sendCodeAsync(model)
-            .subscribe(result => {
-                this.anginSend();
+    emailChangeHandler(): void {
+        const result = this.isBindingEmailHandler();
+        if (!result) {
+            return;
+        }
+        this.sendPasswordResetCodeInput.emailAddress = this.emailAddress;
+        this._accountService.sendPasswordResetCode(this.sendPasswordResetCodeInput)
+            .subscribe(() => {
+                this.message.success(this.l('PasswordResetMailSentMessage'));
             });
     }
 
-    anginSend() {
-        let self = this;
-        let time = 60;
-        this.isSendSMS = true;
-        let set = setInterval(() => {
-            time--;
-            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
-        }, 1000)
-
-        setTimeout(() => {
-            clearInterval(set);
-            self.isSendSMS = false;
-            self._smsBtn.nativeElement.innerHTML = this.l("AgainSendValidateCode");
-        }, 60000);
-    }
     private encrypt(): void {
-        if (!this._appSessionService.user.phoneNumber) {
+        if (!this.phoneNum) {
             return;
         }
-        this.phoneNumText = "•••••••" + this._appSessionService.user.phoneNumber.substr(this._appSessionService.user.phoneNumber.length - 4);
+        this.phoneNumText = '•••••••' + this.phoneNum.substr(this.phoneNum.length - 4);
+    }
+
+    private isBindingPhoneHandler(): boolean {
+        if (this.phoneNum != null) {
+            this.encrypt();
+            return true;
+        } else {
+            this.message.confirm(this.l('Security.ChangePasswd.MustBingPhone'), (result) => {
+                if (result) {
+                    this._router.navigate(['/user/settings/phone']);
+                } else {
+                    return false;
+                }
+            })
+        }
+    }
+
+    private isBindingEmailHandler(): boolean {
+        if (this._appSessionService.user.emailAddress != null) {
+            this.encrypt();
+            return true;
+        } else {
+            this.message.confirm(this.l('Security.ChangePasswd.MustBingEmail'), (result) => {
+                if (result) {
+                    this._router.navigate(['/user/settings/email']);
+                } else {
+                    return false;
+                }
+            })
+        }
     }
 }

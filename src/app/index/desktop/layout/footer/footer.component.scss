@@ -12,15 +12,24 @@
             .nav-title {
                 font-size: 18px;
                 margin-bottom: 60px;
+                .item span {
+                    border-bottom: 2px solid #FF9641
+                }
             }
             .sub-title {
                 font-size: 16px;
                 color: #FF9641;
                 margin-bottom: 20px;
             }
+            .item-content {
+                margin-bottom: 8px;
+                .item {
+                    cursor: pointer;
+                }
+            }
         }
         .footer-img {
-            text-align: right;
+            text-align: center;
             img {
                 display: inline-block;
                 position: relative;
@@ -28,6 +37,7 @@
                 border-radius: 6px;
                 color: rgba(0, 0, 0, 0.87);
                 background: #fff;
+                margin-bottom: 4px;
             }
         }
     }

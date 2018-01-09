@@ -20,14 +20,13 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent extends AppComponentBase implements OnInit, AfterViewInit {
-    phoneModel: PhoneAuthenticateModel = new PhoneAuthenticateModel();
+    model: PhoneAuthenticateModel = new PhoneAuthenticateModel();
     externalLoginProviders: ExternalLoginProvider[];
 
     flag = true;
     // 普通登录或者手机验证登录，默认普通登录
     ordinaryLogin = true;
     saving = false;
-    isSendSMS = false;
 
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
@@ -81,7 +80,7 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
 
         this.saving = true;
         if (!this.ordinaryLogin) {
-            this.loginService.phoneNumAuth(this.phoneModel, () => this.saving = false);
+            this.loginService.phoneNumAuth(this.model, () => this.saving = false);
             return;
         }
 
@@ -101,35 +100,5 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     // 是否手机验证登录
     isPhoneLogin() {
         this.ordinaryLogin = false;
-    }
-
-    // 发送验证码
-    send() {
-        const input: CodeSendInput = new CodeSendInput();
-        input.targetNumber = this.phoneModel.phoneNum;
-        input.codeType = VerificationCodeType.Login;
-        // this.captchaResolved();
-
-        this._SMSServiceProxy
-            .sendCodeAsync(input)
-            .subscribe(result => {
-                this.anginSend();
-            });
-    }
-
-    anginSend() {
-        const self = this;
-        let time = 60;
-        this.isSendSMS = true;
-        const set = setInterval(() => {
-            time--;
-            self._smsBtn.nativeElement.innerHTML = `${time} 秒`;
-        }, 1000);
-
-        setTimeout(() => {
-            clearInterval(set);
-            self.isSendSMS = false;
-            self._smsBtn.nativeElement.innerHTML = this.l('AgainSendValidateCode');
-        }, 60000);
     }
 }

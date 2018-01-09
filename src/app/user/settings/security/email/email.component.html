@@ -1,13 +1,53 @@
-<div class="passwd-wrap">
-    <div [@routerTransition]>
-        <form #changePwFrom="ngForm">
+<!-- 验证旧邮箱  -->
+<div class="email-wrap">
+    <div class="current-email-wrap">
+        <div [@routerTransition] *ngIf="!emailAddress ? false :  !isVerified">
+            <form #currentEmailAddressFrom="ngForm">
+                <div class="card">
+                    <div class="card-header card-header-text" data-background-color="orange">
+                        <span class="title-icon vapps-icon-app-validate-email"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group label-floating" [class.is-empty]="!encryptEmailAddress">
+                                <label class="control-label">{{l('Security.Filed.OldEmailAddress')}}</label>
+                                <input type="text" class="form-control" name="beforeEmail" [value]="encryptEmailAddress" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">{{l('VerifyCode')}}</label>
+                                <input type="text" class="form-control" name="validateCode" [(ngModel)]="code" required>
+                                <xiaoyuyue-send-code [codeType]="changeEmailCodeType" [sendCodeType]="sendCodeType" [emailAddress]="emailAddress"></xiaoyuyue-send-code>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-block btn-warning" type="submit" (click)="verificationEmailAddress()" [disabled]="!currentEmailAddressFrom.form.valid">{{l('NextStep')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 验证旧邮箱后，绑定新邮箱 -->
+    <div class="new-email-wrap" *ngIf="!emailAddress ? false :  isVerified">
+        <form #newEmailAddressFrom="ngForm">
             <div class="card">
+                <div class="card-header card-header-text" data-background-color="orange">
+                    <span class="title-icon vapps-icon-app-validate-email"></span>
+                </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group label-floating">
-                            <label class="control-label">原密码</label>
-                            <input type="password" class="form-control" name="beforePasswd" required>
-                            <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                            <label class="control-label">{{l('Security.Filed.NewEmailAddres')}}</label>
+                            <input type="text" class="form-control" name="beforeEmailAddress" [(ngModel)]="changeBindingEmailInput.newEmailAddress" required>
                         </div>
                     </div>
                 </div>
@@ -15,29 +55,51 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group label-floating">
-                            <label class="control-label">新密码</label>
-                            <input type="password" class="form-control" name="currenPasswd" required>
-                            <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
+                            <label class="control-label">{{l('VerifyCode')}}</label>
+                            <input type="text" class="form-control" name="validateCode" [(ngModel)]="changeBindingEmailInput.bindlingCode" required>
+                            <xiaoyuyue-send-code [codeType]="bindingEmailCodeType" [sendCodeType]="sendCodeType" [emailAddress]="changeBindingEmailInput.newEmailAddress"></xiaoyuyue-send-code>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group label-floating">
-                            <label class="control-label">确认密码</label>
-                            <input type="password" class="form-control" name="confirmPasswd">
-                            <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- <div class="col-xs-6">
-                        <button class="btn btn-block btn-danger" type="button" (click)="cancel()">取消</button>
-                    </div> -->
                     <div class="col-xs-12">
-                        <button class="btn btn-block btn-warning" type="submit" [disabled]="!changePwFrom.form.valid">保存</button>
+                        <button class="btn btn-block btn-warning" type="submit" (click)="changeBindEmail()" [disabled]="!newEmailAddressFrom.form.valid">{{l('Save')}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- 未绑定过邮箱，绑定邮箱 -->
+    <div class="new-email-wrap" *ngIf="!emailAddress" [@routerTransition]>
+        <form #newEmailAddressFrom="ngForm">
+            <div class="card">
+                <div class="card-header card-header-text" data-background-color="orange">
+                    <span class="title-icon vapps-icon-app-validate-email"></span>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group label-floating">
+                            <label class="control-label">{{l('Security.Filed.EmailAddress')}}</label>
+                            <input type="text" class="form-control" name="beforeEmail" [(ngModel)]="bindingEmailInput.emailAddress" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group label-floating">
+                            <label class="control-label">{{l('Verify.Code')}}</label>
+                            <input type="text" class="form-control" name="validateCode" [(ngModel)]="bindingEmailInput.code" required>
+                            <xiaoyuyue-send-code [codeType]="bindingEmailCodeType" [sendCodeType]="sendCodeType" [emailAddress]="bindingEmailInput.emailAddress"></xiaoyuyue-send-code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-block btn-warning" type="submit" (click)="bindEmailAddress()" [disabled]="!newEmailAddressFrom.form.valid">{{l('Binging')}}</button>
                     </div>
                 </div>
             </div>

@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="register-btn-wrap">
-                    <button class="btn btn-register" type="button" [disabled]="!registerForm.form.valid" (click)="register()" [buttonBusy]="saving"
+                    <button class="btn btn-register" type="button" [disabled]="!registerForm.form.valid" (click)="register()" [buttonBusy]="registering"
                         [busyText]="l('Registering')">
                         <i></i>
                         <span>{{ l('Register') }}</span>

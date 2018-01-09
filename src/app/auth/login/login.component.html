@@ -19,17 +19,15 @@
             <div class="login-body">
                 <div class="form-item">
                     <div class="form-group label-floating">
-                        <input class="form-control" type="number" name="phoneNumber" [(ngModel)]="phoneModel.phoneNum" maxlength="11" pattern="^[1][3-8]\d{9}$|^([6|9])\d{7}$|^[0][9]\d{8}$|^[6]([8|6])\d{5}$"
+                        <input class="form-control" type="number" name="phoneNumber" [(ngModel)]="model.phoneNum" maxlength="11" pattern="^[1][3-8]\d{9}$|^([6|9])\d{7}$|^[0][9]\d{8}$|^[6]([8|6])\d{5}$"
                             placeholder="{{l('PhoneNumber')}}" autofocus required>
                     </div>
                 </div>
 
                 <div class="form-item">
                     <div class="validate-code-wrap form-group label-floating">
-                        <input class="form-control" type="number" name="identifyCode" [(ngModel)]="phoneModel.loginCode" required placeholder="{{l('VerificationCode')}}">
-                        <div class="get-sms-btn">
-                            <button type="button" class="btn" (click)="send()" #smsBtn [disabled]="isSendSMS">{{l('GetVerificationCode')}}</button>
-                        </div>
+                        <input class="form-control" type="number" name="identifyCode" [(ngModel)]="model.loginCode" required placeholder="{{l('VerificationCode')}}">
+                        <xiaoyuyue-send-code [codeType]="codeType" [phoneNumber]="model.phoneNum"></xiaoyuyue-send-code>
                     </div>
                 </div>
 

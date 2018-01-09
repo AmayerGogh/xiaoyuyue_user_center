@@ -18,7 +18,7 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     registerInput: RegisterInput = new RegisterInput();
     passwordComplexitySetting: PasswordComplexitySetting = new PasswordComplexitySetting();
     isPhoneRegister = true;
-    saving = false;
+    registering = false;
 
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     constructor(
@@ -53,10 +53,9 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
     // }
 
     register(): void {
-
-        this.saving = true;
+        this.registering = true;
         this._accountServiceProxy.register(this.registerInput)
-            .finally(() => { this.saving = false; })
+            .finally(() => { this.registering = false; })
             .subscribe((result) => {
                 if (!result.canLogin) {
                     this.notify.success(this.l('SuccessfullyRegistered'));
@@ -65,10 +64,10 @@ export class RegisterComponent extends AppComponentBase implements OnInit {
                 }
 
                 // Autheticatee
-                this.saving = true;
+                this.registering = true;
                 this._loginService.authenticateModel.loginCertificate = this.registerInput.phoneNumber ? this.registerInput.phoneNumber : this.registerInput.emailAddress;
                 this._loginService.authenticateModel.password = result.randomPassword;
-                this._loginService.authenticate(() => { this.saving = false; });
+                this._loginService.authenticate(() => { this.registering = false; });
             });
     }
 
