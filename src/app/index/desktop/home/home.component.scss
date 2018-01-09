@@ -13,6 +13,16 @@
         text-align: center;
         color: rgb(47, 47, 47);
     }
+    .card-header {
+        border-radius: 4px;
+    }
+    .card-content {
+        margin-top: -40px;
+    }
+    .rotating-container {
+        position: relative;
+        top: -40px;
+    }
     .section {
         height: 900px;
     }
