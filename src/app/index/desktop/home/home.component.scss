@@ -3,21 +3,19 @@
     width: 100%;
     background-color: rgba(232, 232, 232, 0.39);
     .common-max-width {
-        width: 900px;
+        width: 1200px;
         margin: 0 auto;
         overflow: hidden;
     }
     .content-title {
-        padding: 40px 0;
         font-size: 24px;
         text-align: center;
         color: rgb(47, 47, 47);
+        margin-top: 45px;
+        margin-bottom: 40px;
     }
-    .card-header {
-        border-radius: 4px;
-    }
-    .card-content {
-        margin-top: -40px;
+    .text-left {
+        text-align: left !important;
     }
     .rotating-container {
         position: relative;
@@ -28,99 +26,105 @@
     }
     .banner-wrap {
         width: 100%;
+        height: 712px;
         background: url(/assets/common/images/login/banner-3.jpg) no-repeat center;
         background-size: cover;
         .banner-slogan {
             padding-top: 340px;
-            padding-bottom: 140px;
+            .btn {
+                padding: 10px 20px 10px 20px;
+                font-size: 18px;
+                letter-spacing: 4px;
+            }
         }
     }
     .about-me-wrap {
-        // padding-bottom: 200px;
         background: url(/assets/common/images/index/about/banner.jpg) no-repeat center;
         background-size: cover;
-        .card-content {
-            height: 200px;
-            .text-item {
-                font-size: 12px;
-                text-align: center;
+        .card {
+            overflow: hidden;
+            .card-head {
+                width: 100%;
+                height: 220px;
+                overflow: hidden;
             }
-            .text-title {
-                font-size: 16px;
+            .card-content {
+                padding-top: 40px;
+                padding-bottom: 30px;
+                .text-item {
+                    font-size: 14px;
+                    text-align: center;
+                }
+                .text-title {
+                    font-size: 16px;
+                }
             }
         }
     }
     .how-table-wrap {
-        // padding-bottom: 140px;
         background-color: #EEE;
+        .card {
+            width: 86%;
+            margin: 25px auto;
+            display: block;
+        }
+        .circle-dot {
+            margin: 20px auto 0;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF9641;
+            border-radius: 100%;
+        }
     }
     .how-booking-wrap {
-        // padding-bottom: 140px;
         background-color: #FFF;
+        .card {
+            width: 80%;
+            margin: 25px auto;
+            display: block;
+        }
+        .circle-dot {
+            margin: 20px auto 0;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF9641;
+            border-radius: 100%;
+        }
     }
     .usage-scene-wrap {
-        // padding-bottom: 200px;
         background: url(/assets/common/images/index/scene/banner.jpg) no-repeat center;
         background-size: cover;
+        .card {
+            width: 86%;
+            margin: 25px auto;
+            display: block;
+            .card-header {
+                img {
+                    border-radius: 4px;
+                }
+            }
+        }
         .content-title {
             color: #FFF;
+            margin-top: 100px;
+            margin-bottom: 140px;
         }
         .card-content {
+            margin-top: -40px;
             .text-item {
                 font-size: 12px;
                 text-align: center;
             }
             .text-title {
                 font-size: 16px;
-            }
-        }
-    }
-    .contact-us-wrap {
-        // padding-bottom: 140px;
-        background: url(/assets/common/images/index/contact/map.jpg) no-repeat center;
-        background-size: cover;
-        background-color: #EEE;
-        @include flexMiddle(3);
-        .content {
-            width: 90%;
-            position: relative;
-            margin: 0 auto;
-            padding: 20px 70px;
-            color: #FFF;
-            background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 4px;
-            .content-title {
-                color: #FFF;
-                font-size: 32px;
-                padding-top: 0;
-                padding-bottom: 10px;
-                text-align: left;
-            }
-            .flex-block {
-                display: flex;
-                .flex-left {
-                    color: #FF9641;
-                    font-size: 30px;
-                    padding-top: 8px;
-                    width: 64px;
-                    text-align: right;
-                }
-                .flex-right {
-                    margin-left: 10px;
-                    small {
-                        color: #FFF;
-                    }
-                }
-            }
-            .contact-qrcode {
-                position: absolute;
-                right: 0;
-                @include positionMiddle(2);
-                text-align: center;
-                font-size: 18px;
-                img {
-                    margin-bottom: 4px;
-                }
             }
         }
     }

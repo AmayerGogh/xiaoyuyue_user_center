@@ -97,7 +97,7 @@
                     </div>
                 </div>
 
-                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!loginForm.form.valid"
+                <button class="btn primary-bgcolor btn-block login-btn-wrap" type="submit" (click)="login()" [disabled]="!loginForm.form.valid && checkInputAutofill()"
                     [buttonBusy]="saving" [busyText]="l('Logging')">
                     <i></i>
                     <span>{{l("LogIn")}}</span>
@@ -114,7 +114,7 @@
                     <div *ngIf="loginService.externalLoginProviders.length > 0">
                         <ul class="social-icons-wrap">
                             <li *ngFor="let provider of loginService.externalLoginProviders" [hidden]="provider.name == 'WeChatMP'">
-                                <a class="social-login-icon social-icon-color {{provider.icon}}" (click)="externalLogin(provider,$event)" title="{{provider.name}}"></a>
+                                <a class="social-login-icon social-icon-color {{provider.icon}}" (click)="mobileExternalLogin(provider,$event)" title="{{provider.name}}"></a>
                             </li>
                         </ul>
 

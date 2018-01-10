@@ -50,6 +50,6 @@ export class DesktopHeaderComponent extends AppComponentBase implements OnInit, 
 /*         $.each($('.section'), (i, data) => {
             this.scrollSectionArr.push($('.section').eq(i).position().top);
         }); */
-        this.scrollSectionArr = [670, 1570, 2470, 3370, 4270];
+        this.scrollSectionArr = [712, 1612, 2512, 3412, 4270];
     }
 }

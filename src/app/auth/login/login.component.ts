@@ -101,4 +101,8 @@ export class LoginComponent extends AppComponentBase implements OnInit, AfterVie
     isPhoneLogin() {
         this.ordinaryLogin = false;
     }
+
+    checkInputAutofill(): boolean {
+        return $('input:-webkit-autofill').length === 2 ? false : true;
+    }
 }
