@@ -31,4 +31,9 @@
             @include rotateY-180();
         }
     }
+    &.hover-active:hover {
+        .rotating {
+            @include rotateY-180();
+        }
+    }
 }
