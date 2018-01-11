@@ -11,7 +11,6 @@ import { EmailActivationComponent } from './shared/email-activation/email-activa
 import { ExternalAuthComponent } from './external-auth/external-auth.component';
 import { ForgotPasswordComponent } from './password/forgot-password.component';
 import { FormsModule } from '@angular/forms';
-import { LanguageSwitchComponent } from './language-switch.component';
 import { LocalizationService } from 'abp-ng2-module/src/localization/localization.service';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './../../shared/services/login.service';
@@ -58,7 +57,6 @@ import { AppCommonModule } from 'app/shared/common/app-common.module';
         ConfirmEmailComponent,
         SendTwoFactorCodeComponent,
         ValidateTwoFactorCodeComponent,
-        LanguageSwitchComponent,
         PhoneValidateComponent,
         LuosimaoCaptcha
     ],
