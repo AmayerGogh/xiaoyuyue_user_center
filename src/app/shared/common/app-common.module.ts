@@ -21,6 +21,7 @@ import { RouterModule } from '@angular/router';
 import { SendCodeComponent } from 'app/shared/common/send-code/send-code.component';
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
+import { LanguageSwitchComponent } from 'app/shared/common/language-switch.component/language-switch.component';
 
 @NgModule({
     imports: [
@@ -42,7 +43,8 @@ import { UtilsModule } from '@shared/utils/utils.module';
         SendCodeComponent,
         DesktopHeaderComponent,
         DesktopFooterComponent,
-        MobileUploadPictureComponent
+        MobileUploadPictureComponent,
+        LanguageSwitchComponent
     ],
     exports: [
         TimeZoneComboComponent,
@@ -54,7 +56,8 @@ import { UtilsModule } from '@shared/utils/utils.module';
         SendCodeComponent,
         DesktopHeaderComponent,
         DesktopFooterComponent,
-        MobileUploadPictureComponent
+        MobileUploadPictureComponent,
+        LanguageSwitchComponent
     ],
     providers: [
         AppLocalizationService
