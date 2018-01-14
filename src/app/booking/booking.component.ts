@@ -10,6 +10,7 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { AppConsts } from 'shared/AppConsts';
 import { BookingTimeComponent } from 'app/booking/time/booking-time.component';
 import { CookiesService } from './../../shared/services/cookies.service';
+import { Meta } from '@angular/platform-browser';
 import { Moment } from 'moment';
 import { Observable } from 'rxjs/Rx';
 import { TabsetComponent } from 'ngx-bootstrap';
@@ -49,7 +50,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
         private _cookiesService: CookiesService,
         private _router: Router,
         private _weChatShareTimelineService: WeChatShareTimelineService,
-        private _titleService: TitleService
+        private _titleService: TitleService,
+        private meta: Meta
     ) {
         super(injector);
     }
@@ -88,6 +90,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
 
                 this._titleService.setSingleTitle(this.bookingData.bookingInfo.name);
                 this.initWechatShareConfig();
+
+                this.meta.updateTag({ name: 'og:description', content: this.l('ShareMyBooking', this.bookingData.bookingInfo.name) });
             });
     }
 
