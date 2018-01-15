@@ -17,17 +17,16 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
         private meta: Meta
     ) {
         super(injector);
+    }
+
+    ngOnInit(): void {
         this.meta.updateTag({ name: 'generator', content: this.l('MetaGenerator') });
         this.meta.updateTag({ name: 'keywords', content: this.l('MetaKey') });
         this.meta.updateTag({ name: 'description', content: this.l('MetaDescription') });
 
         this.meta.updateTag({ name: 'og:title', content: this.l('Slogan') });
         this.meta.updateTag({ name: 'og:description', content: this.l('MetaDescription') });
-        this.meta.updateTag({ name: 'og:image', content: 'https://www.xiaoyuyue.com/assets/common/images/index/contact/logo.png' });
         this.meta.updateTag({ name: 'og:url', content: location.href });
-    }
-
-    ngOnInit(): void {
     }
 
     ngAfterViewInit(): void {
