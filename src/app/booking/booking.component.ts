@@ -91,7 +91,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
                 this._titleService.setSingleTitle(this.bookingData.bookingInfo.name);
                 this.initWechatShareConfig();
 
-                this.meta.updateTag({ name: 'og:description', content: this.l('ShareMyBooking', this.bookingData.bookingInfo.name) });
+                this.meta.updateTag({ property: 'og:description', content: this.l('ShareMyBooking', this.bookingData.bookingInfo.name) });
             });
     }
 
