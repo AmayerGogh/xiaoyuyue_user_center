@@ -1,9 +1,13 @@
 .booking-about {
     width: 100%;
-    padding: 20px;
-    padding-bottom: 50px;
+    height: calc(100vh - 256px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0 20px;
     background-color: #FFF;
     margin-top: 4px;
+    overflow: hidden;
     .btn {
         line-height: 1;
         padding: 0;
