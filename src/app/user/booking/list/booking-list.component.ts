@@ -8,19 +8,20 @@ import { BookingCancelComponent } from './../cancel/booking-cancel.component';
 import { BookingOrderStatus } from 'shared/AppEnums';
 import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Router } from '@angular/router';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { appModuleSlowAnimation } from 'shared/animations/routerTransition';
+import { ScrollStatusOutput } from 'app/shared/utils/list-scroll.dto';
+import { ListScrollService } from 'shared/services/list-scroll.service';
 
 @Component({
     selector: 'xiaoyuyue-booking-list',
     templateUrl: './booking-list.component.html',
     styleUrls: ['./booking-list.component.scss'],
-    animations: [appModuleAnimation()]
+    animations: [appModuleSlowAnimation()]
 })
 export class BookingListComponent extends AppComponentBase implements OnInit {
+    scrollStatusOutput: ScrollStatusOutput = new ScrollStatusOutput();
     isLoaded = false;
     isLoading = false;
-    infiniteScrollDistance = 1;
-    infiniteScrollThrottle = 300;
     currentTabIndex = 0;
     personBookingTotalCount: number;
     allPrsonBookingDatas: any[] = [];
@@ -29,7 +30,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     status: Status2[] = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
     bookingName = '';
     pageSize = 10;
-    skip = 0;
+    skipCount = 0;
     sort: any;
     actionFlag: boolean[] = [];
     slogan = this.l('BookingList.Nothing');
@@ -44,6 +45,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     constructor(
         injector: Injector,
         private _router: Router,
+        private _listScrollService: ListScrollService,
         private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
     ) {
         super(
@@ -52,17 +54,19 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     }
 
     ngOnInit() {
-        this.loadPersonBookingData();
+        this.loadData();
     }
 
-    loadPersonBookingData() {
-        if (this.skip < 0) { this.skip = 0 };
+    // scrollHandleBack: 接收一个回调函数，控制下拉刷新，上拉加载的状态
+    loadData(scrollHandleBack?: any) {
+        if (this.skipCount < 0) { this.skipCount = 0 };
 
         this.isLoading = true;
         this._perBookingOrderServiceProxy
-            .getBookingOrders(this.bookingName, this.status, this.sort, this.pageSize, this.skip)
+            .getBookingOrders(this.bookingName, this.status, this.sort, this.pageSize, this.skipCount)
             .finally(() => {
                 this.isLoading = false;
+                scrollHandleBack && scrollHandleBack();
             })
             .subscribe(result => {
                 this.personBookingDatas = result.items;
@@ -74,6 +78,44 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
                     this.allPrsonBookingDatas[this.updateDataIndex] = this.personBookingDatas;
                 }
             });
+    }
+
+    pullDownRefresh(): void {
+        this.updateDataIndex = 0;
+        this.skipCount = 0;
+        this.scrollStatusOutput = new ScrollStatusOutput();
+        this.scrollStatusOutput.pulledDownActive = true;
+        this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        this.loadData(() => {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.pulledDownActive = false;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        });
+    }
+
+    pullUpLoad(): void {
+        this.updateDataIndex = -1;
+        let totalCount = 0;
+        this.allPrsonBookingDatas.forEach(personBookingTotalCount => {
+            personBookingTotalCount.forEach(element => {
+                totalCount++;
+            });
+        });
+        this.skipCount = totalCount;
+        if (this.skipCount >= this.personBookingTotalCount) {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.noMore = true;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+            return;
+        }
+        this.scrollStatusOutput = new ScrollStatusOutput();
+        this.scrollStatusOutput.pulledUpActive = true;
+        this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        this.loadData(() => {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.pulledUpActive = false;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        });
     }
 
     orderSwitch(index: number): void {
@@ -91,18 +133,18 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
         } else {
             this.message.warn(this.l('Improving'), this.l('ComingSoon'));
             this.allPrsonBookingDatas = [];
-            this.skip = 0;
+            this.skipCount = 0;
             return;
         }
         this.allPrsonBookingDatas = [];
-        this.skip = 0;
-        this.loadPersonBookingData();
+        this.skipCount = 0;
+        this.loadData();
     }
 
     orderSerach(keywords: string): void {
         this.bookingName = keywords;
         this.status = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
-        this.loadPersonBookingData();
+        this.loadData();
     }
 
     showBookingDetail(bookingId: number) {
@@ -128,7 +170,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
         this.stickedInput.sticked = toggleFlag;
 
         this.updateDataIndex = indexI;
-        this.skip = this.pageSize * this.updateDataIndex;
+        this.skipCount = this.pageSize * this.updateDataIndex;
         this._perBookingOrderServiceProxy
             .stickedBookingOrder(this.stickedInput)
             .subscribe(() => {
@@ -137,7 +179,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
                 } else {
                     this.notify.success(this.l('CancelStick'));
                 }
-                this.loadPersonBookingData();
+                this.loadData();
             });
     }
 
@@ -165,7 +207,7 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
 
     getIsCancelBooking(event: boolean): void {
         if (event) {
-            this.loadPersonBookingData();
+            this.loadData();
         }
     }
 
@@ -173,21 +215,5 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     isCancelBooking(currentStatus: number): boolean {
         if (currentStatus === BookingOrderStatus.Cancel || currentStatus === BookingOrderStatus.WaitComment || currentStatus === BookingOrderStatus.Complete) { return false; };
         return true;
-    }
-
-    public onScrollDown(): void {
-        this.updateDataIndex = -1;
-        let totalCount = 0;
-        this.allPrsonBookingDatas.forEach(personBookingDatas => {
-            personBookingDatas.forEach(element => {
-                totalCount++;
-            });
-        });
-        this.skip = totalCount;
-
-        if (this.skip >= this.personBookingTotalCount) {
-            return;
-        }
-        this.loadPersonBookingData();
     }
 }
