@@ -8,6 +8,7 @@ import { TenantService } from 'shared/services/tenant.service';
 import { TitleService } from 'shared/services/title.service';
 import { UploadPictureService } from 'shared/services/upload-picture.service';
 import { WeChatShareTimelineService } from 'shared/services/wechat-share-timeline.service';
+import { ListScrollService } from 'shared/services/list-scroll.service';
 
 @NgModule({
     providers: [
@@ -19,7 +20,8 @@ import { WeChatShareTimelineService } from 'shared/services/wechat-share-timelin
         TitleService,
         WeChatShareTimelineService,
         SitemapsService,
-        UploadPictureService
+        UploadPictureService,
+        ListScrollService
     ]
 })
 export class ServicesModule { }

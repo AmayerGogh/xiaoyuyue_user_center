@@ -1,9 +1,9 @@
 .settings {
-    min-height: calc(100vh - 31px);
-    padding-top: 55px;
-    max-width: 480px;
     width: 100%;
+    max-width: 480px;
+    min-height: calc(100vh - 85px);
     margin: 0 auto;
+    padding: 5px 10px 10px;
     font-size: 0;
     .card-wrap {
         display: inline-block;

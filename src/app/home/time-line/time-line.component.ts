@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { BookingTimelineDto, PerBookingOrderServiceProxy } from 'shared/service-proxies/service-proxies';
+import { BookingTimelineDto, PerBookingOrderServiceProxy, PagedResultDtoOfBookingTimelineDto } from 'shared/service-proxies/service-proxies';
 import { Component, Injector, OnInit } from '@angular/core';
 import { MediaCompressFormat, MediaPath } from 'shared/AppConsts';
 
@@ -9,6 +9,8 @@ import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { Moment } from 'moment';
 import { ProfileServiceProxy } from '@shared/service-proxies/service-proxies';
 import { Router } from '@angular/router';
+import { ScrollStatusOutput } from 'app/shared/utils/list-scroll.dto';
+import { ListScrollService } from 'shared/services/list-scroll.service';
 
 @Component({
     selector: 'xiaoyuyue-time-line',
@@ -16,6 +18,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./time-line.component.scss']
 })
 export class TimeLineComponent extends AppComponentBase implements OnInit {
+    scrollStatusOutput: ScrollStatusOutput = new ScrollStatusOutput();
+    updateDataIndex = -1;
     allPerBookingOrderData: any[] = [];
     totalCount: number;
     perBookingOrderData: BookingTimelineDto[] = [];
@@ -36,6 +40,7 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
         injector: Injector,
         private _router: Router,
         private _profileServiceProxy: ProfileServiceProxy,
+        private _listScrollService: ListScrollService,
         private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
         ) {
         super(injector);
@@ -55,14 +60,23 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
         this.beforeHeaderStyle();
     }
 
-    loadData(): void {
+    // scrollHandleBack: 接收一个回调函数，控制下拉刷新，上拉加载的状态
+    loadData(scrollHandleBack?: any): void {
         this.startDataTime = moment();
         this._perBookingOrderServiceProxy
             .getBookingTimeline(this.startDataTime, this.maxResultCount, this.skipCount)
-            .subscribe(result => {
+            .finally(() => {
+                scrollHandleBack && scrollHandleBack();
+            })
+            .subscribe((result: PagedResultDtoOfBookingTimelineDto) => {
                 this.totalCount = result.totalCount;
-                this.perBookingOrderData = _.map(result.items, this.converTimelineData);
-                this.allPerBookingOrderData.push(this.perBookingOrderData);
+                this.perBookingOrderData = result.items;
+
+                if (this.perBookingOrderData.length > 0 && this.updateDataIndex < 0) {
+                    this.allPerBookingOrderData.push(this.perBookingOrderData);
+                } else {
+                    this.allPerBookingOrderData[this.updateDataIndex] = this.perBookingOrderData;
+                }
             })
     }
 
@@ -102,12 +116,41 @@ export class TimeLineComponent extends AppComponentBase implements OnInit {
         });
     }
 
-    public onScrollDown(): void {
-        if (this.skipCount > (this.totalCount - this.maxResultCount)) {
-            this.isLoaded = true;
+    pullDownRefresh(): void {
+        this.updateDataIndex = 0;
+        this.skipCount = 0;
+        this.scrollStatusOutput = new ScrollStatusOutput();
+        this.scrollStatusOutput.pulledDownActive = true;
+        this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        this.loadData(() => {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.pulledDownActive = false;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        });
+    }
+
+    pullUpLoad(): void {
+        this.updateDataIndex = -1;
+        let totalCount = 0;
+        this.allPerBookingOrderData.forEach(perBookingOrderData => {
+            perBookingOrderData.forEach(element => {
+                totalCount++;
+            });
+        });
+        this.skipCount = totalCount;
+        if (this.skipCount >= this.totalCount) {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.noMore = true;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
             return;
         }
-        this.skipCount += this.maxResultCount;
-        this.loadData();
+        this.scrollStatusOutput = new ScrollStatusOutput();
+        this.scrollStatusOutput.pulledUpActive = true;
+        this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        this.loadData(() => {
+            this.scrollStatusOutput = new ScrollStatusOutput();
+            this.scrollStatusOutput.pulledUpActive = false;
+            this._listScrollService.listScrollFinished.emit(this.scrollStatusOutput);
+        });
     }
 }

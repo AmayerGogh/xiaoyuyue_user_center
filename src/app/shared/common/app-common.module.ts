@@ -22,6 +22,7 @@ import { SendCodeComponent } from 'app/shared/common/send-code/send-code.compone
 import { TimeZoneComboComponent } from './timing/timezone-combo.component';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { LanguageSwitchComponent } from 'app/shared/common/language-switch.component/language-switch.component';
+import { ListScrollComponent } from './list-scroll/list-scroll.component';
 
 @NgModule({
     imports: [
@@ -44,8 +45,9 @@ import { LanguageSwitchComponent } from 'app/shared/common/language-switch.compo
         DesktopHeaderComponent,
         DesktopFooterComponent,
         MobileUploadPictureComponent,
-        LanguageSwitchComponent
-    ],
+        LanguageSwitchComponent,
+        ListScrollComponent
+],
     exports: [
         TimeZoneComboComponent,
         JqPluginDirective,
@@ -57,7 +59,8 @@ import { LanguageSwitchComponent } from 'app/shared/common/language-switch.compo
         DesktopHeaderComponent,
         DesktopFooterComponent,
         MobileUploadPictureComponent,
-        LanguageSwitchComponent
+        LanguageSwitchComponent,
+        ListScrollComponent
     ],
     providers: [
         AppLocalizationService

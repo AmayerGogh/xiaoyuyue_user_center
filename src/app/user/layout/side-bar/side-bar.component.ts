@@ -23,7 +23,7 @@ export class AdminSideBarComponent implements OnInit {
     this.sideBarEle.nativeElement.style.display = 'block';
     $('html').css({
       transform: 'translateX(-250px)',
-      transition: 'all 0.6s cubic-bezier(0.53, 0.41, 0, 1.17)'
+      transition: 'all 0.2s linear'
     })
   }
 
@@ -31,7 +31,7 @@ export class AdminSideBarComponent implements OnInit {
     this.sideBarEle.nativeElement.style.display = 'none';
     $('html').css({
       transform: 'translateX(0)',
-      transition: 'all 0.6s cubic-bezier(0.53, 0.41, 0, 1.17)'
+      transition: 'all 0.2s linear'
     })
   }
 
