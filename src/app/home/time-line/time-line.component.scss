@@ -82,18 +82,14 @@
 .time-line-wrap {
     width: 100%;
     max-width: 480px;
+    height: calc(100vh - 266px);
     position: absolute;
-    top: 204px;
-    right: 0;
-    bottom: 0;
+    top: 266px;
     left: 50%;
     transform: translateX(-50%);
-    overflow-y: auto;
-    margin-top: 62px;
     padding: 0 10px 0 36px;
-    -webkit-overflow-scrolling: touch;
+    overflow: hidden;
     .time-line-content {
-        min-height: calc(100vh - 300px);
         border-left: 1px solid #AAA;
         .time-item {
             position: relative;

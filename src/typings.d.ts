@@ -6,12 +6,14 @@
 ///<reference path="../node_modules/@types/bootstrap/index.d.ts"/>
 ///<reference path="../node_modules/@types/toastr/index.d.ts"/>
 ///<reference path="../node_modules/@types/jquery-backstretch/index.d.ts"/>
+///<reference path="../node_modules/better-scroll/types/index.d.ts"/>
 
 // Typings reference file, see links for more information
 // https://github.com/typings/typings
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 
 declare var System: any;
+declare var BScroll: any;
 
 interface JQuery {
     slimScroll(...any): any;

@@ -47,6 +47,7 @@
       "../node_modules/spin.js/jquery.spin.js",
       "../node_modules/sweetalert/dist/sweetalert.min.js",
       "../node_modules/moment/min/moment.min.js",
+      "../node_modules/better-scroll/dist/bscroll.min.js",
       "../node_modules/moment-timezone/builds/moment-timezone-with-data.min.js",
       "../src/assets/common/js/jquery.blockUI.min.js",
       "../node_modules/abp-web-resources/Abp/Framework/scripts/abp.js",
