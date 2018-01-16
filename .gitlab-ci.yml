@@ -75,7 +75,7 @@ build_and_deploy_develop:
     - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recurse # 复制文件到iis目录
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
   tags:
-    - deploy_xiaoyuyue_user_center
+    - deploy_xiaoyuyue_user_center_23
     
 build_and_deploy_test:
   stage: build_and_deploy_test
@@ -85,10 +85,10 @@ build_and_deploy_test:
     - yarn install
     - ng build --prod --aot
     - Stop-WebAppPool 'xiaoyuyue_user_center' # 停止iis进程
-    - Do{echo "waiting stop the iis process...";Start-Sleep -Seconds 1; $WAP=Get-WebAppPoolState -Name xiaoyuyue_user_center}While($WAP.Value -ne 'Stopped')
+    - Do{echo "waiting stop the iis process...";Start-Sleep -Seconds 1; $WAP=Get-WebAppPoolState -Name xiaoyuyue_user_center}While($WAP.Value -ne 'Stopped') # 停止iis进程
     - copy 'web.config' -Destination 'dist\' -Force #复制iis 配置文件
     - rm D:\wwwroot\xiaoyuyue_user_center\* -r # 清空输出目录
     - copy 'dist\*' -Destination 'D:\wwwroot\xiaoyuyue_user_center' -Force -Recurse # 复制文件到iis目录
     - Start-WebAppPool 'xiaoyuyue_user_center' # 启动iis进程
   tags:
-    - deploy_xiaoyuyue_user_center_168
+    - deploy_xiaoyuyue_user_center_113
