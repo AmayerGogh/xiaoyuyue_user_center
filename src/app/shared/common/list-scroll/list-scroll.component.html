@@ -1,5 +1,5 @@
-<div class="bscroll" #bscrollEl>
-    <div class="bscroll-content">
+<div class="bscroll" #bscrollEl [ngStyle]="{'height': height}">
+    <div class="bscroll-content" #bscrollContentEl>
         <!-- 顶部提示信息 -->
         <div class="top-tip" *ngIf="isNeedPullDownRefresh">
             <span class="refresh-hook" *ngIf="!scrollStatusOutput.pulledDownActive">下拉刷新数据</span>

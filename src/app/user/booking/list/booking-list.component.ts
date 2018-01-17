@@ -19,6 +19,8 @@ import { ListScrollService } from 'shared/services/list-scroll.service';
     animations: [appModuleSlowAnimation()]
 })
 export class BookingListComponent extends AppComponentBase implements OnInit {
+    listScrollHeight = 'calc(100vh - 115px)';
+    showSerachInputActive = false;
     scrollStatusOutput: ScrollStatusOutput = new ScrollStatusOutput();
     isLoaded = false;
     isLoading = false;
@@ -34,9 +36,10 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     sort: any;
     actionFlag: boolean[] = [];
     slogan = this.l('BookingList.Nothing');
-    bookingOrderStatusName: string[] = [this.l('BookingList.All'), this.l('BookingList.WaitConfirm'),
+    bookingOrderStatusName: string[] = [this.l('BookingList.All'),
+    this.l('BookingList.WaitConfirm'),
     this.l('BookingList.ConfirmSuccess'),
-    this.l('BookingList.WaitComment'),
+    null,
     this.l('BookingList.Cancel')];
     updateDataIndex = -1;
 
@@ -194,17 +197,6 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
         });
     }
 
-    setTipsClass(status: number): any {
-        const tipsClass = {
-            status1: status === 1,
-            status2: status === 2,
-            status3: status === 3,
-            status4: status === 4,
-            status5: status === 5
-        }
-        return tipsClass;
-    }
-
     getIsCancelBooking(event: boolean): void {
         if (event) {
             this.loadData();
@@ -215,5 +207,25 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     isCancelBooking(currentStatus: number): boolean {
         if (currentStatus === BookingOrderStatus.Cancel || currentStatus === BookingOrderStatus.WaitComment || currentStatus === BookingOrderStatus.Complete) { return false; };
         return true;
+    }
+
+    /* 切换显示搜索框 */
+    toggleSerachInput(): void {
+        this.showSerachInputActive = !this.showSerachInputActive;
+        // 调整.scroll-wrapper的位置，并通知better-scroll，重绘DOM
+        if (this.showSerachInputActive) {
+            this.listScrollHeight = 'calc(100vh - 151px)';
+            $('.scroll-wrapper').css({
+                'height': this.listScrollHeight,
+                'top': '151px'
+            })
+        } else {
+            this.listScrollHeight = 'calc(100vh - 115px)';
+            $('.scroll-wrapper').css({
+                'height': this.listScrollHeight,
+                'top': '115px'
+            })
+        }
+        this._listScrollService.listScrollRefresh.emit();
     }
 }

@@ -7,25 +7,45 @@
     font-size: 16px;
     .serach {
         // background-color: #FFF;
-    }
-    .tabs {
-        display: flex;
-        margin: 0;
-    }
-    .tab-item {
-        flex: 1;
-        line-height: 40px;
-        text-align: center;
-        &.active {
-            color: #FF9641;
+        .form-group {
+            margin: 5px 0;
+            padding-bottom: 0;
         }
     }
-    ul.tabs {
-        padding: 0;
-        li {
-            margin: 0;
+    .header-top {
+        display: flex;
+        ul.tabs {
             padding: 0;
-            list-style: none;
+            li {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+        }
+        .left-flex.tabs {
+            display: flex;
+            flex: 1;
+            margin: 0 10px 0 0;
+            .tab-item {
+                flex: 1;
+                line-height: 40px;
+                text-align: center;
+                &.active {
+                    color: #FF9641;
+                }
+            }
+        }
+        .right-flex {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            flex: 0 0 40px;
+            .btn {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
         }
     }
     .scroll-wrapper {
@@ -38,7 +58,7 @@
         .scroll-content {
             // min-height: calc(100vh - 211px);
             padding: 0 10px 10px;
-            .booking-item-wrap + .booking-item-wrap {
+            .booking-item-wrap+.booking-item-wrap {
                 margin-top: 10px;
             }
             .booking-item-wrap {
@@ -70,9 +90,10 @@
                                 }
                                 &.status3 {}
                                 &.status4 {
-                                    background-color: #999;
+                                    background-color: #CCC;
                                 }
                                 &.status5 {}
+                                &.status6 {}
                             }
                         }
                         .icon {
