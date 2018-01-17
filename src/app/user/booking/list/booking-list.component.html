@@ -1,82 +1,84 @@
-<div class="booking-manage" [@routerTransition]>
-    <div class="serach">
-        <div class="form-group label-floating">
-            <label class="control-label"></label>
-            <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
-            <!-- <span class="help-block">A block of help text that breaks onto a new line.</span> -->
-        </div>
-    </div>
-
-    <ul class="card tabs">
-        <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;"
-            (click)="orderSwitch(index)"> {{ statuItem }}</li>
-    </ul>
-
-    <div class="scroll-wrapper">
-        <xiaoyuyue-list-scroll [height]="'calc(100vh - 181px)'" [isNeedPullUpLoad]="'true'" [isNeedPullDownRefresh]="'true'" (finishPullUpHandle)="pullUpLoad()" (finishPullDownHandle)="pullDownRefresh()">
-            <div class="scroll-content">
-                <div *ngIf="allPrsonBookingDatas.length>0 && personBookingTotalCount > 0; else empty">
-                    <div class="booking-item-wrap" *ngFor="let personBookingDatas of allPrsonBookingDatas; let indexI=index">
-                        <div class="booking-item box-shadow" (click)="setActionFlag(indexJ)" *ngFor="let dataItem of personBookingDatas; let indexJ=index">
-                            <div class="top-wrap clearfix">
-                                <div class="title pull-left">{{dataItem.bookingName}}
-                                    <span class="tips">{{ bookingOrderStatusName[dataItem.status] }}</span>
+<div [@routerTransition]>
+    <div class="booking-manage">
+        <!-- <div class="serach">
+            <div class="form-group label-floating">
+                <label class="control-label"></label>
+                <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
+            </div>
+        </div> -->
+    
+        <ul class="card tabs">
+            <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" *ngFor="let statuItem of bookingOrderStatusName; let index = index;"
+                (click)="orderSwitch(index)"> {{ statuItem }}</li>
+        </ul>
+    
+        <div class="scroll-wrapper">
+            <xiaoyuyue-list-scroll [height]="'calc(100vh - 115px)'" [isNeedPullUpLoad]="'true'" [isNeedPullDownRefresh]="'true'" (finishPullUpHandle)="pullUpLoad()"
+                (finishPullDownHandle)="pullDownRefresh()">
+                <div class="scroll-content">
+                    <div *ngIf="allPrsonBookingDatas.length>0 && personBookingTotalCount > 0; else empty">
+                        <div class="booking-item-wrap" *ngFor="let personBookingDatas of allPrsonBookingDatas; let indexI=index">
+                            <div class="booking-item box-shadow" (click)="setActionFlag(indexJ)" *ngFor="let dataItem of personBookingDatas; let indexJ=index">
+                                <div class="top-wrap clearfix">
+                                    <div class="title pull-left">{{dataItem.bookingName}}
+                                        <span class="tips">{{ bookingOrderStatusName[dataItem.status] }}</span>
+                                    </div>
+                                    <!-- 和lbetter-scroll一起使用，发生死循环，浏览器崩溃，暂时注释 -->
+                                    <!-- <div class="title pull-left">{{dataItem.bookingName}}
+                                        <span class="tips" [ngClass]="setTipsClass(dataItem.status)">{{ bookingOrderStatusName[dataItem.status] }}</span>
+                                    </div> -->
+                                    <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[indexJ], 'rotate-360': !actionFlag[indexJ]}">
+                                        <span class="vapps-icon-app-drop-down"></span>
+                                    </div>
                                 </div>
-                                <!-- 和lbetter-scroll一起使用，发生死循环，浏览器崩溃，暂时注释 -->
-                                <!-- <div class="title pull-left">{{dataItem.bookingName}}
-                                    <span class="tips" [ngClass]="setTipsClass(dataItem.status)">{{ bookingOrderStatusName[dataItem.status] }}</span>
-                                </div> -->
-                                <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[indexJ], 'rotate-360': !actionFlag[indexJ]}">
-                                    <span class="vapps-icon-app-drop-down"></span>
+                                <div class="content">
+                                    <div class="content-item">
+                                        <span class="name">{{l('Booking.OrgName')}} : </span>
+                                        <span class="desc">{{dataItem.outletName}}</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="name">{{l('Booking.Datetime')}} : </span>
+                                        <span class="desc">{{d(dataItem.bookingDate)}} {{ dataItem.hourOfDay }}</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="name">{{l('Booking.Telephone')}} : </span>
+                                        <span class="desc">{{dataItem.phoneNum}}</span>
+                                    </div>
+                                    <div class="content-item">
+                                        <span class="name">{{l('Booking.Num')}} : </span>
+                                        <span class="desc">{{dataItem.subscriberNum}}</span>
+                                    </div>
+                                    <div class="stick-booking" *ngIf="dataItem.sticked">
+                                        <img src="/assets/common/images/booking/stick-booking.svg" alt="stick">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="content">
-                                <div class="content-item">
-                                    <span class="name">{{l('Booking.OrgName')}} : </span>
-                                    <span class="desc">{{dataItem.outletName}}</span>
+                                <div class="bottom-action" *ngIf="actionFlag[indexJ]">
+                                    <span class="action-item" (click)="showBookingDetail(dataItem.id)">
+                                        <span class="icon vapps-icon-app-detail"></span>{{l('ViewDetail')}}
+                                    </span>
+                                    <span class="line">|</span>
+                                    <span *ngIf="isCancelBooking(dataItem.status)" class="action-item" (click)="cancelBooking(dataItem.id, indexI)">
+                                        <span class="icon vapps-icon-app-cancel"></span>{{l('CancelBooking')}}
+                                    </span>
+                                    <span *ngIf="isCancelBooking(dataItem.status)" class="line">|</span>
+                                    <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true, indexI)">
+                                        <span class="icon vapps-icon-app-at-top-2"></span>{{l('StickBooking')}}</span>
+                                    <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false, indexI)">
+                                        <span class="icon vapps-icon-app-at-top-2 rotate-180"></span>{{l('CancelStick')}}</span>
                                 </div>
-                                <div class="content-item">
-                                    <span class="name">{{l('Booking.Datetime')}} : </span>
-                                    <span class="desc">{{d(dataItem.bookingDate)}} {{ dataItem.hourOfDay }}</span>
-                                </div>
-                                <div class="content-item">
-                                    <span class="name">{{l('Booking.Telephone')}} : </span>
-                                    <span class="desc">{{dataItem.phoneNum}}</span>
-                                </div>
-                                <div class="content-item">
-                                    <span class="name">{{l('Booking.Num')}} : </span>
-                                    <span class="desc">{{dataItem.subscriberNum}}</span>
-                                </div>
-                                <div class="stick-booking" *ngIf="dataItem.sticked">
-                                    <img src="/assets/common/images/booking/stick-booking.svg" alt="stick">
-                                </div>
-                            </div>
-                            <div class="bottom-action" *ngIf="actionFlag[indexJ]">
-                                <span class="action-item" (click)="showBookingDetail(dataItem.id)">
-                                    <span class="icon vapps-icon-app-detail"></span>{{l('ViewDetail')}}
-                                </span>
-                                <span class="line">|</span>
-                                <span *ngIf="isCancelBooking(dataItem.status)" class="action-item" (click)="cancelBooking(dataItem.id, indexI)">
-                                    <span class="icon vapps-icon-app-cancel"></span>{{l('CancelBooking')}}
-                                </span>
-                                <span *ngIf="isCancelBooking(dataItem.status)" class="line">|</span>
-                                <span class="action-item" *ngIf="!dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, true, indexI)">
-                                    <span class="icon vapps-icon-app-at-top-2"></span>{{l('StickBooking')}}</span>
-                                <span class="action-item" *ngIf="dataItem.sticked" (click)="toggleSkickBooking(dataItem.id, false, indexI)">
-                                    <span class="icon vapps-icon-app-at-top-2 rotate-180"></span>{{l('CancelStick')}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
-            </div>
-        </xiaoyuyue-list-scroll>
-    </div>
-
-    <ng-template #empty>
-        <div class="empty-wrap" [@routerTransition]>
-            <xiaoyuyue-empty-page [text]="slogan"></xiaoyuyue-empty-page>
+            </xiaoyuyue-list-scroll>
         </div>
-    </ng-template>
-
-    <xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>
+    
+        <ng-template #empty>
+            <div class="empty-wrap" [@routerTransition]>
+                <xiaoyuyue-empty-page [text]="slogan"></xiaoyuyue-empty-page>
+            </div>
+        </ng-template>
+    
+        <xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>
+    </div>
+</div>

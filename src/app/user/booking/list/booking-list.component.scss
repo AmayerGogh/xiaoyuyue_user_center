@@ -10,7 +10,7 @@
     }
     .tabs {
         display: flex;
-        margin: 10px 0;
+        margin: 0;
     }
     .tab-item {
         flex: 1;
@@ -30,90 +30,95 @@
     }
     .scroll-wrapper {
         width: 100%;
-        height: calc(100vh - 181px);
+        height: calc(100vh - 115px);
         position: absolute;
-        top: 181px;
+        top: 115px;
         left: 0;
         overflow: hidden;
-        padding: 0 10px;
-        .booking-item-wrap {
-            margin-bottom: 10px;
-            .booking-item+.booking-item {
+        .scroll-content {
+            // min-height: calc(100vh - 211px);
+            padding: 0 10px 10px;
+            .booking-item-wrap + .booking-item-wrap {
                 margin-top: 10px;
             }
-            .booking-item {
-                padding: 0 15px 0;
-                background-color: #FFF;
-                border-radius: 4px;
-                .top-wrap {
-                    height: 50px;
-                    line-height: 50px;
-                    border-bottom: 1px solid #E5E5E5;
-                    .title {
-                        color: #FF9641;
-                        font-size: 16px;
-                        .tips {
-                            font-size: 12px;
-                            color: #FFF;
-                            padding: 2px;
-                            border-radius: 2px;
-                            margin-bottom: 2px;
-                            &.status1 {
-                                background-color: #999;
-                            }
-                            &.status2 {
-                                background-color: #FF9641;
-                            }
-                            &.status3 {}
-                            &.status4 {
-                                background-color: #999;
-                            }
-                            &.status5 {}
-                        }
-                    }
-                    .icon {
-                        color: #FF9641;
-                        font-size: 22px;
-                    }
+            .booking-item-wrap {
+                .booking-item+.booking-item {
+                    margin-top: 10px;
                 }
-                .content {
-                    position: relative;
-                    padding: 20px 0;
-                    .stick-booking {
-                        width: 60px;
-                        position: absolute;
-                        right: -18px;
-                        bottom: 20px;
-                    }
-                    .content-item {
-                        padding: 4px 0;
-                        .name {
-                            margin-right: 10px;
-                        }
-                        .desc {
+                .booking-item {
+                    padding: 0 15px 0;
+                    background-color: #FFF;
+                    border-radius: 4px;
+                    .top-wrap {
+                        height: 50px;
+                        line-height: 50px;
+                        border-bottom: 1px solid #E5E5E5;
+                        .title {
                             color: #FF9641;
+                            font-size: 16px;
+                            .tips {
+                                font-size: 12px;
+                                color: #FFF;
+                                padding: 2px;
+                                border-radius: 2px;
+                                margin-bottom: 2px;
+                                &.status1 {
+                                    background-color: #999;
+                                }
+                                &.status2 {
+                                    background-color: #FF9641;
+                                }
+                                &.status3 {}
+                                &.status4 {
+                                    background-color: #999;
+                                }
+                                &.status5 {}
+                            }
                         }
-                    }
-                }
-                .bottom-action {
-                    height: 40px;
-                    line-height: 40px;
-                    display: flex;
-                    border-top: 1px solid #E5E5E5; // .line {
-                    //     transform: scaleX(.2) translateY(-1px);
-                    // }
-                    .action-item {
-                        flex: 1;
-                        text-align: center;
-                        color: #333;
                         .icon {
-                            display: inline-block;
-                            margin-right: 6px;
                             color: #FF9641;
-                            transform: translateY(1px);
+                            font-size: 22px;
                         }
-                        a {
+                    }
+                    .content {
+                        position: relative;
+                        padding: 20px 0;
+                        .stick-booking {
+                            width: 60px;
+                            position: absolute;
+                            right: -18px;
+                            bottom: 20px;
+                        }
+                        .content-item {
+                            padding: 4px 0;
+                            .name {
+                                margin-right: 10px;
+                            }
+                            .desc {
+                                color: #FF9641;
+                            }
+                        }
+                    }
+                    .bottom-action {
+                        height: 40px;
+                        line-height: 40px;
+                        display: flex;
+                        border-top: 1px solid #E5E5E5; // .line {
+                        //     transform: scaleX(.2) translateY(-1px);
+                        // }
+                        .action-item {
+                            flex: 1;
+                            text-align: center;
                             color: #333;
+                            .icon {
+                                display: inline-block;
+                                margin-right: 6px;
+                                color: #FF9641;
+                                transform: translateY(1px);
+                            }
+                            a {
+                                color: #333;
+                            }
                         }
                     }
                 }

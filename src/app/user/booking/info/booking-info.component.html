@@ -80,7 +80,7 @@
         </div>
 
         <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn" type="button">取消预约</button>
-        <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer>
+        <!-- <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer> -->
     </div>
 </div>
 <xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>
