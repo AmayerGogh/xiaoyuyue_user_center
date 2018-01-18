@@ -12,7 +12,6 @@ import { AppComponentBase } from 'shared/common/app-component-base';
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent extends AppComponentBase implements OnInit, AfterViewInit {
-    fullpage: any;
     pagesArr: number[] = [];
     constructor(
         private injector: Injector,
@@ -26,8 +25,6 @@ export class HomeComponent extends AppComponentBase implements OnInit, AfterView
 
     ngAfterViewInit() {
         this.getPageOffsetTop();
-        // this.fullpage = $('#mobileFullpage').fullpage({
-        // });
     }
 
     getPageOffsetTop(): void {
