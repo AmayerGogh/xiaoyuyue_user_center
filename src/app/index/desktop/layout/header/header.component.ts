@@ -42,14 +42,18 @@ export class DesktopHeaderComponent extends AppComponentBase implements OnInit, 
         if (this.currentUrl !== '/') {
             this.router.navigate(['/']);
         }
-            const scrollTop = this.scrollSectionArr[index] - 80;
-            $('html, body').animate({ scrollTop: scrollTop }, 300);
+        const scrollTop = this.scrollSectionArr[index] - 80;
+        $('html, body').animate({ scrollTop: scrollTop }, 300);
     }
 
     private initPageSections(): void {
-/*         $.each($('.section'), (i, data) => {
-            this.scrollSectionArr.push($('.section').eq(i).position().top);
-        }); */
-        this.scrollSectionArr = [712, 1612, 2512, 3412, 4270];
+        // const scrollSectionArr = [0];
+        // setTimeout(() => {
+        //     $.each($('.section'), (i, data) => {
+        //         scrollSectionArr.push($('.section').eq(i).position().top);
+        //     });
+        //     console.log(scrollSectionArr);
+        // }, 1000);
+        this.scrollSectionArr = [0, 712, 1832.296875, 2525.296875, 3365.296875];
     }
 }

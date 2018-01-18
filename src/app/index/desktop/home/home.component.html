@@ -15,49 +15,13 @@
     <div class="about-me-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">{{ l('AboutUs') }}</h3>
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/about/bg1.jpg" alt="bg1">
-                        </div>
-                        <div class="card-content">
-                            <p class="text-item text-title">{{ l('Xiaoyuyue.Slogan.Title') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.Slogan.Title.Tip1') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.Slogan.Title.Tip2') }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <!-- <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2"> -->
-                            <div class="video">
-                                <video controls="controls" poster="/assets/common/images/index/about/bg3.jpg" preload="none" [src]="introVideoUrl" type="video/mp4"
-                                    width="100%" draggable>
-                                    {{ l('Nonsupport.VideoTag') }}
-                                </video>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <p class="text-item text-title">{{ l('Xiaoyuyue') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.FastKnowledge') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.FastKnowledge.Tip') }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/about/bg2.jpg" alt="bg2">
-                        </div>
-                        <div class="card-content">
-                            <p class="text-item text-title">{{ l('Xiaoyuyue.MoreDataForSupport') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.MoreDataForSupport.Tip1') }}</p>
-                            <p class="text-item text-left">{{ l('Xiaoyuyue.MoreDataForSupport.Tip2') }}</p>
-                        </div>
-                    </div>
-                </div>
+            <p class="about-desc">小预约，便捷创建预约工具</p>
+            <p class="about-desc">帮助小微企业创建及管理预约，提高流程效率，实现提升效益</p>
+            <div class="video">
+                <video controls="controls" poster="/assets/common/images/index/video.png" preload="none" [src]="introVideoUrl" type="video/mp4"
+                    width="100%" draggable>
+                    {{ l('Nonsupport.VideoTag') }}
+                </video>
             </div>
         </div>
     </div>
@@ -66,30 +30,14 @@
     <div class="how-table-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">{{ l('Xiaoyuyue.HowToCreateBooking') }}</h3>
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/create-table/bg1.jpg" alt="bg1">
-                        </div>
-                    </div>
-                    <div class="circle-dot">1</div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/create-table/bg2.jpg" alt="bg2">
-                        </div>
-                    </div>
-                    <div class="circle-dot">2</div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/create-table/bg3.jpg" alt="bg3">
-                        </div>
-                    </div>
-                    <div class="circle-dot">3</div>
+            <div class="content-wrap clearfix">
+                <div class="pull-left"><img src="/assets/common/images/index/create-table/view.png" width="648px"></div>
+                <div class="pull-right table-desc">
+                    <h4 class="sub-title">PC、手机双平台</h4>
+                    <p>双平台创建预约、轻松打通各种应用</p>
+                    <p>PC兼顾社交媒体的不同类型预约</p>
+                    <p>手机简单编辑、便于操作</p>
+                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">查看视频</button>
                 </div>
             </div>
         </div>
@@ -99,30 +47,18 @@
     <div class="how-booking-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">{{ l('Xiaoyuyue.HowToJoinBooking') }}</h3>
-            <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/booking/bg1.jpg" alt="bg1">
-                        </div>
-                    </div>
-                    <div class="circle-dot">1</div>
+            <div class="content-wrap clearfix">
+                <div class="pull-right">
+                    <img src="/assets/common/images/index/booking/view-1.png" width="300px">
+                    <img style="margin-left: 40px;" src="/assets/common/images/index/booking/view-2.png" width="300px">
                 </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/booking/bg2.jpg" alt="bg2">
-                        </div>
-                    </div>
-                    <div class="circle-dot">2</div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="card-head">
-                            <img src="/assets/common/images/index/booking/bg3.jpg" alt="bg3">
-                        </div>
-                    </div>
-                    <div class="circle-dot">3</div>
+                <div class="pull-left table-desc">
+                    <h4 class="sub-title">用户应约</h4>
+                    <p>应约页面皆为手机端界面</p>
+                    <p>方便用户及时预约</p>
+                    <p>嵌入社交媒体应用</p>
+                    <p>简易操作</p>
+                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">查看视频</button>
                 </div>
             </div>
         </div>
@@ -135,71 +71,30 @@
             <h3 class="content-title">{{ l('Xiaoyuyue.UsageScenario') }}</h3>
             <div class="row">
 
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" *ngFor="let usageSceneItem of allUsageSceneData">
                     <div class="card">
                         <div class="rotating-container hover-active">
                             <div class="rotating">
                                 <div class="front">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg2.jpg" alt="bg2">
+                                    <div class="card-head">
+                                        <img [src]="usageSceneItem.tenantBackgroudUrl" [alt]="usageSceneItem.tenantName">
                                     </div>
                                 </div>
 
                                 <div class="back">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg2.jpg" alt="bg2">
+                                    <div class="card-head">
+                                        <img [src]="usageSceneItem.tenantBackgroudUrl" [alt]="usageSceneItem.tenantName">
+                                        <div class="qrcode-wrap">
+                                            <img [src]="usageSceneItem.tenantBookingQRCode" alt="qrcode">
+                                            <div>扫码查看详情</div>
+                                        </div>
+                                        <div class="bg-cover"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-content">
-                            <p class="text-item text-title">{{ l('ImaginativeFlower') }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="rotating-container hover-active">
-                            <div class="rotating">
-                                <div class="front">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg3.jpg" alt="bg3">
-                                    </div>
-                                </div>
-
-                                <div class="back">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg3.jpg" alt="bg3">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <p class="text-item text-title">{{ l('Baking') }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                    <div class="card">
-                        <div class="rotating-container hover-active">
-                            <div class="rotating">
-                                <div class="front">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg4.jpg" alt="bg4">
-                                    </div>
-                                </div>
-
-                                <div class="back">
-                                    <div class="card-header">
-                                        <img src="/assets/common/images/index/scene/bg4.jpg" alt="bg4">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <p class="text-item text-title">{{ l('ReadingParty') }}</p>
+                            <p class="text-item text-title">{{ usageSceneItem.tenantName }}</p>
                         </div>
                     </div>
                 </div>
