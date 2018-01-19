@@ -5,15 +5,8 @@
     padding: 10px;
     background-color: #EEE;
     font-size: 16px;
-    .serach {
-        // background-color: #FFF;
-        .form-group {
-            margin: 5px 0;
-            padding-bottom: 0;
-        }
-    }
     .header-top {
-        display: flex;
+        margin: 0;
         ul.tabs {
             padding: 0;
             li {
@@ -22,30 +15,38 @@
                 list-style: none;
             }
         }
-        .left-flex.tabs {
+        .tabs {
             display: flex;
-            flex: 1;
-            margin: 0 10px 0 0;
+            margin: 0;
             .tab-item {
                 flex: 1;
-                line-height: 40px;
                 text-align: center;
+                line-height: 46px;
+                &.serach-btn {
+                    line-height: 1;
+                    flex: 0 0 46px;
+                    padding: 10px 0;
+                    color: #FF9641;
+                    font-size: 16px;
+                    .icon {
+                        width: 100%;
+                        height: 100%;
+                        display: inline-block;
+                        border-left: 1px solid #FF9641;
+                        &::before {
+                            font-size: 22px;
+                            transform: translateY(2px);
+                            display: inline-block;
+                        }
+                    }
+                }
                 &.active {
                     color: #FF9641;
                 }
             }
         }
-        .right-flex {
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            flex: 0 0 40px;
-            .btn {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
+        .serach-wrap {
+            padding: 0 20px;
         }
     }
     .scroll-wrapper {

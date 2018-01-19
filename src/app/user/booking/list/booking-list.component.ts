@@ -214,10 +214,10 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
         this.showSerachInputActive = !this.showSerachInputActive;
         // 调整.scroll-wrapper的位置，并通知better-scroll，重绘DOM
         if (this.showSerachInputActive) {
-            this.listScrollHeight = 'calc(100vh - 151px)';
+            this.listScrollHeight = 'calc(100vh - 171px)';
             $('.scroll-wrapper').css({
                 'height': this.listScrollHeight,
-                'top': '151px'
+                'top': '171px'
             })
         } else {
             this.listScrollHeight = 'calc(100vh - 115px)';
