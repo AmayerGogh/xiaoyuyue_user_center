@@ -22,7 +22,7 @@ import { accountModuleAnimation } from '@shared/animations/routerTransition';
 export class LoginComponent extends AppComponentBase implements OnInit, AfterViewInit {
     model: PhoneAuthenticateModel = new PhoneAuthenticateModel();
     externalLoginProviders: ExternalLoginProvider[];
-
+    codeType = VerificationCodeType.Login;
     flag = true;
     // 普通登录或者手机验证登录，默认普通登录
     ordinaryLogin = true;
