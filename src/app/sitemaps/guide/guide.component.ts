@@ -16,6 +16,7 @@ export class GuideComponent extends AppComponentBase implements OnInit {
   }
 
   ngOnInit() {
+    $('html, body').animate({ scrollTop: 0 }, 300);
   }
 
 }
