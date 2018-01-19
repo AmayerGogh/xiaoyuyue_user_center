@@ -1,19 +1,25 @@
 <div [@routerTransition]>
     <div class="booking-manage">
-        <div class="header-top">
-            <ul class="card tabs left-flex">
+        <div class="header-top card">
+            <ul class="tabs">
                 <li class="tab-item" [ngClass]="{'active': currentTabIndex == index}" [hidden]="statuItem === null" *ngFor="let statuItem of bookingOrderStatusName; let index = index;"
                     (click)="orderSwitch(index)"> {{ statuItem }}</li>
+                <li class="tab-item serach-btn" (click)="toggleSerachInput()">
+                    <span class="vapps-icon-app-search icon"></span>
+                </li>
             </ul>
-
-            <div class="right-flex" (click)="toggleSerachInput()"><button class="btn primary-bgcolor">搜索</button></div>
+            <div class="serach-wrap" *ngIf="showSerachInputActive">
+                <div class="form-group label-floating">
+                    <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
+                </div>
+            </div>
         </div>
 
-        <div class="serach" *ngIf="showSerachInputActive">
+        <!-- <div class="serach" *ngIf="showSerachInputActive">
             <div class="form-group label-floating">
                 <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
             </div>
-        </div>
+        </div> -->
 
         <div class="scroll-wrapper">
             <xiaoyuyue-list-scroll [height]="listScrollHeight" [isNeedPullUpLoad]="'true'" [isNeedPullDownRefresh]="'true'" (finishPullUpHandle)="pullUpLoad()"

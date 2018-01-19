@@ -35,11 +35,12 @@ export class ListScrollComponent implements OnInit, AfterViewInit {
                 }
             });
 
-            this._listScrollService
+        this._listScrollService
             .listScrollRefresh
             .subscribe(() => {
                 // TODO: 60ms延迟重新计算better-scroll
-                const timer = setTimeout( () => {
+                const timer = setTimeout(() => {
+                    $(this.bscrollContentEl.nativeElement).css('min-height', $(this.bscrollEl.nativeElement).height() + 1 + 'px');
                     this.refresh();
                 }, 60)
             })
@@ -51,7 +52,7 @@ export class ListScrollComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         // this.bscrollEl.nativeElement.style.height = this.height;
         // 为了解决滚动区高度小于滚动区的父元素，会导致better-scroll无法滚动
-        $(this.bscrollContentEl.nativeElement).css('min-height', $(this.bscrollEl.nativeElement).height() + 10 + 'px');
+        $(this.bscrollContentEl.nativeElement).css('min-height', $(this.bscrollEl.nativeElement).height() + 1 + 'px');
 
         this.bscroll = new BScroll(this.bscrollEl.nativeElement, {
             probeType: 1,
