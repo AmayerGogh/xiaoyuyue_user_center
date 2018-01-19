@@ -334,13 +334,14 @@ input:-webkit-autofill {
     .loading-wrap {
         width: 100%;
         position: absolute;
-        bottom: 60px;
+        bottom: 60px; // loading动画
         .spinner {
             font-size: 20px;
             width: 2em;
             height: 2em;
             border-radius: 50%;
             margin: 0 auto;
+            text-align: left;
             box-shadow: inset 0 0 0 .1em rgba(58, 168, 237, .2);
             i {
                 position: absolute;
@@ -359,23 +360,52 @@ input:-webkit-autofill {
                     box-shadow: inset 0 0 0 .1em #FF9641;
                 }
             }
-            @keyframes spinner-circle-clipper {
-                0% {
-                    transform: rotate(0deg);
-                }
-                100% {
-                    transform: rotate(180deg);
-                }
-            }
-            @keyframes spinner-circle {
-                0% {
-                    transform: rotate(-180deg);
-                }
-                100% {
-                    transform: rotate(180deg);
-                }
-            }
         }
+    }
+}
+
+.swal-loading-spinner {
+    font-size: 40px;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    margin: 40px auto 0;
+    text-align: left;
+    box-shadow: inset 0 0 0 .1em rgba(58, 168, 237, .2);
+    i {
+        position: absolute;
+        clip: rect(0, 2em, 2em, 1em);
+        width: 2em;
+        height: 2em;
+        animation: spinner-circle-clipper 1s ease-in-out infinite;
+        &::after {
+            position: absolute;
+            clip: rect(0, 2em, 2em, 1em);
+            width: 2em;
+            height: 2em;
+            content: '';
+            animation: spinner-circle 1s ease-in-out infinite;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 .1em #FF9641;
+        }
+    }
+}
+
+@keyframes spinner-circle-clipper {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes spinner-circle {
+    0% {
+        transform: rotate(-180deg);
+    }
+    100% {
+        transform: rotate(180deg);
     }
 }
 
