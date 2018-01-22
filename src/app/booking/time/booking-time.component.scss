@@ -1,46 +1,58 @@
 .booking-time {
     width: 100%;
-    padding: 20px;
-    background-color: #FFF;
-    input.flatpickr {
-        display: none;
-    }
-    /* 覆盖flatpickr样式*/
-    .flatpickr-calendar {
-        width: 100%;
-        .flatpickr-rContainer {
-            margin: 0 auto;
-        }
-    }
-    .valid-time-wrap {
-        width: 100%;
-        min-height: 40px;
-        margin-top: 20px;
+    padding: 10px 20px 20px;
+
+    .content {
         background-color: #FFF;
         box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
-        .time-field-time {
-            line-height: 20px;
-            margin: 10px 0;
-            text-align: center;
-            color: #333;
+        padding: 0 10px;
+        border-radius: 6px;
+        input.flatpickr {
+            display: none;
         }
-        .time-field-time.disabled {
-            color: #CCC;
-            cursor: not-allowed;
+        /* 覆盖flatpickr样式*/
+        .flatpickr-calendar {
+            width: 100%;
+            box-shadow: none;
+            .flatpickr-innerContainer {
+                border-top: 1px solid rgba(0, 0, 0, .1);
+                margin-top: 10px;
+                padding-top: 10px;
+            }
+            .flatpickr-rContainer {
+                margin: 0 auto;
+            }
         }
-        .time-content {
-            font-size: 12px;
-            display: inline-block;
-            padding: 2px 6px;
-        }
-        .time-field-time.active {
+        .valid-time-wrap {
+            width: 100%;
+            min-height: 40px;
+            margin-top: 2px;
+            border-top: 1px solid rgba(0, 0, 0, .1);
+            .time-field-time {
+                line-height: 20px;
+                margin: 10px 0;
+                padding: 0 6px;
+                text-align: center;
+                color: #333;
+            }
+            .time-field-time.disabled {
+                color: #CCC;
+                cursor: not-allowed;
+            }
             .time-content {
                 font-size: 12px;
                 display: inline-block;
                 padding: 2px 6px;
-                color: #FFF;
-                background-color: #ff9742;
-                border-radius: 10px;
+            }
+            .time-field-time.active {
+                .time-content {
+                    font-size: 12px;
+                    display: inline-block;
+                    padding: 2px 6px;
+                    color: #FFF;
+                    background-color: #ff9742;
+                    border-radius: 10px;
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
 import { SuggestComponent } from './suggest/suggest.component';
 import { AppCommonModule } from 'app/shared/common/app-common.module';
 import { LangSwitchComponent } from './lang-switch/lang-switch.component';
+import { UtilsModule } from 'shared/utils/utils.module';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { LangSwitchComponent } from './lang-switch/lang-switch.component';
         ReactiveFormsModule,
         CommonModule,
         SettingsRoutingModule,
-        AppCommonModule
+        AppCommonModule,
+        UtilsModule
     ],
     declarations: [
         SettingsComponent,
