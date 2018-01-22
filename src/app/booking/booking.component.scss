@@ -1,7 +1,6 @@
 #booking {
     width: 100%;
     max-width: 480px;
-    height: 100vh;
     margin: 0 auto;
     background-color: #FFF;
 }
@@ -16,24 +15,18 @@
         padding: 0;
         list-style: none;
     }
-    .tab-content {
-        // position: absolute;
-        // top: 256px;
-        // right: 0;
-        // bottom: 0;
-        // left: 0;
-        // overflow: auto;
-        // -webkit-overflow-scrolling: touch;
-    }
     .nav-tabs {
-        // position: fixed;
         width: 100%;
-        // top: 200px;
+        position: relative;
+        z-index: 100;
+        top: -10px;
+        overflow: hidden;
         display: flex;
         background-color: #FFF;
         box-shadow: 0 1px 4px 0px #CCC;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        margin-bottom: 0;
         .nav-item.active {
             .nav-link {
                 color: #FF9641!important;
