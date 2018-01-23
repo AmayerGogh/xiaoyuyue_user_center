@@ -14,6 +14,7 @@ import { UserInfoComponent } from './info/user-info.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UtilsModule } from '@shared/utils/utils.module';
 import { QrcodeModelComponent } from 'app/user/booking/info/qrcode-model/qrcode-model.component';
+import { BookingCheckInComponent } from 'app/user/booking/check-in/booking-check-in.component';
 
 @NgModule({
     imports: [
@@ -36,6 +37,7 @@ import { QrcodeModelComponent } from 'app/user/booking/info/qrcode-model/qrcode-
         BookingCancelComponent,
         UserInfoComponent,
         QrcodeModelComponent,
+        BookingCheckInComponent
     ],
     providers: [
     ],

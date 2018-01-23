@@ -1,0 +1,39 @@
+<div class="booking-edit" [ngClass]="{'miniprogram-top': iswxjsEnvironment}" *ngIf="bookingOrderForEdidData">
+    <div [@routerTransition]>
+        <div class="tenant-wrap card-shadow">
+            <div class="tenant-bg-wrap">
+                <img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg">
+            </div>
+            <div class="checkin-btn">
+                <button class="btn btn-block primary-bgcolor">签到</button>
+            </div>
+        </div>
+
+        <div class="booking-info-wrap card-shadow">
+            <div class="card-item booking-info">
+                <div class="top-wrap clearfix">
+                    <div class="title pull-left">预约信息</div>
+                    <div class="">
+                        <span class="icon vapps-icon-app-detail"></span>
+                        <span class="txt">详情</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-item">
+                        <span class="name">项目名称 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">预约时间 : </span>
+                        <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">应约人数 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn" type="button">取消预约</button>
+    </div>
+</div>
