@@ -6,7 +6,8 @@
     left: 0;
     padding: 20px 20px 0;
     background-color: #FFF;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     .btn {
         line-height: 1;
         padding: 0;
@@ -42,7 +43,7 @@
         .title-name {
             font-size: 15px;
             color: #FF9641;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
             padding-bottom: 6px;
             border-bottom: 1px solid #dadada;
         }
