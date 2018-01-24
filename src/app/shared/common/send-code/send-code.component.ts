@@ -15,6 +15,7 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
     sendTimer: NodeJS.Timer;
     isSend = false;
     sending = false;
+    buttonText: string;
     @ViewChild('smsBtn') _smsBtn: ElementRef;
     @ViewChild('smsBtnSpan') _smsBtnSpan: ElementRef;
     @Input() codeType;
@@ -31,15 +32,16 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
     }
 
     ngOnInit() {
+        this.buttonText = this.l('GetVerificationCode');
     }
 
     ngOnChanges() {
         if (this.phoneNumber) {
             this.isSend = this.isValidPhoneNum(this.phoneNumber);
             if (this.phoneNumber === SMSProviderDto.phoneNum) {
-                this.anginSend();
+                this.updateSendState();
             } else {
-                this._smsBtnSpan.nativeElement.innerHTML = this.l('GetVerificationCode');
+                this.buttonText = this.l('GetVerificationCode');
                 this.clearSendHandle();
             }
         }
@@ -47,9 +49,9 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
         if (this.emailAddress) {
             this.isSend = this.isValidEmailAddress(this.emailAddress);
             if (this.emailAddress === SMSProviderDto.emailAddress) {
-                this.anginSend();
+                this.updateSendState();
             } else {
-                this._smsBtnSpan.nativeElement.innerHTML = this.l('GetVerificationCode');
+                this.buttonText = this.l('GetVerificationCode');
                 this.clearSendHandle();
             }
         }
@@ -69,12 +71,20 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
         }
     }
 
-    anginSend() {
+    updateSendState() {
         const self = this;
         this.isSend = false;
-        self._smsBtnSpan.nativeElement.innerHTML = `${SMSProviderDto.sendCodeSecond} ${this.l('Second')}`;
+        self.buttonText = `${SMSProviderDto.sendCodeSecond} ${this.l('Second')}`;
         this.sendTimer = setInterval(() => {
-            self._smsBtnSpan.nativeElement.innerHTML = `${SMSProviderDto.sendCodeSecond} ${this.l('Second')}`;
+            if (SMSProviderDto.sendCodeSecond <= 0) {
+                this.isSend = true;
+                SMSProviderDto.phoneNum = '';
+                SMSProviderDto.emailAddress = '';
+                this.buttonText = this.l('AgainSendValidateCode');
+                this.clearSendHandle();
+                return;
+            }
+            self.buttonText = `${SMSProviderDto.sendCodeSecond} ${this.l('Second')}`;
         }, 100);
     }
 
@@ -96,7 +106,7 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
             })
             .subscribe(result => {
                 this.sending = false;
-                this.anginSend();
+                this.updateSendState();
                 this.codeInterval();
             });
     }
@@ -114,7 +124,7 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
             })
             .subscribe(result => {
                 this.sending = false;
-                this.anginSend();
+                this.updateSendState();
                 this.codeInterval();
             })
     }
@@ -124,23 +134,8 @@ export class SendCodeComponent extends AppComponentBase implements OnInit, OnCha
         const timer = setInterval(() => {
             SMSProviderDto.sendCodeSecond--;
             if (SMSProviderDto.sendCodeSecond <= 0) {
-                this.isSend = true;
-                this._smsBtnSpan.nativeElement.innerHTML = this.l('AgainSendValidateCode');
-                SMSProviderDto.phoneNum = '';
-                SMSProviderDto.emailAddress = '';
-                this.clearSendHandle();
                 clearInterval(timer);
             }
         }, SMSProviderDto.timeInterval)
-    }
-
-    private isValidPhoneNum(phoneNum: string): boolean {
-        const reg = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
-        return reg.test(phoneNum);
-    }
-
-    private isValidEmailAddress(emailAddress: string): boolean {
-        const reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-        return reg.test(emailAddress);
     }
 }

@@ -1,13 +1,13 @@
 .booking-about {
     width: 100%;
-    height: calc(100vh - 256px);
+    height: calc(100vh - 242px);
     position: absolute;
-    top: 0;
+    top: 242px;
     left: 0;
-    padding: 0 20px;
+    padding: 20px 20px 0;
     background-color: #FFF;
-    margin-top: 4px;
-    overflow: hidden;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
     .btn {
         line-height: 1;
         padding: 0;
@@ -43,13 +43,13 @@
         .title-name {
             font-size: 15px;
             color: #FF9641;
-            margin-bottom: 4px;
+            margin-bottom: 10px;
             padding-bottom: 6px;
             border-bottom: 1px solid #dadada;
         }
         .intro-wrap {
             font-size: 14px;
-            text-align: justify;
+            // text-align: justify;
             img {
                 max-width: 100%;
             }

@@ -1,10 +1,13 @@
-<div class="booking-time" [@routerTransition]>
-    <input class="flatpickr" [(ngModel)]="selectDate">
-    <div *ngIf="availableDateItemData">
-        <div *ngFor="let availableDateItem of availableDateItemData;">
-            <div class="valid-time-wrap clearfix" *ngIf="d(availableDateItem.date) == selectDate">
-                <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxQueueNum<=0, 'active': selectIndex == index}" *ngFor="let time of availableDateItem.times; let index=index">
-                    <span class="time-content" (click)="selectOptimalTime(index, d(availableDateItem.date), time)">{{time.hourOfDay}}</span>
+<div class="booking-time">
+    <div class="content">
+        <input class="flatpickr" [(ngModel)]="selectDate">
+        <div *ngIf="availableDateItemData">
+            <div *ngFor="let availableDateItem of availableDateItemData;">
+                <!-- <div class="valid-time-wrap clearfix" *ngIf="d(availableDateItem.date) == selectDate"> -->
+                <div class="valid-time-wrap clearfix" *ngIf="d(availableDateItem.date) == selectDate">
+                    <div class="time-field-time col-xs-4" [ngClass]="{'disabled': time.maxBookingNum<=0, 'active': time.maxBookingNum>0 && selectIndex == index}" *ngFor="let time of availableDateItem.times; let index=index">
+                        <span class="time-content" (click)="selectOptimalTime(index, d(availableDateItem.date), time)">{{time.hourOfDay}}</span>
+                    </div>
                 </div>
             </div>
         </div>
