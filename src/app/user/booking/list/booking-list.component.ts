@@ -217,13 +217,13 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
             this.listScrollHeight = 'calc(100vh - 171px)';
             $('.scroll-wrapper').css({
                 'height': this.listScrollHeight,
-                'top': '171px'
+                'top': '116px'
             })
         } else {
             this.listScrollHeight = 'calc(100vh - 115px)';
             $('.scroll-wrapper').css({
                 'height': this.listScrollHeight,
-                'top': '115px'
+                'top': '60px'
             })
         }
         this._listScrollService.listScrollRefresh.emit();

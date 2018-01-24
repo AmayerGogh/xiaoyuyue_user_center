@@ -1,6 +1,7 @@
 .booking-manage {
     width: 100%;
     max-width: 480px;
+    position: relative;
     margin: 0 auto 0;
     padding: 10px;
     background-color: #EEE;
@@ -53,7 +54,7 @@
         width: 100%;
         height: calc(100vh - 115px);
         position: absolute;
-        top: 115px;
+        top: 60px;
         left: 0;
         overflow: hidden;
         .scroll-content {
