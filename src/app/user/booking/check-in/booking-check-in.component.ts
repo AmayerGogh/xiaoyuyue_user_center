@@ -1,7 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PerBookingOrderServiceProxy, GetPersonBookingOrderOutput, BookingOrderInfoStatus, SignInBookingOrderInput } from 'shared/service-proxies/service-proxies';
+import { PerBookingOrderServiceProxy, GetPersonBookingOrderOutput, BookingOrderInfoStatus, CheckInBookingOrderInput } from 'shared/service-proxies/service-proxies';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
 export class CheckInStatus {
     active: boolean;
@@ -16,7 +16,7 @@ export class CheckInStatus {
 export class BookingCheckInComponent extends AppComponentBase implements OnInit {
     bookingOrderForEdidData: GetPersonBookingOrderOutput;
     bookingStatus: BookingOrderInfoStatus;
-    signInBookingOrderInput: SignInBookingOrderInput = new SignInBookingOrderInput();
+    signInBookingOrderInput: CheckInBookingOrderInput = new CheckInBookingOrderInput();
     outletPictureUrl = '/assets/common/images/booking/tenant-bg.png';
     bookingId: any;
     checkInStatus = new CheckInStatus();
@@ -60,7 +60,7 @@ export class BookingCheckInComponent extends AppComponentBase implements OnInit 
 
     private checkInService(): void {
         this._perBookingOrderServiceProxy
-            .signBookingOrder(this.signInBookingOrderInput)
+            .checkInBookingOrder(this.signInBookingOrderInput)
             .subscribe(() => {
                 this.message.success('签到成功');
                 this.checkInStatus.active = true;
