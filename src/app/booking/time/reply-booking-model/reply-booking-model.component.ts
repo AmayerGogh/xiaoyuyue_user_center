@@ -68,9 +68,9 @@ export class ReplyBookingModelComponent extends AppComponentBase implements OnIn
             .joinBooking(this.input)
             .finally(() => { this.saving = false; })
             .subscribe(result => {
-                // this.close();
-                // this._localStorageService.setItem(this.cacheKey, this.input);
-                // this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.d(result.bookingDate), hourOfDay: result.hourOfDay } });
+                this.close();
+                this._localStorageService.setItem(this.cacheKey, this.input);
+                this._router.navigate(['/booking/booked'], { queryParams: { bookingName: result.bookingName, bookingCustomer: result.bookingCustomer, bookingDate: this.d(result.bookingDate), hourOfDay: result.hourOfDay } });
             });
     }
 
