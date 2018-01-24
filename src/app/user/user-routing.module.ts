@@ -30,7 +30,7 @@ import { BookingCheckInComponent } from 'app/user/booking/check-in/booking-check
                                 path: 'info/:id', component: BookingInfoComponent, data: { breadcrumb: 'Menu.BookingInfo' }
                             },
                             {
-                                path: 'check-in/:id', component: BookingCheckInComponent, data: { breadcrumb: '签到' }
+                                path: 'checkin/:id', component: BookingCheckInComponent, data: { breadcrumb: '签到' }
                             }
                         ]
                     },
