@@ -29,18 +29,27 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     allPrsonBookingDatas: any[] = [];
     personBookingDatas: BookingOrderListDto[];
     stickedInput: StickedInput = new StickedInput();
-    status: Status2[] = [BookingOrderStatus.WaitConfirm, BookingOrderStatus.ConfirmSuccess, BookingOrderStatus.ConfirmFail, BookingOrderStatus.Cancel, BookingOrderStatus.WaitComment, BookingOrderStatus.Complete];
+    status: Status2[] = [
+        BookingOrderStatus.WaitConfirm,
+        BookingOrderStatus.ConfirmSuccess,
+        BookingOrderStatus.ConfirmFail,
+        BookingOrderStatus.Cancel,
+        BookingOrderStatus.WaitComment,
+        BookingOrderStatus.Complete];
     bookingName = '';
     pageSize = 10;
     skipCount = 0;
     sort: any;
     actionFlag: boolean[] = [];
     slogan = this.l('BookingList.Nothing');
-    bookingOrderStatusName: string[] = [this.l('BookingList.All'),
-    this.l('BookingList.WaitConfirm'),
-    this.l('BookingList.ConfirmSuccess'),
-    null,
-    this.l('BookingList.Cancel')];
+    bookingOrderStatusName: string[] = [
+        this.l('BookingList.All'),
+        this.l('BookingList.WaitConfirm'),
+        this.l('BookingList.ConfirmSuccess'),
+        this.l('BookingList.ConfirmFail'),
+        this.l('BookingList.Cancel'),
+        this.l('BookingList.WaitComment'),
+        this.l('BookingList.Complete')];
     updateDataIndex = -1;
 
     @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;
@@ -133,6 +142,8 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
             this.status = [BookingOrderStatus.Cancel];
         } else if (index === 5) {
             this.status = [BookingOrderStatus.WaitComment];
+        } else if (index === 6) {
+            this.status = [BookingOrderStatus.Complete];
         } else {
             this.message.warn(this.l('Improving'), this.l('ComingSoon'));
             this.allPrsonBookingDatas = [];
@@ -217,13 +228,13 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
             this.listScrollHeight = 'calc(100vh - 171px)';
             $('.scroll-wrapper').css({
                 'height': this.listScrollHeight,
-                'top': '171px'
+                'top': '116px'
             })
         } else {
             this.listScrollHeight = 'calc(100vh - 115px)';
             $('.scroll-wrapper').css({
                 'height': this.listScrollHeight,
-                'top': '115px'
+                'top': '60px'
             })
         }
         this._listScrollService.listScrollRefresh.emit();

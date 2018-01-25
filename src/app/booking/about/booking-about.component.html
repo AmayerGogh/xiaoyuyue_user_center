@@ -1,78 +1,74 @@
 <div class="booking-about" *ngIf="businessAboutData">
-    <xiaoyuyue-list-scroll [height]="'calc(100vh - 256px)'">
-        <div class="scroll-content">
-            <div class="card clearfix optimal-time-wrap" *ngIf="optimalBookingTime">
-                <div class="text-tip-wrap pull-left">
-                    <p class="tip">{{l('Booking.OptimalTime') }}</p>
-                    <p class="time">{{ optimalBookingTime }}</p>
-                </div>
-                <div class="pull-right">
-                    <button class="btn btn-warning" (click)="atOnceBooking()">{{ l('Booking.Now') }}</button>
-                </div>
-            </div>
-            <div class="about-header about-item">
-                <h5 class="title-name">{{ businessAboutData.name }}</h5>
-                <div class="intro-wrap" [innerHTML]="businessAboutData.description"></div>
-            </div>
-            <div class="about-body about-item">
-                <div class="banner-wrap item" *ngIf="businessAboutData">
-                    <div class="swiper-container" id="bookingAboutSwiperContainer">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" *ngFor="let item of businessAboutData.pictures">
-                                <!-- <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span> -->
-                                <img class="img" [src]="item">
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                </div>
-                <div class="video-wrap item" *ngIf="businessAboutData.videoUrl"></div>
-            </div>
-            <div class="about-footer about-item">
-                <div class="address item">
-                    <div class="item-left">
-                        <div class="info-wrap">
-                            <span class="name">{{ l('Booking.Address') }}</span>
-                            <span class="colon">:</span>
-                            <span class="desc">{{businessAboutData.outletAddress}}</span>
-                        </div>
-                    </div>
-                    <div class="item-right" (click)=showBusinessMap()>
-                        <span class="btn primary-bgcolor  vapps-icon-app-location"></span>
-                    </div>
-                </div>
-                <div class="contact item">
-                    <div class="item-left">
-                        <div class="info-wrap">
-                            <span class="name">{{ l('Booking.Contactor') }}</span>
-                            <span class="colon">:</span>
-                            <span class="desc">{{businessAboutData.contactorName}}</span>
-                        </div>
-                    </div>
-                    <!-- <ng-template #popTemplate><img [src]="businessAboutData.contactorWechatUrl" width="150px"></ng-template> -->
-                    <!-- <img [src]="businessAboutData.contactorWechatUrl" width="150px" > -->
-                    <div class="item-right" (click)="showContactorModel()">
-                        <span class="btn primary-bgcolor vapps-icon-app-qr-code"></span>
-                    </div>
-                </div>
-                <div class="phone item">
-                    <div class="item-left">
-                        <div class="info-wrap">
-                            <span class="name">{{ l('Booking.Phone') }}</span>
-                            <span class="colon">:</span>
-                            <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
-                        </div>
-                    </div>
-                    <div class="item-right">
-                        <a [href]="'tel:'+businessAboutData.contactorPhoneNum">
-                            <span class="btn primary-bgcolor  vapps-icon-app-phone"></span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad> -->
+    <div class="card clearfix optimal-time-wrap" *ngIf="optimalBookingTime">
+        <div class="text-tip-wrap pull-left">
+            <p class="tip">{{l('Booking.OptimalTime') }}</p>
+            <p class="time">{{ optimalBookingTime }}</p>
         </div>
-    </xiaoyuyue-list-scroll>
+        <div class="pull-right">
+            <button class="btn btn-warning" (click)="atOnceBooking()">{{ l('Booking.Now') }}</button>
+        </div>
+    </div>
+    <div class="about-header about-item">
+        <h5 class="title-name">{{ businessAboutData.name }}</h5>
+        <div class="intro-wrap" [innerHTML]="businessAboutData.description"></div>
+    </div>
+    <div class="about-body about-item">
+        <div class="banner-wrap item" *ngIf="businessAboutData">
+            <div class="swiper-container" id="bookingAboutSwiperContainer">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let item of businessAboutData.pictures">
+                        <!-- <span class="img" [ngStyle]="{'background-image': 'url(' + item + ')'}"></span> -->
+                        <img class="img" [src]="item">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="video-wrap item" *ngIf="businessAboutData.videoUrl"></div>
+    </div>
+    <div class="about-footer about-item">
+        <div class="address item">
+            <div class="item-left">
+                <div class="info-wrap">
+                    <span class="name">{{ l('Booking.Address') }}</span>
+                    <span class="colon">:</span>
+                    <span class="desc">{{businessAboutData.outletAddress}}</span>
+                </div>
+            </div>
+            <div class="item-right" (click)=showBusinessMap()>
+                <span class="btn primary-bgcolor  vapps-icon-app-location"></span>
+            </div>
+        </div>
+        <div class="contact item">
+            <div class="item-left">
+                <div class="info-wrap">
+                    <span class="name">{{ l('Booking.Contactor') }}</span>
+                    <span class="colon">:</span>
+                    <span class="desc">{{businessAboutData.contactorName}}</span>
+                </div>
+            </div>
+            <!-- <ng-template #popTemplate><img [src]="businessAboutData.contactorWechatUrl" width="150px"></ng-template> -->
+            <!-- <img [src]="businessAboutData.contactorWechatUrl" width="150px" > -->
+            <div class="item-right" (click)="showContactorModel()">
+                <span class="btn primary-bgcolor vapps-icon-app-qr-code"></span>
+            </div>
+        </div>
+        <div class="phone item">
+            <div class="item-left">
+                <div class="info-wrap">
+                    <span class="name">{{ l('Booking.Phone') }}</span>
+                    <span class="colon">:</span>
+                    <span class="desc">{{businessAboutData.contactorPhoneNum}}</span>
+                </div>
+            </div>
+            <div class="item-right">
+                <a [href]="'tel:'+businessAboutData.contactorPhoneNum">
+                    <span class="btn primary-bgcolor  vapps-icon-app-phone"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <xiaoyuyue-footer-ad></xiaoyuyue-footer-ad> -->
 </div>
 
 <xiaoyuyue-contactor-model #contactorModel></xiaoyuyue-contactor-model>

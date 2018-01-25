@@ -105,9 +105,10 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
     selectOptimalTime(index: number, date: string, time: JoinBookingTimeInfo) {
         this.selectIndex = index;
         this.hourOfDay = time.hourOfDay;
-        this.availableDateItemData.forEach((element, index) => {
+        this.input.date = moment(date);
+        this.availableDateItemData.forEach((element) => {
             if (element.date.format('YYYY-MM-DD') === date) {
-                this.input.bookingItemId = element.times[0].id;
+                this.input.bookingItemId = element.times[index].id;
             }
         });
 
@@ -122,6 +123,11 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             this._cookiesService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
+
+        if (time.maxBookingNum <= 0) {
+            this.message.warn('此时间段已满');
+            return;
+        };
         this.replyBookingModel.init(this.input, time.hourOfDay);
         this.replyBookingModel.show();
     }

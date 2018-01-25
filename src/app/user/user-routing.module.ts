@@ -8,6 +8,7 @@ import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { NgModule } from '@angular/core';
 import { UserComponent } from './user.component';
 import { UserInfoComponent } from './info/user-info.component';
+import { BookingCheckInComponent } from 'app/user/booking/check-in/booking-check-in.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,9 @@ import { UserInfoComponent } from './info/user-info.component';
                             },
                             {
                                 path: 'info/:id', component: BookingInfoComponent, data: { breadcrumb: 'Menu.BookingInfo' }
+                            },
+                            {
+                                path: 'checkin/:id', component: BookingCheckInComponent, data: { breadcrumb: '签到' }
                             }
                         ]
                     },

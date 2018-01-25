@@ -1,0 +1,59 @@
+.booking-edit {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 0;
+    position: absolute;
+    top: 55px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px;
+    background-color: #EEE;
+    font-size: 16px;
+    .tenant-wrap {
+        border-radius: 4px;
+        background-color: #FFF;
+        overflow: hidden;
+        .checkin-btn {
+            padding: 20px;
+            .btn {
+                font-size: 16px;
+                padding: 10px 14px 10px 14px;
+                margin: 0;
+            }
+        }
+    }
+    .booking-info-wrap {
+        margin-top: 10px;
+        .card-item {
+            padding: 0 15px 0;
+            background-color: #FFF;
+            border-radius: 4px;
+            .top-wrap {
+                height: 50px;
+                line-height: 50px;
+                border-bottom: 1px solid #E5E5E5;
+            }
+            .content {
+                padding: 20px 0;
+                .content-item {
+                    .name {
+                        margin-right: 10px;
+                    }
+                    .desc {
+                        color: #FF9641;
+                    }
+                }
+                .content-item+.content-item {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
+
+.miniprogram-top {
+    top: 0px !important;
+}
