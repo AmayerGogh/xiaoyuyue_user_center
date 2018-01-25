@@ -5,7 +5,7 @@ import { AppConsts } from '@shared/AppConsts';
 import { Breadcrumb } from 'shared/services/bread-crumb.service';
 import { LocalizationService } from 'abp-ng2-module/src/localization/localization.service';
 import { Title } from '@angular/platform-browser';
-
+ 
 @Injectable()
 export class TitleService {
 
