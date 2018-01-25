@@ -77,28 +77,12 @@
                         .title {
                             color: #FF9641;
                             font-size: 16px;
-                            .tips {
+                            .order-status {
                                 font-size: 12px;
                                 color: #FFF;
                                 padding: 2px;
                                 border-radius: 2px;
                                 margin-bottom: 2px;
-                                &.status-1 {
-                                    background-color: #e32600;
-                                }
-                                &.status-2 {
-                                    background-color: #FF9641;
-                                }
-                                &.status-3 {}
-                                &.status-4 {
-                                    background-color: #808080;
-                                }
-                                &.status-5 {
-                                    background-color: #e32600;
-                                }
-                                &.status-6 {
-                                    background-color: #2aad1c;
-                                }
                             }
                         }
                         .icon {
