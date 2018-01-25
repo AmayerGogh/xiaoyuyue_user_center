@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AfterViewInit, Component, Injector, OnInit, transition } from '@angular/core';
 import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
-import { ExternalLoginProviderInfoModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
+import { ExternalLoginProviderInfoModel, ShortAuthTokenModel, TokenAuthServiceProxy } from '@shared/service-proxies/service-proxies';
 
 import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppConsts } from '@shared/AppConsts';
@@ -35,40 +35,44 @@ export class ExternalAuthComponent extends AppComponentBase implements OnInit, A
     }
 
     ngAfterViewInit(): void {
-        this.externalLogin();
-    }
-
-    externalLogin(): void {
-        const self = this;
         this._activatedRoute.queryParams.subscribe((params: Params) => {
-            if (params['redirectUrl'] !== undefined) {
-                this._cookiesService.setCookieValue('UrlHelper.redirectUrl', params['redirectUrl'], null, '/');
-            }
-
-            if (params['authToken'] !== undefined) {
-                this._cookiesService.setToken(params['authToken']);
-            }
-
-            if (params['isAuthBind'] !== undefined) {
-                self.isAuthBind = params['isAuthBind'];
-            }
-
-            if (self.isAuthBind !== 'true') { this.isLogin(); }
-
-            if (params['providerName'] !== undefined) {
-                if (self.isAuthBind === 'true') {
-                    this._loginService.externalBindingCallback(params);
-                } else {
-                    this._loginService.externalLoginCallback(params);
-                }
-            } else {
-                this._loginService.init((externalLoginProviders) => {
-                    if (this.isWeiXin) {
-                        this.weChatExternalAuthRedirect(externalLoginProviders);
-                    }
+            if (params['shortAuthToken'] !== undefined) {
+                const input = new ShortAuthTokenModel();
+                input.shortAuthToken = params['shortAuthToken']
+                this._tokenAuthService.authenticateByShortAuth(input).subscribe((result) => {
+                    this._cookiesService.setToken(result.accessToken);
+                    this.externalLogin(params);
                 });
+            } else {
+                this.externalLogin(params);
             }
         });
+    }
+
+    externalLogin(params: Params): void {
+        if (params['redirectUrl'] !== undefined) {
+            this._cookiesService.setCookieValue('UrlHelper.redirectUrl', params['redirectUrl'], null, '/');
+        }
+
+        if (params['isAuthBind'] !== undefined) {
+            this.isAuthBind = params['isAuthBind'];
+        }
+
+        if (this.isAuthBind !== 'true') { this.isLogin(); }
+
+        if (params['providerName'] !== undefined) {
+            if (this.isAuthBind === 'true') {
+                this._loginService.externalBindingCallback(params);
+            } else {
+                this._loginService.externalLoginCallback(params);
+            }
+        } else {
+            this._loginService.init((externalLoginProviders) => {
+                if (this.isWeiXin) {
+                    this.weChatExternalAuthRedirect(externalLoginProviders);
+                }
+            });
+        }
     }
 
     weChatExternalAuthRedirect(externalLoginProviders) {
