@@ -196,6 +196,9 @@ export class LoginService {
 
     private initExternalLoginProviders(callback?: any) {
         if (this.externalLoginProviders.length > 0) {
+            if (callback) {
+                callback(this.externalLoginProviders);
+            }
             return;
         }
         this._tokenAuthService
