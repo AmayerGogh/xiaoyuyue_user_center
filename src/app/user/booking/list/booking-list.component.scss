@@ -1,6 +1,7 @@
 .booking-manage {
     width: 100%;
     max-width: 480px;
+    position: relative;
     margin: 0 auto 0;
     padding: 10px;
     background-color: #EEE;
@@ -53,7 +54,7 @@
         width: 100%;
         height: calc(100vh - 115px);
         position: absolute;
-        top: 115px;
+        top: 60px;
         left: 0;
         overflow: hidden;
         .scroll-content {
@@ -82,18 +83,22 @@
                                 padding: 2px;
                                 border-radius: 2px;
                                 margin-bottom: 2px;
-                                &.status1 {
-                                    background-color: #999;
+                                &.status-1 {
+                                    background-color: #e32600;
                                 }
-                                &.status2 {
+                                &.status-2 {
                                     background-color: #FF9641;
                                 }
-                                &.status3 {}
-                                &.status4 {
-                                    background-color: #CCC;
+                                &.status-3 {}
+                                &.status-4 {
+                                    background-color: #808080;
                                 }
-                                &.status5 {}
-                                &.status6 {}
+                                &.status-5 {
+                                    background-color: #e32600;
+                                }
+                                &.status-6 {
+                                    background-color: #2aad1c;
+                                }
                             }
                         }
                         .icon {
