@@ -4,8 +4,17 @@
             <div class="tenant-bg-wrap">
                 <img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg">
             </div>
-            <div class="checkin-btn" [ngClass]="{'disabled': checkInStatus.active}">
-                <button class="btn btn-block primary-bgcolor" (click)="userCheckInHandle()" [disabled]="checkInStatus.active">{{ checkInStatus.text }}</button>
+            <div class="checkin-btn">
+                <button class="btn btn-block primary-bgcolor" *ngIf="!bookingOrderForEdidData.orderInfo.checkIn && bookingOrderForEdidData.orderInfo.status === 2"
+                    (click)="userCheckInHandle()">
+                    <i class="vapps-icon-app-check-in"></i>
+                    <span>签到</span>
+                </button>
+                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.checkIn">
+                        <i class="vapps-icon-app-check-in"></i>
+                        <span>已签到</span>
+                    </button>
+                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">待确认中</button>
             </div>
         </div>
 

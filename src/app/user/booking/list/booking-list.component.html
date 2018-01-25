@@ -29,7 +29,7 @@
                         <div class="booking-item box-shadow" (click)="setActionFlag(indexJ)" *ngFor="let dataItem of personBookingDatas; let indexJ=index">
                             <div class="top-wrap clearfix">
                                 <div class="title pull-left">{{dataItem.bookingName}}
-                                    <span class="tips" [ngClass]="'status-'+dataItem.status">{{ bookingOrderStatusName[dataItem.status] }}</span>
+                                    <span class="order-status" [ngClass]="'status-'+dataItem.status">{{ bookingOrderStatusName[dataItem.status] }}</span>
                                 </div>
                                 <div class="icon pull-right" [ngClass]="{'rotate-180': actionFlag[indexJ], 'rotate-360': !actionFlag[indexJ]}">
                                     <span class="vapps-icon-app-drop-down"></span>

@@ -42,13 +42,14 @@ export class BookingListComponent extends AppComponentBase implements OnInit {
     sort: any;
     actionFlag: boolean[] = [];
     slogan = this.l('BookingList.Nothing');
-    bookingOrderStatusName: string[] = [this.l('BookingList.All'),
-    this.l('BookingList.WaitConfirm'),
-    this.l('BookingList.ConfirmSuccess'),
-    this.l('BookingList.ConfirmFail'),
-    this.l('BookingList.Cancel'),
-    this.l('BookingList.WaitComment'),
-    this.l('BookingList.Complete')];
+    bookingOrderStatusName: string[] = [
+        this.l('BookingList.All'),
+        this.l('BookingList.WaitConfirm'),
+        this.l('BookingList.ConfirmSuccess'),
+        this.l('BookingList.ConfirmFail'),
+        this.l('BookingList.Cancel'),
+        this.l('BookingList.WaitComment'),
+        this.l('BookingList.Complete')];
     updateDataIndex = -1;
 
     @ViewChild('cancelBookingModal') cancelBookingModal: BookingCancelComponent;

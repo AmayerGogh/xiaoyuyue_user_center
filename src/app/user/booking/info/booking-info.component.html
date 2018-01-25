@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <span class="item-right text-center" (click)="showQrcodeModel()">
-                    <span class="orange-icon vapps-icon-app-qr-code"></span>
+                        <span class="orange-icon vapps-icon-app-qr-code"></span>
                     </span>
                     <xiaoyuyue-qrcode-model #qrcodeModel [qrcodeUrl]="bookingOrderForEdidData.bookingInfo.contactorQrcode"></xiaoyuyue-qrcode-model>
                 </div>
@@ -79,8 +79,26 @@
             </div>
         </div>
 
-        <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn" type="button">取消预约</button>
-        <!-- <xiaoyuyue-admin-footer></xiaoyuyue-admin-footer> -->
+        <div class="btn-wrap row">
+            <div class="col-xs-6">
+                <button class="btn btn-block cancel-btn primary-bgcolor" *ngIf="!bookingOrderForEdidData.orderInfo.checkIn && bookingOrderForEdidData.orderInfo.status === 2"
+                    (click)="userCheckInHandle()">
+                    <i class="vapps-icon-app-check-in"></i>
+                    <span>签到</span>
+                </button>
+                <button class="btn btn-block cancel-btn primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">待确认中</button>
+            </div>
+            <div class="col-xs-12" *ngIf="bookingOrderForEdidData.orderInfo.checkIn">
+                <button class="btn btn-block cancel-btn primary-bgcolor" disabled>
+                    <i class="vapps-icon-app-check-in"></i>
+                    <span>已签到</span>
+                </button>
+            </div>
+            <div class="col-xs-6">
+                <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn"
+                    type="button">取消预约</button>
+            </div>
+        </div>
     </div>
 </div>
 <xiaoyuyue-booking-cancel (isCancelBooking)="getIsCancelBooking($event)" #cancelBookingModal></xiaoyuyue-booking-cancel>
