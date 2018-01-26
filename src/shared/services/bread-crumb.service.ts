@@ -9,7 +9,7 @@ export declare class Breadcrumb {
     terminal: boolean;
     url: string;
 }
-
+ 
 @Injectable()
 export class BreadcrumbService {
     breadcrumbChanged = new EventEmitter<Breadcrumb[]>(false);
