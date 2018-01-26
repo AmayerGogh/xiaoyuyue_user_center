@@ -1,0 +1,47 @@
+<div class="booking-edit" [ngClass]="{'miniprogram-top': iswxjsEnvironment}" *ngIf="bookingOrderForEdidData">
+    <div [@routerTransition]>
+        <div class="tenant-wrap card-shadow">
+            <div class="tenant-bg-wrap">
+                <img [src]="bookingOrderForEdidData.bookingInfo.outletPictureUrl" width="100%" alt="tenant-bg">
+            </div>
+            <div class="checkin-btn">
+                <button class="btn btn-block primary-bgcolor" *ngIf="!bookingOrderForEdidData.orderInfo.checkIn && bookingOrderForEdidData.orderInfo.status === 2"
+                    (click)="userCheckInHandle()">
+                    <i class="vapps-icon-app-check-in"></i>
+                    <span>签到</span>
+                </button>
+                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.checkIn">
+                        <i class="vapps-icon-app-check-in"></i>
+                        <span>已签到</span>
+                    </button>
+                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">待确认中</button>
+            </div>
+        </div>
+
+        <div class="booking-info-wrap card-shadow">
+            <div class="card-item booking-info">
+                <div class="top-wrap clearfix">
+                    <div class="title pull-left">预约信息</div>
+                    <div class="pull-right" (click)="viewBookingInfo()">
+                        <span class="icon vapps-icon-app-detail"></span>
+                        <span class="txt">详情</span>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="content-item">
+                        <span class="name">项目名称 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">预约时间 : </span>
+                        <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
+                    </div>
+                    <div class="content-item">
+                        <span class="name">应约人数 : </span>
+                        <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

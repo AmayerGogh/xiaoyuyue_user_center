@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookingServiceProxy, JoinBookingInput, JoinBookingInputGender, JoinBookingInfoDto } from 'shared/service-proxies/service-proxies';
-import { ChangeDetectionStrategy, Component, Injector, OnInit, ViewChild, Input } from '@angular/core';
+import { BookingServiceProxy, JoinBookingInfoDto, JoinBookingInput, JoinBookingInputGender } from 'shared/service-proxies/service-proxies';
+import { ChangeDetectionStrategy, Component, Injector, Input, OnInit, ViewChild } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
 import { AppComponentBase } from 'shared/common/app-component-base';

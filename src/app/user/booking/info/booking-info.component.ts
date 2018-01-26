@@ -8,6 +8,7 @@ import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
 import { MediaCompressFormat } from 'shared/AppConsts';
 import { QrcodeModelComponent } from './qrcode-model/qrcode-model.component';
 import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { BookingCheckInService } from 'shared/services/booking-check-in.service';
 
 @Component({
     selector: 'xiaoyuyue-booking-info',
@@ -29,11 +30,15 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
     constructor(
         injector: Injector,
         private _route: ActivatedRoute,
+        private _bookingCheckInService: BookingCheckInService,
         private _perBookingOrderServiceProxy: PerBookingOrderServiceProxy
     ) {
         super(injector);
         this.bookingId = this._route.snapshot.paramMap.get('id');
         this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram;
+        this._bookingCheckInService.checkedIn.subscribe(() => {
+            this.loadBookingOrderForEditData(this.bookingId);
+        })
     }
 
     ngOnInit() {
@@ -66,6 +71,11 @@ export class BookingInfoComponent extends AppComponentBase implements OnInit, Af
 
     private getOutletPictureUrl(url: string): string {
         return url === '' ? this.outletPictureUrl : url;
+    }
+
+    // 用户签到
+    userCheckInHandle(): void {
+        this._bookingCheckInService.checkinHandle(this.bookingId);
     }
 
     showQrcodeModel(): void {

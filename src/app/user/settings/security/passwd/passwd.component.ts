@@ -90,7 +90,7 @@ export class PasswdComponent extends AppComponentBase implements OnInit {
         } else {
             this.message.confirm(this.l('Security.ChangePasswd.MustBingPhone'), (result) => {
                 if (result) {
-                    this._router.navigate(['/settings/phone']);
+                    this._router.navigate(['/user/settings/phone']);
                 } else {
                     return false;
                 }

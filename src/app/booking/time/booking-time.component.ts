@@ -122,6 +122,11 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             this._cookiesService.setCookieValue('UrlHelper.redirectUrl', href, exdate, '/');
             return;
         }
+
+        if (time.maxBookingNum <= 0) {
+            this.message.warn('此时间段已满');
+            return;
+        };
         this.replyBookingModel.init(this.input, time.hourOfDay);
         this.replyBookingModel.show();
     }

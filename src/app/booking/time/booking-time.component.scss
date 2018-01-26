@@ -1,9 +1,12 @@
 .booking-time {
     width: 100%;
-    padding: 10px 20px 20px;
-
+    height: calc(100vh - 252px);
+    padding: 20px 20px 10px;
+    -webkit-overflow-scrolling: touch;
+    background-color: #FFF;
     .content {
-        background-color: #FFF;
+        position: relative;
+        top: -10px;
         box-shadow: 1px 0 0 #e6e6e6, -1px 0 0 #e6e6e6, 0 1px 0 #e6e6e6, 0 -1px 0 #e6e6e6, 0 3px 13px rgba(0, 0, 0, 0.08);
         padding: 0 10px;
         border-radius: 6px;
