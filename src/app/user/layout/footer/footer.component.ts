@@ -7,7 +7,13 @@ import { AppComponentBase } from 'shared/common/app-component-base';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class AdminFooterComponent implements OnInit {
+export class AdminFooterComponent extends AppComponentBase implements OnInit {
+
+    constructor(
+        private injector: Injector
+    ) {
+        super(injector)
+    }
 
   ngOnInit() {
   }
