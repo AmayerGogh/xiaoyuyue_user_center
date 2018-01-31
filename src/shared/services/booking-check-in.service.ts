@@ -48,12 +48,11 @@ export class BookingCheckInService extends AppComponentBase {
             navigator.geolocation.getCurrentPosition(
                 // 获取成功回调
                 (position: Position) => {
-                    this.signInBookingOrderInput.longitude = `${position.coords.latitude},${position.coords.longitude}`
+                    this.signInBookingOrderInput.longitude = `${position.coords.latitude},${position.coords.longitude}`;
                     this.checkInService();
                 },
                 // 获取失败回调
                 (error: PositionError) => {
-                    this.signInBookingOrderInput.id = +this.bookingId;
                     this.signInBookingOrderInput.longitude = null;
                     this.checkInService();
                 },

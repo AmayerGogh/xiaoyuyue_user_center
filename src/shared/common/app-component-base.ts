@@ -83,6 +83,22 @@ export abstract class AppComponentBase {
         return localDatetimeString;
     }
 
+    transferUtcOffset(momentTime: Moment): Moment {
+        if (momentTime === undefined) {
+            return;
+        }
+
+        return momentTime.utcOffset(moment().local().utcOffset() / 60);
+    }
+
+    transferDate(momentTime: Moment): Moment {
+        if (!momentTime) {
+            return;
+        }
+        const dateFormat = momentTime.format('YYYY-MM-DD');
+        return moment(dateFormat + ' 00:00:00');
+    }
+
     omitString(str: string): string {
         return abp.utils.truncateStringWithPostfix(str, 20);
     }

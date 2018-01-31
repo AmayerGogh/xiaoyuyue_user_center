@@ -71,7 +71,7 @@
 
                         <div class="footer row">
                             <div class="col-xs-12">
-                                <button type="submit" class="btn primary-bgcolor btn-block" [disabled]="!relpyBookingForm.form.valid" (click)="submit()" [buttonBusy]="saving" [busyText]="'提交中...'"><i class="fa fa-check"></i> <span>提交</span></button>
+                                <button type="submit" class="btn primary-bgcolor btn-block" [disabled]="!relpyBookingForm.form.valid" (click)="submit()" [buttonBusy]="saving" [busyText]="l('Submiting')"><i class="fa fa-check"></i> <span>{{ l('Submit') }}</span></button>
                             </div>
                         </div>
                     </div>

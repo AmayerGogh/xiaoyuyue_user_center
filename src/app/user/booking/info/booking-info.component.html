@@ -38,23 +38,23 @@
         <div class="booking-info-wrap card-shadow">
             <div class="card-item booking-info">
                 <div class="top-wrap">
-                    <div class="title">预约信息</div>
+                    <div class="title">{{ l('Booking.BookingInfo') }}</div>
                 </div>
                 <div class="content">
                     <div class="content-item">
-                        <span class="name">项目名称 : </span>
+                        <span class="name">{{ l('Booking.Name') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
                     </div>
                     <div class="content-item">
-                        <span class="name">预约时间 : </span>
+                        <span class="name">{{ l('Booking.Datetime') }} : </span>
                         <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
                     </div>
                     <div class="content-item">
-                        <span class="name">应约人数 : </span>
+                        <span class="name">{{ l('Booking.ResponderNumber"') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
                     </div>
                     <div class="content-item" *ngIf="bookingOrderForEdidData.orderInfo.hit">
-                        <span class="name">温馨提示 : </span>
+                        <span class="name">{{ l('Booking.Hint') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.orderInfo.hit}}</span>
                     </div>
                 </div>
@@ -64,15 +64,15 @@
         <div class="personal-info-wrap card-shadow">
             <div class="card-item personal-info">
                 <div class="top-wrap">
-                    <div class="title">个人信息</div>
+                    <div class="title">{{ l('Booking.PersonInfo') }}</div>
                 </div>
                 <div class="content">
                     <div class="content-item">
-                        <span class="name">姓名 : </span>
+                        <span class="name">{{ l('Booking.CustomerName') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.orderInfo.customerName}}</span>
                     </div>
                     <div class="content-item">
-                        <span class="name">联系方式 : </span>
+                        <span class="name">{{ l('Booking.Telephone') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.orderInfo.phoneNum}}</span>
                     </div>
                 </div>
@@ -84,19 +84,19 @@
                 <button class="btn btn-block cancel-btn primary-bgcolor" *ngIf="!bookingOrderForEdidData.orderInfo.checkIn && bookingOrderForEdidData.orderInfo.status === 2"
                     (click)="userCheckInHandle()">
                     <i class="vapps-icon-app-check-in"></i>
-                    <span>签到</span>
+                    <span>{{ l('Booking.CheckIn') }}</span>
                 </button>
-                <button class="btn btn-block cancel-btn primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">待确认中</button>
+                <button class="btn btn-block cancel-btn primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">{{ l('BookingList.WaitConfirm') }}</button>
             </div>
             <div class="col-xs-12" *ngIf="bookingOrderForEdidData.orderInfo.checkIn">
                 <button class="btn btn-block cancel-btn primary-bgcolor" disabled>
                     <i class="vapps-icon-app-check-in"></i>
-                    <span>已签到</span>
+                    <span>{{ l('Booking.CheckIn.Yes') }}</span>
                 </button>
             </div>
             <div class="col-xs-6">
                 <button (click)="cancelBooking()" *ngIf="bookingStatus == 1 || bookingStatus == 2" class="btn primary-bgcolor btn-block cancel-btn"
-                    type="button">取消预约</button>
+                    type="button">{{ l('CancelBooking') }}</button>
             </div>
         </div>
     </div>
