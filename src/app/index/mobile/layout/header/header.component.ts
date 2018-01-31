@@ -1,24 +1,28 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Injector } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
     selector: 'xiaoyuyue-index-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends AppComponentBase implements OnInit {
     selectIndex: number;
     isShowSubMenuFlag = false;
     href: string = location.href;
     isDefaultSelect: boolean = this.href.substr(this.href.lastIndexOf('/') + 1, this.href.length).length > 0;
-    menuArr: string[] = ['公众号', '应用场景', '关于我们'];
+    menuArr: string[] = [this.l('Menu.OfficialAccounts'), this.l('Menu.ApplicationScenario'), this.l('Menu.AboutUs')];
     menuAnchorsArr: string[] = ['/mobile#sence', '/mobile#scanSode', '/mobile#about'];
     @Output() isSubMenu: EventEmitter<boolean> = new EventEmitter();
 
     constructor(
+        private injector: Injector,
         private _router: Router
-    ) { }
+    ) {
+        super(injector);
+    }
 
     ngOnInit() {
         if (!this.isDefaultSelect) {

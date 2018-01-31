@@ -8,36 +8,36 @@
                 <button class="btn btn-block primary-bgcolor" *ngIf="!bookingOrderForEdidData.orderInfo.checkIn && bookingOrderForEdidData.orderInfo.status === 2"
                     (click)="userCheckInHandle()">
                     <i class="vapps-icon-app-check-in"></i>
-                    <span>签到</span>
+                    <span>{{ l('Booking.CheckIn') }}</span>
                 </button>
                 <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.checkIn">
                         <i class="vapps-icon-app-check-in"></i>
-                        <span>已签到</span>
+                        <span>{{ l('Booking.CheckIn.Yes') }}</span>
                     </button>
-                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">待确认中</button>
+                <button class="btn btn-block primary-bgcolor" disabled *ngIf="bookingOrderForEdidData.orderInfo.status === 1">{{ l('BookingOrderStatus.WaitConfirm') }}</button>
             </div>
         </div>
 
         <div class="booking-info-wrap card-shadow">
             <div class="card-item booking-info">
                 <div class="top-wrap clearfix">
-                    <div class="title pull-left">预约信息</div>
+                    <div class="title pull-left">{{ l('Booking.BaseInfo') }}</div>
                     <div class="pull-right" (click)="viewBookingInfo()">
                         <span class="icon vapps-icon-app-detail"></span>
-                        <span class="txt">详情</span>
+                        <span class="txt">{{ l('Detail') }}</span>
                     </div>
                 </div>
                 <div class="content">
                     <div class="content-item">
-                        <span class="name">项目名称 : </span>
+                        <span class="name">{{ l('Booking.Name') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.bookingInfo.bookingName}}</span>
                     </div>
                     <div class="content-item">
-                        <span class="name">预约时间 : </span>
+                        <span class="name">{{ l('Booking.Datetime') }} : </span>
                         <span class="desc">{{d(bookingOrderForEdidData.orderInfo.bookingData)}} {{bookingOrderForEdidData.orderInfo.hourOfDay}}</span>
                     </div>
                     <div class="content-item">
-                        <span class="name">应约人数 : </span>
+                        <span class="name">{{ l('Booking.ResponderNumber') }} : </span>
                         <span class="desc">{{bookingOrderForEdidData.orderInfo.bookingNum}}</span>
                     </div>
                 </div>

@@ -9,7 +9,7 @@
         </ul>
         <div class="serach-wrap" *ngIf="showSerachInputActive">
             <div class="form-group label-floating">
-                <input type="text" class="form-control" name="serach" placeholder="请输入搜索内容" ngModel (ngModelChange)="orderSerach($event)">
+                <input type="text" class="form-control" name="serach" [placeholder]="l('PleaseInputSearch.Hint')" ngModel (ngModelChange)="orderSerach($event)">
             </div>
         </div>
     </div>

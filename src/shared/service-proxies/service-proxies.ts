@@ -886,7 +886,7 @@ export class BookingServiceProxy {
     joinBooking(input: JoinBookingInput): Observable<JoinBookingResultDto> {
         let url_ = this.baseUrl + "/api/services/app/Booking/JoinBooking";
         url_ = url_.replace(/[?&]$/, "");
-
+debugger;
         const content_ = JSON.stringify(input);
 
         let options_ : any = {

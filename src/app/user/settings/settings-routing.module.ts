@@ -22,8 +22,8 @@ import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.c
                     { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
                     { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
                     { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
-                    { path: 'email', component: EmailComponent, data: { breadcrumb: '改绑邮箱' } },
-                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: '语言切换' } }
+                    { path: 'email', component: EmailComponent, data: { breadcrumb: 'Menu.ChangeAndBindingEmail' } },
+                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: 'Menu.SwitchLanguage' } }
                 ]
             }
         ])

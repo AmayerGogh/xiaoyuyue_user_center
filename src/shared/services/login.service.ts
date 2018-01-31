@@ -11,6 +11,7 @@ import { LogService } from '@abp/log/log.service';
 import { MessageService } from '@abp/message/message.service';
 import { PhoneAuthenticateModel } from '../service-proxies/service-proxies';
 import { UrlHelper } from '@shared/helpers/UrlHelper';
+import { Observable } from 'rxjs/Observable';
 
 const UA = require('ua-device');
 
@@ -246,12 +247,18 @@ export class LoginService {
         model.authProvider = params['providerName'];
         model.providerAccessCode = params['code'];
         model.providerKey = params['code'];
-        this._tokenAuthService.externalBinding(model).subscribe(() => {
-            UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
-            this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
-            const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
-            location.href = initialUrl;
-        });
+        this._tokenAuthService.externalBinding(model)
+            .subscribe(() => {
+                UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+                this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
+                const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
+                location.href = initialUrl;
+            }, (error: any) => {
+                this._cookiesService.clearToken();
+                this._messageService.confirm(error.message, () => {
+                    this._router.navigate(['/auth/login']);
+                });
+            });
     }
 
     /**
