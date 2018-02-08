@@ -1,14 +1,14 @@
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 
 import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
-import { PhoneComponent } from './security/phone/phone.component';
 import { EmailComponent } from './security/email/email.component';
+import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.component';
 import { NgModule } from '@angular/core';
 import { PasswdComponent } from './security/passwd/passwd.component';
+import { PhoneComponent } from './security/phone/phone.component';
 import { SecurityComponent } from './security/security.component';
 import { SettingsComponent } from './settings.component';
 import { SuggestComponent } from './suggest/suggest.component';
-import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.component';
 
 @NgModule({
     imports: [
@@ -20,10 +20,10 @@ import { LangSwitchComponent } from 'app/user/settings/lang-switch/lang-switch.c
                     // { path: 'settings', component: SettingsComponent, data: { breadcrumb: 'Menu.Settings' } },
                     { path: 'security', component: SecurityComponent, data: { breadcrumb: 'Menu.Security' } },
                     { path: 'suggest', component: SuggestComponent, data: { breadcrumb: 'Menu.Feedback' } },
-                    { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Menu.ChangePassword' } },
-                    { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Menu.BindingPhone' } },
-                    { path: 'email', component: EmailComponent, data: { breadcrumb: 'Menu.ChangeAndBindingEmail' } },
-                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: 'Menu.SwitchLanguage' } }
+                    { path: 'passwd', component: PasswdComponent, data: { breadcrumb: 'Page.ChangePassword' } },
+                    { path: 'phone', component: PhoneComponent, data: { breadcrumb: 'Page.BindingPhone' } },
+                    { path: 'email', component: EmailComponent, data: { breadcrumb: 'Page.BindingEmail' } },
+                    { path: 'lang', component: LangSwitchComponent, data: { breadcrumb: 'Page.SwitchLanguage' } }
                 ]
             }
         ])
