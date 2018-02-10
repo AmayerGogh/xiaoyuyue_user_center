@@ -11,6 +11,7 @@ import { LocalizationHelper } from 'shared/helpers/LocalizationHelper';
 import { OptimalBookingTimeModelComponent } from './optimal-booking-time-model/optimal-booking-time-model.component';
 import { ReplyBookingModelComponent } from './reply-booking-model/reply-booking-model.component';
 import { appModuleSlowAnimation } from 'shared/animations/routerTransition';
+import { Moment } from 'moment';
 
 @Component({
     selector: 'xiaoyuyue-booking-time',
@@ -94,7 +95,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
             enable: this.enableBookingDate.length === 0 ? this.defaultEnableBookingDate : this.enableBookingDate,
             defaultDate: this.enableBookingDate[0],
             onChange: (selectedDates, dateStr, instance) => {
-                this.input.date = moment(new Date(selectedDates));
+                // this.input.date = moment(new Date(selectedDates));
                 // self.optimalBookingTimeModel.show();
                 // self.optimalBookingTimeModel.save(self.input);
             },
@@ -102,12 +103,12 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         });
     }
 
-    selectOptimalTime(index: number, date: string, time: JoinBookingTimeInfo) {
+    selectOptimalTime(index: number, date: Moment, time: JoinBookingTimeInfo) {
         this.selectIndex = index;
         this.hourOfDay = time.hourOfDay;
-        this.input.date = moment(date);
+        this.input.date = date;
         this.availableDateItemData.forEach((element) => {
-            if (element.date.format('YYYY-MM-DD') === date) {
+            if (element.date.format('YYYY-MM-DD') === date.format('YYYY-MM-DD')) {
                 this.input.bookingItemId = element.times[index].id;
             }
         });
@@ -125,7 +126,7 @@ export class BookingTimeComponent extends AppComponentBase implements OnInit, Af
         }
 
         if (time.maxBookingNum <= 0) {
-            this.message.warn('此时间段已满');
+            this.message.warn(this.l('Booked.TimeIsFull'));
             return;
         };
         this.replyBookingModel.init(this.input, time.hourOfDay);

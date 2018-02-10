@@ -26,7 +26,7 @@ export class SettingsComponent extends AppComponentBase implements OnInit, After
     }
 
     stayTuned(): void {
-        this.message.info('正在完善中...', '敬请期待');
+        this.message.info(this.l('Improving'), this.l('Expect'));
     }
 
 }

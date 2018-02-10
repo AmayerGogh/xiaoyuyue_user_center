@@ -1,17 +1,21 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Injector } from '@angular/core';
 
 import { AppAuthService } from 'app/shared/common/auth/app-auth.service';
+import { AppComponentBase } from 'shared/common/app-component-base';
 
 @Component({
   selector: 'xiaoyuyue-admin-side-bar',
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.scss']
 })
-export class AdminSideBarComponent implements OnInit {
+export class AdminSideBarComponent extends AppComponentBase implements OnInit {
   @ViewChild('sideBar') sideBarEle: ElementRef;
   constructor(
+      private injector: Injector,
     private _authService: AppAuthService
-  ) { }
+  ) {
+      super(injector)
+  }
 
   ngOnInit() {
     const self = this;

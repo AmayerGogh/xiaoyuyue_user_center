@@ -8,7 +8,7 @@
                 <div class="item">
                     <div class="content">
                         <span class="icon vapps-icon-app-change-passwd"></span>
-                        <p class="text">{{ l('Menu.ChangePassword') }}</p>
+                        <p class="text">{{ l('Page.ChangePassword') }}</p>
                     </div>
                 </div>
             </div>
@@ -18,8 +18,8 @@
                 <div class="item">
                     <div class="content">
                         <span class="icon vapps-icon-app-validate-phone"></span>
-                        <p class="text" *ngIf="userSecurityInfo.phoneNumber">{{ l('Menu.RevisePhone') }}</p>
-                        <p class="text" *ngIf="!userSecurityInfo.phoneNumber">{{ l('Menu.BindingPhone') }}</p>
+                        <p class="text" *ngIf="userSecurityInfo.phoneNumber">{{ l('Security.RevisePhone') }}</p>
+                        <p class="text" *ngIf="!userSecurityInfo.phoneNumber">{{ l('Page.BindingPhone') }}</p>
                     </div>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                 <div class="item">
                     <div class="content">
                         <span class="icon vapps-icon-app-validate-email"></span>
-                        <p class="text" *ngIf="userSecurityInfo.emailAddress">{{ l('Menu.ReviseEmail') }}</p>
-                        <p class="text" *ngIf="!userSecurityInfo.emailAddress">{{ l('Menu.BindingEmail') }}</p>
+                        <p class="text" *ngIf="userSecurityInfo.emailAddress">{{ l('Security.ReviseEmail') }}</p>
+                        <p class="text" *ngIf="!userSecurityInfo.emailAddress">{{ l('Security.VerifyEmail') }}</p>
                     </div>
                 </div>
             </div>

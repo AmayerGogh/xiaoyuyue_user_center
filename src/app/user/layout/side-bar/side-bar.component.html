@@ -1,10 +1,10 @@
 <div class="side-bar-wrap box-shadow" #sideBar>
     <div class="menu-wrap">
-        <div class="menu-item" routerLinkActive="active" routerLink="/user/home"><a class="item"><span class="icon vapps-icon-app-menu-home"></span>个人中心</a></div>
-        <div class="menu-item" routerLinkActive="active" routerLink="/user/booking/list"><a class="item"><span class="icon vapps-icon-app-menu-booked"></span>应约管理</a></div>
-        <div class="menu-item" routerLinkActive="active" routerLink="/user/info"><a class="item"><span class="icon vapps-icon-app-menu-personal"></span>个人信息</a></div>
-        <div class="menu-item" routerLinkActive="active" routerLink="/user/settings"><a class="item"><span class="icon vapps-icon-app-menu-setting"></span>设置管理</a></div>
-        <div class="menu-item" routerLinkActive="active" (click)="logout()"><a class="item"><span class="icon vapps-icon-app-user-logout"></span>退出账户</a></div>
+        <div class="menu-item" routerLinkActive="active" routerLink="/user/home"><a class="item"><span class="icon vapps-icon-app-menu-home"></span>{{ l('Menu.UserCenter') }}</a></div>
+        <div class="menu-item" routerLinkActive="active" routerLink="/user/booking/list"><a class="item"><span class="icon vapps-icon-app-menu-booked"></span>{{ l('Menu.ManageBooking') }}</a></div>
+        <div class="menu-item" routerLinkActive="active" routerLink="/user/info"><a class="item"><span class="icon vapps-icon-app-menu-personal"></span>{{ l('Menu.Account.BaseInfo') }}</a></div>
+        <div class="menu-item" routerLinkActive="active" routerLink="/user/settings"><a class="item"><span class="icon vapps-icon-app-menu-setting"></span>{{ l('Menu.Settings') }}</a></div>
+        <div class="menu-item" routerLinkActive="active" (click)="logout()"><a class="item"><span class="icon vapps-icon-app-user-logout"></span>{{ l('Menu.Account.Logout') }}</a></div>
     </div>
     <div class="cover-wrap" (click)="hideSideBar()"></div>
 </div>

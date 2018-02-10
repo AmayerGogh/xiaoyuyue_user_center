@@ -15,8 +15,8 @@
     <div class="about-me-wrap section">
         <div class="common-max-width">
             <h3 class="content-title">{{ l('AboutUs') }}</h3>
-            <p class="about-desc">小预约，便捷创建预约工具</p>
-            <p class="about-desc">帮助小微企业创建及管理预约，提高流程效率，实现提升效益</p>
+            <p class="about-desc">{{ l('Xiaoyuyue.AboutUs.Tip1') }}</p>
+            <p class="about-desc">{{ l('Xiaoyuyue.AboutUs.Tip2') }}</p>
             <div class="video">
                 <video controls="controls" poster="/assets/common/images/index/video.png" preload="none" [src]="introVideoUrl" type="video/mp4"
                     width="100%" draggable>
@@ -33,11 +33,11 @@
             <div class="content-wrap clearfix">
                 <div class="pull-left"><img src="/assets/common/images/index/create-table/view.png" width="648px"></div>
                 <div class="pull-right table-desc">
-                    <h4 class="sub-title">PC、手机双平台</h4>
-                    <p>双平台创建预约、轻松打通各种应用</p>
-                    <p>PC兼顾社交媒体的不同类型预约</p>
-                    <p>手机简单编辑、便于操作</p>
-                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">查看视频</button>
+                    <h4 class="sub-title">{{ l('Xiaoyuyue.HowToCreateBooking.Tip1') }}</h4>
+                    <p>{{ l('Xiaoyuyue.HowToCreateBooking.Tip2') }}</p>
+                    <p>{{ l('Xiaoyuyue.HowToCreateBooking.Tip3') }}</p>
+                    <p>{{ l('Xiaoyuyue.HowToCreateBooking.Tip4') }}</p>
+                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">{{ l('ViewVideo') }}</button>
                 </div>
             </div>
         </div>
@@ -53,12 +53,12 @@
                     <img style="margin-left: 40px;" src="/assets/common/images/index/booking/view-2.png" width="300px">
                 </div>
                 <div class="pull-left table-desc">
-                    <h4 class="sub-title">用户应约</h4>
-                    <p>应约页面皆为手机端界面</p>
-                    <p>方便用户及时预约</p>
-                    <p>嵌入社交媒体应用</p>
-                    <p>简易操作</p>
-                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">查看视频</button>
+                    <h4 class="sub-title">{{ l('Xiaoyuyue.HowToJoinBooking.Tip1') }}</h4>
+                    <p>{{ l('Xiaoyuyue.HowToJoinBooking.Tip2') }}</p>
+                    <p>{{ l('Xiaoyuyue.HowToJoinBooking.Tip3') }}</p>
+                    <p>{{ l('Xiaoyuyue.HowToJoinBooking.Tip4') }}</p>
+                    <p>{{ l('Xiaoyuyue.HowToJoinBooking.Tip5') }}</p>
+                    <button class="btn primary-bgcolor" routerLink="/guide/create-tenant">{{ l('ViewVideo') }}</button>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
                                         <img [src]="usageSceneItem.tenantBackgroudUrl" [alt]="usageSceneItem.tenantName">
                                         <div class="qrcode-wrap">
                                             <img [src]="usageSceneItem.tenantBookingQRCode" alt="qrcode">
-                                            <div>扫码查看详情</div>
+                                            <div>{{ l('ScanCodeViewDetail') }}</div>
                                         </div>
                                         <div class="bg-cover"></div>
                                     </div>
