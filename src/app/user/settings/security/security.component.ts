@@ -1,27 +1,27 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { ExternalLoginProvider, LoginService } from 'shared/services/login.service';
 import { ExternalUnBindingModel, ProfileServiceProxy, TokenAuthServiceProxy, UserSecurityInfoDto } from 'shared/service-proxies/service-proxies';
 
-import { AppComponentBase } from '@shared/common/app-component-base';
+import { AppComponentBase } from 'shared/common/app-component-base';
 import { AppConsts } from 'shared/AppConsts';
-import { AppSessionService } from 'shared/common/session/app-session.service';
-import { ClientTypeHelper } from 'shared/helpers/ClientTypeHelper';
+import { AppSessionService } from '@shared/common/session/app-session.service';
 import { CookiesService } from 'shared/services/cookies.service';
-import { LoginService } from 'shared/services/login.service';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { accountModuleAnimation } from '@shared/animations/routerTransition';
 
 @Component({
     selector: 'xiaoyuyue-security',
     templateUrl: './security.component.html',
     styleUrls: ['./security.component.scss'],
-    animations: [appModuleAnimation()]
+    animations: [accountModuleAnimation()]
 })
 export class SecurityComponent extends AppComponentBase implements OnInit {
-    linkedQQText: string;
     userSecurityInfo: UserSecurityInfoDto = new UserSecurityInfoDto();
     externalWechatUrl: string;
     linkedWechatText: string;
+    linkedQQText: string;
+    linkedFaceBookText: string;
+    linkedGoogleText: string;
     isBindingQQ: boolean;
-    iswxjsEnvironment = false;
     constructor(
         private injector: Injector,
         private _appSessionService: AppSessionService,
@@ -36,7 +36,6 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
     ngOnInit() {
         this._loginService.init();
         this.getUserSecurityInfo();
-        this.iswxjsEnvironment = ClientTypeHelper.isWeChatMiniProgram;
     }
 
     // 获取当前用户安全信息
@@ -47,6 +46,8 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
                 this.userSecurityInfo = result;
                 this.linkedWechatText = result.weChat ? result.weChat : this.l('Unrelated');
                 this.linkedQQText = result.qq ? result.qq : this.l('Unrelated');
+                this.linkedFaceBookText = result.faceBook ? result.faceBook : this.l('Unrelated');
+                this.linkedGoogleText = result.google ? result.google : this.l('Unrelated');
             })
     }
 
@@ -55,10 +56,8 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
             this.unBindWeChat();
             return;
         }
-        const exdate = new Date();
-        exdate.setDate(exdate.getDate() + 1);
-        this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
-        this.externalWechatUrl = AppConsts.appBaseUrl + '/auth/external?authToken=' + this._cookiesService.getToken() + '&isAuthBind=true&redirectUrl=' + encodeURIComponent(document.location.href);
+
+        this.externalWechatUrl = AppConsts.userCenterUrl + '/auth/external?authToken=' + this._cookiesService.getToken() + '&isAuthBind=true&redirectUrl=' + encodeURIComponent(document.location.href);
         window.location.href = this.externalWechatUrl;
     }
 
@@ -67,10 +66,27 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
             this.unBindQQ();
             return;
         }
-        const exdate = new Date();
-        exdate.setDate(exdate.getDate() + 1);
-        this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
-        this.qqExternalAuthRedirect(this._loginService.externalLoginProviders);
+        this.setRedirectUrl();
+        this._loginService.externalAuthenticate(this._loginService.findExternalLoginProvider(ExternalLoginProvider.QQ), true);
+    }
+
+    linkFacebook(): void {
+        if (this.checkIsBindFacebook()) {
+            this.unBindFacebook();
+            return;
+        }
+        this.setRedirectUrl();
+        this._loginService.externalAuthenticate(this._loginService.findExternalLoginProvider(ExternalLoginProvider.FACEBOOK), true);
+    }
+
+
+    linkGoogle(): void {
+        if (this.checkIsBindGoogle()) {
+            this.unBindGoogle();
+            return;
+        }
+        this.setRedirectUrl();
+        this._loginService.externalAuthenticate(this._loginService.findExternalLoginProvider(ExternalLoginProvider.GOOGLE), true);
     }
 
     checkIsBindWechat(): boolean {
@@ -91,39 +107,60 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
         return false;
     }
 
+
+    checkIsBindFacebook(): boolean {
+        if (this.userSecurityInfo.faceBook) {
+            this.linkedFaceBookText = this.userSecurityInfo.faceBook;
+            return true;
+        }
+        this.linkedFaceBookText = this.l('Unrelated');
+        return false;
+    }
+
+    checkIsBindGoogle(): boolean {
+        if (this.userSecurityInfo.google) {
+            this.linkedGoogleText = this.userSecurityInfo.google;
+            return true;
+        }
+        this.linkedGoogleText = this.l('Unrelated');
+        return false;
+    }
+
     unBindQQ(): void {
         const data = new ExternalUnBindingModel();
-        data.authProvider = 'QQ';
-        this._tokenAuthService.externalUnBinding(data).subscribe(result => {
-            this.getUserSecurityInfo();
-            this.notify.success(this.l('Unbinding.Success.Hint'));
-        });
+        data.authProvider = ExternalLoginProvider.QQ;
+        this.unBind(data);
     }
 
     // 解绑微信
     unBindWeChat() {
         const data = new ExternalUnBindingModel();
-        data.authProvider = 'WeChat'
+        data.authProvider = ExternalLoginProvider.WECHAT;
+        this.unBind(data);
+    }
+
+    unBindGoogle() {
+        const data = new ExternalUnBindingModel();
+        data.authProvider = ExternalLoginProvider.GOOGLE;
+        this.unBind(data);
+    }
+
+    unBindFacebook() {
+        const data = new ExternalUnBindingModel();
+        data.authProvider = ExternalLoginProvider.FACEBOOK;
+        this.unBind(data);
+    }
+
+    private setRedirectUrl() {
+        const exdate = new Date();
+        exdate.setDate(exdate.getDate() + 1);
+        this._cookiesService.setCookieValue('UrlHelper.redirectUrl', location.href, exdate, '/');
+    }
+
+    private unBind(data: ExternalUnBindingModel) {
         this._tokenAuthService.externalUnBinding(data).subscribe(result => {
             this.getUserSecurityInfo();
             this.notify.success(this.l('Unbinding.Success.Hint'));
         });
     }
-
-    qqExternalAuthRedirect(externalLoginProviders): void {
-        for (let i = 0; i < externalLoginProviders.length; i++) {
-            if (externalLoginProviders[i].name === 'QQ') {
-                const authBaseUrl = 'https://graph.qq.com/oauth2.0/authorize';
-                const appid = externalLoginProviders[i].clientId;
-                const redirect_url = AppConsts.appBaseUrl + '/auth/external' + '?providerName=' + externalLoginProviders[i].name + '&isAuthBind=true';
-                const response_type = 'code';
-                const scope = 'get_user_info';
-
-                const authUrl = `${authBaseUrl}?client_id=${appid}&response_type=${response_type}&scope=${scope}&redirect_uri=${encodeURIComponent(redirect_url)}&display=`;
-
-                window.location.href = authUrl;
-            }
-        }
-    }
 }
-
