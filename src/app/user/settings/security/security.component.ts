@@ -60,8 +60,8 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
             return;
         }
 
-        this.externalWechatUrl = AppConsts.userCenterUrl + '/auth/external?authToken=' + this._cookiesService.getToken() + '&isAuthBind=true&redirectUrl=' + encodeURIComponent(document.location.href);
-        window.location.href = this.externalWechatUrl;
+        this.setRedirectUrl();
+        this._loginService.externalAuthenticate(this._loginService.findExternalLoginProvider(ExternalLoginProvider.WECHATMP), true);
     }
 
     linkQQ(): void {
