@@ -330,6 +330,11 @@ export class LoginService {
                     .subscribe(() => {
                         this.hideLoading();
                         abp.event.trigger('facebookBinding');
+                    }, (error: any) => {
+                        this.hideLoading();
+                        this._messageService.confirm('', error.message, () => {
+                            this.redirectByCookie();
+                        });
                     });
             } else {
                 this._tokenAuthService.externalAuthenticate(model)
@@ -358,6 +363,11 @@ export class LoginService {
                     .subscribe(() => {
                         this.hideLoading();
                         abp.event.trigger('googleBinding');
+                    }, (error: any) => {
+                        this.hideLoading();
+                        this._messageService.confirm('', error.message, () => {
+                            this.redirectByCookie();
+                        });
                     });
             } else {
                 this._tokenAuthService.externalAuthenticate(model)
@@ -391,6 +401,7 @@ export class LoginService {
             .subscribe(() => {
                 this.redirectByCookie();
             }, (error: any) => {
+                this.hideLoading();
                 this._messageService.confirm('', error.message, () => {
                     this.redirectByCookie();
                 });

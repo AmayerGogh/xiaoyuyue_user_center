@@ -1,20 +1,4 @@
-﻿import { BookingAccessRecordInputSource, BookingAccessRecordInputWeChatSource, ChatMessageDtoReadState, ChatMessageDtoSide, CodeSendInputCodeType, CurrentUserProfileEditDtoGender, DefaultTimezoneScope, FriendDtoState, IsTenantAvailableOutputState, Status, UserNotificationState } from '@shared/service-proxies/service-proxies';
-
-export class AppChatMessageReadState {
-    static Unread: number = ChatMessageDtoReadState._1;
-    static Read: number = ChatMessageDtoReadState._2;
-}
-
-export class AppChatSide {
-    static Sender: number = ChatMessageDtoSide._1;
-    static Receiver: number = ChatMessageDtoSide._2;
-}
-
-export class AppFriendshipState {
-    static Accepted: number = FriendDtoState._1;
-    static Blocked: number = FriendDtoState._2;
-}
-
+﻿import { BookingAccessRecordInputSource, BookingAccessRecordInputWeChatSource, CodeSendInputCodeType, CurrentUserProfileEditDtoGender, DefaultTimezoneScope, IsTenantAvailableOutputState, Status, UserNotificationState } from '@shared/service-proxies/service-proxies';
 
 export class AppTimezoneScope {
     static Application: number = DefaultTimezoneScope._1;
