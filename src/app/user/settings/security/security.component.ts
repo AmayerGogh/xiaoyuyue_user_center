@@ -158,9 +158,12 @@ export class SecurityComponent extends AppComponentBase implements OnInit {
     }
 
     private unBind(data: ExternalUnBindingModel) {
-        this._tokenAuthService.externalUnBinding(data).subscribe(result => {
-            this.getUserSecurityInfo();
-            this.notify.success(this.l('Unbinding.Success.Hint'));
-        });
+        this.message.confirm(this.l('UnBinding.Sure'), this.l('UnBinding.Confirm.Message'), (result) => {
+            if (!result) { return; }
+            this._tokenAuthService.externalUnBinding(data).subscribe(result => {
+                this.getUserSecurityInfo();
+                this.notify.success(this.l('Unbinding.Success.Hint'));
+            });
+        })
     }
 }
