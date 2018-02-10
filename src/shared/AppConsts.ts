@@ -11,6 +11,7 @@ export class AppConsts {
     static appBaseUrl: string;
     static appBaseUrlFormat: string;
 
+    static userCenterUrl: string;
     static businessCenterUrl: string;
 
     static BookingPicture: string;
