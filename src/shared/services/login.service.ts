@@ -233,7 +233,7 @@ export class LoginService {
 
         UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
         this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
-        const initialUrl = UrlHelper.redirectUrl && UrlHelper.redirectUrl.indexOf(AppConsts.appBaseUrl) >= 0 ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/dashboard';
+        const initialUrl = UrlHelper.redirectUrl && UrlHelper.redirectUrl.indexOf(AppConsts.appBaseUrl) >= 0 ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
         if (redirectUrl) {
             location.href = redirectUrl;
         } else {
@@ -378,7 +378,6 @@ export class LoginService {
         this._tokenAuthService.externalAuthenticate(model).subscribe((result: ExternalAuthenticateResultModel) => {
             if (result.waitingForActivation) {
                 this._messageService.info(this.l('NeedSupplementary'));
-                // this._router.navigate(['/account/supplementary-external-register', result.userId]);
                 return;
             }
 
@@ -390,14 +389,10 @@ export class LoginService {
         const model = this.initAccessCode(params);
         this._tokenAuthService.externalBinding(model)
             .subscribe(() => {
-                UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
-                this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
-                const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/dashboard';
-                location.href = initialUrl;
+                this.redirectByCookie();
             }, (error: any) => {
-                this._cookiesService.clearToken();
                 this._messageService.confirm('', error.message, () => {
-                    this._router.navigate(['/auth/login']);
+                    this.redirectByCookie();
                 });
             });
     }
@@ -417,6 +412,13 @@ export class LoginService {
         }
 
         return model;
+    }
+
+    private redirectByCookie() {
+        UrlHelper.redirectUrl = this._cookiesService.getCookieValue('UrlHelper.redirectUrl');
+        this._cookiesService.deleteCookie('UrlHelper.redirectUrl', '/');
+        const initialUrl = UrlHelper.redirectUrl ? UrlHelper.redirectUrl : UrlHelper.redirectUrl = AppConsts.appBaseUrl + '/user/home';
+        location.href = initialUrl;
     }
 
     protected processExternalAuthenticate(response: Response): ExternalAuthenticateResultModel {
