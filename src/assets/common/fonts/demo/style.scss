@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'xiaoyuyue-icon';
-  src:  url('#{$icomoon-font-path}/xiaoyuyue-icon.eot?cv1ipy');
-  src:  url('#{$icomoon-font-path}/xiaoyuyue-icon.eot?cv1ipy#iefix') format('embedded-opentype'),
-    url('#{$icomoon-font-path}/xiaoyuyue-icon.ttf?cv1ipy') format('truetype'),
-    url('#{$icomoon-font-path}/xiaoyuyue-icon.woff?cv1ipy') format('woff'),
-    url('#{$icomoon-font-path}/xiaoyuyue-icon.svg?cv1ipy#xiaoyuyue-icon') format('svg');
+  src:  url('#{$icomoon-font-path}/xiaoyuyue-icon.eot?cn3auw');
+  src:  url('#{$icomoon-font-path}/xiaoyuyue-icon.eot?cn3auw#iefix') format('embedded-opentype'),
+    url('#{$icomoon-font-path}/xiaoyuyue-icon.ttf?cn3auw') format('truetype'),
+    url('#{$icomoon-font-path}/xiaoyuyue-icon.woff?cn3auw') format('woff'),
+    url('#{$icomoon-font-path}/xiaoyuyue-icon.svg?cn3auw#xiaoyuyue-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,369 +26,389 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.vapps-icon-app-facebook {
+  &:before {
+    content: $vapps-icon-app-facebook; 
+  }
+}
+.vapps-icon-app-google {
+  &:before {
+    content: $vapps-icon-app-google; 
+  }
+}
+.vapps-icon-app-twitter {
+  &:before {
+    content: $vapps-icon-app-twitter; 
+  }
+}
+.vapps-icon-app-check-in {
+  &:before {
+    content: $vapps-icon-app-check-in; 
+  }
+}
 .vapps-icon-app-active {
   &:before {
-    content: $vapps-icon-app-active;
+    content: $vapps-icon-app-active; 
   }
 }
 .vapps-icon-app-add {
   &:before {
-    content: $vapps-icon-app-add;
+    content: $vapps-icon-app-add; 
   }
 }
 .vapps-icon-app-add-booking-item {
   &:before {
-    content: $vapps-icon-app-add-booking-item;
+    content: $vapps-icon-app-add-booking-item; 
   }
 }
 .vapps-icon-app-add-time-field {
   &:before {
-    content: $vapps-icon-app-add-time-field;
+    content: $vapps-icon-app-add-time-field; 
   }
 }
 .vapps-icon-app-at-top-1 {
   &:before {
-    content: $vapps-icon-app-at-top-1;
+    content: $vapps-icon-app-at-top-1; 
   }
 }
 .vapps-icon-app-at-top-2 {
   &:before {
-    content: $vapps-icon-app-at-top-2;
+    content: $vapps-icon-app-at-top-2; 
   }
 }
 .vapps-icon-app-back {
   &:before {
-    content: $vapps-icon-app-back;
+    content: $vapps-icon-app-back; 
   }
 }
 .vapps-icon-app-back-left {
   &:before {
-    content: $vapps-icon-app-back-left;
+    content: $vapps-icon-app-back-left; 
   }
 }
 .vapps-icon-app-booked {
   &:before {
-    content: $vapps-icon-app-booked;
+    content: $vapps-icon-app-booked; 
   }
 }
 .vapps-icon-app-cancel {
   &:before {
-    content: $vapps-icon-app-cancel;
+    content: $vapps-icon-app-cancel; 
   }
 }
 .vapps-icon-app-cancel-booking {
   &:before {
-    content: $vapps-icon-app-cancel-booking;
+    content: $vapps-icon-app-cancel-booking; 
   }
 }
 .vapps-icon-app-change-passwd {
   &:before {
-    content: $vapps-icon-app-change-passwd;
+    content: $vapps-icon-app-change-passwd; 
   }
 }
 .vapps-icon-app-check {
   &:before {
-    content: $vapps-icon-app-check;
+    content: $vapps-icon-app-check; 
   }
 }
 .vapps-icon-app-close {
   &:before {
-    content: $vapps-icon-app-close;
+    content: $vapps-icon-app-close; 
   }
 }
 .vapps-icon-app-confirm {
   &:before {
-    content: $vapps-icon-app-confirm;
+    content: $vapps-icon-app-confirm; 
   }
 }
 .vapps-icon-app-contact {
   &:before {
-    content: $vapps-icon-app-contact;
+    content: $vapps-icon-app-contact; 
   }
 }
 .vapps-icon-app-copy-2 {
   &:before {
-    content: $vapps-icon-app-copy-2;
+    content: $vapps-icon-app-copy-2; 
   }
 }
 .vapps-icon-app-delete-time-field {
   &:before {
-    content: $vapps-icon-app-delete-time-field;
+    content: $vapps-icon-app-delete-time-field; 
   }
 }
 .vapps-icon-app-detail {
   &:before {
-    content: $vapps-icon-app-detail;
+    content: $vapps-icon-app-detail; 
   }
 }
 .vapps-icon-app-drop-down {
   &:before {
-    content: $vapps-icon-app-drop-down;
+    content: $vapps-icon-app-drop-down; 
   }
 }
 .vapps-icon-app-edit {
   &:before {
-    content: $vapps-icon-app-edit;
+    content: $vapps-icon-app-edit; 
   }
 }
 .vapps-icon-app-finished {
   &:before {
-    content: $vapps-icon-app-finished;
+    content: $vapps-icon-app-finished; 
   }
 }
 .vapps-icon-app-first-page {
   &:before {
-    content: $vapps-icon-app-first-page;
+    content: $vapps-icon-app-first-page; 
   }
 }
 .vapps-icon-app-lang-switch-1 {
   &:before {
-    content: $vapps-icon-app-lang-switch-1;
+    content: $vapps-icon-app-lang-switch-1; 
   }
 }
 .vapps-icon-app-lang-switch-2 {
   &:before {
-    content: $vapps-icon-app-lang-switch-2;
+    content: $vapps-icon-app-lang-switch-2; 
   }
 }
 .vapps-icon-app-last-page {
   &:before {
-    content: $vapps-icon-app-last-page;
+    content: $vapps-icon-app-last-page; 
   }
 }
 .vapps-icon-app-link-qq {
   &:before {
-    content: $vapps-icon-app-link-qq;
+    content: $vapps-icon-app-link-qq; 
   }
 }
 .vapps-icon-app-link-wechat {
   &:before {
-    content: $vapps-icon-app-link-wechat;
+    content: $vapps-icon-app-link-wechat; 
   }
 }
 .vapps-icon-app-link-weibo {
   &:before {
-    content: $vapps-icon-app-link-weibo;
+    content: $vapps-icon-app-link-weibo; 
   }
 }
 .vapps-icon-app-location {
   &:before {
-    content: $vapps-icon-app-location;
+    content: $vapps-icon-app-location; 
   }
 }
 .vapps-icon-app-logo {
   &:before {
-    content: $vapps-icon-app-logo;
+    content: $vapps-icon-app-logo; 
   }
 }
 .vapps-icon-app-logo-text {
   &:before {
-    content: $vapps-icon-app-logo-text;
+    content: $vapps-icon-app-logo-text; 
   }
 }
 .vapps-icon-app-menu {
   &:before {
-    content: $vapps-icon-app-menu;
+    content: $vapps-icon-app-menu; 
   }
 }
 .vapps-icon-app-menu-booked {
   &:before {
-    content: $vapps-icon-app-menu-booked;
+    content: $vapps-icon-app-menu-booked; 
   }
 }
 .vapps-icon-app-menu-home {
   &:before {
-    content: $vapps-icon-app-menu-home;
+    content: $vapps-icon-app-menu-home; 
   }
 }
 .vapps-icon-app-menu-logout {
   &:before {
-    content: $vapps-icon-app-menu-logout;
+    content: $vapps-icon-app-menu-logout; 
   }
 }
 .vapps-icon-app-menu-personal {
   &:before {
-    content: $vapps-icon-app-menu-personal;
+    content: $vapps-icon-app-menu-personal; 
   }
 }
 .vapps-icon-app-menu-setting {
   &:before {
-    content: $vapps-icon-app-menu-setting;
+    content: $vapps-icon-app-menu-setting; 
   }
 }
 .vapps-icon-app-message {
   &:before {
-    content: $vapps-icon-app-message;
+    content: $vapps-icon-app-message; 
   }
 }
 .vapps-icon-app-mode-toggle-1 {
   &:before {
-    content: $vapps-icon-app-mode-toggle-1;
+    content: $vapps-icon-app-mode-toggle-1; 
   }
 }
 .vapps-icon-app-mode-toggle-2 {
   &:before {
-    content: $vapps-icon-app-mode-toggle-2;
+    content: $vapps-icon-app-mode-toggle-2; 
   }
 }
 .vapps-icon-app-multitask {
   &:before {
-    content: $vapps-icon-app-multitask;
+    content: $vapps-icon-app-multitask; 
   }
 }
 .vapps-icon-app-next-page {
   &:before {
-    content: $vapps-icon-app-next-page;
+    content: $vapps-icon-app-next-page; 
   }
 }
 .vapps-icon-app-phone {
   &:before {
-    content: $vapps-icon-app-phone;
+    content: $vapps-icon-app-phone; 
   }
 }
 .vapps-icon-app-preview {
   &:before {
-    content: $vapps-icon-app-preview;
+    content: $vapps-icon-app-preview; 
   }
 }
 .vapps-icon-app-prev-page {
   &:before {
-    content: $vapps-icon-app-prev-page;
+    content: $vapps-icon-app-prev-page; 
   }
 }
 .vapps-icon-app-qr-code {
   &:before {
-    content: $vapps-icon-app-qr-code;
+    content: $vapps-icon-app-qr-code; 
   }
 }
 .vapps-icon-app-refurbish {
   &:before {
-    content: $vapps-icon-app-refurbish;
+    content: $vapps-icon-app-refurbish; 
   }
 }
 .vapps-icon-app-remove {
   &:before {
-    content: $vapps-icon-app-remove;
+    content: $vapps-icon-app-remove; 
   }
 }
 .vapps-icon-app-search {
   &:before {
-    content: $vapps-icon-app-search;
+    content: $vapps-icon-app-search; 
   }
 }
 .vapps-icon-app-security {
   &:before {
-    content: $vapps-icon-app-security;
+    content: $vapps-icon-app-security; 
   }
 }
 .vapps-icon-app-submit {
   &:before {
-    content: $vapps-icon-app-submit;
+    content: $vapps-icon-app-submit; 
   }
 }
 .vapps-icon-app-suggest {
   &:before {
-    content: $vapps-icon-app-suggest;
+    content: $vapps-icon-app-suggest; 
   }
 }
 .vapps-icon-app-time-line-item-name {
   &:before {
-    content: $vapps-icon-app-time-line-item-name;
+    content: $vapps-icon-app-time-line-item-name; 
   }
 }
 .vapps-icon-app-time-line-outlet {
   &:before {
-    content: $vapps-icon-app-time-line-outlet;
+    content: $vapps-icon-app-time-line-outlet; 
   }
 }
 .vapps-icon-app-time-line-shophours {
   &:before {
-    content: $vapps-icon-app-time-line-shophours;
+    content: $vapps-icon-app-time-line-shophours; 
   }
 }
 .vapps-icon-app-to-bottom {
   &:before {
-    content: $vapps-icon-app-to-bottom;
+    content: $vapps-icon-app-to-bottom; 
   }
 }
 .vapps-icon-app-to-top {
   &:before {
-    content: $vapps-icon-app-to-top;
+    content: $vapps-icon-app-to-top; 
   }
 }
 .vapps-icon-app-upload {
   &:before {
-    content: $vapps-icon-app-upload;
+    content: $vapps-icon-app-upload; 
   }
 }
 .vapps-icon-app-user-auth {
   &:before {
-    content: $vapps-icon-app-user-auth;
+    content: $vapps-icon-app-user-auth; 
   }
 }
 .vapps-icon-app-user-center {
   &:before {
-    content: $vapps-icon-app-user-center;
+    content: $vapps-icon-app-user-center; 
   }
 }
 .vapps-icon-app-user-feedback {
   &:before {
-    content: $vapps-icon-app-user-feedback;
+    content: $vapps-icon-app-user-feedback; 
   }
 }
 .vapps-icon-app-user-info {
   &:before {
-    content: $vapps-icon-app-user-info;
+    content: $vapps-icon-app-user-info; 
   }
 }
 .vapps-icon-app-user-logout {
   &:before {
-    content: $vapps-icon-app-user-logout;
+    content: $vapps-icon-app-user-logout; 
   }
 }
 .vapps-icon-app-user-manage {
   &:before {
-    content: $vapps-icon-app-user-manage;
+    content: $vapps-icon-app-user-manage; 
   }
 }
 .vapps-icon-app-user-profile {
   &:before {
-    content: $vapps-icon-app-user-profile;
+    content: $vapps-icon-app-user-profile; 
   }
 }
 .vapps-icon-app-user-security {
   &:before {
-    content: $vapps-icon-app-user-security;
+    content: $vapps-icon-app-user-security; 
   }
 }
 .vapps-icon-app-user-setting {
   &:before {
-    content: $vapps-icon-app-user-setting;
+    content: $vapps-icon-app-user-setting; 
   }
 }
 .vapps-icon-app-validate-email {
   &:before {
-    content: $vapps-icon-app-validate-email;
+    content: $vapps-icon-app-validate-email; 
   }
 }
 .vapps-icon-app-validate-phone {
   &:before {
-    content: $vapps-icon-app-validate-phone;
+    content: $vapps-icon-app-validate-phone; 
   }
 }
 .vapps-icon-linked-qq {
   &:before {
-    content: $vapps-icon-linked-qq;
+    content: $vapps-icon-linked-qq; 
   }
 }
 .vapps-icon-linked-wechat {
   &:before {
-    content: $vapps-icon-linked-wechat;
+    content: $vapps-icon-linked-wechat; 
   }
 }
 .vapps-icon-linked-weibo {
   &:before {
-    content: $vapps-icon-linked-weibo;
+    content: $vapps-icon-linked-weibo; 
   }
 }
 
