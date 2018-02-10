@@ -37,6 +37,8 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
     bookingData: JoinBookingOutput;
     source = '';
     wechatSource = '';
+    removeLogo = false;
+    defaultLogoUrl = AppConsts.appBaseUrl + '/assets/common/images/logo.jpg';
 
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
     @ViewChild('bookingTimeModel') bookingTimeModel: BookingTimeComponent;
@@ -71,6 +73,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             });
 
         this.bookingId = this._route.snapshot.paramMap.get('id');
+        this.removeLogo = this.feature.isEnabled('App.RemoveLogo');
     }
 
     ngAfterViewInit(): void {
@@ -139,7 +142,7 @@ export class BookingComponent extends AppComponentBase implements OnInit, AfterV
             this._weChatShareTimelineService.input.sourceUrl = this.href;
             this._weChatShareTimelineService.input.title = this.l('ShareBooking', this.bookingData.bookingInfo.name);
             this._weChatShareTimelineService.input.desc = this.l(this.bookingData.bookingInfo.name);
-            this._weChatShareTimelineService.input.imgUrl = this.bookingData.organizationInfo.logoUrl;
+            this._weChatShareTimelineService.input.imgUrl = this.removeLogo ? this.bookingData.organizationInfo.logoUrl : this.defaultLogoUrl;
             this._weChatShareTimelineService.input.link = AppConsts.appBaseUrl + '/booking/' + this.bookingId + '?source=wechat';
             this._weChatShareTimelineService.initWeChatShareConfig();
             this._weChatShareTimelineService.successAction.subscribe(result => {
